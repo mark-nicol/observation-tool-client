@@ -1,6 +1,6 @@
 before-script:
     script:
-    - npm install
+        - npm install
 
 test:
     script:

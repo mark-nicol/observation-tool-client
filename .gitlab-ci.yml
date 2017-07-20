@@ -1,10 +1,15 @@
-image: ubuntu
+image: node
+
+stages:
+    - test
+
+cache:
+    paths:
+        - node_modules/
 
 before-script:
     script:
-        - apt-get update -y && apt-get upgrade -y
-        - apt-get install -y nodejs
-        - apt-get install -y npm
+        - npm install
         - npm update npm -g
         - npm cache clean
         - npm install -g @angular/cli
@@ -13,6 +18,4 @@ test:
     stage: test
     script:
         - npm test
-    cache:
-        paths:
-            - node_modules/
+

@@ -3,6 +3,7 @@ image: node
 before-script:
     script:
         - npm install
+        - npm install ng
         - npm install @angular/cli
 
 test:

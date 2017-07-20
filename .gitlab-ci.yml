@@ -1,10 +1,13 @@
-image: node
+image: ubuntu
 
 before-script:
     script:
-        - npm install
-        - npm install ng
-        - npm install @angular/cli
+        - apt-get update -y && apt-get upgrade -y
+        - apt-get install -y nodejs
+        - apt-get install -y npm
+        - npm update npm -g
+        - npm cache clean
+        - npm install -g @angular/cli
 
 test:
     script:

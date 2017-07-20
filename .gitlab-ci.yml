@@ -10,5 +10,9 @@ before-script:
         - npm install -g @angular/cli
 
 test:
+    stage: test
     script:
         - npm test
+    cache:
+        paths:
+            - node_modules/

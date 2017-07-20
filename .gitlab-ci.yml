@@ -1,21 +1,11 @@
-image: node
-
-stages:
-    - test
+image: node:latest
 
 cache:
     paths:
         - node_modules/
 
-before-script:
+test:
     script:
         - npm install
-        - npm update npm -g
-        - npm cache verify
-        - npm install -g @angular/cli
-
-test:
-    stage: test
-    script:
-        - npm test
+        - ./node_modules/@angular/cli/bin/ng test --single-run=true --browsers PhantomJS --watch=false
 

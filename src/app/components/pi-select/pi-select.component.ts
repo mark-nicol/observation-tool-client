@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { ResultsTableComponent } from "./results-table/results-table.component";
 
 @Component({
   selector: 'app-pi-select',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PiSelectComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild(ResultsTableComponent) resultsTable: ResultsTableComponent;
+
+  constructor() {
+  }
+
 
   ngOnInit() {
   }
+
+
 
 }

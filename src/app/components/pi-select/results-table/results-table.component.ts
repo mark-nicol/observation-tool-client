@@ -15,8 +15,6 @@ class Primary_Investigator {
 })
 export class ResultsTableComponent implements OnInit {
 
-
-
   PRIMARY_INVESTIGATORS: Primary_Investigator[] = [
     {
       fullName: 'Joe Barrett',
@@ -34,7 +32,9 @@ export class ResultsTableComponent implements OnInit {
 
   selectedPi: Primary_Investigator;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
   }

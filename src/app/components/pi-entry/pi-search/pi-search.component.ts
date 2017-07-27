@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PiSearchComponent implements OnInit {
 
-  constructor() { }
+  INPUT_PLACEHOLDER: string = "Enter Principle Investigator name";
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 }

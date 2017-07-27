@@ -16,7 +16,16 @@ const routes: Routes = [
     component: PiSelectComponent,
     children: []
   },
-  { path: '', redirectTo: '/pi-entry', pathMatch: 'full'}
+  {
+    path: 'pi-select/:value',
+    component: PiSelectComponent,
+    children: []
+  },
+  {
+    path: '',
+    redirectTo: '/pi-entry',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

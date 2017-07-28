@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PrimaryInvestigator} from "../../../models/primary-investigator"
 import {PrimaryInvestigatorService} from "../../../services/primary-investigator.service";
-import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-results-table',
@@ -13,19 +12,21 @@ import {Observable} from "rxjs/Observable";
 export class ResultsTableComponent implements OnInit {
 
   searchQuery: string;
-  pis: any;
-  searchResults: PrimaryInvestigator[];
+  primaryInvestigators: any;
   selectedPi: PrimaryInvestigator;
+  name:string;
 
   constructor(private primaryInvestigatorService: PrimaryInvestigatorService) {
   }
 
   ngOnInit() {
-    this.primaryInvestigatorService.getPIs().then(pis => this.pis = pis);
+    this.primaryInvestigatorService.search('name', this.searchQuery)
+                                   .then(pis => this.primaryInvestigators = pis);
   }
 
   rowClick(pi: PrimaryInvestigator) {
-    this.selectedPi = pi;
+    this.selectedPi = this.selectedPi === pi ? null : pi;
+    this.name = this.selectedPi.name;
   }
 
 }

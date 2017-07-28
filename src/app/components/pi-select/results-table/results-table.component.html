@@ -9,7 +9,7 @@
           <th>ALMA ID</th>
         </tr>
       </thead>
-      <tr *ngFor="let pi of pis"
+      <tr *ngFor="let pi of primaryInvestigators"
           [class.active]="pi === selectedPi"
           (click)="rowClick(pi)">
         <td>{{pi.name}}</td>

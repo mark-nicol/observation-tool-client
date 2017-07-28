@@ -1,8 +1,15 @@
 <app-refine-panel #refinePanel></app-refine-panel>
 <app-results-table #resultsTable></app-results-table>
 <div class="container-fluid pull-right">
-  <button class="btn btn-success" [disabled]="!resultsTable.selectedPi">Select PI</button>
+  <a [routerLink]="['/pi-entry', {selectedPi: resultsTable.name}]">
+    <button class="btn btn-success"
+            [disabled]="!resultsTable.selectedPi">
+      Select PI
+    </button>
+  </a>
   <a routerLink="/pi-entry">
-    <button class="btn btn-danger">Cancel</button>
+    <button class="btn btn-danger">
+      Cancel
+    </button>
   </a>
 </div>

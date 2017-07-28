@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from "@angular/router";
 import { RefinePanelComponent } from "./refine-panel/refine-panel.component";
 import 'rxjs/add/operator/switchMap';
 import {ResultsTableComponent} from "./results-table/results-table.component";
+import {PrimaryInvestigator} from "../../models/primary-investigator";
 
 @Component({
   selector: 'app-pi-select',
@@ -18,7 +19,8 @@ export class PiSelectComponent implements OnInit{
   constructor(private route: ActivatedRoute) {
   }
 
-  ngOnInit() {this.route.params.subscribe((params: Params) => {
+  ngOnInit() {
+    this.route.params.subscribe(params => {
       this.name = params['name'];
     });
     this.refinePanel.name = this.name;

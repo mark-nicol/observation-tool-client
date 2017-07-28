@@ -12,6 +12,11 @@ const routes: Routes = [
     children: []
   },
   {
+    path: 'pi-entry/:value',
+    component: PiEntryComponent,
+    children: []
+  },
+  {
     path: 'pi-select',
     component: PiSelectComponent,
     children: []

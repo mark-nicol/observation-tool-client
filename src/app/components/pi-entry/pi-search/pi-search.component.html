@@ -4,15 +4,19 @@
     <div class="panel-body">
       <form>
         <div class="input-group">
-          <input #piSearch id="pi-search-txt-box" (keyup)="0" type="text" class="form-control"
+          <input #piSearchInput
+                 id="pi-search-txt-box"
+                 (keyup)="0"
+                 type="text"
+                 class="form-control"
                  placeholder="{{this.INPUT_PLACEHOLDER}}">
           <div class="input-group-btn">
-            <a [routerLink]="['/pi-select', {name: piSearch.value}]">
+            <a [routerLink]="['/pi-select', {name: piSearchInput.value}]">
               <button
                 id="pi-search-submit-btn"
                 type="submit"
                 class="btn btn-default"
-                [disabled]="piSearch.value === ''">
+                [disabled]="piSearchInput.value === ''">
                 SelectPI
               </button>
             </a>

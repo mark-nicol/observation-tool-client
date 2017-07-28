@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RefinePanelComponent implements OnInit {
 
-  passedValue: string;
+  name: string;
 
   constructor() {
   }

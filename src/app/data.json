@@ -1,0 +1,34 @@
+[
+  {
+    "@type": "Person",
+    "affiliation": {
+      "@type": "Affiliation",
+      "organisationName": "Science and Technology Facilities Council",
+      "streetAddress": "Royal Observatory, Blackford Hill",
+      "addressLocality": "Edinburgh",
+      "addressRegion": "Scotland",
+      "postalCode": "EH11 1LL"
+    },
+    "email": "joe.barrett@stfc.ac.uk",
+    "title": "Mr",
+    "name": "Joe Barrett",
+    "telephone": "01316688220",
+    "url": "http://something.something.com"
+  },
+  {
+    "@type": "Person",
+    "affiliation": {
+      "@type": "Affiliation",
+      "organisationName": "Science and Technology Facilities Council",
+      "streetAddress": "Royal Observatory, Blackford Hill",
+      "addressLocality": "Edinburgh",
+      "addressRegion": "Scotland",
+      "postalCode": "EH11 1LL"
+    },
+    "email": "joe.barrett@stfc.ac.uk",
+    "title": "Mr",
+    "name": "Joe Barrett",
+    "telephone": "01316688220",
+    "url": "http://something.something.com"
+  }
+]

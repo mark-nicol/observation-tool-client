@@ -13,5 +13,5 @@ export class PrimaryInvestigator {
   name: string;
   telephone: number;
   url: string;
-  alma_id: string;
+  almaId: string;
 }

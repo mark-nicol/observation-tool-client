@@ -2,10 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from "@angular/http"
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from "./app-routing.module"
 
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from "./services/in-memory-data.service"
+
 /* Components */
+import { AppComponent } from './app.component';
 import { NavbarComponent } from "./components/navbar/navbar.component"
 import { PiEntryComponent } from "./components/pi-entry/pi-entry.component"
 import { PiSearchComponent } from "./components/pi-entry/pi-search/pi-search.component"
@@ -14,6 +17,9 @@ import { PiSelectComponent } from "./components/pi-select/pi-select.component"
 import { RefinePanelComponent } from "./components/pi-select/refine-panel/refine-panel.component"
 import { ResultsTableComponent } from "./components/pi-select/results-table/results-table.component"
 import { SidenavComponent } from "./components/sidenav/sidenav.component"
+
+/* Services */
+import { PrimaryInvestigatorService } from "./services/primary-investigator.service"
 
 @NgModule({
   declarations: [
@@ -28,11 +34,16 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component"
     SidenavComponent,
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
     HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    AppRoutingModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    PrimaryInvestigatorService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

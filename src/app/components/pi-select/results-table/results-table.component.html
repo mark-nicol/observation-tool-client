@@ -9,13 +9,13 @@
           <th>ALMA ID</th>
         </tr>
       </thead>
-      <tr *ngFor="let pi of searchResults"
+      <tr *ngFor="let pi of pis"
           [class.active]="pi === selectedPi"
           (click)="rowClick(pi)">
-        <td>{{pi.fullName}}</td>
+        <td>{{pi.name}}</td>
         <td>{{pi.email}}</td>
-        <td>{{pi.affiliation}}</td>
-        <td>{{pi.alma_id}}</td>
+        <td>{{pi.affiliation.organisationName}}</td>
+        <td>{{pi.almaId}}</td>
       </tr>
     </table>
   </div>

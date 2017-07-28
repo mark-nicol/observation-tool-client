@@ -1,52 +1,30 @@
 import {Component, OnInit} from '@angular/core';
 import {PrimaryInvestigator} from "../../../models/primary-investigator"
-
-class Primary_Investigator {
-  fullName: string;
-  email: string;
-  affiliation: string;
-  alma_id: string;
-}
+import {PrimaryInvestigatorService} from "../../../services/primary-investigator.service";
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-results-table',
   templateUrl: './results-table.component.html',
-  styleUrls: ['./results-table.component.css']
+  styleUrls: ['./results-table.component.css'],
+  providers: [ PrimaryInvestigatorService ]
 })
+
 export class ResultsTableComponent implements OnInit {
 
   searchQuery: string;
+  pis: any;
+  searchResults: PrimaryInvestigator[];
+  selectedPi: PrimaryInvestigator;
 
-  // PRIMARY_INVESTIGATORS: PrimaryInvestigator[] = [
-  //   {
-  //     title: '',
-  //     name: 'Joe Barrett',
-  //     affiliation: null,
-  //     email: '',
-  //     telephone: '',
-  //     url: ''
-  //   }
-  // ];
-
-  searchResults: Primary_Investigator[];
-  selectedPi: Primary_Investigator;
-
-  constructor() {
-    this.searchQuery = '';
+  constructor(private primaryInvestigatorService: PrimaryInvestigatorService) {
   }
 
   ngOnInit() {
-    this.searchResults = [];
-    console.log(this.searchQuery);
-    for (let i = 0; i < this.PRIMARY_INVESTIGATORS.length; i++){
-      console.log(this.PRIMARY_INVESTIGATORS[i]);
-      if (this.PRIMARY_INVESTIGATORS[i].name.includes(this.searchQuery)){
-        this.searchResults.push(this.PRIMARY_INVESTIGATORS[i]);
-      }
-    }
+    this.primaryInvestigatorService.getPIs().then(pis => this.pis = pis);
   }
 
-  rowClick(pi: Primary_Investigator) {
+  rowClick(pi: PrimaryInvestigator) {
     this.selectedPi = pi;
   }
 

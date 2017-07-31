@@ -10,7 +10,7 @@ import {PrimaryInvestigator} from "../../../models/primary-investigator";
 export class PiSearchComponent implements OnInit {
 
   INPUT_PLACEHOLDER: string = "Enter Principle Investigator name";
-  passedPi: string;
+  passedPi: PrimaryInvestigator;
 
   constructor(private activatedRoute: ActivatedRoute) {
 
@@ -18,9 +18,10 @@ export class PiSearchComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
+      console.log(params.hasOwnProperty('selectedPi'));
       if(params.hasOwnProperty('selectedPi'))
-        this.passedPi = params['selectedPi'];
-        console.log(this.passedPi);
+        this.passedPi = JSON.parse(sessionStorage.getItem('selectedPi'));
+        console.log(this.passedPi.name);
     });
   }
 }

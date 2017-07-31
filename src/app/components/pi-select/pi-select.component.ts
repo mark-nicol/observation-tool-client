@@ -1,17 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from "@angular/router";
-import { RefinePanelComponent } from "./refine-panel/refine-panel.component";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
+import {RefinePanelComponent} from "./refine-panel/refine-panel.component";
 import {ResultsTableComponent} from "./results-table/results-table.component";
-import {PrimaryInvestigator} from "../../models/primary-investigator";
 
 @Component({
   selector: 'app-pi-select',
   templateUrl: './pi-select.component.html',
   styleUrls: ['./pi-select.component.css']
 })
-export class PiSelectComponent implements OnInit{
 
+export class PiSelectComponent implements OnInit{
   @ViewChild(RefinePanelComponent) refinePanel: RefinePanelComponent;
   @ViewChild(ResultsTableComponent) resultsTable: ResultsTableComponent;
   name: string;

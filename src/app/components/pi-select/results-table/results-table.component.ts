@@ -6,7 +6,7 @@ import {PrimaryInvestigatorService} from "../../../services/primary-investigator
   selector: 'app-results-table',
   templateUrl: './results-table.component.html',
   styleUrls: ['./results-table.component.css'],
-  providers: [ PrimaryInvestigatorService ]
+  providers: [PrimaryInvestigatorService]
 })
 
 export class ResultsTableComponent implements OnInit {
@@ -14,19 +14,18 @@ export class ResultsTableComponent implements OnInit {
   searchQuery: string;
   primaryInvestigators: any;
   selectedPi: PrimaryInvestigator;
-  name:string;
 
   constructor(private primaryInvestigatorService: PrimaryInvestigatorService) {
   }
 
   ngOnInit() {
     this.primaryInvestigatorService.search('name', this.searchQuery)
-                                   .then(pis => this.primaryInvestigators = pis);
+      .then(pis => this.primaryInvestigators = pis);
   }
 
   rowClick(pi: PrimaryInvestigator) {
     this.selectedPi = this.selectedPi === pi ? null : pi;
-    this.name = this.selectedPi.name;
+    sessionStorage.setItem("selectedPi", JSON.stringify(this.selectedPi));
   }
 
 }

@@ -9,7 +9,7 @@
                  (keyup)="0"
                  type="text"
                  class="form-control"
-                 placeholder="{{this.INPUT_PLACEHOLDER}}">
+                 placeholder="{{this.passedPi.name}}">
           <div class="input-group-btn">
             <a [routerLink]="['/pi-select', {name: piSearchInput.value}]">
               <button

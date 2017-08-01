@@ -19,7 +19,9 @@ import { ResultsTableComponent } from "./components/pi-select/results-table/resu
 import { SidenavComponent } from "./components/sidenav/sidenav.component"
 
 /* Services */
-import { PrimaryInvestigatorService } from "./services/primary-investigator.service"
+import { PrimaryInvestigatorService } from "./services/primary-investigator.service";
+import {FormsModule} from "@angular/forms";
+import {TreeModule} from "angular-tree-component";
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { PrimaryInvestigatorService } from "./services/primary-investigator.serv
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    TreeModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,

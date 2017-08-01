@@ -1,9 +1,10 @@
 image: node:latest
 
 before-script:
-    - chmod +x 777 ci/install-browsers
-    - ci/install-browsers
-    - npm install
+    script:
+        - chmod +x 777 ci/install-browsers
+        - ci/install-browsers
+        - npm install
 
 cache:
     paths:

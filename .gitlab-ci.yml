@@ -2,7 +2,7 @@ image: node:latest
 
 before-script:
     script:
-        - chmod +x 777 ci/install-browsers
+        - chmod +x ci/install-browsers
         - ci/install-browsers
         - npm install
 

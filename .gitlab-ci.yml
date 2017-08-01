@@ -1,8 +1,9 @@
 image: node:latest
 
 before-script:
-    - ci/install-browsers
-    - npm install
+    script:
+        - ci/install-browsers
+        - npm install
 
 cache:
     paths:

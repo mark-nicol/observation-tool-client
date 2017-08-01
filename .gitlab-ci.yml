@@ -3,7 +3,7 @@ image: node:latest
 before-script:
     script:
         - chmod +x ci/install-browsers
-        - ci/install-browsers
+        - ./ci/install-browsers
         - npm install
 
 cache:

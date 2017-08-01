@@ -44,6 +44,7 @@ import { PrimaryInvestigatorService } from "./services/primary-investigator.serv
   ],
   bootstrap: [
     AppComponent
-  ]
+  ],
+  exports: [NavbarComponent]
 })
 export class AppModule { }

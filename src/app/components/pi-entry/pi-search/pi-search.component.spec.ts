@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PiSearchComponent } from './pi-search.component';
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('PiSearchComponent', () => {
   let component: PiSearchComponent;
@@ -8,6 +9,7 @@ describe('PiSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [ PiSearchComponent ]
     })
     .compileComponents();

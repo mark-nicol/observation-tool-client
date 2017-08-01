@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PiSelectComponent } from './pi-select.component';
+import {PiSelectComponent} from './pi-select.component';
+import {RouterTestingModule} from "@angular/router/testing";
+import {RefinePanelComponent} from "./refine-panel/refine-panel.component";
+import {ResultsTableComponent} from "./results-table/results-table.component";
+import {HttpModule} from "@angular/http";
 
 describe('PiSelectComponent', () => {
   let component: PiSelectComponent;
@@ -8,9 +12,17 @@ describe('PiSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PiSelectComponent ]
+      imports: [
+        RouterTestingModule,
+        HttpModule
+      ],
+      declarations: [
+        PiSelectComponent,
+        RefinePanelComponent,
+        ResultsTableComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

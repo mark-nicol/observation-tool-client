@@ -1,9 +1,13 @@
+/* Modules */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from "@angular/http"
-
+import {FormsModule} from "@angular/forms";
+import {TreeModule} from "angular-tree-component";
+import {ContextMenuModule} from "ngx-contextmenu";
 import { AppRoutingModule } from "./app-routing.module"
 
+/* Web faking */
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from "./services/in-memory-data.service"
 
@@ -20,8 +24,7 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component"
 
 /* Services */
 import { PrimaryInvestigatorService } from "./services/primary-investigator.service";
-import {FormsModule} from "@angular/forms";
-import {TreeModule} from "angular-tree-component";
+import { SidenavContextMenuComponent } from './components/sidenav/sidenav-context-menu/sidenav-context-menu/sidenav-context-menu.component';
 
 @NgModule({
   declarations: [
@@ -34,11 +37,13 @@ import {TreeModule} from "angular-tree-component";
     RefinePanelComponent,
     ResultsTableComponent,
     SidenavComponent,
+    SidenavContextMenuComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     TreeModule,
+    ContextMenuModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,

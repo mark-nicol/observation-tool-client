@@ -1,1 +1,36 @@
-<tree-root [nodes]="nodes"></tree-root>
+<tree-root id="tree3" [focused]="true" [nodes]="nodes" [options]="options">
+  <ng-template #treeNodeWrapperTemplate let-node let-index="index">
+    <span
+      [ngClass]="this.getIcon(node)"
+      (click)="node.toggleExpanded()"
+      style="padding-right: 0.25em; color: #6495ed"
+      [contextMenu]="basicMenu"
+      [contextMenuSubject]="node"
+      [class.node-content-wrapper-active]="node.isActive"
+      [class.node-content-wrapper-focused]="node.isFocused">
+    </span>
+    <span
+      [class]="node.data.className"
+      [class.title]="true"
+      (click)="node.toggleActivated()"
+      (dblclick)="node.toggleExpanded(); node.toggleActivated()"
+      [contextMenu]="basicMenu"
+      [contextMenuSubject]="node"
+      [class.node-content-wrapper-active]="node.isActive"
+      [class.node-content-wrapper-focused]="node.isFocused">
+      {{ node.data.name }}
+    </span>
+  </ng-template>
+</tree-root>
+
+<context-menu>
+  <ng-template contextMenuItem (execute)="add($event.item)">
+    Add
+  </ng-template>
+  <ng-template contextMenuItem let-node (execute)="copy($event.item)">
+    Copy {{node.data.name}}
+  </ng-template>
+  <ng-template contextMenuItem (execute)="remove($event.item)">
+    Remove
+  </ng-template>
+</context-menu>

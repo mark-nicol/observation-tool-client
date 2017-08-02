@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ITreeOptions, TreeComponent, TreeNode} from "angular-tree-component";
+import {ContextMenuComponent, ContextMenuService} from "ngx-contextmenu";
+
+import * as _ from "lodash";
 
 @Component({
   selector: 'app-sidenav',
@@ -8,46 +12,45 @@ import { Component, OnInit } from '@angular/core';
 
 export class SidenavComponent implements OnInit {
 
+  @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
+  @ViewChild(TreeComponent) private tree: TreeComponent;
+
   nodes = [
     {
-      id: 1,
       name: 'Project',
       children: [
         {
-          id: 2,
           name: 'Proposal',
           children: [
             {
-              id: 3,
               name: 'Planned Observing',
               children: [
                 {
-                  id: 4,
                   name: 'ScienceGoal',
                   children: [
                     {
-                      id: 5,
-                      name: 'General'
+                      name: 'General',
+                      children: []
                     },
                     {
-                      id: 6,
-                      name: 'Field Setup'
+                      name: 'Field Setup',
+                      children: []
                     },
                     {
-                      id: 7,
-                      name: 'Spectral Setup'
+                      name: 'Spectral Setup',
+                      children: []
                     },
                     {
-                      id: 8,
-                      name: 'Calibration Setup'
+                      name: 'Calibration Setup',
+                      children: []
                     },
                     {
-                      id: 9,
-                      name: 'Control and Performance'
+                      name: 'Control and Performance',
+                      children: []
                     },
                     {
-                      id: 10,
-                      name: 'Technical Justification'
+                      name: 'Technical Justification',
+                      children: []
                     }
                   ]
                 }
@@ -60,9 +63,62 @@ export class SidenavComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  options : ITreeOptions = {
+    getChildren: () => new Promise((resolve, reject) => {
+    }),
+    animateExpand: true
+  };
+
+  constructor(private contextMenuService: ContextMenuService) {
+  }
+
+  public onContextMenu($event: MouseEvent, item: any): void {
+    this.contextMenuService.show.next({ event: $event, item: item });
+    $event.preventDefault();
+  }
 
   ngOnInit() {
+  }
+
+  getIcon(node: TreeNode) {
+    if (node.hasChildren)
+      if (node.isExpanded)
+        return 'glyphicon glyphicon-folder-open';
+      else
+        return 'glyphicon glyphicon-folder-close';
+    else
+      return 'glyphicon glyphicon-file';
+  }
+
+  add(node){
+    if (node){
+      console.log('Add to ' + node.data.name)
+    } else {
+      console.log('node undefined')
+    }
+    let newNode = { id: null, name: 'New Node', children: []}
+    node.children.push(newNode);
+    this.tree.treeModel.update();
+  }
+
+  copy(node) {
+    if (node){
+      console.log('Copy ' + node.data.name)
+    } else {
+      console.log('node undefined')
+    }
+
+    console.log(this.tree.treeModel.getNodeById(node.id));
+
+    // let newNode = this.nodes.find(x => x.name === node.name);
+    // newNode.name = newNode.name+'1';
+    // this.nodes.push(newNode);
+    // this.tree.treeModel.update();
+  }
+
+  remove(node){
+    _.remove(node.parent.data.children, node.data);
+    this.tree.treeModel.update();
   }
 
 }

@@ -13,22 +13,31 @@
       [class]="node.data.className"
       [class.title]="true"
       (click)="node.toggleActivated()"
-      (dblclick)="node.toggleExpanded(); node.toggleActivated()"
+      (dblclick)="handleDblClick(node)"
       [contextMenu]="basicMenu"
       [contextMenuSubject]="node"
       [class.node-content-wrapper-active]="node.isActive"
-      [class.node-content-wrapper-focused]="node.isFocused">
+      [class.node-content-wrapper-focused]="node.isFocused"
+      *ngIf="node.hasChildren ? true : !inputs[node.name]">
       {{ node.data.name }}
     </span>
+    <input
+      id="{{node.data.name + 'Input'}}"
+      class="input-sm"
+      *ngIf="node.hasChildren ? false : inputs[node.name]"
+      (dblclick)="reshow(node)">
   </ng-template>
 </tree-root>
 
 <context-menu>
   <ng-template contextMenuItem (execute)="add($event.item)">
-    Add
+    Add Science Goal
   </ng-template>
   <ng-template contextMenuItem let-node (execute)="copy($event.item)">
     Copy {{node.data.name}}
+  </ng-template>
+  <ng-template contextMenuItem (execute)="rename($event.item)">
+    Rename
   </ng-template>
   <ng-template contextMenuItem (execute)="remove($event.item)">
     Remove

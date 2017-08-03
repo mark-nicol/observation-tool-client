@@ -15,44 +15,57 @@ export class SidenavComponent implements OnInit {
   @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
   @ViewChild(TreeComponent) private tree: TreeComponent;
 
+  inputHidden:boolean = true;
+
+  inputs = {
+    General: true,
+    FieldSetup: true,
+  };
+
+  scienceGoals = [
+    {
+      name: 'General',
+      children: []
+    },
+    {
+      name: 'Field Setup',
+      children: []
+    },
+    {
+      name: 'Spectral Setup',
+      children: []
+    },
+    {
+      name: 'Calibration Setup',
+      children: []
+    },
+    {
+      name: 'Control and Performance',
+      children: []
+    },
+    {
+      name: 'Technical Justification',
+      children: []
+    }
+  ];
+
   nodes = [
     {
       name: 'Project',
+      isExpanded: true,
       children: [
         {
           name: 'Proposal',
+          isExpanded: true,
           children: [
             {
               name: 'Planned Observing',
+              isExpanded: true,
               children: [
                 {
                   name: 'ScienceGoal',
-                  children: [
-                    {
-                      name: 'General',
-                      children: []
-                    },
-                    {
-                      name: 'Field Setup',
-                      children: []
-                    },
-                    {
-                      name: 'Spectral Setup',
-                      children: []
-                    },
-                    {
-                      name: 'Calibration Setup',
-                      children: []
-                    },
-                    {
-                      name: 'Control and Performance',
-                      children: []
-                    },
-                    {
-                      name: 'Technical Justification',
-                      children: []
-                    }
-                  ]
+                  isExpanded: true,
+                  children: this.scienceGoals
                 }
               ]
             }
@@ -63,7 +76,7 @@ export class SidenavComponent implements OnInit {
     }
   ];
 
-  options : ITreeOptions = {
+  options: ITreeOptions = {
     getChildren: () => new Promise((resolve, reject) => {
     }),
     animateExpand: true
@@ -73,7 +86,7 @@ export class SidenavComponent implements OnInit {
   }
 
   public onContextMenu($event: MouseEvent, item: any): void {
-    this.contextMenuService.show.next({ event: $event, item: item });
+    this.contextMenuService.show.next({event: $event, item: item});
     $event.preventDefault();
   }
 
@@ -90,35 +103,54 @@ export class SidenavComponent implements OnInit {
       return 'glyphicon glyphicon-file';
   }
 
-  add(node){
-    if (node){
+  add(node) {
+    if (node) {
       console.log('Add to ' + node.data.name)
     } else {
       console.log('node undefined')
     }
-    let newNode = { id: null, name: 'New Node', children: []}
-    node.children.push(newNode);
+
+
+    let newNode = {id: null, name: 'New Node', children: []};
+    this.scienceGoals.push(newNode);
     this.tree.treeModel.update();
   }
 
   copy(node) {
-    if (node){
+    if (node) {
       console.log('Copy ' + node.data.name)
     } else {
       console.log('node undefined')
     }
 
     console.log(this.tree.treeModel.getNodeById(node.id));
-
-    // let newNode = this.nodes.find(x => x.name === node.name);
-    // newNode.name = newNode.name+'1';
-    // this.nodes.push(newNode);
-    // this.tree.treeModel.update();
   }
 
-  remove(node){
+  remove(node) {
+    if (node.hasChildren) {
+
+    }
     _.remove(node.parent.data.children, node.data);
     this.tree.treeModel.update();
+  }
+
+
+  handleDblClick(node) {
+    if (node.hasChildren) {
+      node.toggleExpanded();
+      node.toggleActivated();
+    } else {
+      this.rename(node)
+    }
+  }
+
+  rename(node) {
+    this.inputs[node.name] = !this.inputs[node.name];
+    console.log(node.name, this.inputs[node.name]);
+  }
+
+  reshow(node){
+    this.inputs[node.name] = !this.inputs[node.name];
   }
 
 }

@@ -24,6 +24,7 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component"
 
 /* Services */
 import { PrimaryInvestigatorService } from "./services/primary-investigator.service";
+import {Autofocus} from "./directives/autofocus";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { PrimaryInvestigatorService } from "./services/primary-investigator.serv
     RefinePanelComponent,
     ResultsTableComponent,
     SidenavComponent,
+    Autofocus
   ],
   imports: [
     BrowserModule,

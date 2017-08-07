@@ -3,6 +3,7 @@ import {ITreeOptions, TreeComponent, TreeNode} from "angular-tree-component";
 import {ContextMenuComponent, ContextMenuService} from "ngx-contextmenu";
 
 import * as _ from "lodash";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-sidenav',
@@ -17,8 +18,7 @@ export class SidenavComponent implements OnInit {
 
   renameValue:string = '';
 
-  inputs = {
-  };
+  inputs: { [id:string] : boolean } = {};
 
   scienceGoals = [
     {
@@ -107,11 +107,12 @@ export class SidenavComponent implements OnInit {
     } else {
       console.log('node undefined')
     }
-
-
-    let newNode = {id: null, name: 'New Node', children: []};
+    let newNode = {name: 'New Goal', children: []};
     this.scienceGoals.push(newNode);
     this.tree.treeModel.update();
+    this.rename(this.tree.treeModel.getNodeBy(function (obj) {
+      if (obj.data.name == newNode.name){return obj;}
+    }));
   }
 
   copy(node) {
@@ -133,7 +134,7 @@ export class SidenavComponent implements OnInit {
   }
 
 
-  handleDblClick(node) {
+  handleDblClick(node, inputBox) {
     if (node.hasChildren) {
       node.toggleExpanded();
       node.toggleActivated();
@@ -144,30 +145,36 @@ export class SidenavComponent implements OnInit {
 
   rename(node) {
     console.log('Rename ' + node.data.name);
-    this.reshow(node);
+    this.toggleInput(node);
     this.renameValue = node.data.name;
   }
 
   submitRename(event, node, newName) {
     switch (event.keyCode) {
       case 13: // Enter
-        this.reshow(node);
+        this.toggleInput(node);
         this.getByValue(this.scienceGoals, node.data.name).name = newName.trim();
         break;
       case 27: // Escape
-        this.reshow(node);
+        this.toggleInput(node);
         break;
       default:
         break;
     }
   }
 
-  reshow(node){
+  toggleInput(node){
+    // Check any others are visible
+    for (let key in this.inputs) {
+      if (key != node.data.name && this.inputs[key] === true) {
+        this.inputs[key] = false;
+      }
+    }
     this.inputs[node.data.name] = !this.inputs[node.data.name];
   }
 
   getByValue(array, value) {
-    var result = array.filter(function(object){
+    let result = array.filter(function (object) {
       return object.name == value
     });
     return result? result[0] : null;

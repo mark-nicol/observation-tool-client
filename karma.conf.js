@@ -34,12 +34,12 @@ module.exports = function (config) {
     browsers: [
       'Chrome',
       'PhantomJS',
-      'IE',
-      'Firefox',
-      'FirefoxDeveloper',
-      'FirefoxAurora',
-      'FirefoxNightly',
-      'Safari'
+      // 'IE',
+      // 'Firefox',
+      // 'FirefoxDeveloper',
+      // 'FirefoxAurora',
+      // 'FirefoxNightly',
+      // 'Safari'
     ],
     singleRun: false
   });

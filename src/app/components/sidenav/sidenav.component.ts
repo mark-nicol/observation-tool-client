@@ -15,11 +15,9 @@ export class SidenavComponent implements OnInit {
   @ViewChild(ContextMenuComponent) public basicMenu: ContextMenuComponent;
   @ViewChild(TreeComponent) private tree: TreeComponent;
 
-  inputHidden:boolean = true;
+  renameValue:string = '';
 
   inputs = {
-    General: true,
-    FieldSetup: true,
   };
 
   scienceGoals = [
@@ -145,12 +143,34 @@ export class SidenavComponent implements OnInit {
   }
 
   rename(node) {
-    this.inputs[node.name] = !this.inputs[node.name];
-    console.log(node.name, this.inputs[node.name]);
+    console.log('Rename ' + node.data.name);
+    this.reshow(node);
+    this.renameValue = node.data.name;
+  }
+
+  submitRename(event, node, newName) {
+    switch (event.keyCode) {
+      case 13: // Enter
+        this.reshow(node);
+        this.getByValue(this.scienceGoals, node.data.name).name = newName.trim();
+        break;
+      case 27: // Escape
+        this.reshow(node);
+        break;
+      default:
+        break;
+    }
   }
 
   reshow(node){
-    this.inputs[node.name] = !this.inputs[node.name];
+    this.inputs[node.data.name] = !this.inputs[node.data.name];
+  }
+
+  getByValue(array, value) {
+    var result = array.filter(function(object){
+      return object.name == value
+    });
+    return result? result[0] : null;
   }
 
 }

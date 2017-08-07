@@ -9,23 +9,29 @@
       [class.node-content-wrapper-active]="node.isActive"
       [class.node-content-wrapper-focused]="node.isFocused">
     </span>
-    <span
-      [class]="node.data.className"
-      [class.title]="true"
-      (click)="node.toggleActivated()"
-      (dblclick)="handleDblClick(node)"
-      [contextMenu]="basicMenu"
-      [contextMenuSubject]="node"
-      [class.node-content-wrapper-active]="node.isActive"
-      [class.node-content-wrapper-focused]="node.isFocused"
-      *ngIf="node.hasChildren ? true : !inputs[node.name]">
-      {{ node.data.name }}
-    </span>
-    <input
-      id="{{node.data.name + 'Input'}}"
-      class="input-sm"
-      *ngIf="node.hasChildren ? false : inputs[node.name]"
-      (dblclick)="reshow(node)">
+    <div *ngIf="node.hasChildren || !inputs[node.data.name]; then label else input"></div>
+    <ng-template #input>
+      <input #inputBox
+        id="{{node.data.name + 'Input'}}"
+        class="rename-box"
+        (dblclick)="reshow(node)"
+        (keyup)="submitRename($event, node, inputBox.value)"
+        title="{{node.data.name}}"
+        value="{{node.data.name}}">
+    </ng-template>
+    <ng-template #label>
+      <span
+        [class]="node.data.className"
+        [class.title]="true"
+        (click)="node.toggleActivated()"
+        (dblclick)="handleDblClick(node)"
+        [contextMenu]="basicMenu"
+        [contextMenuSubject]="node"
+        [class.node-content-wrapper-active]="node.isActive"
+        [class.node-content-wrapper-focused]="node.isFocused">
+        {{ node.data.name }}
+      </span>
+    </ng-template>
   </ng-template>
 </tree-root>
 

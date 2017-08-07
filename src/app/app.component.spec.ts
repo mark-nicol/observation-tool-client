@@ -4,11 +4,17 @@ import { AppComponent } from './app.component';
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
 import {RouterTestingModule} from "@angular/router/testing";
+import {TreeModule} from "angular-tree-component";
+import {ContextMenuModule} from "ngx-contextmenu";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule,
+        TreeModule,
+        ContextMenuModule
+      ],
       declarations: [
         AppComponent,
         NavbarComponent,

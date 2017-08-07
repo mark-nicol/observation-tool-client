@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidenavComponent } from './sidenav.component';
+import { TreeModule } from "angular-tree-component";
+import { ContextMenuModule } from "ngx-contextmenu";
+import { FormsModule } from "@angular/forms";
+
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
@@ -8,7 +12,13 @@ describe('SidenavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidenavComponent ]
+      declarations: [ SidenavComponent ],
+      imports: [
+        TreeModule,
+        ContextMenuModule,
+        FormsModule
+      ],
+
     })
     .compileComponents();
   }));

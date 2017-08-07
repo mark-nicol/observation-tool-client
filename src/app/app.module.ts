@@ -24,7 +24,6 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component"
 
 /* Services */
 import { PrimaryInvestigatorService } from "./services/primary-investigator.service";
-import { SidenavContextMenuComponent } from './components/sidenav/sidenav-context-menu/sidenav-context-menu/sidenav-context-menu.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,6 @@ import { SidenavContextMenuComponent } from './components/sidenav/sidenav-contex
     RefinePanelComponent,
     ResultsTableComponent,
     SidenavComponent,
-    SidenavContextMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +52,6 @@ import { SidenavContextMenuComponent } from './components/sidenav/sidenav-contex
   bootstrap: [
     AppComponent
   ],
-  exports: [NavbarComponent]
+  exports: [ NavbarComponent ]
 })
 export class AppModule { }

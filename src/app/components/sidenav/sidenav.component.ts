@@ -102,13 +102,9 @@ export class SidenavComponent implements OnInit {
   }
 
   add(node) {
-    if (node) {
-      console.log('Add to ' + node.data.name)
-    } else {
-      console.log('node undefined')
-    }
     let newNode = {name: 'New Goal', children: []};
-    this.scienceGoals.push(newNode);
+    let index = this.scienceGoals.indexOf(node.data);
+    this.scienceGoals.splice(index + 1, 0, newNode);
     this.tree.treeModel.update();
     this.rename(this.tree.treeModel.getNodeBy(function (obj) {
       if (obj.data.name == newNode.name){return obj;}
@@ -116,13 +112,12 @@ export class SidenavComponent implements OnInit {
   }
 
   copy(node) {
-    if (node) {
-      console.log('Copy ' + node.data.name)
-    } else {
-      console.log('node undefined')
-    }
-
-    console.log(this.tree.treeModel.getNodeById(node.id));
+    let copy = JSON.parse(JSON.stringify(this.getByValue(this.scienceGoals, node.data.name)));
+    copy.name += ' (copy)';
+    copy.id = null;
+    let index = this.scienceGoals.indexOf(node.data);
+    this.scienceGoals.splice(index + 1, 0, copy);
+    this.tree.treeModel.update();
   }
 
   remove(node) {
@@ -144,7 +139,6 @@ export class SidenavComponent implements OnInit {
   }
 
   rename(node) {
-    console.log('Rename ' + node.data.name);
     this.toggleInput(node);
     this.renameValue = node.data.name;
   }

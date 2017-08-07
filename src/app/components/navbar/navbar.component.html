@@ -9,12 +9,9 @@
       <a class="navbar-brand" href="#">Logo</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar">
-      <ul class="nav navbar-nav">
-        <li class="navbar-link">
-          <a routerLink="/pi-entry">PI Entry</a>
-        </li>
-        <li class="navbar-link">
-          <a routerLink="/pi-select">PI Select</a>
+      <ul class="nav navbar-nav" [contextMenu]="basicMenu">
+        <li class="nav-item" *ngFor="let item of items">
+          <a href="#" class="nav-item navbar-link">{{item}}</a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -23,3 +20,24 @@
     </div>
   </div>
 </nav>
+
+<context-menu #basicMenu>
+  <ng-template contextMenuItem (execute)="add($event.item)">
+    Add Science Goal
+  </ng-template>
+  <ng-template contextMenuItem (execute)="copy($event.item)">
+    Copy
+  </ng-template>
+  <ng-template contextMenuItem (execute)="rename($event.item)">
+    Rename
+  </ng-template>
+  <ng-template contextMenuItem (execute)="remove($event.item)">
+    Remove
+  </ng-template>
+</context-menu>
+<!--<li class="navbar-link">-->
+<!--<a routerLink="/pi-entry">PI Entry</a>-->
+<!--</li>-->
+<!--<li class="navbar-link">-->
+<!--<a routerLink="/pi-select">PI Select</a>-->
+<!--</li>-->

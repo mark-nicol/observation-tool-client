@@ -4,6 +4,8 @@ import { Routes, RouterModule } from "@angular/router"
 /* Components */
 import { PiEntryComponent } from "./components/pi-entry/pi-entry.component"
 import { PiSelectComponent } from "./components/pi-select/pi-select.component"
+import {ProjectComponent} from "./components/project/project.component";
+import {ProposalComponent} from "./components/proposal/proposal.component";
 
 const routes: Routes = [
   {
@@ -24,6 +26,16 @@ const routes: Routes = [
   {
     path: 'pi-select/:value',
     component: PiSelectComponent,
+    children: []
+  },
+  {
+    path: 'project',
+    component: ProjectComponent,
+    children: []
+  },
+  {
+    path: 'proposal',
+    component: ProposalComponent,
     children: []
   },
   {

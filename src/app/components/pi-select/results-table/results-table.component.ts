@@ -19,7 +19,7 @@ export class ResultsTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.primaryInvestigatorService.search('name', this.searchQuery)
+    this.primaryInvestigatorService.search('Real Name', this.searchQuery)
       .then(pis => this.primaryInvestigators = pis);
   }
 

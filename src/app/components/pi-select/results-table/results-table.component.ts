@@ -19,8 +19,7 @@ export class ResultsTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.primaryInvestigatorService.search('Real Name', this.searchQuery)
-      .then(pis => this.primaryInvestigators = pis);
+    this.primaryInvestigatorService.search('Real Name', this.searchQuery);
   }
 
   rowClick(pi: PrimaryInvestigator) {

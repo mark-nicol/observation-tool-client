@@ -45,7 +45,7 @@ import {Autofocus} from "./directives/autofocus";
     TreeModule,
     ContextMenuModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    //InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
   ],
   providers: [

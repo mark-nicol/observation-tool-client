@@ -26,6 +26,21 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
+  scienceGoals = [
+    {
+      title: 'Science Goal 1',
+      path: 'sg1'
+    },
+    {
+      title: 'Science Goal 2',
+      path: 'sg2'
+    },
+    {
+      title: 'Science Goal 3',
+      path: 'sg3'
+    }
+  ];
+
   constructor() { }
 
   ngOnInit() {

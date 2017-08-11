@@ -6,6 +6,7 @@ import { PiEntryComponent } from "./components/pi-entry/pi-entry.component"
 import { PiSelectComponent } from "./components/pi-select/pi-select.component"
 import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
+import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 
 const routes: Routes = [
   {
@@ -39,10 +40,15 @@ const routes: Routes = [
     children: []
   },
   {
-    path: '',
-    redirectTo: '/pi-entry',
-    pathMatch: 'full'
-  }
+    path: 'plannedObs',
+    component: PlannedObservingComponent,
+    children: []
+  },
+  // {
+  //   path: '',
+  //   redirectTo: '/pi-entry',
+  //   pathMatch: 'full'
+  // }
 ];
 
 @NgModule({

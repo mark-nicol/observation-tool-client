@@ -27,6 +27,7 @@ import { PrimaryInvestigatorService } from "./services/primary-investigator.serv
 import {Autofocus} from "./directives/autofocus";
 import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
+import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {ProposalComponent} from "./components/proposal/proposal.component";
     NavbarComponent,
     PiEntryComponent,
     PiSearchComponent,
+    PlannedObservingComponent,
     ProjectComponent,
     ProjectInfoComponent,
     ProposalComponent,

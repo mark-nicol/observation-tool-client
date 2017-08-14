@@ -25,7 +25,9 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component"
 /* Services */
 import { PrimaryInvestigatorService } from "./services/primary-investigator.service";
 import {Autofocus} from "./directives/autofocus";
-import {HttpClientModule} from "@angular/common/http";
+import {ProjectComponent} from "./components/project/project.component";
+import {ProposalComponent} from "./components/proposal/proposal.component";
+import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,10 @@ import {HttpClientModule} from "@angular/common/http";
     NavbarComponent,
     PiEntryComponent,
     PiSearchComponent,
+    PlannedObservingComponent,
+    ProjectComponent,
     ProjectInfoComponent,
+    ProposalComponent,
     PiSelectComponent,
     RefinePanelComponent,
     ResultsTableComponent,

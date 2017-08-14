@@ -1,25 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {PrimaryInvestigator} from "../../../models/primary-investigator"
-import {PrimaryInvestigatorService} from "../../../services/primary-investigator.service";
 
 @Component({
   selector: 'app-results-table',
   templateUrl: './results-table.component.html',
-  styleUrls: ['./results-table.component.css'],
-  providers: [PrimaryInvestigatorService]
+  styleUrls: ['./results-table.component.css']
 })
 
 export class ResultsTableComponent implements OnInit {
 
-  searchQuery: string;
   primaryInvestigators: any;
   selectedPi: PrimaryInvestigator;
 
-  constructor(private primaryInvestigatorService: PrimaryInvestigatorService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.primaryInvestigatorService.search('Real Name', this.searchQuery);
   }
 
   rowClick(pi: PrimaryInvestigator) {

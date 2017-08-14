@@ -7,16 +7,14 @@
           <input #piSearchInput
                  id="pi-search-txt-box"
                  (keyup)="0"
-                 type="text"
                  class="form-control"
-                 placeholder="{{this.passedPi ? '' : this.INPUT_PLACEHOLDER}}"
-                 value="{{this.passedPi ? this.passedPi.name : ''}}"
+                 placeholder="{{this.passedPi ? null : this.INPUT_PLACEHOLDER}}"
+                 value="{{this.passedPi ? this.passedPi.fullName : null}}"
                  [disabled]="this.passedPi">
           <div class="input-group-btn">
-            <a [routerLink]="['/pi-select', {name: piSearchInput.value}]">
+            <a [routerLink]="['/pi-select', {fullName: piSearchInput.value}]">
               <button
                 id="pi-search-submit-btn"
-                type="submit"
                 class="btn btn-default"
                 [disabled]="piSearchInput.value === '' || piSearchInput.disabled">
                 SelectPI

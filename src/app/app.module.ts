@@ -25,6 +25,7 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component"
 /* Services */
 import { PrimaryInvestigatorService } from "./services/primary-investigator.service";
 import {Autofocus} from "./directives/autofocus";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import {Autofocus} from "./directives/autofocus";
     TreeModule,
     ContextMenuModule,
     HttpModule,
-    //InMemoryWebApiModule.forRoot(InMemoryDataService),
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
   ],
   providers: [

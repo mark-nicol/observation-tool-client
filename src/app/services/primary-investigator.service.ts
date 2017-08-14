@@ -1,10 +1,7 @@
-import {Http, Response} from "@angular/http";
 import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
-import {PrimaryInvestigator} from "../models/primary-investigator";
 import "rxjs/add/operator/toPromise";
-import {Observable} from "rxjs/Observable";
-import {HttpParams} from "@angular/common/http";
 
 
 @Injectable()
@@ -17,29 +14,30 @@ export class PrimaryInvestigatorService {
   constructor(private http: Http) {
   }
 
-  getPIs(): Promise<PrimaryInvestigator[]> {
-    return this.http.get(this.piUrl)
-      .toPromise()
-      .then(response => response.json().data as PrimaryInvestigator[])
-      .catch(PrimaryInvestigatorService.handleError);
-  }
-
   private static handleError(error: any): Promise<any> {
     console.error('An error occured', error);
     return Promise.reject(error.message || error);
   }
 
   search(searchVariant: string, searchStrings: string) {
-    const search = {searchVariant, searchStrings};
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json; charset=utf-8');
+    this.searchUrl = this.piUrl.concat('/?', searchVariant, '=', searchStrings);
+    return this.http.get(this.searchUrl)
+  }
+
+  searchPost(searchVariant: string, searchStrings: string) {
+    let headers = new Headers();
+    //headers.append('Content-Type', 'application/json');
+    headers.append('Content-Type', 'multipart/form-data; boundary=----WebKitFormBoundary8KN6AmVANq817OnO');
+
+    let body = new URLSearchParams();
+    body.set('searchVariant', 'Name');
+    body.set('searchStrings', 'Alan');
 
     this.http.post(
       this.almaUserLookupUrl,
-      JSON.stringify(search),
-      headers)
-      .subscribe(resp => console.log('RESPONSE', resp),
-                err => console.log('ERROR', err));
+      body.toString()
+    )
+      .subscribe();
   }
 
 }

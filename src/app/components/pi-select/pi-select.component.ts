@@ -9,7 +9,8 @@ import {PrimaryInvestigator} from "../../models/primary-investigator";
 @Component({
   selector: 'app-pi-select',
   templateUrl: './pi-select.component.html',
-  styleUrls: ['./pi-select.component.css']
+  styleUrls: ['./pi-select.component.css'],
+  providers: [PrimaryInvestigatorService]
 })
 
 export class PiSelectComponent implements OnInit{
@@ -29,5 +30,4 @@ export class PiSelectComponent implements OnInit{
         data => this.resultsTable.primaryInvestigators = data.json().data as PrimaryInvestigator[]);
     this.refinePanel.name = this.name;
   }
-
 }

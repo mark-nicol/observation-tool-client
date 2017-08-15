@@ -15,21 +15,42 @@
           <a [routerLink]="item.path" class="nav-item navbar-link">{{item.title}}</a>
         </li>
 
-        <li ngbDropdown>
-          <a class="dropdown-toggle scienceGoals" ngbDropdownToggle>
-            {{selectedGoal.title}} <span class="caret"></span>
+        <li
+          ngbDropdown
+          #dropdown="ngbDropdown"
+          [autoClose]="false">
+          <a
+            class="dropdown-toggle scienceGoals"
+            ngbDropdownToggle>
+            {{selectedGoal.title}}
+            <span class="caret"></span>
           </a>
-          <ul ngbDropdownMenu style="width: auto">
-            <li *ngFor="let sg of scienceGoals" [class.active]="sg===selectedGoal">
-              <a (click)="click(sg)" [routerLink]="sg.path">{{sg.title}}</a><span class="btn btn-sm">&times;</span>
+          <ul
+            ngbDropdownMenu>
+            <li
+              *ngFor="let sg of scienceGoals"
+              [class.active]="sg===selectedGoal">
+              <a
+                (click)="click(sg); dropdown.close()"
+                [routerLink]="sg.path">
+                {{sg.title}}
+              </a>
+              <span
+                class="btn btn-sm"
+                (click)="removeGoal(sg)">
+              &times;
+              </span>
             </li>
             <li class="divider dropdown-divider"></li>
             <li>
               <div class="container-fluid">
-                <button class="btn btn-sm btn-success">New Goal</button>
+                <button
+                  (click)="addGoal()"
+                  class="btn btn-sm btn-success">Add Goal</button>
               </div>
             </li>
           </ul>
+
         </li>
 
 

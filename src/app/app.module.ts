@@ -30,9 +30,9 @@ import {ProposalComponent} from "./components/proposal/proposal.component";
 import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {ScienceGoalDirective} from "./directives/science-goal.directive";
-import {ScienceGoalLoaderComponent} from "./components/science-goal-loader.component";
-import {FieldSetupComponent} from "./components/field-setup.component";
-import {ScienceGoalControllerComponent} from "./components/science-goal-controller.component";
+import {ScienceGoalLoaderComponent} from "./components/science-goal-components/science-goal-loader.component";
+import {FieldSetupComponent} from "./components/science-goal-components/field-setup.component";
+import {ScienceGoalControllerComponent} from "./components/science-goal-components/science-goal-controller.component";
 
 @NgModule({
   declarations: [

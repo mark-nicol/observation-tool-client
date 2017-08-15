@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
+import * as _ from "lodash";
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -53,6 +55,18 @@ export class NavbarComponent implements OnInit {
 
   click(newGoal) {
     this.selectedGoal = newGoal;
+  }
+
+  addGoal() {
+    this.scienceGoals.push({title: 'New Goal', path: 'sciGoals'});
+    return false;
+  }
+
+  removeGoal(toRemove) {
+    _.remove(this.scienceGoals, toRemove);
+    if (this.selectedGoal === toRemove) {
+      this.selectedGoal = this.scienceGoals[0];
+    }
   }
 
 

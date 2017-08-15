@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ScienceGoalItem} from "./science-goal-item";
-import {ScienceGoalService} from "../services/science-goal.service";
+import {ScienceGoalService} from "../../services/science-goal.service";
 
 @Component({
   selector: 'science-goal-controller',

@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
-import {ScienceGoalItem} from "../components/science-goal-item";
-import {FieldSetupComponent} from "../components/field-setup.component";
+import {ScienceGoalItem} from "../components/science-goal-components/science-goal-item";
+import {FieldSetupComponent} from "../components/science-goal-components/field-setup.component";
 
 @Injectable()
 export class ScienceGoalService {

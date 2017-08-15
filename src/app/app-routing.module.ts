@@ -7,7 +7,7 @@ import { PiSelectComponent } from "./components/pi-select/pi-select.component"
 import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
 import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
-import {ScienceGoalControllerComponent} from "./components/science-goal-controller.component";
+import {ScienceGoalControllerComponent} from "./components/science-goal-components/science-goal-controller.component";
 
 const routes: Routes = [
   {

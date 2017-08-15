@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ComponentFactoryResolver, Input, ViewChild} from "@angular/core";
-import {ScienceGoalDirective} from "../directives/science-goal.directive";
+import {ScienceGoalDirective} from "../../directives/science-goal.directive";
 import {ScienceGoalItem} from "./science-goal-item";
 import {ScienceGoalComponent} from "./science-goal.component";
 

@@ -7,6 +7,7 @@ import { PiSelectComponent } from "./components/pi-select/pi-select.component"
 import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
 import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
+import {ScienceGoalControllerComponent} from "./components/science-goal-controller.component";
 
 const routes: Routes = [
   {
@@ -44,11 +45,16 @@ const routes: Routes = [
     component: PlannedObservingComponent,
     children: []
   },
-  // {
-  //   path: '',
-  //   redirectTo: '/pi-entry',
-  //   pathMatch: 'full'
-  // }
+  {
+    path: 'sciGoals',
+    component: ScienceGoalControllerComponent,
+    children: []
+  },
+  {
+    path: '',
+    redirectTo: '/pi-entry',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

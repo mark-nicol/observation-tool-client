@@ -13,13 +13,13 @@ export class PiSearchComponent implements OnInit, AfterViewInit {
   INPUT_PLACEHOLDER: string = "Enter Principle Investigator name";
   passedPi: PrimaryInvestigator;
 
-  constructor(private activatedRoute: ActivatedRoute) {  }
+  constructor(private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      if(params.hasOwnProperty('selectedPi'))
-        this.passedPi = JSON.parse(sessionStorage.getItem('selectedPi'));
-    });
+    if (sessionStorage['selectedPi']) {
+      this.passedPi = JSON.parse(sessionStorage.getItem('selectedPi'));
+    }
   }
 
   ngAfterViewInit () {

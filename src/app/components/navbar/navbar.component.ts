@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+
+  selectedGoal: any;
 
   items = [
     {
@@ -29,21 +32,28 @@ export class NavbarComponent implements OnInit {
   scienceGoals = [
     {
       title: 'Science Goal 1',
-      path: 'sg1'
+      path: 'sciGoals'
     },
     {
       title: 'Science Goal 2',
-      path: 'sg2'
+      path: 'sciGoals'
     },
     {
       title: 'Science Goal 3',
-      path: 'sg3'
+      path: 'sciGoals'
     }
   ];
 
-  constructor() { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
+    this.selectedGoal = this.scienceGoals[0];
   }
+
+  click(newGoal) {
+    this.selectedGoal = newGoal;
+  }
+
 
 }

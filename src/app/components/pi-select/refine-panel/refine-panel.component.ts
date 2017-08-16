@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 
 @Component({
@@ -8,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RefinePanelComponent implements OnInit {
 
-  name: string;
+  @Output() refineSearch = new EventEmitter<string[]>();
+  @Input() name;
 
   constructor() {
   }
 
   ngOnInit() {
 
+  }
+
+  refineClick(searchVariant, searchString) {
+    this.refineSearch.emit([searchVariant, searchString]);
   }
 
 }

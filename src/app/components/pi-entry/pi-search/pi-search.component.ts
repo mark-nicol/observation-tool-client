@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {PrimaryInvestigator} from "../../../models/primary-investigator";
 
 @Component({
@@ -13,7 +12,7 @@ export class PiSearchComponent implements OnInit, AfterViewInit {
   INPUT_PLACEHOLDER: string = "Enter Principle Investigator name";
   passedPi: PrimaryInvestigator;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor() {
   }
 
   ngOnInit() {

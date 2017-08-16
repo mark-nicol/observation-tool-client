@@ -4,7 +4,7 @@ import {FieldSetupComponent} from "../components/science-goal-components/field-s
 
 @Injectable()
 export class ScienceGoalService {
-  getScienceGoals() {
+  static getScienceGoals() {
     return [
       new ScienceGoalItem(FieldSetupComponent, {title: 'Field Setup', body: 'test test test'})
     ]

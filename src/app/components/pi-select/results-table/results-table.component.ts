@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PrimaryInvestigator} from "../../../models/primary-investigator"
+import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-results-table',
@@ -9,7 +10,7 @@ import {PrimaryInvestigator} from "../../../models/primary-investigator"
 
 export class ResultsTableComponent implements OnInit {
 
-  primaryInvestigators: any;
+  @Input() searchResults: Observable<any>;
   selectedPi: PrimaryInvestigator;
 
   constructor() {

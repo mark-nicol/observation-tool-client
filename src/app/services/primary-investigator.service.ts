@@ -1,27 +1,27 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http, URLSearchParams} from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/toPromise";
-
 
 @Injectable()
 export class PrimaryInvestigatorService {
 
-  private piUrl = 'api/primaryInvestigators';
+  private piUrl = 'api/primaryInvestigators/';
   private almaUserLookupUrl = 'https://cycle-5.asa.alma.cl/ObsprepSubmissionService/UserLookup?action=MatchStrings';
-  private searchUrl: string;
+  private searchParams: URLSearchParams;
 
   constructor(private http: Http) {
+    this.searchParams = new URLSearchParams();
   }
 
-  private static handleError(error: any): Promise<any> {
-    console.error('An error occured', error);
-    return Promise.reject(error.message || error);
+  newSearch(searchVariant: string, searchStrings: string) {
+    this.searchParams = new URLSearchParams();
+    return this.search(searchVariant, searchStrings);
   }
 
   search(searchVariant: string, searchStrings: string) {
-    this.searchUrl = this.piUrl.concat('/?', searchVariant, '=', searchStrings);
-    return this.http.get(this.searchUrl)
+    this.searchParams.set(searchVariant, searchStrings);
+    return this.http.get(this.piUrl, {params: this.searchParams});
   }
 
   searchPost(searchVariant: string, searchStrings: string) {
@@ -40,4 +40,10 @@ export class PrimaryInvestigatorService {
       .subscribe();
   }
 
+  private static handleError(error: any): Promise<any> {
+    console.error('An error occured', error);
+    return Promise.reject(error.message || error);
+  }
+
 }
+

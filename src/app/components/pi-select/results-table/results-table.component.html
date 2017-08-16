@@ -9,7 +9,7 @@
           <th>Affiliation</th>
         </tr>
       </thead>
-      <tr *ngFor="let pi of primaryInvestigators"
+      <tr *ngFor="let pi of searchResults"
           [class.active]="pi === selectedPi"
           (click)="rowClick(pi)">
         <td>{{pi.uid}}</td>

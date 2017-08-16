@@ -1,21 +1,21 @@
 <div class="container-fluid">
-  <div class="panel panel-default">
-    <table class="table table-hover">
+  <div class="panel panel-default" style="max-height: 50em; overflow: auto">
+    <table class="table table-hover" style="">
       <thead>
         <tr>
+          <th>ALMA ID</th>
           <th>Full Name</th>
           <th>Email</th>
           <th>Affiliation</th>
-          <th>ALMA ID</th>
         </tr>
       </thead>
-      <tr *ngFor="let pi of primaryInvestigators"
+      <tr *ngFor="let pi of searchResults"
           [class.active]="pi === selectedPi"
           (click)="rowClick(pi)">
-        <td>{{pi.name}}</td>
+        <td>{{pi.uid}}</td>
+        <td>{{pi.fullName}}</td>
         <td>{{pi.email}}</td>
-        <td>{{pi.affiliation.organisationName}}</td>
-        <td>{{pi.almaId}}</td>
+        <td>{{pi.affiliation}}</td>
       </tr>
     </table>
   </div>

@@ -24,7 +24,15 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component"
 
 /* Services */
 import { PrimaryInvestigatorService } from "./services/primary-investigator.service";
-import {Autofocus} from "./directives/autofocus";
+import {Autofocus} from "./directives/autofocus.directive";
+import {ProjectComponent} from "./components/project/project.component";
+import {ProposalComponent} from "./components/proposal/proposal.component";
+import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {ScienceGoalDirective} from "./directives/science-goal.directive";
+import {ScienceGoalLoaderComponent} from "./components/science-goal-components/science-goal-loader.component";
+import {FieldSetupComponent} from "./components/science-goal-components/field-setup.component";
+import {ScienceGoalControllerComponent} from "./components/science-goal-components/science-goal-controller.component";
 
 @NgModule({
   declarations: [
@@ -32,12 +40,19 @@ import {Autofocus} from "./directives/autofocus";
     NavbarComponent,
     PiEntryComponent,
     PiSearchComponent,
+    PlannedObservingComponent,
+    ProjectComponent,
     ProjectInfoComponent,
+    ProposalComponent,
     PiSelectComponent,
     RefinePanelComponent,
     ResultsTableComponent,
     SidenavComponent,
-    Autofocus
+    Autofocus,
+    ScienceGoalLoaderComponent,
+    ScienceGoalDirective,
+    FieldSetupComponent,
+    ScienceGoalControllerComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +60,7 @@ import {Autofocus} from "./directives/autofocus";
     TreeModule,
     ContextMenuModule,
     HttpModule,
+    NgbModule.forRoot(),
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
   ],
@@ -54,6 +70,7 @@ import {Autofocus} from "./directives/autofocus";
   bootstrap: [
     AppComponent
   ],
-  exports: [ NavbarComponent ]
+  exports: [ NavbarComponent ],
+  entryComponents: [FieldSetupComponent]
 })
 export class AppModule { }

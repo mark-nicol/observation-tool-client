@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {PrimaryInvestigator} from "../../../models/primary-investigator";
 
 @Component({
@@ -8,21 +7,21 @@ import {PrimaryInvestigator} from "../../../models/primary-investigator";
   styleUrls: ['./pi-search.component.css']
 })
 
-export class PiSearchComponent implements OnInit {
+export class PiSearchComponent implements OnInit, AfterViewInit {
 
   INPUT_PLACEHOLDER: string = "Enter Principle Investigator name";
   passedPi: PrimaryInvestigator;
-  piSearchInput: Input;
 
-  constructor(private activatedRoute: ActivatedRoute) {  }
+  constructor() {
+  }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      if(params.hasOwnProperty('selectedPi'))
-        this.passedPi = JSON.parse(sessionStorage.getItem('selectedPi'));
-    });
-    // If passedPi != null
-      // set search box value to name
-      // set
+    if (sessionStorage['selectedPi']) {
+      this.passedPi = JSON.parse(sessionStorage.getItem('selectedPi'));
+    }
+  }
+
+  ngAfterViewInit () {
+
   }
 }

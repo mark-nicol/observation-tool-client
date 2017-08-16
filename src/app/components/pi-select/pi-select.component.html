@@ -1,7 +1,7 @@
-<app-refine-panel #refinePanel></app-refine-panel>
-<app-results-table #resultsTable></app-results-table>
+<app-refine-panel #refinePanel [name]="this.name" (refineSearch)="refineSearch($event)"></app-refine-panel>
+<app-results-table #resultsTable [searchResults]="results"></app-results-table>
 <div class="container-fluid pull-right">
-  <a [routerLink]="['/pi-entry', {selectedPi: resultsTable.selectedPi}]">
+  <a [routerLink]="['/pi-entry', {selectedPi: true}]">
     <button class="btn btn-success"
             [disabled]="!resultsTable.selectedPi">
       Select PI

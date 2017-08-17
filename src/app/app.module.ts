@@ -33,6 +33,7 @@ import {ScienceGoalDirective} from "./directives/science-goal.directive";
 import {ScienceGoalLoaderComponent} from "./components/science-goal-components/science-goal-loader.component";
 import {FieldSetupComponent} from "./components/science-goal-components/field-setup.component";
 import {ScienceGoalControllerComponent} from "./components/science-goal-components/science-goal-controller.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {ScienceGoalControllerComponent} from "./components/science-goal-componen
     TreeModule,
     ContextMenuModule,
     HttpModule,
+    HttpClientModule,
     NgbModule.forRoot(),
     //InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,

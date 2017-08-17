@@ -1,5 +1,6 @@
+import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Http, RequestOptions, URLSearchParams, Headers} from "@angular/http";
+import {Headers, RequestOptions, URLSearchParams} from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/toPromise";
 
@@ -7,10 +8,11 @@ import "rxjs/add/operator/toPromise";
 export class PrimaryInvestigatorService {
 
   //private piUrl = 'api/primaryInvestigators/';
-  private piUrl = 'http://localhost:8080/ObsprepSubmissionService/UserLookup?action=MatchStrings';
+  // private piUrl = 'http://localhost:8080/ObsprepSubmissionService/UserLookup?action=MatchStrings';
+  private piUrl = 'https://cycle-5.asa.alma.cl/ObsprepSubmissionService/UserLookup?action=MatchStrings';
   private searchParams: URLSearchParams;
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     this.searchParams = new URLSearchParams();
   }
 
@@ -25,12 +27,13 @@ export class PrimaryInvestigatorService {
   // }
 
   search(searchVariant: string, searchStrings: string) {
+    let formData = new FormData();
+    formData.append('searchVariant', searchVariant);
+    formData.append('searchStrings', searchStrings);
     let headers = new Headers();
-    headers.append('Content-Type', 'application/X-www-form-urlencoded');
+    headers.set('Accept', 'application/json');
     let options = new RequestOptions({headers});
-
-    let body = 'searchVariant=' + searchVariant + "&searchStrings=" + searchStrings;
-    return this.http.post(this.piUrl, body, options);
+    return this.http.post(this.piUrl, formData, headers);
   }
 
   // private static handleError(error: any): Promise<any> {

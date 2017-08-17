@@ -61,7 +61,7 @@ import {ScienceGoalControllerComponent} from "./components/science-goal-componen
     ContextMenuModule,
     HttpModule,
     NgbModule.forRoot(),
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    //InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
   ],
   providers: [

@@ -33,6 +33,8 @@ import {ScienceGoalDirective} from "./directives/science-goal.directive";
 import {ScienceGoalLoaderComponent} from "./components/science-goal-components/science-goal-loader.component";
 import {FieldSetupComponent} from "./components/science-goal-components/field-setup.component";
 import {ScienceGoalControllerComponent} from "./components/science-goal-components/science-goal-controller.component";
+import {AngularDraggableModule} from "angular2-draggable";
+import {ResizableModule} from "angular-resizable-element";
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import {ScienceGoalControllerComponent} from "./components/science-goal-componen
     HttpModule,
     NgbModule.forRoot(),
     InMemoryWebApiModule.forRoot(InMemoryDataService),
+    AngularDraggableModule,
+    ResizableModule,
     AppRoutingModule,
   ],
   providers: [

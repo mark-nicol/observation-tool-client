@@ -14,6 +14,7 @@ import {PrimaryInvestigatorService} from "../../services/primary-investigator.se
 export class PiSelectComponent implements OnInit {
   name: string;
   results: any;
+  isSearching: boolean;
 
   constructor(private route: ActivatedRoute, private piService: PrimaryInvestigatorService) {
 
@@ -31,6 +32,7 @@ export class PiSelectComponent implements OnInit {
   }
 
   search(variant, string, newSearch) {
+    this.isSearching = true;
     let result = new Observable<Response>();
 
     if (newSearch)
@@ -38,7 +40,7 @@ export class PiSelectComponent implements OnInit {
     else
       result = this.piService.search(variant, string);
 
-    result.subscribe(response => this.results = response);
+    result.subscribe(response => this.results = response, (error) =>  console.log(error),() => this.isSearching = false);
   }
 
 }

@@ -1,23 +1,25 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {ScienceGoalComponent} from "./science-goal.component";
 import {ResizeEvent} from "angular-resizable-element";
 
 @Component({
-  template: `
-    <h1>{{isDragging}}</h1>
-    <div ngDraggable 
-         mwlResizable
-         [enableGhostResize]="true"
-         [resizeEdges]="{bottom: true, right: true, top: true, left: true}"
+  template: `    
+    <div ngDraggable
+         *ngIf="isShown"
          (resizeEnd)="onResizeEnd($event)"
          (started)="isDragging = true"
          (stopped)="isDragging = false"
+         style="width: 20em"
          [ngStyle]="style"
          [handle]="PanelHandle"
          class="panel panel-default">
+      <h4>I'm the science goal</h4>
       <div #PanelHandle
            class="panel-heading">
         <span>{{data.title}}</span>
+        <button class="btn btn-default btn-sm pull-right" (click)="closeClick()">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
         <button class="btn btn-default btn-sm pull-right"
                 (click)="isCollapsed = !isCollapsed"
                 [attr.aria-expanded]="!isCollapsed"
@@ -36,14 +38,20 @@ import {ResizeEvent} from "angular-resizable-element";
 
 export class FieldSetupComponent implements ScienceGoalComponent {
 
+  @Output() closeComponent = new EventEmitter<ScienceGoalComponent>();
   @Input() data: any;
   isCollapsed = false;
   isDragging = false;
+  isShown = true;
 
   public style: Object = {};
 
   log(message) {
     console.log(message)
+  }
+
+  closeClick() {
+    this.isShown = !this.isShown;
   }
 
   onResizeEnd(event: ResizeEvent) {

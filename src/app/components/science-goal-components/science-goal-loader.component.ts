@@ -1,38 +1,44 @@
-import {AfterViewInit, Component, ComponentFactoryResolver, Input, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from "@angular/core";
 import {ScienceGoalDirective} from "../../directives/science-goal.directive";
 import {ScienceGoalItem} from "./science-goal-item";
 import {ScienceGoalComponent} from "./science-goal.component";
 
 @Component({
   selector: 'science-goal-loader',
-  template: '<ng-template science-goal-host></ng-template>'
+  template: `
+    <h4>I'm the loader</h4>
+    <ng-template science-goal-host></ng-template>`
 })
 
-export class ScienceGoalLoaderComponent implements AfterViewInit {
+export class ScienceGoalLoaderComponent implements AfterViewInit, OnInit {
+
   @Input() scienceGoals: ScienceGoalItem[];
-  currentScienceGoalIndex: number = -1;
   @ViewChild(ScienceGoalDirective) scienceGoalHost: ScienceGoalDirective;
   subscription: any;
   interval: any;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
-
-  ngAfterViewInit() {
-    this.loadComponent();
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
-  loadComponent() {
-    this.currentScienceGoalIndex = (this.currentScienceGoalIndex + 1) % this.scienceGoals.length;
-    let scienceGoalItem = this.scienceGoals[this.currentScienceGoalIndex];
+  ngOnInit() {
+    this.loadComponents();
+  }
 
+  ngAfterViewInit() {
+
+  }
+
+  loadComponent(index: number) {
+    let scienceGoalItem = this.scienceGoals[index];
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(scienceGoalItem.component);
-
-    let viewContainerRef = this.scienceGoalHost.viewContainerRef;
-    viewContainerRef.clear();
-
-    let componentRef = viewContainerRef.createComponent(componentFactory);
+    let componentRef = this.scienceGoalHost.viewContainerRef.createComponent(componentFactory);
     (<ScienceGoalComponent>componentRef.instance).data = scienceGoalItem.data;
+  }
 
+  loadComponents() {
+    for (let i = 0; i < this.scienceGoals.length; i++) {
+      this.loadComponent(i);
+    }
   }
 
 }

@@ -4,9 +4,29 @@ import {FieldSetupComponent} from "../components/science-goal-components/field-s
 
 @Injectable()
 export class ScienceGoalService {
+
+  scienceGoals: ScienceGoalItem[] = [
+    new ScienceGoalItem(FieldSetupComponent,
+      {
+        title: 'Field Setup',
+        body: 'Science Goal 1'
+      }
+    ),
+    new ScienceGoalItem(FieldSetupComponent,
+      {
+        title: 'Field Setup',
+        body: 'Science Goal 2'
+      }
+    ),
+  ];
+
   getScienceGoals() {
-    return [
-      new ScienceGoalItem(FieldSetupComponent, {title: 'Field Setup', body: 'test test test'})
-    ]
+    return this.scienceGoals;
   }
+
+  addScienceGoal(component: any, data: Object) {
+    console.log('MORE SCIENCE!');
+    this.scienceGoals.push(new ScienceGoalItem(component, data));
+  }
+
 }

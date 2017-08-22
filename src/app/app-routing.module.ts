@@ -1,13 +1,12 @@
-import { NgModule } from "@angular/core"
-import { Routes, RouterModule } from "@angular/router"
-
+import {NgModule} from "@angular/core"
+import {RouterModule, Routes} from "@angular/router"
 /* Components */
-import { PiEntryComponent } from "./components/pi-entry/pi-entry.component"
-import { PiSelectComponent } from "./components/pi-select/pi-select.component"
+import {PiEntryComponent} from "./components/pi-entry/pi-entry.component"
+import {PiSelectComponent} from "./components/pi-select/pi-select.component"
+import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
-import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
-import {ScienceGoalControllerComponent} from "./components/science-goal-components/science-goal-controller.component";
+import {ModularPanelControllerComponent} from "./components/modular-panel-controller/modular-panel-controller.component";
 
 const routes: Routes = [
   {
@@ -47,7 +46,7 @@ const routes: Routes = [
   },
   {
     path: 'sciGoals',
-    component: ScienceGoalControllerComponent,
+    component: ModularPanelControllerComponent,
     children: []
   },
   {
@@ -61,4 +60,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

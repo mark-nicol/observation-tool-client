@@ -29,12 +29,15 @@ import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
 import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {ScienceGoalDirective} from "./directives/science-goal.directive";
-import {ScienceGoalLoaderComponent} from "./components/science-goal-components/science-goal-loader.component";
-import {FieldSetupComponent} from "./components/science-goal-components/field-setup.component";
-import {ScienceGoalControllerComponent} from "./components/science-goal-components/science-goal-controller.component";
-import {AngularDraggableModule} from "angular2-draggable";
-import {ResizableModule} from "angular-resizable-element";
+import { ModularPanelComponent } from './components/modular-panel/modular-panel.component';
+import { SpacialImageComponent } from './components/spacial-image/spacial-image.component';
+import { FovParametersComponent } from './components/fov-parameters/fov-parameters.component';
+import { ImageQueryComponent } from './components/image-query/image-query.component';
+import { PanelBodyDirective } from './directives/panel-body.directive';
+import { ModularPanelControllerComponent } from './components/modular-panel-controller/modular-panel-controller.component';
+import { ModularPanelLoaderComponent } from './components/modular-panel-loader/modular-panel-loader.component';
+import { PanelHostDirective } from './directives/panel-host.directive';
+import {DragulaModule} from "ng2-dragula";
 
 @NgModule({
   declarations: [
@@ -51,21 +54,24 @@ import {ResizableModule} from "angular-resizable-element";
     ResultsTableComponent,
     SidenavComponent,
     Autofocus,
-    ScienceGoalLoaderComponent,
-    ScienceGoalDirective,
-    FieldSetupComponent,
-    ScienceGoalControllerComponent
+    ModularPanelComponent,
+    SpacialImageComponent,
+    FovParametersComponent,
+    ImageQueryComponent,
+    PanelBodyDirective,
+    ModularPanelControllerComponent,
+    ModularPanelLoaderComponent,
+    PanelHostDirective,
   ],
   imports: [
     BrowserModule,
+    DragulaModule,
     FormsModule,
     TreeModule,
     ContextMenuModule,
     HttpModule,
     NgbModule.forRoot(),
     InMemoryWebApiModule.forRoot(InMemoryDataService),
-    AngularDraggableModule,
-    ResizableModule,
     AppRoutingModule,
   ],
   providers: [
@@ -75,6 +81,11 @@ import {ResizableModule} from "angular-resizable-element";
     AppComponent
   ],
   exports: [ NavbarComponent ],
-  entryComponents: [FieldSetupComponent]
+  entryComponents: [
+    ModularPanelComponent,
+    ImageQueryComponent,
+    FovParametersComponent,
+    SpacialImageComponent
+  ]
 })
 export class AppModule { }

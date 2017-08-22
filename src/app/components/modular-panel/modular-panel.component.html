@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {{data.title}}
+    <button
+      class="btn btn-sm btn-outline-info pull-right"
+      type="button"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="panelBody">
+      <i class="fa"
+         [class.fa-window-minimize]="!isCollapsed"
+         [class.fa-window-maximize]="isCollapsed"></i>
+    </button>
+    <button
+      class="btn btn-sm btn-outline-info pull-right"
+      type="button">
+      <i class="fa fa-window-close"></i>
+    </button>
+  </div>
+  <div class="panel-body"
+       id="panelBody"
+       [ngbCollapse]="isCollapsed">
+    <ng-template panel-body></ng-template>
+  </div>
+</div>

@@ -27,6 +27,10 @@ export class NavbarComponent implements OnInit {
     {
       title: 'Planned Observing',
       path: 'plannedObs'
+    },
+    {
+      title: 'Science Goals',
+      path: 'sciGoals'
     }
   ];
 

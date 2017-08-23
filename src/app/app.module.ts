@@ -38,6 +38,8 @@ import { ModularPanelControllerComponent } from './components/modular-panel-cont
 import { ModularPanelLoaderComponent } from './components/modular-panel-loader/modular-panel-loader.component';
 import { PanelHostDirective } from './directives/panel-host.directive';
 import {DragulaModule} from "ng2-dragula";
+import { FieldSetupComponent } from './components/field-setup/field-setup.component';
+import { ModularPanelDirective } from './directives/modular-panel.directive';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import {DragulaModule} from "ng2-dragula";
     ModularPanelControllerComponent,
     ModularPanelLoaderComponent,
     PanelHostDirective,
+    FieldSetupComponent,
+    ModularPanelDirective,
   ],
   imports: [
     BrowserModule,

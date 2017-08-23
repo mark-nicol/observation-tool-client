@@ -1,25 +1,23 @@
-<div class="container-fluid">
-  <div class="panel panel-default">
-    <div class="panel-heading">Refine Search</div>
-    <div class="panel-body">
-      <div class="container-fluid">
-        <form class="form-inline">
-          <!-- Attribute Dropdown -->
-          <select #refineSelector class="form-control text-center" title="Attribute">
-            <option value="fullName">Name</option>
-            <option value="email">Email</option>
-            <option value="affiliation">Affiliation</option>
-            <option value="uid">ALMA ID</option>
-          </select>
-          <!-- Search type dropdown -->
-          <label (for)="refineInput" style="padding-left: 0.5em; padding-right: 0.5em">contains</label>
-          <!-- Text Entry -->
-          <input title="refineInput" #refineInput class="form-control" value="{{this.name}}">
-        </form>
-        <!-- Find Button -->
-        <button (click)="refineClick(refineSelector.value, refineInput.value)" class="btn btn-primary pull-right">Find
-          Investigator</button>
-      </div><!-- container-fluid -->
-    </div><!-- panel-body -->
-  </div><!-- panel panel-default -->
-</div><!-- container-fluid -->
+<div class="card">
+  <div class="card-header">Refine Search</div>
+  <div class="card-body">
+
+    <form class="form-inline">
+      <div class="form-group">
+        <select
+          #refineSelector class="form-control" title="Attribute">
+          <option value="fullName">Name</option>
+          <option value="email">Email</option>
+          <option value="affiliation">Affiliation</option>
+          <option value="uid">ALMA ID</option>
+        </select>
+        <label for="refineInput" style="padding-left: 0.5em; padding-right: 0.5em">contains</label>
+        <input class="form-control" title="refineInput" id="refineInput" #refineInput value="{{this.name}}">
+      </div>
+    </form>
+
+    <button (click)="refineClick(refineSelector.value, refineInput.value)" class="btn btn-primary pull-right">Find
+      Investigator
+    </button>
+  </div><!-- panel-body -->
+</div><!-- panel panel-default -->

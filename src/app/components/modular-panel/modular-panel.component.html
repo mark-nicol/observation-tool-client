@@ -1,12 +1,12 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
+<div class="card">
+  <div class="card-header">
     {{data.title}}
     <button
       class="btn btn-sm btn-outline-info pull-right"
       type="button"
       (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed"
-      aria-controls="panelBody">
+      aria-controls="card-body">
       <i class="fa"
          [class.fa-window-minimize]="!isCollapsed"
          [class.fa-window-maximize]="isCollapsed"></i>

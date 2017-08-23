@@ -1,22 +1,20 @@
-<div class="container-fluid">
-  <div class="panel panel-default" style="max-height: 50em; overflow: auto">
-    <table class="table table-hover" style="">
-      <thead>
-        <tr>
-          <th>ALMA ID</th>
-          <th>Full Name</th>
-          <th>Email</th>
-          <th>Affiliation</th>
-        </tr>
-      </thead>
-      <tr *ngFor="let pi of searchResults"
-          [class.active]="pi === selectedPi"
-          (click)="rowClick(pi)">
-        <td>{{pi.uid}}</td>
-        <td>{{pi.fullName}}</td>
-        <td>{{pi.email}}</td>
-        <td>{{pi.affiliation}}</td>
+<div class="card" style="max-height: 50em; overflow: auto">
+  <table class="table table-hover" style="">
+    <thead>
+      <tr>
+        <th>ALMA ID</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Affiliation</th>
       </tr>
-    </table>
-  </div>
+    </thead>
+    <tr *ngFor="let pi of searchResults"
+        [class.table-info]="pi === selectedPi"
+        (click)="rowClick(pi)">
+      <td>{{pi.uid}}</td>
+      <td>{{pi.fullName}}</td>
+      <td>{{pi.email}}</td>
+      <td>{{pi.affiliation}}</td>
+    </tr>
+  </table>
 </div>

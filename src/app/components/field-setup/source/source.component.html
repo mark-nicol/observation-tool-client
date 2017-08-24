@@ -1,0 +1,28 @@
+<form>
+  <div class="form-group">
+    <label for="sourceNameInput">Source Name</label>
+    <div class="input-group">
+      <input id="sourceNameInput" class="form-control">
+      <span class="input-group-btn">
+    <button class="btn btn-outline-secondary">Resolve</button>
+        </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="solarSystemCheckBox">Choose a Solar System Object?</label>
+    <input id="solarSystemCheckBox" type="checkbox">
+  </div>
+  <div class="form-group">
+    <label for="solarSystemSelector">Name of Object</label>
+    <select id="solarSystemSelector" class="form-control">
+      <option *ngFor="let body of solarBodies">{{body}}</option>
+    </select>
+  </div>
+  <label for="sourceCoordinates">Source Coordinates</label>
+  <div id="sourceCoordinates" class="form-group">
+    <label for="systemSelector">System</label>
+    <select id="systemSelector" class="form-control">
+      <option *ngFor="let system of systems">{{system}}</option>
+    </select>
+  </div>
+</form>

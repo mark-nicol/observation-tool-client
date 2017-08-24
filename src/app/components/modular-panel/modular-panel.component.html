@@ -1,8 +1,8 @@
 <div class="card">
-  <div class="card-header">
-    {{data.title}}
+  <h5 class="card-title">
+    {{title}}
     <button
-      class="btn btn-sm btn-outline-info pull-right"
+      class="btn btn-sm btn-outline-secondary pull-right"
       type="button"
       (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed"
@@ -12,14 +12,17 @@
          [class.fa-window-maximize]="isCollapsed"></i>
     </button>
     <button
-      class="btn btn-sm btn-outline-info pull-right"
-      type="button">
+      class="btn btn-sm btn-outline-secondary pull-right"
+      type="button"
+      (click)="removeClick()">
       <i class="fa fa-window-close"></i>
     </button>
-  </div>
-  <div class="panel-body"
-       id="panelBody"
+  </h5>
+  <div id="card-body"
        [ngbCollapse]="isCollapsed">
-    <ng-template panel-body></ng-template>
+    <img *ngIf="image" src="{{image}}" class="mx-auto d-block">
+    <div class="card-body">
+      <ng-content></ng-content>
+    </div>
   </div>
 </div>

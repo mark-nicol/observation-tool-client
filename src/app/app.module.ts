@@ -30,16 +30,14 @@ import {ProposalComponent} from "./components/proposal/proposal.component";
 import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { ModularPanelComponent } from './components/modular-panel/modular-panel.component';
-import { SpacialImageComponent } from './components/spacial-image/spacial-image.component';
-import { FovParametersComponent } from './components/fov-parameters/fov-parameters.component';
-import { ImageQueryComponent } from './components/image-query/image-query.component';
-import { PanelBodyDirective } from './directives/panel-body.directive';
-import { ModularPanelControllerComponent } from './components/modular-panel-controller/modular-panel-controller.component';
-import { ModularPanelLoaderComponent } from './components/modular-panel-loader/modular-panel-loader.component';
-import { PanelHostDirective } from './directives/panel-host.directive';
+import { SpacialImageComponent } from './components/field-setup/spacial-image/spacial-image.component';
+import { FovParametersComponent } from './components/field-setup/fov-parameters/fov-parameters.component';
+import { ImageQueryComponent } from './components/field-setup/image-query/image-query.component';
 import {DragulaModule} from "ng2-dragula";
 import { FieldSetupComponent } from './components/field-setup/field-setup.component';
-import { ModularPanelDirective } from './directives/modular-panel.directive';
+import { SourceComponent } from './components/field-setup/source/source.component';
+import { SourceExpectedPropertiesComponent } from './components/field-setup/source-expected-properties/source-expected-properties.component';
+import { FieldCenterCoordinatesComponent } from './components/field-setup/field-center-coordinates/field-center-coordinates.component';
 
 @NgModule({
   declarations: [
@@ -60,12 +58,10 @@ import { ModularPanelDirective } from './directives/modular-panel.directive';
     SpacialImageComponent,
     FovParametersComponent,
     ImageQueryComponent,
-    PanelBodyDirective,
-    ModularPanelControllerComponent,
-    ModularPanelLoaderComponent,
-    PanelHostDirective,
     FieldSetupComponent,
-    ModularPanelDirective,
+    SourceComponent,
+    SourceExpectedPropertiesComponent,
+    FieldCenterCoordinatesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,29 +1,27 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from '@angular/core';
-import {PanelBodyDirective} from "../../directives/panel-body.directive";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-modular-panel',
+  selector: 'modular-panel',
   templateUrl: './modular-panel.component.html',
   styleUrls: ['./modular-panel.component.css']
 })
 export class ModularPanelComponent implements OnInit {
 
-  @Input() data: any;
-  @ViewChild(PanelBodyDirective) panelBody: PanelBodyDirective;
-  isCollapsed: boolean = false;
+  @Input() id: string;
+  @Input() title: string;
+  @Input() image: string;
+  isCollapsed = false;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  @Output() hiddenChange = new EventEmitter<string>();
 
-  ngOnInit() {
-    this.loadBody();
+  constructor() {
   }
 
-  loadBody(){
-    this.panelBody.viewContainerRef.createComponent(
-      this.componentFactoryResolver.resolveComponentFactory(
-        this.data.body
-      )
-    );
+  ngOnInit() {
+  }
+
+  removeClick() {
+    this.hiddenChange.emit(this.id);
   }
 
 }

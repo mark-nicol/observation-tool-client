@@ -1,3 +1,61 @@
-<app-fov-parameters modular-panel></app-fov-parameters>
-<app-spacial-image></app-spacial-image>
-<app-image-query></app-image-query>
+<div class="row">
+  <div class="col">
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-secondary" id="showDropdown" ngbDropdownToggle>Show Panel</button>
+      <div ngbDropdownMenu aria-labelledby="showDropdown">
+        <button class="dropdown-item" (click)="showPanel('spatial')">{{components['spatial'].title}}</button>
+        <button class="dropdown-item" (click)="showPanel('fov')">{{components['fov'].title}}</button>
+        <button class="dropdown-item" (click)="showPanel('query')">{{components['query'].title}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col border p-0 m-0" [dragula]="'first-bag'">
+    <modular-panel
+      [id]="'spatial'"
+      [title]="components['spatial'].title"
+      [image]="'/assets/img/placeholder.PNG'"
+      (hiddenChange)="hiddenChange($event)"
+      *ngIf="components['spatial'].shown">
+      <spacial-image></spacial-image>
+    </modular-panel>
+  </div>
+  <div class="col border m-0 p-0" [dragula]="'first-bag'">
+    <modular-panel>
+      <field-source></field-source>
+    </modular-panel>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col border m-0 p-0" [dragula]="'first-bag'">
+    <modular-panel
+      [id]="'fov'"
+      [title]="components['fov'].title"
+      (hiddenChange)="hiddenChange($event)"
+      *ngIf="components['fov'].shown">
+      <fov-parameters></fov-parameters>
+    </modular-panel>
+  </div>
+  <div class="col border m-0 p-0" [dragula]="'first-bag'">
+    <modular-panel>
+      <source-expected-properties></source-expected-properties>
+    </modular-panel>
+  </div>
+</div>
+<div class="row">
+  <div class="col border m-0 p-0" [dragula]="'first-bag'"><modular-panel
+    [id]="'query'"
+    [title]="components['query'].title"
+    (hiddenChange)="hiddenChange($event)"
+    *ngIf="components['query'].shown">
+    <image-query></image-query>
+  </modular-panel></div>
+  <div class="col border m-0 p-0" [dragula]="'first-bag'">
+    <modular-panel>
+      <field-center-coordinates></field-center-coordinates>
+    </modular-panel>
+  </div>
+</div>

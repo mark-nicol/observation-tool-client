@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-spacial-image',
+  selector: 'spacial-image',
   templateUrl: './spacial-image.component.html',
   styleUrls: ['./spacial-image.component.css']
 })

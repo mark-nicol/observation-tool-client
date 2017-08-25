@@ -1,28 +1,191 @@
-<form>
-  <div class="form-group">
+<div class="row">
+  <!-- Source selector -->
+  <div class="col form-group">
     <label for="sourceNameInput">Source Name</label>
     <div class="input-group">
       <input id="sourceNameInput" class="form-control">
       <span class="input-group-btn">
-    <button class="btn btn-outline-secondary">Resolve</button>
-        </span>
+        <button class="btn btn-outline-secondary">Resolve</button>
+      </span>
+    </div><!--div.input-group-->
+  </div><!--div.col.form-group-->
+</div><!--div.row-->
+<div class="row">
+  <!-- Solar checkbox -->
+  <div class="col form-check">
+    <label class="form-check-label">
+      <input #solarCheckbox type="checkbox" class="form-check-input" (change)="solarCheckboxClicked()">
+      Choose a Solar System Object?
+    </label>
+  </div>
+  <!-- Solar selector -->
+  <div class="col form-group">
+    <div class="row">
+      <label for="solarSystemSelector" class="col">Name of Object</label>
+      <select id="solarSystemSelector" class="col form-control form-control-sm ml-2">
+        <option *ngFor="let body of solarBodies">{{body}}</option>
+      </select>
+    </div><!--div.row-->
+  </div><!--div.col.form-group-->
+</div><!--div.row-->
+<div class="row" *ngIf="showSourceCoords">
+  <!-- Source coords label -->
+  <label class="col-2 col-sm align-self-center">Source Coordinates</label>
+  <div class="col-sm">
+    <div class="row">
+      <!--System selector-->
+      <div class="col form-group">
+        <div class="row">
+          <label for="systemSelector" class="col-md">System</label>
+          <select id="systemSelector" class="col-md form-control form-control-sm" [(ngModel)]="chosenSystem"
+                  (ngModelChange)="changeSystem()">
+            <option *ngFor="let system of systems" [ngValue]="system">{{system}}</option>
+          </select>
+        </div>
+      </div>
+      <!--Sexa checkbox-->
+      <div class="col-lg form-check">
+        <label class="form-check-label" [class.text-muted]="latLongSystemChosen">
+          <input id="sexagesimalCheck" type="checkbox" class="form-check-input mr-2" [disabled]="latLongSystemChosen">
+          Sexagesimal
+        </label>
+      </div>
+    </div>
+    <!--RA Input-->
+    <div class="row">
+      <div class="col form-group">
+        <div class="row">
+          <div *ngIf="latLongSystemChosen; then normalLon else alternateLon"></div>
+          <ng-template #normalLon><label for="raInput" class="col-md-3">Lon (deg)</label></ng-template>
+          <ng-template #alternateLon><label for="raInput" class="col-md-3">RA</label></ng-template>
+          <input id="raInput" class="col-md-9 align-self-baseline form-control form-control-sm" placeholder="00:00:00.0000">
+        </div><!-- div.row -->
+      </div><!-- div.col.form-group -->
+    </div><!-- div.row -->
+    <!--Dec Input-->
+    <div class="row">
+      <div class="col form-group">
+        <div class="row">
+          <div *ngIf="latLongSystemChosen; then normalLat else alternateLat"></div>
+          <ng-template #normalLat><label for="raInput" class="col-md-3">Lat (deg)</label></ng-template>
+          <ng-template #alternateLat><label for="raInput" class="col-md-3">Dec</label></ng-template>
+          <input id="decInput" class="col-md-9 align-self-baseline form-control form-control-sm" placeholder="00:00:00.000">
+        </div><!-- div.row -->
+      </div><!-- div.col.form-group -->
+    </div><!-- div.row -->
+  </div><!-- div.col-sm -->
+  <div class="col-sm">
+    <!--Parallax input-->
+    <div class="row">
+      <div class="col form-group">
+        <div class="row">
+          <label for="parallaxInput" class="col-md-3">Parallax</label>
+          <div class="col-md-9 align-self-baseline input-group">
+            <input id="parallaxInput" class="form-control form-control-sm" placeholder="0.00000">
+            <select class="input-group-addon form-control-sm">
+              <option>mas</option>
+              <option>arcsec</option>
+            </select>
+          </div><!-- div.col-md-9.align-self-baseline.input-group -->
+        </div><!-- div.row -->
+      </div><!-- div.col.form-group -->
+    </div><!-- div.row -->
+    <!--Proper Motion RA Input-->
+    <div class="row">
+      <div class="col form-group">
+        <div class="row">
+          <label for="pmRaInput" class="col-md-3">PM RA</label>
+          <div class="col-md-9 align-self-baseline input-group">
+            <input id="pmRaInput" class="form-control form-control-sm" placeholder="0.00000">
+            <select class="input-group-addon form-control-sm">
+              <option>mas/yr</option>
+              <option>arcsec/s</option>
+              <option>arcmin/s</option>
+              <option>deg/s</option>
+            </select>
+          </div><!-- div.col-md-9.align-self-baseline.input-group -->
+        </div><!-- div.row -->
+      </div><!-- div.col.form-group -->
+    </div><!-- div.row -->
+    <!--Proper Motion DEC Input-->
+    <div class="row">
+      <div class="col form-group">
+        <div class="row">
+          <label for="pmDecInput" class="col-md-3">PM DEC</label>
+          <div class="col-md-9 align-self-baseline input-group">
+            <input id="pmDecInput" class="form-control form-control-sm" placeholder="0.00000">
+            <select class="input-group-addon form-control-sm">
+              <option>mas/yr</option>
+              <option>arcsec/s</option>
+              <option>arcmin/s</option>
+              <option>deg/s</option>
+            </select>
+          </div><!-- div.col-md-9.align-self-baseline.input-group -->
+        </div><!-- div.row -->
+      </div><!-- div.col.form-group -->
+    </div><!-- div.row -->
+  </div><!-- div.col-sm -->
+</div><!-- div.row -->
+<div class="row" *ngIf="showSourceCoords">
+  <!--Radial Velocity Input-->
+  <div class="col form-group">
+    <div class="row">
+      <label for="radialVelocityInput" class="col-lg-4">Radial Velocity</label>
+      <div class="col-lg-8 align-self-baseline input-group">
+        <div class="row">
+          <input id="radialVelocityInput" class="col-sm form-control form-control-sm" placeholder="0.000">
+          <select class="col-sm input-group-addon form-control-sm">
+            <option>m/s</option>
+            <option>km/s</option>
+          </select>
+          <select class="col-sm input-group-addon form-control-sm">
+            <option>bar</option>
+            <option>lsrk</option>
+            <option>topo</option>
+            <option>hel</option>
+          </select>
+        </div><!--div.col-lg-8.align-self-baseline.input-group-->
+      </div><!--div.row-->
+    </div><!--div.col.form-group-->
+  </div><!--div.row-->
+  <!--Z input-->
+  <div class="col form-group">
+    <div class="row">
+      <label for="zInput" class="col-lg-3 ">Z</label>
+      <input id="zInput" class="col-lg-9 form-control form-control-sm" placeholder="0.000000000">
     </div>
   </div>
-  <div class="form-group">
-    <label for="solarSystemCheckBox">Choose a Solar System Object?</label>
-    <input id="solarSystemCheckBox" type="checkbox">
+  <!--Doppler type selector-->
+  <div class="col form-group">
+    <div class="row">
+      <label for="dopplerSelect" class="col-lg-4">Doppler Type</label>
+      <select id="dopplerSelect" class="col-lg-8 form-control form-control-sm">
+        <option>Radio</option>
+        <option>Optical</option>
+        <option>Relativistic</option>
+      </select>
+    </div><!-- div.row -->
+  </div><!-- div.col.form-group -->
+</div><!-- div.row -->
+<div class="row">
+  <!--Target type label-->
+  <div class="col">
+    <label>Target Type</label>
   </div>
-  <div class="form-group">
-    <label for="solarSystemSelector">Name of Object</label>
-    <select id="solarSystemSelector" class="form-control">
-      <option *ngFor="let body of solarBodies">{{body}}</option>
-    </select>
-  </div>
-  <label for="sourceCoordinates">Source Coordinates</label>
-  <div id="sourceCoordinates" class="form-group">
-    <label for="systemSelector">System</label>
-    <select id="systemSelector" class="form-control">
-      <option *ngFor="let system of systems">{{system}}</option>
-    </select>
-  </div>
-</form>
+  <!--Target type radios-->
+  <div class="col">
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" name="targetTypeRadios" id="individualRadio" value="option1"
+               checked>
+        Individual Pointing(s)
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" name="targetTypeRadios" id="rectangularRadio" value="option2">
+        Rectangular Field
+      </label>
+    </div><!-- div.form-check.form-check-inline -->
+  </div><!-- div.col -->
+</div><!--div.row-->

@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SourceComponent implements OnInit {
 
   solarBodies = [
+    '',
     'Mercury',
     'Venus',
     'Moon',
@@ -39,9 +40,22 @@ export class SourceComponent implements OnInit {
     'azel'
   ];
 
+  showSourceCoords = true;
+
+  latLongSystemChosen = false;
+  chosenSystem:string;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  solarCheckboxClicked() {
+    this.showSourceCoords = !this.showSourceCoords;
+  }
+
+  changeSystem(value: string) {
+    this.latLongSystemChosen = !(this.chosenSystem === 'ICRS' || this.chosenSystem === 'FK5 J2000');
   }
 
 }

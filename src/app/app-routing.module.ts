@@ -6,7 +6,8 @@ import {PiSelectComponent} from "./components/pi-select/pi-select.component"
 import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
-import {ModularPanelControllerComponent} from "./components/modular-panel-controller/modular-panel-controller.component";
+import {FieldSetupComponent} from "./components/field-setup/field-setup.component";
+import {SourceComponent} from "./components/field-setup/source/source.component";
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'project',
-    component: ProjectComponent,
+    component: SourceComponent,
     children: []
   },
   {
@@ -46,7 +47,7 @@ const routes: Routes = [
   },
   {
     path: 'sciGoals',
-    component: ModularPanelControllerComponent,
+    component: FieldSetupComponent,
     children: []
   },
   {

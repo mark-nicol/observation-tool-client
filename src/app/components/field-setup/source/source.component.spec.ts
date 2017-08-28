@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModularPanelLoaderComponent } from './modular-panel-loader.component';
+import { SourceComponent } from './source.component';
 
-describe('ModularPanelLoaderComponent', () => {
-  let component: ModularPanelLoaderComponent;
-  let fixture: ComponentFixture<ModularPanelLoaderComponent>;
+describe('SourceComponent', () => {
+  let component: SourceComponent;
+  let fixture: ComponentFixture<SourceComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModularPanelLoaderComponent ]
+      declarations: [ SourceComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModularPanelLoaderComponent);
+    fixture = TestBed.createComponent(SourceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

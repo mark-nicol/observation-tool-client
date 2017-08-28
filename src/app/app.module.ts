@@ -29,10 +29,15 @@ import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
 import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {ScienceGoalDirective} from "./directives/science-goal.directive";
-import {ScienceGoalLoaderComponent} from "./components/science-goal-components/science-goal-loader.component";
-import {FieldSetupComponent} from "./components/science-goal-components/field-setup.component";
-import {ScienceGoalControllerComponent} from "./components/science-goal-components/science-goal-controller.component";
+import { ModularPanelComponent } from './components/modular-panel/modular-panel.component';
+import { SpacialImageComponent } from './components/field-setup/spacial-image/spacial-image.component';
+import { FovParametersComponent } from './components/field-setup/fov-parameters/fov-parameters.component';
+import { ImageQueryComponent } from './components/field-setup/image-query/image-query.component';
+import {DragulaModule} from "ng2-dragula";
+import { FieldSetupComponent } from './components/field-setup/field-setup.component';
+import { SourceComponent } from './components/field-setup/source/source.component';
+import { SourceExpectedPropertiesComponent } from './components/field-setup/source-expected-properties/source-expected-properties.component';
+import { FieldCenterCoordinatesComponent } from './components/field-setup/field-center-coordinates/field-center-coordinates.component';
 
 @NgModule({
   declarations: [
@@ -49,13 +54,18 @@ import {ScienceGoalControllerComponent} from "./components/science-goal-componen
     ResultsTableComponent,
     SidenavComponent,
     Autofocus,
-    ScienceGoalLoaderComponent,
-    ScienceGoalDirective,
+    ModularPanelComponent,
+    SpacialImageComponent,
+    FovParametersComponent,
+    ImageQueryComponent,
     FieldSetupComponent,
-    ScienceGoalControllerComponent
+    SourceComponent,
+    SourceExpectedPropertiesComponent,
+    FieldCenterCoordinatesComponent,
   ],
   imports: [
     BrowserModule,
+    DragulaModule,
     FormsModule,
     TreeModule,
     ContextMenuModule,
@@ -71,6 +81,11 @@ import {ScienceGoalControllerComponent} from "./components/science-goal-componen
     AppComponent
   ],
   exports: [ NavbarComponent ],
-  entryComponents: [FieldSetupComponent]
+  entryComponents: [
+    ModularPanelComponent,
+    ImageQueryComponent,
+    FovParametersComponent,
+    SpacialImageComponent
+  ]
 })
 export class AppModule { }

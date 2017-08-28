@@ -1,3 +1,60 @@
-<p>
-  field-center-coordinates works!
-</p>
+<div class="row">
+  <!--Target type label-->
+  <div class="col">
+    <label>Coord Type</label>
+  </div>
+  <!--Target type radios-->
+  <div class="col">
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" name="coordTypeRadios" id="individualRadio" value="option1"
+               checked>
+        Relative
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input class="form-check-input" type="radio" name="coordTypeRadios" id="rectangularRadio" value="option2">
+        Absolute
+      </label>
+    </div><!-- div.form-check.form-check-inline -->
+  </div><!-- div.col -->
+</div><!--div.row-->
+<div class="row form-group">
+  <label class="col">Offset Unit</label>
+  <select class="col form-control-sm">
+    <option>mas</option>
+    <option>arcsec</option>
+    <option>arcmin</option>
+    <option>deg</option>
+    <option>rad</option>
+  </select>
+</div>
+<div class="row form-group">
+  <label class="col"># Pointings</label>
+  <p class="col form-control-static">1</p>
+</div>
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>RA [mas]</th>
+        <th>Dec [mas]</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0.00000</td>
+        <td>0.00000</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row justify-content-center">
+  <div class="btn-group" role="group">
+    <button class="btn btn-outline-secondary"><i class="fa fa-plus"></i></button>
+    <button class="btn btn-outline-secondary"><i class="fa fa-minus"></i></button>
+    <button class="btn btn-outline-secondary"><i class="fa fa-download"></i></button>
+    <button class="btn btn-outline-secondary"><i class="fa fa-upload"></i></button>
+  </div>
+</div>

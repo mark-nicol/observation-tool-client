@@ -13,6 +13,9 @@ export class FieldSetupComponent implements OnInit {
     this.components['spatial'] = {title: 'Spatial Image', shown: true};
     this.components['fov'] = {title: 'FOV Parameters', shown: true};
     this.components['query'] = {title: 'Image Query', shown: true};
+    this.components['field-source'] = {title: 'Source', shown: true};
+    this.components['expected'] = {title: 'Expected Source Properties', shown: true};
+    this.components['field-centre'] = {title: 'Field Centre Coordinates', shown: true};
   }
 
   ngOnInit() {

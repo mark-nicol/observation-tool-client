@@ -1,16 +1,19 @@
-<form class="form-horizontal">
-  <div class="form-group">
-    <label class="col-sm-6" for="serverInput">Image Server</label>
-    <select id=serverInput class="form-control col-sm-6">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label for="imgSizeInput">Image Size (arcmin)</label>
-    <input id="imgSizeInput">
-  </div>
-  <button class="btn btn-default pull-right">Query</button>
-</form>
+<div class="row form-group">
+  <label class="col-2" for="serverInput">Image Server</label>
+  <select id=serverInput class="col-10 form-control-sm">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+  </select>
+</div>
+
+<div class="row">
+  <label class="col-2" for="imgSizeInput">Image Size (arcmin)</label>
+  <input id="imgSizeInput" class="col-10 form-control-sm align-self-baseline">
+</div>
+
+<div class="row justify-content-end">
+  <button class="btn btn-outline-secondary">Query</button>
+</div>
+

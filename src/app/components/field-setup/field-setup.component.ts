@@ -7,15 +7,30 @@ import {Component, OnInit} from '@angular/core';
 })
 export class FieldSetupComponent implements OnInit {
 
-  components: {[id: string] : {title: string, shown: boolean}} = { };
+
+  componentKeys = Object.keys;
+  components: {[id: string] : {title: string, shown: boolean}} = {
+    'spatial': {
+      title: 'Spatial Image', shown: true
+    },
+    'fov': {
+      title: 'FOV Parameters', shown: true
+    },
+    'query': {
+      title: 'Image Query', shown: true
+    },
+    'field-source': {
+      title: 'Source', shown: true
+    },
+    'expected': {
+      title: 'Expected Source Properties', shown: true
+    },
+    'field-centre': {
+      title: 'Field Centre Coordinates', shown: true
+    }
+  };
 
   constructor() {
-    this.components['spatial'] = {title: 'Spatial Image', shown: true};
-    this.components['fov'] = {title: 'FOV Parameters', shown: true};
-    this.components['query'] = {title: 'Image Query', shown: true};
-    this.components['field-source'] = {title: 'Source', shown: true};
-    this.components['expected'] = {title: 'Expected Source Properties', shown: true};
-    this.components['field-centre'] = {title: 'Field Centre Coordinates', shown: true};
   }
 
   ngOnInit() {

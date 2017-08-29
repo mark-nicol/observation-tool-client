@@ -40,24 +40,25 @@
     <div class="col-2 input-group">
       <label for="systemSelector" class="">System</label>
       <select id="systemSelector" class="form-control form-control-sm" [(ngModel)]="chosenSystem"
-              (ngModelChange)="changeSystem()">
-        <option *ngFor="let system of systems" [ngValue]="system">{{system}}</option>
+              (ngModelChange)="systemChange()">
+        <option *ngFor="let system of systemKeys(systems)" [value]="system">{{system}}</option>
       </select>
     </div><!-- div.col -->
     <!--Sexa checkbox-->
     <div class="col-2 form-check">
       <label class="form-check-label" [class.text-muted]="latLongSystemChosen">
-        <input id="sexagesimalCheck" type="checkbox" class="form-check-input mr-2" [disabled]="latLongSystemChosen">
+        <input id="sexagesimalCheck" type="checkbox" class="form-check-input mr-2" [disabled]="latLongSystemChosen"
+               (change)="sexagesimalCheckboxClicked()">
         Sexagesimal
       </label>
     </div>
     <!-- Lat input -->
     <div class="col input-group">
-      <div *ngIf="latLongSystemChosen; then normalLat else alternateLat"></div>
-      <ng-template #normalLat><label for="raInput" class="mr-2">Lat (deg)</label></ng-template>
-      <ng-template #alternateLat><label for="raInput" class="mr-2">Dec</label></ng-template>
+      <label for="raInput" class="mr-2">{{sexagesimalUnits ?
+        systems[chosenSystem].sexagesimalLabels.latLabel : systems[chosenSystem].normalLabels
+        .latLabel}}</label>
       <input id="decInput" class="align-self-baseline form-control form-control-sm"
-             placeholder="00:00:00.000">
+             placeholder="{{sexagesimalUnits ? systems[chosenSystem].sexagesimalLabels.latPlaceholder : systems[chosenSystem].normalLabels.latPlaceholder}}">
     </div><!-- div.col -->
     <!-- Long input -->
     <div class="col input-group">

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModularPanelComponent } from './modular-panel.component';
+import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
 
 describe('ModularPanelComponent', () => {
   let component: ModularPanelComponent;
@@ -8,7 +9,8 @@ describe('ModularPanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModularPanelComponent ]
+      declarations: [ ModularPanelComponent ],
+      imports: [ NgbCollapseModule ]
     })
     .compileComponents();
   }));

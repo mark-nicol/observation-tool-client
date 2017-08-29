@@ -5,8 +5,8 @@
     <div class="input-group">
       <input id="sourceNameInput" class="form-control">
       <span class="input-group-btn">
-        <button class="btn btn-outline-secondary">Resolve</button>
-      </span>
+<button class="btn btn-outline-secondary">Resolve</button>
+</span>
     </div><!--div.input-group-->
   </div><!--div.col.form-group-->
 </div><!--div.row-->
@@ -28,145 +28,120 @@
     </div><!--div.row-->
   </div><!--div.col.form-group-->
 </div><!--div.row-->
-<div class="row" *ngIf="showSourceCoords">
-  <!-- Source coords label -->
-  <label class="col-2 col-md align-self-center">Source Coordinates</label>
-  <div class="col-md">
-    <div class="row">
-      <!--System selector-->
-      <div class="col form-group">
-        <div class="row">
-          <label for="systemSelector" class="col-lg">System</label>
-          <select id="systemSelector" class="col-lg form-control form-control-sm" [(ngModel)]="chosenSystem"
-                  (ngModelChange)="changeSystem()">
-            <option *ngFor="let system of systems" [ngValue]="system">{{system}}</option>
-          </select>
-        </div>
-      </div>
-      <!--Sexa checkbox-->
-      <div class="col-xl form-check">
-        <label class="form-check-label" [class.text-muted]="latLongSystemChosen">
-          <input id="sexagesimalCheck" type="checkbox" class="form-check-input mr-2" [disabled]="latLongSystemChosen">
-          Sexagesimal
-        </label>
-      </div>
+
+<div class="form-group" *ngIf="showSourceCoords">
+  <!-- Label -->
+  <div class="row">
+    <h6>Source Coordinates</h6>
+  </div><!-- div.row -->
+  <!-- System, Lat, Long -->
+  <div class="row">
+    <!-- System Selector -->
+    <div class="col-2 input-group">
+      <label for="systemSelector" class="">System</label>
+      <select id="systemSelector" class="form-control form-control-sm" [(ngModel)]="chosenSystem"
+              (ngModelChange)="changeSystem()">
+        <option *ngFor="let system of systems" [ngValue]="system">{{system}}</option>
+      </select>
+    </div><!-- div.col -->
+    <!--Sexa checkbox-->
+    <div class="col-2 form-check">
+      <label class="form-check-label" [class.text-muted]="latLongSystemChosen">
+        <input id="sexagesimalCheck" type="checkbox" class="form-check-input mr-2" [disabled]="latLongSystemChosen">
+        Sexagesimal
+      </label>
     </div>
-    <!--RA Input-->
-    <div class="row">
-      <div class="col form-group">
-        <div class="row">
-          <div *ngIf="latLongSystemChosen; then normalLon else alternateLon"></div>
-          <ng-template #normalLon><label for="raInput" class="col-lg-3">Lon (deg)</label></ng-template>
-          <ng-template #alternateLon><label for="raInput" class="col-lg-3">RA</label></ng-template>
-          <input id="raInput" class="col-lg-9 align-self-baseline form-control form-control-sm" placeholder="00:00:00.0000">
-        </div><!-- div.row -->
-      </div><!-- div.col.form-group -->
-    </div><!-- div.row -->
-    <!--Dec Input-->
-    <div class="row">
-      <div class="col form-group">
-        <div class="row">
-          <div *ngIf="latLongSystemChosen; then normalLat else alternateLat"></div>
-          <ng-template #normalLat><label for="raInput" class="col-lg-3">Lat (deg)</label></ng-template>
-          <ng-template #alternateLat><label for="raInput" class="col-lg-3">Dec</label></ng-template>
-          <input id="decInput" class="col-lg-9 align-self-baseline form-control form-control-sm" placeholder="00:00:00.000">
-        </div><!-- div.row -->
-      </div><!-- div.col.form-group -->
-    </div><!-- div.row -->
-  </div><!-- div.col-md -->
-  <div class="col-md">
-    <!--Parallax input-->
-    <div class="row">
-      <div class="col form-group">
-        <div class="row">
-          <label for="parallaxInput" class="col-lg-3">Parallax</label>
-          <div class="col-lg-9 align-self-baseline input-group">
-            <input id="parallaxInput" class="form-control form-control-sm" placeholder="0.00000">
-            <select class="input-group-addon form-control-sm">
-              <option>mas</option>
-              <option>arcsec</option>
-            </select>
-          </div><!-- div.col-lg-9.align-self-baseline.input-group -->
-        </div><!-- div.row -->
-      </div><!-- div.col.form-group -->
-    </div><!-- div.row -->
-    <!--Proper Motion RA Input-->
-    <div class="row">
-      <div class="col form-group">
-        <div class="row">
-          <label for="pmRaInput" class="col-lg-3">PM RA</label>
-          <div class="col-lg-9 align-self-baseline input-group">
-            <input id="pmRaInput" class="form-control form-control-sm" placeholder="0.00000">
-            <select class="input-group-addon form-control-sm">
-              <option>mas/yr</option>
-              <option>arcsec/s</option>
-              <option>arcmin/s</option>
-              <option>deg/s</option>
-            </select>
-          </div><!-- div.col-lg-9.align-self-baseline.input-group -->
-        </div><!-- div.row -->
-      </div><!-- div.col.form-group -->
-    </div><!-- div.row -->
-    <!--Proper Motion DEC Input-->
-    <div class="row">
-      <div class="col form-group">
-        <div class="row">
-          <label for="plgecInput" class="col-lg-3">PM DEC</label>
-          <div class="col-lg-9 align-self-baseline input-group">
-            <input id="plgecInput" class="form-control form-control-sm" placeholder="0.00000">
-            <select class="input-group-addon form-control-sm">
-              <option>mas/yr</option>
-              <option>arcsec/s</option>
-              <option>arcmin/s</option>
-              <option>deg/s</option>
-            </select>
-          </div><!-- div.col-lg-9.align-self-baseline.input-group -->
-        </div><!-- div.row -->
-      </div><!-- div.col.form-group -->
-    </div><!-- div.row -->
-  </div><!-- div.col-md -->
-</div><!-- div.row -->
-<div class="row" *ngIf="showSourceCoords">
-  <!--Radial Velocity Input-->
-  <div class="col form-group">
-    <div class="row">
-      <label for="radialVelocityInput" class="col-xl-4">Radial Velocity</label>
-      <div class="col-xl-8 align-self-baseline input-group">
-        <div class="row">
-          <input id="radialVelocityInput" class="col-md form-control form-control-sm" placeholder="0.000">
-          <select class="col-md input-group-addon form-control-sm">
-            <option>m/s</option>
-            <option>km/s</option>
-          </select>
-          <select class="col-md input-group-addon form-control-sm">
-            <option>bar</option>
-            <option>lsrk</option>
-            <option>topo</option>
-            <option>hel</option>
-          </select>
-        </div><!--div.col-xl-8.align-self-baseline.input-group-->
-      </div><!--div.row-->
-    </div><!--div.col.form-group-->
-  </div><!--div.row-->
-  <!--Z input-->
-  <div class="col form-group">
-    <div class="row">
-      <label for="zInput" class="col-xl-3 ">Z</label>
-      <input id="zInput" class="col-xl-9 form-control form-control-sm" placeholder="0.000000000">
-    </div>
-  </div>
-  <!--Doppler type selector-->
-  <div class="col form-group">
-    <div class="row">
-      <label for="dopplerSelect" class="col-xl-4">Doppler Type</label>
-      <select id="dopplerSelect" class="col-xl-8 form-control form-control-sm">
+    <!-- Lat input -->
+    <div class="col input-group">
+      <div *ngIf="latLongSystemChosen; then normalLat else alternateLat"></div>
+      <ng-template #normalLat><label for="raInput" class="mr-2">Lat (deg)</label></ng-template>
+      <ng-template #alternateLat><label for="raInput" class="mr-2">Dec</label></ng-template>
+      <input id="decInput" class="align-self-baseline form-control form-control-sm"
+             placeholder="00:00:00.000">
+    </div><!-- div.col -->
+    <!-- Long input -->
+    <div class="col input-group">
+      <div *ngIf="latLongSystemChosen; then normalLon else alternateLon"></div>
+      <ng-template #normalLon><label for="raInput" class="mr-2">Lon (deg)</label></ng-template>
+      <ng-template #alternateLon><label for="raInput" class="mr-2">RA</label></ng-template>
+      <input id="raInput" class="align-self-baseline form-control form-control-sm"
+             placeholder="00:00:00.0000">
+    </div><!-- div.col -->
+  </div><!-- div.row -->
+  <!-- Parallax, PM RA, PM DEC -->
+  <div class="row">
+    <!-- Parallax input -->
+    <div class="col input-group">
+      <label for="parallaxInput" class="mr-2">Parallax</label>
+      <div class="align-self-baseline input-group">
+        <input id="parallaxInput" class="form-control form-control-sm" placeholder="0.00000">
+        <select class="input-group-addon form-control-sm">
+          <option>mas</option>
+          <option>arcsec</option>
+        </select>
+      </div>
+    </div><!-- div.col -->
+    <!-- PM RA input -->
+    <div class="col input-group">
+      <label for="pmRaInput" class="mr-2">PM RA</label>
+      <div class="align-self-baseline input-group">
+        <input id="pmRaInput" class="form-control form-control-sm" placeholder="0.00000">
+        <select class="input-group-addon form-control-sm">
+          <option>mas/yr</option>
+          <option>arcsec/s</option>
+          <option>arcmin/s</option>
+          <option>deg/s</option>
+        </select>
+      </div>
+    </div><!-- div.col -->
+    <!-- PM Dec input -->
+    <div class="col input-group">
+      <label for="plgecInput" class="mr-2">PM DEC</label>
+      <div class="align-self-baseline input-group">
+        <input id="plgecInput" class="form-control form-control-sm" placeholder="0.00000">
+        <select class="input-group-addon form-control-sm">
+          <option>mas/yr</option>
+          <option>arcsec/s</option>
+          <option>arcmin/s</option>
+          <option>deg/s</option>
+        </select>
+      </div>
+    </div><!-- div.col -->
+  </div><!-- div.row -->
+  <!-- Radial, Z, Doppler -->
+  <div class="row">
+    <!-- Radial input -->
+    <div class="col input-group">
+      <label for="radialVelocityInput" class="mr-2">Radial Velocity</label>
+      <input id="radialVelocityInput" class="col-md form-control form-control-sm" placeholder="0.000">
+      <select class="col-md input-group-addon form-control-sm">
+        <option>m/s</option>
+        <option>km/s</option>
+      </select>
+      <select class="col-md input-group-addon form-control-sm">
+        <option>bar</option>
+        <option>lsrk</option>
+        <option>topo</option>
+        <option>hel</option>
+      </select>
+    </div><!-- div.col -->
+    <!-- Z input -->
+    <div class="col input-group">
+      <label for="zInput" class="mr-2">Z</label>
+      <input id="zInput" class="form-control form-control-sm" placeholder="0.000000000">
+    </div><!-- div.col -->
+    <!-- Doppler selector -->
+    <div class="col input-group">
+      <label for="dopplerSelect" class="mr-2">Doppler Type</label>
+      <select id="dopplerSelect" class="form-control form-control-sm">
         <option>Radio</option>
         <option>Optical</option>
         <option>Relativistic</option>
       </select>
-    </div><!-- div.row -->
-  </div><!-- div.col.form-group -->
-</div><!-- div.row -->
+    </div><!-- div.col -->
+  </div><!-- div.row -->
+</div><!-- div *ngIf -->
+
 <div class="row">
   <!--Target type label-->
   <div class="col">

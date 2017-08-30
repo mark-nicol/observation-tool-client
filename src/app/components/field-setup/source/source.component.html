@@ -62,11 +62,11 @@
     </div><!-- div.col -->
     <!-- Long input -->
     <div class="col input-group">
-      <div *ngIf="latLongSystemChosen; then normalLon else alternateLon"></div>
-      <ng-template #normalLon><label for="raInput" class="mr-2">Lon (deg)</label></ng-template>
-      <ng-template #alternateLon><label for="raInput" class="mr-2">RA</label></ng-template>
+      <label for="raInput" class="mr-2">{{sexagesimalUnits ? systems[chosenSystem].sexagesimalLabels.longLabel :
+        systems[chosenSystem].normalLabels.longLabel
+        }}</label>
       <input id="raInput" class="align-self-baseline form-control form-control-sm"
-             placeholder="00:00:00.0000">
+             placeholder="{{sexagesimalUnits ? systems[chosenSystem].sexagesimalLabels.longPlaceholder : systems[chosenSystem].normalLabels.longPlaceholder}}">
     </div><!-- div.col -->
   </div><!-- div.row -->
   <!-- Parallax, PM RA, PM DEC -->

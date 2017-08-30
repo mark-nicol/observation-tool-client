@@ -37,18 +37,18 @@ export class SourceComponent implements OnInit {
     [id: string]: {
       sexagesimalLabels: {
         latLabel: string,
-        longLabel: string,
+        lonLabel: string,
         latPlaceholder: string,
-        longPlaceholder: string
+        lonPlaceholder: string
       },
       normalLabels: {
         latLabel: string,
-        longLabel: string,
+        lonLabel: string,
         latPlaceholder: string,
-        longPlaceholder: string
+        lonPlaceholder: string
       },
       tableHeaders: {
-        longHeader: string,
+        lonHeader: string,
         latHeader: string
       }
 
@@ -57,108 +57,108 @@ export class SourceComponent implements OnInit {
     'ICRS': {
       sexagesimalLabels: {
         latLabel: 'Dec',
-        longLabel: 'RA',
+        lonLabel: 'RA',
         latPlaceholder: '00:00:00.000',
-        longPlaceholder: '00:00:00.000'
+        lonPlaceholder: '00:00:00.000'
       },
       normalLabels: {
         latLabel: 'Dec (deg)',
-        longLabel: 'RA (deg)',
+        lonLabel: 'RA (deg)',
         latPlaceholder: '0.00000',
-        longPlaceholder: '0.00000'
+        lonPlaceholder: '0.00000'
       },
       tableHeaders: {
-        longHeader: 'RA',
+        lonHeader: 'RA',
         latHeader: 'Dec'
       }
     },
     'FK5 J2000': {
       sexagesimalLabels: {
         latLabel: 'Dec',
-        longLabel: 'RA',
+        lonLabel: 'RA',
         latPlaceholder: '00:00:00.000',
-        longPlaceholder: '00:00:00.000'
+        lonPlaceholder: '00:00:00.000'
       },
       normalLabels: {
-        latLabel: 'Deg (deg)',
-        longLabel: 'RA (deg)',
+        latLabel: 'Dec (deg)',
+        lonLabel: 'RA (deg)',
         latPlaceholder: '0.00000',
-        longPlaceholder: '0.00000'
+        lonPlaceholder: '0.00000'
       },
       tableHeaders: {
-        longHeader: 'RA',
+        lonHeader: 'RA',
         latHeader: 'Dec'
       }
     },
     'galactic': {
       sexagesimalLabels: {
         latLabel: '',
-        longLabel: '',
+        lonLabel: '',
         latPlaceholder: '',
-        longPlaceholder: ''
+        lonPlaceholder: ''
       },
       normalLabels: {
         latLabel: 'Lat (deg)',
-        longLabel: 'Lon (deg)',
+        lonLabel: 'Lon (deg)',
         latPlaceholder: '-60.18855219',
-        longPlaceholder: '96.33728304'
+        lonPlaceholder: '96.33728304'
       },
       tableHeaders: {
-        longHeader: 'Lon',
+        lonHeader: 'Lon',
         latHeader: 'Lat'
       }
     },
     'eliptic': {
       sexagesimalLabels: {
         latLabel: '',
-        longLabel: '',
+        lonLabel: '',
         latPlaceholder: '',
-        longPlaceholder: ''
+        lonPlaceholder: ''
       },
       normalLabels: {
         latLabel: 'Lat (deg)',
-        longLabel: 'Lon (deg)',
+        lonLabel: 'Lon (deg)',
         latPlaceholder: '0.000000',
-        longPlaceholder: '0.000000'
+        lonPlaceholder: '0.000000'
       },
       tableHeaders: {
-        longHeader: 'RA',
+        lonHeader: 'RA',
         latHeader: 'Deg'
       }
     },
     'horizon': {
       sexagesimalLabels: {
         latLabel: '',
-        longLabel: '',
+        lonLabel: '',
         latPlaceholder: '',
-        longPlaceholder: ''
+        lonPlaceholder: ''
       },
       normalLabels: {
         latLabel: 'Alt (deg)',
-        longLabel: 'Az (deg)',
+        lonLabel: 'Az (deg)',
         latPlaceholder: '0.000000',
-        longPlaceholder: '0.000000'
+        lonPlaceholder: '0.000000'
       },
       tableHeaders: {
-        longHeader: 'RA',
+        lonHeader: 'RA',
         latHeader: 'Deg'
       }
     },
     'azel': {
       sexagesimalLabels: {
         latLabel: '',
-        longLabel: '',
+        lonLabel: '',
         latPlaceholder: '',
-        longPlaceholder: ''
+        lonPlaceholder: ''
       },
       normalLabels: {
         latLabel: 'Alt (deg)',
-        longLabel: 'Az (deg)',
+        lonLabel: 'Az (deg)',
         latPlaceholder: '0.000000',
-        longPlaceholder: '0.000000'
+        lonPlaceholder: '0.000000'
       },
       tableHeaders: {
-        longHeader: 'RA',
+        lonHeader: 'RA',
         latHeader: 'Deg'
       }
     }

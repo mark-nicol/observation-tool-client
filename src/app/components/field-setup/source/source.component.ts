@@ -31,7 +31,7 @@ export class SourceComponent implements OnInit {
     'Ephemeris'
   ];
 
-  sexagesimalEnabled = true;
+  sexagesimalDisabled = false;
   systemKeys = Object.keys;
   systems: {
     [id: string]: {
@@ -164,11 +164,8 @@ export class SourceComponent implements OnInit {
     }
   };
   chosenSystem = 'ICRS';
-
   showSourceCoords = true;
   sexagesimalUnits = false;
-
-  latLongSystemChosen = false;
 
 
   constructor() {
@@ -187,6 +184,12 @@ export class SourceComponent implements OnInit {
   }
 
   systemChange() {
+    if(this.chosenSystem == 'ICRS' || this.chosenSystem == 'FK5 J2000'){
+      this.sexagesimalDisabled = false;
+    } else {
+      this.sexagesimalDisabled = true;
+      this.sexagesimalUnits = false;
+    }
     console.log(this.chosenSystem, this.sexagesimalUnits);
   }
 

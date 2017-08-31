@@ -15,7 +15,7 @@
 </div>
 
 <div class="row p-0 m-0">
-  <div class="col p-0 m-0" [dragula]="'main'">
+  <div class="col-lg-5 col-xl-4 p-0 m-0" [dragula]="'main'">
     <modular-panel
       [id]="'spatial'"
       [title]="components['spatial'].title"
@@ -25,7 +25,7 @@
       <spacial-image></spacial-image>
     </modular-panel>
     <div class="row p-0 m-0">
-      <div class="col p-0 m-0" [dragula]="'one'" >
+      <div class="col-xl p-0 m-0" [dragula]="'one'" >
         <modular-panel
           [id]="'fov'"
           [title]="components['fov'].title"
@@ -35,7 +35,7 @@
           <fov-parameters></fov-parameters>
         </modular-panel>
       </div>
-      <div class="col p-0 m-0" [dragula]="'one'">
+      <div class="col-xl p-0 m-0" [dragula]="'one'">
         <modular-panel
           [id]="'query'"
           [title]="components['query'].title"
@@ -47,7 +47,7 @@
       </div>
     </div>
   </div>
-  <div class="col p-0 m-0" [dragula]="'main'">
+  <div class="col-lg-7 col-xl-8 p-0 m-0" [dragula]="'main'">
     <modular-panel
       [id]="'field-source'"
       [title]="components['field-source'].title"

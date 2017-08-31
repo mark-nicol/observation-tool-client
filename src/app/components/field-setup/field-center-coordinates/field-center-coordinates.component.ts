@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FieldCenterCoordinatesComponent implements OnInit {
 
+  rows = [
+    {
+      lat: '0.00000',
+      lon: '0.00000'
+    }
+  ];
+
+
   constructor() { }
 
   ngOnInit() {

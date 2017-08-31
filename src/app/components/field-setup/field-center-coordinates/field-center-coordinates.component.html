@@ -43,9 +43,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>0.00000</td>
-        <td>0.00000</td>
+      <tr *ngFor="let row of rows">
+        <td>{{row.lon}}</td>
+        <td>{{row.lat}}</td>
       </tr>
     </tbody>
   </table>

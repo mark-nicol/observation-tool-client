@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Pipe} from '@angular/core';
+import {SexagesimalPipe} from "../../../pipes/sexagesimal.pipe";
 
 @Component({
   selector: 'field-source',
@@ -37,136 +38,110 @@ export class SourceComponent implements OnInit {
     [id: string]: {
       sexagesimalLabels: {
         latLabel: string,
-        lonLabel: string,
-        latPlaceholder: string,
-        lonPlaceholder: string
+        lonLabel: string
       },
       normalLabels: {
         latLabel: string,
-        lonLabel: string,
-        latPlaceholder: string,
-        lonPlaceholder: string
+        lonLabel: string
       },
-      tableHeaders: {
-        lonHeader: string,
-        latHeader: string
-      }
-
+      latPlaceholder: string,
+      lonPlaceholder: string,
+      lonHeader: string,
+      latHeader: string
     }
   } = {
     'ICRS': {
       sexagesimalLabels: {
         latLabel: 'Dec',
         lonLabel: 'RA',
-        latPlaceholder: '00:00:00.000',
-        lonPlaceholder: '00:00:00.000'
       },
       normalLabels: {
-        latLabel: 'Dec (deg)',
-        lonLabel: 'RA (deg)',
-        latPlaceholder: '0.00000',
-        lonPlaceholder: '0.00000'
+        latLabel: 'Dec(deg)',
+        lonLabel: 'RA(deg)',
       },
-      tableHeaders: {
-        lonHeader: 'RA',
-        latHeader: 'Dec'
-      }
+      latPlaceholder: '0',
+      lonPlaceholder: '0',
+      lonHeader: 'RA',
+      latHeader: 'Dec'
     },
     'FK5 J2000': {
       sexagesimalLabels: {
         latLabel: 'Dec',
         lonLabel: 'RA',
-        latPlaceholder: '00:00:00.000',
-        lonPlaceholder: '00:00:00.000'
       },
       normalLabels: {
-        latLabel: 'Dec (deg)',
-        lonLabel: 'RA (deg)',
-        latPlaceholder: '0.00000',
-        lonPlaceholder: '0.00000'
+        latLabel: 'Dec(deg)',
+        lonLabel: 'RA(deg)'
       },
-      tableHeaders: {
-        lonHeader: 'RA',
-        latHeader: 'Dec'
-      }
+      latPlaceholder: '0',
+      lonPlaceholder: '0',
+      lonHeader: 'RA',
+      latHeader: 'Dec'
     },
     'galactic': {
       sexagesimalLabels: {
         latLabel: '',
         lonLabel: '',
-        latPlaceholder: '',
-        lonPlaceholder: ''
       },
       normalLabels: {
-        latLabel: 'Lat (deg)',
-        lonLabel: 'Lon (deg)',
-        latPlaceholder: '-60.18855219',
-        lonPlaceholder: '96.33728304'
+        latLabel: 'Lat(deg)',
+        lonLabel: 'Lon(deg)',
       },
-      tableHeaders: {
-        lonHeader: 'Lon',
-        latHeader: 'Lat'
-      }
+      latPlaceholder: '-60.18855219',
+      lonPlaceholder: '96.33728304',
+      lonHeader: 'Lon',
+      latHeader: 'Lat',
     },
     'eliptic': {
       sexagesimalLabels: {
         latLabel: '',
         lonLabel: '',
-        latPlaceholder: '',
-        lonPlaceholder: ''
       },
       normalLabels: {
         latLabel: 'Lat (deg)',
         lonLabel: 'Lon (deg)',
-        latPlaceholder: '0.000000',
-        lonPlaceholder: '0.000000'
       },
-      tableHeaders: {
-        lonHeader: 'RA',
-        latHeader: 'Deg'
-      }
+      latPlaceholder: '0',
+      lonPlaceholder: '0',
+      lonHeader: 'RA',
+      latHeader: 'Deg'
     },
     'horizon': {
       sexagesimalLabels: {
         latLabel: '',
         lonLabel: '',
-        latPlaceholder: '',
-        lonPlaceholder: ''
       },
       normalLabels: {
-        latLabel: 'Alt (deg)',
-        lonLabel: 'Az (deg)',
-        latPlaceholder: '0.000000',
-        lonPlaceholder: '0.000000'
+        latLabel: 'Alt(deg)',
+        lonLabel: 'Az(deg)',
       },
-      tableHeaders: {
-        lonHeader: 'RA',
-        latHeader: 'Deg'
-      }
+      latPlaceholder: '0',
+      lonPlaceholder: '0',
+      lonHeader: 'RA',
+      latHeader: 'Deg'
     },
     'azel': {
       sexagesimalLabels: {
         latLabel: '',
         lonLabel: '',
-        latPlaceholder: '',
-        lonPlaceholder: ''
       },
       normalLabels: {
-        latLabel: 'Alt (deg)',
-        lonLabel: 'Az (deg)',
-        latPlaceholder: '0.000000',
-        lonPlaceholder: '0.000000'
+        latLabel: 'Alt(deg)',
+        lonLabel: 'Az(deg)',
       },
-      tableHeaders: {
-        lonHeader: 'RA',
-        latHeader: 'Deg'
-      }
+      latPlaceholder: '0',
+      lonPlaceholder: '0',
+      lonHeader: 'RA',
+      latHeader: 'Deg'
     }
   };
   chosenSystem = 'ICRS';
   showSourceCoords = true;
   sexagesimalUnits = false;
-
+  lonInputValue: any;
+  lonInputError = true;
+  latInputValue: any;
+  latInputError = true;
 
   constructor() {
   }
@@ -180,17 +155,26 @@ export class SourceComponent implements OnInit {
 
   sexagesimalCheckboxClicked() {
     this.sexagesimalUnits = !this.sexagesimalUnits;
-    console.log(this.chosenSystem, this.sexagesimalUnits);
+  }
+
+  setLatLon(event, value, element) {
+    if (event.keyCode == 13) {
+      if (element.id == 'latInput') {
+        this.latInputValue = value;
+      } else {
+        this.lonInputValue = value;
+      }
+    }
+
   }
 
   systemChange() {
-    if(this.chosenSystem == 'ICRS' || this.chosenSystem == 'FK5 J2000'){
+    if (this.chosenSystem == 'ICRS' || this.chosenSystem == 'FK5 J2000') {
       this.sexagesimalDisabled = false;
     } else {
       this.sexagesimalDisabled = true;
       this.sexagesimalUnits = false;
     }
-    console.log(this.chosenSystem, this.sexagesimalUnits);
   }
 
 }

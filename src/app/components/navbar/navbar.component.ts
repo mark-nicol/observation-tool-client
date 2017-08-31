@@ -9,6 +9,8 @@ import * as _ from "lodash";
 })
 export class NavbarComponent implements OnInit {
 
+
+  isCollapsed = true;
   selectedGoal: any;
 
   items = [

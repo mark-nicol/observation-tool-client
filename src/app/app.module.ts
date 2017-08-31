@@ -38,6 +38,8 @@ import { FieldSetupComponent } from './components/field-setup/field-setup.compon
 import { SourceComponent } from './components/field-setup/source/source.component';
 import { SourceExpectedPropertiesComponent } from './components/field-setup/source-expected-properties/source-expected-properties.component';
 import { FieldCenterCoordinatesComponent } from './components/field-setup/field-center-coordinates/field-center-coordinates.component';
+import { SexagesimalPipe } from './pipes/sexagesimal.pipe';
+import { DegreesPipe } from './pipes/degrees.pipe';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { FieldCenterCoordinatesComponent } from './components/field-setup/field-
     SourceComponent,
     SourceExpectedPropertiesComponent,
     FieldCenterCoordinatesComponent,
+    SexagesimalPipe,
+    DegreesPipe,
   ],
   imports: [
     BrowserModule,

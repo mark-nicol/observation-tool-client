@@ -87,7 +87,8 @@
       <div class="row">
         <label
           class="col-xl-4 text-xl-right"
-          for="systemSelector">
+          for="systemSelector"
+          ngbTooltip="Coordinate system type">
           System
         </label>
         <div class="col-xl-8 pl-0 pr-0 input-group">
@@ -114,10 +115,11 @@
     </div>
     <!-- Lat input -->
     <div class="col-md">
-      <div class="row form-group has-danger" style="white-space: nowrap">
+      <div class="row" style="white-space: nowrap">
         <label
           class="form-control-label col-xl-4 text-xl-right"
-          for="latInput">
+          for="latInput"
+          ngbTooltip="The latitude of the source">
           {{sexagesimalUnits ?
           systems[chosenSystem].sexagesimalLabels.latLabel :
           systems[chosenSystem].normalLabels.latLabel}}
@@ -125,7 +127,7 @@
         <input
           #latInput
           id="latInput"
-          class="col-xl-8 align-self-baseline form-control form-control-danger"
+          class="col-xl-8 align-self-baseline form-control form-control-sm"
           [ngModel]="sexagesimalUnits && latInputValue ? (latInputValue | sexagesimal) : (latInputValue | degrees)"
           (keyup)="setLatLon($event, latInput.value, latInput)"
           placeholder="{{
@@ -140,7 +142,8 @@
       <div class="row" [class.has-danger]="lonInputError" style="white-space: nowrap">
         <label
           class="col-xl-4 text-xl-right"
-          for="lonInput">
+          for="lonInput"
+          ngbTooltip="The longitude of the source">
           {{sexagesimalUnits ?
           systems[chosenSystem].sexagesimalLabels.lonLabel :
           systems[chosenSystem].normalLabels.lonLabel
@@ -166,7 +169,8 @@
       <div class="row">
         <label
           class="col-xl-4 text-xl-right"
-          for="parallaxInput">
+          for="parallaxInput"
+          ngbTooltip="The parallax angle of the source">
           Parallax
         </label>
         <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
@@ -188,7 +192,8 @@
       <div class="row">
         <label
           class="col-xl-4 text-xl-right"
-          for="pmRaInput">
+          for="pmRaInput"
+          ngbTooltip="Proper motion along cross-declination direction">
           PM RA
         </label>
         <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
@@ -212,7 +217,8 @@
       <div class="row" style="white-space: nowrap">
         <label
           class="col-xl-4 text-xl-right"
-          for="plgecInput">
+          for="plgecInput"
+          ngbTooltip="Proper motion along declination direction">
           PM DEC
         </label>
         <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
@@ -239,7 +245,8 @@
       <div class="row" style="white-space: nowrap">
         <label
           class="col-xl-4 text-xl-right"
-          for="radialVelocityInput">
+          for="radialVelocityInput"
+          ngbTooltip="Velocity value in your desired units">
           Radial Velocity
         </label>
         <div class="col-xl-8 pl-0 pr-0 input-group">
@@ -269,7 +276,8 @@
       <div class="row">
         <label
           class="col-xl-4 text-xl-right"
-          for="zInput">
+          for="zInput"
+          ngbTooltip="Astronomical redshift, calculated using the specified velocity convention">
           Z
         </label>
         <input
@@ -283,7 +291,8 @@
       <div class="row" style="white-space: nowrap">
         <label
           class="col-xl-4 text-xl-right"
-          for="dopplerSelect">
+          for="dopplerSelect"
+          ngbTooltip="Doppler calculation convention to be used">
           Doppler Type
         </label>
         <select

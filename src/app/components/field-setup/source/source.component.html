@@ -3,9 +3,8 @@
   <div class="col form-group">
     <label for="sourceNameInput">Source Name</label>
     <div class="input-group">
-      <input
-        id="sourceNameInput"
-        class="form-control">
+      <input id="sourceNameInput"
+             class="form-control">
       <span class="input-group-btn">
         <button class="btn btn-outline-secondary">Resolve</button>
       </span>
@@ -16,32 +15,30 @@
   <!-- Solar checkbox -->
   <div class="col form-check">
     <label class="form-check-label">
-      <input
-        #solarCheckbox
-        type="checkbox"
-        class="form-check-input"
-        (change)="solarCheckboxClicked()">
+      <input #solarCheckbox
+             type="checkbox"
+             class="form-check-input"
+             (change)="solarCheckboxClicked()">
       Choose a Solar System Object?
     </label>
   </div>
   <!-- Solar selector -->
   <div class="col">
     <div class="row">
-      <label
-        for="solarSystemSelector"
-        class="col">
+      <label for="solarSystemSelector"
+             class="col">
         Name of Object
       </label>
-      <select
-        id="solarSystemSelector"
-        class="col form-control form-control-sm ml-2">
+      <select id="solarSystemSelector"
+              class="col form-control form-control-sm ml-2">
         <option *ngFor="let body of solarBodies">{{body}}</option>
       </select>
     </div><!--div.row-->
   </div><!--div.col.form-group-->
 </div><!--div.row-->
 
-<div class="row">
+<div class="row"
+     (click)="unfocus()">
   <!--Target type label-->
   <div class="col">
     <label>Target Type</label>
@@ -50,24 +47,22 @@
   <div class="col">
     <div class="form-check form-check-inline">
       <label class="form-check-label">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="targetTypeRadios"
-          id="individualRadio"
-          value="option1"
-          checked>
+        <input class="form-check-input"
+               type="radio"
+               name="targetTypeRadios"
+               id="individualRadio"
+               value="option1"
+               checked>
         Individual Pointing(s)
       </label>
     </div>
     <div class="form-check form-check-inline">
       <label class="form-check-label">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="targetTypeRadios"
-          id="rectangularRadio"
-          value="option2">
+        <input class="form-check-input"
+               type="radio"
+               name="targetTypeRadios"
+               id="rectangularRadio"
+               value="option2">
         Rectangular Field
       </label>
     </div><!-- div.form-check.form-check-inline -->
@@ -85,52 +80,50 @@
     <!-- System Selector -->
     <div class="col-md">
       <div class="row">
-        <label
-          class="col-xl-4 text-xl-right"
-          for="systemSelector"
-          ngbTooltip="Coordinate system type">
+        <label class="col-xl-4 text-xl-right"
+               for="systemSelector"
+               ngbTooltip="Coordinate system type">
           System
         </label>
         <div class="col-xl-8 pl-0 pr-0 input-group">
-          <select
-            id="systemSelector"
-            class="form-control form-control-sm"
-            [(ngModel)]="chosenSystem"
-            (ngModelChange)="systemChange()">
-            <option
-              *ngFor="let system of systemKeys(systems)"
-              [value]="system">
+          <select id="systemSelector"
+                  class="form-control form-control-sm"
+                  [(ngModel)]="chosenSystem"
+                  (ngModelChange)="systemChange()">
+            <option *ngFor="let system of systemKeys(systems)"
+                    [value]="system">
               {{system}}
             </option>
           </select>
-          <span class="input-group-addon align-self-baseline">
-                <input id="sexagesimalCheck"
-                       type="checkbox"
-                       title="sexagesimal checkbox"
-                       [disabled]="sexagesimalDisabled"
-                       (change)="sexagesimalCheckboxClicked()">
-              </span>
+          <div class="input-group-addon align-self-baseline">
+            <input id="sexagesimalCheck"
+                   type="checkbox"
+                   title="sexagesimal checkbox"
+                   placement="right"
+                   ngbTooltip="Sexagesimal display"
+                   [(ngModel)]="sexagesimalUnits"
+                   [disabled]="sexagesimalDisabled">
+          </div>
         </div>
       </div>
     </div>
     <!-- Lat input -->
     <div class="col-md">
       <div class="row" style="white-space: nowrap">
-        <label
-          class="form-control-label col-xl-4 text-xl-right"
-          for="latInput"
-          ngbTooltip="The latitude of the source">
+        <label class="form-control-label col-xl-4 text-xl-right"
+               for="latInput"
+               ngbTooltip="The latitude of the source">
           {{sexagesimalUnits ?
           systems[chosenSystem].sexagesimalLabels.latLabel :
           systems[chosenSystem].normalLabels.latLabel}}
         </label>
-        <input
-          #latInput
-          id="latInput"
-          class="col-xl-8 align-self-baseline form-control form-control-sm"
-          [ngModel]="sexagesimalUnits && latInputValue ? (latInputValue | sexagesimal) : (latInputValue | degrees)"
-          (keyup)="setLatLon($event, latInput.value, latInput)"
-          placeholder="{{
+        <input #latInput
+               id="latInput"
+               class="col-xl-8 align-self-baseline form-control form-control-sm"
+               [ngModel]="sexagesimalUnits && latInputValue ? (latInputValue | sexagesimal) : (latInputValue | degrees)"
+               (keyup.enter)="setLatLon(latInput.value, latInput)"
+               (blur)="setLatLon(latInput.value, latInput)"
+               placeholder="{{
             sexagesimalUnits ?
             (systems[chosenSystem].latPlaceholder | sexagesimal) :
             (systems[chosenSystem].latPlaceholder | degrees)
@@ -139,22 +132,23 @@
     </div>
     <!-- Long input -->
     <div class="col-md">
-      <div class="row" [class.has-danger]="lonInputError" style="white-space: nowrap">
-        <label
-          class="col-xl-4 text-xl-right"
-          for="lonInput"
-          ngbTooltip="The longitude of the source">
+      <div class="row"
+           [class.has-danger]="lonInputError"
+           style="white-space: nowrap">
+        <label class="col-xl-4 text-xl-right"
+               for="lonInput"
+               ngbTooltip="The longitude of the source">
           {{sexagesimalUnits ?
           systems[chosenSystem].sexagesimalLabels.lonLabel :
           systems[chosenSystem].normalLabels.lonLabel
           }}</label>
-        <input
-          #lonInput
-          id="lonInput"
-          class="col-xl-8 align-self-baseline form-control form-control-sm"
-          [ngModel]="sexagesimalUnits && lonInputValue ? (lonInputValue | sexagesimal) : (lonInputValue | degrees)"
-          (keyup)="setLatLon($event, lonInput.value, lonInput)"
-          placeholder="{{
+        <input #lonInput
+               id="lonInput"
+               class="col-xl-8 align-self-baseline form-control form-control-sm"
+               [ngModel]="sexagesimalUnits && lonInputValue ? (lonInputValue | sexagesimal) : (lonInputValue | degrees)"
+               (keyup.enter)="setLatLon(lonInput.value, lonInput)"
+               (blur)="setLatLon(lonInput.value, lonInput)"
+               placeholder="{{
             sexagesimalUnits ?
             (systems[chosenSystem].lonPlaceholder | sexagesimal) :
             (systems[chosenSystem].lonPlaceholder | degrees)
@@ -167,20 +161,17 @@
     <!-- Parallax input -->
     <div class="col-md">
       <div class="row">
-        <label
-          class="col-xl-4 text-xl-right"
-          for="parallaxInput"
-          ngbTooltip="The parallax angle of the source">
+        <label class="col-xl-4 text-xl-right"
+               for="parallaxInput"
+               ngbTooltip="The parallax angle of the source">
           Parallax
         </label>
         <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
-          <input
-            id="parallaxInput"
-            class="form-control form-control-sm"
-            placeholder="0.00000">
-          <select
-            class="input-group-addon form-control-sm"
-            title="Parallax unit selector">
+          <input id="parallaxInput"
+                 class="form-control form-control-sm"
+                 placeholder="0.00000">
+          <select class="input-group-addon form-control-sm"
+                  title="Parallax unit selector">
             <option>mas</option>
             <option>arcsec</option>
           </select>
@@ -190,20 +181,17 @@
     <!-- PM RA input -->
     <div class="col-md">
       <div class="row">
-        <label
-          class="col-xl-4 text-xl-right"
-          for="pmRaInput"
-          ngbTooltip="Proper motion along cross-declination direction">
+        <label class="col-xl-4 text-xl-right"
+               for="pmRaInput"
+               ngbTooltip="Proper motion along cross-declination direction">
           PM RA
         </label>
         <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
-          <input
-            id="pmRaInput"
-            class="form-control form-control-sm"
-            placeholder="0.00000">
-          <select
-            class="input-group-addon form-control-sm"
-            title="Proper motion ra unit selector">
+          <input id="pmRaInput"
+                 class="form-control form-control-sm"
+                 placeholder="0.00000">
+          <select class="input-group-addon form-control-sm"
+                  title="Proper motion ra unit selector">
             <option>mas/yr</option>
             <option>arcsec/s</option>
             <option>arcmin/s</option>
@@ -214,21 +202,19 @@
     </div>
     <!-- PM Dec input -->
     <div class="col-md">
-      <div class="row" style="white-space: nowrap">
-        <label
-          class="col-xl-4 text-xl-right"
-          for="plgecInput"
-          ngbTooltip="Proper motion along declination direction">
+      <div class="row"
+           style="white-space: nowrap">
+        <label class="col-xl-4 text-xl-right"
+               for="plgecInput"
+               ngbTooltip="Proper motion along declination direction">
           PM DEC
         </label>
         <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
-          <input
-            id="plgecInput"
-            class="form-control form-control-sm"
-            placeholder="0.00000">
-          <select
-            class="input-group-addon form-control-sm"
-            title="proper motion declination unit selector">
+          <input id="plgecInput"
+                 class="form-control form-control-sm"
+                 placeholder="0.00000">
+          <select class="input-group-addon form-control-sm"
+                  title="proper motion declination unit selector">
             <option>mas/yr</option>
             <option>arcsec/s</option>
             <option>arcmin/s</option>
@@ -242,27 +228,24 @@
   <div class="row">
     <!-- Radial input -->
     <div class="col-md">
-      <div class="row" style="white-space: nowrap">
-        <label
-          class="col-xl-4 text-xl-right"
-          for="radialVelocityInput"
-          ngbTooltip="Velocity value in your desired units">
+      <div class="row"
+           style="white-space: nowrap">
+        <label class="col-xl-4 text-xl-right"
+               for="radialVelocityInput"
+               ngbTooltip="Velocity value in your desired units">
           Radial Velocity
         </label>
         <div class="col-xl-8 pl-0 pr-0 input-group">
-          <input
-            id="radialVelocityInput"
-            class="align-self-baseline form-control form-control-sm"
-            placeholder="0.000">
-          <select
-            class="input-group-addon form-control-sm"
-            title="Radial velocity unit selector">
+          <input id="radialVelocityInput"
+                 class="align-self-baseline form-control form-control-sm"
+                 placeholder="0.000">
+          <select class="input-group-addon form-control-sm"
+                  title="Radial velocity unit selector">
             <option>m/s</option>
             <option>km/s</option>
           </select>
-          <select
-            class="input-group-addon form-control-sm"
-            title="Radial velocity reference frame selector">
+          <select class="input-group-addon form-control-sm"
+                  title="Radial velocity reference frame selector">
             <option>bar</option>
             <option>lsrk</option>
             <option>topo</option>
@@ -274,30 +257,27 @@
     <!-- Z input -->
     <div class="col-md">
       <div class="row">
-        <label
-          class="col-xl-4 text-xl-right"
-          for="zInput"
-          ngbTooltip="Astronomical redshift, calculated using the specified velocity convention">
+        <label class="col-xl-4 text-xl-right"
+               for="zInput"
+               ngbTooltip="Astronomical redshift, calculated using the specified velocity convention">
           Z
         </label>
-        <input
-          id="zInput"
-          class="col-xl-8 align-self-baseline form-control form-control-sm"
-          placeholder="0.000000000">
+        <input id="zInput"
+               class="col-xl-8 align-self-baseline form-control form-control-sm"
+               placeholder="0.000000000">
       </div>
     </div>
     <!-- Doppler selector -->
     <div class="col-md">
-      <div class="row" style="white-space: nowrap">
-        <label
-          class="col-xl-4 text-xl-right"
-          for="dopplerSelect"
-          ngbTooltip="Doppler calculation convention to be used">
+      <div class="row"
+           style="white-space: nowrap">
+        <label class="col-xl-4 text-xl-right"
+               for="dopplerSelect"
+               ngbTooltip="Doppler calculation convention to be used">
           Doppler Type
         </label>
-        <select
-          id="dopplerSelect"
-          class="col-xl-8 form-control form-control-sm">
+        <select id="dopplerSelect"
+                class="col-xl-8 form-control form-control-sm">
           <option>Radio</option>
           <option>Optical</option>
           <option>Relativistic</option>

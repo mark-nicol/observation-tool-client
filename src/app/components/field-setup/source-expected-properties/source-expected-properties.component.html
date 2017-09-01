@@ -1,17 +1,17 @@
 <div class="row">
-  <ng-template #peakFluxTooltip>Expected peak flux density of source continuum for the <b>weakest</b> source component that you wish to detect</ng-template>
-  <label
-    for="peakContInput"
-    class="col-6"
-    data-html="true"
-  [ngbTooltip]="peakFluxTooltip">
+  <ng-template #peakFluxTooltip>Expected peak flux density of source continuum for the <b>weakest</b> source component
+    that you wish to detect
+  </ng-template>
+  <label for="peakContInput"
+         class="col-6"
+         data-html="true"
+         [ngbTooltip]="peakFluxTooltip">
     Peak Continuum Flux Density per Synthesized Beam
   </label>
   <div class="col-6 input-group">
-    <input
-      id="peakContInput"
-      class="form-control form-control-sm align-self-baseline"
-      placeholder="0.00000">
+    <input id="peakContInput"
+           class="form-control form-control-sm align-self-baseline"
+           placeholder="0.00000">
     <select class="form-control form-control-sm input-group-addon">
       <option>mJy</option>
       <option>Jy</option>
@@ -19,34 +19,31 @@
   </div>
 </div>
 <div class="row">
-  <label
-    for="contPolInput"
-    class="col-6"
-  ngbTooltip="Expected polarization of the source in percent">
+  <label for="contPolInput"
+         class="col-6"
+         ngbTooltip="Expected polarization of the source in percent">
     Continuum Polarization Percentage
   </label>
   <div class="col-6 input-group">
-    <input
-      id="contPolInput"
-      class="form-control form-control-sm align-self-baseline"
-      placeholder="0.0%">
+    <input id="contPolInput"
+           class="form-control form-control-sm align-self-baseline"
+           placeholder="0.0%">
   </div>
 </div>
 <div class="row">
   <ng-template #peakLineTooltip>Expected peak flux density of line emission relative to the continuum for the <b>
     weakest</b> source component
-    that you wish to detect</ng-template>
-  <label
-    for="peakFluxPerInput"
-    class="col-6"
-    [ngbTooltip]="peakLineTooltip">
+    that you wish to detect
+  </ng-template>
+  <label for="peakFluxPerInput"
+         class="col-6"
+         [ngbTooltip]="peakLineTooltip">
     Peak Line Flux Density per Synthesized Beam
   </label>
   <div class="col-6 input-group">
-    <input
-      id="peakFluxPerInput"
-      class="form-control form-control-sm align-self-baseline"
-      placeholder="0.00000">
+    <input id="peakFluxPerInput"
+           class="form-control form-control-sm align-self-baseline"
+           placeholder="0.00000">
     <select class="form-control form-control-sm input-group-addon">
       <option>mJy</option>
       <option>Jy</option>
@@ -54,17 +51,15 @@
   </div>
 </div>
 <div class="row">
-  <label
-    for="lineWidthInput"
-    class="col-6"
-    ngbTooltip="Expected width of the lines to be observed (FWHM)">
+  <label for="lineWidthInput"
+         class="col-6"
+         ngbTooltip="Expected width of the lines to be observed (FWHM)">
     Line Width
   </label>
   <div class="col-6 input-group">
-    <input
-      id="lineWidthInput"
-      class="form-control form-control-sm align-self-baseline"
-      placeholder="0.00000">
+    <input id="lineWidthInput"
+           class="form-control form-control-sm align-self-baseline"
+           placeholder="0.00000">
     <select class="form-control form-control-sm input-group-addon">
       <option>m/s</option>
       <option>km/s</option>
@@ -72,16 +67,14 @@
   </div>
 </div>
 <div class="row">
-  <label
-    for="linePolInput"
-    class="col-6"
-    ngbTooltip="Expected polarization of the line in percent">
+  <label for="linePolInput"
+         class="col-6"
+         ngbTooltip="Expected polarization of the line in percent">
     Line Polarization Percentage
   </label>
   <div class="col-6 input-group">
-    <input
-      id="linePolInput"
-      class="form-control form-control-sm align-self-baseline"
-      placeholder="0.0%">
+    <input id="linePolInput"
+           class="form-control form-control-sm align-self-baseline"
+           placeholder="0.0%">
   </div>
 </div>

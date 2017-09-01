@@ -7,17 +7,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FieldCenterCoordinatesComponent implements OnInit {
 
+
+  radioValue = 'relative';
   rows = [
     {
-      lat: '0.00000',
-      lon: '0.00000'
+      lat: '0',
+      lon: '0'
     }
   ];
 
+  selectedUnits = 'mas';
+  offsetUnits = [
+    'mas',
+    'arcsec',
+    'arcmin',
+    'deg',
+    'rad'
+  ];
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  addRow() {
+    this.rows.push({lat: '0', lon: '0'});
+  }
+
+  removeRow() {
+    this.rows.pop();
+  }
+
+  log(message){
+    console.log(message);
   }
 
 }

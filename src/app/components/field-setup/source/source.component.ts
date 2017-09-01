@@ -1,8 +1,8 @@
-import {Component, OnInit, Pipe} from '@angular/core';
-import {SexagesimalPipe} from "../../../pipes/sexagesimal.pipe";
+import {Component, ElementRef, OnInit} from '@angular/core';
 
 @Component({
   selector: 'field-source',
+  host: {'(document:click)': 'unfocus($event)'},
   templateUrl: './source.component.html',
   styleUrls: ['./source.component.css']
 })
@@ -149,23 +149,26 @@ export class SourceComponent implements OnInit {
   ngOnInit() {
   }
 
+  unfocus(event) {
+    let active = document.activeElement;
+    try {
+      if (active != event.target)
+        (active as HTMLElement).blur();
+    } catch (TypeError) {
+    }
+
+  }
+
   solarCheckboxClicked() {
     this.showSourceCoords = !this.showSourceCoords;
   }
 
-  sexagesimalCheckboxClicked() {
-    this.sexagesimalUnits = !this.sexagesimalUnits;
-  }
-
-  setLatLon(event, value, element) {
-    if (event.keyCode == 13) {
-      if (element.id == 'latInput') {
-        this.latInputValue = value;
-      } else {
-        this.lonInputValue = value;
-      }
+  setLatLon(value, element) {
+    if (element.id == 'latInput') {
+      this.latInputValue = value;
+    } else {
+      this.lonInputValue = value;
     }
-
   }
 
   systemChange() {

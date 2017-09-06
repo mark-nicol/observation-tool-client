@@ -1,10 +1,11 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'field-source',
   host: {'(document:click)': 'unfocus($event)'},
   templateUrl: './source.component.html',
-  styleUrls: ['./source.component.css']
+  styleUrls: ['./source.component.css'],
+
 })
 export class SourceComponent implements OnInit {
 
@@ -143,10 +144,13 @@ export class SourceComponent implements OnInit {
   latInputValue: any;
   latInputError = true;
 
+  @Output() systemEmitter = new EventEmitter<string[]>();
+
   constructor() {
   }
 
   ngOnInit() {
+    this.systemEmitter.emit([this.systems[this.chosenSystem].lonHeader, this.systems[this.chosenSystem].latHeader]);
   }
 
   unfocus(event) {
@@ -178,6 +182,7 @@ export class SourceComponent implements OnInit {
       this.sexagesimalDisabled = true;
       this.sexagesimalUnits = false;
     }
+    this.systemEmitter.emit([this.systems[this.chosenSystem].lonHeader, this.systems[this.chosenSystem].latHeader]);
   }
 
 }

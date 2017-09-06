@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'field-center-coordinates',
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class FieldCenterCoordinatesComponent implements OnInit {
 
 
+  @Input() tableHeaders: string[];
   radioValue = 'relative';
   rows = [
     {

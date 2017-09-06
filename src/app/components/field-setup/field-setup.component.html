@@ -58,7 +58,7 @@
                    [title]="components['field-source'].title"
                    (hiddenChange)="hiddenChange($event)"
                    *ngIf="components['field-source'].shown">
-      <field-source></field-source>
+      <field-source (systemEmitter)="setHeaders($event)"></field-source>
     </modular-panel>
     <modular-panel [id]="'expected'"
                    [title]="components['expected'].title"
@@ -70,7 +70,7 @@
                    [title]="components['field-centre'].title"
                    (hiddenChange)="hiddenChange($event)"
                    *ngIf="components['field-centre'].shown">
-      <field-center-coordinates></field-center-coordinates>
+      <field-center-coordinates [tableHeaders]="tableHeaders"></field-center-coordinates>
     </modular-panel>
   </div>
 </div>

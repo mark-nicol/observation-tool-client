@@ -20,7 +20,8 @@
     <div class="form-check form-check-inline">
       <label class="form-check-label"
              ngbTooltip="Absolute coordinate type">
-        <input class="form-check-input"
+        <input #absoluteRadio
+               class="form-check-input"
                type="radio"
                name="coordTypeRadios"
                [(ngModel)]="radioValue"
@@ -33,13 +34,14 @@
 </div><!--div.row-->
 <div class="row">
   <label for="offsetSelector"
-         class="col">
+         class="col"
+         ngbTooltip="Unit of offset pointings">
     Offset Unit
   </label>
   <select id="offsetSelector"
           class="col form-control form-control-sm"
           [(ngModel)]="selectedUnits"
-          ngbTooltip="Unit of offset pointings">
+          [disabled]="radioValue === 'absolute'">
     <option *ngFor="let unit of offsetUnits"
             value="{{unit}}"
             (selcted)="unit === 'mas'">
@@ -59,12 +61,12 @@
     <thead>
       <tr *ngIf="radioValue == 'relative'"
           ngbTooltip="Coordinate offsets for each pointing">
-        <th>RA [{{selectedUnits}}]</th>
-        <th>Dec [{{selectedUnits}}]</th>
+        <th>{{tableHeaders[0]}} [{{selectedUnits}}]</th>
+        <th>{{tableHeaders[1]}} [{{selectedUnits}}]</th>
       </tr>
       <tr *ngIf="radioValue == 'absolute'">
-        <th>RA</th>
-        <th>Dec</th>
+        <th>{{tableHeaders[0]}}</th>
+        <th>{{tableHeaders[1]}}</th>
       </tr>
     </thead>
     <tbody>

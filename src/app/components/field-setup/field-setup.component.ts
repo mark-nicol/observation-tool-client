@@ -8,6 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class FieldSetupComponent implements OnInit {
 
 
+  tableHeaders: string[];
   componentKeys = Object.keys;
   components: {[id: string] : {title: string, shown: boolean}} = {
     'spatial': {
@@ -44,6 +45,10 @@ export class FieldSetupComponent implements OnInit {
     console.log('show panel', key);
     if (this.components[key].shown === false)
       this.components[key].shown = true;
+  }
+
+  setHeaders(headers: string[]) {
+    this.tableHeaders = headers;
   }
 
 }

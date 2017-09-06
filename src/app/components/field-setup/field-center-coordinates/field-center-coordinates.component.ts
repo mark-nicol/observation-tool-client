@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class FieldCenterCoordinatesComponent implements OnInit {
 
 
-  @Input() tableHeaders: string[];
+  @Input() tableHeaders: string[] = ['', ''];
   radioValue = 'relative';
   rows = [
     {

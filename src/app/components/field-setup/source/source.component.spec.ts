@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SourceComponent } from './source.component';
 import {FormsModule} from "@angular/forms";
+import {SexagesimalPipe} from "../../../pipes/sexagesimal.pipe";
+import {DegreesPipe} from "../../../pipes/degrees.pipe";
 
 describe('SourceComponent', () => {
   let component: SourceComponent;
@@ -9,7 +11,7 @@ describe('SourceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SourceComponent ],
+      declarations: [ SourceComponent, SexagesimalPipe, DegreesPipe ],
       imports: [ FormsModule ]
     })
     .compileComponents();

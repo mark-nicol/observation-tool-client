@@ -9,9 +9,11 @@ import {SpacialImageComponent} from "./spacial-image/spacial-image.component";
 import {SourceComponent} from "./source/source.component";
 import {SourceExpectedPropertiesComponent} from "./source-expected-properties/source-expected-properties.component";
 import {FieldCenterCoordinatesComponent} from "./field-center-coordinates/field-center-coordinates.component";
-import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbCollapseModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
 import {BrowserTestingModule} from "@angular/platform-browser/testing";
+import {SexagesimalPipe} from "../../pipes/sexagesimal.pipe";
+import {DegreesPipe} from "../../pipes/degrees.pipe";
 
 describe('FieldSetupComponent', () => {
   let component: FieldSetupComponent;
@@ -27,9 +29,11 @@ describe('FieldSetupComponent', () => {
         ImageQueryComponent,
         SourceComponent,
         SourceExpectedPropertiesComponent,
-        FieldCenterCoordinatesComponent
+        FieldCenterCoordinatesComponent,
+        SexagesimalPipe,
+        DegreesPipe
       ],
-      imports: [DragulaModule, NgbCollapseModule, FormsModule]
+      imports: [DragulaModule, NgbCollapseModule, FormsModule, NgbModule.forRoot()]
     })
       .compileComponents();
   }));

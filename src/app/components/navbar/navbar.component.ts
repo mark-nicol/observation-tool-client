@@ -9,6 +9,8 @@ import * as _ from "lodash";
 })
 export class NavbarComponent implements OnInit {
 
+
+  isCollapsed = true;
   selectedGoal: any;
 
   items = [
@@ -27,6 +29,10 @@ export class NavbarComponent implements OnInit {
     {
       title: 'Planned Observing',
       path: 'plannedObs'
+    },
+    {
+      title: 'Science Goals',
+      path: 'sciGoals'
     }
   ];
 

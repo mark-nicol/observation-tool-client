@@ -1,0 +1,109 @@
+<div class="row">
+  <!--Target type label-->
+  <div class="col">
+    <label>Coord Type</label>
+  </div>
+  <!--Target type radios-->
+  <div class="col">
+    <div class="form-check form-check-inline">
+      <label class="form-check-label"
+             ngbTooltip="Relative coordinate type">
+        <input class="form-check-input"
+               type="radio"
+               name="coordTypeRadios"
+               [(ngModel)]="radioValue"
+               id="individualRadio"
+               value="relative">
+        Relative
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label"
+             ngbTooltip="Absolute coordinate type">
+        <input #absoluteRadio
+               class="form-check-input"
+               type="radio"
+               name="coordTypeRadios"
+               [(ngModel)]="radioValue"
+               id="rectangularRadio"
+               value="absolute">
+        Absolute
+      </label>
+    </div><!-- div.form-check.form-check-inline -->
+  </div><!-- div.col -->
+</div><!--div.row-->
+<div class="row">
+  <label for="offsetSelector"
+         class="col"
+         ngbTooltip="Unit of offset pointings">
+    Offset Unit
+  </label>
+  <select id="offsetSelector"
+          class="col form-control form-control-sm"
+          [(ngModel)]="selectedUnits"
+          [disabled]="radioValue === 'absolute'">
+    <option *ngFor="let unit of offsetUnits"
+            value="{{unit}}"
+            (selcted)="unit === 'mas'">
+      {{unit}}
+    </option>
+  </select>
+</div>
+<div class="row">
+  <label class="col"
+         ngbTooltip="Number of pointings in this field">
+    # Pointings
+  </label>
+  <p class="col form-control-static">{{rows.length}}</p>
+</div>
+<div class="row">
+  <table class="table table-sm">
+    <thead>
+      <tr *ngIf="radioValue == 'relative'"
+          ngbTooltip="Coordinate offsets for each pointing">
+        <th>{{tableHeaders[0]}} [{{selectedUnits}}]</th>
+        <th>{{tableHeaders[1]}} [{{selectedUnits}}]</th>
+      </tr>
+      <tr *ngIf="radioValue == 'absolute'">
+        <th>{{tableHeaders[0]}}</th>
+        <th>{{tableHeaders[1]}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows"
+          (keyup.enter)="log('enter')">
+        <td contenteditable (blur)="log('blur')">
+          {{radioValue == 'absolute' ? (row.lon | sexagesimal) : (row.lon | degrees)}}
+        </td>
+        <td contenteditable>
+          {{radioValue == 'absolute' ? (row.lat | sexagesimal) : (row.lat | degrees)}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row justify-content-center">
+  <div class="btn-group"
+       role="group">
+    <button class="btn btn-outline-secondary"
+            (click)="addRow()"
+            ngbTooltip="Add a pointing"
+            placement="left">
+      <i class="fa fa-plus"></i>
+    </button>
+    <button class="btn btn-outline-secondary"
+            (click)="removeRow()"
+            ngbTooltip="Remove a pointing">
+      <i class="fa fa-minus"></i>
+    </button>
+    <button class="btn btn-outline-secondary"
+            ngbTooltip="Import pointings">
+      <i class="fa fa-download"></i>
+    </button>
+    <button class="btn btn-outline-secondary"
+            ngbTooltip="Export current pointings"
+            placement="right">
+      <i class="fa fa-upload"></i>
+    </button>
+  </div>
+</div>

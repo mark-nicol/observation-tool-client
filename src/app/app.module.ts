@@ -29,6 +29,11 @@ import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
 import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {ScienceGoalDirective} from "./directives/science-goal.directive";
+import {ScienceGoalLoaderComponent} from "./components/science-goal-components/science-goal-loader.component";
+import {FieldSetupComponent} from "./components/science-goal-components/field-setup.component";
+import {ScienceGoalControllerComponent} from "./components/science-goal-components/science-goal-controller.component";
+import {HttpClientModule} from "@angular/common/http";
 import { ModularPanelComponent } from './components/modular-panel/modular-panel.component';
 import { SpacialImageComponent } from './components/field-setup/spacial-image/spacial-image.component';
 import { FovParametersComponent } from './components/field-setup/fov-parameters/fov-parameters.component';
@@ -75,8 +80,9 @@ import { DegreesPipe } from './pipes/degrees.pipe';
     TreeModule,
     ContextMenuModule,
     HttpModule,
+    HttpClientModule,
     NgbModule.forRoot(),
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    //InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
   ],
   providers: [

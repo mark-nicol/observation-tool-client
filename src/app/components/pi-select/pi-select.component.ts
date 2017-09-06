@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Response} from "@angular/http";
 import {ActivatedRoute} from "@angular/router";
 import {Observable} from "rxjs/Observable";
-import {Response} from "@angular/http";
-import {PrimaryInvestigator} from "../../models/primary-investigator";
 import {PrimaryInvestigatorService} from "../../services/primary-investigator.service";
 
 @Component({
@@ -14,7 +13,8 @@ import {PrimaryInvestigatorService} from "../../services/primary-investigator.se
 
 export class PiSelectComponent implements OnInit {
   name: string;
-  results: Observable<PrimaryInvestigator[]>;
+  results: any;
+  isSearching: boolean;
 
   constructor(private route: ActivatedRoute, private piService: PrimaryInvestigatorService) {
 
@@ -22,9 +22,9 @@ export class PiSelectComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.name = params['fullName'];
+      this.name = params['Name'];
     });
-    this.search('fullName', this.name, true);
+    this.search('Name', this.name, true);
   }
 
   refineSearch(strings: string[]) {
@@ -32,6 +32,7 @@ export class PiSelectComponent implements OnInit {
   }
 
   search(variant, string, newSearch) {
+    this.isSearching = true;
     let result = new Observable<Response>();
 
     if (newSearch)
@@ -39,7 +40,7 @@ export class PiSelectComponent implements OnInit {
     else
       result = this.piService.search(variant, string);
 
-    result.subscribe(response => this.results = response.json().data);
+    result.subscribe(response => this.results = response, (error) =>  console.log(error),() => this.isSearching = false);
   }
 
 }

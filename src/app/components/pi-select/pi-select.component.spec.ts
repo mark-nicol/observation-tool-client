@@ -5,6 +5,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {RefinePanelComponent} from "./refine-panel/refine-panel.component";
 import {ResultsTableComponent} from "./results-table/results-table.component";
 import {HttpModule} from "@angular/http";
+import {HttpClientModule} from "@angular/common/http";
 
 describe('PiSelectComponent', () => {
   let component: PiSelectComponent;
@@ -14,7 +15,8 @@ describe('PiSelectComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpModule
+        HttpModule,
+        HttpClientModule
       ],
       declarations: [
         PiSelectComponent,

@@ -1,28 +1,26 @@
-<div class="container-fluid">
-  <div class="card">
-    <div class="card-header">Principal Investigator</div>
-    <div class="card-body">
-      <form>
-        <div class="input-group">
-          <input #piSearchInput
-                 id="pi-search-txt-box"
-                 (keyup)="0"
-                 class="form-control"
-                 placeholder="{{this.passedPi ? null : this.INPUT_PLACEHOLDER}}"
-                 value="{{this.passedPi ? this.passedPi.fullName : null}}"
-                 [disabled]="this.passedPi">
-          <div class="input-group-btn">
-            <a [routerLink]="['/pi-select', {fullName: piSearchInput.value}]">
-              <button
-                id="pi-search-submit-btn"
-                class="btn btn-default"
-                [disabled]="piSearchInput.value === ''">
-                SelectPI
-              </button>
-            </a>
-          </div>
+<div class="card">
+  <h5 class="card-title">Principal Investigator</h5>
+  <div class="card-body">
+    <form>
+      <div class="input-group">
+        <input #piSearchInput
+               id="pi-search-txt-box"
+               (keyup)="0"
+               class="form-control"
+               placeholder="{{this.passedPi ? null : this.INPUT_PLACEHOLDER}}"
+               value="{{this.passedPi ? this.passedPi.fullName : null}}"
+               [disabled]="this.passedPi">
+        <div class="input-group-btn">
+          <a [routerLink]="['/pi-select', {fullName: piSearchInput.value}]">
+            <button
+              id="pi-search-submit-btn"
+              class="btn btn-outline-secondary"
+              [disabled]="piSearchInput.value === ''">
+              SelectPI
+            </button>
+          </a>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>

@@ -1,22 +1,26 @@
 <div class="card">
-  <div class="card-header">Refine Search</div>
+  <h5 class="card-title">Refine Search</h5>
   <div class="card-body">
-
     <form class="form-inline">
       <div class="form-group">
-        <select
-          #refineSelector class="form-control" title="Attribute">
+        <select #refineSelector
+                class="form-control"
+                title="Attribute">
           <option value="fullName">Name</option>
           <option value="email">Email</option>
           <option value="affiliation">Affiliation</option>
           <option value="uid">ALMA ID</option>
         </select>
-        <label for="refineInput" style="padding-left: 0.5em; padding-right: 0.5em">contains</label>
-        <input class="form-control" title="refineInput" id="refineInput" #refineInput value="{{this.name}}">
+        <label for="refineInput"
+               style="padding-left: 0.5em; padding-right: 0.5em">contains</label>
+        <input class="form-control"
+               title="refineInput"
+               id="refineInput"
+               #refineInput
+               value="{{this.name}}">
       </div>
     </form>
-
-    <button (click)="refineClick(refineSelector.value, refineInput.value)" class="btn btn-primary pull-right">Find
+    <button (click)="refineClick(refineSelector.value, refineInput.value)" class="btn btn-outline-primary pull-right">Find
       Investigator
     </button>
   </div><!-- panel-body -->

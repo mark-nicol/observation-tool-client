@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpacialImageComponent } from './spacial-image.component';
+import {DelayTooltipDirective} from "../../../directives/delay-tooltip.directive";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 describe('SpacialImageComponent', () => {
   let component: SpacialImageComponent;
@@ -8,7 +10,8 @@ describe('SpacialImageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpacialImageComponent ]
+      declarations: [ SpacialImageComponent, DelayTooltipDirective ],
+      imports: [ NgbModule.forRoot() ]
     })
     .compileComponents();
   }));

@@ -31,18 +31,23 @@ import {PlannedObservingComponent} from "./components/planned-observing/planned-
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {HttpClientModule} from "@angular/common/http";
 import { ModularPanelComponent } from './components/modular-panel/modular-panel.component';
-import { SpacialImageComponent } from './components/field-setup/spacial-image/spacial-image.component';
-import { FovParametersComponent } from './components/field-setup/fov-parameters/fov-parameters.component';
-import { ImageQueryComponent } from './components/field-setup/image-query/image-query.component';
+import { SpacialImageComponent } from './components/science-goals/field-setup/spacial-image/spacial-image.component';
+import { FovParametersComponent } from './components/science-goals/field-setup/fov-parameters/fov-parameters.component';
+import { ImageQueryComponent } from './components/science-goals/field-setup/image-query/image-query.component';
 import {DragulaModule} from "ng2-dragula";
-import { FieldSetupComponent } from './components/field-setup/field-setup.component';
-import { SourceComponent } from './components/field-setup/source/source.component';
-import { SourceExpectedPropertiesComponent } from './components/field-setup/source-expected-properties/source-expected-properties.component';
-import { FieldCenterCoordinatesComponent } from './components/field-setup/field-center-coordinates/field-center-coordinates.component';
+import { FieldSetupComponent } from './components/science-goals/field-setup/field-setup.component';
+import { SourceComponent } from './components/science-goals/field-setup/source/source.component';
+import { SourceExpectedPropertiesComponent } from './components/science-goals/field-setup/source-expected-properties/source-expected-properties.component';
+import { FieldCenterCoordinatesComponent } from './components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component';
 import { SexagesimalPipe } from './pipes/sexagesimal.pipe';
 import { DegreesPipe } from './pipes/degrees.pipe';
 import { DelayTooltipDirective } from './directives/delay-tooltip.directive';
 import { ScienceGoalComponent } from './components/science-goals/science-goal.component';
+import { GeneralComponent } from './components/science-goals/general/general.component';
+import { SpectralSetupComponent } from './components/science-goals/spectral-setup/spectral-setup.component';
+import { CalibrationSetupComponent } from './components/science-goals/calibration-setup/calibration-setup.component';
+import { ControlPerformanceComponent } from './components/science-goals/control-performance/control-performance.component';
+import { TechnicalJustificationComponent } from './components/science-goals/technical-justification/technical-justification.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +76,11 @@ import { ScienceGoalComponent } from './components/science-goals/science-goal.co
     DegreesPipe,
     SexagesimalPipe,
     ScienceGoalComponent,
+    GeneralComponent,
+    SpectralSetupComponent,
+    CalibrationSetupComponent,
+    ControlPerformanceComponent,
+    TechnicalJustificationComponent,
   ],
   imports: [
     BrowserModule,

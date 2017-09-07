@@ -1,8 +1,7 @@
 <ul class="nav nav-tabs">
-  <!--<li class="nav-item" *ngFor="let goal of goalKeys(scienceGoals)">-->
-  <li class="nav-item">
+  <li class="nav-item" *ngFor="let goal of goalKeys(scienceGoals)">
     <a class="nav-link"
-       [routerLink]="[{outlets: {scienceGoalOutlet: ['fieldSetup']}}]">Field Setup</a>
+       [routerLink]="[{outlets: {scienceGoalOutlet: [goal]}}]">{{scienceGoals[goal].title}}</a>
   </li>
 </ul>
 <router-outlet name="scienceGoalOutlet"></router-outlet>

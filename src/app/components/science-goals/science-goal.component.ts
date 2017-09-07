@@ -8,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class ScienceGoalComponent implements OnInit {
 
   scienceGoals = {
-    'general': {title: 'General', path: ''},
+    'general': {title: 'General', path: 'general'},
     'fieldSetup': {title: 'Field Setup', path: 'fieldSetup'},
-    'spectralSetup': {title: 'Spectral Setup', path: ''},
-    'calibrationSetup': {title: 'Calibration Setup', path: ''},
-    'control': {title: 'Control and Performance', path: ''},
-    'technicalJustification': {title: 'Technical Justification', path: ''}
+    'spectralSetup': {title: 'Spectral Setup', path: 'spectralSetup'},
+    'calibrationSetup': {title: 'Calibration Setup', path: 'calibrationSetup'},
+    'control': {title: 'Control and Performance', path: 'control'},
+    'technicalJustification': {title: 'Technical Justification', path: 'technicalJustification'}
   };
   goalKeys = Object.keys;
 

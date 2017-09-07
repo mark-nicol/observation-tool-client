@@ -82,7 +82,9 @@
       <div class="row">
         <label class="col-xl-4 text-xl-right"
                for="systemSelector"
-               ngbTooltip="Coordinate system type">
+               ngbTooltip="Coordinate system type"
+               #systemSelectorTooltip="ngbTooltip"
+               [tooltip-delay]="systemSelectorTooltip">
           System
         </label>
         <div class="col-xl-8 pl-0 pr-0 input-group">
@@ -101,6 +103,8 @@
                    title="sexagesimal checkbox"
                    placement="right"
                    ngbTooltip="Sexagesimal display"
+                   #sexagesimalCheckboxTooltip="ngbTooltip"
+                   [tooltip-delay]="sexagesimalCheckboxTooltip"
                    [(ngModel)]="sexagesimalUnits"
                    [disabled]="sexagesimalDisabled">
           </div>
@@ -112,7 +116,9 @@
       <div class="row" style="white-space: nowrap">
         <label class="form-control-label col-xl-4 text-xl-right"
                for="latInput"
-               ngbTooltip="The latitude of the source">
+               ngbTooltip="The latitude of the source"
+               #latInputTooltip="ngbTooltip"
+               [tooltip-delay]="latInputTooltip">
           {{sexagesimalUnits ?
           systems[chosenSystem].sexagesimalLabels.latLabel :
           systems[chosenSystem].normalLabels.latLabel}}
@@ -137,7 +143,9 @@
            style="white-space: nowrap">
         <label class="col-xl-4 text-xl-right"
                for="lonInput"
-               ngbTooltip="The longitude of the source">
+               ngbTooltip="The longitude of the source"
+               #lonInputTooltip="ngbTooltip"
+               [tooltip-delay]="lonInputTooltip">
           {{sexagesimalUnits ?
           systems[chosenSystem].sexagesimalLabels.lonLabel :
           systems[chosenSystem].normalLabels.lonLabel
@@ -163,7 +171,9 @@
       <div class="row">
         <label class="col-xl-4 text-xl-right"
                for="parallaxInput"
-               ngbTooltip="The parallax angle of the source">
+               ngbTooltip="The parallax angle of the source"
+               #parallaxInputTooltip="ngbTooltip"
+               [tooltip-delay]="parallaxInputTooltip">
           Parallax
         </label>
         <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
@@ -183,7 +193,9 @@
       <div class="row">
         <label class="col-xl-4 text-xl-right"
                for="pmRaInput"
-               ngbTooltip="Proper motion along cross-declination direction">
+               ngbTooltip="Proper motion along cross-declination direction"
+               #pmLonTooltip="ngbTooltip"
+               [tooltip-delay]="pmLonTooltip">
           PM RA
         </label>
         <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
@@ -206,7 +218,9 @@
            style="white-space: nowrap">
         <label class="col-xl-4 text-xl-right"
                for="plgecInput"
-               ngbTooltip="Proper motion along declination direction">
+               ngbTooltip="Proper motion along declination direction"
+               #pmLatTooltip="ngbTooltip"
+               [tooltip-delay]="pmLatTooltip">
           PM DEC
         </label>
         <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
@@ -232,7 +246,9 @@
            style="white-space: nowrap">
         <label class="col-xl-4 text-xl-right"
                for="radialVelocityInput"
-               ngbTooltip="Velocity value in your desired units">
+               ngbTooltip="Velocity value in your desired units"
+               #radialInputTooltip="ngbTooltip"
+               [tooltip-delay]="radialInputTooltip">
           Radial Velocity
         </label>
         <div class="col-xl-8 pl-0 pr-0 input-group">
@@ -259,7 +275,9 @@
       <div class="row">
         <label class="col-xl-4 text-xl-right"
                for="zInput"
-               ngbTooltip="Astronomical redshift, calculated using the specified velocity convention">
+               ngbTooltip="Astronomical redshift, calculated using the specified velocity convention"
+               #zInputTooltip="ngbTooltip"
+               [tooltip-delay]="zInputTooltip">
           Z
         </label>
         <input id="zInput"
@@ -273,7 +291,9 @@
            style="white-space: nowrap">
         <label class="col-xl-4 text-xl-right"
                for="dopplerSelect"
-               ngbTooltip="Doppler calculation convention to be used">
+               ngbTooltip="Doppler calculation convention to be used"
+               #dopplerInputTooltip="ngbTooltip"
+               [tooltip-delay]="dopplerInputTooltip">
           Doppler Type
         </label>
         <select id="dopplerSelect"

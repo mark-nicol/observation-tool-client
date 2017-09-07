@@ -4,6 +4,9 @@ import { FieldCenterCoordinatesComponent } from './field-center-coordinates.comp
 import {FormsModule} from "@angular/forms";
 import {SexagesimalPipe} from "../../../pipes/sexagesimal.pipe";
 import {DegreesPipe} from "../../../pipes/degrees.pipe";
+import {DelayTooltipDirective} from "../../../directives/delay-tooltip.directive";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {CommonModule} from "@angular/common";
 
 describe('FieldCenterCoordinatesComponent', () => {
   let component: FieldCenterCoordinatesComponent;
@@ -11,8 +14,8 @@ describe('FieldCenterCoordinatesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FieldCenterCoordinatesComponent, SexagesimalPipe, DegreesPipe ],
-      imports: [FormsModule]
+      declarations: [ FieldCenterCoordinatesComponent, SexagesimalPipe, DegreesPipe, DelayTooltipDirective ],
+      imports: [FormsModule, NgbModule.forRoot()],
     })
     .compileComponents();
   }));

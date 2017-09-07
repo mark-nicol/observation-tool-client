@@ -24,7 +24,7 @@ import { SidenavComponent } from "./components/sidenav/sidenav.component"
 
 /* Services */
 import { PrimaryInvestigatorService } from "./services/primary-investigator.service";
-import {Autofocus} from "./directives/autofocus.directive";
+import {AutofocusDirective} from "./directives/autofocus.directive";
 import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
 import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
@@ -41,32 +41,34 @@ import { SourceExpectedPropertiesComponent } from './components/field-setup/sour
 import { FieldCenterCoordinatesComponent } from './components/field-setup/field-center-coordinates/field-center-coordinates.component';
 import { SexagesimalPipe } from './pipes/sexagesimal.pipe';
 import { DegreesPipe } from './pipes/degrees.pipe';
+import { DelayTooltipDirective } from './directives/delay-tooltip.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FieldCenterCoordinatesComponent,
+    FieldSetupComponent,
+    FovParametersComponent,
+    ImageQueryComponent,
+    ModularPanelComponent,
     NavbarComponent,
     PiEntryComponent,
     PiSearchComponent,
+    PiSelectComponent,
     PlannedObservingComponent,
     ProjectComponent,
     ProjectInfoComponent,
     ProposalComponent,
-    PiSelectComponent,
     RefinePanelComponent,
     ResultsTableComponent,
     SidenavComponent,
-    Autofocus,
-    ModularPanelComponent,
-    SpacialImageComponent,
-    FovParametersComponent,
-    ImageQueryComponent,
-    FieldSetupComponent,
     SourceComponent,
     SourceExpectedPropertiesComponent,
-    FieldCenterCoordinatesComponent,
-    SexagesimalPipe,
+    SpacialImageComponent,
+    AutofocusDirective,
+    DelayTooltipDirective,
     DegreesPipe,
+    SexagesimalPipe,
   ],
   imports: [
     BrowserModule,

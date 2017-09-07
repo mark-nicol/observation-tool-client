@@ -42,6 +42,7 @@ import { FieldCenterCoordinatesComponent } from './components/field-setup/field-
 import { SexagesimalPipe } from './pipes/sexagesimal.pipe';
 import { DegreesPipe } from './pipes/degrees.pipe';
 import { DelayTooltipDirective } from './directives/delay-tooltip.directive';
+import { ScienceGoalComponent } from './components/science-goals/science-goal.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { DelayTooltipDirective } from './directives/delay-tooltip.directive';
     DelayTooltipDirective,
     DegreesPipe,
     SexagesimalPipe,
+    ScienceGoalComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@
         <button class="dropdown-item"
                 *ngFor="let component of componentKeys(components)"
                 (click)="showPanel(component)"
-                [disabled]="components[component].shown">
+                [hidden]="components[component].shown">
           {{components[component].title}}
         </button>
       </div>

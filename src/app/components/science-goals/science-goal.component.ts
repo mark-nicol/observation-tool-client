@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScienceGoalComponent implements OnInit {
 
+  selectedGoal: string;
   scienceGoals = {
     'general': {title: 'General', path: 'general'},
     'fieldSetup': {title: 'Field Setup', path: 'fieldSetup'},

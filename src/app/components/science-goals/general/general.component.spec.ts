@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GeneralComponent } from './general.component';
+import {FormsModule} from "@angular/forms";
+import {ModularPanelComponent} from "../../modular-panel/modular-panel.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 describe('GeneralComponent', () => {
   let component: GeneralComponent;
@@ -8,7 +11,8 @@ describe('GeneralComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneralComponent ]
+      declarations: [ GeneralComponent, ModularPanelComponent ],
+      imports: [FormsModule, NgbModule.forRoot()]
     })
     .compileComponents();
   }));

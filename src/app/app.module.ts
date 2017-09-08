@@ -48,6 +48,8 @@ import { SpectralSetupComponent } from './components/science-goals/spectral-setu
 import { CalibrationSetupComponent } from './components/science-goals/calibration-setup/calibration-setup.component';
 import { ControlPerformanceComponent } from './components/science-goals/control-performance/control-performance.component';
 import { TechnicalJustificationComponent } from './components/science-goals/technical-justification/technical-justification.component';
+import { VisualisationComponent } from './components/science-goals/spectral-setup/visualisation/visualisation.component';
+import { TypeComponent } from './components/science-goals/spectral-setup/type/type.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import { TechnicalJustificationComponent } from './components/science-goals/tech
     CalibrationSetupComponent,
     ControlPerformanceComponent,
     TechnicalJustificationComponent,
+    VisualisationComponent,
+    TypeComponent,
   ],
   imports: [
     BrowserModule,

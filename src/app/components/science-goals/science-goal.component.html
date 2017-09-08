@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item" *ngFor="let goal of goalKeys(scienceGoals)">
+    <a class="nav-link"
+       [class.active]="goal == selectedGoal"
+       [routerLink]="[{outlets: {scienceGoalOutlet: [goal]}}]"
+       (click)="selectedGoal=goal">
+      {{scienceGoals[goal].title}}
+    </a>
+  </li>
+</ul>
+<router-outlet name="scienceGoalOutlet"></router-outlet>

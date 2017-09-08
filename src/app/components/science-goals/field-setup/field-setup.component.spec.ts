@@ -1,6 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {DragulaModule} from "ng2-dragula";
-import {ModularPanelComponent} from "../modular-panel/modular-panel.component";
+import {ModularPanelComponent} from "../../modular-panel/modular-panel.component";
 
 import {FieldSetupComponent} from './field-setup.component';
 import {FovParametersComponent} from "./fov-parameters/fov-parameters.component";
@@ -12,9 +12,9 @@ import {FieldCenterCoordinatesComponent} from "./field-center-coordinates/field-
 import {NgbCollapseModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule} from "@angular/forms";
 import {BrowserTestingModule} from "@angular/platform-browser/testing";
-import {SexagesimalPipe} from "../../pipes/sexagesimal.pipe";
-import {DegreesPipe} from "../../pipes/degrees.pipe";
-import {DelayTooltipDirective} from "../../directives/delay-tooltip.directive";
+import {SexagesimalPipe} from "../../../pipes/sexagesimal.pipe";
+import {DegreesPipe} from "../../../pipes/degrees.pipe";
+import {DelayTooltipDirective} from "../../../directives/delay-tooltip.directive";
 
 describe('FieldSetupComponent', () => {
   let component: FieldSetupComponent;

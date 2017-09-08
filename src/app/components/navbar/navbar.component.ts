@@ -15,12 +15,8 @@ export class NavbarComponent implements OnInit {
 
   items = [
     {
-      title: 'PI Search',
-      path: 'pi-entry'
-    },
-    {
       title: 'Project',
-      path: 'project'
+      path: 'pi-entry'
     },
     {
       title: 'Proposal',

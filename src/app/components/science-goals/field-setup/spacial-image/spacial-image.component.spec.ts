@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpacialImageComponent } from './spacial-image.component';
-import {DelayTooltipDirective} from "../../../directives/delay-tooltip.directive";
+import {DelayTooltipDirective} from "../../../../directives/delay-tooltip.directive";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 describe('SpacialImageComponent', () => {

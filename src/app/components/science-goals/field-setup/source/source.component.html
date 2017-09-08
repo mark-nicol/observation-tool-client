@@ -14,12 +14,10 @@
 <div class="row">
   <!-- Solar checkbox -->
   <div class="col form-check">
-    <label class="form-check-label">
-      <input #solarCheckbox
-             type="checkbox"
-             class="form-check-input"
-             (change)="solarCheckboxClicked()">
-      Choose a Solar System Object?
+    <label class="custom-control custom-checkbox">
+      <input #solarCheckbox type="checkbox" class="custom-control-input" (change)="solarCheckboxClicked()">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Choose a Solar System Object?</span>
     </label>
   </div>
   <!-- Solar selector -->
@@ -97,8 +95,9 @@
               {{system}}
             </option>
           </select>
-          <div class="input-group-addon align-self-baseline">
+          <div class="input-group-addon align-self-baseline ">
             <input id="sexagesimalCheck"
+                   class="custom-checkbox"
                    type="checkbox"
                    title="sexagesimal checkbox"
                    placement="right"
@@ -107,6 +106,18 @@
                    [tooltip-delay]="sexagesimalCheckboxTooltip"
                    [(ngModel)]="sexagesimalUnits"
                    [disabled]="sexagesimalDisabled">
+            <label class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                placement="right"
+                ngbTooltip="Sexagesimal display"
+                #sexagesimalCheckboxTooltip="ngbTooltip"
+                [tooltip-delay]="sexagesimalCheckboxTooltip"
+                [(ngModel)]="sexagesimalUnits"
+                [disabled]="sexagesimalDisabled">
+              <span class="custom-control-indicator"></span>
+            </label>
           </div>
         </div>
       </div>

@@ -5,35 +5,23 @@
   </div>
   <!--Target type radios-->
   <div class="col">
-    <div class="form-check form-check-inline">
-      <label class="form-check-label"
-             ngbTooltip="Relative coordinate type"
-             #relativeRadioTooltip="ngbTooltip"
-             [tooltip-delay]="relativeRadioTooltip">
-        <input class="form-check-input"
-               type="radio"
-               name="coordTypeRadios"
-               [(ngModel)]="radioValue"
-               id="individualRadio"
-               value="relative">
-        Relative
-      </label>
-    </div>
-    <div class="form-check form-check-inline">
-      <label class="form-check-label"
-             ngbTooltip="Absolute coordinate type"
-             #absoluteRadioTooltip="ngbTooltip"
-             [tooltip-delay]="absoluteRadioTooltip">
-        <input #absoluteRadio
-               class="form-check-input"
-               type="radio"
-               name="coordTypeRadios"
-               [(ngModel)]="radioValue"
-               id="rectangularRadio"
-               value="absolute">
-        Absolute
-      </label>
-    </div><!-- div.form-check.form-check-inline -->
+    <label class="custom-control custom-radio">
+      <input id="relativeRadio"
+             name="coordTypeRadios"
+             type="radio"
+             class="custom-control-input"
+             checked>
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Relative</span>
+    </label>
+    <label class="custom-control custom-radio">
+      <input id="absoluteRadio"
+             name="coordTypeRadios"
+             type="radio"
+             class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Absolute</span>
+    </label>
   </div><!-- div.col -->
 </div><!--div.row-->
 <div class="row">

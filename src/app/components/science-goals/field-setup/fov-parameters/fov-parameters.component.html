@@ -1,39 +1,36 @@
-<div class="form-row">
-  <label class="col-xl"
-         for="freqInput">
+<div class="row form-group">
+  <label for="freqInput">
     Representative Frequency (Sky)
   </label>
-  <input class="col-xl form-control form-control-sm align-self-baseline"
+  <input class="form-control form-control-sm align-self-baseline"
          id="freqInput"
          placeholder="0.000 GHz">
 </div>
-<div class="form-row">
-  <label class="col"
-         for="antRadio">
+<div class="row form-group">
+  <label>
     Antenna Diameter
   </label>
-  <label class="col align-self-baseline">
-    <input class="form-control-sm mr-2"
-           id="antRadio"
-           type="radio">
-    12m
+  <label class="custom-control custom-radio">
+    <input id="12mRadio"
+           name="antSizeRadios"
+           type="radio"
+           class="custom-control-input">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">12m</span>
   </label>
 </div>
-<div class="form-row">
-  <label class="col-xl"
-         for="beamInput">
+<div class="row form-group">
+  <label for="beamInput">
     Antenna Beamsize (HPBW)
   </label>
-  <input class="col-xl form-control form-control-sm align-self-baseline"
+  <input class="form-control form-control-sm align-self-baseline"
          id="beamInput"
          placeholder="0.000 arcsec">
 </div>
-<div class="form-row">
-  <label class="col"
-         for="beamCheck">
-    Show Antenna Beamsize
+<div class="row form-group">
+  <label class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">Show Antenna Beamsize</span>
   </label>
-  <input class="col form-control form-control-sm"
-         id="beamCheck"
-         type="checkbox">
 </div>

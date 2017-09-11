@@ -1,25 +1,4 @@
 <div class="row p-0 m-0">
-  <div class="col p-0 m-0">
-    <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-outline-secondary"
-              id="showDropdown"
-              ngbDropdownToggle>
-        Show Panel
-      </button>
-      <div ngbDropdownMenu
-           aria-labelledby="showDropdown">
-        <button class="dropdown-item"
-                *ngFor="let component of componentKeys(components)"
-                (click)="showPanel(component)"
-                [hidden]="components[component].shown">
-          {{components[component].title}}
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row p-0 m-0">
   <div class="col-lg-5 col-xl-4 p-0 m-0"
        [dragula]="'main'">
     <modular-panel [id]="'spatial'"

@@ -1,11 +1,24 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item" *ngFor="let goal of goalKeys(scienceGoals)">
-    <a class="nav-link"
-       [class.active]="goal == selectedGoal"
-       [routerLink]="[{outlets: {scienceGoalOutlet: [goal]}}]"
-       (click)="selectedGoal=goal">
-      {{scienceGoals[goal].title}}
-    </a>
-  </li>
-</ul>
+<div class="row">
+  <ul class="col nav nav-tabs">
+    <li class="nav-item" *ngFor="let goal of goalKeys(scienceGoals)">
+      <a class="nav-link"
+         [class.active]="goal == selectedGoal"
+         [routerLink]="[{outlets: {scienceGoalOutlet: [goal]}}]"
+         (click)="selectedGoal=goal">
+        {{scienceGoals[goal].title}}
+      </a>
+    </li>
+  </ul>
+  <div ngbDropdown class="d-inline-block nav nav-tabs">
+    <button class="btn btn-outline-secondary"
+            id="showDropdown"
+            ngbDropdownToggle>
+      Show Panel
+    </button>
+    <div ngbDropdownMenu
+         aria-labelledby="showDropdown">
+      <button></button>
+    </div>
+  </div>
+</div><!-- div.row -->
 <router-outlet name="scienceGoalOutlet"></router-outlet>

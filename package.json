@@ -29,7 +29,7 @@
     "angular-tree-component": "^4.0.0",
     "angular2-draggable": "^1.0.5",
     "angular2-in-memory-web-api": "0.0.21",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.0.0-beta",
     "core-js": "^2.5.0",
     "font-awesome": "^4.7.0",
     "intl": "^1.2.5",

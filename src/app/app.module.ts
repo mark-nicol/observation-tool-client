@@ -50,6 +50,7 @@ import { ControlPerformanceComponent } from './components/science-goals/control-
 import { TechnicalJustificationComponent } from './components/science-goals/technical-justification/technical-justification.component';
 import { VisualisationComponent } from './components/science-goals/spectral-setup/visualisation/visualisation.component';
 import { TypeComponent } from './components/science-goals/spectral-setup/type/type.component';
+import {ScienceGoalPanelService} from "./services/science-goal-panel.service";
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { TypeComponent } from './components/science-goals/spectral-setup/type/ty
     AppRoutingModule,
   ],
   providers: [
-    PrimaryInvestigatorService
+    PrimaryInvestigatorService,
+    ScienceGoalPanelService
   ],
   bootstrap: [
     AppComponent

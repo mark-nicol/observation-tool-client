@@ -4,9 +4,16 @@ import {Injectable} from '@angular/core';
 export class ScienceGoalPanelService {
 
   pages: { [id: string]: { title: string, path: string, panels: { [id: string]: { title: string, shown: boolean } } } } = {
-    'field': {
+    'general' : {
+      title: 'General',
+      path: 'general',
+      panels: {
+        'general': {title: 'general', shown: true}
+      }
+    },
+    'fieldSetup': {
       title: 'Field Setup',
-      path: '',
+      path: 'fieldSetup',
       panels: {
         'query': {title: 'Image Query', shown: true},
         'fov': {title: 'FOV Parameters', shown: true},
@@ -16,11 +23,11 @@ export class ScienceGoalPanelService {
         'field-centre': {title: 'Field Centre Coordinates', shown: true},
       }
     },
-    'spectral': {
+    'spectralSetup': {
       title: 'Spectral Setup',
-      path: '',
+      path: 'spectralSetup',
       panels: {
-        'type': {title: 'Spectral Type', shown: true},
+        'spectralType': {title: 'Spectral Type', shown: true},
         'visualisation': {title: 'Visualisation', shown: true},
       }
     }
@@ -29,14 +36,12 @@ export class ScienceGoalPanelService {
   constructor() {
   }
 
-  showPanel(page: string, panel: string) {
-    if (this.pages[page].panels[panel].shown === false)
-      this.pages[page].panels[panel].shown = true;
+  hiddenChange(page: string, panel: string) {
+    this.pages[page].panels[panel].shown = !this.pages[page].panels[panel].shown;
   }
 
-  hidePanel(page: string, panel: string) {
-    if (this.pages[page].panels[panel].shown === true)
-      this.pages[page].panels[panel].shown = false;
+  getPage(key: string) {
+    return this.pages[key].panels;
   }
 
 }

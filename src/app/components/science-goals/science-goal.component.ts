@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ScienceGoalPanelService} from "../../services/science-goal-panel.service";
 
 @Component({
   selector: 'app-science-goal',
@@ -7,18 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScienceGoalComponent implements OnInit {
 
-  selectedGoal: string;
-  scienceGoals = {
-    'general': {title: 'General', path: 'general'},
-    'fieldSetup': {title: 'Field Setup', path: 'fieldSetup'},
-    'spectralSetup': {title: 'Spectral Setup', path: 'spectralSetup'},
-    'calibrationSetup': {title: 'Calibration Setup', path: 'calibrationSetup'},
-    'control': {title: 'Control and Performance', path: 'control'},
-    'technicalJustification': {title: 'Technical Justification', path: 'technicalJustification'}
-  };
-  goalKeys = Object.keys;
+  selectedPage: string ='general';
+  pages: any;
+  pageKeys = Object.keys;
 
-  constructor() { }
+  constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
+    this.pages = this.scienceGoalPanelService.pages;
+  }
 
   ngOnInit() {
   }

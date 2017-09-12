@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ScienceGoalPanelService} from "../../../services/science-goal-panel.service";
 
 @Component({
   selector: 'app-spectral-setup',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpectralSetupComponent implements OnInit {
 
-  constructor() { }
+  panels: any;
+
+  constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
+    this.panels = scienceGoalPanelService.getPage('spectralSetup');
+  }
 
   ngOnInit() {
   }

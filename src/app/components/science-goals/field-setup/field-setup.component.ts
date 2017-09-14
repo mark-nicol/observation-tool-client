@@ -1,50 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ScienceGoalPanelService} from "../../../services/science-goal-panel.service";
 
 @Component({
   selector: 'field-setup',
   templateUrl: './field-setup.component.html',
-  styleUrls: ['./field-setup.component.css']
+  styleUrls: ['./field-setup.component.css'],
+  providers: [ScienceGoalPanelService]
 })
 export class FieldSetupComponent implements OnInit {
 
 
   tableHeaders: string[];
-  componentKeys = Object.keys;
-  components: {[id: string] : {title: string, shown: boolean}} = {
-    'spatial': {
-      title: 'Spatial Image', shown: true
-    },
-    'fov': {
-      title: 'FOV Parameters', shown: true
-    },
-    'query': {
-      title: 'Image Query', shown: true
-    },
-    'field-source': {
-      title: 'Source', shown: true
-    },
-    'expected': {
-      title: 'Expected Source Properties', shown: true
-    },
-    'field-centre': {
-      title: 'Field Centre Coordinates', shown: true
-    }
-  };
+  panel: any;
 
-  constructor() {
+  constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
+    this.scienceGoalPanelService.getPage('fieldSetup').subscribe(data => this.panel = data);
   }
 
   ngOnInit() {
   }
 
   hiddenChange(event) {
-    this.components[event].shown = !this.components[event].shown;
+    this.scienceGoalPanelService.hiddenChange('fieldSetup', event);
   }
 
   showPanel(key: string) {
-    console.log('show panel', key);
-    if (this.components[key].shown === false)
-      this.components[key].shown = true;
+    if (this.panel[key].shown === false)
+      this.panel[key].shown = true;
   }
 
   setHeaders(headers: string[]) {

@@ -50,6 +50,11 @@ const routes: Routes = [
     component: ScienceGoalComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'general',
+        pathMatch: 'full'
+      },
+      {
         path: 'general',
         component: GeneralComponent,
         outlet: 'scienceGoalOutlet'
@@ -79,11 +84,6 @@ const routes: Routes = [
         component: TechnicalJustificationComponent,
         outlet: 'scienceGoalOutlet'
       },
-      {
-        path: '',
-        redirectTo: 'general',
-        pathMatch: 'full'
-      }
     ]
   },
   {

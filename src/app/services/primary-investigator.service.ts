@@ -7,8 +7,6 @@ import "rxjs/add/operator/toPromise";
 @Injectable()
 export class PrimaryInvestigatorService {
 
-  //private piUrl = 'api/primaryInvestigators/';
-  // private piUrl = 'http://localhost:8080/ObsprepSubmissionService/UserLookup?action=MatchStrings';
   private piUrl = 'https://cycle-5.asa.alma.cl/ObsprepSubmissionService/UserLookup?action=MatchStrings';
   private searchParams: URLSearchParams;
 
@@ -21,11 +19,6 @@ export class PrimaryInvestigatorService {
     return this.search(searchVariant, searchStrings);
   }
 
-  // search(searchVariant: string, searchStrings: string) {
-  //   this.searchParams.set(searchVariant, searchStrings);
-  //   return this.http.get(this.piUrl, {params: this.searchParams});
-  // }
-
   search(searchVariant: string, searchStrings: string) {
     let formData = new FormData();
     formData.append('searchVariant', searchVariant);
@@ -35,11 +28,6 @@ export class PrimaryInvestigatorService {
     let options = new RequestOptions({headers});
     return this.http.post(this.piUrl, formData, headers);
   }
-
-  // private static handleError(error: any): Promise<any> {
-  //   console.error('An error occured', error);
-  //   return Promise.reject(error.message || error);
-  // }
 
 }
 

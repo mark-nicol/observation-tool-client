@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-3">
+    <label>Overlays:</label>
+  </div>
+  <div class="col">
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Receiver Bands</span>
+    </label>
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Transmission</span>
+    </label>
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">DSB Image</span>
+    </label>
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Spectral Lines</span>
+    </label>
+    <button class="btn btn-sm btn-outline-secondary">Select Lines to Overlay</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-3">
+    <label>Water Vapour Column Density:</label>
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <label class="custom-control custom-radio">
+          <input id="radio1" name="radio" type="radio" class="custom-control-input">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Automatic Choice</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input id="radio2" name="radio" type="radio" class="custom-control-input">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Manual Choice</span>
+        </label>
+      </div>
+      <select class="col form-control"></select>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-3">
+    <label>Viewport:</label>
+  </div>
+  <div class="col btn-group btn-group-sm" role="group">
+    <button class="btn btn-outline-secondary">Pan to Spectral Window</button>
+    <button class="btn btn-outline-secondary">Zoom to Band</button>
+    <button class="btn btn-outline-secondary">Reset</button>
+  </div>
+</div>

@@ -1,11 +1,30 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item" *ngFor="let goal of goalKeys(scienceGoals)">
-    <a class="nav-link"
-       [class.active]="goal == selectedGoal"
-       [routerLink]="[{outlets: {scienceGoalOutlet: [goal]}}]"
-       (click)="selectedGoal=goal">
-      {{scienceGoals[goal].title}}
-    </a>
-  </li>
-</ul>
+<div class="row">
+  <ul class="col nav nav-tabs">
+    <li class="nav-item" *ngFor="let page of pageKeys(pages)">
+      <a class="nav-link"
+         [class.active]="page == selectedPage"
+         [routerLink]="[{outlets: {scienceGoalOutlet: [page]}}]"
+         (click)="selectedPage=page">
+        {{pages[page].title}}
+      </a>
+    </li>
+  </ul>
+  <div ngbDropdown class="d-inline-block nav nav-tabs">
+    <button class="btn btn-outline-secondary"
+            id="showDropdown"
+            ngbDropdownToggle>
+      Show Panel
+    </button>
+    <div ngbDropdownMenu
+         aria-labelledby="showDropdown">
+      <button class="dropdown-item"
+              type="button"
+              *ngFor="let panel of pageKeys(pages[selectedPage].panels)"
+              [disabled]="pages[selectedPage].panels[panel].shown"
+              (click)="hiddenChange(panel)">
+        {{pages[selectedPage].panels[panel].title}}
+      </button>
+    </div>
+  </div><!-- div.d-inline-block.nav.nav-tabs -->
+</div><!-- div.row -->
 <router-outlet name="scienceGoalOutlet"></router-outlet>

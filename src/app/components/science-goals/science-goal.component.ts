@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ScienceGoalPanelService} from "../../services/science-goal-panel.service";
+import {Observable} from "rxjs/Observable";
+import {Page} from "../../models/page";
 
 @Component({
   selector: 'app-science-goal',
@@ -7,20 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScienceGoalComponent implements OnInit {
 
-  selectedGoal: string;
-  scienceGoals = {
-    'general': {title: 'General', path: 'general'},
-    'fieldSetup': {title: 'Field Setup', path: 'fieldSetup'},
-    'spectralSetup': {title: 'Spectral Setup', path: 'spectralSetup'},
-    'calibrationSetup': {title: 'Calibration Setup', path: 'calibrationSetup'},
-    'control': {title: 'Control and Performance', path: 'control'},
-    'technicalJustification': {title: 'Technical Justification', path: 'technicalJustification'}
-  };
-  goalKeys = Object.keys;
+  selectedPage: string = 'general';
+  pages: { [id: string]: Page };
+  pageKeys = Object.keys;
 
-  constructor() { }
+  constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
+
+  }
 
   ngOnInit() {
+    this.scienceGoalPanelService.pages.subscribe(data => this.pages =data);
+  }
+
+  hiddenChange(event) {
+    this.scienceGoalPanelService.hiddenChange(this.selectedPage, event);
   }
 
 }

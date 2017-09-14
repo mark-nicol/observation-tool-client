@@ -11,14 +11,13 @@ export class FieldSetupComponent implements OnInit {
 
 
   tableHeaders: string[];
-  panels: any;
+  panel: any;
 
   constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
-    this.panels = this.scienceGoalPanelService.getPage('fieldSetup');
+    this.scienceGoalPanelService.getPage('fieldSetup').subscribe(data => this.panel = data);
   }
 
   ngOnInit() {
-
   }
 
   hiddenChange(event) {
@@ -26,8 +25,8 @@ export class FieldSetupComponent implements OnInit {
   }
 
   showPanel(key: string) {
-    if (this.panels[key].shown === false)
-      this.panels[key].shown = true;
+    if (this.panel[key].shown === false)
+      this.panel[key].shown = true;
   }
 
   setHeaders(headers: string[]) {

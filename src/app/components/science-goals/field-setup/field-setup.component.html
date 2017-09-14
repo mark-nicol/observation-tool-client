@@ -2,19 +2,19 @@
   <div class="col-lg-5 col-xl-4 p-0 m-0"
        [dragula]="'main'">
     <modular-panel [id]="'spatial'"
-                   [title]="panels['spatial'].title"
+                   [title]="panel.panels['spatial'].title"
                    [image]="'/assets/img/placeholder.PNG'"
                    (hiddenChange)="hiddenChange($event)"
-                   *ngIf="panels['spatial'].shown">
+                   *ngIf="panel.panels['spatial'].shown">
       <spacial-image></spacial-image>
     </modular-panel>
     <div class="row p-0 m-0">
       <div class="col-xl p-0 m-0"
            [dragula]="'one'">
         <modular-panel [id]="'fov'"
-                       [title]="panels['fov'].title"
+                       [title]="panel.panels['fov'].title"
                        (hiddenChange)="hiddenChange($event)"
-                       *ngIf="panels['fov'].shown"
+                       *ngIf="panel.panels['fov'].shown"
                        style="height: 100%;">
           <fov-parameters></fov-parameters>
         </modular-panel>
@@ -22,9 +22,9 @@
       <div class="col-xl p-0 m-0"
            [dragula]="'one'">
         <modular-panel [id]="'query'"
-                       [title]="panels['query'].title"
+                       [title]="panel.panels['query'].title"
                        (hiddenChange)="hiddenChange($event)"
-                       *ngIf="panels['query'].shown"
+                       *ngIf="panel.panels['query'].shown"
                        style="height: 100%;">
           <image-query></image-query>
         </modular-panel>
@@ -34,21 +34,21 @@
   <div class="col-lg-7 col-xl-8 p-0 m-0"
        [dragula]="'main'">
     <modular-panel [id]="'field-source'"
-                   [title]="panels['field-source'].title"
+                   [title]="panel.panels['field-source'].title"
                    (hiddenChange)="hiddenChange($event)"
-                   *ngIf="panels['field-source'].shown">
+                   *ngIf="panel.panels['field-source'].shown">
       <field-source (systemEmitter)="setHeaders($event)"></field-source>
     </modular-panel>
     <modular-panel [id]="'expected'"
-                   [title]="panels['expected'].title"
+                   [title]="panel.panels['expected'].title"
                    (hiddenChange)="hiddenChange($event)"
-                   *ngIf="panels['expected'].shown">
+                   *ngIf="panel.panels['expected'].shown">
       <source-expected-properties></source-expected-properties>
     </modular-panel>
     <modular-panel [id]="'field-centre'"
-                   [title]="panels['field-centre'].title"
+                   [title]="panel.panels['field-centre'].title"
                    (hiddenChange)="hiddenChange($event)"
-                   *ngIf="panels['field-centre'].shown">
+                   *ngIf="panel.panels['field-centre'].shown">
       <field-center-coordinates [tableHeaders]="tableHeaders"></field-center-coordinates>
     </modular-panel>
   </div>

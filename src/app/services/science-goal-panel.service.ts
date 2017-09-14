@@ -1,47 +1,38 @@
 import {Injectable} from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {Page} from "../models/page";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {PAGES} from "../data/pages";
 
 @Injectable()
 export class ScienceGoalPanelService {
 
-  pages: { [id: string]: { title: string, path: string, panels: { [id: string]: { title: string, shown: boolean } } } } = {
-    'general' : {
-      title: 'General',
-      path: 'general',
-      panels: {
-        'general': {title: 'general', shown: true}
-      }
-    },
-    'fieldSetup': {
-      title: 'Field Setup',
-      path: 'fieldSetup',
-      panels: {
-        'query': {title: 'Image Query', shown: true},
-        'fov': {title: 'FOV Parameters', shown: true},
-        'field-source': {title: 'Source', shown: true},
-        'spatial': {title: 'Spatial Image', shown: true},
-        'expected': {title: 'Expected Source Properties', shown: true},
-        'field-centre': {title: 'Field Centre Coordinates', shown: true},
-      }
-    },
-    'spectralSetup': {
-      title: 'Spectral Setup',
-      path: 'spectralSetup',
-      panels: {
-        'spectralType': {title: 'Spectral Type', shown: true},
-        'visualisation': {title: 'Visualisation', shown: true},
-      }
-    }
+  pages: Observable<{ [id: string]: Page }>;
+  private _pages: BehaviorSubject<{ [id: string]: Page }>;
+  private baseUrl: string;
+  private dataStore: {
+    pages: { [id: string]: Page };
   };
 
   constructor() {
+    this.baseUrl = './data/pages';
+    this.dataStore = {pages: {}};
+    this._pages = <BehaviorSubject<{ [id: string]: Page }>>new BehaviorSubject({});
+    this.pages = this._pages.asObservable();
+    this.dataStore.pages = PAGES;
+    this._pages.next(Object.assign({}, this.dataStore).pages);
+  }
+
+  getPage(key: string): Observable<Page> {
+    let page: Observable<Page>;
+    let subject = <BehaviorSubject<Page>> new BehaviorSubject({});
+    page = subject.asObservable();
+    subject.next(this.dataStore.pages[key]);
+    return page;
   }
 
   hiddenChange(page: string, panel: string) {
-    this.pages[page].panels[panel].shown = !this.pages[page].panels[panel].shown;
-  }
-
-  getPage(key: string) {
-    return this.pages[key].panels;
+    this.dataStore.pages[page].panels[panel].shown = !this.dataStore.pages[page].panels[panel].shown;
   }
 
 }

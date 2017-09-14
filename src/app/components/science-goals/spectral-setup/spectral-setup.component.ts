@@ -8,10 +8,10 @@ import {ScienceGoalPanelService} from "../../../services/science-goal-panel.serv
 })
 export class SpectralSetupComponent implements OnInit {
 
-  panels: any;
+  page: any;
 
   constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
-    this.panels = scienceGoalPanelService.getPage('spectralSetup');
+    this.scienceGoalPanelService.getPage('spectralSetup').subscribe(data => this.page = data);
   }
 
   ngOnInit() {

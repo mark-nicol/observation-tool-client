@@ -20,7 +20,8 @@
       <button class="dropdown-item"
               type="button"
               *ngFor="let panel of pageKeys(pages[selectedPage].panels)"
-              [disabled]="pages[selectedPage].panels[panel].shown">
+              [disabled]="pages[selectedPage].panels[panel].shown"
+              (click)="hiddenChange(panel)">
         {{pages[selectedPage].panels[panel].title}}
       </button>
     </div>

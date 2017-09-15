@@ -75,12 +75,12 @@ const routes: Routes = [
         outlet: 'scienceGoalOutlet'
       },
       {
-        path: 'control',
+        path: 'controlAndPerf',
         component: ControlPerformanceComponent,
         outlet: 'scienceGoalOutlet'
       },
       {
-        path: 'technicalJustification',
+        path: 'techJust',
         component: TechnicalJustificationComponent,
         outlet: 'scienceGoalOutlet'
       },

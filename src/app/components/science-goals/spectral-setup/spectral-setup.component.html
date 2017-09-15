@@ -1,12 +1,18 @@
 <div class="row p-0 m-0">
   <div class="col p-0 m-0">
     <modular-panel [title]="page.panels['visualisation'].title"
-                   [image]="'/assets/img/spectral_placeholder.png'">
+                   [id]="'visualisation'"
+                   [image]="'/assets/img/spectral_placeholder.png'"
+                   (hiddenChange)="hiddenChange($event)"
+                   *ngIf="page.panels['visualisation'].shown">
       <app-visualisation></app-visualisation>
     </modular-panel>
   </div>
   <div class="col p-0 m-0">
-    <modular-panel [title]="page.panels['spectralType'].title">
+    <modular-panel [title]="page.panels['spectralType'].title"
+                   [id]="'spectralType'"
+                   (hiddenChange)="hiddenChange($event)"
+                   *ngIf="page.panels['spectralType'].shown">
       <app-type></app-type>
     </modular-panel>
   </div>

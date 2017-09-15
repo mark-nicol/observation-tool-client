@@ -32,7 +32,7 @@ import {SourceExpectedPropertiesComponent} from './components/science-goals/fiel
 import {SourceComponent} from './components/science-goals/field-setup/source/source.component';
 import {SpacialImageComponent} from './components/science-goals/field-setup/spacial-image/spacial-image.component';
 import {GeneralComponent} from './components/science-goals/general/general.component';
-import {ScienceGoalPageComponent} from './components/science-goals/science-goal-page/science-goal-page.component';
+import {ScienceGoalPage} from './models/science-goal-page';
 import {ScienceGoalComponent} from './components/science-goals/science-goal.component';
 import {SpectralSetupComponent} from './components/science-goals/spectral-setup/spectral-setup.component';
 import {TypeComponent} from './components/science-goals/spectral-setup/type/type.component';

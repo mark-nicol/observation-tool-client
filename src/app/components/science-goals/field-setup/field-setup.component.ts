@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ScienceGoalPageComponent} from "../science-goal-page/science-goal-page.component";
+import {ScienceGoalPage} from "../../../models/science-goal-page";
 import {ScienceGoalPanelService} from "../../../services/science-goal-panel.service";
 
 @Component({
@@ -9,7 +9,7 @@ import {ScienceGoalPanelService} from "../../../services/science-goal-panel.serv
   providers: [ScienceGoalPanelService]
 })
 
-export class FieldSetupComponent extends ScienceGoalPageComponent{
+export class FieldSetupComponent extends ScienceGoalPage{
 
   tableHeaders: string[];
   panel: any;

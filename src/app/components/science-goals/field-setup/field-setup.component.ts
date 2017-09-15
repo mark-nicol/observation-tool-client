@@ -15,7 +15,7 @@ export class FieldSetupComponent extends ScienceGoalPageComponent{
   panel: any;
 
   constructor(scienceGoalPanelService: ScienceGoalPanelService) {
-    super(scienceGoalPanelService);
+    super(scienceGoalPanelService, 'fieldSetup');
   }
 
   // hiddenChange(event) {

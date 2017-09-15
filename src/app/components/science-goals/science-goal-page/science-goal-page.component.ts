@@ -5,15 +5,15 @@ import {ScienceGoalPanelService} from "../../../services/science-goal-panel.serv
 // @Component({
 //   selector: 'app-science-goal-page',
 //   templateUrl: './science-goal-page.component.html',
-//   styleUrls: ['./science-goal-page.component.scss'],
-//   providers: [ScienceGoalPanelService]
+//   styleUrls: ['./science-goal-page.component.scss']
 // })
 export abstract class ScienceGoalPageComponent implements OnInit {
 
   id: string;
   page: Page;
 
-  constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
+  constructor(private scienceGoalPanelService: ScienceGoalPanelService, id?: string) {
+    this.id = id;
     this.scienceGoalPanelService.getPage(this.id).subscribe(data => this.page = data);
   }
 

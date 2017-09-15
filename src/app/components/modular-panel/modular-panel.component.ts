@@ -21,6 +21,7 @@ export class ModularPanelComponent implements OnInit {
   }
 
   removeClick() {
+    console.log('Remove click', this.id);
     this.hiddenChange.emit(this.id);
   }
 

@@ -13,5 +13,6 @@ cache:
 test:
     script:
         # - xvfb-run -a ./node_modules/@angular/cli/bin/ng test --browser PhantomJS --single-run=true --watch=false
-        - ./node_modules/@angular/cli/bin/ng test --browser PhantomJS --single-run=true --watch=false
+        #- ./node_modules/@angular/cli/bin/ng test --browser PhantomJS --single-run=true --watch=false
+        - ng test --single-run=true --watch=false
 

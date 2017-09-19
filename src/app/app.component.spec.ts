@@ -1,26 +1,26 @@
 import {async, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from "@angular/router/testing";
 import {NgbDropdownConfig, NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {TreeModule} from "angular-tree-component";
+// import {TreeModule} from "angular-tree-component";
 import {ContextMenuModule} from "ngx-contextmenu";
 
 import {AppComponent} from './app.component';
 import {NavbarComponent} from "./components/navbar/navbar.component";
-import {SidenavComponent} from "./components/sidenav/sidenav.component";
+// import {SidenavComponent} from "./components/sidenav/sidenav.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        TreeModule,
+        // TreeModule,
         ContextMenuModule,
         NgbModule
       ],
       declarations: [
         AppComponent,
         NavbarComponent,
-        SidenavComponent
+        // SidenavComponent
       ],
       providers: [NgbDropdownConfig]
     }).compileComponents();

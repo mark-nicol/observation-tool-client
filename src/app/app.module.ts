@@ -5,9 +5,9 @@ import {HttpModule} from "@angular/http"
 import {BrowserModule} from '@angular/platform-browser';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 /* Web faking */
-import {TreeModule} from "angular-tree-component";
+// import {TreeModule} from "angular-tree-component";
 import {DragulaModule} from "ng2-dragula";
-import {ContextMenuModule} from "ngx-contextmenu";
+// import {ContextMenuModule} from "ngx-contextmenu";
 import {AppRoutingModule} from "./app-routing.module"
 /* Components */
 import {AppComponent} from './app.component';
@@ -38,7 +38,7 @@ import {SpectralSetupComponent} from './components/science-goals/spectral-setup/
 import {TypeComponent} from './components/science-goals/spectral-setup/type/type.component';
 import {VisualisationComponent} from './components/science-goals/spectral-setup/visualisation/visualisation.component';
 import {TechnicalJustificationComponent} from './components/science-goals/technical-justification/technical-justification.component';
-import {SidenavComponent} from "./components/sidenav/sidenav.component"
+// import {SidenavComponent} from "./components/sidenav/sidenav.component"
 import {AutofocusDirective} from "./directives/autofocus.directive";
 import {DelayTooltipDirective} from './directives/delay-tooltip.directive';
 import {DegreesPipe} from './pipes/degrees.pipe';
@@ -65,7 +65,7 @@ import {ScienceGoalPanelService} from "./services/science-goal-panel.service";
     ProposalComponent,
     RefinePanelComponent,
     ResultsTableComponent,
-    SidenavComponent,
+    // SidenavComponent,
     SourceComponent,
     SourceExpectedPropertiesComponent,
     SpacialImageComponent,
@@ -87,8 +87,8 @@ import {ScienceGoalPanelService} from "./services/science-goal-panel.service";
     DragulaModule,
     FormsModule,
     ReactiveFormsModule,
-    TreeModule,
-    ContextMenuModule,
+    // TreeModule,
+    // ContextMenuModule,
     HttpModule,
     NgbModule.forRoot(),
     //InMemoryWebApiModule.forRoot(InMemoryDataService),

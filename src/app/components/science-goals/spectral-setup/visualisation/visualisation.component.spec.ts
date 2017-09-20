@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VisualisationComponent } from './visualisation.component';
+import {SelectableComponent} from "../../../selectable/selectable.component";
 
 describe('VisualisationComponent', () => {
   let component: VisualisationComponent;
@@ -8,7 +9,9 @@ describe('VisualisationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VisualisationComponent ]
+      declarations: [
+        VisualisationComponent, SelectableComponent
+      ]
     })
     .compileComponents();
   }));

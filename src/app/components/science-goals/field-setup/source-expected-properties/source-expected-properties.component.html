@@ -41,7 +41,7 @@
   </ng-template>
   <label for="peakFluxPerInput"
          class="col-6"
-         ngbTooltip="peakLineTooltipTemplate"
+         [ngbTooltip]="peakLineTooltipTemplate"
          #peakLineTooltip="ngbTooltip"
          [tooltip-delay]="peakLineTooltip">
     Peak Line Flux Density per Synthesized Beam

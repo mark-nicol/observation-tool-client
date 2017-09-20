@@ -1,49 +1,22 @@
 <div class="row">
   <label class="col-5">Spectral Type</label>
   <div class="col-7">
-    <label class="custom-control custom-radio">
-      <input id="lineRadio" name="typeRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Spectral Line</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="contRadio" name="typeRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Single Continuum</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="scanRadio" name="typeRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Spectral Scan</span>
-    </label>
+    <selectable id="lineRadio" name="typeRadios" type="radio">Spectral Line</selectable>
+    <selectable id="contRadio" name="typeRadios" type="radio">Single Continuum</selectable>
+    <selectable id="scanRadio" name="typeRadios" type="radio">Spectral Scan</selectable>
   </div>
 </div>
 <div class="row">
   <label class="col-5">Produce Image Sidebands (Bands 9 and 10 only)</label>
   <div class="col-7">
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-    </label>
+    <selectable type="checkbox"></selectable>
   </div>
 </div>
 <div class="row">
   <label class="col-5">Polarization Products Desired</label>
   <div class="col-7">
-    <label class="custom-control custom-radio">
-      <input id="xxRadio" name="polarRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">XX</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="dualRadio" name="polarRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">DUAL</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="fullRadio" name="polarRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">FULL</span>
-    </label>
+    <selectable id="xxRadio" name="polarRadios" type="radio">XX</selectable>
+    <selectable id="dualRadio" name="polarRadios" type="radio">DUAL</selectable>
+    <selectable id="fullRadio" name="polarRadios" type="radio">FULL</selectable>
   </div>
 </div>

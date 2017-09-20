@@ -46,6 +46,7 @@ import {SexagesimalPipe} from './pipes/sexagesimal.pipe';
 /* Services */
 import {PrimaryInvestigatorService} from "./services/primary-investigator.service";
 import {ScienceGoalPanelService} from "./services/science-goal-panel.service";
+import { SelectableComponent } from './components/selectable/selectable.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import {ScienceGoalPanelService} from "./services/science-goal-panel.service";
     TechnicalJustificationComponent,
     VisualisationComponent,
     TypeComponent,
+    SelectableComponent,
   ],
   imports: [
     BrowserModule,

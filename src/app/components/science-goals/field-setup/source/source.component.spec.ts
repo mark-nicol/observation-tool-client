@@ -6,6 +6,7 @@ import {SexagesimalPipe} from "../../../../pipes/sexagesimal.pipe";
 import {DegreesPipe} from "../../../../pipes/degrees.pipe";
 import {DelayTooltipDirective} from "../../../../directives/delay-tooltip.directive";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {SelectableComponent} from "../../../selectable/selectable.component";
 
 describe('SourceComponent', () => {
   let component: SourceComponent;
@@ -13,7 +14,13 @@ describe('SourceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SourceComponent, SexagesimalPipe, DegreesPipe, DelayTooltipDirective ],
+      declarations: [
+        SourceComponent,
+        SexagesimalPipe,
+        DegreesPipe,
+        DelayTooltipDirective,
+        SelectableComponent
+      ],
       imports: [ FormsModule, NgbModule.forRoot() ]
     })
     .compileComponents();

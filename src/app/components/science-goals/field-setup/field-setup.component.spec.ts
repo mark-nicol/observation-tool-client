@@ -15,6 +15,7 @@ import {BrowserTestingModule} from "@angular/platform-browser/testing";
 import {SexagesimalPipe} from "../../../pipes/sexagesimal.pipe";
 import {DegreesPipe} from "../../../pipes/degrees.pipe";
 import {DelayTooltipDirective} from "../../../directives/delay-tooltip.directive";
+import {SelectableComponent} from "../../selectable/selectable.component";
 
 describe('FieldSetupComponent', () => {
   let component: FieldSetupComponent;
@@ -33,7 +34,8 @@ describe('FieldSetupComponent', () => {
         FieldCenterCoordinatesComponent,
         SexagesimalPipe,
         DegreesPipe,
-        DelayTooltipDirective
+        DelayTooltipDirective,
+        SelectableComponent
       ],
       imports: [DragulaModule, NgbCollapseModule, FormsModule, NgbModule.forRoot()]
     })

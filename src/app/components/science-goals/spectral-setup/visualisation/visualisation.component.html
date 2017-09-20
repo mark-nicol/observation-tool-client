@@ -3,27 +3,10 @@
     <label>Overlays</label>
   </div>
   <div class="col-xl">
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Receiver Bands</span>
-    </label>
-
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Transmission</span>
-    </label>
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">DSB Image</span>
-    </label>
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Spectral Lines</span>
-    </label>
+    <selectable type="checkbox">Receiver Bands</selectable>
+    <selectable type="checkbox">Transmission</selectable>
+    <selectable type="checkbox">DSB Image</selectable>
+    <selectable type="checkbox">Spectral Lines</selectable>
     <button class="btn btn-sm btn-outline-secondary">Select Lines to Overlay</button>
   </div>
 </div>
@@ -32,16 +15,8 @@
     <label>Water Vapour Column Density</label>
   </div>
   <div class="col-xl">
-    <label class="custom-control custom-radio">
-      <input id="automaticRadio" name="radio" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Automatic Choice</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="manualRadio" name="radio" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Manual Choice</span>
-    </label>
+    <selectable id="automaticRadio" name="densityRadios" type="radio">Automatic Choice</selectable>
+    <selectable id="manualRadio" name="densityRadios" type="radio">Manual Choice</selectable>
     <select class="form-control form-control-sm">
       <option *ngFor="let choice of columnDensityChoices">{{choice}}</option>
     </select>

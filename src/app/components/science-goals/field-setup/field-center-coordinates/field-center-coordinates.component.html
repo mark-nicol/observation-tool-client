@@ -5,23 +5,17 @@
   </div>
   <!--Target type radios-->
   <div class="col">
-    <label class="custom-control custom-radio">
-      <input id="relativeRadio"
-             name="coordTypeRadios"
-             type="radio"
-             class="custom-control-input"
-             checked>
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Relative</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="absoluteRadio"
-             name="coordTypeRadios"
-             type="radio"
-             class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Absolute</span>
-    </label>
+    <selectable id="relativeRadio"
+                name="coordTypeRadios"
+                type="radio"
+                checked="true">
+      Relative
+    </selectable>
+    <selectable id="absoluteRadio"
+                name="coordTypeRadios"
+                type="radio">
+      Absolute
+    </selectable>
   </div><!-- div.col -->
 </div><!--div.row-->
 <div class="row">

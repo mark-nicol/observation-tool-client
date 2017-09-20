@@ -5,6 +5,7 @@ import {Component, Input, OnInit} from '@angular/core';
   templateUrl: './selectable.component.html',
   styleUrls: ['./selectable.component.scss']
 })
+
 export class SelectableComponent implements OnInit {
 
   @Input('class')
@@ -18,6 +19,9 @@ export class SelectableComponent implements OnInit {
 
   @Input()
   name: any;
+
+  @Input()
+  checked: boolean;
 
   constructor() { }
 

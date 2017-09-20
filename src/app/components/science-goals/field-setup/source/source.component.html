@@ -14,11 +14,10 @@
 <div class="row">
   <!-- Solar checkbox -->
   <div class="col form-check">
-    <label class="custom-control custom-checkbox">
-      <input #solarCheckbox type="checkbox" class="custom-control-input" (change)="solarCheckboxClicked()">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Choose a Solar System Object?</span>
-    </label>
+    <selectable type="checkbox"
+                (change)="solarCheckboxClicked()">
+      Choose a Solar System Object?
+    </selectable>
   </div>
   <!-- Solar selector -->
   <div class="col">
@@ -43,23 +42,17 @@
   </div>
   <!--Target type radios-->
   <div class="col">
-    <label class="custom-control custom-radio">
-      <input id="indvRadio"
-             name="targetTypeRadios"
-             type="radio"
-             class="custom-control-input"
-             checked>
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Individual Pointing(s)</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="rectRadio"
-             name="targetTypeRadios"
-             type="radio"
-             class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Rectangular Field</span>
-    </label>
+    <selectable id="indvRadio"
+                name="targetTypeRadios"
+                type="radio"
+                checked="true">
+      Individual Pointing(s)
+    </selectable>
+    <selectable id="rectRadio"
+                name="targetTypeRadios"
+                type="radio">
+      Rectangular Field
+    </selectable>
   </div><!-- div.col -->
 </div><!--div.row-->
 

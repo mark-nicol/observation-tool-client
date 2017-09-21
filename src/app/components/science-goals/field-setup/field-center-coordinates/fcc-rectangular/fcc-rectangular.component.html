@@ -1,3 +1,124 @@
-<p>
-  fcc-rectangular works!
-</p>
+<div class="row">
+  <div class="col-md">
+    <system-selector></system-selector>
+  </div>
+  <!-- Lon offset input -->
+  <div class="col-md">
+    <div class="row" style="white-space: nowrap">
+      <label class="col-xl-4 text-xl-right">
+        Offset(Lon)
+      </label>
+      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
+        <input class="form-control form-control-sm"
+               placeholder="0.00000">
+        <select class="input-group-addon form-control-sm">
+          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lat offset input -->
+  <div class="col-md">
+    <div class="row" style="white-space: nowrap">
+      <label class="col-xl-4 text-xl-right">
+        Offset(Lat)
+      </label>
+      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
+        <input class="form-control form-control-sm"
+               placeholder="0.00000">
+        <select class="input-group-addon form-control-sm">
+          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- p length input -->
+  <div class="col-md">
+    <div class="row">
+      <label class="col-xl-4 text-xl-right">
+        p length
+      </label>
+      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
+        <input class="form-control form-control-sm"
+               placeholder="0.00000">
+        <select class="input-group-addon form-control-sm">
+          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- q length input -->
+  <div class="col-md">
+    <div class="row">
+      <label class="col-xl-4 text-xl-right">
+        q length
+      </label>
+      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
+        <input class="form-control form-control-sm"
+               placeholder="0.00000">
+        <select class="input-group-addon form-control-sm">
+          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Position angle -->
+  <div class="col-md">
+    <div class="row" style="white-space: nowrap">
+      <label class="col-xl-4 text-xl-right">
+        Position Angle
+      </label>
+      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
+        <input class="form-control form-control-sm"
+               placeholder="0.00000">
+        <select class="input-group-addon form-control-sm">
+          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <!-- Spacing input -->
+  <div class="col">
+    <div class="row" style="white-space: nowrap">
+      <label class="col-xl-2 text-xl-right">
+        Spacing
+      </label>
+      <div class="col-xl align-self-baseline input-group">
+        <div class="row">
+          <input class="col-md-3 col-lg-3 col-xl-3 form-control form-control-sm"
+                 placeholder="0.51093">
+          <select class="col-md col-lg col-xl input-group-addon form-control-sm">
+            <option>Fraction of antenna beamsize</option>
+            <option>arcsec</option>
+          </select>
+        </div>
+
+      </div>
+      <span class="col-xl pl-0">
+          <button class="btn btn-sm btn-outline-secondary" type="button">Reset to Nyquist</button>
+        </span>
+    </div>
+  </div>
+
+  <!-- Number of pointings -->
+  <div class="col-4">
+    <div class="row" style="white-space: nowrap">
+      <label class="col-xl text-xl-right align-self-baseline"># Pointings</label>
+      <label class="col align-self-baseline">12m Array</label>
+      <label class="col form-control-static align-self-baseline">0</label>
+    </div>
+  </div>
+
+</div>
+
+<button class="btn btn-sm btn-outline-secondary pull-right" type="button">Export</button>

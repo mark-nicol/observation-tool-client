@@ -24,8 +24,6 @@ import {ProjectComponent} from "./components/project/project.component";
 import {ProposalComponent} from "./components/proposal/proposal.component";
 import {CalibrationSetupComponent} from './components/science-goals/calibration-setup/calibration-setup.component';
 import {ControlPerformanceComponent} from './components/science-goals/control-performance/control-performance.component';
-import {FccAbsoluteComponent} from './components/science-goals/field-setup/field-center-coordinates/fcc-absolute/fcc-absolute.component';
-import {FccRelativeComponent} from './components/science-goals/field-setup/field-center-coordinates/fcc-relative/fcc-relative.component';
 import {FieldCenterCoordinatesComponent} from './components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component';
 import {FieldSetupComponent} from './components/science-goals/field-setup/field-setup.component';
 import {FovParametersComponent} from './components/science-goals/field-setup/fov-parameters/fov-parameters.component';

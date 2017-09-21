@@ -145,6 +145,7 @@ export class SourceComponent implements OnInit {
   latInputError = true;
 
   @Output() systemEmitter = new EventEmitter<string[]>();
+  @Output() targetTypeEmitter = new EventEmitter<string>();
 
   constructor() {
   }
@@ -183,6 +184,10 @@ export class SourceComponent implements OnInit {
       this.sexagesimalUnits = false;
     }
     this.systemEmitter.emit([this.systems[this.chosenSystem].lonHeader, this.systems[this.chosenSystem].latHeader]);
+  }
+
+  targetChange(targetType: string) {
+    this.targetTypeEmitter.emit(targetType);
   }
 
 }

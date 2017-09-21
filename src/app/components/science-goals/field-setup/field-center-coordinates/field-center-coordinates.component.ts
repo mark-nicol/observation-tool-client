@@ -12,7 +12,6 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   @Input() targetType: string = 'individual';
   radioValue = 'relative';
 
-
   constructor() {
   }
 

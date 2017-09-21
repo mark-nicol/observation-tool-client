@@ -48,6 +48,7 @@ import {PrimaryInvestigatorService} from "./services/primary-investigator.servic
 import {ScienceGoalPanelService} from "./services/science-goal-panel.service";
 import { FccIndividualComponent } from './components/science-goals/field-setup/field-center-coordinates/fcc-individual/fcc-individual.component';
 import { FccRectangularComponent } from './components/science-goals/field-setup/field-center-coordinates/fcc-rectangular/fcc-rectangular.component';
+import { SystemSelectorComponent } from './components/science-goals/field-setup/system-selector/system-selector.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { FccRectangularComponent } from './components/science-goals/field-setup/
     SelectableComponent,
     FccIndividualComponent,
     FccRectangularComponent,
+    SystemSelectorComponent,
   ],
   imports: [
     BrowserModule,

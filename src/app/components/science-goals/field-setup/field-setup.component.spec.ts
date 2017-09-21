@@ -18,6 +18,7 @@ import {DelayTooltipDirective} from "../../../directives/delay-tooltip.directive
 import {SelectableComponent} from "../../selectable/selectable.component";
 import {FccRectangularComponent} from "./field-center-coordinates/fcc-rectangular/fcc-rectangular.component";
 import {FccIndividualComponent} from "./field-center-coordinates/fcc-individual/fcc-individual.component";
+import {SystemSelectorComponent} from "./system-selector/system-selector.component";
 
 describe('FieldSetupComponent', () => {
   let component: FieldSetupComponent;
@@ -39,7 +40,8 @@ describe('FieldSetupComponent', () => {
         DelayTooltipDirective,
         SelectableComponent,
         FccRectangularComponent,
-        FccIndividualComponent
+        FccIndividualComponent,
+        SystemSelectorComponent
       ],
       imports: [DragulaModule, NgbCollapseModule, FormsModule, NgbModule.forRoot()]
     })

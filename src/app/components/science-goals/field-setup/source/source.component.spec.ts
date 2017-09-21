@@ -7,6 +7,7 @@ import {DegreesPipe} from "../../../../pipes/degrees.pipe";
 import {DelayTooltipDirective} from "../../../../directives/delay-tooltip.directive";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SelectableComponent} from "../../../selectable/selectable.component";
+import {SystemSelectorComponent} from "../system-selector/system-selector.component";
 
 describe('SourceComponent', () => {
   let component: SourceComponent;
@@ -19,7 +20,8 @@ describe('SourceComponent', () => {
         SexagesimalPipe,
         DegreesPipe,
         DelayTooltipDirective,
-        SelectableComponent
+        SelectableComponent,
+        SystemSelectorComponent
       ],
       imports: [ FormsModule, NgbModule.forRoot() ]
     })

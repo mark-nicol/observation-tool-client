@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SystemSelectorComponent } from './system-selector.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {DelayTooltipDirective} from "../../../../directives/delay-tooltip.directive";
+import {FormsModule} from "@angular/forms";
 
 describe('SystemSelectorComponent', () => {
   let component: SystemSelectorComponent;
@@ -8,7 +11,8 @@ describe('SystemSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SystemSelectorComponent ]
+      declarations: [ SystemSelectorComponent, DelayTooltipDirective ],
+      imports: [NgbModule.forRoot(), FormsModule]
     })
     .compileComponents();
   }));

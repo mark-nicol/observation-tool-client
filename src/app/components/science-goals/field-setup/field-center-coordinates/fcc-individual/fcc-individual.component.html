@@ -1,0 +1,87 @@
+<div class="row">
+  <label for="offsetSelector"
+         class="col"
+         ngbTooltip="Unit of offset pointings"
+         #offsetTooltip="ngbTooltip"
+         [tooltip-delay]="offsetTooltip">
+    Offset Unit
+  </label>
+  <select id="offsetSelector"
+          class="col form-control form-control-sm"
+          [(ngModel)]="selectedUnits"
+          [disabled]="radioValue === 'absolute'">
+    <option *ngFor="let unit of offsetUnits"
+            value="{{unit}}"
+            (selcted)="unit === 'mas'">
+      {{unit}}
+    </option>
+  </select>
+</div>
+<div class="row">
+  <label class="col"
+         ngbTooltip="Number of pointings in this field"
+         #pointingsLableTooltip="ngbTooltip"
+         [tooltip-delay]="pointingsLableTooltip">
+    # Pointings
+  </label>
+  <p class="col form-control-static">{{rows.length}}</p>
+</div>
+<div class="row">
+  <table class="table table-sm">
+    <thead>
+      <tr *ngIf="radioValue == 'relative'"
+          ngbTooltip="Coordinate offsets for each pointing">
+        <th>{{tableHeaders[0]}} [{{selectedUnits}}]</th>
+        <th>{{tableHeaders[1]}} [{{selectedUnits}}]</th>
+      </tr>
+      <tr *ngIf="radioValue == 'absolute'">
+        <th>{{tableHeaders[0]}}</th>
+        <th>{{tableHeaders[1]}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows"
+          (keyup.enter)="log('enter')">
+        <td contenteditable (blur)="log('blur')">
+          {{radioValue == 'absolute' ? (row.lon | sexagesimal) : (row.lon | degrees)}}
+        </td>
+        <td contenteditable>
+          {{radioValue == 'absolute' ? (row.lat | sexagesimal) : (row.lat | degrees)}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row justify-content-center">
+  <div class="btn-group"
+       role="group">
+    <button class="btn btn-outline-secondary"
+            (click)="addRow()"
+            ngbTooltip="Add a pointing"
+            #addButtonTooltip="ngbTooltip"
+            placement="left"
+            [tooltip-delay]="addButtonTooltip">
+      <i class="fa fa-plus"></i>
+    </button>
+    <button class="btn btn-outline-secondary"
+            (click)="removeRow()"
+            ngbTooltip="Remove a pointing"
+            #removeButtonTooltip="ngbTooltip"
+            [tooltip-delay]="removeButtonTooltip">
+      <i class="fa fa-minus"></i>
+    </button>
+    <button class="btn btn-outline-secondary"
+            ngbTooltip="Import pointings"
+            #importButtonTooltip="ngbTooltip"
+            [tooltip-delay]="importButtonTooltip">
+      <i class="fa fa-download"></i>
+    </button>
+    <button class="btn btn-outline-secondary"
+            ngbTooltip="Export current pointings"
+            #exportButtonTooltip="ngbTooltip"
+            placement="right"
+            [tooltip-delay]="exportButtonTooltip">
+      <i class="fa fa-upload"></i>
+    </button>
+  </div>
+</div>

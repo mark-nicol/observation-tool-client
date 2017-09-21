@@ -7,6 +7,8 @@ import {DegreesPipe} from "../../../../pipes/degrees.pipe";
 import {DelayTooltipDirective} from "../../../../directives/delay-tooltip.directive";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SelectableComponent} from "../../../selectable/selectable.component";
+import {FccIndividualComponent} from "./fcc-individual/fcc-individual.component";
+import {FccRectangularComponent} from "./fcc-rectangular/fcc-rectangular.component";
 
 describe('FieldCenterCoordinatesComponent', () => {
   let component: FieldCenterCoordinatesComponent;
@@ -19,7 +21,9 @@ describe('FieldCenterCoordinatesComponent', () => {
         SexagesimalPipe,
         DegreesPipe,
         DelayTooltipDirective,
-        SelectableComponent
+        SelectableComponent,
+        FccIndividualComponent,
+        FccRectangularComponent
       ],
       imports: [FormsModule, NgbModule.forRoot()],
     })

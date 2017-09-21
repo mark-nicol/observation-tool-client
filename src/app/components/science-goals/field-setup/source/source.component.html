@@ -42,17 +42,29 @@
   </div>
   <!--Target type radios-->
   <div class="col">
-    <selectable id="indvRadio"
-                name="targetTypeRadios"
-                type="radio"
-                checked="true">
-      Individual Pointing(s)
-    </selectable>
-    <selectable id="rectRadio"
-                name="targetTypeRadios"
-                type="radio">
-      Rectangular Field
-    </selectable>
+    <label class="custom-control custom-radio">
+      <input #indvRadio
+             id="indvRadio"
+             name="targetTypeRadios"
+             type="radio"
+             class="custom-control-input"
+             value="individual"
+             (change)="targetChange(indvRadio.value)"
+             checked>
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Individual Pointing(s)</span>
+    </label>
+    <label class="custom-control custom-radio">
+      <input #rectRadio
+             id="rectRadio"
+             name="targetTypeRadios"
+             type="radio"
+             class="custom-control-input"
+             value="rectangular"
+             (change)="targetChange(rectRadio.value)">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Rectangular Field</span>
+    </label>
   </div><!-- div.col -->
 </div><!--div.row-->
 

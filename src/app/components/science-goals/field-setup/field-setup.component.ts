@@ -11,6 +11,7 @@ import {ScienceGoalPanelService} from "../../../services/science-goal-panel.serv
 
 export class FieldSetupComponent extends ScienceGoalPage{
 
+  targetType: string;
   tableHeaders: string[];
   panel: any;
 
@@ -18,12 +19,12 @@ export class FieldSetupComponent extends ScienceGoalPage{
     super(scienceGoalPanelService, 'fieldSetup');
   }
 
-  // hiddenChange(event) {
-  //   this.scienceGoalPanelService.hiddenChange('fieldSetup', event);
-  // }
-
   setHeaders(headers: string[]) {
     this.tableHeaders = headers;
+  }
+
+  setTargetType(targetType: string) {
+    this.targetType = targetType;
   }
 
 }

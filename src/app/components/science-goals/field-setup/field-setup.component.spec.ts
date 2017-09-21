@@ -16,6 +16,8 @@ import {SexagesimalPipe} from "../../../pipes/sexagesimal.pipe";
 import {DegreesPipe} from "../../../pipes/degrees.pipe";
 import {DelayTooltipDirective} from "../../../directives/delay-tooltip.directive";
 import {SelectableComponent} from "../../selectable/selectable.component";
+import {FccRectangularComponent} from "./field-center-coordinates/fcc-rectangular/fcc-rectangular.component";
+import {FccIndividualComponent} from "./field-center-coordinates/fcc-individual/fcc-individual.component";
 
 describe('FieldSetupComponent', () => {
   let component: FieldSetupComponent;
@@ -35,7 +37,9 @@ describe('FieldSetupComponent', () => {
         SexagesimalPipe,
         DegreesPipe,
         DelayTooltipDirective,
-        SelectableComponent
+        SelectableComponent,
+        FccRectangularComponent,
+        FccIndividualComponent
       ],
       imports: [DragulaModule, NgbCollapseModule, FormsModule, NgbModule.forRoot()]
     })

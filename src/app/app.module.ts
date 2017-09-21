@@ -1,5 +1,5 @@
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgModule} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http"
 /* Modules */
 import {BrowserModule} from '@angular/platform-browser';
@@ -32,12 +32,12 @@ import {SourceExpectedPropertiesComponent} from './components/science-goals/fiel
 import {SourceComponent} from './components/science-goals/field-setup/source/source.component';
 import {SpacialImageComponent} from './components/science-goals/field-setup/spacial-image/spacial-image.component';
 import {GeneralComponent} from './components/science-goals/general/general.component';
-import {ScienceGoalPage} from './models/science-goal-page';
 import {ScienceGoalComponent} from './components/science-goals/science-goal.component';
 import {SpectralSetupComponent} from './components/science-goals/spectral-setup/spectral-setup.component';
 import {TypeComponent} from './components/science-goals/spectral-setup/type/type.component';
 import {VisualisationComponent} from './components/science-goals/spectral-setup/visualisation/visualisation.component';
 import {TechnicalJustificationComponent} from './components/science-goals/technical-justification/technical-justification.component';
+import {SelectableComponent} from './components/selectable/selectable.component';
 // import {SidenavComponent} from "./components/sidenav/sidenav.component"
 import {AutofocusDirective} from "./directives/autofocus.directive";
 import {DelayTooltipDirective} from './directives/delay-tooltip.directive';
@@ -46,7 +46,8 @@ import {SexagesimalPipe} from './pipes/sexagesimal.pipe';
 /* Services */
 import {PrimaryInvestigatorService} from "./services/primary-investigator.service";
 import {ScienceGoalPanelService} from "./services/science-goal-panel.service";
-import { SelectableComponent } from './components/selectable/selectable.component';
+import { FccIndividualComponent } from './components/science-goals/field-setup/field-center-coordinates/fcc-individual/fcc-individual.component';
+import { FccRectangularComponent } from './components/science-goals/field-setup/field-center-coordinates/fcc-rectangular/fcc-rectangular.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,8 @@ import { SelectableComponent } from './components/selectable/selectable.componen
     VisualisationComponent,
     TypeComponent,
     SelectableComponent,
+    FccIndividualComponent,
+    FccRectangularComponent,
   ],
   imports: [
     BrowserModule,

@@ -15,7 +15,6 @@ export class FccIndividualComponent implements OnInit {
       lon: '0'
     }
   ];
-
   selectedUnits = 'mas';
   offsetUnits = [
     'mas',

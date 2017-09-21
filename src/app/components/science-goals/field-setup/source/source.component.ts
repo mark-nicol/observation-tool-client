@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'field-source',
@@ -32,136 +32,57 @@ export class SourceComponent implements OnInit {
     'Vesta',
     'Ephemeris'
   ];
-
-  sexagesimalDisabled = false;
-  systemKeys = Object.keys;
-  systems: {
-    [id: string]: {
-      sexagesimalLabels: {
-        latLabel: string,
-        lonLabel: string
-      },
-      normalLabels: {
-        latLabel: string,
-        lonLabel: string
-      },
-      latPlaceholder: string,
-      lonPlaceholder: string,
-      lonHeader: string,
-      latHeader: string
-    }
-  } = {
-    'ICRS': {
-      sexagesimalLabels: {
-        latLabel: 'Dec',
-        lonLabel: 'RA',
-      },
-      normalLabels: {
-        latLabel: 'Dec(deg)',
-        lonLabel: 'RA(deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Dec'
-    },
-    'FK5 J2000': {
-      sexagesimalLabels: {
-        latLabel: 'Dec',
-        lonLabel: 'RA',
-      },
-      normalLabels: {
-        latLabel: 'Dec(deg)',
-        lonLabel: 'RA(deg)'
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Dec'
-    },
-    'galactic': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Lat(deg)',
-        lonLabel: 'Lon(deg)',
-      },
-      latPlaceholder: '-60.18855219',
-      lonPlaceholder: '96.33728304',
-      lonHeader: 'Lon',
-      latHeader: 'Lat',
-    },
-    'eliptic': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Lat (deg)',
-        lonLabel: 'Lon (deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Deg'
-    },
-    'horizon': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Alt(deg)',
-        lonLabel: 'Az(deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Deg'
-    },
-    'azel': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Alt(deg)',
-        lonLabel: 'Az(deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Deg'
-    }
-  };
-  chosenSystem = 'ICRS';
   showSourceCoords = true;
-  sexagesimalUnits = false;
   lonInputValue: any;
   lonInputError = true;
   latInputValue: any;
   latInputError = true;
+  sexagesimalUnits = false;
+  chosenSystem: {
+    sexagesimalLabels: {
+      latLabel: string,
+      lonLabel: string
+    },
+    normalLabels: {
+      latLabel: string,
+      lonLabel: string
+    },
+    latPlaceholder: string,
+    lonPlaceholder: string,
+    lonHeader: string,
+    latHeader: string
+  } = {
+    sexagesimalLabels: {
+      latLabel: 'Dec',
+      lonLabel: 'RA',
+    },
+    normalLabels: {
+      latLabel: 'Dec(deg)',
+      lonLabel: 'RA(deg)',
+    },
+    latPlaceholder: '0',
+    lonPlaceholder: '0',
+    lonHeader: 'RA',
+    latHeader: 'Dec'
+  };
 
-  @Output() systemEmitter = new EventEmitter<string[]>();
   @Output() targetTypeEmitter = new EventEmitter<string>();
+  @Output() tableHeaderEmitter = new EventEmitter<string[]>();
 
   constructor() {
   }
 
   ngOnInit() {
-    this.systemEmitter.emit([this.systems[this.chosenSystem].lonHeader, this.systems[this.chosenSystem].latHeader]);
+    this.targetChange('individual');
   }
 
-  unfocus(event) {
+  unfocus(event): void {
     let active = document.activeElement;
     try {
       if (active != event.target)
         (active as HTMLElement).blur();
     } catch (TypeError) {
     }
-
   }
 
   solarCheckboxClicked() {
@@ -176,18 +97,17 @@ export class SourceComponent implements OnInit {
     }
   }
 
-  systemChange() {
-    if (this.chosenSystem == 'ICRS' || this.chosenSystem == 'FK5 J2000') {
-      this.sexagesimalDisabled = false;
-    } else {
-      this.sexagesimalDisabled = true;
-      this.sexagesimalUnits = false;
-    }
-    this.systemEmitter.emit([this.systems[this.chosenSystem].lonHeader, this.systems[this.chosenSystem].latHeader]);
-  }
-
   targetChange(targetType: string) {
     this.targetTypeEmitter.emit(targetType);
+  }
+
+  sexagesimalChange(units: boolean) {
+    this.sexagesimalUnits = units;
+  }
+
+  systemChange(system: any) {
+    this.chosenSystem = system;
+    this.tableHeaderEmitter.emit([this.chosenSystem.latHeader, this.chosenSystem.lonHeader]);
   }
 
 }

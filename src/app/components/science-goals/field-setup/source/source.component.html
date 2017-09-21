@@ -78,39 +78,41 @@
   <div class="row">
     <!-- System Selector -->
     <div class="col-md">
-      <div class="row">
-        <label class="col-xl-4 text-xl-right"
-               for="systemSelector"
-               ngbTooltip="Coordinate system type"
-               #systemSelectorTooltip="ngbTooltip"
-               [tooltip-delay]="systemSelectorTooltip">
-          System
-        </label>
-        <div class="col-xl-8 pl-0 pr-0 input-group align-self-baseline ">
-          <select id="systemSelector"
-                  class="form-control form-control-sm"
-                  [(ngModel)]="chosenSystem"
-                  (ngModelChange)="systemChange()">
-            <option *ngFor="let system of systemKeys(systems)"
-                    [value]="system">
-              {{system}}
-            </option>
-          </select>
-          <label class="input-group-addon custom-control custom-checkbox mr-0"
-                 placement="right"
-                 ngbTooltip="Sexagesimal display"
-                 #sexagesimalCheckboxTooltip="ngbTooltip"
-                 [tooltip-delay]="sexagesimalCheckboxTooltip">
-            <input id="sexagesimalCheck"
-                   class="custom-control-input"
-                   type="checkbox"
-                   title="sexagesimal checkbox"
-                   [(ngModel)]="sexagesimalUnits"
-                   [disabled]="sexagesimalDisabled">
-            <span class="custom-control-indicator ml-2 mt-1"></span>
-          </label>
-        </div>
-      </div>
+      <!--<div class="row">-->
+        <!--<label class="col-xl-4 text-xl-right"-->
+               <!--for="systemSelector"-->
+               <!--ngbTooltip="Coordinate system type"-->
+               <!--#systemSelectorTooltip="ngbTooltip"-->
+               <!--[tooltip-delay]="systemSelectorTooltip">-->
+          <!--System-->
+        <!--</label>-->
+        <!--<div class="col-xl-8 pl-0 pr-0 input-group align-self-baseline ">-->
+          <!--<select id="systemSelector"-->
+                  <!--class="form-control form-control-sm"-->
+                  <!--[(ngModel)]="chosenSystem"-->
+                  <!--(ngModelChange)="systemChange()">-->
+            <!--<option *ngFor="let system of systemKeys(systems)"-->
+                    <!--[value]="system">-->
+              <!--{{system}}-->
+            <!--</option>-->
+          <!--</select>-->
+          <!--<label class="input-group-addon custom-control custom-checkbox mr-0"-->
+                 <!--placement="right"-->
+                 <!--ngbTooltip="Sexagesimal display"-->
+                 <!--#sexagesimalCheckboxTooltip="ngbTooltip"-->
+                 <!--[tooltip-delay]="sexagesimalCheckboxTooltip">-->
+            <!--<input id="sexagesimalCheck"-->
+                   <!--class="custom-control-input"-->
+                   <!--type="checkbox"-->
+                   <!--title="sexagesimal checkbox"-->
+                   <!--[(ngModel)]="sexagesimalUnits"-->
+                   <!--[disabled]="sexagesimalDisabled">-->
+            <!--<span class="custom-control-indicator ml-2 mt-1"></span>-->
+          <!--</label>-->
+        <!--</div>-->
+      <!--</div>-->
+      <system-selector (systemEmitter)="systemChange($event)"
+                       (sexagesimalEmitter)="sexagesimalChange($event)"></system-selector>
     </div>
     <!-- Lat input -->
     <div class="col-md">
@@ -121,8 +123,8 @@
                #latInputTooltip="ngbTooltip"
                [tooltip-delay]="latInputTooltip">
           {{sexagesimalUnits ?
-          systems[chosenSystem].sexagesimalLabels.latLabel :
-          systems[chosenSystem].normalLabels.latLabel}}
+          chosenSystem.sexagesimalLabels.latLabel :
+          chosenSystem.normalLabels.latLabel}}
         </label>
         <input #latInput
                id="latInput"
@@ -132,8 +134,8 @@
                (blur)="setLatLon(latInput.value, latInput)"
                placeholder="{{
             sexagesimalUnits ?
-            (systems[chosenSystem].latPlaceholder | sexagesimal) :
-            (systems[chosenSystem].latPlaceholder | degrees)
+            (chosenSystem.latPlaceholder | sexagesimal) :
+            (chosenSystem.latPlaceholder | degrees)
              }}">
       </div>
     </div>
@@ -148,8 +150,8 @@
                #lonInputTooltip="ngbTooltip"
                [tooltip-delay]="lonInputTooltip">
           {{sexagesimalUnits ?
-          systems[chosenSystem].sexagesimalLabels.lonLabel :
-          systems[chosenSystem].normalLabels.lonLabel
+          chosenSystem.sexagesimalLabels.lonLabel :
+          chosenSystem.normalLabels.lonLabel
           }}</label>
         <input #lonInput
                id="lonInput"
@@ -159,8 +161,8 @@
                (blur)="setLatLon(lonInput.value, lonInput)"
                placeholder="{{
             sexagesimalUnits ?
-            (systems[chosenSystem].lonPlaceholder | sexagesimal) :
-            (systems[chosenSystem].lonPlaceholder | degrees)
+            (chosenSystem.lonPlaceholder | sexagesimal) :
+            (chosenSystem.lonPlaceholder | degrees)
           }}">
       </div>
     </div>

@@ -8,8 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class FccIndividualComponent implements OnInit {
 
   @Input() tableHeaders: string[] = ['', ''];
-  @Input()
-  radioValue = 'relative';
+  @Input() radioValue = 'relative';
   rows = [
     {
       lat: '0',

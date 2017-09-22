@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
+import {FieldSetupService} from "../../../../services/field-setup.service";
 
 @Component({
   selector: 'field-source',
@@ -8,6 +9,8 @@ import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core'
 
 })
 export class SourceComponent implements OnInit {
+
+  pageData = {};
 
   solarBodies = [
     '',
@@ -69,7 +72,8 @@ export class SourceComponent implements OnInit {
   @Output() targetTypeEmitter = new EventEmitter<string>();
   @Output() tableHeaderEmitter = new EventEmitter<string[]>();
 
-  constructor() {
+  constructor(private fieldSetupService: FieldSetupService) {
+    fieldSetupService.getPageData('source').subscribe(data => console.log(data));
   }
 
   ngOnInit() {

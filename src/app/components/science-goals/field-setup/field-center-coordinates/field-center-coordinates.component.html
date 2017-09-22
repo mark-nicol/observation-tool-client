@@ -29,7 +29,8 @@
   </div><!-- div.col -->
 </div><!--div.row-->
 
-<div class="row" *ngIf="(targetType==='individual'); then individualComponent; else rectangularComponent"></div>
+<div class="row"
+     *ngIf="(this.targetType ==='individual'); then individualComponent; else rectangularComponent"></div>
 <ng-template #individualComponent>
   <fcc-individual [radioValue]="radioValue"
                   [tableHeaders]="tableHeaders"></fcc-individual>

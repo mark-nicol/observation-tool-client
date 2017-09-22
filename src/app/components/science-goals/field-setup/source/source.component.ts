@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
 import {FieldSetupService} from "../../../../services/field-setup.service";
+import {SourceComponentInterface} from "../../../../models/source.interface";
+import {CoordSystem} from "../../../../models/coord-system.interface";
 
 @Component({
   selector: 'field-source',
@@ -10,7 +12,7 @@ import {FieldSetupService} from "../../../../services/field-setup.service";
 })
 export class SourceComponent implements OnInit {
 
-  pageData = {};
+  pageData: SourceComponentInterface;
 
   solarBodies = [
     '',
@@ -41,43 +43,16 @@ export class SourceComponent implements OnInit {
   latInputValue: any;
   latInputError = true;
   sexagesimalUnits = false;
-  chosenSystem: {
-    sexagesimalLabels: {
-      latLabel: string,
-      lonLabel: string
-    },
-    normalLabels: {
-      latLabel: string,
-      lonLabel: string
-    },
-    latPlaceholder: string,
-    lonPlaceholder: string,
-    lonHeader: string,
-    latHeader: string
-  } = {
-    sexagesimalLabels: {
-      latLabel: 'Dec',
-      lonLabel: 'RA',
-    },
-    normalLabels: {
-      latLabel: 'Dec(deg)',
-      lonLabel: 'RA(deg)',
-    },
-    latPlaceholder: '0',
-    lonPlaceholder: '0',
-    lonHeader: 'RA',
-    latHeader: 'Dec'
-  };
+  chosenSystem: CoordSystem;
 
   @Output() targetTypeEmitter = new EventEmitter<string>();
   @Output() tableHeaderEmitter = new EventEmitter<string[]>();
 
   constructor(private fieldSetupService: FieldSetupService) {
-    fieldSetupService.getPageData('source').subscribe(data => console.log(data));
+    fieldSetupService.getPageData('source').subscribe(data => this.pageData = data);
   }
 
   ngOnInit() {
-    this.targetChange('rectangular');
   }
 
   unfocus(event): void {
@@ -90,7 +65,7 @@ export class SourceComponent implements OnInit {
   }
 
   solarCheckboxClicked() {
-    this.showSourceCoords = !this.showSourceCoords;
+    this.pageData.solarSystemObject = !this.pageData.solarSystemObject;
   }
 
   setLatLon(value, element) {

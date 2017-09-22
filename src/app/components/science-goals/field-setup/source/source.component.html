@@ -27,7 +27,9 @@
         Name of Object
       </label>
       <select id="solarSystemSelector"
-              class="col form-control form-control-sm ml-2">
+              class="col form-control form-control-sm ml-2"
+              [disabled]="!pageData.solarSystemObject"
+              [value]="pageData.chosenSolarObject">
         <option *ngFor="let body of solarBodies">{{body}}</option>
       </select>
     </div><!--div.row-->
@@ -50,7 +52,7 @@
              class="custom-control-input"
              value="individual"
              (change)="targetChange(indvRadio.value)"
-             checked>
+             [checked]="pageData.targetType === indvRadio.value">
       <span class="custom-control-indicator"></span>
       <span class="custom-control-description">Individual Pointing(s)</span>
     </label>
@@ -62,7 +64,7 @@
              class="custom-control-input"
              value="rectangular"
              (change)="targetChange(rectRadio.value)"
-             checked>
+             [checked]="pageData.targetType === rectRadio.value">
       <span class="custom-control-indicator"></span>
       <span class="custom-control-description">Rectangular Field</span>
     </label>
@@ -70,7 +72,7 @@
 </div><!--div.row-->
 
 <div class="form-group"
-     *ngIf="showSourceCoords">
+     *ngIf="!pageData.solarSystemObject">
   <!-- Label -->
   <div class="row">
     <h6>Source Coordinates</h6>
@@ -79,7 +81,8 @@
   <div class="row">
     <!-- System Selector -->
     <div class="col-md">
-      <system-selector (systemEmitter)="systemChange($event)"
+      <system-selector [chosenSystem]="pageData.chosenSystem"
+                       (systemEmitter)="systemChange($event)"
                        (sexagesimalEmitter)="sexagesimalChange($event)"></system-selector>
     </div>
     <!-- Lat input -->
@@ -90,14 +93,14 @@
                ngbTooltip="The latitude of the source"
                #latInputTooltip="ngbTooltip"
                [tooltip-delay]="latInputTooltip">
-          {{sexagesimalUnits ?
+          {{pageData.sexagesimalUnits ?
           chosenSystem.sexagesimalLabels.latLabel :
           chosenSystem.normalLabels.latLabel}}
         </label>
         <input #latInput
                id="latInput"
                class="col-xl-8 align-self-baseline form-control form-control-sm"
-               [ngModel]="sexagesimalUnits && latInputValue ? (latInputValue | sexagesimal) : (latInputValue | degrees)"
+               [ngModel]="pageData.sexagesimalUnits && latInputValue ? (latInputValue | sexagesimal) : (latInputValue | degrees)"
                (keyup.enter)="setLatLon(latInput.value, latInput)"
                (blur)="setLatLon(latInput.value, latInput)"
                placeholder="{{

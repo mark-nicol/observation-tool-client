@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {FieldSetupService} from "../../../../services/field-setup.service";
+import {FieldCentreCoordinatesInterface} from "../../../../models/field-centre-coordinates.interface";
 
 @Component({
   selector: 'field-center-coordinates',
@@ -12,7 +14,10 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   @Input() targetType: string = 'individual';
   radioValue = 'relative';
 
-  constructor() {
+  data: FieldCentreCoordinatesInterface;
+
+  constructor(private fieldSetupService: FieldSetupService) {
+    fieldSetupService.getPageData('fieldCentreCoorinates').subscribe(res => this.data = res);
   }
 
   ngOnInit() {

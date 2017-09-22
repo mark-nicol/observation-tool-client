@@ -10,6 +10,7 @@ import {SelectableComponent} from "../../../selectable/selectable.component";
 import {FccIndividualComponent} from "./fcc-individual/fcc-individual.component";
 import {FccRectangularComponent} from "./fcc-rectangular/fcc-rectangular.component";
 import {SystemSelectorComponent} from "../system-selector/system-selector.component";
+import {FieldSetupService} from "../../../../services/field-setup.service";
 
 describe('FieldCenterCoordinatesComponent', () => {
   let component: FieldCenterCoordinatesComponent;
@@ -28,6 +29,7 @@ describe('FieldCenterCoordinatesComponent', () => {
         SystemSelectorComponent
       ],
       imports: [FormsModule, NgbModule.forRoot()],
+      providers: [FieldSetupService]
     })
     .compileComponents();
   }));

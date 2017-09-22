@@ -19,6 +19,7 @@ import {SelectableComponent} from "../../selectable/selectable.component";
 import {FccRectangularComponent} from "./field-center-coordinates/fcc-rectangular/fcc-rectangular.component";
 import {FccIndividualComponent} from "./field-center-coordinates/fcc-individual/fcc-individual.component";
 import {SystemSelectorComponent} from "./system-selector/system-selector.component";
+import {FieldSetupService} from "../../../services/field-setup.service";
 
 describe('FieldSetupComponent', () => {
   let component: FieldSetupComponent;
@@ -43,7 +44,8 @@ describe('FieldSetupComponent', () => {
         FccIndividualComponent,
         SystemSelectorComponent
       ],
-      imports: [DragulaModule, NgbCollapseModule, FormsModule, NgbModule.forRoot()]
+      imports: [DragulaModule, NgbCollapseModule, FormsModule, NgbModule.forRoot()],
+      providers: [FieldSetupService]
     })
       .compileComponents();
   }));

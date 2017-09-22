@@ -8,6 +8,7 @@ import {DelayTooltipDirective} from "../../../../directives/delay-tooltip.direct
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SelectableComponent} from "../../../selectable/selectable.component";
 import {SystemSelectorComponent} from "../system-selector/system-selector.component";
+import {FieldSetupService} from "../../../../services/field-setup.service";
 
 describe('SourceComponent', () => {
   let component: SourceComponent;
@@ -23,7 +24,8 @@ describe('SourceComponent', () => {
         SelectableComponent,
         SystemSelectorComponent
       ],
-      imports: [ FormsModule, NgbModule.forRoot() ]
+      imports: [ FormsModule, NgbModule.forRoot() ],
+      providers: [FieldSetupService]
     })
     .compileComponents();
   }));

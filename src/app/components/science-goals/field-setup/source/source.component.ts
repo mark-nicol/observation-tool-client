@@ -73,7 +73,7 @@ export class SourceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.targetChange('individual');
+    this.targetChange('rectangular');
   }
 
   unfocus(event): void {

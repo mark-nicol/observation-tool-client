@@ -10,6 +10,14 @@ export class FccRectangularComponent implements OnInit {
   @Input()
   radioValue = 'relative';
 
+  offsetUnits = [
+    'mas',
+    'arcsec',
+    'arcmin',
+    'deg',
+    'rad'
+  ];
+
   constructor() { }
 
   ngOnInit() {

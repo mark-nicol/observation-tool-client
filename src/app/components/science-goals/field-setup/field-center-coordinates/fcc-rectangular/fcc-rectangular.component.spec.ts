@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FccRectangularComponent } from './fcc-rectangular.component';
+import {SystemSelectorComponent} from "../../system-selector/system-selector.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {DelayTooltipDirective} from "../../../../../directives/delay-tooltip.directive";
+import {FormsModule} from "@angular/forms";
 
 describe('FccRectangularComponent', () => {
   let component: FccRectangularComponent;
@@ -8,7 +12,8 @@ describe('FccRectangularComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FccRectangularComponent ]
+      declarations: [ FccRectangularComponent, SystemSelectorComponent, DelayTooltipDirective ],
+      imports: [NgbModule.forRoot(), FormsModule]
     })
     .compileComponents();
   }));

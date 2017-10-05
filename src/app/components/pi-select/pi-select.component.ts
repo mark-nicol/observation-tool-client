@@ -39,8 +39,7 @@ export class PiSelectComponent implements OnInit {
       result = this.piService.newSearch(variant, string);
     else
       result = this.piService.search(variant, string);
-
-    result.subscribe(response => this.results = response, (error) =>  console.log(error),() => this.isSearching = false);
+    result.subscribe(response => this.results = response.json(), (error) =>  console.log(error),() => this.isSearching = false);
   }
 
 }

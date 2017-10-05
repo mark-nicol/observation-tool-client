@@ -10,7 +10,7 @@ import {Observable} from "rxjs/Observable";
 
 export class ResultsTableComponent implements OnInit {
 
-  @Input() searchResults: Observable<any>;
+  @Input() searchResults: Observable<PrimaryInvestigator[]>;
   @Input() isSearching: boolean;
   selectedPi: PrimaryInvestigator;
 

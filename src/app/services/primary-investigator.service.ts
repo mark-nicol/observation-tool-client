@@ -1,6 +1,5 @@
-import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
-import {Headers, RequestOptions, URLSearchParams} from "@angular/http";
+import {Headers, Http, RequestOptions, URLSearchParams} from "@angular/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/toPromise";
 
@@ -10,7 +9,7 @@ export class PrimaryInvestigatorService {
   private piUrl = 'https://cycle-5.asa.alma.cl/ObsprepSubmissionService/UserLookup?action=MatchStrings';
   private searchParams: URLSearchParams;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: Http) {
     this.searchParams = new URLSearchParams();
   }
 

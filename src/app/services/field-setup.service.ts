@@ -28,12 +28,8 @@ export class FieldSetupService {
     return data;
   }
 
-  getItem(key: string, item: string) {
-    let data: Observable<any>;
-    let subject = <BehaviorSubject<any>> new BehaviorSubject({});
-    data = subject.asObservable();
-    subject.next(this.dataStore.data[key]);
-    return data;
+  getItem(key: string, item: string): any {
+    return this.dataStore.data[key][item];
   }
 
 }

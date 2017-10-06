@@ -30,10 +30,10 @@
 </div><!--div.row-->
 
 <div class="row"
-     *ngIf="(this.targetType ==='individual'); then individualComponent; else rectangularComponent"></div>
+     *ngIf="(_fieldSetupService.getItem('source', 'targetType') === 'individual'); then individualComponent; else rectangularComponent"></div>
 <ng-template #individualComponent>
   <fcc-individual [radioValue]="radioValue"
-                  [tableHeaders]="tableHeaders"></fcc-individual>
+                  [data]="data.individual"></fcc-individual>
 </ng-template>
 <ng-template #rectangularComponent>
   <fcc-rectangular [radioValue]="radioValue"></fcc-rectangular>

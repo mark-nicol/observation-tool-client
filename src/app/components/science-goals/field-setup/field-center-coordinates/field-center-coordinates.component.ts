@@ -10,13 +10,15 @@ import {FieldCentreCoordinatesInterface} from "../../../../models/field-centre-c
 export class FieldCenterCoordinatesComponent implements OnInit {
 
 
-  @Input() tableHeaders: string[] = ['', ''];
-  @Input() targetType: string = 'individual';
+  // @Input() tableHeaders: string[] = ['', ''];
+  // @Input() targetType: string = 'individual';
   radioValue = 'relative';
 
   data: FieldCentreCoordinatesInterface;
+  _fieldSetupService: FieldSetupService;
 
   constructor(private fieldSetupService: FieldSetupService) {
+    this._fieldSetupService = fieldSetupService;
     fieldSetupService.getPageData('fieldCentreCoordinates').subscribe(res => this.data = res);
   }
 

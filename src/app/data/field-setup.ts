@@ -17,7 +17,7 @@ export const FIELD_SETUP = {
     solarSystemObject: false,
     chosenSolarObject: 'Mercury',
     targetType: 'individual',
-    chosenSystem: 'ICRS',
+    chosenSystem: 'ICRS', /*TODO change to object*/
     sexagesimalUnits: false,
     lat: 0.00000,
     lon: 0.00000,

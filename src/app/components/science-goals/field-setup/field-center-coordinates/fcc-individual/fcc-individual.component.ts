@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {FieldSetupService} from "../../../../../services/field-setup.service";
 
 @Component({
   selector: 'fcc-individual',
@@ -9,12 +10,6 @@ export class FccIndividualComponent implements OnInit {
 
   @Input() tableHeaders: string[] = ['', ''];
   @Input() radioValue = 'relative';
-  rows = [
-    {
-      lat: '0',
-      lon: '0'
-    }
-  ];
   selectedUnits = 'mas';
   offsetUnits = [
     'mas',
@@ -23,18 +18,23 @@ export class FccIndividualComponent implements OnInit {
     'deg',
     'rad'
   ];
+  @Input() data: any;
+  _fieldSetupService: FieldSetupService;
 
-  constructor() { }
+  constructor(private fieldSetupService: FieldSetupService) {
+    this._fieldSetupService = fieldSetupService;
+  }
 
   ngOnInit() {
+    console.log(this._fieldSetupService.getItem('source', 'chosenSystem').latHeader);
   }
 
   addRow() {
-    this.rows.push({lat: '0', lon: '0'});
+    this.data.rows.push({lat: '0', lon: '0'});
   }
 
   removeRow() {
-    this.rows.pop();
+    this.data.rows.pop();
   }
 
   log(message){

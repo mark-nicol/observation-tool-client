@@ -8,7 +8,7 @@
   </label>
   <select id="offsetSelector"
           class="col form-control form-control-sm"
-          [(ngModel)]="selectedUnits"
+          [(ngModel)]="data.selectedUnits"
           [disabled]="radioValue === 'absolute'">
     <option *ngFor="let unit of offsetUnits"
             value="{{unit}}"
@@ -24,23 +24,23 @@
          [tooltip-delay]="pointingsLableTooltip">
     # Pointings
   </label>
-  <p class="col form-control-static">{{rows.length}}</p>
+  <p class="col form-control-static">{{data.rows.length}}</p>
 </div>
 <div class="row">
   <table class="table table-sm">
     <thead>
-      <tr *ngIf="radioValue == 'relative'"
+      <tr *ngIf="data.radioValue == 'relative'"
           ngbTooltip="Coordinate offsets for each pointing">
-        <th>{{tableHeaders[0]}} [{{selectedUnits}}]</th>
-        <th>{{tableHeaders[1]}} [{{selectedUnits}}]</th>
+        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').latHeader}} [{{data.selectedUnits}}]</th>
+        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').lonHeader}} [{{data.selectedUnits}}]</th>
       </tr>
       <tr *ngIf="radioValue == 'absolute'">
-        <th>{{tableHeaders[0]}}</th>
-        <th>{{tableHeaders[1]}}</th>
+        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').latHeader}}</th>
+        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').lonHeader}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of rows"
+      <tr *ngFor="let row of data.rows"
           (keyup.enter)="log('enter')">
         <td contenteditable (blur)="log('blur')">
           {{radioValue == 'absolute' ? (row.lon | sexagesimal) : (row.lon | degrees)}}

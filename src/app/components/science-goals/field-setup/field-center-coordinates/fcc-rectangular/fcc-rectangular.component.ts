@@ -1,14 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 
 @Component({
   selector: 'fcc-rectangular',
   templateUrl: './fcc-rectangular.component.html',
   styleUrls: ['./fcc-rectangular.component.scss']
 })
-export class FccRectangularComponent implements OnInit {
+export class FccRectangularComponent implements OnInit, OnChanges {
 
-  @Input()
-  radioValue = 'relative';
+  @Input() radioValue = 'relative';
+  sexagesimalHidden = (this.radioValue === 'relative');
 
   offsetUnits = [
     'mas',
@@ -21,6 +21,10 @@ export class FccRectangularComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+    this.sexagesimalHidden = (this.radioValue === 'relative');
   }
 
 }

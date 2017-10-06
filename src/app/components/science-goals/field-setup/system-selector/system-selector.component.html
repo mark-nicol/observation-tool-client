@@ -20,7 +20,8 @@
            placement="right"
            ngbTooltip="Sexagesimal display"
            #sexagesimalCheckboxTooltip="ngbTooltip"
-           [tooltip-delay]="sexagesimalCheckboxTooltip">
+           [tooltip-delay]="sexagesimalCheckboxTooltip"
+           *ngIf="!sexagesimalHidden">
       <input id="sexagesimalCheck"
              class="custom-control-input"
              type="checkbox"

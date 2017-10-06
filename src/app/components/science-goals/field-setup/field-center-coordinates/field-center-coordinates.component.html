@@ -6,22 +6,26 @@
   <!--Target type radios-->
   <div class="col">
     <label class="custom-control custom-radio">
-      <input id="relativeRadio"
+      <input #relativeRadio
+             id="relativeRadio"
              name="coordTypeRadios"
              type="radio"
              class="custom-control-input"
              value="relative"
              [(ngModel)]="data.coordType"
+             (change)="changeCoordType(relativeRadio.value)"
              checked>
       <span class="custom-control-indicator"></span>
       <span class="custom-control-description">Relative</span>
     </label>
     <label class="custom-control custom-radio">
-      <input id="absoluteRadio"
+      <input #absoluteRadio
+             id="absoluteRadio"
              name="coordTypeRadios"
              type="radio"
              value="absolute"
              [(ngModel)]="data.coordType"
+             (change)="changeCoordType(absoluteRadio.value)"
              class="custom-control-input">
       <span class="custom-control-indicator"></span>
       <span class="custom-control-description">Absolute</span>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {CoordSystem} from "../../../../models/coord-system.interface";
 
 @Component({
@@ -96,11 +96,12 @@ export class SystemSelectorComponent implements OnInit {
       latHeader: 'Deg'
     }
   };
-  @Input()
-  chosenSystem = 'ICRS';
+  @Input() chosenSystem = 'ICRS';
+  @Input() sexagesimalHidden = false;
   sexagesimalUnits = false;
   @Output() systemEmitter = new EventEmitter<CoordSystem>();
   @Output() sexagesimalEmitter = new EventEmitter<boolean>();
+
 
   constructor() {
   }

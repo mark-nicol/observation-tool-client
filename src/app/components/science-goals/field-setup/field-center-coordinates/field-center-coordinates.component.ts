@@ -20,4 +20,8 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   ngOnInit() {
   }
 
+  changeCoordType(event: any) {
+    this.data.coordType = event;
+  }
+
 }

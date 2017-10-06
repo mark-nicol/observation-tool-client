@@ -20,7 +20,8 @@ describe('FccIndividualComponent', () => {
         SexagesimalPipe,
         DegreesPipe
       ],
-      imports: [NgbModule.forRoot(), FormsModule]
+      imports: [NgbModule.forRoot(), FormsModule],
+      providers: [FieldSetupService]
     })
       .compileComponents();
   }));

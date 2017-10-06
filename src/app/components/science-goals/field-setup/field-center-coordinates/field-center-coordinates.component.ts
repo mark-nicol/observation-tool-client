@@ -9,11 +9,6 @@ import {FieldCentreCoordinatesInterface} from "../../../../models/field-centre-c
 })
 export class FieldCenterCoordinatesComponent implements OnInit {
 
-
-  // @Input() tableHeaders: string[] = ['', ''];
-  // @Input() targetType: string = 'individual';
-  // radioValue = 'relative';
-
   data: FieldCentreCoordinatesInterface;
   _fieldSetupService: FieldSetupService;
 

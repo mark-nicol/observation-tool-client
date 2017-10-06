@@ -32,8 +32,7 @@
 <div class="row"
      *ngIf="(_fieldSetupService.getItem('source', 'targetType') === 'individual'); then individualComponent; else rectangularComponent"></div>
 <ng-template #individualComponent>
-  <fcc-individual [radioValue]="data.coordType"
-                  [data]="data.individual"></fcc-individual>
+  <fcc-individual [radioValue]="data.coordType"></fcc-individual>
 </ng-template>
 <ng-template #rectangularComponent>
   <fcc-rectangular [radioValue]="data.coordType"></fcc-rectangular>

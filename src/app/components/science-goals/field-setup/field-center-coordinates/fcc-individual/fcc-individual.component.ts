@@ -16,11 +16,12 @@ export class FccIndividualComponent implements OnInit {
     'deg',
     'rad'
   ];
-  @Input() data: any;
+  data: any;
   _fieldSetupService: FieldSetupService;
 
   constructor(private fieldSetupService: FieldSetupService) {
     this._fieldSetupService = fieldSetupService;
+    fieldSetupService.getPageData('fieldCentreCoordinates').subscribe(res => this.data = res.individual);
   }
 
   ngOnInit() {

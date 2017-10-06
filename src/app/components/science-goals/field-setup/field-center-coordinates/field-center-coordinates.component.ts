@@ -17,7 +17,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   data: FieldCentreCoordinatesInterface;
 
   constructor(private fieldSetupService: FieldSetupService) {
-    fieldSetupService.getPageData('fieldCentreCoorinates').subscribe(res => this.data = res);
+    fieldSetupService.getPageData('fieldCentreCoordinates').subscribe(res => this.data = res);
   }
 
   ngOnInit() {

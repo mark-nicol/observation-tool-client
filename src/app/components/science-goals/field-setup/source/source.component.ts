@@ -37,13 +37,13 @@ export class SourceComponent implements OnInit {
     'Vesta',
     'Ephemeris'
   ];
-  showSourceCoords = true;
-  lonInputValue: any;
-  lonInputError = true;
-  latInputValue: any;
-  latInputError = true;
-  sexagesimalUnits = false;
-  chosenSystem: CoordSystem;
+  // showSourceCoords = true;
+  // lonInputValue: any;
+  // lonInputError = true;
+  // latInputValue: any;
+  // latInputError = true;
+  // sexagesimalUnits = false;
+  // chosenSystem: CoordSystem;
 
   @Output() targetTypeEmitter = new EventEmitter<string>();
   @Output() tableHeaderEmitter = new EventEmitter<string[]>();
@@ -70,23 +70,28 @@ export class SourceComponent implements OnInit {
 
   setLatLon(value, element) {
     if (element.id == 'latInput') {
-      this.latInputValue = value;
+      // this.latInputValue = value;
+      this.pageData.lat = value;
     } else {
-      this.lonInputValue = value;
+      // this.lonInputValue = value;
+      this.pageData.lon = value;
     }
   }
 
   targetChange(targetType: string) {
-    this.targetTypeEmitter.emit(targetType);
+    this.pageData.targetType = targetType;
+    // this.targetTypeEmitter.emit(targetType);
   }
 
   sexagesimalChange(units: boolean) {
-    this.sexagesimalUnits = units;
+    this.pageData.sexagesimalUnits = units;
+    // this.sexagesimalUnits = units;
   }
 
   systemChange(system: any) {
-    this.chosenSystem = system;
-    this.tableHeaderEmitter.emit([this.chosenSystem.latHeader, this.chosenSystem.lonHeader]);
+    // this.chosenSystem = system;
+    this.pageData.chosenSystem = system;
+    // this.tableHeaderEmitter.emit([this.chosenSystem.latHeader, this.chosenSystem.lonHeader]);
   }
 
 }

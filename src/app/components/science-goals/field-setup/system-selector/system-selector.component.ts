@@ -10,8 +10,7 @@ export class SystemSelectorComponent implements OnInit {
 
   sexagesimalDisabled = false;
   systemKeys = Object.keys;
-  systems: { [id: string]: CoordSystem }
-  = {
+  systems: { [id: string]: CoordSystem } = {
     'ICRS': {
       sexagesimalLabels: {
         latLabel: 'Dec',
@@ -100,20 +99,7 @@ export class SystemSelectorComponent implements OnInit {
   @Input()
   chosenSystem = 'ICRS';
   sexagesimalUnits = false;
-  @Output() systemEmitter = new EventEmitter<{
-    sexagesimalLabels: {
-      latLabel: string,
-      lonLabel: string
-    },
-    normalLabels: {
-      latLabel: string,
-      lonLabel: string
-    },
-    latPlaceholder: string,
-    lonPlaceholder: string,
-    lonHeader: string,
-    latHeader: string
-  }>();
+  @Output() systemEmitter = new EventEmitter<CoordSystem>();
   @Output() sexagesimalEmitter = new EventEmitter<boolean>();
 
   constructor() {

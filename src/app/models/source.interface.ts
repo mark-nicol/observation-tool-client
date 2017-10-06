@@ -1,9 +1,11 @@
+import {CoordSystem} from "./coord-system.interface";
+
 export interface SourceComponentInterface {
   sourceName: string,
   solarSystemObject: boolean,
   chosenSolarObject: string,
   targetType: string,
-  chosenSystem: string,
+  chosenSystem: CoordSystem,
   sexagesimalUnits: boolean,
   lat: number,
   lon: number,

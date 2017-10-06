@@ -81,8 +81,7 @@
   <div class="row">
     <!-- System Selector -->
     <div class="col-md">
-      <system-selector [chosenSystem]="pageData.chosenSystem"
-                       (systemEmitter)="systemChange($event)"
+      <system-selector (systemEmitter)="systemChange($event)"
                        (sexagesimalEmitter)="sexagesimalChange($event)"></system-selector>
     </div>
     <!-- Lat input -->
@@ -94,46 +93,45 @@
                #latInputTooltip="ngbTooltip"
                [tooltip-delay]="latInputTooltip">
           {{pageData.sexagesimalUnits ?
-          chosenSystem.sexagesimalLabels.latLabel :
-          chosenSystem.normalLabels.latLabel}}
+          pageData.chosenSystem.sexagesimalLabels.latLabel :
+          pageData.chosenSystem.normalLabels.latLabel}}
         </label>
         <input #latInput
                id="latInput"
                class="col-xl-8 align-self-baseline form-control form-control-sm"
-               [ngModel]="pageData.sexagesimalUnits && latInputValue ? (latInputValue | sexagesimal) : (latInputValue | degrees)"
+               [ngModel]="pageData.sexagesimalUnits && pageData.lat ? (pageData.lat | sexagesimal) : (pageData.lat | degrees)"
                (keyup.enter)="setLatLon(latInput.value, latInput)"
                (blur)="setLatLon(latInput.value, latInput)"
                placeholder="{{
-            sexagesimalUnits ?
-            (chosenSystem.latPlaceholder | sexagesimal) :
-            (chosenSystem.latPlaceholder | degrees)
+            pageData.sexagesimalUnits ?
+            (pageData.chosenSystem.latPlaceholder | sexagesimal) :
+            (pageData.chosenSystem.latPlaceholder | degrees)
              }}">
       </div>
     </div>
     <!-- Long input -->
     <div class="col-md">
       <div class="row"
-           [class.has-danger]="lonInputError"
            style="white-space: nowrap">
         <label class="col-xl-4 text-xl-right"
                for="lonInput"
                ngbTooltip="The longitude of the source"
                #lonInputTooltip="ngbTooltip"
                [tooltip-delay]="lonInputTooltip">
-          {{sexagesimalUnits ?
-          chosenSystem.sexagesimalLabels.lonLabel :
-          chosenSystem.normalLabels.lonLabel
+          {{pageData.sexagesimalUnits ?
+          pageData.chosenSystem.sexagesimalLabels.lonLabel :
+          pageData.chosenSystem.normalLabels.lonLabel
           }}</label>
         <input #lonInput
                id="lonInput"
                class="col-xl-8 align-self-baseline form-control form-control-sm"
-               [ngModel]="sexagesimalUnits && lonInputValue ? (lonInputValue | sexagesimal) : (lonInputValue | degrees)"
+               [ngModel]="pageData.sexagesimalUnits && pageData.lon ? (pageData.lon | sexagesimal) : (pageData.lon | degrees)"
                (keyup.enter)="setLatLon(lonInput.value, lonInput)"
                (blur)="setLatLon(lonInput.value, lonInput)"
                placeholder="{{
-            sexagesimalUnits ?
-            (chosenSystem.lonPlaceholder | sexagesimal) :
-            (chosenSystem.lonPlaceholder | degrees)
+            pageData.sexagesimalUnits ?
+            (pageData.chosenSystem.lonPlaceholder | sexagesimal) :
+            (pageData.chosenSystem.lonPlaceholder | degrees)
           }}">
       </div>
     </div>

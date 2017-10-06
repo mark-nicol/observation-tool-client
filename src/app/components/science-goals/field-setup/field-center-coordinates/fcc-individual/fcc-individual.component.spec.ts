@@ -1,11 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FccIndividualComponent } from './fcc-individual.component';
+import {FccIndividualComponent} from './fcc-individual.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {DelayTooltipDirective} from "../../../../../directives/delay-tooltip.directive";
 import {FormsModule} from "@angular/forms";
 import {SexagesimalPipe} from "../../../../../pipes/sexagesimal.pipe";
 import {DegreesPipe} from "../../../../../pipes/degrees.pipe";
+import {FieldSetupService} from "../../../../../services/field-setup.service";
 
 describe('FccIndividualComponent', () => {
   let component: FccIndividualComponent;
@@ -13,10 +14,15 @@ describe('FccIndividualComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FccIndividualComponent, DelayTooltipDirective, SexagesimalPipe, DegreesPipe ],
+      declarations: [
+        FccIndividualComponent,
+        DelayTooltipDirective,
+        SexagesimalPipe,
+        DegreesPipe
+      ],
       imports: [NgbModule.forRoot(), FormsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

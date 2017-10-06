@@ -8,9 +8,7 @@ import {FieldSetupService} from "../../../../../services/field-setup.service";
 })
 export class FccIndividualComponent implements OnInit {
 
-  @Input() tableHeaders: string[] = ['', ''];
   @Input() radioValue = 'relative';
-  selectedUnits = 'mas';
   offsetUnits = [
     'mas',
     'arcsec',
@@ -26,7 +24,6 @@ export class FccIndividualComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this._fieldSetupService.getItem('source', 'chosenSystem').latHeader);
   }
 
   addRow() {

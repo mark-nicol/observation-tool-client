@@ -8,7 +8,7 @@
   </label>
   <select id="offsetSelector"
           class="col form-control form-control-sm"
-          [(ngModel)]="data.selectedUnits"
+          [(ngModel)]="data.offsetUnit"
           [disabled]="radioValue === 'absolute'">
     <option *ngFor="let unit of offsetUnits"
             value="{{unit}}"
@@ -29,12 +29,12 @@
 <div class="row">
   <table class="table table-sm">
     <thead>
-      <tr *ngIf="data.radioValue == 'relative'"
+      <tr *ngIf="radioValue === 'relative'"
           ngbTooltip="Coordinate offsets for each pointing">
-        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').latHeader}} [{{data.selectedUnits}}]</th>
-        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').lonHeader}} [{{data.selectedUnits}}]</th>
+        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').latHeader}} [{{data.offsetUnit}}]</th>
+        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').lonHeader}} [{{data.offsetUnit}}]</th>
       </tr>
-      <tr *ngIf="radioValue == 'absolute'">
+      <tr *ngIf="radioValue === 'absolute'">
         <th>{{_fieldSetupService.getItem('source', 'chosenSystem').latHeader}}</th>
         <th>{{_fieldSetupService.getItem('source', 'chosenSystem').lonHeader}}</th>
       </tr>

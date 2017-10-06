@@ -11,7 +11,7 @@
              type="radio"
              class="custom-control-input"
              value="relative"
-             [(ngModel)]="radioValue"
+             [(ngModel)]="data.coordType"
              checked>
       <span class="custom-control-indicator"></span>
       <span class="custom-control-description">Relative</span>
@@ -21,7 +21,7 @@
              name="coordTypeRadios"
              type="radio"
              value="absolute"
-             [(ngModel)]="radioValue"
+             [(ngModel)]="data.coordType"
              class="custom-control-input">
       <span class="custom-control-indicator"></span>
       <span class="custom-control-description">Absolute</span>
@@ -32,9 +32,9 @@
 <div class="row"
      *ngIf="(_fieldSetupService.getItem('source', 'targetType') === 'individual'); then individualComponent; else rectangularComponent"></div>
 <ng-template #individualComponent>
-  <fcc-individual [radioValue]="radioValue"
+  <fcc-individual [radioValue]="data.coordType"
                   [data]="data.individual"></fcc-individual>
 </ng-template>
 <ng-template #rectangularComponent>
-  <fcc-rectangular [radioValue]="radioValue"></fcc-rectangular>
+  <fcc-rectangular [radioValue]="data.coordType"></fcc-rectangular>
 </ng-template>

@@ -12,7 +12,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
 
   // @Input() tableHeaders: string[] = ['', ''];
   // @Input() targetType: string = 'individual';
-  radioValue = 'relative';
+  // radioValue = 'relative';
 
   data: FieldCentreCoordinatesInterface;
   _fieldSetupService: FieldSetupService;

@@ -7,8 +7,7 @@ import {CoordSystem} from "../../../../models/coord-system.interface";
   selector: 'field-source',
   host: {'(document:click)': 'unfocus($event)'},
   templateUrl: './source.component.html',
-  styleUrls: ['./source.component.css'],
-
+  styleUrls: ['./source.component.css']
 })
 export class SourceComponent implements OnInit {
 

@@ -1,17 +1,31 @@
 <div class="row">
   <div class="col-md">
-    <system-selector [sexagesimalHidden]="sexagesimalHidden"></system-selector>
+    <system-selector [sexagesimalHidden]="sexagesimalHidden"
+                     (systemEmitter)="systemChange($event)"
+                     (sexagesimalEmitter)="sexagesimalChange($event)"></system-selector>
   </div>
   <!-- Lon offset input -->
   <div class="col-md">
     <div class="row" style="white-space: nowrap">
-      <label class="col-xl-4 text-xl-right">
-        Offset(Lon)
-      </label>
+      <div *ngIf="radioValue === 'absolute'; then absoluteLonLabel; else relativeLonLabel"></div>
+      <ng-template #absoluteLonLabel>
+        <label class="col-xl-4 text-xl-right">
+          {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.lonLabel : chosenSystem.normalLabels.lonLabel}}
+        </label>
+      </ng-template>
+      <ng-template #relativeLonLabel>
+        <label class="col-xl-4 text-xl-right">
+          Offset(Lon)
+        </label>
+      </ng-template>
       <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
         <input class="form-control form-control-sm"
-               placeholder="0.00000">
-        <select class="input-group-addon form-control-sm">
+               placeholder="{{
+               sexagesimalUnits ?
+               (chosenSystem.lonPlaceholder | sexagesimal) :
+               (chosenSystem.lonPlaceholder | degrees)}}">
+        <select class="input-group-addon form-control-sm"
+                *ngIf="radioValue === 'relative'">
           <option *ngFor="let unit of offsetUnits">{{unit}}</option>
         </select>
       </div>
@@ -21,13 +35,25 @@
   <!-- Lat offset input -->
   <div class="col-md">
     <div class="row" style="white-space: nowrap">
-      <label class="col-xl-4 text-xl-right">
-        Offset(Lat)
-      </label>
+      <div *ngIf="radioValue === 'absolute'; then absoluteLatLabel; else relativeLatLabel"></div>
+      <ng-template #absoluteLatLabel>
+        <label class="col-xl-4 text-xl-right">
+          {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
+        </label>
+      </ng-template>
+      <ng-template #relativeLatLabel>
+        <label class="col-xl-4 text-xl-right">
+          Offset(Lat)
+        </label>
+      </ng-template>
       <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
         <input class="form-control form-control-sm"
-               placeholder="0.00000">
-        <select class="input-group-addon form-control-sm">
+               placeholder="{{
+               sexagesimalUnits ?
+               (chosenSystem.latPlaceholder | sexagesimal) :
+               (chosenSystem.latPlaceholder | degrees)}}">
+        <select class="input-group-addon form-control-sm"
+                *ngIf="radioValue === 'relative'">
           <option *ngFor="let unit of offsetUnits">{{unit}}</option>
         </select>
       </div>

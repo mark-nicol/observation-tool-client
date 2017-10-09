@@ -5,6 +5,8 @@ import {SystemSelectorComponent} from "../../system-selector/system-selector.com
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {DelayTooltipDirective} from "../../../../../directives/delay-tooltip.directive";
 import {FormsModule} from "@angular/forms";
+import {SexagesimalPipe} from "../../../../../pipes/sexagesimal.pipe";
+import {DegreesPipe} from "../../../../../pipes/degrees.pipe";
 
 describe('FccRectangularComponent', () => {
   let component: FccRectangularComponent;
@@ -12,8 +14,16 @@ describe('FccRectangularComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FccRectangularComponent, SystemSelectorComponent, DelayTooltipDirective ],
-      imports: [NgbModule.forRoot(), FormsModule]
+      declarations: [
+        FccRectangularComponent,
+        SystemSelectorComponent,
+        DelayTooltipDirective,
+        SexagesimalPipe,
+        DegreesPipe ],
+      imports: [
+        NgbModule.forRoot(),
+        FormsModule
+      ]
     })
     .compileComponents();
   }));

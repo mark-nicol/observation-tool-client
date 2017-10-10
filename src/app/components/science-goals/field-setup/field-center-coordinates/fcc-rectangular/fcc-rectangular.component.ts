@@ -1,4 +1,5 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {CoordSystem} from "../../../../../models/coord-system.interface";
 
 @Component({
   selector: 'fcc-rectangular',
@@ -9,6 +10,8 @@ export class FccRectangularComponent implements OnInit, OnChanges {
 
   @Input() radioValue = 'relative';
   sexagesimalHidden = (this.radioValue === 'relative');
+  sexagesimalUnits: boolean;
+  chosenSystem: CoordSystem;
 
   offsetUnits = [
     'mas',
@@ -21,10 +24,19 @@ export class FccRectangularComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.chosenSystem);
   }
 
   ngOnChanges() {
     this.sexagesimalHidden = (this.radioValue === 'relative');
+  }
+
+  systemChange(system: CoordSystem) {
+    this.chosenSystem = system;
+  }
+
+  sexagesimalChange(sexagesimal: boolean) {
+    this.sexagesimalUnits = sexagesimal;
   }
 
 }

@@ -13,6 +13,7 @@ module.exports = function (config) {
       // require('karma-firefox-launcher'),
       // require('karma-safari-launcher'),
       require('karma-jasmine-html-reporter'),
+      require('karma-coverage'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma')
     ],
@@ -26,7 +27,7 @@ module.exports = function (config) {
     angularCli: {
       environment: 'dev'
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml', 'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -41,6 +42,7 @@ module.exports = function (config) {
       // 'FirefoxNightly',
       // 'Safari'
     ],
-    singleRun: false
+    singleRun: false,
+    watch: false
   });
 };

@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http, RequestOptions, URLSearchParams} from "@angular/http";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/toPromise";
+import {Injectable} from '@angular/core';
+import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class PrimaryInvestigatorService {
@@ -19,13 +19,13 @@ export class PrimaryInvestigatorService {
   }
 
   search(searchVariant: string, searchStrings: string) {
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('searchVariant', searchVariant);
     formData.append('searchStrings', searchStrings);
-    let headers = new Headers();
+    const headers = new Headers();
     headers.set('Accept', 'application/json');
-    let options = new RequestOptions({headers});
-    return this.http.post(this.piUrl, formData, headers);
+    const options = new RequestOptions({headers});
+    return this.http.post(this.piUrl, formData, options);
   }
 
 }

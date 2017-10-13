@@ -1,3 +1,9 @@
+import {Latitude} from "../../units/classes/latitude";
+import {Longitude} from "../../units/classes/longitude";
+import {Angle} from "../../units/classes/angle";
+import {AngularVelocity} from "../../units/classes/angular-velocity";
+import {Speed} from "../../units/classes/speed";
+
 export const FIELD_SETUP = {
   spatialImage: {
     imageFilename: ''
@@ -19,16 +25,12 @@ export const FIELD_SETUP = {
     targetType: 'individual',
     chosenSystem: 'ICRS', /*TODO change to object*/
     sexagesimalUnits: false,
-    lat: 0.00000,
-    lon: 0.00000,
-    parallax: 0.00000,
-    parallaxUnits: 'mas',
-    properMotionCross: 0.00000,
-    properMotionCrossUnits: 'mas/yr',
-    properMotionDeclination: 0.00000,
-    properMotionDeclinationUnits: 'mas/yr',
-    radialVelocity: 0.00000,
-    radialVelocityUnits: 'm/s',
+    lat: new Latitude(),
+    lon: new Longitude(),
+    parallax: new Angle(),
+    properMotionCross: new AngularVelocity(),
+    properMotionDeclination: new AngularVelocity(),
+    radialVelocity: Speed,
     radialVelocityReferenceFrame: 'bar',
     redshift: 0.00000,
     dopplerType: 'Radio'

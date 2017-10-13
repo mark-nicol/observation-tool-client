@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
-import {FieldSetupService} from "../../../../services/field-setup.service";
-import {SourceComponentInterface} from "../../../../models/source.interface";
-import {CoordSystem} from "../../../../models/coord-system.interface";
+import {FieldSetupService} from '../../../../services/field-setup.service';
+import {SourceComponentInterface} from '../../../../models/source.interface';
+import {CoordSystem} from '../../../../models/coord-system.interface';
 
 @Component({
   selector: 'field-source',
@@ -48,9 +48,9 @@ export class SourceComponent implements OnInit {
   }
 
   unfocus(event): void {
-    let active = document.activeElement;
+    const active = document.activeElement;
     try {
-      if (active != event.target)
+      if (active !== event.target)
         (active as HTMLElement).blur();
     } catch (TypeError) {
     }
@@ -61,10 +61,10 @@ export class SourceComponent implements OnInit {
   }
 
   setLatLon(value, element) {
-    if (element.id == 'latInput') {
-      this.pageData.lat = value;
+    if (element.id === 'latInput') {
+      this.pageData.lat.value = value;
     } else {
-      this.pageData.lon = value;
+      this.pageData.lon.value = value;
     }
   }
 

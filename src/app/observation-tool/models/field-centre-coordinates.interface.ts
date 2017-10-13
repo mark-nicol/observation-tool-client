@@ -1,27 +1,26 @@
+import {Latitude} from '../../units/classes/latitude';
+import {Longitude} from '../../units/classes/longitude';
+import {Angle} from '../../units/classes/angle';
+
 export interface FieldCentreCoordinatesInterface {
   coordType: string,
   individual: {
     offsetUnit: string,
     rows: [
       {
-        lat: string,
-        lon: string
+        lat: Latitude,
+        lon: Longitude
       }
       ]
   },
   rectangular: {
     chosenSystem: string,
     sexagesimalUnits: boolean,
-    lonOffset: number,
-    lonOffsetUnits: string,
-    latOffset: number,
-    latOffsetUnits: string,
-    pLength: number,
-    pLengthUnits: string,
-    qLength: number,
-    qLengthUnits: string,
-    positionAngle: number,
-    positionAngleUnits: string,
+    lonOffset: Angle,
+    latOffset: Angle,
+    pLength: Angle,
+    qLength: Angle,
+    positionAngle: Angle,
     spacing: number,
     spacingUnits: string
   }

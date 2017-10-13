@@ -99,7 +99,7 @@
         <input #latInput
                id="latInput"
                class="col-xl-8 align-self-baseline form-control form-control-sm"
-               [ngModel]="pageData.sexagesimalUnits && pageData.lat ? (pageData.lat | sexagesimal) : (pageData.lat | degrees)"
+               [ngModel]="pageData.sexagesimalUnits && pageData.lat ? (pageData.lat.value | sexagesimal) : (pageData.lat.value | degrees)"
                (keyup.enter)="setLatLon(latInput.value, latInput)"
                (blur)="setLatLon(latInput.value, latInput)"
                placeholder="{{
@@ -125,7 +125,7 @@
         <input #lonInput
                id="lonInput"
                class="col-xl-8 align-self-baseline form-control form-control-sm"
-               [ngModel]="pageData.sexagesimalUnits && pageData.lon ? (pageData.lon | sexagesimal) : (pageData.lon | degrees)"
+               [ngModel]="pageData.sexagesimalUnits && pageData.lon ? (pageData.lon.value | sexagesimal) : (pageData.lon.value | degrees)"
                (keyup.enter)="setLatLon(lonInput.value, lonInput)"
                (blur)="setLatLon(lonInput.value, lonInput)"
                placeholder="{{

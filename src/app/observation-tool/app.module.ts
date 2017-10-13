@@ -1,27 +1,27 @@
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpModule} from "@angular/http"
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpModule} from '@angular/http'
 /* Modules */
 import {BrowserModule} from '@angular/platform-browser';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 /* Web faking */
 // import {TreeModule} from "angular-tree-component";
-import {DragulaModule} from "ng2-dragula";
+import {DragulaModule} from 'ng2-dragula';
 // import {ContextMenuModule} from "ngx-contextmenu";
-import {AppRoutingModule} from "./app-routing.module"
+import {AppRoutingModule} from './app-routing.module'
 /* Components */
 import {AppComponent} from './app.component';
 import {ModularPanelComponent} from './components/modular-panel/modular-panel.component';
-import {NavbarComponent} from "./components/navbar/navbar.component"
-import {PiEntryComponent} from "./components/pi-entry/pi-entry.component"
-import {PiSearchComponent} from "./components/pi-entry/pi-search/pi-search.component"
-import {ProjectInfoComponent} from "./components/pi-entry/project-info/project-info.component"
-import {PiSelectComponent} from "./components/pi-select/pi-select.component"
-import {RefinePanelComponent} from "./components/pi-select/refine-panel/refine-panel.component"
-import {ResultsTableComponent} from "./components/pi-select/results-table/results-table.component"
-import {PlannedObservingComponent} from "./components/planned-observing/planned-observing.component";
-import {ProjectComponent} from "./components/project/project.component";
-import {ProposalComponent} from "./components/proposal/proposal.component";
+import {NavbarComponent} from './components/navbar/navbar.component'
+import {PiEntryComponent} from './components/pi-entry/pi-entry.component'
+import {PiSearchComponent} from './components/pi-entry/pi-search/pi-search.component'
+import {ProjectInfoComponent} from './components/pi-entry/project-info/project-info.component'
+import {PiSelectComponent} from './components/pi-select/pi-select.component'
+import {RefinePanelComponent} from './components/pi-select/refine-panel/refine-panel.component'
+import {ResultsTableComponent} from './components/pi-select/results-table/results-table.component'
+import {PlannedObservingComponent} from './components/planned-observing/planned-observing.component';
+import {ProjectComponent} from './components/project/project.component';
+import {ProposalComponent} from './components/proposal/proposal.component';
 import {CalibrationSetupComponent} from './components/science-goals/calibration-setup/calibration-setup.component';
 import {ControlPerformanceComponent} from './components/science-goals/control-performance/control-performance.component';
 import {FieldCenterCoordinatesComponent} from './components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component';
@@ -38,18 +38,17 @@ import {TypeComponent} from './components/science-goals/spectral-setup/type/type
 import {VisualisationComponent} from './components/science-goals/spectral-setup/visualisation/visualisation.component';
 import {TechnicalJustificationComponent} from './components/science-goals/technical-justification/technical-justification.component';
 import {SelectableComponent} from './components/selectable/selectable.component';
-// import {SidenavComponent} from "./components/sidenav/sidenav.component"
-import {AutofocusDirective} from "./directives/autofocus.directive";
+import {AutofocusDirective} from './directives/autofocus.directive';
 import {DelayTooltipDirective} from './directives/delay-tooltip.directive';
 import {DegreesPipe} from './pipes/degrees.pipe';
 import {SexagesimalPipe} from './pipes/sexagesimal.pipe';
 /* Services */
-import {PrimaryInvestigatorService} from "./services/primary-investigator.service";
-import {ScienceGoalPanelService} from "./services/science-goal-panel.service";
+import {PrimaryInvestigatorService} from './services/primary-investigator.service';
+import {ScienceGoalPanelService} from './services/science-goal-panel.service';
 import { FccIndividualComponent } from './components/science-goals/field-setup/field-center-coordinates/fcc-individual/fcc-individual.component';
 import { FccRectangularComponent } from './components/science-goals/field-setup/field-center-coordinates/fcc-rectangular/fcc-rectangular.component';
 import { SystemSelectorComponent } from './components/science-goals/field-setup/system-selector/system-selector.component';
-import {FieldSetupService} from "./services/field-setup.service";
+import {FieldSetupService} from './services/field-setup.service';
 
 @NgModule({
   declarations: [
@@ -99,7 +98,7 @@ import {FieldSetupService} from "./services/field-setup.service";
     // ContextMenuModule,
     HttpModule,
     NgbModule.forRoot(),
-    //InMemoryWebApiModule.forRoot(InMemoryDataService),
+    // InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
   ],
   providers: [

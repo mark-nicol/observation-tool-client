@@ -15,11 +15,10 @@ export class ScienceGoalComponent implements OnInit {
   pageKeys = Object.keys;
 
   constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
-
   }
 
   ngOnInit() {
-    this.scienceGoalPanelService.pages.subscribe(data => this.pages =data);
+    this.scienceGoalPanelService.pages.subscribe(data => this.pages = data);
   }
 
   hiddenChange(event) {

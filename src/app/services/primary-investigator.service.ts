@@ -25,7 +25,7 @@ export class PrimaryInvestigatorService {
     let headers = new Headers();
     headers.set('Accept', 'application/json');
     let options = new RequestOptions({headers});
-    return this.http.post(this.piUrl, formData, headers);
+    return this.http.post(this.piUrl, formData, options);
   }
 
 }

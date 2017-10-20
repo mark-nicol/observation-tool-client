@@ -1,5 +1,5 @@
-import {Page} from "./page";
-import {ScienceGoalPanelService} from "../services/science-goal-panel.service";
+import {Page} from './page';
+import {ScienceGoalPanelService} from '../services/science-goal-panel.service';
 
 export abstract class ScienceGoalPage {
 
@@ -9,9 +9,6 @@ export abstract class ScienceGoalPage {
   constructor(private scienceGoalPanelService: ScienceGoalPanelService, id?: string) {
     this.id = id;
     this.scienceGoalPanelService.getPage(this.id).subscribe(data => this.page = data);
-  }
-
-  ngOnInit() {
   }
 
   hiddenChange(event) {

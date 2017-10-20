@@ -24,11 +24,15 @@ export class PrimaryInvestigatorService {
     formData.append('searchStrings', searchStrings);
     const headers = new Headers();
     headers.set('Accept', 'application/json');
+<<<<<<< src/app/observation-tool/services/primary-investigator.service.ts
+    const options = new RequestOptions({headers});
+=======
 <<<<<<< HEAD:src/app/services/primary-investigator.service.ts
     let options = new RequestOptions({headers});
 =======
     const options = new RequestOptions({headers});
 >>>>>>> value-unit-pair:src/app/observation-tool/services/primary-investigator.service.ts
+>>>>>>> src/app/observation-tool/services/primary-investigator.service.ts
     return this.http.post(this.piUrl, formData, options);
   }
 

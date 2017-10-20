@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand"
+     href="#">
+    ALMA
+  </a>
+  <button class="navbar-toggler"
+          (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed"
+          type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div [ngbCollapse]="isCollapsed"
+       class="collapse navbar-collapse"
+       id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"
+          *ngFor="let item of items">
+        <a class="nav-link"
+           [routerLink]="item.path">
+          {{item.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!--<li-->
+<!--ngbDropdown-->
+<!--#dropdown="ngbDropdown"-->
+<!--[autoClose]="false">-->
+<!--<a-->
+<!--class="dropdown-toggle scienceGoals"-->
+<!--ngbDropdownToggle>-->
+<!--{{selectedGoal.title}}-->
+<!--<span class="caret"></span>-->
+<!--</a>-->
+<!--<ul-->
+<!--ngbDropdownMenu>-->
+<!--<li-->
+<!--*ngFor="let sg of scienceGoals"-->
+<!--[class.active]="sg===selectedGoal">-->
+<!--<a-->
+<!--(click)="click(sg); dropdown.close()"-->
+<!--[routerLink]="sg.path">-->
+<!--{{sg.title}}-->
+<!--</a>-->
+<!--<span-->
+<!--class="btn btn-sm"-->
+<!--(click)="removeGoal(sg)">-->
+<!--&times;-->
+<!--</span>-->
+<!--</li>-->
+<!--<li class="divider dropdown-divider"></li>-->
+<!--<li>-->
+<!--<div class="container-fluid">-->
+<!--<button-->
+<!--(click)="addGoal()"-->
+<!--class="btn btn-sm btn-success">Add Goal-->
+<!--</button>-->
+<!--</div>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</li>-->

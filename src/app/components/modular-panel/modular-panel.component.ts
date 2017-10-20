@@ -7,12 +7,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class ModularPanelComponent implements OnInit {
 
-  @Input() id: string;
+  @Input() id: string;                                 // ID of the panel to locate in model
   @Input() title: string;
   @Input() image: string;
-  isCollapsed = false;
-
-  @Output() hiddenChange = new EventEmitter<string>();
+  isCollapsed = false;                                 // Used for minimizing
+  @Output() hiddenChange = new EventEmitter<string>(); // Outputs on close click
 
   constructor() {
   }

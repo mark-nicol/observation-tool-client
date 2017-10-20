@@ -18,10 +18,11 @@
                id="refineInput"
                #refineInput
                value="{{this.name}}">
-      </div>
+      </div><!-- div.form-group -->
     </form>
-    <button (click)="refineClick(refineSelector.value, refineInput.value)" class="btn btn-outline-primary pull-right">Find
-      Investigator
+    <button class="btn btn-outline-primary pull-right"
+            (click)="refineClick(refineSelector.value, refineInput.value)">
+      Find Investigator
     </button>
   </div><!-- panel-body -->
 </div><!-- panel panel-default -->

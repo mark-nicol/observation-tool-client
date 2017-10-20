@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Response} from "@angular/http";
-import {ActivatedRoute} from "@angular/router";
-import {Observable} from "rxjs/Observable";
-import {PrimaryInvestigatorService} from "../../services/primary-investigator.service";
+import {Response} from '@angular/http';
+import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {PrimaryInvestigatorService} from '../../services/primary-investigator.service';
 
 @Component({
   selector: 'app-pi-select',
@@ -39,7 +39,7 @@ export class PiSelectComponent implements OnInit {
       result = this.piService.newSearch(variant, string);
     else
       result = this.piService.search(variant, string);
-    result.subscribe(response => this.results = response.json(), (error) =>  console.log(error),() => this.isSearching = false);
+    result.subscribe(response => this.results = response.json(), (error) =>  console.log(error), () => this.isSearching = false);
   }
 
 }

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {ScienceGoalPage} from "../../../models/science-goal-page";
-import {ScienceGoalPanelService} from "../../../services/science-goal-panel.service";
+import {ScienceGoalPage} from '../../../models/science-goal-page';
+import {ScienceGoalPanelService} from '../../../services/science-goal-panel.service';
 
 @Component({
   selector: 'field-setup',
@@ -9,7 +9,7 @@ import {ScienceGoalPanelService} from "../../../services/science-goal-panel.serv
   providers: [ScienceGoalPanelService]
 })
 
-export class FieldSetupComponent extends ScienceGoalPage{
+export class FieldSetupComponent extends ScienceGoalPage {
 
   targetType: string;
   tableHeaders: string[];

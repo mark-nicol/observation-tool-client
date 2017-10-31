@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PrimaryInvestigator} from "../../../models/primary-investigator"
+import {PrimaryInvestigator} from "../../../interfaces/primary-investigator"
 import {Observable} from "rxjs/Observable";
 
 @Component({

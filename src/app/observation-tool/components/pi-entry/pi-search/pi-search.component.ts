@@ -1,5 +1,9 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {PrimaryInvestigator} from "../../../models/primary-investigator";
+import {Component, OnInit} from '@angular/core';
+import {PrimaryInvestigator} from '../../../interfaces/primary-investigator';
+
+/**
+ * Initial PI search component
+ */
 
 @Component({
   selector: 'app-pi-search',
@@ -7,21 +11,20 @@ import {PrimaryInvestigator} from "../../../models/primary-investigator";
   styleUrls: ['./pi-search.component.css']
 })
 
-export class PiSearchComponent implements OnInit, AfterViewInit {
+export class PiSearchComponent implements OnInit {
 
-  INPUT_PLACEHOLDER: string = "Enter Principle Investigator name";
+  /** Placeholder for the search input */
+  INPUT_PLACEHOLDER = 'Enter Principle Investigator name';
+
+  /** The chosen PI passed back from piSelect */
   passedPi: PrimaryInvestigator;
 
-  constructor() {
-  }
-
+  /**
+   * Checks for a chosen PI in session storage and sets if available
+   */
   ngOnInit() {
     if (sessionStorage['selectedPi']) {
       this.passedPi = JSON.parse(sessionStorage.getItem('selectedPi'));
     }
-  }
-
-  ngAfterViewInit () {
-
   }
 }

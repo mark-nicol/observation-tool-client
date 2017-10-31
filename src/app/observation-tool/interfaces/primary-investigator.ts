@@ -1,4 +1,4 @@
-export class PrimaryInvestigator {
+export interface PrimaryInvestigator {
   uid:           string;
   firstName:     string;
   lastName:      string;

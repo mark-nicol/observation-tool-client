@@ -109,7 +109,7 @@ import {FieldSetupService} from './services/field-setup.service';
   bootstrap: [
     AppComponent
   ],
-  exports: [ NavbarComponent ],
+  exports: [],
   entryComponents: [
     ModularPanelComponent,
     ImageQueryComponent,

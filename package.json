@@ -14,7 +14,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "compodoc": "./node_modules/.bin/compodoc -p ./tsconfig.json --theme Readthedocs"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "@angular/cli": "1.4.7",
     "@angular/compiler-cli": "^4.2.4",
     "@angular/language-service": "^4.2.4",
+    "@compodoc/compodoc": "^1.0.2",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
     "@types/jasmine": "~2.6.0",
     "@types/jasminewd2": "~2.0.2",

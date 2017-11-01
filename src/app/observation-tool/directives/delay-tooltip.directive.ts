@@ -1,20 +1,31 @@
-import {Directive, HostListener, Input, OnInit} from '@angular/core';
-import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+import {Directive, HostListener, Input} from '@angular/core';
+import {NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
+
+/**
+ * Directive to delay the opening of NgbTooltips by 1 second
+ */
 
 @Directive({
   selector: '[tooltip-delay]'
 })
 export class DelayTooltipDirective{
 
+  /** The tooltip to delay opening */
   @Input('tooltip-delay') tooltip: NgbTooltip;
-  openCode;
 
-  constructor() {  }
+  /** Used to store the open tooltip for closing later on */
+  openCode: any;
 
+  /**
+   * Listens for a mouseenter on the tooltipped element and delays the opening
+   */
   @HostListener('mouseenter') onMouseEnter() {
-    this.openCode = setTimeout(() => {this.tooltip.open();}, 1000);
+    this.openCode = setTimeout(() => { this.tooltip.open(); }, 1000);
   }
 
+  /**
+   * Listens for a mouseleave on the tooltipped element, removes the timeout, and closes
+   */
   @HostListener('mouseleave') onMouseLeave() {
     clearTimeout(this.openCode);
     this.tooltip.close();

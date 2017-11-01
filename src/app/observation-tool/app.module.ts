@@ -38,7 +38,6 @@ import {TypeComponent} from './components/science-goals/spectral-setup/type/type
 import {VisualisationComponent} from './components/science-goals/spectral-setup/visualisation/visualisation.component';
 import {TechnicalJustificationComponent} from './components/science-goals/technical-justification/technical-justification.component';
 import {SelectableComponent} from './components/selectable/selectable.component';
-import {AutofocusDirective} from './directives/autofocus.directive';
 import {DelayTooltipDirective} from './directives/delay-tooltip.directive';
 import {DegreesPipe} from './pipes/degrees.pipe';
 import {SexagesimalPipe} from './pipes/sexagesimal.pipe';
@@ -72,7 +71,6 @@ import {FieldSetupService} from './services/field-setup.service';
     SourceComponent,
     SourceExpectedPropertiesComponent,
     SpacialImageComponent,
-    AutofocusDirective,
     DelayTooltipDirective,
     DegreesPipe,
     SexagesimalPipe,

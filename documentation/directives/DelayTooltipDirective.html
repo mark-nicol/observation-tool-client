@@ -196,9 +196,6 @@
                                 id="xs-directives-links"
                             >
                                 <li class="link">
-                                    <a href="../directives/AutofocusDirective.html" >AutofocusDirective</a>
-                                </li>
-                                <li class="link">
                                     <a href="../directives/DelayTooltipDirective.html"  data-type="entity-link" class="active" >DelayTooltipDirective</a>
                                 </li>
                         </ul>
@@ -579,9 +576,6 @@
                                        id="directives-links"
                    >
                                        <li class="link">
-                                           <a href="../directives/AutofocusDirective.html" >AutofocusDirective</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../directives/DelayTooltipDirective.html"  data-type="entity-link" class="active" >DelayTooltipDirective</a>
                                        </li>
                                </ul>
@@ -814,6 +808,13 @@
             <code>src/app/observation-tool/directives/delay-tooltip.directive.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Directive to delay the opening of NgbTooltips by 1 second</p>
+
+            </p>
 
 
 
@@ -884,24 +885,6 @@
                 </table>
             </section>
 
-            <section>
-                <h3 id="constructor">Constructor</h3>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">
-                                    <code>constructor()</code>
-                                </td>
-                            </tr>
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/observation-tool/directives/delay-tooltip.directive.ts:10</a></div>
-                                        </td>
-                                    </tr>
-            
-                        </tbody>
-                    </table>
-            </section>
 
             <section>
                 <h3 id="inputs">Inputs</h3>
@@ -913,6 +896,8 @@
                                     <code>tooltip-delay</code>
                                 </td>
                                 <td class="col-md-10">
+                                    <div><p>The tooltip to delay opening </p>
+</div>
                                       <p>
                                         <em>Type:</em>    <code>NgbTooltip</code>
 
@@ -921,7 +906,7 @@
                             </tr>
                                     <tr>
                                         <td class="col-md-2" colspan="2">
-                                            <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/observation-tool/directives/delay-tooltip.directive.ts:9</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/observation-tool/directives/delay-tooltip.directive.ts:14</a></div>
                                         </td>
                                     </tr>
                         </tbody>
@@ -948,7 +933,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/observation-tool/directives/delay-tooltip.directive.ts:14</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/observation-tool/directives/delay-tooltip.directive.ts:22</a></div>
                                         </td>
                                     </tr>
             
@@ -971,7 +956,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/observation-tool/directives/delay-tooltip.directive.ts:18</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/observation-tool/directives/delay-tooltip.directive.ts:29</a></div>
                                         </td>
                                     </tr>
             
@@ -995,16 +980,28 @@
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <code>openCode:     <code></code>
+                                    <code>openCode:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
             </code>
                                 </td>
                             </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+            
+                                    </td>
+                                </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/observation-tool/directives/delay-tooltip.directive.ts:10</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/observation-tool/directives/delay-tooltip.directive.ts:17</a></div>
                                         </td>
                                     </tr>
             
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Used to store the open tooltip for closing later on </p>
+            </div>
+                                </td>
+                            </tr>
             
                         </tbody>
                     </table>
@@ -1015,23 +1012,34 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {Directive, HostListener, Input, OnInit} from &#x27;@angular/core&#x27;;
-import {NgbTooltip} from &quot;@ng-bootstrap/ng-bootstrap&quot;;
+        <pre class="line-numbers"><code class="language-typescript">import {Directive, HostListener, Input} from &#x27;@angular/core&#x27;;
+import {NgbTooltip} from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
+
+/**
+ * Directive to delay the opening of NgbTooltips by 1 second
+ */
 
 @Directive({
   selector: &#x27;[tooltip-delay]&#x27;
 })
 export class DelayTooltipDirective{
 
+  /** The tooltip to delay opening */
   @Input(&#x27;tooltip-delay&#x27;) tooltip: NgbTooltip;
-  openCode;
 
-  constructor() {  }
+  /** Used to store the open tooltip for closing later on */
+  openCode: any;
 
+  /**
+   * Listens for a mouseenter on the tooltipped element and delays the opening
+   */
   @HostListener(&#x27;mouseenter&#x27;) onMouseEnter() {
-    this.openCode &#x3D; setTimeout(() &#x3D;&gt; {this.tooltip.open();}, 1000);
+    this.openCode &#x3D; setTimeout(() &#x3D;&gt; { this.tooltip.open(); }, 1000);
   }
 
+  /**
+   * Listens for a mouseleave on the tooltipped element, removes the timeout, and closes
+   */
   @HostListener(&#x27;mouseleave&#x27;) onMouseLeave() {
     clearTimeout(this.openCode);
     this.tooltip.close();

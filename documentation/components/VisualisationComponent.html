@@ -817,14 +817,16 @@
     <code>src/app/observation-tool/components/science-goals/spectral-setup/visualisation/visualisation.component.ts</code>
 </p>
 
-
-
     <p class="comment">
-        <h3>Implements</h3>
+        <h3>Description</h3>
     </p>
     <p class="comment">
-                <code>OnInit</code>
+        <p>Spectral visualisation component</p>
+<p>Currently inactive</p>
+
     </p>
+
+
 
 
 <section>
@@ -883,85 +885,15 @@
                         </ul>
                     </td>
                 </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                 <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </section>
 
-    <section>
-        <h3 id="constructor">Constructor</h3>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <code>constructor()</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation/visualisation.component.ts:18</a></div>
-                                </td>
-                            </tr>
-    
-                </tbody>
-            </table>
-    </section>
 
 
 
 
 
-    <section>
-        
-            <h3 id="methods">
-                Methods
-            </h3>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <a name="ngOnInit"></a>
-                            <span class="name"><b> ngOnInit</b><a href="#ngOnInit"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-    <code>ngOnInit()</code>
-                        </td>
-                    </tr>
-    
-    
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation/visualisation.component.ts:22</a></div>
-                                </td>
-                            </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-    
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-    
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-    </section>
 
     <section>
         
@@ -984,10 +916,16 @@
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation/visualisation.component.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation/visualisation.component.ts:17</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Values for the column density selector </p>
+    </div>
+                        </td>
+                    </tr>
     
                 </tbody>
             </table>
@@ -997,15 +935,22 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
+
+/**
+ * Spectral visualisation component
+ *
+ * Currently inactive
+ */
 
 @Component({
   selector: &#x27;app-visualisation&#x27;,
   templateUrl: &#x27;./visualisation.component.html&#x27;,
   styleUrls: [&#x27;./visualisation.component.scss&#x27;]
 })
-export class VisualisationComponent implements OnInit {
+export class VisualisationComponent {
 
+  /** Values for the column density selector */
   columnDensityChoices &#x3D; [
     &#x27;0.472mm (1st Octile)&#x27;,
     &#x27;0.658mm (2nd Octile)&#x27;,
@@ -1015,11 +960,6 @@ export class VisualisationComponent implements OnInit {
     &#x27;2.748mm (6th Octile)&#x27;,
     &#x27;5.186mm (7th Octile)&#x27;,
   ];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }
 </code></pre>

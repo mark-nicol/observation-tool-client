@@ -817,6 +817,13 @@
     <code>src/app/observation-tool/components/science-goals/spectral-setup/spectral-setup.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Contains type and visualisation components</p>
+
+    </p>
 
     <p class="comment">
         <h3>Extends</h3>
@@ -825,12 +832,6 @@
             <code><a href="../interfaces/Page.html" target="_self" >ScienceGoalPage</a></code>
     </p>
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code>OnInit</code>
-    </p>
 
 
 <section>
@@ -871,27 +872,6 @@
     </table>
 </section>
 
-    <section>
-        <h3 id="index">Index</h3>
-        <table class="table table-sm table-bordered index-table">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                 <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
 
     <section>
         <h3 id="constructor">Constructor</h3>
@@ -904,12 +884,14 @@
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/spectral-setup.component.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/spectral-setup.component.ts:14</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Calls super constructor</p>
+    </div>
                                 <div>
                                         <b>Parameters :</b>
                                         <table class="params">
@@ -929,7 +911,8 @@
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>Injected service to be used in parent class</p>
+    </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -944,66 +927,33 @@
 
 
 
-    <section>
-        
-            <h3 id="methods">
-                Methods
-            </h3>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <a name="ngOnInit"></a>
-                            <span class="name"><b> ngOnInit</b><a href="#ngOnInit"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-    <code>ngOnInit()</code>
-                        </td>
-                    </tr>
-    
-    
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/spectral-setup.component.ts:16</a></div>
-                                </td>
-                            </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-    
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-    
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-    </section>
 
 
 </div>
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import {ScienceGoalPanelService} from &quot;../../../services/science-goal-panel.service&quot;;
-import {ScienceGoalPage} from &quot;../../../models/science-goal-page&quot;;
+        <pre class="line-numbers"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
+import {ScienceGoalPage} from &#x27;../../../models/science-goal-page&#x27;;
+import {ScienceGoalPanelService} from &#x27;../../../services/science-goal-panel.service&#x27;;
+
+/**
+ * Contains type and visualisation components
+ */
 
 @Component({
   selector: &#x27;app-spectral-setup&#x27;,
   templateUrl: &#x27;./spectral-setup.component.html&#x27;,
   styleUrls: [&#x27;./spectral-setup.component.scss&#x27;]
 })
-export class SpectralSetupComponent extends ScienceGoalPage implements OnInit {
+export class SpectralSetupComponent extends ScienceGoalPage {
 
+  /**
+   * Calls super constructor
+   * @param scienceGoalPanelService Injected service to be used in parent class
+   */
   constructor(scienceGoalPanelService: ScienceGoalPanelService) {
     super(scienceGoalPanelService, &#x27;spectralSetup&#x27;);
-  }
-
-  ngOnInit() {
   }
 
 }

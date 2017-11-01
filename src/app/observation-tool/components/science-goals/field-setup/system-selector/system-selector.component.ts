@@ -1,5 +1,11 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {CoordSystem} from "../../../../models/coord-system.interface";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {CoordSystem} from '../../../../models/coord-system.interface';
+
+/**
+ * System select components
+ *
+ * Allows for selecting of coordinates systems and whether sexagesimal units are used
+ */
 
 @Component({
   selector: 'system-selector',
@@ -8,8 +14,19 @@ import {CoordSystem} from "../../../../models/coord-system.interface";
 })
 export class SystemSelectorComponent implements OnInit {
 
+  /** The currently selected system */
+  @Input() chosenSystem = 'ICRS';
+
+  /** Controls if the sexagesimal checkbox is hidden */
+  @Input() sexagesimalHidden = false;
+
+  /** Controls if the sexagesimal checkbox is disabled */
   sexagesimalDisabled = false;
-  systemKeys = Object.keys;
+
+  /** Iterator for the systems */
+  systemKeys: (o) => string[] = Object.keys;
+
+  /** Possible system choices dict */
   systems: { [id: string]: CoordSystem } = {
     'ICRS': {
       sexagesimalLabels: {
@@ -96,23 +113,32 @@ export class SystemSelectorComponent implements OnInit {
       latHeader: 'Deg'
     }
   };
-  @Input() chosenSystem = 'ICRS';
-  @Input() sexagesimalHidden = false;
+
+  /** True if the sexagesimal checkbox is checked */
   sexagesimalUnits = false;
+
+  /** Emitter for a selected system change */
   @Output() systemEmitter = new EventEmitter<CoordSystem>();
+
+  /** Emitter for a sexagesimal check change */
   @Output() sexagesimalEmitter = new EventEmitter<boolean>();
 
-
-  constructor() {
-  }
-
+  /**
+   * Emits the current system and sexagesimal state
+   */
   ngOnInit() {
     this.systemEmitter.emit(this.systems[this.chosenSystem]);
     this.sexagesimalEmitter.emit(this.sexagesimalUnits);
   }
 
+  /**
+   * Controls a change of system
+   *
+   * If the system is is ICRS or FK5 then sexagesimal units are allowed,
+   * else the checkbox is disabled and hidden
+   */
   systemChange() {
-    if (this.chosenSystem == 'ICRS' || this.chosenSystem == 'FK5 J2000') {
+    if (this.chosenSystem === 'ICRS' || this.chosenSystem === 'FK5 J2000') {
       this.sexagesimalDisabled = false;
     } else {
       this.sexagesimalDisabled = true;
@@ -122,6 +148,9 @@ export class SystemSelectorComponent implements OnInit {
     this.sexagesimalEmitter.emit(this.sexagesimalUnits);
   }
 
+  /**
+   * Controls a change of the sexagesimal state
+   */
   sexagesimalChange() {
     this.sexagesimalEmitter.emit(this.sexagesimalUnits);
   }

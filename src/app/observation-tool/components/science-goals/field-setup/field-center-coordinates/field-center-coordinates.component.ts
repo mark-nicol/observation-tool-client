@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FieldCentreCoordinatesInterface} from '../../../../models/field-centre-coordinates.interface';
+import {FieldCentreCoordinatesInterface} from '../../../../classes/field-centre-coordinates.interface';
 import {FieldSetupService} from '../../../../services/field-setup.service';
 
 /**

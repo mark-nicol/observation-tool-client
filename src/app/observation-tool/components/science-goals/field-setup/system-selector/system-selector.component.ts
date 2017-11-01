@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CoordSystem} from '../../../../models/coord-system.interface';
+import {CoordSystem} from '../../../../classes/coord-system.interface';
 
 /**
  * System select components

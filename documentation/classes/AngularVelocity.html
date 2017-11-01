@@ -816,6 +816,13 @@
             <code>src/app/units/classes/angular-velocity.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>ValueUnitPair for angular velocity units</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -838,12 +845,14 @@
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/units/classes/angular-velocity.ts:6</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/units/classes/angular-velocity.ts:10</a></div>
                                         </td>
                                     </tr>
             
                             <tr>
                                 <td class="col-md-4">
+                                        <div class="io-description"><p>Calls super constructor, injects correct conversion service</p>
+            </div>
                                         <div>
                                                 <b>Parameters :</b>
                                                 <table class="params">
@@ -862,7 +871,8 @@
                                                               </td>
                                                               <td>
                                                               </td>
-                                                              <td></td>
+                                                              <td><p>The units which the value is stored in</p>
+            </td>
                                                             </tr>
                                                             <tr>
                                                               <td>value</td>
@@ -870,7 +880,8 @@
                                                               </td>
                                                               <td>
                                                               </td>
-                                                              <td></td>
+                                                              <td><p>The value of the pair</p>
+            </td>
                                                             </tr>
                                                     </tbody>
                                                 </table>
@@ -893,7 +904,17 @@ import {AngularVelocityUnits} from &#x27;../enums/angular-velocity-units.enum&#x
 import {AngularVelocityConversionService} from &#x27;../services/angular-velocity-conversion.service&#x27;;
 import {ValueUnitPair} from &#x27;./value-unit-pair&#x27;;
 
+/**
+ * ValueUnitPair for angular velocity units
+ */
+
 export class AngularVelocity extends ValueUnitPair {
+
+  /**
+   * Calls super constructor, injects correct conversion service
+   * @param unit  The units which the value is stored in
+   * @param value The value of the pair
+   */
   constructor(unit &#x3D; AngularVelocityUnits.DEG_S, value &#x3D; 0.0) {
     super(unit, value, AngularVelocityUnits.DEG_S);
     const injector &#x3D; ReflectiveInjector.resolveAndCreate([AngularVelocityConversionService]);

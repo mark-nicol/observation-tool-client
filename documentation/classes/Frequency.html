@@ -816,6 +816,13 @@
             <code>src/app/units/classes/frequency.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>ValueUnitPair for frequency units</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -838,12 +845,14 @@
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/units/classes/frequency.ts:6</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/units/classes/frequency.ts:10</a></div>
                                         </td>
                                     </tr>
             
                             <tr>
                                 <td class="col-md-4">
+                                        <div class="io-description"><p>Calls super constructor, injects correct conversion service</p>
+            </div>
                                         <div>
                                                 <b>Parameters :</b>
                                                 <table class="params">
@@ -862,7 +871,8 @@
                                                               </td>
                                                               <td>
                                                               </td>
-                                                              <td></td>
+                                                              <td><p>The units which the value is stored in</p>
+            </td>
                                                             </tr>
                                                             <tr>
                                                               <td>value</td>
@@ -870,7 +880,8 @@
                                                               </td>
                                                               <td>
                                                               </td>
-                                                              <td></td>
+                                                              <td><p>The value of the pair</p>
+            </td>
                                                             </tr>
                                                     </tbody>
                                                 </table>
@@ -893,7 +904,17 @@ import {FrequencyUnits} from &#x27;../enums/frequency-units.enum&#x27;;
 import {ReflectiveInjector} from &#x27;@angular/core&#x27;;
 import {FrequencyConversionService} from &#x27;../services/frequency-conversion.service&#x27;;
 
+/**
+ * ValueUnitPair for frequency units
+ */
+
 export class Frequency extends ValueUnitPair {
+
+  /**
+   * Calls super constructor, injects correct conversion service
+   * @param unit  The units which the value is stored in
+   * @param value The value of the pair
+   */
   constructor(unit &#x3D; FrequencyUnits.GHZ, value &#x3D; 0.0) {
     super(unit, value, FrequencyUnits.GHZ);
     const injector &#x3D; ReflectiveInjector.resolveAndCreate([FrequencyConversionService]);

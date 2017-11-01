@@ -813,9 +813,17 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/observation-tool/models/science-goal-page.ts</code>
+            <code>src/app/observation-tool/classes/science-goal-page.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Abstract class defining science goal pages</p>
+<p>Handles ID setting, data loading, and hiding and showing panels</p>
+
+            </p>
 
 
 
@@ -865,17 +873,19 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <code>constructor(scienceGoalPanelService: <a href="../injectables/ScienceGoalPanelService.html">ScienceGoalPanelService</a>, id?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                                    <code>constructor(scienceGoalPanelService: <a href="../injectables/ScienceGoalPanelService.html">ScienceGoalPanelService</a>, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                                 </td>
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/observation-tool/models/science-goal-page.ts:7</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/classes/science-goal-page.ts:16</a></div>
                                         </td>
                                     </tr>
             
                             <tr>
                                 <td class="col-md-4">
+                                        <div class="io-description"><p>Sets the id and loads page data</p>
+            </div>
                                         <div>
                                                 <b>Parameters :</b>
                                                 <table class="params">
@@ -895,7 +905,8 @@
                                                               </td>
                                                               <td>
                                                               </td>
-                                                              <td></td>
+                                                              <td><p>Injected service</p>
+            </td>
                                                             </tr>
                                                             <tr>
                                                               <td>id</td>
@@ -903,9 +914,9 @@
                                                                         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                               </td>
                                                               <td>
-                                                                      true
                                                               </td>
-                                                              <td></td>
+                                                              <td><p>Id for the page</p>
+            </td>
                                                             </tr>
                                                     </tbody>
                                                 </table>
@@ -931,19 +942,21 @@
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>hiddenChange(event: )</code>
+            <code>hiddenChange(panel: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                                 </td>
                             </tr>
             
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/observation-tool/models/science-goal-page.ts:14</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/observation-tool/classes/science-goal-page.ts:32</a></div>
                                         </td>
                                     </tr>
             
                             <tr>
                                 <td class="col-md-4">
+                                        <div class="io-description"><p>Handles closing or opening of panels</p>
+            </div>
             
                                         <div class="io-description">
                                                 <b>Parameters :</b>
@@ -958,12 +971,14 @@
                                                     </thead>
                                                     <tbody>
                                                             <tr>
-                                                              <td>event</td>
+                                                              <td>panel</td>
                                                               <td>
+                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                               </td>
                                                               <td>
                                                               </td>
-                                                              <td></td>
+                                                              <td><p>The id of the panel to change state</p>
+            </td>
                                                             </tr>
                                                     </tbody>
                                                 </table>
@@ -1011,10 +1026,16 @@
                                 </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/observation-tool/models/science-goal-page.ts:6</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/observation-tool/classes/science-goal-page.ts:13</a></div>
                                         </td>
                                     </tr>
             
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Unique id of the page </p>
+            </div>
+                                </td>
+                            </tr>
             
                         </tbody>
                     </table>
@@ -1040,10 +1061,16 @@
                                 </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/observation-tool/models/science-goal-page.ts:7</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/classes/science-goal-page.ts:16</a></div>
                                         </td>
                                     </tr>
             
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Page data </p>
+            </div>
+                                </td>
+                            </tr>
             
                         </tbody>
                     </table>
@@ -1053,21 +1080,39 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {Page} from &#x27;./page&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {Page} from &#x27;../interfaces/page&#x27;;
 import {ScienceGoalPanelService} from &#x27;../services/science-goal-panel.service&#x27;;
+
+/**
+ * Abstract class defining science goal pages
+ *
+ * Handles ID setting, data loading, and hiding and showing panels
+ */
 
 export abstract class ScienceGoalPage {
 
+  /** Unique id of the page */
   id: string;
+
+  /** Page data */
   page: Page;
 
-  constructor(private scienceGoalPanelService: ScienceGoalPanelService, id?: string) {
+  /**
+   * Sets the id and loads page data
+   * @param scienceGoalPanelService Injected service
+   * @param id                      Id for the page
+   */
+  constructor(private scienceGoalPanelService: ScienceGoalPanelService, id: string) {
     this.id &#x3D; id;
     this.scienceGoalPanelService.getPage(this.id).subscribe(data &#x3D;&gt; this.page &#x3D; data);
   }
 
-  hiddenChange(event) {
-    this.scienceGoalPanelService.hiddenChange(this.id, event);
+  /**
+   * Handles closing or opening of panels
+   * @param panel The id of the panel to change state
+   */
+  hiddenChange(panel: string) {
+    this.scienceGoalPanelService.hiddenChange(this.id, panel);
   }
 
 }

@@ -1,7 +1,6 @@
-import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
-import {FieldSetupService} from '../../../../services/field-setup.service';
+import {Component, OnInit} from '@angular/core';
 import {SourceComponentInterface} from '../../../../models/source.interface';
-import {CoordSystem} from '../../../../models/coord-system.interface';
+import {FieldSetupService} from '../../../../services/field-setup.service';
 
 @Component({
   selector: 'field-source',

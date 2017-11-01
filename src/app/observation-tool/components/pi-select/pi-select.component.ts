@@ -4,6 +4,12 @@ import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 import {PrimaryInvestigatorService} from '../../services/primary-investigator.service';
 
+/**
+ * The PI select component
+ *
+ * Makes search calls to PrimaryInvestigatorService to based on entered name
+ */
+
 @Component({
   selector: 'app-pi-select',
   templateUrl: './pi-select.component.html',
@@ -12,13 +18,25 @@ import {PrimaryInvestigatorService} from '../../services/primary-investigator.se
 })
 
 export class PiSelectComponent implements OnInit {
+
+  /** The name to search for */
   name: string;
+  /** Results returned by the search service */
   results: any;
+  /** True if waiting for a search to return */
   isSearching: boolean;
 
+  /**
+   * Constructor
+   * @param route     Activated route to extract name from
+   * @param piService PI search service used for PI lookup
+   */
   constructor(private route: ActivatedRoute, private piService: PrimaryInvestigatorService) {
   }
 
+  /**
+   * Takes search name from activated route and makes search call
+   */
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.name = params['Name'];
@@ -26,11 +44,21 @@ export class PiSelectComponent implements OnInit {
     this.search('Name', this.name, true);
   }
 
+  /**
+   * Used to refine the search or change search name
+   * @param strings String array of search category and term
+   */
   refineSearch(strings: string[]) {
     this.search(strings[0], strings[1], false);
   }
 
-  search(variant, string, newSearch) {
+  /**
+   * Makes search calls to PiSearchService
+   * @param variant   The field to search in
+   * @param string    The string to search for
+   * @param newSearch True if making a new search, previous results will be cleared
+   */
+  search(variant: string, string: string, newSearch: boolean) {
     this.isSearching = true;
     let result = new Observable<Response>();
 

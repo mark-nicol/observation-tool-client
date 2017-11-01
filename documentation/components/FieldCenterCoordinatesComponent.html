@@ -817,14 +817,15 @@
     <code>src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts</code>
 </p>
 
-
-
     <p class="comment">
-        <h3>Implements</h3>
+        <h3>Description</h3>
     </p>
     <p class="comment">
-                <code>OnInit</code>
+        <p>Handles the Field Centre Coordinates component in the Field Setup</p>
+
     </p>
+
+
 
 
 <section>
@@ -878,7 +879,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                 <a href="#_fieldSetupService">_fieldSetupService</a>
+                                <span class="modifier">Protected</span> <a href="#_fieldSetupService">_fieldSetupService</a>
                             </li>
                             <li>
                                  <a href="#data">data</a>
@@ -896,9 +897,6 @@
                         <ul class="index-list">
                             <li>
                                  <a href="#changeCoordType">changeCoordType</a>
-                            </li>
-                            <li>
-                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                         </ul>
                     </td>
@@ -918,12 +916,14 @@
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts:20</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Sets _fieldSetupService and retrieves page data</p>
+    </div>
                                 <div>
                                         <b>Parameters :</b>
                                         <table class="params">
@@ -943,7 +943,8 @@
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>Injected service</p>
+    </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -973,19 +974,21 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-    <code>changeCoordType(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+    <code>changeCoordType(newCoordType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                         </td>
                     </tr>
     
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts:35</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Handles changes to the chosen coordinate type, sets new type in page data</p>
+    </div>
     
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -1000,9 +1003,9 @@
                                             </thead>
                                             <tbody>
                                                     <tr>
-                                                      <td>event</td>
+                                                      <td>newCoordType</td>
                                                       <td>
-                                                              <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
@@ -1024,38 +1027,6 @@
                     </tr>
                 </tbody>
             </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <a name="ngOnInit"></a>
-                            <span class="name"><b> ngOnInit</b><a href="#ngOnInit"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-    <code>ngOnInit()</code>
-                        </td>
-                    </tr>
-    
-    
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts:20</a></div>
-                                </td>
-                            </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-    
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-    
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
     </section>
 
     <section>
@@ -1068,12 +1039,12 @@
                     <tr>
                         <td class="col-md-4">
                             <a name="_fieldSetupService"></a>
-                            <span class="name"><b> _fieldSetupService</b><a href="#_fieldSetupService"><span class="fa fa-link"></span></a></span>
+                            <span class="name"><b><span class="modifier">Protected</span> _fieldSetupService</b><a href="#_fieldSetupService"><span class="fa fa-link"></span></a></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>_fieldSetupService:     <code><a href="../injectables/FieldSetupService.html" target="_self" >FieldSetupService</a></code>
+                            <span class="modifier-icon fa fa-lock"></span><code>_fieldSetupService:     <code><a href="../injectables/FieldSetupService.html" target="_self" >FieldSetupService</a></code>
     </code>
                         </td>
                     </tr>
@@ -1085,10 +1056,16 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts:20</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Field Setup Service to be used in HTML template </p>
+    </div>
+                        </td>
+                    </tr>
     
                 </tbody>
             </table>
@@ -1114,10 +1091,16 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component.ts:17</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>The page data from the fieldSetupService </p>
+    </div>
+                        </td>
+                    </tr>
     
                 </tbody>
             </table>
@@ -1127,30 +1110,42 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {Component, Input, OnInit} from &#x27;@angular/core&#x27;;
-import {FieldSetupService} from &quot;../../../../services/field-setup.service&quot;;
-import {FieldCentreCoordinatesInterface} from &quot;../../../../models/field-centre-coordinates.interface&quot;;
+        <pre class="line-numbers"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
+import {FieldCentreCoordinatesInterface} from &#x27;../../../../models/field-centre-coordinates.interface&#x27;;
+import {FieldSetupService} from &#x27;../../../../services/field-setup.service&#x27;;
+
+/**
+ * Handles the Field Centre Coordinates component in the Field Setup
+ */
 
 @Component({
   selector: &#x27;field-center-coordinates&#x27;,
   templateUrl: &#x27;./field-center-coordinates.component.html&#x27;,
   styleUrls: [&#x27;./field-center-coordinates.component.css&#x27;],
 })
-export class FieldCenterCoordinatesComponent implements OnInit {
+export class FieldCenterCoordinatesComponent {
 
+  /** The page data from the fieldSetupService */
   data: FieldCentreCoordinatesInterface;
-  _fieldSetupService: FieldSetupService;
 
+  /** Field Setup Service to be used in HTML template */
+  protected _fieldSetupService: FieldSetupService;
+
+  /**
+   * Sets _fieldSetupService and retrieves page data
+   * @param fieldSetupService Injected service
+   */
   constructor(private fieldSetupService: FieldSetupService) {
     this._fieldSetupService &#x3D; fieldSetupService;
     fieldSetupService.getPageData(&#x27;fieldCentreCoordinates&#x27;).subscribe(res &#x3D;&gt; this.data &#x3D; res);
   }
 
-  ngOnInit() {
-  }
-
-  changeCoordType(event: any) {
-    this.data.coordType &#x3D; event;
+  /**
+   * Handles changes to the chosen coordinate type, sets new type in page data
+   * @param newCoordType
+   */
+  changeCoordType(newCoordType: string) {
+    this.data.coordType &#x3D; newCoordType;
   }
 
 }

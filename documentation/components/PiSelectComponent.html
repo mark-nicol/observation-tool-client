@@ -817,6 +817,14 @@
     <code>src/app/observation-tool/components/pi-select/pi-select.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>The PI select component</p>
+<p>Makes search calls to PrimaryInvestigatorService to based on entered name</p>
+
+    </p>
 
 
     <p class="comment">
@@ -932,12 +940,14 @@
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:27</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Constructor</p>
+    </div>
                                 <div>
                                         <b>Parameters :</b>
                                         <table class="params">
@@ -957,7 +967,8 @@
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>Activated route to extract name from</p>
+    </td>
                                                     </tr>
                                                     <tr>
                                                       <td>piService</td>
@@ -966,7 +977,8 @@
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>PI search service used for PI lookup</p>
+    </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -1003,12 +1015,14 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:40</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Takes search name from activated route and makes search call</p>
+    </div>
     
                                 <div class="io-description">
                                     <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1035,12 +1049,14 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:51</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Used to refine the search or change search name</p>
+    </div>
     
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -1061,7 +1077,8 @@
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>String array of search category and term</p>
+    </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -1089,19 +1106,21 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-    <code>search(variant: , string: , newSearch: )</code>
+    <code>search(variant: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, string: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, newSearch: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
                         </td>
                     </tr>
     
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:61</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Makes search calls to PiSearchService</p>
+    </div>
     
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -1118,26 +1137,32 @@
                                                     <tr>
                                                       <td>variant</td>
                                                       <td>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>The field to search in</p>
+    </td>
                                                     </tr>
                                                     <tr>
                                                       <td>string</td>
                                                       <td>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>The string to search for</p>
+    </td>
                                                     </tr>
                                                     <tr>
                                                       <td>newSearch</td>
                                                       <td>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>True if making a new search, previous results will be cleared</p>
+    </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -1184,10 +1209,16 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:27</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>True if waiting for a search to return </p>
+    </div>
+                        </td>
+                    </tr>
     
                 </tbody>
             </table>
@@ -1213,10 +1244,16 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:23</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>The name to search for </p>
+    </div>
+                        </td>
+                    </tr>
     
                 </tbody>
             </table>
@@ -1242,10 +1279,16 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/observation-tool/components/pi-select/pi-select.component.ts:25</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Results returned by the search service </p>
+    </div>
+                        </td>
+                    </tr>
     
                 </tbody>
             </table>
@@ -1256,10 +1299,16 @@
 
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
-import {Response} from &quot;@angular/http&quot;;
-import {ActivatedRoute} from &quot;@angular/router&quot;;
-import {Observable} from &quot;rxjs/Observable&quot;;
-import {PrimaryInvestigatorService} from &quot;../../services/primary-investigator.service&quot;;
+import {Response} from &#x27;@angular/http&#x27;;
+import {ActivatedRoute} from &#x27;@angular/router&#x27;;
+import {Observable} from &#x27;rxjs/Observable&#x27;;
+import {PrimaryInvestigatorService} from &#x27;../../services/primary-investigator.service&#x27;;
+
+/**
+ * The PI select component
+ *
+ * Makes search calls to PrimaryInvestigatorService to based on entered name
+ */
 
 @Component({
   selector: &#x27;app-pi-select&#x27;,
@@ -1269,14 +1318,25 @@ import {PrimaryInvestigatorService} from &quot;../../services/primary-investigat
 })
 
 export class PiSelectComponent implements OnInit {
+
+  /** The name to search for */
   name: string;
+  /** Results returned by the search service */
   results: any;
+  /** True if waiting for a search to return */
   isSearching: boolean;
 
+  /**
+   * Constructor
+   * @param route     Activated route to extract name from
+   * @param piService PI search service used for PI lookup
+   */
   constructor(private route: ActivatedRoute, private piService: PrimaryInvestigatorService) {
-
   }
 
+  /**
+   * Takes search name from activated route and makes search call
+   */
   ngOnInit() {
     this.route.params.subscribe(params &#x3D;&gt; {
       this.name &#x3D; params[&#x27;Name&#x27;];
@@ -1284,11 +1344,21 @@ export class PiSelectComponent implements OnInit {
     this.search(&#x27;Name&#x27;, this.name, true);
   }
 
+  /**
+   * Used to refine the search or change search name
+   * @param strings String array of search category and term
+   */
   refineSearch(strings: string[]) {
     this.search(strings[0], strings[1], false);
   }
 
-  search(variant, string, newSearch) {
+  /**
+   * Makes search calls to PiSearchService
+   * @param variant   The field to search in
+   * @param string    The string to search for
+   * @param newSearch True if making a new search, previous results will be cleared
+   */
+  search(variant: string, string: string, newSearch: boolean) {
     this.isSearching &#x3D; true;
     let result &#x3D; new Observable&lt;Response&gt;();
 
@@ -1296,7 +1366,7 @@ export class PiSelectComponent implements OnInit {
       result &#x3D; this.piService.newSearch(variant, string);
     else
       result &#x3D; this.piService.search(variant, string);
-    result.subscribe(response &#x3D;&gt; this.results &#x3D; response.json(), (error) &#x3D;&gt;  console.log(error),() &#x3D;&gt; this.isSearching &#x3D; false);
+    result.subscribe(response &#x3D;&gt; this.results &#x3D; response.json(), (error) &#x3D;&gt; console.log(error), () &#x3D;&gt; this.isSearching &#x3D; false);
   }
 
 }

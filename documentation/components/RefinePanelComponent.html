@@ -817,14 +817,16 @@
     <code>src/app/observation-tool/components/pi-select/refine-panel/refine-panel.component.ts</code>
 </p>
 
-
-
     <p class="comment">
-        <h3>Implements</h3>
+        <h3>Description</h3>
     </p>
     <p class="comment">
-                <code>OnInit</code>
+        <p>The refine panel component.
+Allows user to refine PI search by category</p>
+
     </p>
+
+
 
 
 <section>
@@ -878,9 +880,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                 <a href="#ngOnInit">ngOnInit</a>
-                            </li>
-                            <li>
                                  <a href="#refineClick">refineClick</a>
                             </li>
                         </ul>
@@ -918,24 +917,6 @@
         </table>
     </section>
 
-    <section>
-        <h3 id="constructor">Constructor</h3>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <code>constructor()</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/observation-tool/components/pi-select/refine-panel/refine-panel.component.ts:12</a></div>
-                                </td>
-                            </tr>
-    
-                </tbody>
-            </table>
-    </section>
 
     <section>
         <h3 id="inputs">Inputs</h3>
@@ -947,11 +928,13 @@
                             <code>name</code>
                         </td>
                         <td class="col-md-10">
+                            <div><p>The name originally searched for </p>
+</div>
                         </td>
                     </tr>
                             <tr>
                                 <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/observation-tool/components/pi-select/refine-panel/refine-panel.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/components/pi-select/refine-panel/refine-panel.component.ts:16</a></div>
                                 </td>
                             </tr>
                 </tbody>
@@ -968,13 +951,15 @@
                             <code>refineSearch</code>
                         </td>
                         <td class="col-md-10">
+                            <div><p>Emits chosen search parameters </p>
+</div>
                             <em><code>$event</code> type:</em>    <code>EventEmitter</code>
 
                         </td>
                     </tr>
                             <tr>
                                 <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/observation-tool/components/pi-select/refine-panel/refine-panel.component.ts:11</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/observation-tool/components/pi-select/refine-panel/refine-panel.component.ts:18</a></div>
                                 </td>
                             </tr>
                 </tbody>
@@ -992,57 +977,27 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <a name="ngOnInit"></a>
-                            <span class="name"><b> ngOnInit</b><a href="#ngOnInit"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-    <code>ngOnInit()</code>
-                        </td>
-                    </tr>
-    
-    
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/observation-tool/components/pi-select/refine-panel/refine-panel.component.ts:17</a></div>
-                                </td>
-                            </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-    
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-    
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
                             <a name="refineClick"></a>
                             <span class="name"><b> refineClick</b><a href="#refineClick"><span class="fa fa-link"></span></a></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-    <code>refineClick(searchVariant: , searchString: )</code>
+    <code>refineClick(searchVariant: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, searchString: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                         </td>
                     </tr>
     
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/observation-tool/components/pi-select/refine-panel/refine-panel.component.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/observation-tool/components/pi-select/refine-panel/refine-panel.component.ts:25</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Called when refine button is clicked, emits the search parameters</p>
+    </div>
     
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -1059,18 +1014,22 @@
                                                     <tr>
                                                       <td>searchVariant</td>
                                                       <td>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>The type of search to be made</p>
+    </td>
                                                     </tr>
                                                     <tr>
                                                       <td>searchString</td>
                                                       <td>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>The string to search for</p>
+    </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -1095,27 +1054,31 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {Component, EventEmitter, Input, OnInit, Output} from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {Component, EventEmitter, Input, Output} from &#x27;@angular/core&#x27;;
 
+/**
+ * The refine panel component.
+ * Allows user to refine PI search by category
+ */
 
 @Component({
   selector: &#x27;app-refine-panel&#x27;,
   templateUrl: &#x27;./refine-panel.component.html&#x27;,
   styleUrls: [&#x27;./refine-panel.component.css&#x27;]
 })
-export class RefinePanelComponent implements OnInit {
+export class RefinePanelComponent {
 
-  @Output() refineSearch &#x3D; new EventEmitter&lt;string[]&gt;();
+  /** The name originally searched for */
   @Input() name;
+  /** Emits chosen search parameters */
+  @Output() refineSearch &#x3D; new EventEmitter&lt;string[]&gt;();
 
-  constructor() {
-  }
-
-  ngOnInit() {
-
-  }
-
-  refineClick(searchVariant, searchString) {
+  /**
+   * Called when refine button is clicked, emits the search parameters
+   * @param searchVariant The type of search to be made
+   * @param searchString  The string to search for
+   */
+  refineClick(searchVariant: string, searchString: string) {
     this.refineSearch.emit([searchVariant, searchString]);
   }
 

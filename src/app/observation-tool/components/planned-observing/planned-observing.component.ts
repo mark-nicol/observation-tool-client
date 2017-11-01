@@ -1,4 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from '@angular/core';
+
+/**
+ * Planned observing component
+ *
+ * TODO Implement
+ */
 
 @Component({
   selector: 'app-planned-observing',
@@ -6,11 +12,6 @@ import {Component, OnInit} from "@angular/core";
   styleUrls: ['./planned-observing.component.css']
 })
 
-export class PlannedObservingComponent implements OnInit {
-
-  constructor () {}
-
-  ngOnInit() {
-  }
+export class PlannedObservingComponent {
 
 }

@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import * as _ from 'lodash';
+import {NavItem} from 'app/observation-tool/interfaces/navbar-item';
 
-import * as _ from "lodash";
+/**
+ * The navbar component at the top of the application
+ */
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +13,14 @@ import * as _ from "lodash";
 })
 export class NavbarComponent implements OnInit {
 
-
+  /** Controls collapsing of the navbar on smaller screen sizes */
   isCollapsed = true;
+
+  /** Keeps track of the currently selected science goal */
   selectedGoal: any;
 
-  items = [
+  /** All items to show on the navbar menu and their routing paths */
+  items: NavItem[] = [
     {
       title: 'Project',
       path: 'pi-entry'
@@ -32,7 +39,12 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  scienceGoals = [
+  /**
+   * Selectable science goals
+   *
+   * Currently unused
+   * */
+  scienceGoals: NavItem[] = [
     {
       title: 'Science Goal 1',
       path: 'sciGoals'
@@ -47,23 +59,36 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  constructor() {
-  }
-
+  /**
+   * Sets the currently selected goal to the first in the list
+   */
   ngOnInit() {
     this.selectedGoal = this.scienceGoals[0];
   }
 
-  click(newGoal) {
+  /**
+   * Sets the currently selected goal to the item selected in the menu
+   * @param {string} newGoal The user selected goal to be set
+   */
+  click(newGoal: string) {
     this.selectedGoal = newGoal;
   }
 
+  /**
+   * Adds a new goal to the available goals
+   *
+   * @return false
+   */
   addGoal() {
     this.scienceGoals.push({title: 'New Goal', path: 'sciGoals'});
     return false;
   }
 
-  removeGoal(toRemove) {
+  /**
+   * Removes the selected goal from the available goals
+   * @param toRemove The goal to remove from the list
+   */
+  removeGoal(toRemove: string) {
     _.remove(this.scienceGoals, toRemove);
     if (this.selectedGoal === toRemove) {
       this.selectedGoal = this.scienceGoals[0];

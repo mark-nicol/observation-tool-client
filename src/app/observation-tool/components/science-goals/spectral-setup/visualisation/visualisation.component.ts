@@ -1,12 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+
+/**
+ * Spectral visualisation component
+ *
+ * Currently inactive
+ */
 
 @Component({
   selector: 'app-visualisation',
   templateUrl: './visualisation.component.html',
   styleUrls: ['./visualisation.component.scss']
 })
-export class VisualisationComponent implements OnInit {
+export class VisualisationComponent {
 
+  /** Values for the column density selector */
   columnDensityChoices = [
     '0.472mm (1st Octile)',
     '0.658mm (2nd Octile)',
@@ -16,10 +23,5 @@ export class VisualisationComponent implements OnInit {
     '2.748mm (6th Octile)',
     '5.186mm (7th Octile)',
   ];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }

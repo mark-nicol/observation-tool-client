@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ScienceGoalPanelService} from "../../services/science-goal-panel.service";
-import {Observable} from "rxjs/Observable";
-import {Page} from "../../models/page";
+import {Page} from '../../classes/page';
+import {ScienceGoalPanelService} from '../../services/science-goal-panel.service';
+
+/**
+ * Science goal component which contains tabbed science goal pages
+ */
 
 @Component({
   selector: 'app-science-goal',
@@ -10,19 +13,35 @@ import {Page} from "../../models/page";
 })
 export class ScienceGoalComponent implements OnInit {
 
-  selectedPage: string = 'general';
-  pages: { [id: string]: Page };
-  pageKeys = Object.keys;
+  /** The currently selected goal page */
+  selectedPage = 'general';
 
+  /** Dict of all science goal page data */
+  pages: { [id: string]: Page };
+
+  /** Iterator for pages */
+  pageKeys: (o) => string[] = Object.keys;
+
+  /**
+   * Constructor
+   * @param scienceGoalPanelService Injected service
+   */
   constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
   }
 
+  /**
+   * Collects page data from the service
+   */
   ngOnInit() {
     this.scienceGoalPanelService.pages.subscribe(data => this.pages = data);
   }
 
-  hiddenChange(event) {
-    this.scienceGoalPanelService.hiddenChange(this.selectedPage, event);
+  /**
+   * Handles a change of a panel's hidden state
+   * @param panel The panel to change state on
+   */
+  hiddenChange(panel: string) {
+    this.scienceGoalPanelService.hiddenChange(this.selectedPage, panel);
   }
 
 }

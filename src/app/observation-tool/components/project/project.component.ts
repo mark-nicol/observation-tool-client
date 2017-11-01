@@ -1,4 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from '@angular/core';
+
+/**
+ * The project component
+ *
+ * TODO Implement
+ */
 
 @Component({
   selector: 'app-project',
@@ -6,8 +12,5 @@ import {Component, OnInit} from "@angular/core";
   styleUrls: ['./project.component.css']
 })
 
-export class ProjectComponent implements OnInit{
-  constructor() {}
-
-  ngOnInit() {}
+export class ProjectComponent {
 }

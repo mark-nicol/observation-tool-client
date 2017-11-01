@@ -1,4 +1,4 @@
-import {Page} from '../models/page';
+import {Page} from '../classes/page';
 
 
 export const PAGES: { [id: string]: Page } = {

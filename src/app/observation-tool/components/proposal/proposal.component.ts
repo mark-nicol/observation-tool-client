@@ -1,4 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from '@angular/core';
+
+/**
+ * The proposal component
+ *
+ * TODO Implement
+ */
 
 @Component({
   selector: 'app-proposal',
@@ -6,12 +12,6 @@ import {Component, OnInit} from "@angular/core";
   styleUrls: ['./proposal.component.css']
 })
 
-export class ProposalComponent implements OnInit {
-
-  constructor() {}
-
-  ngOnInit() {
-
-  }
+export class ProposalComponent {
 
 }

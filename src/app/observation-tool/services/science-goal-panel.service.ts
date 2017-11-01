@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {Page} from "../models/page";
+import {Page} from "../classes/page";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {PAGES} from "../data/pages";
 

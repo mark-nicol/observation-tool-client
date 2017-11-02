@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpectralSetupComponent } from './spectral-setup.component';
 import {ModularPanelComponent} from "../../modular-panel/modular-panel.component";
-import {VisualisationComponent} from "./visualisation/visualisation.component";
+import {VisualisationControlComponent} from "./visualisation-control/visualisation-control.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {TypeComponent} from "./type/type.component";
 import {ScienceGoalPanelService} from "../../../services/science-goal-panel.service";
@@ -17,7 +17,7 @@ describe('SpectralSetupComponent', () => {
       declarations: [
         SpectralSetupComponent,
         ModularPanelComponent,
-        VisualisationComponent,
+        VisualisationControlComponent,
         TypeComponent,
         SelectableComponent
       ],

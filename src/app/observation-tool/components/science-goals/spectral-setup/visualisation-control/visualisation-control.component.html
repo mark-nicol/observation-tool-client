@@ -3,7 +3,18 @@
     <label>Overlays</label>
   </div>
   <div class="col-xl">
-    <selectable type="checkbox">Receiver Bands</selectable>
+    <!--<label><input type="checkbox" (checked)="bandsChecked" (change)="bandsCheckedChange()">Receiver Bands</label>-->
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" [(checked)]="bandsChecked" (change)="bandsCheckedChange()">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Receiver Bands</span>
+    </label>
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" [(checked)]="transmissionChecked"
+             (change)="transmissionCheckedChange()">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Transmission</span>
+    </label>
     <selectable type="checkbox">Transmission</selectable>
     <selectable type="checkbox">DSB Image</selectable>
     <selectable type="checkbox">Spectral Lines</selectable>

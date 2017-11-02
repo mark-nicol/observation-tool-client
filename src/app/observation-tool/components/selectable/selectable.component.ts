@@ -23,6 +23,9 @@ export class SelectableComponent implements OnInit {
   @Input()
   checked: boolean;
 
+  @Input()
+  change: any;
+
   constructor() { }
 
   ngOnInit() {

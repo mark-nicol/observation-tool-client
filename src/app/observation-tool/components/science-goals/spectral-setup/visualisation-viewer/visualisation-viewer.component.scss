@@ -1,0 +1,16 @@
+.spectral-chart {
+  width: 100%;
+  height: 20em;
+}
+
+.spectral-chart .line {
+  fill: none;
+  stroke: crimson;
+  stroke-width: 1.5px;
+}
+
+.spectral-chart .axis-label {
+  font-weight: bold;
+  fill: black;
+  text-anchor: middle;
+}

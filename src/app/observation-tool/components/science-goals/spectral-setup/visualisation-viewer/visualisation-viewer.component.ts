@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as d3 from 'd3';
 
 /**
@@ -15,9 +15,6 @@ import * as d3 from 'd3';
 })
 export class VisualisationViewerComponent implements OnInit {
 
-  @Input() bands = true;
-  @Input() transmission = true;
-
   private regions = [
     [84, 116],
     [120, 163],
@@ -32,40 +29,48 @@ export class VisualisationViewerComponent implements OnInit {
   private regionColors: any;
 
   /** Reference to the div in the template which holds the chart */
-  @ViewChild('chart') private chartContainer: ElementRef;
+  @ViewChild('focus') private focusContainer: ElementRef;
+
+  @ViewChild('context') private contextContainer: ElementRef;
 
   /** The data array for use within the component */
   private data: Array<any>;
 
   /** The complete svg element of the chart */
-  private svg: any;
+  private focusSvg: any;
+  private contextSvg: any;
 
   /** Margins for the whole svg */
-  private margin = {top: 40, right: 20, bottom: 40, left: 20};
+  private focusMargin = {top: 40, right: 20, bottom: 40, left: 20};
+  private contextMargin = {top: 0, right: 20, bottom: 40, left: 20};
 
   /** The chart group, this is the svg minus the axes */
-  private chart: any;
+  private focus: any;
+  private context: any;
 
-  /** The width of the chart area (element width - lr margins */
-  private width: number;
+  /** The width of the chart area (element width - lr margins) */
+  private focusWidth: number;
+  private contextWidth: number;
 
   /** The height of the chart area (element height - tb margins) */
-  private height: number;
+  private focusHeight: number;
+  private contextHeight: number;
 
   /** X Scale for any x-axes */
-  private xScale: any;
+  private focusXScale: any;
+  private contextXScale: any;
 
   /** Y Scale for main chart y-axis */
-  private yScale: any;
-
-  private regionScale: any;
+  private focusYScale: any;
+  private contextYScale: any;
 
   /** The upper x axis of the chart */
-  private xUpperAxis: any;
+  private focusXUpperAxis: any;
 
   /** The lower x axis of the chart */
-  private xLowerAxis: any;
+  private focusXLowerAxis: any;
 
+  private contextXAxis: any;
   /** The y axis of the chart */
   private yAxis: any;
 
@@ -74,7 +79,8 @@ export class VisualisationViewerComponent implements OnInit {
 
   ngOnInit() {
     this.createData();
-    this.createChart();
+    this.createFocusChart();
+    this.createContextChart();
   }
 
   createData() {
@@ -84,26 +90,60 @@ export class VisualisationViewerComponent implements OnInit {
     }
   }
 
-  createChart() {
-    const element = this.chartContainer.nativeElement;
-    this.width = element.offsetWidth - this.margin.left - this.margin.right;
-    this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
+  createContextChart() {
+    const element = this.contextContainer.nativeElement;
+    this.contextWidth = element.offsetWidth - this.contextMargin.left - this.contextMargin.right;
+    this.contextHeight = element.offsetHeight - this.contextMargin.top - this.contextMargin.bottom;
 
-    this.svg = d3.select(element).append('svg')
+    this.contextSvg = d3.select(element).append('svg')
       .attr('width', element.offsetWidth)
       .attr('height', element.offsetHeight);
 
-    this.chart = this.svg.append('g')
-      .attr('class', 'lines')
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+    this.context = this.contextSvg.append('g')
+      .attr('class', 'context')
+      .attr('transform', `translate(${this.contextMargin.left}, ${this.contextMargin.top})`);
 
     const
       xDomain = [0, d3.max(this.data, d => d[0])],
       yDomain = [d3.min(this.data, d => d[1]), d3.max(this.data, d => d[1])];
 
-    this.xScale = d3.scaleLinear().domain(xDomain).range([0, this.width]);
-    this.regionScale = d3.scaleBand().domain(xDomain).rangeRound([0, this.width]);
-    this.yScale = d3.scaleLinear().domain(yDomain).range([this.height, 0]);
+    this.contextXScale = d3.scaleLinear().domain(xDomain).range([0, this.contextWidth]);
+    this.contextYScale = d3.scaleLinear().domain(yDomain).range([this.contextHeight, 0]);
+
+    this.contextXAxis = this.contextSvg.append('g')
+      .attr('class', 'axis axis-x axis-x-context')
+      .attr('transform', `translate(${this.contextMargin.left}, ${this.contextMargin.top + this.contextHeight})`)
+      .call(d3.axisBottom(this.contextXScale));
+
+    const line = d3.line()
+      .x((d: any) => this.contextXScale(d[0]))
+      .y((d: any) => this.contextYScale(d[1]));
+
+    this.context.append('path')
+      .data([this.data])
+      .attr('class', 'line')
+      .attr('d', line);
+  }
+
+  createFocusChart() {
+    const element = this.focusContainer.nativeElement;
+    this.focusWidth = element.offsetWidth - this.focusMargin.left - this.focusMargin.right;
+    this.focusHeight = element.offsetHeight - this.focusMargin.top - this.focusMargin.bottom;
+
+    this.focusSvg = d3.select(element).append('svg')
+      .attr('width', element.offsetWidth)
+      .attr('height', element.offsetHeight);
+
+    this.focus = this.focusSvg.append('g')
+      .attr('class', 'focus')
+      .attr('transform', `translate(${this.focusMargin.left}, ${this.focusMargin.top})`);
+
+    const
+      xDomain = [0, d3.max(this.data, d => d[0])],
+      yDomain = [d3.min(this.data, d => d[1]), d3.max(this.data, d => d[1])];
+
+    this.focusXScale = d3.scaleLinear().domain(xDomain).range([0, this.focusWidth]);
+    this.focusYScale = d3.scaleLinear().domain(yDomain).range([this.focusHeight, 0]);
 
     this.drawXAxes();
 
@@ -112,22 +152,22 @@ export class VisualisationViewerComponent implements OnInit {
   }
 
   drawXAxes() {
-    this.xUpperAxis = this.svg.append('g')
+    this.focusXUpperAxis = this.focusSvg.append('g')
       .attr('class', 'axis axis-x axis-x-upper')
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
-      .call(d3.axisTop(this.xScale))
+      .attr('transform', `translate(${this.focusMargin.left}, ${this.focusMargin.top})`)
+      .call(d3.axisTop(this.focusXScale))
       .append('text')
       .attr('class', 'axis-label axis-x-upper-label')
-      .attr('transform', `translate(${this.margin.left + (this.width / 2)}, ${-this.margin.top * 0.66})`)
+      .attr('transform', `translate(${this.focusMargin.left + (this.focusWidth / 2)}, ${-this.focusMargin.top * 0.66})`)
       .text('Observed Frequency');
 
-    this.xLowerAxis = this.svg.append('g')
+    this.focusXLowerAxis = this.focusSvg.append('g')
       .attr('class', 'axis axis-x axis-x-lower')
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top + this.height})`)
-      .call(d3.axisBottom(this.xScale))
+      .attr('transform', `translate(${this.focusMargin.left}, ${this.focusMargin.top + this.focusHeight})`)
+      .call(d3.axisBottom(this.focusXScale))
       .append('text')
       .attr('class', 'axis-label axis-x-upper-label')
-      .attr('transform', `translate(${this.margin.left + (this.width / 2)}, ${this.margin.bottom * 0.66})`)
+      .attr('transform', `translate(${this.focusMargin.left + (this.focusWidth / 2)}, ${this.focusMargin.bottom * 0.66})`)
       .text('Rest Frequency');
   }
 
@@ -137,12 +177,12 @@ export class VisualisationViewerComponent implements OnInit {
       'steelblue'
     ]);
     for (let i = 0; i < this.regions.length; i++) {
-      this.chart.append('rect')
+      this.focus.append('rect')
         .attr('class', 'region')
-        .attr('x', d => this.xScale(this.regions[i][0]))
+        .attr('x', d => this.focusXScale(this.regions[i][0]))
         .attr('y', d => 0)
-        .attr('width', this.xScale(this.regions[i][1]) - this.xScale(this.regions[i][0]))
-        .attr('height', this.height)
+        .attr('width', this.focusXScale(this.regions[i][1]) - this.focusXScale(this.regions[i][0]))
+        .attr('height', this.focusHeight)
         .style('fill', d => this.regionColors(i))
         .style('opacity', '0.3')
     }
@@ -150,10 +190,10 @@ export class VisualisationViewerComponent implements OnInit {
 
   drawLine() {
     const line = d3.line()
-      .x((d: any) => this.xScale(d[0]))
-      .y((d: any) => this.yScale(d[1]));
+      .x((d: any) => this.focusXScale(d[0]))
+      .y((d: any) => this.focusYScale(d[1]));
 
-    this.chart.append('path')
+    this.focus.append('path')
       .data([this.data])
       .attr('class', 'line')
       .attr('d', line);
@@ -162,10 +202,10 @@ export class VisualisationViewerComponent implements OnInit {
   hideShowBands(show?: boolean) {
     console.log('hide show bands =', show);
     if (show) {
-      this.chart.selectAll('.region').transition().delay((d, i) => i * 50)
+      this.focus.selectAll('.region').transition().delay((d, i) => i * 50)
         .style('opacity', '0.3');
     } else {
-      this.chart.selectAll('.region').transition().delay((d, i) => i * 50)
+      this.focus.selectAll('.region').transition().delay((d, i) => i * 50)
         .style('opacity', '0.0');
     }
   }
@@ -173,12 +213,20 @@ export class VisualisationViewerComponent implements OnInit {
   hideShowTransmission(show?: boolean) {
     console.log('hide show trans =', show);
     if (show) {
-      this.chart.selectAll('.line').transition()
+      this.focus.selectAll('.line').transition()
         .style('opacity', '1.0');
     } else {
-      this.chart.selectAll('.line').transition()
+      this.focus.selectAll('.line').transition()
         .style('opacity', '0.0');
     }
+  }
+
+  brushed() {
+
+  }
+
+  zoomed() {
+
   }
 
 }

@@ -316,9 +316,6 @@
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ModularPanelInterface.html" >ModularPanelInterface</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/NavItem.html"  data-type="entity-link" class="active" >NavItem</a>
                                 </li>
                                 <li class="link">
@@ -696,9 +693,6 @@
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ModularPanelInterface.html" >ModularPanelInterface</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/NavItem.html"  data-type="entity-link" class="active" >NavItem</a>
                                        </li>
                                        <li class="link">
@@ -811,6 +805,13 @@
             <code>src/app/observation-tool/interfaces/navbar-item.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Forces all navbar items to have a title and routing path</p>
+
+            </p>
 
 
         <section>
@@ -869,10 +870,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="3" class="link-to-prism">src/app/observation-tool/interfaces/navbar-item.ts:3</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/observation-tool/interfaces/navbar-item.ts:8</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The routing path of the item </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -902,10 +909,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="2" class="link-to-prism">src/app/observation-tool/interfaces/navbar-item.ts:2</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/observation-tool/interfaces/navbar-item.ts:6</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The title to show for the item in the navbar </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -914,7 +927,9 @@
 
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">export interface NavItem {
+  /** The title to show for the item in the navbar */
   title: string;
+  /** The routing path of the item */
   path: string;
 }
 </code></pre>

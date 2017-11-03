@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {SourceComponentInterface} from '../../../../classes/source.interface';
+import {SourceComponentInterface} from '../../../../interfaces/source.interface';
 import {FieldSetupService} from '../../../../services/field-setup.service';
-import {CoordSystem} from '../../../../classes/coord-system.interface';
+import {CoordSystem} from '../../../../interfaces/coord-system.interface';
 
 /**
  * Source Component in Field Setup

@@ -1,9 +1,15 @@
+import {Angle} from '../../units/classes/angle';
 import {Latitude} from '../../units/classes/latitude';
 import {Longitude} from '../../units/classes/longitude';
-import {Angle} from '../../units/classes/angle';
+
+/**
+ * Interface for the Field Centre Coordinates Component page data
+ */
 
 export interface FieldCentreCoordinatesInterface {
+  /** The currently chosen coordinates type */
   coordType: string,
+  /** Data for if individual component is being used */
   individual: {
     offsetUnit: string,
     rows: [
@@ -13,6 +19,7 @@ export interface FieldCentreCoordinatesInterface {
       }
       ]
   },
+  /** Data for if rectangular component is being used */
   rectangular: {
     chosenSystem: string,
     sexagesimalUnits: boolean,

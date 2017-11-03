@@ -316,9 +316,6 @@
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html"  data-type="entity-link" class="active" >FieldCentreCoordinatesInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ModularPanelInterface.html" >ModularPanelInterface</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/NavItem.html" >NavItem</a>
                                 </li>
                                 <li class="link">
@@ -696,9 +693,6 @@
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html"  data-type="entity-link" class="active" >FieldCentreCoordinatesInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ModularPanelInterface.html" >ModularPanelInterface</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/NavItem.html" >NavItem</a>
                                        </li>
                                        <li class="link">
@@ -811,6 +805,13 @@
             <code>src/app/observation-tool/interfaces/field-centre-coordinates.interface.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface for the Field Centre Coordinates Component page data</p>
+
+            </p>
 
 
         <section>
@@ -872,10 +873,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/observation-tool/interfaces/field-centre-coordinates.interface.ts:6</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/observation-tool/interfaces/field-centre-coordinates.interface.ts:11</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The currently chosen coordinates type </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -905,10 +912,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/observation-tool/interfaces/field-centre-coordinates.interface.ts:7</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/observation-tool/interfaces/field-centre-coordinates.interface.ts:13</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Data for if individual component is being used </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -938,10 +951,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/interfaces/field-centre-coordinates.interface.ts:16</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/observation-tool/interfaces/field-centre-coordinates.interface.ts:23</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Data for if rectangular component is being used </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -949,12 +968,18 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {Latitude} from &#x27;../../units/classes/latitude&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {Angle} from &#x27;../../units/classes/angle&#x27;;
+import {Latitude} from &#x27;../../units/classes/latitude&#x27;;
 import {Longitude} from &#x27;../../units/classes/longitude&#x27;;
-import {Angle} from &#x27;../../units/classes/angle&#x27;;
+
+/**
+ * Interface for the Field Centre Coordinates Component page data
+ */
 
 export interface FieldCentreCoordinatesInterface {
+  /** The currently chosen coordinates type */
   coordType: string,
+  /** Data for if individual component is being used */
   individual: {
     offsetUnit: string,
     rows: [
@@ -964,6 +989,7 @@ export interface FieldCentreCoordinatesInterface {
       }
       ]
   },
+  /** Data for if rectangular component is being used */
   rectangular: {
     chosenSystem: string,
     sexagesimalUnits: boolean,

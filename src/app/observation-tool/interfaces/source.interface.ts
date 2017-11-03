@@ -5,6 +5,10 @@ import {Angle} from '../../units/classes/angle';
 import {AngularVelocity} from '../../units/classes/angular-velocity';
 import {Speed} from '../../units/classes/speed';
 
+/**
+ * Interface to define data in the ScienceGoal/FieldSetup/Source component
+ */
+
 export interface SourceComponentInterface {
   sourceName: string,
   solarSystemObject: boolean,

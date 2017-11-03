@@ -811,6 +811,13 @@
             <code>src/app/observation-tool/interfaces/coord-system.interface.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Interface for a coordinates system supplying labels and placeholders to the UI</p>
+
+            </p>
 
 
         <section>
@@ -881,10 +888,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:13</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:22</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Latitude table header in field centre coordinates input component </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -914,10 +927,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:10</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:16</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Latitude placeholder </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -947,10 +966,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:12</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:20</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Longitude table header in field centre coordinates input component </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -980,10 +1005,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:11</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:18</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Longitude placeholder </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -1013,10 +1044,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:6</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:11</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Labels for lat long input boxes if sexagesimal checkbox is unchecked </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -1046,10 +1083,16 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="2" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:2</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/observation-tool/interfaces/coord-system.interface.ts:6</a></div>
                                         </td>
                                     </tr>
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Labels for lat long input boxes if sexagesimal checkbox is checked </p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -1058,17 +1101,23 @@
 
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">export interface CoordSystem {
+  /** Labels for lat long input boxes if sexagesimal checkbox is checked */
   sexagesimalLabels: {
     latLabel: string,
     lonLabel: string
   },
+  /** Labels for lat long input boxes if sexagesimal checkbox is unchecked */
   normalLabels: {
     latLabel: string,
     lonLabel: string
   },
+  /** Latitude placeholder */
   latPlaceholder: string,
+  /** Longitude placeholder */
   lonPlaceholder: string,
+  /** Longitude table header in field centre coordinates input component */
   lonHeader: string,
+  /** Latitude table header in field centre coordinates input component */
   latHeader: string
 }
 </code></pre>

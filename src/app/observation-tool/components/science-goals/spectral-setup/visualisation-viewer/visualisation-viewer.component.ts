@@ -1,6 +1,9 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as d3 from 'd3';
 
+/**
+ * Interface for a standard chart. Everything but axes
+ */
 interface ChartInterface {
   svg: any,
   margin: Margin,
@@ -11,15 +14,24 @@ interface ChartInterface {
   yScale: any,
 }
 
+/**
+ * Interface for the focus chart, includes upper and lower axes
+ */
 interface FocusChartInterface extends ChartInterface {
   xUpperAxis: any,
   xLowerAxis: any
 }
 
+/**
+ * Interface for the context chart. Lower X axis only
+ */
 interface ContextChartInterface extends ChartInterface {
   xAxis: any
 }
 
+/**
+ * Interface for chart margins
+ */
 interface Margin {
   top: number,
   right: number,
@@ -41,6 +53,7 @@ interface Margin {
 })
 export class VisualisationViewerComponent implements OnInit {
 
+  /** Regions for receiver bands */
   private regions = [
     [84, 116],
     [120, 163],
@@ -52,6 +65,7 @@ export class VisualisationViewerComponent implements OnInit {
     [787, 950]
   ];
 
+  /** Colors for receiver band regions */
   private regionColors: any;
 
   /** Reference to the div in the template to hold the focus chartArea */
@@ -63,6 +77,7 @@ export class VisualisationViewerComponent implements OnInit {
   /** The data array for use within the component */
   private data: Array<any>;
 
+  /** Object holding data for the focus chart */
   private focus: FocusChartInterface = {
     svg: {},
     margin: {top: 40, right: 20, bottom: 40, left: 20},
@@ -75,6 +90,7 @@ export class VisualisationViewerComponent implements OnInit {
     xLowerAxis: {}
   };
 
+  /** Object holding data for the context chart */
   private context: ContextChartInterface = {
     svg: {},
     margin: {top: 0, right: 20, bottom: 40, left: 20},
@@ -86,15 +102,18 @@ export class VisualisationViewerComponent implements OnInit {
     xAxis: {}
   };
 
-  constructor() {
-  }
-
+  /**
+   * Creates the data and two charts
+   */
   ngOnInit() {
     this.createData();
     this.createFocusChart();
     this.createContextChart();
   }
 
+  /**
+   * Creates the data array for the charts to use
+   */
   createData() {
     this.data = [];
     for (let i = 0; i < 1000; i++) {
@@ -102,6 +121,9 @@ export class VisualisationViewerComponent implements OnInit {
     }
   }
 
+  /**
+   * Creates and draws the smaller context chart
+   */
   createContextChart() {
     const element = this.contextContainer.nativeElement;
     this.context.width = element.offsetWidth - this.context.margin.left - this.context.margin.right;
@@ -137,6 +159,9 @@ export class VisualisationViewerComponent implements OnInit {
       .attr('d', line);
   }
 
+  /**
+   * Creates and draws the larger focus chart
+   */
   createFocusChart() {
     const element = this.focusContainer.nativeElement;
     this.focus.width = element.offsetWidth - this.focus.margin.left - this.focus.margin.right;
@@ -162,6 +187,9 @@ export class VisualisationViewerComponent implements OnInit {
     this.drawRegions();
   }
 
+  /**
+   * Draws the x axes for the focus chart
+   */
   drawXAxes() {
     this.focus.xUpperAxis = this.focus.svg.append('g')
       .attr('class', 'axis axis-x axis-x-upper')
@@ -182,6 +210,9 @@ export class VisualisationViewerComponent implements OnInit {
       .text('Rest Frequency');
   }
 
+  /**
+   * Draws the receiver band regions on the focus chart
+   */
   drawRegions() {
     this.regionColors = d3.scaleLinear().domain([0, this.regions.length]).range(<any[]>[
       'limegreen',
@@ -199,6 +230,9 @@ export class VisualisationViewerComponent implements OnInit {
     }
   }
 
+  /**
+   * Draws the line on the focus chart
+   */
   drawLine() {
     const line = d3.line()
       .x((d: any) => this.focus.xScale(d[0]))
@@ -210,6 +244,9 @@ export class VisualisationViewerComponent implements OnInit {
       .attr('d', line);
   }
 
+  /**
+   * Hides or shows the receiver bands on the focus chart depending on the checkbox
+   */
   hideShowBands(show?: boolean) {
     console.log('hide show bands =', show);
     if (show) {
@@ -221,6 +258,9 @@ export class VisualisationViewerComponent implements OnInit {
     }
   }
 
+  /**
+   * Hides or shows the transmission line depending on the checkbox
+   */
   hideShowTransmission(show?: boolean) {
     console.log('hide show trans =', show);
     if (show) {

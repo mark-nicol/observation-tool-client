@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Page} from '../../classes/page';
+import {Page} from '../../interfaces/page';
 import {ScienceGoalPanelService} from '../../services/science-goal-panel.service';
 
 /**

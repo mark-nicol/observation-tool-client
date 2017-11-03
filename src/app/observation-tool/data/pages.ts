@@ -1,4 +1,4 @@
-import {Page} from '../classes/page';
+import {Page} from '../interfaces/page';
 
 
 export const PAGES: { [id: string]: Page } = {

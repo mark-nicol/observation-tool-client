@@ -25,10 +25,40 @@
     <label>Water Vapour Column Density</label>
   </div>
   <div class="col-xl">
-    <selectable id="automaticRadio" name="densityRadios" type="radio">Automatic Choice</selectable>
-    <selectable id="manualRadio" name="densityRadios" type="radio">Manual Choice</selectable>
-    <select class="form-control form-control-sm">
-      <option *ngFor="let choice of columnDensityChoices">{{choice}}</option>
+    <label class="custom-control custom-radio">
+      <input #autoRadio
+             id="automaticRadio"
+             name="densityRadios"
+             type="radio"
+             class="custom-control-input"
+             value="automatic"
+             [checked]="densityRadioChoice === autoRadio.value"
+             (change)="densityRadioChange(autoRadio.value)">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">
+        Automatic Choice
+      </span>
+    </label>
+    <label class="custom-control custom-radio">
+      <input #manRadio
+             id="manualRadio"
+             name="densityRadios"
+             type="radio"
+             class="custom-control-input"
+             value="manual"
+             [checked]="densityRadioChoice === manRadio.value"
+             (change)="densityRadioChange(manRadio.value)">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">
+        Manual Choice
+      </span>
+    </label>
+    <select #densitySelector
+            class="form-control form-control-sm"
+            [disabled]="densityRadioChoice === autoRadio.value"
+            (change)="densitySelectorChange(densitySelector.value)">
+      <option *ngFor="let choice of columnDensityChoices"
+              value="{{choice}}">{{choice}}</option>
     </select>
   </div>
 </div>

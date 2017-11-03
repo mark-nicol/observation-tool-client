@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as d3 from 'd3';
+import {brush} from 'd3-brush';
 
 /**
  * Interface for a standard chart. Everything but axes
@@ -75,7 +76,9 @@ export class VisualisationViewerComponent implements OnInit {
   @ViewChild('context') private contextContainer: ElementRef;
 
   /** The data array for use within the component */
-  private data: Array<any>;
+  private sin: Array<any>;
+  private cos: Array<any>;
+  private tan: Array<any>;
 
   /** Object holding data for the focus chart */
   private focus: FocusChartInterface = {
@@ -102,6 +105,9 @@ export class VisualisationViewerComponent implements OnInit {
     xAxis: {}
   };
 
+  private brush: any;
+  private zoom: any;
+
   /**
    * Creates the data and two charts
    */
@@ -115,9 +121,13 @@ export class VisualisationViewerComponent implements OnInit {
    * Creates the data array for the charts to use
    */
   createData() {
-    this.data = [];
+    this.sin = [];
+    this.cos = [];
+    this.tan = [];
     for (let i = 0; i < 1000; i++) {
-      this.data.push([i, Math.sin(i / 10)]);
+      this.sin.push([i, Math.sin(i / 10)]);
+      this.cos.push([i, Math.cos(i / 20)]);
+      this.tan.push([i, Math.tan(i / 10)]);
     }
   }
 
@@ -138,8 +148,8 @@ export class VisualisationViewerComponent implements OnInit {
       .attr('transform', `translate(${this.context.margin.left}, ${this.context.margin.top})`);
 
     const
-      xDomain = [0, d3.max(this.data, d => d[0])],
-      yDomain = [d3.min(this.data, d => d[1]), d3.max(this.data, d => d[1])];
+      xDomain = [0, d3.max(this.sin, d => d[0])],
+      yDomain = [d3.min(this.sin, d => d[1]), d3.max(this.sin, d => d[1])];
 
     this.context.xScale = d3.scaleLinear().domain(xDomain).range([0, this.context.width]);
     this.context.yScale = d3.scaleLinear().domain(yDomain).range([this.context.height, 0]);
@@ -154,7 +164,7 @@ export class VisualisationViewerComponent implements OnInit {
       .y((d: any) => this.context.yScale(d[1]));
 
     this.context.chartArea.append('path')
-      .data([this.data])
+      .data([this.sin])
       .attr('class', 'line')
       .attr('d', line);
   }
@@ -176,8 +186,8 @@ export class VisualisationViewerComponent implements OnInit {
       .attr('transform', `translate(${this.focus.margin.left}, ${this.focus.margin.top})`);
 
     const
-      xDomain = [0, d3.max(this.data, d => d[0])],
-      yDomain = [d3.min(this.data, d => d[1]), d3.max(this.data, d => d[1])];
+      xDomain = [0, d3.max(this.sin, d => d[0])],
+      yDomain = [d3.min(this.sin, d => d[1]), d3.max(this.sin, d => d[1])];
 
     this.focus.xScale = d3.scaleLinear().domain(xDomain).range([0, this.focus.width]);
     this.focus.yScale = d3.scaleLinear().domain(yDomain).range([this.focus.height, 0]);
@@ -239,7 +249,7 @@ export class VisualisationViewerComponent implements OnInit {
       .y((d: any) => this.focus.yScale(d[1]));
 
     this.focus.chartArea.append('path')
-      .data([this.data])
+      .data([this.sin])
       .attr('class', 'line')
       .attr('d', line);
   }
@@ -248,7 +258,6 @@ export class VisualisationViewerComponent implements OnInit {
    * Hides or shows the receiver bands on the focus chart depending on the checkbox
    */
   hideShowBands(show?: boolean) {
-    console.log('hide show bands =', show);
     if (show) {
       this.focus.chartArea.selectAll('.region').transition().delay((d, i) => i * 50)
         .style('opacity', '0.3');
@@ -262,7 +271,6 @@ export class VisualisationViewerComponent implements OnInit {
    * Hides or shows the transmission line depending on the checkbox
    */
   hideShowTransmission(show?: boolean) {
-    console.log('hide show trans =', show);
     if (show) {
       this.focus.chartArea.selectAll('.line').transition()
         .style('opacity', '1.0');
@@ -270,6 +278,50 @@ export class VisualisationViewerComponent implements OnInit {
       this.focus.chartArea.selectAll('.line').transition()
         .style('opacity', '0.0');
     }
+  }
+
+  changeLine(lineType: string) {
+    switch (lineType) {
+      case 'sin':
+        this.redrawLines(this.sin);
+        break;
+      case 'cos':
+        this.redrawLines(this.cos);
+        break;
+      case 'tan':
+        this.redrawLines(this.tan);
+        break;
+      default:
+        break;
+    }
+  }
+
+  redrawLines(data: any) {
+    this.focus.xScale.domain([0, d3.max(data, d => d[0])]);
+    this.focus.yScale.domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])]);
+    this.context.xScale = this.focus.xScale;
+    this.context.yScale.domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])]);
+    this.focus.xUpperAxis.transition().call(d3.axisTop(this.focus.xScale));
+    this.focus.xLowerAxis.transition().call(d3.axisBottom(this.focus.xScale));
+    this.context.xAxis.transition().call(d3.axisBottom(this.context.xScale));
+
+    const focusLine = d3.line()
+      .x((d: any) => this.focus.xScale(d[0]))
+      .y((d: any) => this.focus.yScale(d[1]));
+
+    this.focus.chartArea.selectAll('.line')
+      .data([data])
+      .transition()
+      .attr('d', focusLine);
+
+    const contextLine = d3.line()
+      .x((d: any) => this.context.xScale(d[0]))
+      .y((d: any) => this.context.yScale(d[1]));
+
+    this.context.chartArea.selectAll('.line')
+      .data([data])
+      .transition()
+      .attr('d', contextLine);
   }
 
   brushed() {

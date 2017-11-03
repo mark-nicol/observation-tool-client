@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ScienceGoalPanelService} from "../../../services/science-goal-panel.service";
-import {ScienceGoalPage} from "../../../models/science-goal-page";
+import {ScienceGoalPage} from '../../../models/science-goal-page';
+import {ScienceGoalPanelService} from '../../../services/science-goal-panel.service';
 import {VisualisationViewerComponent} from './visualisation-viewer/visualisation-viewer.component';
 
 @Component({
@@ -20,13 +20,21 @@ export class SpectralSetupComponent extends ScienceGoalPage implements OnInit {
   }
 
   bandsCheckedChange(event: boolean) {
-    console.log('bands checked =', event);
     this.visualisationViewerComponent.hideShowBands(event);
   }
 
   transmissionCheckedChange(event: boolean) {
-    console.log('trans checked =', event);
     this.visualisationViewerComponent.hideShowTransmission(event);
+  }
+
+  densityRadioChange(event: string) {
+    if (event === 'automatic') {
+      this.visualisationViewerComponent.changeLine('sin');
+    }
+  }
+
+  densitySelectorChange(event: string) {
+    this.visualisationViewerComponent.changeLine(event);
   }
 
 }

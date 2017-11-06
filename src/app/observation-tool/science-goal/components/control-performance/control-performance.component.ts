@@ -4,7 +4,6 @@ import {Component} from '@angular/core';
  * The control and performance component
  *
  * TODO Implement
- * TODO Implement
  */
 
 @Component({

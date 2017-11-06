@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {ScienceGoalPage} from '../interfaces/science-goal-page.interface';
+import {ScienceGoalPage} from '../../shared/interfaces/science-goal-page.interface';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {SCIENCE_GOAL_PAGES} from '../data/science-goal-pages';
 

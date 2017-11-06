@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {PrimaryInvestigator} from '../../../interfaces/primary-investigator'
+import {PrimaryInvestigator} from '../../../../shared/interfaces/primary-investigator'
 
 /**
  * Results table component.

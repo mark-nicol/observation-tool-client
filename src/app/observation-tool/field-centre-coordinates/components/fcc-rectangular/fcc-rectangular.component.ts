@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {CoordSystem} from '../../../../../interfaces/coord-system.interface';
+import {CoordSystem} from '../../../shared/interfaces/coord-system.interface';
 
 /**
  * Field Centre Coordinates component

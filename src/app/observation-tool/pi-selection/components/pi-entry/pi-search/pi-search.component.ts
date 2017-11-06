@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PrimaryInvestigator} from '../../../interfaces/primary-investigator';
+import {PrimaryInvestigator} from '../../../../shared/interfaces/primary-investigator';
 
 /**
  * Initial PI search component

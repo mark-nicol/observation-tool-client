@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ScienceGoalPage} from '../../../classes/science-goal-page';
-import {ScienceGoalPanelService} from '../../../services/science-goal-panel.service';
-import {VisualisationViewerComponent} from './visualisation-viewer/visualisation-viewer.component';
+import {ScienceGoalPage} from '../shared/classes/science-goal-page';
+import {ScienceGoalPanelService} from '../services/science-goal-panel.service';
+import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
 
 @Component({
   selector: 'app-spectral-setup',

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {ScienceGoalPage} from '../../../classes/science-goal-page';
 import {ScienceGoalPanelService} from '../../../services/science-goal-panel.service';
+import {ScienceGoalPage} from '../shared/classes/science-goal-page';
 
 /**
  * Handles the field setup page of a science goal

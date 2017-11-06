@@ -280,6 +280,9 @@ export class VisualisationViewerComponent implements OnInit {
     }
   }
 
+  /**
+   * Changes the type of line show to demonstrate D3 transition
+   */
   changeLine(lineType: string) {
     switch (lineType) {
       case 'sin':
@@ -296,6 +299,9 @@ export class VisualisationViewerComponent implements OnInit {
     }
   }
 
+  /**
+   * Redraws the displayed lines on focus and context charts
+   */
   redrawLines(data: any) {
     this.focus.xScale.domain([0, d3.max(data, d => d[0])]);
     this.focus.yScale.domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])]);

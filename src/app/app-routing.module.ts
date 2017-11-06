@@ -1,18 +1,18 @@
 import {NgModule} from '@angular/core'
 import {RouterModule, Routes} from '@angular/router'
-import {FieldSetupComponent} from './observation-tool/components/science-goals/field-setup/field-setup.component';
-import {SourceComponent} from './observation-tool/components/science-goals/field-setup/source/source.component';
 /* Components */
-import {PiEntryComponent} from './observation-tool/components/pi-entry/pi-entry.component'
-import {PiSelectComponent} from './observation-tool/components/pi-select/pi-select.component'
 import {PlannedObservingComponent} from './observation-tool/components/planned-observing/planned-observing.component';
 import {ProposalComponent} from './observation-tool/components/proposal/proposal.component';
-import {ScienceGoalComponent} from './observation-tool/components/science-goals/science-goal.component';
-import {GeneralComponent} from './observation-tool/components/science-goals/general/general.component';
-import {SpectralSetupComponent} from './observation-tool/components/science-goals/spectral-setup/spectral-setup.component';
 import {CalibrationSetupComponent} from './observation-tool/components/science-goals/calibration-setup/calibration-setup.component';
 import {ControlPerformanceComponent} from './observation-tool/components/science-goals/control-performance/control-performance.component';
+import {FieldSetupComponent} from './observation-tool/components/science-goals/field-setup/field-setup.component';
+import {SourceComponent} from './observation-tool/components/science-goals/field-setup/source/source.component';
+import {GeneralComponent} from './observation-tool/components/science-goals/general/general.component';
+import {ScienceGoalComponent} from './observation-tool/components/science-goals/science-goal.component';
+import {SpectralSetupComponent} from './observation-tool/components/science-goals/spectral-setup/spectral-setup.component';
 import {TechnicalJustificationComponent} from './observation-tool/components/science-goals/technical-justification/technical-justification.component';
+// TODO Sort this error, probably change routing for the module
+import {PiEntryComponent, PiSelectComponent} from './observation-tool/pi-selection/pi-selection.module';
 
 const routes: Routes = [
   {

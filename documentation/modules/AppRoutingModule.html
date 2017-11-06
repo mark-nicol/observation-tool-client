@@ -72,6 +72,9 @@
                                     <a href="../modules/AppRoutingModule.html"  data-type="entity-link" class="active" >AppRoutingModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/PiSelectionModule.html" >PiSelectionModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/UnitsModule.html" >UnitsModule</a>
                                 </li>
                         </ul>
@@ -464,6 +467,9 @@
                                            <a href="../modules/AppRoutingModule.html"  data-type="entity-link" class="active" >AppRoutingModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/PiSelectionModule.html" >PiSelectionModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/UnitsModule.html" >UnitsModule</a>
                                        </li>
                                </ul>
@@ -841,12 +847,11 @@
 
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {NgModule} from &#x27;@angular/core&#x27;
+import {PiEntryComponent, PiSelectComponent} from &#x27;./observation-tool/pi-selection/pi-selection.module&#x27;;
 import {RouterModule, Routes} from &#x27;@angular/router&#x27;
 import {FieldSetupComponent} from &#x27;./observation-tool/components/science-goals/field-setup/field-setup.component&#x27;;
 import {SourceComponent} from &#x27;./observation-tool/components/science-goals/field-setup/source/source.component&#x27;;
 /* Components */
-import {PiEntryComponent} from &#x27;./observation-tool/components/pi-entry/pi-entry.component&#x27;
-import {PiSelectComponent} from &#x27;./observation-tool/components/pi-select/pi-select.component&#x27;
 import {PlannedObservingComponent} from &#x27;./observation-tool/components/planned-observing/planned-observing.component&#x27;;
 import {ProposalComponent} from &#x27;./observation-tool/components/proposal/proposal.component&#x27;;
 import {ScienceGoalComponent} from &#x27;./observation-tool/components/science-goals/science-goal.component&#x27;;

@@ -1,5 +1,5 @@
 import {inject, TestBed} from '@angular/core/testing';
-import {LongitudeConversionService} from './Longitude-conversion.service';
+import {LongitudeConversionService} from './longitude-conversion.service';
 
 describe('LongitudeConversionService', () => {
   beforeEach(() => {

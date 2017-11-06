@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ScienceGoalPage} from '../../../models/science-goal-page';
+import {ScienceGoalPage} from '../../../classes/science-goal-page';
 import {ScienceGoalPanelService} from '../../../services/science-goal-panel.service';
 import {VisualisationViewerComponent} from './visualisation-viewer/visualisation-viewer.component';
 

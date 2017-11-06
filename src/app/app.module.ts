@@ -8,7 +8,6 @@ import {DragulaModule} from 'ng2-dragula';
 import {AppRoutingModule} from './app-routing.module'
 /* Components */
 import {AppComponent} from './app.component';
-import {ModularPanelComponent} from './observation-tool/components/modular-panel/modular-panel.component';
 import {NavbarComponent} from './observation-tool/components/navbar/navbar.component'
 import {PlannedObservingComponent} from './observation-tool/components/planned-observing/planned-observing.component';
 import {ProjectComponent} from './observation-tool/components/project/project.component';
@@ -33,13 +32,11 @@ import {VisualisationControlComponent} from './observation-tool/components/scien
 import {VisualisationViewerComponent} from './observation-tool/components/science-goals/spectral-setup/visualisation-viewer/visualisation-viewer.component';
 import {TechnicalJustificationComponent} from './observation-tool/components/science-goals/technical-justification/technical-justification.component';
 import {SelectableComponent} from './observation-tool/components/selectable/selectable.component';
-import {DelayTooltipDirective} from './observation-tool/directives/delay-tooltip.directive';
-import {DegreesPipe} from './observation-tool/pipes/degrees.pipe';
-import {SexagesimalPipe} from './observation-tool/pipes/sexagesimal.pipe';
 import {FieldSetupService} from './observation-tool/services/field-setup.service';
 /* Services */
 import {ScienceGoalPanelService} from './observation-tool/services/science-goal-panel.service';
 import {PiSelectionModule} from './observation-tool/pi-selection/pi-selection.module';
+import {SharedModule} from './observation-tool/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +45,6 @@ import {PiSelectionModule} from './observation-tool/pi-selection/pi-selection.mo
     FieldSetupComponent,
     FovParametersComponent,
     ImageQueryComponent,
-    ModularPanelComponent,
     NavbarComponent,
     PlannedObservingComponent,
     ProjectComponent,
@@ -56,9 +52,6 @@ import {PiSelectionModule} from './observation-tool/pi-selection/pi-selection.mo
     SourceComponent,
     SourceExpectedPropertiesComponent,
     SpacialImageComponent,
-    DelayTooltipDirective,
-    DegreesPipe,
-    SexagesimalPipe,
     ScienceGoalComponent,
     GeneralComponent,
     SpectralSetupComponent,
@@ -74,6 +67,7 @@ import {PiSelectionModule} from './observation-tool/pi-selection/pi-selection.mo
     VisualisationViewerComponent,
   ],
   imports: [
+    SharedModule,
     PiSelectionModule,
     BrowserModule,
     DragulaModule,

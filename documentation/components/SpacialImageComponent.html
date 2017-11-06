@@ -78,6 +78,12 @@
                                     <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/SharedModule.html" >SharedModule</a>
                                 </li>
                                 <li class="link">
@@ -162,9 +168,6 @@
                                 </li>
                                 <li class="link">
                                     <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -296,7 +299,7 @@
                                     <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                    <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                 </li>
                                 <li class="link">
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -479,6 +482,12 @@
                                            <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/SharedModule.html" >SharedModule</a>
                                        </li>
                                        <li class="link">
@@ -563,9 +572,6 @@
                                        </li>
                                        <li class="link">
                                            <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -697,7 +703,7 @@
                                            <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                           <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                        </li>
                                        <li class="link">
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -1064,7 +1070,7 @@ export class SpacialImageComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="row btn-toolbar justify-content-center">  <div class="btn-group mr-2"       role="group">    <button class="btn btn-outline-secondary"            ngbTooltip="Open a FITS file"            #openButtonTooltip="ngbTooltip"            [tooltip-delay]="openButtonTooltip">      <i class="fa fa-folder-open-o"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Save image as.."            #saveButtonTooltip="ngbTooltip"            [tooltip-delay]="saveButtonTooltip">      <i class="fa fa-save"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Cut selected FOVs"            #cutButtonTooltip="ngbTooltip"            [tooltip-delay]="cutButtonTooltip">      <i class="fa fa-cut"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Select FOVs in a rectangle region"            #rectSelectTooltip="ngbTooltip"            [tooltip-delay]="rectSelectTooltip">      <i class="fa fa-square-o"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Select target centre"            #centreSelectTooltip="ngbTooltip"            [tooltip-delay]="centreSelectTooltip">      <i class="fa fa-times"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Add an FOV"            #addButtonTooltip="ngbTooltip"            [tooltip-delay]="addButtonTooltip">      <i class="fa fa-times-circle-o"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Image cut levels"            #levelsButtonTooltip="ngbTooltip"            [tooltip-delay]="levelsButtonTooltip">      <i class="fa fa-area-chart"></i>    </button>  </div>  <div class="btn-group ml-2"       role="group">    <button class="btn btn-outline-secondary"            ngbTooltip="Zoom in"            #zoomInButtonTooltip="ngbTooltip"            [tooltip-delay]="zoomInButtonTooltip">      <i class="fa fa-search-plus"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Zoom out"            #zoomOutButtonTooltip="ngbTooltip"            [tooltip-delay]="zoomOutButtonTooltip">      <i class="fa fa-search-minus"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Zoom to fit the window"            #fitButtonTooltip="ngbTooltip"            [tooltip-delay]="fitButtonTooltip">      <i class="fa fa-square-o"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Normal zoom"            #normalButtonTooltip="ngbTooltip"            [tooltip-delay]="normalButtonTooltip">      <i class="fa fa-search"></i>    </button>  </div></div><div class="row form-group justify-content-center">  <input class="form-control form-control-sm"         placeholder="1x"         style="width: 2.5em; text-align: center"         ngbTooltip="Current magnification"         #magInputTooltip="ngbTooltip"         [tooltip-delay]="magInputTooltip">  <input class="form-control form-control-sm"         placeholder="432, 276"         style="width: 6em; text-align: center"         ngbTooltip="Image pixel coordinates at mouse position"         #mouseCoordsTooltip="ngbTooltip"         [tooltip-delay]="mouseCoordsTooltip">  <input class="form-control form-control-sm"         placeholder="0.0"         style="width: 6em; text-align: center"         ngbTooltip="Image pixel value at mouse position"         #pxValTooltip="ngbTooltip"         [tooltip-delay]="pxValTooltip"></div><div class="row form-group justify-content-center">  <label class="col-3"         for="filenameNote">    Image Filename  </label>  <input class="col-9 align-self-baseline form-control form-control-sm"         id="filenameNote"></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'SpacialImageComponent'};
 </script>

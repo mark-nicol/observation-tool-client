@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ScienceGoalPage} from '../../interfaces/science-goal-page.interface';
-import {ScienceGoalPanelService} from '../../services/science-goal-panel.service';
+import {ScienceGoalPageService} from '../../services/science-goal-page.service';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -26,7 +26,7 @@ export class ScienceGoalComponent implements OnInit {
    * Constructor
    * @param scienceGoalPanelService Injected service
    */
-  constructor(private scienceGoalPanelService: ScienceGoalPanelService) {
+  constructor(private scienceGoalPanelService: ScienceGoalPageService) {
   }
 
   /**

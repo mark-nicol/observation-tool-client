@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ScienceGoalPage} from '../interfaces/science-goal-page.interface';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {PAGES} from '../data/pages';
+import {SCIENCE_GOAL_PAGES} from '../data/science-goal-pages';
 
 /**
  * Service to supply science goal page data and handle closing of panels
  */
 
 @Injectable()
-export class ScienceGoalPanelService {
+export class ScienceGoalPageService {
 
   /** Publicly subscribable page data */
   pages: Observable<{ [id: string]: ScienceGoalPage }>;
@@ -29,7 +29,7 @@ export class ScienceGoalPanelService {
     this.dataStore = {pages: {}};
     this._pages = <BehaviorSubject<{ [id: string]: ScienceGoalPage }>>new BehaviorSubject({});
     this.pages = this._pages.asObservable();
-    this.dataStore.pages = PAGES;
+    this.dataStore.pages = SCIENCE_GOAL_PAGES;
     this._pages.next(Object.assign({}, this.dataStore).pages);
   }
 

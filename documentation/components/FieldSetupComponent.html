@@ -78,6 +78,12 @@
                                     <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/SharedModule.html" >SharedModule</a>
                                 </li>
                                 <li class="link">
@@ -162,9 +168,6 @@
                                 </li>
                                 <li class="link">
                                     <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -296,7 +299,7 @@
                                     <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                    <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                 </li>
                                 <li class="link">
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -479,6 +482,12 @@
                                            <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/SharedModule.html" >SharedModule</a>
                                        </li>
                                        <li class="link">
@@ -563,9 +572,6 @@
                                        </li>
                                        <li class="link">
                                            <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -697,7 +703,7 @@
                                            <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                           <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                        </li>
                                        <li class="link">
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -967,7 +973,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(scienceGoalPanelService: <a href="../injectables/ScienceGoalPanelService.html">ScienceGoalPanelService</a>)</code>
+                            <code>constructor(scienceGoalPanelService: <a href="../interfaces/ScienceGoalPanel.html">ScienceGoalPanelService</a>)</code>
                         </td>
                     </tr>
                             <tr>
@@ -995,7 +1001,7 @@
                                                     <tr>
                                                       <td>scienceGoalPanelService</td>
                                                       <td>
-                                                                <code><a href="../injectables/ScienceGoalPanelService.html" target="_self" >ScienceGoalPanelService</a></code>
+                                                                <code><a href="../interfaces/ScienceGoalPanel.html" target="_self" >ScienceGoalPanelService</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
@@ -1403,7 +1409,7 @@ export class FieldSetupComponent extends ScienceGoalPage {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="row p-0 m-0">  <div class="col-lg-5 col-xl-4 p-0 m-0"       [dragula]="\'main\'">    <modular-panel [id]="\'spatial\'"                   [title]="page.panels[\'spatial\'].title"                   [image]="\'/assets/img/field_placeholder.png\'"                   (hiddenChange)="hiddenChange($event)"                   *ngIf="page.panels[\'spatial\'].shown">      <spacial-image></spacial-image>    </modular-panel>    <div class="row p-0 m-0">      <div class="col-xl p-0 m-0"           [dragula]="\'one\'">        <modular-panel [id]="\'fov\'"                       [title]="page.panels[\'fov\'].title"                       (hiddenChange)="hiddenChange($event)"                       *ngIf="page.panels[\'fov\'].shown"                       style="height: 100%;">          <fov-parameters></fov-parameters>        </modular-panel>      </div>      <div class="col-xl p-0 m-0"           [dragula]="\'one\'">        <modular-panel [id]="\'query\'"                       [title]="page.panels[\'query\'].title"                       (hiddenChange)="hiddenChange($event)"                       *ngIf="page.panels[\'query\'].shown"                       style="height: 100%;">          <image-query></image-query>        </modular-panel>      </div>    </div>  </div>  <div class="col-lg-7 col-xl-8 p-0 m-0"       [dragula]="\'main\'">    <modular-panel [id]="\'field-source\'"                   [title]="page.panels[\'field-source\'].title"                   (hiddenChange)="hiddenChange($event)"                   *ngIf="page.panels[\'field-source\'].shown">      <field-source (tableHeaderEmitter)="setHeaders($event)" (targetTypeEmitter)="setTargetType($event)"></field-source>    </modular-panel>    <modular-panel [id]="\'expected\'"                   [title]="page.panels[\'expected\'].title"                   (hiddenChange)="hiddenChange($event)"                   *ngIf="page.panels[\'expected\'].shown">      <source-expected-properties></source-expected-properties>    </modular-panel>    <modular-panel [id]="\'field-centre\'"                   [title]="page.panels[\'field-centre\'].title"                   (hiddenChange)="hiddenChange($event)"                   *ngIf="page.panels[\'field-centre\'].shown">      <field-center-coordinates></field-center-coordinates>    </modular-panel>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'FieldSetupComponent'};
 </script>

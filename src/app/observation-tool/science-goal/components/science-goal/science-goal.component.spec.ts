@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScienceGoalComponent } from './science-goal.component';
 import {RouterTestingModule} from "@angular/router/testing";
-import {ScienceGoalPanelService} from "../../services/science-goal-panel.service";
+import {ScienceGoalPageService} from "../../services/science-goal-page.service";
 
 describe('ScienceGoalComponent', () => {
   let component: ScienceGoalComponent;
@@ -12,7 +12,7 @@ describe('ScienceGoalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ScienceGoalComponent ],
       imports: [RouterTestingModule],
-      providers: [ScienceGoalPanelService]
+      providers: [ScienceGoalPageService]
     })
     .compileComponents();
   }));

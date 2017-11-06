@@ -78,6 +78,12 @@
                                     <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/SharedModule.html" >SharedModule</a>
                                 </li>
                                 <li class="link">
@@ -162,9 +168,6 @@
                                 </li>
                                 <li class="link">
                                     <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -296,7 +299,7 @@
                                     <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                    <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                 </li>
                                 <li class="link">
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -479,6 +482,12 @@
                                            <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/SharedModule.html" >SharedModule</a>
                                        </li>
                                        <li class="link">
@@ -563,9 +572,6 @@
                                        </li>
                                        <li class="link">
                                            <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -697,7 +703,7 @@
                                            <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                           <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                        </li>
                                        <li class="link">
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -1554,7 +1560,7 @@ export class FccRectangularComponent implements OnChanges {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="row">  <div class="col-md">    <system-selector [sexagesimalHidden]="sexagesimalHidden"                     (systemEmitter)="systemChange($event)"                     (sexagesimalEmitter)="sexagesimalChange($event)"></system-selector>  </div>  <!-- Lon offset input -->  <div class="col-md">    <div class="row" style="white-space: nowrap">      <div *ngIf="radioValue === \'absolute\'; then absoluteLonLabel; else relativeLonLabel"></div>      <ng-template #absoluteLonLabel>        <label class="col-xl-4 text-xl-right">          {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.lonLabel : chosenSystem.normalLabels.lonLabel}}        </label>      </ng-template>      <ng-template #relativeLonLabel>        <label class="col-xl-4 text-xl-right">          Offset(Lon)        </label>      </ng-template>      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">        <input class="form-control form-control-sm"               placeholder="{{               sexagesimalUnits ?               (chosenSystem.lonPlaceholder | sexagesimal) :               (chosenSystem.lonPlaceholder | degrees)}}">        <select class="input-group-addon form-control-sm"                *ngIf="radioValue === \'relative\'">          <option *ngFor="let unit of offsetUnits">{{unit}}</option>        </select>      </div>    </div>  </div>  <!-- Lat offset input -->  <div class="col-md">    <div class="row" style="white-space: nowrap">      <div *ngIf="radioValue === \'absolute\'; then absoluteLatLabel; else relativeLatLabel"></div>      <ng-template #absoluteLatLabel>        <label class="col-xl-4 text-xl-right">          {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}        </label>      </ng-template>      <ng-template #relativeLatLabel>        <label class="col-xl-4 text-xl-right">          Offset(Lat)        </label>      </ng-template>      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">        <input class="form-control form-control-sm"               placeholder="{{               sexagesimalUnits ?               (chosenSystem.latPlaceholder | sexagesimal) :               (chosenSystem.latPlaceholder | degrees)}}">        <select class="input-group-addon form-control-sm"                *ngIf="radioValue === \'relative\'">          <option *ngFor="let unit of offsetUnits">{{unit}}</option>        </select>      </div>    </div>  </div></div><div class="row">  <!-- p length input -->  <div class="col-md">    <div class="row">      <label class="col-xl-4 text-xl-right">        p length      </label>      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">        <input class="form-control form-control-sm"               placeholder="0.00000">        <select class="input-group-addon form-control-sm">          <option *ngFor="let unit of offsetUnits">{{unit}}</option>        </select>      </div>    </div>  </div>  <!-- q length input -->  <div class="col-md">    <div class="row">      <label class="col-xl-4 text-xl-right">        q length      </label>      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">        <input class="form-control form-control-sm"               placeholder="0.00000">        <select class="input-group-addon form-control-sm">          <option *ngFor="let unit of offsetUnits">{{unit}}</option>        </select>      </div>    </div>  </div>  <!-- Position angle -->  <div class="col-md">    <div class="row" style="white-space: nowrap">      <label class="col-xl-4 text-xl-right">        Position Angle      </label>      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">        <input class="form-control form-control-sm"               placeholder="0.00000">        <select class="input-group-addon form-control-sm">          <option *ngFor="let unit of offsetUnits">{{unit}}</option>        </select>      </div>    </div>  </div></div><div class="row">  <!-- Spacing input -->  <div class="col">    <div class="row" style="white-space: nowrap">      <label class="col-xl-2 text-xl-right">        Spacing      </label>      <div class="col-xl align-self-baseline input-group">        <div class="row">          <input class="col-md-3 col-lg-3 col-xl-3 form-control form-control-sm"                 placeholder="0.51093">          <select class="col-md col-lg col-xl input-group-addon form-control-sm">            <option>Fraction of antenna beamsize</option>            <option>arcsec</option>          </select>        </div>      </div>      <span class="col-xl pl-0">          <button class="btn btn-sm btn-outline-secondary" type="button">Reset to Nyquist</button>        </span>    </div>  </div>  <!-- Number of pointings -->  <div class="col-4">    <div class="row" style="white-space: nowrap">      <label class="col-xl text-xl-right align-self-baseline"># Pointings</label>      <label class="col align-self-baseline">12m Array</label>      <label class="col form-control-static align-self-baseline">0</label>    </div>  </div></div><button class="btn btn-sm btn-outline-secondary pull-right" type="button">Export</button></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'FccRectangularComponent'};
 </script>

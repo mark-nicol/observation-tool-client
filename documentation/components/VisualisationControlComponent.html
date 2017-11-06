@@ -78,6 +78,12 @@
                                     <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/SharedModule.html" >SharedModule</a>
                                 </li>
                                 <li class="link">
@@ -162,9 +168,6 @@
                                 </li>
                                 <li class="link">
                                     <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -296,7 +299,7 @@
                                     <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                    <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                 </li>
                                 <li class="link">
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -479,6 +482,12 @@
                                            <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/SharedModule.html" >SharedModule</a>
                                        </li>
                                        <li class="link">
@@ -563,9 +572,6 @@
                                        </li>
                                        <li class="link">
                                            <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -697,7 +703,7 @@
                                            <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                           <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                        </li>
                                        <li class="link">
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -1592,7 +1598,7 @@ export class VisualisationControlComponent implements OnInit {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="row">  <div class="col-xl-3">    <label>Overlays</label>  </div>  <div class="col-xl">    <!--<label><input type="checkbox" (checked)="bandsChecked" (change)="bandsCheckedChange()">Receiver Bands</label>-->    <label class="custom-control custom-checkbox">      <input type="checkbox" class="custom-control-input" [(checked)]="bandsChecked" (change)="bandsCheckedChange()">      <span class="custom-control-indicator"></span>      <span class="custom-control-description">Receiver Bands</span>    </label>    <label class="custom-control custom-checkbox">      <input type="checkbox" class="custom-control-input" [(checked)]="transmissionChecked"             (change)="transmissionCheckedChange()">      <span class="custom-control-indicator"></span>      <span class="custom-control-description">Transmission</span>    </label>    <selectable type="checkbox">DSB Image</selectable>    <selectable type="checkbox">Spectral Lines</selectable>    <button class="btn btn-sm btn-outline-secondary">Select Lines to Overlay</button>  </div></div><div class="row">  <div class="col-xl-3">    <label>Water Vapour Column Density</label>  </div>  <div class="col-xl">    <label class="custom-control custom-radio">      <input #autoRadio             id="automaticRadio"             name="densityRadios"             type="radio"             class="custom-control-input"             value="automatic"             [checked]="densityRadioChoice === autoRadio.value"             (change)="densityRadioChange(autoRadio.value)">      <span class="custom-control-indicator"></span>      <span class="custom-control-description">        Automatic Choice      </span>    </label>    <label class="custom-control custom-radio">      <input #manRadio             id="manualRadio"             name="densityRadios"             type="radio"             class="custom-control-input"             value="manual"             [checked]="densityRadioChoice === manRadio.value"             (change)="densityRadioChange(manRadio.value)">      <span class="custom-control-indicator"></span>      <span class="custom-control-description">        Manual Choice      </span>    </label>    <select #densitySelector            class="form-control form-control-sm"            [disabled]="densityRadioChoice === autoRadio.value"            (change)="densitySelectorChange(densitySelector.value)">      <option *ngFor="let choice of columnDensityChoices"              value="{{choice}}">{{choice}}</option>    </select>  </div></div><div class="row">  <div class="col-xl-3">    <label>Viewport</label>  </div>  <div class="col-xl btn-group btn-group-sm" role="group">    <button class="btn btn-outline-secondary">Pan to Spectral Window</button>    <button class="btn btn-outline-secondary">Zoom to Band</button>    <button class="btn btn-outline-secondary">Reset</button>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'VisualisationControlComponent'};
 </script>

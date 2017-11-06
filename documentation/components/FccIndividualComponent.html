@@ -78,6 +78,12 @@
                                     <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/SharedModule.html" >SharedModule</a>
                                 </li>
                                 <li class="link">
@@ -162,9 +168,6 @@
                                 </li>
                                 <li class="link">
                                     <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -296,7 +299,7 @@
                                     <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                    <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                 </li>
                                 <li class="link">
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -479,6 +482,12 @@
                                            <a href="../modules/ProjectModule.html" >ProjectModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ScienceGoalRoutingModule.html" >ScienceGoalRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/SharedModule.html" >SharedModule</a>
                                        </li>
                                        <li class="link">
@@ -563,9 +572,6 @@
                                        </li>
                                        <li class="link">
                                            <a href="../components/ScienceGoalComponent.html" >ScienceGoalComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SelectableComponent.html" >SelectableComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/SourceComponent.html" >SourceComponent</a>
@@ -697,7 +703,7 @@
                                            <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/ScienceGoalPanelService.html" >ScienceGoalPanelService</a>
+                                           <a href="../injectables/ScienceGoalPageService.html" >ScienceGoalPageService</a>
                                        </li>
                                        <li class="link">
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
@@ -1474,7 +1480,7 @@ export class FccIndividualComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="row">  <label for="offsetSelector"         class="col"         ngbTooltip="Unit of offset pointings"         #offsetTooltip="ngbTooltip"         [tooltip-delay]="offsetTooltip">    Offset Unit  </label>  <select id="offsetSelector"          class="col form-control form-control-sm"          [(ngModel)]="data.offsetUnit"          [disabled]="radioValue === \'absolute\'">    <option *ngFor="let unit of offsetUnits"            value="{{unit}}"            (selcted)="unit === \'mas\'">      {{unit}}    </option>  </select></div><div class="row">  <label class="col"         ngbTooltip="Number of pointings in this field"         #pointingsLableTooltip="ngbTooltip"         [tooltip-delay]="pointingsLableTooltip">    # Pointings  </label>  <p class="col form-control-static">{{data.rows.length}}</p></div><div class="row">  <table class="table table-sm">    <thead>      <tr *ngIf="radioValue === \'relative\'"          ngbTooltip="Coordinate offsets for each pointing">        <th>{{_fieldSetupService.getItem(\'source\', \'chosenSystem\').latHeader}} [{{data.offsetUnit}}]</th>        <th>{{_fieldSetupService.getItem(\'source\', \'chosenSystem\').lonHeader}} [{{data.offsetUnit}}]</th>      </tr>      <tr *ngIf="radioValue === \'absolute\'">        <th>{{_fieldSetupService.getItem(\'source\', \'chosenSystem\').latHeader}}</th>        <th>{{_fieldSetupService.getItem(\'source\', \'chosenSystem\').lonHeader}}</th>      </tr>    </thead>    <tbody>      <tr *ngFor="let row of data.rows"          (keyup.enter)="log(\'enter\')">        <td contenteditable (blur)="log(\'blur\')">          {{radioValue == \'absolute\' ? (row.lon | sexagesimal) : (row.lon | degrees)}}        </td>        <td contenteditable>          {{radioValue == \'absolute\' ? (row.lat | sexagesimal) : (row.lat | degrees)}}        </td>      </tr>    </tbody>  </table></div><div class="row justify-content-center">  <div class="btn-group"       role="group">    <button class="btn btn-outline-secondary"            (click)="addRow()"            ngbTooltip="Add a pointing"            #addButtonTooltip="ngbTooltip"            placement="left"            [tooltip-delay]="addButtonTooltip">      <i class="fa fa-plus"></i>    </button>    <button class="btn btn-outline-secondary"            (click)="removeRow()"            ngbTooltip="Remove a pointing"            #removeButtonTooltip="ngbTooltip"            [tooltip-delay]="removeButtonTooltip">      <i class="fa fa-minus"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Import pointings"            #importButtonTooltip="ngbTooltip"            [tooltip-delay]="importButtonTooltip">      <i class="fa fa-download"></i>    </button>    <button class="btn btn-outline-secondary"            ngbTooltip="Export current pointings"            #exportButtonTooltip="ngbTooltip"            placement="right"            [tooltip-delay]="exportButtonTooltip">      <i class="fa fa-upload"></i>    </button>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'FccIndividualComponent'};
 </script>

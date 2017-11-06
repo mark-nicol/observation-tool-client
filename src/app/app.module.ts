@@ -9,8 +9,6 @@ import {AppRoutingModule} from './app-routing.module'
 /* Components */
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './observation-tool/components/navbar/navbar.component'
-import {CalibrationSetupComponent} from './observation-tool/components/science-goals/calibration-setup/calibration-setup.component';
-import {ControlPerformanceComponent} from './observation-tool/components/science-goals/control-performance/control-performance.component';
 import {FccIndividualComponent} from './observation-tool/components/science-goals/field-setup/field-center-coordinates/fcc-individual/fcc-individual.component';
 import {FccRectangularComponent} from './observation-tool/components/science-goals/field-setup/field-center-coordinates/fcc-rectangular/fcc-rectangular.component';
 import {FieldCenterCoordinatesComponent} from './observation-tool/components/science-goals/field-setup/field-center-coordinates/field-center-coordinates.component';
@@ -21,17 +19,11 @@ import {SourceExpectedPropertiesComponent} from './observation-tool/components/s
 import {SourceComponent} from './observation-tool/components/science-goals/field-setup/source/source.component';
 import {SpacialImageComponent} from './observation-tool/components/science-goals/field-setup/spacial-image/spacial-image.component';
 import {SystemSelectorComponent} from './observation-tool/components/science-goals/field-setup/system-selector/system-selector.component';
-import {GeneralComponent} from './observation-tool/components/science-goals/general/general.component';
-import {ScienceGoalComponent} from './observation-tool/components/science-goals/science-goal.component';
 import {SpectralSetupComponent} from './observation-tool/components/science-goals/spectral-setup/spectral-setup.component';
 import {TypeComponent} from './observation-tool/components/science-goals/spectral-setup/type/type.component';
 import {VisualisationControlComponent} from './observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component';
 import {VisualisationViewerComponent} from './observation-tool/components/science-goals/spectral-setup/visualisation-viewer/visualisation-viewer.component';
-import {TechnicalJustificationComponent} from './observation-tool/components/science-goals/technical-justification/technical-justification.component';
-import {SelectableComponent} from './observation-tool/components/selectable/selectable.component';
-import {FieldSetupService} from './observation-tool/services/field-setup.service';
 /* Services */
-import {ScienceGoalPanelService} from './observation-tool/services/science-goal-panel.service';
 import {PiSelectionModule} from './observation-tool/pi-selection/pi-selection.module';
 import {SharedModule} from './observation-tool/shared/shared.module';
 
@@ -46,15 +38,9 @@ import {SharedModule} from './observation-tool/shared/shared.module';
     SourceComponent,
     SourceExpectedPropertiesComponent,
     SpacialImageComponent,
-    ScienceGoalComponent,
-    GeneralComponent,
     SpectralSetupComponent,
-    CalibrationSetupComponent,
-    ControlPerformanceComponent,
-    TechnicalJustificationComponent,
     VisualisationControlComponent,
     TypeComponent,
-    SelectableComponent,
     FccIndividualComponent,
     FccRectangularComponent,
     SystemSelectorComponent,
@@ -72,8 +58,6 @@ import {SharedModule} from './observation-tool/shared/shared.module';
     AppRoutingModule,
   ],
   providers: [
-    ScienceGoalPanelService,
-    FieldSetupService
   ],
   bootstrap: [
     AppComponent

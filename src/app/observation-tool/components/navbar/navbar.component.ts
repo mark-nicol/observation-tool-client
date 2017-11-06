@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as _ from 'lodash';
-import {NavItem} from 'app/observation-tool/interfaces/navbar-item';
+import {NavItem} from 'app/observation-tool/interfaces/navbar-item.interface';
 
 /**
  * The navbar component at the top of the application

@@ -75,6 +75,12 @@
                                     <a href="../modules/PiSelectionModule.html" >PiSelectionModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/SharedModule.html" >SharedModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/UnitsModule.html" >UnitsModule</a>
                                 </li>
                         </ul>
@@ -337,13 +343,13 @@
                                     <a href="../interfaces/NavItem.html" >NavItem</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/Page.html" >Page</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../interfaces/Panel.html" >Panel</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/PrimaryInvestigator.html" >PrimaryInvestigator</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ScienceGoalPage.html" >ScienceGoalPage</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ScienceGoalPanel.html" >ScienceGoalPanel</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/SourceComponentInterface.html" >SourceComponentInterface</a>
@@ -468,6 +474,12 @@
                                        </li>
                                        <li class="link">
                                            <a href="../modules/PiSelectionModule.html" >PiSelectionModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/SharedModule.html" >SharedModule</a>
                                        </li>
                                        <li class="link">
                                            <a href="../modules/UnitsModule.html" >UnitsModule</a>
@@ -732,13 +744,13 @@
                                            <a href="../interfaces/NavItem.html" >NavItem</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/Page.html" >Page</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../interfaces/Panel.html" >Panel</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/PrimaryInvestigator.html" >PrimaryInvestigator</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ScienceGoalPage.html" >ScienceGoalPage</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ScienceGoalPanel.html" >ScienceGoalPanel</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/SourceComponentInterface.html" >SourceComponentInterface</a>
@@ -847,19 +859,20 @@
 
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {NgModule} from &#x27;@angular/core&#x27;
-import {PiEntryComponent, PiSelectComponent} from &#x27;./observation-tool/pi-selection/pi-selection.module&#x27;;
 import {RouterModule, Routes} from &#x27;@angular/router&#x27;
-import {FieldSetupComponent} from &#x27;./observation-tool/components/science-goals/field-setup/field-setup.component&#x27;;
-import {SourceComponent} from &#x27;./observation-tool/components/science-goals/field-setup/source/source.component&#x27;;
 /* Components */
 import {PlannedObservingComponent} from &#x27;./observation-tool/components/planned-observing/planned-observing.component&#x27;;
 import {ProposalComponent} from &#x27;./observation-tool/components/proposal/proposal.component&#x27;;
-import {ScienceGoalComponent} from &#x27;./observation-tool/components/science-goals/science-goal.component&#x27;;
-import {GeneralComponent} from &#x27;./observation-tool/components/science-goals/general/general.component&#x27;;
-import {SpectralSetupComponent} from &#x27;./observation-tool/components/science-goals/spectral-setup/spectral-setup.component&#x27;;
 import {CalibrationSetupComponent} from &#x27;./observation-tool/components/science-goals/calibration-setup/calibration-setup.component&#x27;;
 import {ControlPerformanceComponent} from &#x27;./observation-tool/components/science-goals/control-performance/control-performance.component&#x27;;
+import {FieldSetupComponent} from &#x27;./observation-tool/components/science-goals/field-setup/field-setup.component&#x27;;
+import {SourceComponent} from &#x27;./observation-tool/components/science-goals/field-setup/source/source.component&#x27;;
+import {GeneralComponent} from &#x27;./observation-tool/components/science-goals/general/general.component&#x27;;
+import {ScienceGoalComponent} from &#x27;./observation-tool/components/science-goals/science-goal.component&#x27;;
+import {SpectralSetupComponent} from &#x27;./observation-tool/components/science-goals/spectral-setup/spectral-setup.component&#x27;;
 import {TechnicalJustificationComponent} from &#x27;./observation-tool/components/science-goals/technical-justification/technical-justification.component&#x27;;
+// TODO Sort this error, probably change routing for the module
+import {PiEntryComponent, PiSelectComponent} from &#x27;./observation-tool/pi-selection/pi-selection.module&#x27;;
 
 const routes: Routes &#x3D; [
   {

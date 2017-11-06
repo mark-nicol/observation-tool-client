@@ -17,7 +17,7 @@ import {CoordSystem} from '../../../../interfaces/coord-system.interface';
 })
 export class SourceComponent {
 
-  /** Page data loaded from Field Setup Service */
+  /** ScienceGoalPage data loaded from Field Setup Service */
   pageData: SourceComponentInterface;
 
   /** Selectable solar system bodies for selection box */

@@ -22,7 +22,7 @@ export class FccIndividualComponent {
     'deg',
     'rad'
   ];
-  /** Page data for fields and table rows */
+  /** ScienceGoalPage data for fields and table rows */
   data: any;
   /** Field Setup Service to be used in template */
   protected _fieldSetupService: FieldSetupService;

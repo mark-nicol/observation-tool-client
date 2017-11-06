@@ -1,4 +1,4 @@
-import {Page} from '../interfaces/page';
+import {ScienceGoalPage} from '../interfaces/science-goal-page.interface';
 import {ScienceGoalPanelService} from '../services/science-goal-panel.service';
 
 /**
@@ -12,8 +12,8 @@ export abstract class ScienceGoalPage {
   /** Unique id of the page */
   id: string;
 
-  /** Page data */
-  page: Page;
+  /** ScienceGoalPage data */
+  page: ScienceGoalPage;
 
   /**
    * Sets the id and loads page data

@@ -1,7 +1,7 @@
-import {Page} from '../interfaces/page';
+import {ScienceGoalPage} from '../interfaces/science-goal-page.interface';
 
 
-export const PAGES: { [id: string]: Page } = {
+export const PAGES: { [id: string]: ScienceGoalPage } = {
   'general': {
     title: 'General',
     path: 'general',

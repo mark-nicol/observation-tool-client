@@ -1,13 +1,13 @@
-import {Panel} from './panel';
+import {ScienceGoalPanel} from './science-goal-panel.interface';
 
 /**
  * Interface for a science goal page
  */
-export interface Page {
+export interface ScienceGoalPage {
   /** The title of the page */
   title: string;
   /** The routing path of the page */
   path: string;
   /** The panels to show on the page */
-  panels: { [id: string]: Panel };
+  panels: { [id: string]: ScienceGoalPanel };
 }

@@ -9,9 +9,6 @@ import {AppRoutingModule} from './app-routing.module'
 /* Components */
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './observation-tool/components/navbar/navbar.component'
-import {PlannedObservingComponent} from './observation-tool/components/planned-observing/planned-observing.component';
-import {ProjectComponent} from './observation-tool/components/project/project.component';
-import {ProposalComponent} from './observation-tool/components/proposal/proposal.component';
 import {CalibrationSetupComponent} from './observation-tool/components/science-goals/calibration-setup/calibration-setup.component';
 import {ControlPerformanceComponent} from './observation-tool/components/science-goals/control-performance/control-performance.component';
 import {FccIndividualComponent} from './observation-tool/components/science-goals/field-setup/field-center-coordinates/fcc-individual/fcc-individual.component';
@@ -46,9 +43,6 @@ import {SharedModule} from './observation-tool/shared/shared.module';
     FovParametersComponent,
     ImageQueryComponent,
     NavbarComponent,
-    PlannedObservingComponent,
-    ProjectComponent,
-    ProposalComponent,
     SourceComponent,
     SourceExpectedPropertiesComponent,
     SpacialImageComponent,

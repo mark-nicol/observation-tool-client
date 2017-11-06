@@ -1,23 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VisualisationComponent } from './visualisation.component';
+import { VisualisationControlComponent } from './visualisation-control.component';
 import {SelectableComponent} from "../../../selectable/selectable.component";
 
-describe('VisualisationComponent', () => {
-  let component: VisualisationComponent;
-  let fixture: ComponentFixture<VisualisationComponent>;
+describe('VisualisationControlComponent', () => {
+  let component: VisualisationControlComponent;
+  let fixture: ComponentFixture<VisualisationControlComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        VisualisationComponent, SelectableComponent
+        VisualisationControlComponent, SelectableComponent
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VisualisationComponent);
+    fixture = TestBed.createComponent(VisualisationControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -35,7 +35,7 @@ import {GeneralComponent} from './components/science-goals/general/general.compo
 import {ScienceGoalComponent} from './components/science-goals/science-goal.component';
 import {SpectralSetupComponent} from './components/science-goals/spectral-setup/spectral-setup.component';
 import {TypeComponent} from './components/science-goals/spectral-setup/type/type.component';
-import {VisualisationComponent} from './components/science-goals/spectral-setup/visualisation/visualisation.component';
+import {VisualisationControlComponent} from './components/science-goals/spectral-setup/visualisation-control/visualisation-control.component';
 import {TechnicalJustificationComponent} from './components/science-goals/technical-justification/technical-justification.component';
 import {SelectableComponent} from './components/selectable/selectable.component';
 import {DelayTooltipDirective} from './directives/delay-tooltip.directive';
@@ -48,6 +48,7 @@ import { FccIndividualComponent } from './components/science-goals/field-setup/f
 import { FccRectangularComponent } from './components/science-goals/field-setup/field-center-coordinates/fcc-rectangular/fcc-rectangular.component';
 import { SystemSelectorComponent } from './components/science-goals/field-setup/system-selector/system-selector.component';
 import {FieldSetupService} from './services/field-setup.service';
+import { VisualisationViewerComponent } from './components/science-goals/spectral-setup/visualisation-viewer/visualisation-viewer.component';
 
 @NgModule({
   declarations: [
@@ -80,12 +81,13 @@ import {FieldSetupService} from './services/field-setup.service';
     CalibrationSetupComponent,
     ControlPerformanceComponent,
     TechnicalJustificationComponent,
-    VisualisationComponent,
+    VisualisationControlComponent,
     TypeComponent,
     SelectableComponent,
     FccIndividualComponent,
     FccRectangularComponent,
     SystemSelectorComponent,
+    VisualisationViewerComponent,
   ],
   imports: [
     BrowserModule,

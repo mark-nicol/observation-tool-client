@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {FieldSetupComponent} from './components/field-setup/field-setup.component';
-import {FieldSetupService} from '../services/field-setup.service';
+import {FieldSetupService} from './services/field-setup.service';
 
 @NgModule({
   imports: [],

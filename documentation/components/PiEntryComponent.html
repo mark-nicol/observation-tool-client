@@ -179,7 +179,10 @@
                                     <a href="../components/TypeComponent.html" >TypeComponent</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../components/VisualisationComponent.html" >VisualisationComponent</a>
+                                    <a href="../components/VisualisationControlComponent.html" >VisualisationControlComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VisualisationViewerComponent.html" >VisualisationViewerComponent</a>
                                 </li>
                         </ul>
                     </li>
@@ -310,10 +313,22 @@
                                 id="xs-interfaces-links"
                             >
                                 <li class="link">
+                                    <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
+                                </li>
+                                <li class="link">
                                     <a href="../interfaces/CoordSystem.html" >CoordSystem</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Margin.html" >Margin</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/NavItem.html" >NavItem</a>
@@ -556,7 +571,10 @@
                                            <a href="../components/TypeComponent.html" >TypeComponent</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../components/VisualisationComponent.html" >VisualisationComponent</a>
+                                           <a href="../components/VisualisationControlComponent.html" >VisualisationControlComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VisualisationViewerComponent.html" >VisualisationViewerComponent</a>
                                        </li>
                                </ul>
                            </li>
@@ -687,10 +705,22 @@
                                        id="interfaces-links"
                    >
                                        <li class="link">
+                                           <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../interfaces/CoordSystem.html" >CoordSystem</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Margin.html" >Margin</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/NavItem.html" >NavItem</a>
@@ -918,7 +948,7 @@ export class PiEntryComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="row">  <app-pi-search class="col-12"></app-pi-search></div><div class="row">  <app-project-info  class="col-12"></app-project-info></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationComponent', 'selector': 'app-visualisation'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'PiEntryComponent'};
 </script>

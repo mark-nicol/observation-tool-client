@@ -179,7 +179,7 @@
                                     <a href="../components/TypeComponent.html" >TypeComponent</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../components/VisualisationControlComponent.html" >VisualisationControlComponent</a>
+                                    <a href="../components/VisualisationControlComponent.html"  data-type="entity-link" class="active" >VisualisationControlComponent</a>
                                 </li>
                                 <li class="link">
                                     <a href="../components/VisualisationViewerComponent.html" >VisualisationViewerComponent</a>
@@ -266,7 +266,7 @@
                                     <a href="../injectables/AngleConversionService.html" >AngleConversionService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/AngularVelocityConversionService.html"  data-type="entity-link" class="active" >AngularVelocityConversionService</a>
+                                    <a href="../injectables/AngularVelocityConversionService.html" >AngularVelocityConversionService</a>
                                 </li>
                                 <li class="link">
                                     <a href="../injectables/FieldSetupService.html" >FieldSetupService</a>
@@ -571,7 +571,7 @@
                                            <a href="../components/TypeComponent.html" >TypeComponent</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../components/VisualisationControlComponent.html" >VisualisationControlComponent</a>
+                                           <a href="../components/VisualisationControlComponent.html"  data-type="entity-link" class="active" >VisualisationControlComponent</a>
                                        </li>
                                        <li class="link">
                                            <a href="../components/VisualisationViewerComponent.html" >VisualisationViewerComponent</a>
@@ -658,7 +658,7 @@
                                            <a href="../injectables/AngleConversionService.html" >AngleConversionService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/AngularVelocityConversionService.html"  data-type="entity-link" class="active" >AngularVelocityConversionService</a>
+                                           <a href="../injectables/AngularVelocityConversionService.html" >AngularVelocityConversionService</a>
                                        </li>
                                        <li class="link">
                                            <a href="../injectables/FieldSetupService.html" >FieldSetupService</a>
@@ -799,17 +799,15 @@
                    
                    </nav>
                </div>
-               <div class="content injectable">
+               <div class="content component">
                    <div class="content-data">
 
 
 
 
-
-
 <ol class="breadcrumb">
-  <li>Injectables</li>
-  <li>AngularVelocityConversionService</li>
+  <li>Components</li>
+  <li>VisualisationControlComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -817,128 +815,772 @@
         <a href="#info" id="info-tab" role="tab" data-toggle="tab" data-link="info">Info</a>
     </li>
 
-
     <li>
         <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
+
+    <li>
+        <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+    </li>
+    <li>
+        <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
     </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="info">
-        <p class="comment">
-            <h3>File</h3>
-        </p>
-        <p class="comment">
-            <code>src/app/units/services/angular-velocity-conversion.service.ts</code>
-        </p>
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts</code>
+</p>
 
 
 
-            <section>
-                <h3 id="index">Index</h3>
-                <table class="table table-sm table-bordered index-table">
-                    <tbody>
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-visualisation-control</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>visualisation-control.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./visualisation-control.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+        <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                 <a href="#bandsChecked">bandsChecked</a>
+                            </li>
+                            <li>
+                                 <a href="#columnDensityChoices">columnDensityChoices</a>
+                            </li>
+                            <li>
+                                 <a href="#densityRadioChoice">densityRadioChoice</a>
+                            </li>
+                            <li>
+                                 <a href="#transmissionChecked">transmissionChecked</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                 <a href="#bandsCheckedChange">bandsCheckedChange</a>
+                            </li>
+                            <li>
+                                 <a href="#densityRadioChange">densityRadioChange</a>
+                            </li>
+                            <li>
+                                 <a href="#densitySelectorChange">densitySelectorChange</a>
+                            </li>
+                            <li>
+                                 <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                 <a href="#transmissionCheckedChange">transmissionCheckedChange</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#bandsCheckedEmitter">bandsCheckedEmitter</a>
+                            </li>
+                            <li>
+                                <a href="#densityRadioEmitter">densityRadioEmitter</a>
+                            </li>
+                            <li>
+                                <a href="#densitySelectorEmitter">densitySelectorEmitter</a>
+                            </li>
+                            <li>
+                                <a href="#transmissionCheckedEmitter">transmissionCheckedEmitter</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>constructor()</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:34</a></div>
+                                </td>
+                            </tr>
+    
+                </tbody>
+            </table>
+    </section>
+
+
+    <section>
+        <h3 id="outputs">Outputs</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="bandsCheckedEmitter"></a>
+                            <code>bandsCheckedEmitter</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:11</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="densityRadioEmitter"></a>
+                            <code>densityRadioEmitter</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:15</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="densitySelectorEmitter"></a>
+                            <code>densitySelectorEmitter</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:16</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="transmissionCheckedEmitter"></a>
+                            <code>transmissionCheckedEmitter</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code>EventEmitter</code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:13</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+    </section>
+
+
+
+    <section>
+        
+            <h3 id="methods">
+                Methods
+            </h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="bandsCheckedChange"></a>
+                            <span class="name"><b> bandsCheckedChange</b><a href="#bandsCheckedChange"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>bandsCheckedChange()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:42</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="densityRadioChange"></a>
+                            <span class="name"><b> densityRadioChange</b><a href="#densityRadioChange"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>densityRadioChange(newRadio: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:52</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>newRadio</td>
+                                                      <td>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="densitySelectorChange"></a>
+                            <span class="name"><b> densitySelectorChange</b><a href="#densitySelectorChange"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>densitySelectorChange(newDensity: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:57</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>newDensity</td>
+                                                      <td>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="ngOnInit"></a>
+                            <span class="name"><b> ngOnInit</b><a href="#ngOnInit"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>ngOnInit()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:39</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="transmissionCheckedChange"></a>
+                            <span class="name"><b> transmissionCheckedChange</b><a href="#transmissionCheckedChange"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>transmissionCheckedChange()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:47</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <section>
+        
+            <h3 id="inputs">
+                Properties
+            </h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="bandsChecked"></a>
+                            <span class="name"><b> bandsChecked</b><a href="#bandsChecked"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>bandsChecked:     <code></code>
+    </code>
+                        </td>
+                    </tr>
                         <tr>
                             <td class="col-md-4">
-                                <h6><b>Methods</b></h6>
+                                <i>Default value : </i><code>true</code>
                             </td>
                         </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:10</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="columnDensityChoices"></a>
+                            <span class="name"><b> columnDensityChoices</b><a href="#columnDensityChoices"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>columnDensityChoices:     <code></code>
+    </code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:30</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="densityRadioChoice"></a>
+                            <span class="name"><b> densityRadioChoice</b><a href="#densityRadioChoice"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>densityRadioChoice:     <code></code>
+    </code>
+                        </td>
+                    </tr>
                         <tr>
                             <td class="col-md-4">
-                                <ul class="index-list">
-                                    <li>
-                                         <a href="#loadData">loadData</a>
-                                    </li>
-                                </ul>
+                                <i>Default value : </i><code>automatic</code>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <section>
-                <h3 id="constructor">Constructor</h3>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <code>constructor()</code>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:18</a></div>
                                 </td>
                             </tr>
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/units/services/angular-velocity-conversion.service.ts:6</a></div>
-                                        </td>
-                                    </tr>
-            
-                        </tbody>
-                    </table>
-            </section>
-
-            <section>
-                
-                    <h3 id="methods">
-                        Methods
-                    </h3>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="transmissionChecked"></a>
+                            <span class="name"><b> transmissionChecked</b><a href="#transmissionChecked"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>transmissionChecked:     <code></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value : </i><code>true</code>
+                            </td>
+                        </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <a name="loadData"></a>
-                                    <span class="name"><b> loadData</b><a href="#loadData"><span class="fa fa-link"></span></a></span>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/observation-tool/components/science-goals/spectral-setup/visualisation-control/visualisation-control.component.ts:12</a></div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="col-md-4">
-            <code>loadData()</code>
-                                </td>
-                            </tr>
-            
-            
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/units/services/angular-velocity-conversion.service.ts:13</a></div>
-                                        </td>
-                                    </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-            
-                                        <div class="io-description">
-                                            <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-            
-                                        </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-            </section>
+    
+    
+                </tbody>
+            </table>
+    </section>
 
-
-    </div>
+</div>
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
-import {ANGULAR_VELOCITY_DATA} from &#x27;../data/angular-velocity.data&#x27;;
-import {ValueConversionService} from &#x27;./value-conversion.service&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {Component, EventEmitter, OnInit, Output} from &#x27;@angular/core&#x27;;
 
-@Injectable()
-export class AngularVelocityConversionService extends ValueConversionService {
+@Component({
+  selector: &#x27;app-visualisation-control&#x27;,
+  templateUrl: &#x27;./visualisation-control.component.html&#x27;,
+  styleUrls: [&#x27;./visualisation-control.component.scss&#x27;]
+})
+export class VisualisationControlComponent implements OnInit {
+
+  bandsChecked &#x3D; true;
+  @Output() bandsCheckedEmitter &#x3D; new EventEmitter&lt;boolean&gt;();
+  transmissionChecked &#x3D; true;
+  @Output() transmissionCheckedEmitter &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  @Output() densityRadioEmitter &#x3D; new EventEmitter&lt;string&gt;();
+  @Output() densitySelectorEmitter &#x3D; new EventEmitter&lt;string&gt;();
+
+  densityRadioChoice &#x3D; &#x27;automatic&#x27;;
+
+  // columnDensityChoices &#x3D; [
+  //   &#x27;0.472mm (1st Octile)&#x27;,
+  //   &#x27;0.658mm (2nd Octile)&#x27;,
+  //   &#x27;0.913mm (3rd Octile)&#x27;,
+  //   &#x27;1.262mm (4th Octile)&#x27;,
+  //   &#x27;1.796mm (5th Octile)&#x27;,
+  //   &#x27;2.748mm (6th Octile)&#x27;,
+  //   &#x27;5.186mm (7th Octile)&#x27;,
+  // ];
+
+  columnDensityChoices &#x3D; [
+    &#x27;sin&#x27;,
+    &#x27;cos&#x27;,
+    &#x27;tan&#x27;,
+  ];
 
   constructor() {
-    super();
-    this.loadData();
   }
 
-  loadData(): void {
-    this._data &#x3D; ANGULAR_VELOCITY_DATA;
+  ngOnInit() {
+  }
+
+  bandsCheckedChange() {
+    this.bandsChecked &#x3D; !this.bandsChecked;
+    this.bandsCheckedEmitter.emit(this.bandsChecked);
+  }
+
+  transmissionCheckedChange() {
+    this.transmissionChecked &#x3D; !this.transmissionChecked;
+    this.transmissionCheckedEmitter.emit(this.transmissionChecked);
+  }
+
+  densityRadioChange(newRadio: string) {
+    this.densityRadioChoice &#x3D; newRadio;
+    this.densityRadioEmitter.emit(newRadio);
+  }
+
+  densitySelectorChange(newDensity: string) {
+    this.densitySelectorEmitter.emit(newDensity);
   }
 
 }
 </code></pre>
     </div>
+
+    <div class="tab-pane fade" id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;row&quot;&gt;
+  &lt;div class&#x3D;&quot;col-xl-3&quot;&gt;
+    &lt;label&gt;Overlays&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;col-xl&quot;&gt;
+    &lt;!--&lt;label&gt;&lt;input type&#x3D;&quot;checkbox&quot; (checked)&#x3D;&quot;bandsChecked&quot; (change)&#x3D;&quot;bandsCheckedChange()&quot;&gt;Receiver Bands&lt;/label&gt;--&gt;
+    &lt;label class&#x3D;&quot;custom-control custom-checkbox&quot;&gt;
+      &lt;input type&#x3D;&quot;checkbox&quot; class&#x3D;&quot;custom-control-input&quot; [(checked)]&#x3D;&quot;bandsChecked&quot; (change)&#x3D;&quot;bandsCheckedChange()&quot;&gt;
+      &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+      &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;Receiver Bands&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class&#x3D;&quot;custom-control custom-checkbox&quot;&gt;
+      &lt;input type&#x3D;&quot;checkbox&quot; class&#x3D;&quot;custom-control-input&quot; [(checked)]&#x3D;&quot;transmissionChecked&quot;
+             (change)&#x3D;&quot;transmissionCheckedChange()&quot;&gt;
+      &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+      &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;Transmission&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;selectable type&#x3D;&quot;checkbox&quot;&gt;DSB Image&lt;/selectable&gt;
+    &lt;selectable type&#x3D;&quot;checkbox&quot;&gt;Spectral Lines&lt;/selectable&gt;
+    &lt;button class&#x3D;&quot;btn btn-sm btn-outline-secondary&quot;&gt;Select Lines to Overlay&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class&#x3D;&quot;row&quot;&gt;
+  &lt;div class&#x3D;&quot;col-xl-3&quot;&gt;
+    &lt;label&gt;Water Vapour Column Density&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;col-xl&quot;&gt;
+    &lt;label class&#x3D;&quot;custom-control custom-radio&quot;&gt;
+      &lt;input #autoRadio
+             id&#x3D;&quot;automaticRadio&quot;
+             name&#x3D;&quot;densityRadios&quot;
+             type&#x3D;&quot;radio&quot;
+             class&#x3D;&quot;custom-control-input&quot;
+             value&#x3D;&quot;automatic&quot;
+             [checked]&#x3D;&quot;densityRadioChoice &#x3D;&#x3D;&#x3D; autoRadio.value&quot;
+             (change)&#x3D;&quot;densityRadioChange(autoRadio.value)&quot;&gt;
+      &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+      &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;
+        Automatic Choice
+      &lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class&#x3D;&quot;custom-control custom-radio&quot;&gt;
+      &lt;input #manRadio
+             id&#x3D;&quot;manualRadio&quot;
+             name&#x3D;&quot;densityRadios&quot;
+             type&#x3D;&quot;radio&quot;
+             class&#x3D;&quot;custom-control-input&quot;
+             value&#x3D;&quot;manual&quot;
+             [checked]&#x3D;&quot;densityRadioChoice &#x3D;&#x3D;&#x3D; manRadio.value&quot;
+             (change)&#x3D;&quot;densityRadioChange(manRadio.value)&quot;&gt;
+      &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+      &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;
+        Manual Choice
+      &lt;/span&gt;
+    &lt;/label&gt;
+    &lt;select #densitySelector
+            class&#x3D;&quot;form-control form-control-sm&quot;
+            [disabled]&#x3D;&quot;densityRadioChoice &#x3D;&#x3D;&#x3D; autoRadio.value&quot;
+            (change)&#x3D;&quot;densitySelectorChange(densitySelector.value)&quot;&gt;
+      &lt;option *ngFor&#x3D;&quot;let choice of columnDensityChoices&quot;
+              value&#x3D;&quot;{{choice}}&quot;&gt;{{choice}}&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class&#x3D;&quot;row&quot;&gt;
+  &lt;div class&#x3D;&quot;col-xl-3&quot;&gt;
+    &lt;label&gt;Viewport&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;col-xl btn-group btn-group-sm&quot; role&#x3D;&quot;group&quot;&gt;
+    &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Pan to Spectral Window&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Zoom to Band&lt;/button&gt;
+    &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Reset&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade" id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="row">  <div class="col-xl-3">    <label>Overlays</label>  </div>  <div class="col-xl">    <!--<label><input type="checkbox" (checked)="bandsChecked" (change)="bandsCheckedChange()">Receiver Bands</label>-->    <label class="custom-control custom-checkbox">      <input type="checkbox" class="custom-control-input" [(checked)]="bandsChecked" (change)="bandsCheckedChange()">      <span class="custom-control-indicator"></span>      <span class="custom-control-description">Receiver Bands</span>    </label>    <label class="custom-control custom-checkbox">      <input type="checkbox" class="custom-control-input" [(checked)]="transmissionChecked"             (change)="transmissionCheckedChange()">      <span class="custom-control-indicator"></span>      <span class="custom-control-description">Transmission</span>    </label>    <selectable type="checkbox">DSB Image</selectable>    <selectable type="checkbox">Spectral Lines</selectable>    <button class="btn btn-sm btn-outline-secondary">Select Lines to Overlay</button>  </div></div><div class="row">  <div class="col-xl-3">    <label>Water Vapour Column Density</label>  </div>  <div class="col-xl">    <label class="custom-control custom-radio">      <input #autoRadio             id="automaticRadio"             name="densityRadios"             type="radio"             class="custom-control-input"             value="automatic"             [checked]="densityRadioChoice === autoRadio.value"             (change)="densityRadioChange(autoRadio.value)">      <span class="custom-control-indicator"></span>      <span class="custom-control-description">        Automatic Choice      </span>    </label>    <label class="custom-control custom-radio">      <input #manRadio             id="manualRadio"             name="densityRadios"             type="radio"             class="custom-control-input"             value="manual"             [checked]="densityRadioChoice === manRadio.value"             (change)="densityRadioChange(manRadio.value)">      <span class="custom-control-indicator"></span>      <span class="custom-control-description">        Manual Choice      </span>    </label>    <select #densitySelector            class="form-control form-control-sm"            [disabled]="densityRadioChoice === autoRadio.value"            (change)="densitySelectorChange(densitySelector.value)">      <option *ngFor="let choice of columnDensityChoices"              value="{{choice}}">{{choice}}</option>    </select>  </div></div><div class="row">  <div class="col-xl-3">    <label>Viewport</label>  </div>  <div class="col-xl btn-group btn-group-sm" role="group">    <button class="btn btn-outline-secondary">Pan to Spectral Window</button>    <button class="btn btn-outline-secondary">Zoom to Band</button>    <button class="btn btn-outline-secondary">Reset</button>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
+    var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
+    var ACTUAL_COMPONENT = {'name': 'VisualisationControlComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
 
 
 

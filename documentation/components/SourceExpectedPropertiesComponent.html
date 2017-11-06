@@ -179,7 +179,10 @@
                                     <a href="../components/TypeComponent.html" >TypeComponent</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../components/VisualisationComponent.html" >VisualisationComponent</a>
+                                    <a href="../components/VisualisationControlComponent.html" >VisualisationControlComponent</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../components/VisualisationViewerComponent.html" >VisualisationViewerComponent</a>
                                 </li>
                         </ul>
                     </li>
@@ -310,10 +313,22 @@
                                 id="xs-interfaces-links"
                             >
                                 <li class="link">
+                                    <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
+                                </li>
+                                <li class="link">
                                     <a href="../interfaces/CoordSystem.html" >CoordSystem</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../interfaces/Margin.html" >Margin</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/NavItem.html" >NavItem</a>
@@ -556,7 +571,10 @@
                                            <a href="../components/TypeComponent.html" >TypeComponent</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../components/VisualisationComponent.html" >VisualisationComponent</a>
+                                           <a href="../components/VisualisationControlComponent.html" >VisualisationControlComponent</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../components/VisualisationViewerComponent.html" >VisualisationViewerComponent</a>
                                        </li>
                                </ul>
                            </li>
@@ -687,10 +705,22 @@
                                        id="interfaces-links"
                    >
                                        <li class="link">
+                                           <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../interfaces/CoordSystem.html" >CoordSystem</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../interfaces/Margin.html" >Margin</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/NavItem.html" >NavItem</a>
@@ -1004,7 +1034,7 @@ export class SourceExpectedPropertiesComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="row">  <ng-template #peakFluxTooltipTemplate>    Expected peak flux density of source continuum for the <b>weakest</b> source component that you wish to detect  </ng-template>  <label for="peakContInput"         class="col-6"         data-html="true"         [ngbTooltip]="peakFluxTooltipTemplate"         #peakFluxTooltip="ngbTooltip"         [tooltip-delay]="peakFluxTooltip">    Peak Continuum Flux Density per Synthesized Beam  </label>  <div class="col-6 input-group">    <input id="peakContInput"           class="form-control form-control-sm align-self-baseline"           placeholder="0.00000">    <select class="form-control form-control-sm input-group-addon">      <option>mJy</option>      <option>Jy</option>    </select>  </div></div><div class="row">  <label for="contPolInput"         class="col-6"         ngbTooltip="Expected polarization of the source in percent"         #continuumPercentageTooltip="ngbTooltip"         [tooltip-delay]="continuumPercentageTooltip">    Continuum Polarization Percentage  </label>  <div class="col-6 input-group">    <input id="contPolInput"           class="form-control form-control-sm align-self-baseline"           placeholder="0.0%">  </div></div><div class="row">  <ng-template #peakLineTooltipTemplate>    Expected peak flux density of line emission relative to the continuum for the <b>weakest</b> source component that    you wish to detect  </ng-template>  <label for="peakFluxPerInput"         class="col-6"         [ngbTooltip]="peakLineTooltipTemplate"         #peakLineTooltip="ngbTooltip"         [tooltip-delay]="peakLineTooltip">    Peak Line Flux Density per Synthesized Beam  </label>  <div class="col-6 input-group">    <input id="peakFluxPerInput"           class="form-control form-control-sm align-self-baseline"           placeholder="0.00000">    <select class="form-control form-control-sm input-group-addon">      <option>mJy</option>      <option>Jy</option>    </select>  </div></div><div class="row">  <label for="lineWidthInput"         class="col-6"         ngbTooltip="Expected width of the lines to be observed (FWHM)"         #lineWidthTooltip="ngbTooltip"         [tooltip-delay]="lineWidthTooltip">    Line Width  </label>  <div class="col-6 input-group">    <input id="lineWidthInput"           class="form-control form-control-sm align-self-baseline"           placeholder="0.00000">    <select class="form-control form-control-sm input-group-addon">      <option>m/s</option>      <option>km/s</option>    </select>  </div></div><div class="row">  <label for="linePolInput"         class="col-6"         ngbTooltip="Expected polarization of the line in percent"         #linePercentageTooltip="ngbTooltip"         [tooltip-delay]="linePercentageTooltip">    Line Polarization Percentage  </label>  <div class="col-6 input-group">    <input id="linePolInput"           class="form-control form-control-sm align-self-baseline"           placeholder="0.0%">  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationComponent', 'selector': 'app-visualisation'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SelectableComponent', 'selector': 'selectable'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'SourceExpectedPropertiesComponent'};
 </script>

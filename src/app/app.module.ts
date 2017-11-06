@@ -65,7 +65,6 @@ import {VisualisationViewerComponent} from './observation-tool/components/scienc
     ProposalComponent,
     RefinePanelComponent,
     ResultsTableComponent,
-    // SidenavComponent,
     SourceComponent,
     SourceExpectedPropertiesComponent,
     SpacialImageComponent,

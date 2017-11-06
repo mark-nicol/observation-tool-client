@@ -828,7 +828,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/observation-tool/app-routing.module.ts</code>
+            <code>src/app/app-routing.module.ts</code>
         </p>
 
 
@@ -840,22 +840,21 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {NgModule} from &quot;@angular/core&quot;
-import {RouterModule, Routes} from &quot;@angular/router&quot;
-import {FieldSetupComponent} from &quot;./components/science-goals/field-setup/field-setup.component&quot;;
-import {SourceComponent} from &quot;./components/science-goals/field-setup/source/source.component&quot;;
+        <pre class="line-numbers"><code class="language-typescript">import {NgModule} from &#x27;@angular/core&#x27;
+import {RouterModule, Routes} from &#x27;@angular/router&#x27;
+import {FieldSetupComponent} from &#x27;./observation-tool/components/science-goals/field-setup/field-setup.component&#x27;;
+import {SourceComponent} from &#x27;./observation-tool/components/science-goals/field-setup/source/source.component&#x27;;
 /* Components */
-import {PiEntryComponent} from &quot;./components/pi-entry/pi-entry.component&quot;
-import {PiSelectComponent} from &quot;./components/pi-select/pi-select.component&quot;
-import {PlannedObservingComponent} from &quot;./components/planned-observing/planned-observing.component&quot;;
-import {ProposalComponent} from &quot;./components/proposal/proposal.component&quot;;
-import {ScienceGoalComponent} from &quot;./components/science-goals/science-goal.component&quot;;
-import {GeneralComponent} from &quot;./components/science-goals/general/general.component&quot;;
-import {SpectralSetupComponent} from &quot;./components/science-goals/spectral-setup/spectral-setup.component&quot;;
-import {CalibrationSetupComponent} from &quot;./components/science-goals/calibration-setup/calibration-setup.component&quot;;
-import {ControlContainer} from &quot;@angular/forms&quot;;
-import {ControlPerformanceComponent} from &quot;./components/science-goals/control-performance/control-performance.component&quot;;
-import {TechnicalJustificationComponent} from &quot;./components/science-goals/technical-justification/technical-justification.component&quot;;
+import {PiEntryComponent} from &#x27;./observation-tool/components/pi-entry/pi-entry.component&#x27;
+import {PiSelectComponent} from &#x27;./observation-tool/components/pi-select/pi-select.component&#x27;
+import {PlannedObservingComponent} from &#x27;./observation-tool/components/planned-observing/planned-observing.component&#x27;;
+import {ProposalComponent} from &#x27;./observation-tool/components/proposal/proposal.component&#x27;;
+import {ScienceGoalComponent} from &#x27;./observation-tool/components/science-goals/science-goal.component&#x27;;
+import {GeneralComponent} from &#x27;./observation-tool/components/science-goals/general/general.component&#x27;;
+import {SpectralSetupComponent} from &#x27;./observation-tool/components/science-goals/spectral-setup/spectral-setup.component&#x27;;
+import {CalibrationSetupComponent} from &#x27;./observation-tool/components/science-goals/calibration-setup/calibration-setup.component&#x27;;
+import {ControlPerformanceComponent} from &#x27;./observation-tool/components/science-goals/control-performance/control-performance.component&#x27;;
+import {TechnicalJustificationComponent} from &#x27;./observation-tool/components/science-goals/technical-justification/technical-justification.component&#x27;;
 
 const routes: Routes &#x3D; [
   {

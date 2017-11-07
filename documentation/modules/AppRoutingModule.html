@@ -896,93 +896,17 @@
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {NgModule} from &#x27;@angular/core&#x27;
 import {RouterModule, Routes} from &#x27;@angular/router&#x27;
-// /* Components */
-// import {CalibrationSetupComponent} from &#x27;./observation-tool/components/science-goals/calibration-setup/calibration-setup.component&#x27;;
-// import {ControlPerformanceComponent} from &#x27;./observation-tool/components/science-goals/control-performance/control-performance.component&#x27;;
-// import {FieldSetupComponent} from &#x27;./observation-tool/components/science-goals/field-setup/field-setup.component&#x27;;
-// import {SourceComponent} from &#x27;./observation-tool/components/science-goals/field-setup/source/source.component&#x27;;
-// import {GeneralComponent} from &#x27;./observation-tool/components/science-goals/general/general.component&#x27;;
-// import {SpectralSetupComponent} from &#x27;./observation-tool/components/science-goals/spectral-setup/spectral-setup.component&#x27;;
-// import {TechnicalJustificationComponent} from &#x27;./observation-tool/components/science-goals/technical-justification/technical-justification.component&#x27;;
-// // TODO Sort this error, probably change routing for the module
-// import {PiEntryComponent, PiSelectComponent} from &#x27;./observation-tool/pi-selection/pi-selection.module&#x27;;
 
 const routes: Routes &#x3D; [
-  // {
-  //   path: &#x27;pi-entry&#x27;,
-  //   component: PiEntryComponent,
-  //   children: []
-  // },
-  // {
-  //   path: &#x27;pi-entry/:value&#x27;,
-  //   component: PiEntryComponent
-  // },
-  // {
-  //   path: &#x27;pi-select&#x27;,
-  //   component: PiSelectComponent
-  // },
-  // {
-  //   path: &#x27;pi-select/:value&#x27;,
-  //   component: PiSelectComponent
-  // },
-  // {
-  //   path: &#x27;project&#x27;,
-  //   component: SourceComponent
-  // },
-  // {
-  //   path: &#x27;proposal&#x27;,
-  //   component: ProposalComponent
-  // },
-  // {
-  //   path: &#x27;plannedObs&#x27;,
-  //   component: PlannedObservingComponent
-  // },
-  // {
-  //   path: &#x27;sciGoals&#x27;,
-  //   component: ScienceGoalComponent,
-  //   children: [
-  //     {
-  //       path: &#x27;&#x27;,
-  //       redirectTo: &#x27;general&#x27;,
-  //       pathMatch: &#x27;full&#x27;
-  //     },
-  //     {
-  //       path: &#x27;general&#x27;,
-  //       component: GeneralComponent,
-  //       outlet: &#x27;scienceGoalOutlet&#x27;
-  //     },
-  //     {
-  //       path: &#x27;fieldSetup&#x27;,
-  //       component: FieldSetupComponent,
-  //       outlet: &#x27;scienceGoalOutlet&#x27;
-  //     },
-  //     {
-  //       path: &#x27;spectralSetup&#x27;,
-  //       component: SpectralSetupComponent,
-  //       outlet: &#x27;scienceGoalOutlet&#x27;
-  //     },
-  //     {
-  //       path: &#x27;calibrationSetup&#x27;,
-  //       component: CalibrationSetupComponent,
-  //       outlet: &#x27;scienceGoalOutlet&#x27;
-  //     },
-  //     {
-  //       path: &#x27;controlAndPerf&#x27;,
-  //       component: ControlPerformanceComponent,
-  //       outlet: &#x27;scienceGoalOutlet&#x27;
-  //     },
-  //     {
-  //       path: &#x27;techJust&#x27;,
-  //       component: TechnicalJustificationComponent,
-  //       outlet: &#x27;scienceGoalOutlet&#x27;
-  //     },
-  //   ]
-  // },
-  // {
-  //   path: &#x27;&#x27;,
-  //   redirectTo: &#x27;pi-entry&#x27;,
-  //   pathMatch: &#x27;full&#x27;
-  // }
+  {
+    path: &#x27;project&#x27;,
+    loadChildren: &#x27;project/project.module#ProjectModule&#x27;
+  },
+  {
+    path: &#x27;&#x27;,
+    redirectTo: &#x27;project&#x27;,
+    pathMatch: &#x27;full&#x27;
+  }
 ];
 
 @NgModule({

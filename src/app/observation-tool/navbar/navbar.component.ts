@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   items: NavItemInterface[] = [
     {
       title: 'Project',
-      path: 'pi-entry'
+      path: 'project'
     },
     {
       title: 'Proposal',
@@ -31,11 +31,11 @@ export class NavbarComponent implements OnInit {
     },
     {
       title: 'Planned Observing',
-      path: 'plannedObs'
+      path: 'planned-observing'
     },
     {
       title: 'Science Goals',
-      path: 'sciGoals'
+      path: 'science-goals'
     }
   ];
 

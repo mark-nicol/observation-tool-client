@@ -308,6 +308,9 @@
                                     <a href="../injectables/LongitudeConversionService.html" >LongitudeConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/PersistenceService.html" >PersistenceService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                 </li>
                                 <li class="link">
@@ -343,7 +346,7 @@
                                     <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/CoordSystem.html" >CoordSystem</a>
+                                    <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
@@ -355,16 +358,16 @@
                                     <a href="../interfaces/Margin.html" >Margin</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/NavItem.html" >NavItem</a>
+                                    <a href="../interfaces/NavItemInterface.html" >NavItemInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/PrimaryInvestigator.html" >PrimaryInvestigator</a>
+                                    <a href="../interfaces/PrimaryInvestigatorInterface.html" >PrimaryInvestigatorInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ScienceGoalPage.html" >ScienceGoalPage</a>
+                                    <a href="../interfaces/ScienceGoalPageInterface.html" >ScienceGoalPageInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ScienceGoalPanel.html" >ScienceGoalPanel</a>
+                                    <a href="../interfaces/ScienceGoalPanelInterface.html" >ScienceGoalPanelInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/SourceComponentInterface.html" >SourceComponentInterface</a>
@@ -724,6 +727,9 @@
                                            <a href="../injectables/LongitudeConversionService.html" >LongitudeConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/PersistenceService.html" >PersistenceService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                        </li>
                                        <li class="link">
@@ -759,7 +765,7 @@
                                            <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/CoordSystem.html" >CoordSystem</a>
+                                           <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
@@ -771,16 +777,16 @@
                                            <a href="../interfaces/Margin.html" >Margin</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/NavItem.html" >NavItem</a>
+                                           <a href="../interfaces/NavItemInterface.html" >NavItemInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/PrimaryInvestigator.html" >PrimaryInvestigator</a>
+                                           <a href="../interfaces/PrimaryInvestigatorInterface.html" >PrimaryInvestigatorInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ScienceGoalPage.html" >ScienceGoalPage</a>
+                                           <a href="../interfaces/ScienceGoalPageInterface.html" >ScienceGoalPageInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ScienceGoalPanel.html" >ScienceGoalPanel</a>
+                                           <a href="../interfaces/ScienceGoalPanelInterface.html" >ScienceGoalPanelInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/SourceComponentInterface.html" >SourceComponentInterface</a>
@@ -1232,7 +1238,7 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-    <code>systemChange(system: <a href="../interfaces/CoordSystem.html">CoordSystem</a>)</code>
+    <code>systemChange(system: <a href="../interfaces/CoordSystemInterface.html">CoordSystemInterface</a>)</code>
                         </td>
                     </tr>
     
@@ -1263,7 +1269,7 @@
                                                     <tr>
                                                       <td>system</td>
                                                       <td>
-                                                              <code><a href="../interfaces/CoordSystem.html" target="_self" >CoordSystem</a></code>
+                                                              <code><a href="../interfaces/CoordSystemInterface.html" target="_self" >CoordSystemInterface</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
@@ -1448,7 +1454,7 @@
     
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-description"><p>ScienceGoalPage data loaded from Field Setup Service </p>
+                            <div class="io-description"><p>ScienceGoalPageInterface data loaded from Field Setup Service </p>
     </div>
                         </td>
                     </tr>
@@ -1491,9 +1497,9 @@
 
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
-import {SourceComponentInterface} from &#x27;../../../../interfaces/source.interface&#x27;;
+import {SourceComponentInterface} from &#x27;../../../shared/interfaces/source.interface&#x27;;
 import {FieldSetupService} from &#x27;../../../../services/field-setup.service&#x27;;
-import {CoordSystem} from &#x27;../../../../interfaces/coord-system.interface&#x27;;
+import {CoordSystemInterface} from &#x27;../../../shared/interfaces/coord-system.interface&#x27;;
 
 /**
  * Source Component in Field Setup
@@ -1509,7 +1515,7 @@ import {CoordSystem} from &#x27;../../../../interfaces/coord-system.interface&#x
 })
 export class SourceComponent {
 
-  /** ScienceGoalPage data loaded from Field Setup Service */
+  /** ScienceGoalPageInterface data loaded from Field Setup Service */
   pageData: SourceComponentInterface;
 
   /** Selectable solar system bodies for selection box */
@@ -1597,7 +1603,7 @@ export class SourceComponent {
    * Handles a change of system in the system selector
    * @param system The new system type to be used
    */
-  systemChange(system: CoordSystem) {
+  systemChange(system: CoordSystemInterface) {
     this.pageData.chosenSystem &#x3D; system;
   }
 

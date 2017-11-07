@@ -308,6 +308,9 @@
                                     <a href="../injectables/LongitudeConversionService.html" >LongitudeConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/PersistenceService.html" >PersistenceService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                 </li>
                                 <li class="link">
@@ -343,7 +346,7 @@
                                     <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/CoordSystem.html" >CoordSystem</a>
+                                    <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
@@ -355,16 +358,16 @@
                                     <a href="../interfaces/Margin.html" >Margin</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/NavItem.html" >NavItem</a>
+                                    <a href="../interfaces/NavItemInterface.html" >NavItemInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/PrimaryInvestigator.html" >PrimaryInvestigator</a>
+                                    <a href="../interfaces/PrimaryInvestigatorInterface.html" >PrimaryInvestigatorInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ScienceGoalPage.html" >ScienceGoalPage</a>
+                                    <a href="../interfaces/ScienceGoalPageInterface.html" >ScienceGoalPageInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ScienceGoalPanel.html" >ScienceGoalPanel</a>
+                                    <a href="../interfaces/ScienceGoalPanelInterface.html" >ScienceGoalPanelInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/SourceComponentInterface.html" >SourceComponentInterface</a>
@@ -724,6 +727,9 @@
                                            <a href="../injectables/LongitudeConversionService.html" >LongitudeConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/PersistenceService.html" >PersistenceService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/PrimaryInvestigatorService.html" >PrimaryInvestigatorService</a>
                                        </li>
                                        <li class="link">
@@ -759,7 +765,7 @@
                                            <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/CoordSystem.html" >CoordSystem</a>
+                                           <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
@@ -771,16 +777,16 @@
                                            <a href="../interfaces/Margin.html" >Margin</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/NavItem.html" >NavItem</a>
+                                           <a href="../interfaces/NavItemInterface.html" >NavItemInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/PrimaryInvestigator.html" >PrimaryInvestigator</a>
+                                           <a href="../interfaces/PrimaryInvestigatorInterface.html" >PrimaryInvestigatorInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ScienceGoalPage.html" >ScienceGoalPage</a>
+                                           <a href="../interfaces/ScienceGoalPageInterface.html" >ScienceGoalPageInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ScienceGoalPanel.html" >ScienceGoalPanel</a>
+                                           <a href="../interfaces/ScienceGoalPanelInterface.html" >ScienceGoalPanelInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/SourceComponentInterface.html" >SourceComponentInterface</a>
@@ -1216,7 +1222,7 @@
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
 import {Observable} from &#x27;rxjs/Observable&#x27;;
-import {ScienceGoalPage} from &#x27;../interfaces/science-goal-page.interface&#x27;;
+import {ScienceGoalPageInterface} from &#x27;../../shared/interfaces/science-goal-page.interface&#x27;;
 import {BehaviorSubject} from &#x27;rxjs/BehaviorSubject&#x27;;
 import {SCIENCE_GOAL_PAGES} from &#x27;../data/science-goal-pages&#x27;;
 
@@ -1228,14 +1234,14 @@ import {SCIENCE_GOAL_PAGES} from &#x27;../data/science-goal-pages&#x27;;
 export class ScienceGoalPageService {
 
   /** Publicly subscribable page data */
-  pages: Observable&lt;{ [id: string]: ScienceGoalPage }&gt;;
+  pages: Observable&lt;{ [id: string]: ScienceGoalPageInterface }&gt;;
 
   /** Private page data used for loading */
-  private _pages: BehaviorSubject&lt;{ [id: string]: ScienceGoalPage }&gt;;
+  private _pages: BehaviorSubject&lt;{ [id: string]: ScienceGoalPageInterface }&gt;;
 
   /** Data store used for data loading */
   private dataStore: {
-    pages: { [id: string]: ScienceGoalPage };
+    pages: { [id: string]: ScienceGoalPageInterface };
   };
 
   /**
@@ -1243,7 +1249,7 @@ export class ScienceGoalPageService {
    */
   constructor() {
     this.dataStore &#x3D; {pages: {}};
-    this._pages &#x3D; &lt;BehaviorSubject&lt;{ [id: string]: ScienceGoalPage }&gt;&gt;new BehaviorSubject({});
+    this._pages &#x3D; &lt;BehaviorSubject&lt;{ [id: string]: ScienceGoalPageInterface }&gt;&gt;new BehaviorSubject({});
     this.pages &#x3D; this._pages.asObservable();
     this.dataStore.pages &#x3D; SCIENCE_GOAL_PAGES;
     this._pages.next(Object.assign({}, this.dataStore).pages);
@@ -1253,9 +1259,9 @@ export class ScienceGoalPageService {
    * Returns observable for a single page
    * @param key Unique key of the page to return
    */
-  getPage(key: string): Observable&lt;ScienceGoalPage&gt; {
-    let page: Observable&lt;ScienceGoalPage&gt;;
-    const subject &#x3D; &lt;BehaviorSubject&lt;ScienceGoalPage&gt;&gt; new BehaviorSubject({});
+  getPage(key: string): Observable&lt;ScienceGoalPageInterface&gt; {
+    let page: Observable&lt;ScienceGoalPageInterface&gt;;
+    const subject &#x3D; &lt;BehaviorSubject&lt;ScienceGoalPageInterface&gt;&gt; new BehaviorSubject({});
     page &#x3D; subject.asObservable();
     subject.next(this.dataStore.pages[key]);
     return page;

@@ -8,13 +8,15 @@ import {PiSelectRoutingModule} from './pi-select-routing.module';
 import {PrimaryInvestigatorService} from './services/primary-investigator.service';
 
 @NgModule({
+  imports: [
+    PiSelectRoutingModule,
+  ],
   declarations: [
     PiEntryComponent,
     PiSearchComponent,
     PiSelectComponent,
     RefinePanelComponent,
     ResultsTableComponent,
-    PiSelectRoutingModule,
   ],
   providers: [
     PrimaryInvestigatorService

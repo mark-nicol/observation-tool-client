@@ -1,15 +1,20 @@
 import {NgModule} from '@angular/core';
+import {FieldSetupModule} from '../field-setup/field-setup.module';
+import {SharedModule} from '../shared/shared.module';
+import {SpectralSetupModule} from '../spectral-setup/spectral-setup.module';
 import {CalibrationSetupComponent} from './components/calibration-setup/calibration-setup.component';
 import {ControlPerformanceComponent} from './components/control-performance/control-performance.component';
 import {GeneralComponent} from './components/general/general.component';
-import {ScienceGoalComponent} from './components/science-goal/science-goal.component';
 import {TechnicalJustificationComponent} from './components/technical-justification/technical-justification.component';
 import {ScienceGoalRoutingModule} from './science-goal-routing.module';
-import {ScienceGoalPageService} from './services/science-goal-page.service';
+import {ScienceGoalComponent} from './science-goal.component';
 
 @NgModule({
   imports: [
-    ScienceGoalRoutingModule
+    FieldSetupModule,
+    SharedModule,
+    SpectralSetupModule,
+    ScienceGoalRoutingModule,
   ],
   declarations: [
     CalibrationSetupComponent,
@@ -18,8 +23,10 @@ import {ScienceGoalPageService} from './services/science-goal-page.service';
     TechnicalJustificationComponent,
     ScienceGoalComponent,
   ],
-  providers: [ScienceGoalPageService],
-  exports: [ScienceGoalComponent]
+  providers: [],
+  exports: [
+    ScienceGoalComponent
+  ]
 })
 
 export class ScienceGoalModule {

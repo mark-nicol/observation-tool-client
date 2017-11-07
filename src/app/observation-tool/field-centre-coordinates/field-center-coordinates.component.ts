@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FieldCentreCoordinatesInterface} from '../shared/interfaces/field-centre-coordinates.interface';
-import {FieldSetupService} from '../../../../services/field-setup.service';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
  * Handles the Field Centre Coordinates component in the Field Setup
@@ -17,15 +17,15 @@ export class FieldCenterCoordinatesComponent {
   data: FieldCentreCoordinatesInterface;
 
   /** Field Setup Service to be used in HTML template */
-  protected _fieldSetupService: FieldSetupService;
+  protected _fieldSetupService: PersistenceService;
 
   /**
    * Sets _fieldSetupService and retrieves page data
-   * @param fieldSetupService Injected service
+   * @param persistenceService Injected service
    */
-  constructor(private fieldSetupService: FieldSetupService) {
-    this._fieldSetupService = fieldSetupService;
-    fieldSetupService.getPageData('fieldCentreCoordinates').subscribe(res => this.data = res);
+  constructor(private persistenceService: PersistenceService) {
+    this._fieldSetupService = persistenceService;
+    persistenceService.getPage('fieldCentreCoordinates').subscribe(res => this.data = res);
   }
 
   /**

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {ScienceGoalPanelService} from '../../../services/science-goal-panel.service';
 import {ScienceGoalPage} from '../shared/classes/science-goal-page';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
  * Handles the field setup page of a science goal
@@ -9,8 +9,7 @@ import {ScienceGoalPage} from '../shared/classes/science-goal-page';
 @Component({
   selector: 'field-setup',
   templateUrl: './field-setup.component.html',
-  styleUrls: ['./field-setup.component.css'],
-  providers: [ScienceGoalPanelService]
+  styleUrls: ['./field-setup.component.css']
 })
 
 export class FieldSetupComponent extends ScienceGoalPage {
@@ -26,10 +25,10 @@ export class FieldSetupComponent extends ScienceGoalPage {
 
   /**
    * Calls super
-   * @param scienceGoalPanelService Passed to super for use in parent
+   * @param persistenceService Passed to super for use in parent
    */
-  constructor(scienceGoalPanelService: ScienceGoalPanelService) {
-    super(scienceGoalPanelService, 'fieldSetup');
+  constructor(persistenceService: PersistenceService) {
+    super(persistenceService, 'fieldSetup');
   }
 
   /**

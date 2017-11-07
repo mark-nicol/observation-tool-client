@@ -5,14 +5,18 @@ import {FieldCenterCoordinatesComponent} from './field-center-coordinates.compon
 import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
-  imports: [SharedModule],
+  imports: [
+    SharedModule
+  ],
   declarations: [
     FccIndividualComponent,
     FccRectangularComponent,
     FieldCenterCoordinatesComponent
   ],
   providers: [],
-  exports: [FieldCenterCoordinatesComponent]
+  exports: [
+    FieldCenterCoordinatesComponent
+  ]
 })
 
 export class FieldCentreCoordinatesModule {

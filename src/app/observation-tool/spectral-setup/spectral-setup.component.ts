@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ScienceGoalPage} from '../shared/classes/science-goal-page';
-import {ScienceGoalPanelService} from '../services/science-goal-panel.service';
+import {PersistenceService} from '../shared/services/persistence.service';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
 
 @Component({
@@ -12,8 +12,8 @@ export class SpectralSetupComponent extends ScienceGoalPage implements OnInit {
 
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
-  constructor(scienceGoalPanelService: ScienceGoalPanelService) {
-    super(scienceGoalPanelService, 'spectralSetup');
+  constructor(persistenceService: PersistenceService) {
+    super(persistenceService, 'spectralSetup');
   }
 
   ngOnInit() {

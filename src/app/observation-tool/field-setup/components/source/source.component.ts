@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {SourceComponentInterface} from '../../../shared/interfaces/source.interface';
-import {FieldSetupService} from '../../../../services/field-setup.service';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * Source Component in Field Setup
@@ -47,10 +47,10 @@ export class SourceComponent {
 
   /**
    * Retrieves data from service
-   * @param fieldSetupService Injected service
+   * @param persistenceService Injected service
    */
-  constructor(private fieldSetupService: FieldSetupService) {
-    fieldSetupService.getPageData('source').subscribe(data => this.pageData = data);
+  constructor(private persistenceService: PersistenceService) {
+    persistenceService.getPage('source').subscribe(data => this.pageData = data);
   }
 
   /**

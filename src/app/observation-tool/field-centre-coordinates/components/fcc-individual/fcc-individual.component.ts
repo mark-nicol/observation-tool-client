@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FieldSetupService} from '../../../../../services/field-setup.service';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * Individual Field Centre Coordinates component
@@ -25,7 +25,7 @@ export class FccIndividualComponent {
   /** ScienceGoalPageInterface data for fields and table rows */
   data: any;
   /** Field Setup Service to be used in template */
-  protected _fieldSetupService: FieldSetupService;
+  protected _persistenceService: PersistenceService;
 
   /**
    * Constructor
@@ -33,9 +33,9 @@ export class FccIndividualComponent {
    * Sets local _fieldSetupService from injected and retrieves page data from service
    * @param fieldSetupService The injected service
    */
-  constructor(private fieldSetupService: FieldSetupService) {
-    this._fieldSetupService = fieldSetupService;
-    fieldSetupService.getPageData('fieldCentreCoordinates').subscribe(res => this.data = res.individual);
+  constructor(private persistenceService: PersistenceService) {
+    this._persistenceService = persistenceService;
+    persistenceService.getPage('fieldCentreCoordinates').subscribe(res => this.data = res.individual);
   }
 
   /**

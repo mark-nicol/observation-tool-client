@@ -84,7 +84,13 @@
                                     <a href="../modules/PiSelectModule.html" >PiSelectModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                 </li>
                                 <li class="link">
                                     <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
@@ -259,12 +265,6 @@
                                 </li>
                                 <li class="link">
                                     <a href="../classes/OtPrototypePage.html" >OtPrototypePage</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                 </li>
                                 <li class="link">
                                     <a href="../classes/ScienceGoalPage.html" >ScienceGoalPage</a>
@@ -503,7 +503,13 @@
                                            <a href="../modules/PiSelectModule.html" >PiSelectModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                        </li>
                                        <li class="link">
                                            <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
@@ -678,12 +684,6 @@
                                        </li>
                                        <li class="link">
                                            <a href="../classes/OtPrototypePage.html" >OtPrototypePage</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                        </li>
                                        <li class="link">
                                            <a href="../classes/ScienceGoalPage.html" >ScienceGoalPage</a>
@@ -997,7 +997,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(scienceGoalPanelService: ScienceGoalPanelService)</code>
+                            <code>constructor(persistenceService: <a href="../injectables/PersistenceService.html">PersistenceService</a>)</code>
                         </td>
                     </tr>
                             <tr>
@@ -1021,9 +1021,9 @@
                                             </thead>
                                             <tbody>
                                                     <tr>
-                                                      <td>scienceGoalPanelService</td>
+                                                      <td>persistenceService</td>
                                                       <td>
-                                                                <code>ScienceGoalPanelService</code>
+                                                                <code><a href="../injectables/PersistenceService.html" target="_self" >PersistenceService</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
@@ -1372,7 +1372,7 @@
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {Component, OnInit, ViewChild} from &#x27;@angular/core&#x27;;
 import {ScienceGoalPage} from &#x27;../shared/classes/science-goal-page&#x27;;
-import {ScienceGoalPanelService} from &#x27;../services/science-goal-panel.service&#x27;;
+import {PersistenceService} from &#x27;../shared/services/persistence.service&#x27;;
 import {VisualisationViewerComponent} from &#x27;./components/visualisation-viewer/visualisation-viewer.component&#x27;;
 
 @Component({
@@ -1384,8 +1384,8 @@ export class SpectralSetupComponent extends ScienceGoalPage implements OnInit {
 
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
-  constructor(scienceGoalPanelService: ScienceGoalPanelService) {
-    super(scienceGoalPanelService, &#x27;spectralSetup&#x27;);
+  constructor(persistenceService: PersistenceService) {
+    super(persistenceService, &#x27;spectralSetup&#x27;);
   }
 
   ngOnInit() {

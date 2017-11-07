@@ -18,14 +18,14 @@ import {SpeedConversionService} from './services/speed-conversion.service';
 
 @NgModule({
   declarations: [
-    Angle,
-    AngularVelocity,
-    Frequency,
-    Latitude,
-    Length,
-    Longitude,
-    Sensitivity,
-    Speed,
+    // Angle,
+    // AngularVelocity,
+    // Frequency,
+    // Latitude,
+    // Length,
+    // Longitude,
+    // Sensitivity,
+    // Speed,
   ],
   providers: [
     AngleConversionService,
@@ -38,14 +38,14 @@ import {SpeedConversionService} from './services/speed-conversion.service';
     SpeedConversionService,
   ],
   exports: [
-    Angle,
-    AngularVelocity,
-    Frequency,
-    Latitude,
-    Length,
-    Longitude,
-    Sensitivity,
-    Speed
+    // Angle,
+    // AngularVelocity,
+    // Frequency,
+    // Latitude,
+    // Length,
+    // Longitude,
+    // Sensitivity,
+    // Speed
   ]
 })
 

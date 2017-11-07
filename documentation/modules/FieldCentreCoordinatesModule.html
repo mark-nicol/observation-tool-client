@@ -84,7 +84,13 @@
                                     <a href="../modules/PiSelectModule.html" >PiSelectModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                 </li>
                                 <li class="link">
                                     <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
@@ -259,12 +265,6 @@
                                 </li>
                                 <li class="link">
                                     <a href="../classes/OtPrototypePage.html" >OtPrototypePage</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                 </li>
                                 <li class="link">
                                     <a href="../classes/ScienceGoalPage.html" >ScienceGoalPage</a>
@@ -503,7 +503,13 @@
                                            <a href="../modules/PiSelectModule.html" >PiSelectModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                        </li>
                                        <li class="link">
                                            <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
@@ -678,12 +684,6 @@
                                        </li>
                                        <li class="link">
                                            <a href="../classes/OtPrototypePage.html" >OtPrototypePage</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                        </li>
                                        <li class="link">
                                            <a href="../classes/ScienceGoalPage.html" >ScienceGoalPage</a>
@@ -1048,10 +1048,12 @@ import {FccIndividualComponent} from &#x27;./components/fcc-individual/fcc-indiv
 import {FccRectangularComponent} from &#x27;./components/fcc-rectangular/fcc-rectangular.component&#x27;;
 import {FieldCenterCoordinatesComponent} from &#x27;./field-center-coordinates.component&#x27;;
 import {SharedModule} from &#x27;../shared/shared.module&#x27;;
+import {NgbModule} from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    NgbModule.forRoot(),
   ],
   declarations: [
     FccIndividualComponent,

@@ -10,7 +10,12 @@
   <label>
     Antenna Diameter
   </label>
-  <selectable id="12mRadio" name="antSizeRadios" type="radio">12m</selectable>
+  <label class="custom-control custom-radio">
+    <input id="12mRadio" name="antennaSizeRadios" type="radio" class="custom-control-input">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">12m</span>
+  </label>
+
 </div>
 <div class="row form-group">
   <label for="beamInput">
@@ -21,5 +26,9 @@
          placeholder="0.000 arcsec">
 </div>
 <div class="row form-group">
-  <selectable type="checkbox">Show Antenna Beamsize</selectable>
+  <label class="custom-control custom-checkbox">
+    <input id="beamsizeCheckbox" type="checkbox" class="custom-control-input">
+    <span class="custom-control-indicator"></span>
+    <span class="custom-control-description">Show Antenna Beamsize</span>
+  </label>
 </div>

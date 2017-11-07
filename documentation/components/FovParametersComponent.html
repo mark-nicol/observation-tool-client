@@ -84,7 +84,13 @@
                                     <a href="../modules/PiSelectModule.html" >PiSelectModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                 </li>
                                 <li class="link">
                                     <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
@@ -259,12 +265,6 @@
                                 </li>
                                 <li class="link">
                                     <a href="../classes/OtPrototypePage.html" >OtPrototypePage</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                 </li>
                                 <li class="link">
                                     <a href="../classes/ScienceGoalPage.html" >ScienceGoalPage</a>
@@ -503,7 +503,13 @@
                                            <a href="../modules/PiSelectModule.html" >PiSelectModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                        </li>
                                        <li class="link">
                                            <a href="../modules/ScienceGoalModule.html" >ScienceGoalModule</a>
@@ -678,12 +684,6 @@
                                        </li>
                                        <li class="link">
                                            <a href="../classes/OtPrototypePage.html" >OtPrototypePage</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                        </li>
                                        <li class="link">
                                            <a href="../classes/ScienceGoalPage.html" >ScienceGoalPage</a>
@@ -983,7 +983,12 @@ export class FovParametersComponent {
   &lt;label&gt;
     Antenna Diameter
   &lt;/label&gt;
-  &lt;selectable id&#x3D;&quot;12mRadio&quot; name&#x3D;&quot;antSizeRadios&quot; type&#x3D;&quot;radio&quot;&gt;12m&lt;/selectable&gt;
+  &lt;label class&#x3D;&quot;custom-control custom-radio&quot;&gt;
+    &lt;input id&#x3D;&quot;12mRadio&quot; name&#x3D;&quot;antennaSizeRadios&quot; type&#x3D;&quot;radio&quot; class&#x3D;&quot;custom-control-input&quot;&gt;
+    &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;12m&lt;/span&gt;
+  &lt;/label&gt;
+
 &lt;/div&gt;
 &lt;div class&#x3D;&quot;row form-group&quot;&gt;
   &lt;label for&#x3D;&quot;beamInput&quot;&gt;
@@ -994,7 +999,11 @@ export class FovParametersComponent {
          placeholder&#x3D;&quot;0.000 arcsec&quot;&gt;
 &lt;/div&gt;
 &lt;div class&#x3D;&quot;row form-group&quot;&gt;
-  &lt;selectable type&#x3D;&quot;checkbox&quot;&gt;Show Antenna Beamsize&lt;/selectable&gt;
+  &lt;label class&#x3D;&quot;custom-control custom-checkbox&quot;&gt;
+    &lt;input id&#x3D;&quot;beamsizeCheckbox&quot; type&#x3D;&quot;checkbox&quot; class&#x3D;&quot;custom-control-input&quot;&gt;
+    &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+    &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;Show Antenna Beamsize&lt;/span&gt;
+  &lt;/label&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -1022,7 +1031,7 @@ export class FovParametersComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="row form-group">  <label for="freqInput">    Representative Frequency (Sky)  </label>  <input class="form-control form-control-sm align-self-baseline"         id="freqInput"         placeholder="0.000 GHz"></div><div class="row form-group">  <label>    Antenna Diameter  </label>  <selectable id="12mRadio" name="antSizeRadios" type="radio">12m</selectable></div><div class="row form-group">  <label for="beamInput">    Antenna Beamsize (HPBW)  </label>  <input class="form-control form-control-sm align-self-baseline"         id="beamInput"         placeholder="0.000 arcsec"></div><div class="row form-group">  <selectable type="checkbox">Show Antenna Beamsize</selectable></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="row form-group">  <label for="freqInput">    Representative Frequency (Sky)  </label>  <input class="form-control form-control-sm align-self-baseline"         id="freqInput"         placeholder="0.000 GHz"></div><div class="row form-group">  <label>    Antenna Diameter  </label>  <label class="custom-control custom-radio">    <input id="12mRadio" name="antennaSizeRadios" type="radio" class="custom-control-input">    <span class="custom-control-indicator"></span>    <span class="custom-control-description">12m</span>  </label></div><div class="row form-group">  <label for="beamInput">    Antenna Beamsize (HPBW)  </label>  <input class="form-control form-control-sm align-self-baseline"         id="beamInput"         placeholder="0.000 arcsec"></div><div class="row form-group">  <label class="custom-control custom-checkbox">    <input id="beamsizeCheckbox" type="checkbox" class="custom-control-input">    <span class="custom-control-indicator"></span>    <span class="custom-control-description">Show Antenna Beamsize</span>  </label></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'FovParametersComponent'};

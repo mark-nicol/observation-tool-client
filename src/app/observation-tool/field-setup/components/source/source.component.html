@@ -14,10 +14,11 @@
 <div class="row">
   <!-- Solar checkbox -->
   <div class="col form-check">
-    <selectable type="checkbox"
-                (change)="solarCheckboxClicked()">
-      Choose a Solar System Object?
-    </selectable>
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" (change)="solarCheckboxClicked()">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Choose a Solar System Object?</span>
+    </label>
   </div>
   <!-- Solar selector -->
   <div class="col">

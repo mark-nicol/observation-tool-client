@@ -8,10 +8,12 @@ import {GeneralComponent} from './components/general/general.component';
 import {TechnicalJustificationComponent} from './components/technical-justification/technical-justification.component';
 import {ScienceGoalRoutingModule} from './science-goal-routing.module';
 import {ScienceGoalComponent} from './science-goal.component';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
     FieldSetupModule,
+    RouterModule,
     SharedModule,
     SpectralSetupModule,
     ScienceGoalRoutingModule,

@@ -8,11 +8,16 @@ import {DelayTooltipDirective} from './directives/delay-tooltip.directive';
 import {DegreesPipe} from './pipes/degrees.pipe';
 import {SexagesimalPipe} from './pipes/sexagesimal.pipe';
 import {PersistenceService} from './services/persistence.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {RouterModule} from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    NgbModule.forRoot(),
+    RouterModule,
     UnitsModule,
   ],
   declarations: [
@@ -27,6 +32,7 @@ import {PersistenceService} from './services/persistence.service';
   ],
   exports: [
     CommonModule,
+    BrowserModule,
     FormsModule,
     UnitsModule,
     ModularPanelComponent,
@@ -34,7 +40,6 @@ import {PersistenceService} from './services/persistence.service';
     DelayTooltipDirective,
     DegreesPipe,
     SexagesimalPipe,
-    PersistenceService,
   ]
 })
 

@@ -84,7 +84,13 @@
                                     <a href="../modules/PiSelectModule.html" >PiSelectModule</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../modules/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
+                                </li>
+                                <li class="link">
                                     <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                </li>
+                                <li class="link">
+                                    <a href="../modules/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                 </li>
                                 <li class="link">
                                     <a href="../modules/ScienceGoalModule.html"  data-type="entity-link" class="active" >ScienceGoalModule</a>
@@ -259,12 +265,6 @@
                                 </li>
                                 <li class="link">
                                     <a href="../classes/OtPrototypePage.html" >OtPrototypePage</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                 </li>
                                 <li class="link">
                                     <a href="../classes/ScienceGoalPage.html" >ScienceGoalPage</a>
@@ -503,7 +503,13 @@
                                            <a href="../modules/PiSelectModule.html" >PiSelectModule</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../modules/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../modules/ProjectModule.html" >ProjectModule</a>
+                                       </li>
+                                       <li class="link">
+                                           <a href="../modules/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                        </li>
                                        <li class="link">
                                            <a href="../modules/ScienceGoalModule.html"  data-type="entity-link" class="active" >ScienceGoalModule</a>
@@ -678,12 +684,6 @@
                                        </li>
                                        <li class="link">
                                            <a href="../classes/OtPrototypePage.html" >OtPrototypePage</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/PiSelectRoutingModule.html" >PiSelectRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/ProjectRoutingModule.html" >ProjectRoutingModule</a>
                                        </li>
                                        <li class="link">
                                            <a href="../classes/ScienceGoalPage.html" >ScienceGoalPage</a>
@@ -1128,10 +1128,12 @@ import {GeneralComponent} from &#x27;./components/general/general.component&#x27
 import {TechnicalJustificationComponent} from &#x27;./components/technical-justification/technical-justification.component&#x27;;
 import {ScienceGoalRoutingModule} from &#x27;./science-goal-routing.module&#x27;;
 import {ScienceGoalComponent} from &#x27;./science-goal.component&#x27;;
+import {RouterModule} from &#x27;@angular/router&#x27;;
 
 @NgModule({
   imports: [
     FieldSetupModule,
+    RouterModule,
     SharedModule,
     SpectralSetupModule,
     ScienceGoalRoutingModule,

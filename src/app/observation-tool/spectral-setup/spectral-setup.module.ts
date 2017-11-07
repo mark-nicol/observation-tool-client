@@ -8,12 +8,14 @@ import {SpectralSetupComponent} from './spectral-setup.component';
   imports: [],
   declarations: [
     TypeComponent,
-    VisualisationViewerComponent,
     VisualisationControlComponent,
+    VisualisationViewerComponent,
     SpectralSetupComponent
   ],
   providers: [],
-  exports: [SpectralSetupComponent]
+  exports: [
+    SpectralSetupComponent
+  ]
 })
 
 export class SpectralSetupModule {

@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {CoordSystem} from '../../../shared/interfaces/coord-system.interface';
+import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 
 /**
  * Field Centre Coordinates component
@@ -18,7 +18,7 @@ export class FccRectangularComponent implements OnChanges {
   @Input() radioValue = 'relative';
 
   /** The chosen coordinates system from the selector */
-  chosenSystem: CoordSystem;
+  chosenSystem: CoordSystemInterface;
 
   /** Controls if the sexagesimal checkbox is shown in the system selector */
   sexagesimalHidden = (this.radioValue === 'relative');
@@ -46,7 +46,7 @@ export class FccRectangularComponent implements OnChanges {
    * Called when the chosen system changes in the system selector.
    * @param system The newly selected system
    */
-  systemChange(system: CoordSystem) {
+  systemChange(system: CoordSystemInterface) {
     this.chosenSystem = system;
   }
 

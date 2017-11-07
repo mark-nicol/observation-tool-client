@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CoordSystem} from '../../interfaces/coord-system.interface';
+import {CoordSystemInterface} from '../../interfaces/coord-system.interface';
 
 /**
  * System select components
@@ -27,7 +27,7 @@ export class SystemSelectorComponent implements OnInit {
   systemKeys: (o) => string[] = Object.keys;
 
   /** Possible system choices dict */
-  systems: { [id: string]: CoordSystem } = {
+  systems: { [id: string]: CoordSystemInterface } = {
     'ICRS': {
       sexagesimalLabels: {
         latLabel: 'Dec',
@@ -118,7 +118,7 @@ export class SystemSelectorComponent implements OnInit {
   sexagesimalUnits = false;
 
   /** Emitter for a selected system change */
-  @Output() systemEmitter = new EventEmitter<CoordSystem>();
+  @Output() systemEmitter = new EventEmitter<CoordSystemInterface>();
 
   /** Emitter for a sexagesimal check change */
   @Output() sexagesimalEmitter = new EventEmitter<boolean>();

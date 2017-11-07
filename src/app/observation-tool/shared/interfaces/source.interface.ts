@@ -3,7 +3,7 @@ import {AngularVelocity} from '../../../units/classes/angular-velocity';
 import {Latitude} from '../../../units/classes/latitude';
 import {Longitude} from '../../../units/classes/longitude';
 import {Speed} from '../../../units/classes/speed';
-import {CoordSystem} from './coord-system.interface';
+import {CoordSystemInterface} from './coord-system.interface';
 
 /**
  * Interface to define data in the ScienceGoal/FieldSetup/Source component
@@ -14,7 +14,7 @@ export interface SourceComponentInterface {
   solarSystemObject: boolean,
   chosenSolarObject: string,
   targetType: string,
-  chosenSystem: CoordSystem,
+  chosenSystem: CoordSystemInterface,
   sexagesimalUnits: boolean,
   lat: Latitude,
   lon: Longitude,

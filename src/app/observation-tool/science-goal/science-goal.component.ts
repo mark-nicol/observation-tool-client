@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ScienceGoalPage} from '../shared/interfaces/science-goal-page.interface';
+import {ScienceGoalPageInterface} from '../shared/interfaces/science-goal-page.interface';
 import {ScienceGoalPageService} from '../../services/science-goal-page.service';
 
 /**
@@ -17,7 +17,7 @@ export class ScienceGoalComponent implements OnInit {
   selectedPage = 'general';
 
   /** Dict of all science goal page data */
-  pages: { [id: string]: ScienceGoalPage };
+  pages: { [id: string]: ScienceGoalPageInterface };
 
   /** Iterator for pages */
   pageKeys: (o) => string[] = Object.keys;

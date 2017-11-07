@@ -1,7 +1,7 @@
-import {ScienceGoalPage} from '../../shared/interfaces/science-goal-page.interface';
+import {ScienceGoalPageInterface} from '../../shared/interfaces/science-goal-page.interface';
 
 
-export const SCIENCE_GOAL_PAGES: { [id: string]: ScienceGoalPage } = {
+export const SCIENCE_GOAL_PAGES: { [id: string]: ScienceGoalPageInterface } = {
   'general': {
     title: 'General',
     path: 'general',

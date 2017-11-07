@@ -1,7 +1,7 @@
 /**
  * Interface for a coordinates system supplying labels and placeholders to the UI
  */
-export interface CoordSystem {
+export interface CoordSystemInterface {
   /** Labels for lat long input boxes if sexagesimal checkbox is checked */
   sexagesimalLabels: {
     latLabel: string,

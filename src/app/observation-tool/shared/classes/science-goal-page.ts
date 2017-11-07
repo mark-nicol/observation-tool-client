@@ -1,5 +1,5 @@
-import {ScienceGoalPage} from '../interfaces/science-goal-page.interface';
 import {ScienceGoalPanelService} from '../services/science-goal-panel.service';
+import {ScienceGoalPageInterface} from '../interfaces/science-goal-page.interface';
 
 /**
  * Abstract class defining science goal pages
@@ -12,8 +12,8 @@ export abstract class ScienceGoalPage {
   /** Unique id of the page */
   id: string;
 
-  /** ScienceGoalPage data */
-  page: ScienceGoalPage;
+  /** ScienceGoalPageInterface data */
+  page: ScienceGoalPageInterface;
 
   /**
    * Sets the id and loads page data

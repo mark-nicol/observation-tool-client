@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {SourceComponentInterface} from '../../../shared/interfaces/source.interface';
 import {FieldSetupService} from '../../../../services/field-setup.service';
-import {CoordSystem} from '../../../shared/interfaces/coord-system.interface';
+import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 
 /**
  * Source Component in Field Setup
@@ -17,7 +17,7 @@ import {CoordSystem} from '../../../shared/interfaces/coord-system.interface';
 })
 export class SourceComponent {
 
-  /** ScienceGoalPage data loaded from Field Setup Service */
+  /** ScienceGoalPageInterface data loaded from Field Setup Service */
   pageData: SourceComponentInterface;
 
   /** Selectable solar system bodies for selection box */
@@ -105,7 +105,7 @@ export class SourceComponent {
    * Handles a change of system in the system selector
    * @param system The new system type to be used
    */
-  systemChange(system: CoordSystem) {
+  systemChange(system: CoordSystemInterface) {
     this.pageData.chosenSystem = system;
   }
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as _ from 'lodash';
-import {NavItem} from 'app/observation-tool/interfaces/navbar-item.interface';
+import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
 
 /**
  * The navbar component at the top of the application
@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   selectedGoal: any;
 
   /** All items to show on the navbar menu and their routing paths */
-  items: NavItem[] = [
+  items: NavItemInterface[] = [
     {
       title: 'Project',
       path: 'pi-entry'
@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
    *
    * Currently unused
    * */
-  scienceGoals: NavItem[] = [
+  scienceGoals: NavItemInterface[] = [
     {
       title: 'Science Goal 1',
       path: 'sciGoals'

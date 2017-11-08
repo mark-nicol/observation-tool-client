@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PiSelectComponent } from './pi-select.component';
+import {RouterModule} from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('PiSelectComponent', () => {
   let component: PiSelectComponent;
@@ -8,6 +11,7 @@ describe('PiSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [BrowserModule, RouterTestingModule],
       declarations: [ PiSelectComponent ]
     })
     .compileComponents();

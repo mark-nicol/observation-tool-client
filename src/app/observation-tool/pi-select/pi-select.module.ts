@@ -15,7 +15,7 @@ import {HttpModule} from '@angular/http';
   imports: [
     PiSelectRoutingModule,
     SharedModule,
-    HttpModule,
+    HttpModule
   ],
   declarations: [
     PiEntryComponent,

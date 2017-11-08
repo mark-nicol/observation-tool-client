@@ -1,0 +1,55 @@
+<div class="row p-0 m-0">
+  <div class="col-lg-5 col-xl-4 p-0 m-0"
+       [dragula]="'main'">
+    <modular-panel [id]="'spatial-image'"
+                   [title]="page.panels['spatial-image'].title"
+                   [image]="'/assets/img/field_placeholder.png'"
+                   (hiddenChange)="hiddenChange($event)"
+                   *ngIf="page.panels['spatial-image'].shown">
+      <spacial-image></spacial-image>
+    </modular-panel>
+    <div class="row p-0 m-0">
+      <div class="col-xl p-0 m-0"
+           [dragula]="'one'">
+        <modular-panel [id]="'fov-parameters'"
+                       [title]="page.panels['fov-parameters'].title"
+                       (hiddenChange)="hiddenChange($event)"
+                       *ngIf="page.panels['fov-parameters'].shown"
+                       style="height: 100%;">
+          <fov-parameters></fov-parameters>
+        </modular-panel>
+      </div>
+      <div class="col-xl p-0 m-0"
+           [dragula]="'one'">
+        <modular-panel [id]="'image-query'"
+                       [title]="page.panels['image-query'].title"
+                       (hiddenChange)="hiddenChange($event)"
+                       *ngIf="page.panels['image-query'].shown"
+                       style="height: 100%;">
+          <image-query></image-query>
+        </modular-panel>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-7 col-xl-8 p-0 m-0"
+       [dragula]="'main'">
+    <modular-panel [id]="'field-source'"
+                   [title]="page.panels['field-source'].title"
+                   (hiddenChange)="hiddenChange($event)"
+                   *ngIf="page.panels['field-source'].shown">
+      <field-source (tableHeaderEmitter)="setHeaders($event)" (targetTypeEmitter)="setTargetType($event)"></field-source>
+    </modular-panel>
+    <modular-panel [id]="'expected-source-properties'"
+                   [title]="page.panels['expected-source-properties'].title"
+                   (hiddenChange)="hiddenChange($event)"
+                   *ngIf="page.panels['expected-source-properties'].shown">
+      <source-expected-properties></source-expected-properties>
+    </modular-panel>
+    <modular-panel [id]="'field-centre-coordinates'"
+                   [title]="page.panels['field-centre-coordinates'].title"
+                   (hiddenChange)="hiddenChange($event)"
+                   *ngIf="page.panels['field-centre-coordinates'].shown">
+      <field-center-coordinates></field-center-coordinates>
+    </modular-panel>
+  </div>
+</div>

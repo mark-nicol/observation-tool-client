@@ -1,6 +1,6 @@
 import {ReflectiveInjector} from '@angular/core';
-import {LongitudeUnits} from '../enums/Longitude-units.enum';
-import {LongitudeConversionService} from '../services/Longitude-conversion.service';
+import {LongitudeUnits} from '../enums/longitude-units.enum';
+import {LongitudeConversionService} from '../services/longitude-conversion.service';
 import {ValueUnitPair} from './value-unit-pair';
 
 /**

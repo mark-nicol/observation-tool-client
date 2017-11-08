@@ -11,7 +11,7 @@
                value="{{this.passedPi ? this.passedPi.fullName : null}}"
                [disabled]="this.passedPi">
         <div class="input-group-btn">
-          <a [routerLink]="['/pi-select', {Name: passedPi ? passedPi.fullName : piSearchInput.value}]">
+          <a [routerLink]="['/pi-results', {Name: passedPi ? passedPi.fullName : piSearchInput.value}]">
             <button
               id="pi-search-submit-btn"
               class="btn btn-outline-secondary"

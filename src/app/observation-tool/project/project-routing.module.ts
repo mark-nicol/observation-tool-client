@@ -10,6 +10,10 @@ const routes: Routes = [
     component: ProjectComponent, // TODO Change to PI Select
     children: [
       {
+        path: 'pi-select',
+        loadChildren: '../pi-select/pi-select.module#PiSelectModule'
+      },
+      {
         path: 'proposal',
         component: ProposalComponent,
       },
@@ -25,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'project',
+    redirectTo: 'project/pi-select',
     pathMatch: 'full'
   }
 ];

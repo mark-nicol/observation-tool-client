@@ -31,22 +31,28 @@
     <thead>
       <tr *ngIf="radioValue === 'relative'"
           ngbTooltip="Coordinate offsets for each pointing">
-        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').latHeader}} [{{data.offsetUnit}}]</th>
-        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').lonHeader}} [{{data.offsetUnit}}]</th>
+        <th>
+          {{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').latHeader}}
+          [{{data.offsetUnit}}]
+        </th>
+        <th>
+          {{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').lonHeader}}
+          [{{data.offsetUnit}}]
+        </th>
       </tr>
       <tr *ngIf="radioValue === 'absolute'">
-        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').latHeader}}</th>
-        <th>{{_fieldSetupService.getItem('source', 'chosenSystem').lonHeader}}</th>
+        <th>{{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').latHeader}}</th>
+        <th>{{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').lonHeader}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let row of data.rows"
           (keyup.enter)="log('enter')">
         <td contenteditable (blur)="log('blur')">
-          {{radioValue == 'absolute' ? (row.lon | sexagesimal) : (row.lon | degrees)}}
+          {{radioValue === 'absolute' ? (row.lon.value | sexagesimal) : (row.lon.value | degrees)}}
         </td>
         <td contenteditable>
-          {{radioValue == 'absolute' ? (row.lat | sexagesimal) : (row.lat | degrees)}}
+          {{radioValue === 'absolute' ? (row.lat.value | sexagesimal) : (row.lat.value | degrees)}}
         </td>
       </tr>
     </tbody>

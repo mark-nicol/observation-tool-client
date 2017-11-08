@@ -17,15 +17,15 @@ export class FieldCenterCoordinatesComponent {
   data: FieldCentreCoordinatesInterface;
 
   /** Field Setup Service to be used in HTML template */
-  protected _fieldSetupService: PersistenceService;
+  protected _persistenceService: PersistenceService;
 
   /**
    * Sets _fieldSetupService and retrieves page data
    * @param persistenceService Injected service
    */
   constructor(private persistenceService: PersistenceService) {
-    this._fieldSetupService = persistenceService;
-    // persistenceService.getPage('fieldCentreCoordinates').subscribe(res => this.data = res);
+    this._persistenceService = persistenceService;
+    persistenceService.getPanelData('field-setup', 'field-centre').subscribe(res => this.data = res);
   }
 
   /**

@@ -35,7 +35,7 @@ export class FccIndividualComponent {
    */
   constructor(private persistenceService: PersistenceService) {
     this._persistenceService = persistenceService;
-    persistenceService.getPanelData('field-setup', 'fieldCentreCoordinates').subscribe(res => this.data = res.individual);
+    persistenceService.getPanelData('field-setup', 'field-centre').subscribe(res => this.data = res.individual);
   }
 
   /**

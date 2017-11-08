@@ -34,7 +34,7 @@
 </div><!--div.row-->
 
 <div class="row"
-     *ngIf="(_fieldSetupService.getItem('source', 'targetType') === 'individual'); then individualComponent; else rectangularComponent"></div>
+     *ngIf="(_persistenceService.getDataItem('field-setup', 'field-source', 'targetType') === 'individual'); then individualComponent; else rectangularComponent"></div>
 <ng-template #individualComponent>
   <fcc-individual [radioValue]="data.coordType"></fcc-individual>
 </ng-template>

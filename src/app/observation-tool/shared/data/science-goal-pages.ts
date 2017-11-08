@@ -1,4 +1,6 @@
 import {ScienceGoalPageInterface} from '../interfaces/science-goal-page.interface';
+import {FIELD_SOURCE_DATA} from './field-setup/source';
+import {FIELD_CENTRE_COORDINATES_DATA} from './field-setup/field-centre-coordinates';
 
 
 export const SCIENCE_GOAL_PAGES: { [id: string]: ScienceGoalPageInterface } = {
@@ -13,19 +15,19 @@ export const SCIENCE_GOAL_PAGES: { [id: string]: ScienceGoalPageInterface } = {
       }
     }
   },
-  'fieldSetup': {
+  'field-setup': {
     title: 'Field Setup',
     path: 'field-setup',
     panels: {
       'query': {title: 'Image Query', shown: true, data: {} },
       'fov': {title: 'FOV Parameters', shown: true, data: {} },
-      'field-source': {title: 'Source', shown: true, data: {} },
+      'field-source': {title: 'Source', shown: true, data: FIELD_SOURCE_DATA },
       'spatial': {title: 'Spatial Image', shown: true, data: {} },
       'expected': {title: 'Expected Source Properties', shown: true, data: {} },
-      'field-centre': {title: 'Field Centre Coordinates', shown: true, data: {} }
+      'field-centre': {title: 'Field Centre Coordinates', shown: true, data: FIELD_CENTRE_COORDINATES_DATA }
     }
   },
-  'spectralSetup': {
+  'spectral-setup': {
     title: 'Spectral Setup',
     path: 'spectral-setup',
     panels: {
@@ -33,14 +35,14 @@ export const SCIENCE_GOAL_PAGES: { [id: string]: ScienceGoalPageInterface } = {
       'visualisation': {title: 'Visualisation', shown: true, data: {} }
     }
   },
-  'calibrationSetup': {
+  'calibration-setup': {
     title: 'Calibration Setup',
     path: 'calibration-setup',
     panels: {
       'goalCalibrators': {title: 'Goal Calibrators', shown: true, data: {}}
     }
   },
-  'controlAndPerf': {
+  'control-performance': {
     title: 'Control and Performance',
     path: 'control-performance',
     panels: {
@@ -48,7 +50,7 @@ export const SCIENCE_GOAL_PAGES: { [id: string]: ScienceGoalPageInterface } = {
       'desiredPerf': {title: 'Desired Performance', shown: true, data: {} }
     }
   },
-  'techJust': {
+  'technical-justification': {
     title: 'Technical Justification',
     path: 'technical-justification',
     panels: {

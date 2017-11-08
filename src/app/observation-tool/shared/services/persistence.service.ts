@@ -41,6 +41,10 @@ export class PersistenceService {
     return returnData;
   }
 
+  getDataItem(page: string, panel: string, item: string): any {
+    return this._dataStore.pages[page].panels[panel].data[item];
+  }
+
   hiddenChange(page: string, panel: string) {
     this._dataStore.pages[page].panels[panel].shown = !this._dataStore.pages[page].panels[panel].shown;
   }

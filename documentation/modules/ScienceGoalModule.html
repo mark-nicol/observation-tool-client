@@ -1129,10 +1129,12 @@ import {TechnicalJustificationComponent} from &#x27;./components/technical-justi
 import {ScienceGoalRoutingModule} from &#x27;./science-goal-routing.module&#x27;;
 import {ScienceGoalComponent} from &#x27;./science-goal.component&#x27;;
 import {RouterModule} from &#x27;@angular/router&#x27;;
+import {NgbModule} from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
 
 @NgModule({
   imports: [
     FieldSetupModule,
+    NgbModule.forRoot(),
     SharedModule,
     SpectralSetupModule,
     ScienceGoalRoutingModule,

@@ -28,7 +28,7 @@ export class FieldSetupComponent extends ScienceGoalPage {
    * @param persistenceService Passed to super for use in parent
    */
   constructor(persistenceService: PersistenceService) {
-    super(persistenceService, 'fieldSetup');
+    super(persistenceService, 'field-setup');
   }
 
   /**

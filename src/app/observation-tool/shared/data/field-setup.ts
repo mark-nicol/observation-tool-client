@@ -4,7 +4,7 @@ import {Angle} from '../../../units/classes/angle';
 import {AngularVelocity} from '../../../units/classes/angular-velocity';
 import {Speed} from '../../../units/classes/speed';
 
-export const FIELD_SETUP = {
+export const FIELD_SETUP_DATA = {
   spatialImage: {
     imageFilename: ''
   },

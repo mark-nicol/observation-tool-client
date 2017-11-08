@@ -912,32 +912,26 @@ const routes: Routes &#x3D; [
       {
         path: &#x27;general&#x27;,
         component: GeneralComponent,
-        outlet: &#x27;scienceGoalOutlet&#x27;
       },
       {
         path: &#x27;field-setup&#x27;,
         component: FieldSetupComponent,
-        outlet: &#x27;scienceGoalOutlet&#x27;
       },
       {
         path: &#x27;spectral-setup&#x27;,
         component: SpectralSetupComponent,
-        outlet: &#x27;scienceGoalOutlet&#x27;
       },
       {
         path: &#x27;calibration-setup&#x27;,
         component: CalibrationSetupComponent,
-        outlet: &#x27;scienceGoalOutlet&#x27;
       },
       {
         path: &#x27;control-performance&#x27;,
         component: ControlPerformanceComponent,
-        outlet: &#x27;scienceGoalOutlet&#x27;
       },
       {
         path: &#x27;technical-justification&#x27;,
         component: TechnicalJustificationComponent,
-        outlet: &#x27;scienceGoalOutlet&#x27;
       },
       {
         path: &#x27;&#x27;,
@@ -945,7 +939,12 @@ const routes: Routes &#x3D; [
         pathMatch: &#x27;full&#x27;
       }
     ]
-  }
+  },
+  // {
+  //   path: &#x27;&#x27;,
+  //   redirectTo: &#x27;science-goals&#x27;,
+  //   pathMatch: &#x27;full&#x27;
+  // }
 ];
 
 @NgModule({

@@ -5,7 +5,6 @@ import {Latitude} from '../../../units/classes/latitude';
 import {Longitude} from '../../../units/classes/longitude';
 import {Angle} from '../../../units/classes/angle';
 
-
 export interface FieldCentreCoordinatesInterface {
   /** The currently chosen coordinates type */
   coordType: string,

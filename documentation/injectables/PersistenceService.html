@@ -921,6 +921,9 @@
                             <td class="col-md-4">
                                 <ul class="index-list">
                                     <li>
+                                         <a href="#getDataItem">getDataItem</a>
+                                    </li>
+                                    <li>
                                          <a href="#getPage">getPage</a>
                                     </li>
                                     <li>
@@ -963,6 +966,85 @@
                     <h3 id="methods">
                         Methods
                     </h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="getDataItem"></a>
+                                    <span class="name"><b> getDataItem</b><a href="#getDataItem"><span class="fa fa-link"></span></a></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>getDataItem(page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, panel: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, item: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:44</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            
+                                        <div class="io-description">
+                                                <b>Parameters :</b>
+                                                <table class="params">
+                                                    <thead>
+                                                        <tr>
+                                                            <td>Name</td>
+                                                            <td>Type</td>
+                                                            <td>Optional</td>
+                                                            <td>Description</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                            <tr>
+                                                              <td>page</td>
+                                                              <td>
+                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                              </td>
+                                                              <td>
+                                                              </td>
+                                                              <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>panel</td>
+                                                              <td>
+                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                              </td>
+                                                              <td>
+                                                              </td>
+                                                              <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>item</td>
+                                                              <td>
+                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                              </td>
+                                                              <td>
+                                                              </td>
+                                                              <td></td>
+                                                            </tr>
+                                                    </tbody>
+                                                </table>
+                                        </div>
+                                        <div>
+                                        </div>
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+            
+                                        </div>
+                                            <div class="io-description">
+                                                
+                                            </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                             <tr>
@@ -1143,7 +1225,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:44</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:48</a></div>
                                         </td>
                                     </tr>
             
@@ -1337,6 +1419,10 @@ export class PersistenceService {
     returnData &#x3D; subject.asObservable();
     subject.next(this._dataStore.pages[page].panels[panel].data);
     return returnData;
+  }
+
+  getDataItem(page: string, panel: string, item: string): any {
+    return this._dataStore.pages[page].panels[panel].data[item];
   }
 
   hiddenChange(page: string, panel: string) {

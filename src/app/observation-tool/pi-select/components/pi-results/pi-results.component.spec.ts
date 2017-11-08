@@ -3,13 +3,13 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {HttpModule} from '@angular/http';
 import {RouterTestingModule} from '@angular/router/testing';
 
-import {PiSelectComponent} from './pi-select.component';
+import {PiResultsComponent} from './pi-results.component';
 import {RefinePanelComponent} from './refine-panel/refine-panel.component';
 import {ResultsTableComponent} from './results-table/results-table.component';
 
-describe('PiSelectComponent', () => {
-  let component: PiSelectComponent;
-  let fixture: ComponentFixture<PiSelectComponent>;
+describe('PiResultsComponent', () => {
+  let component: PiResultsComponent;
+  let fixture: ComponentFixture<PiResultsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -19,7 +19,7 @@ describe('PiSelectComponent', () => {
         HttpClientModule
       ],
       declarations: [
-        PiSelectComponent,
+        PiResultsComponent,
         RefinePanelComponent,
         ResultsTableComponent
       ]
@@ -28,7 +28,7 @@ describe('PiSelectComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PiSelectComponent);
+    fixture = TestBed.createComponent(PiResultsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

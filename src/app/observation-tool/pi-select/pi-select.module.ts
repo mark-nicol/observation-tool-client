@@ -3,11 +3,12 @@ import {SharedModule} from '../shared/shared.module';
 import {PiEntryComponent} from './components/pi-entry/pi-entry.component';
 import {PiSearchComponent} from './components/pi-entry/pi-search/pi-search.component';
 import {ProjectInfoComponent} from './components/pi-entry/project-info/project-info.component';
-import {PiSelectComponent} from './components/pi-select/pi-select.component';
-import {RefinePanelComponent} from './components/pi-select/refine-panel/refine-panel.component';
-import {ResultsTableComponent} from './components/pi-select/results-table/results-table.component';
+import {RefinePanelComponent} from './components/pi-results/refine-panel/refine-panel.component';
+import {ResultsTableComponent} from './components/pi-results/results-table/results-table.component';
 import {PiSelectRoutingModule} from './pi-select-routing.module';
+import {PiSelectComponent} from './pi-select.component';
 import {PrimaryInvestigatorService} from './services/primary-investigator.service';
+import {PiResultsComponent} from './components/pi-results/pi-results.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import {PrimaryInvestigatorService} from './services/primary-investigator.servic
   ],
   declarations: [
     PiEntryComponent,
+    PiResultsComponent,
     PiSearchComponent,
     PiSelectComponent,
     ProjectInfoComponent,

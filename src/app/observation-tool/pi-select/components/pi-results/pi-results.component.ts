@@ -11,13 +11,13 @@ import {PrimaryInvestigatorService} from '../../services/primary-investigator.se
  */
 
 @Component({
-  selector: 'app-pi-select',
-  templateUrl: './pi-select.component.html',
-  styleUrls: ['./pi-select.component.css'],
+  selector: 'app-pi-results',
+  templateUrl: './pi-results.component.html',
+  styleUrls: ['./pi-results.component.css'],
   providers: [PrimaryInvestigatorService]
 })
 
-export class PiSelectComponent implements OnInit {
+export class PiResultsComponent implements OnInit {
 
   /** The name to search for */
   name: string;

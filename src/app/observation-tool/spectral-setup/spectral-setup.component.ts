@@ -13,7 +13,7 @@ export class SpectralSetupComponent extends ScienceGoalPage implements OnInit {
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
   constructor(persistenceService: PersistenceService) {
-    super(persistenceService, 'spectralSetup');
+    super(persistenceService, 'spectral-setup');
   }
 
   ngOnInit() {

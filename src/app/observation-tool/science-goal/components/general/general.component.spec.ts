@@ -1,9 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
 
-import { GeneralComponent } from './general.component';
-import {FormsModule} from "@angular/forms";
-import {ModularPanelComponent} from "../../modular-panel/modular-panel.component";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ModularPanelComponent} from '../../../shared/components/modular-panel/modular-panel.component';
+
+import {GeneralComponent} from './general.component';
 
 describe('GeneralComponent', () => {
   let component: GeneralComponent;

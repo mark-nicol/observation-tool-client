@@ -1,25 +1,23 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {DragulaModule} from "ng2-dragula";
-import {ModularPanelComponent} from "../../modular-panel/modular-panel.component";
+import {NgbCollapseModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DragulaModule} from 'ng2-dragula';
 
 import {FieldSetupComponent} from './field-setup.component';
-import {FovParametersComponent} from "./fov-parameters/fov-parameters.component";
-import {ImageQueryComponent} from "./image-query/image-query.component";
-import {SpacialImageComponent} from "./spacial-image/spacial-image.component";
-import {SourceComponent} from "./source/source.component";
-import {SourceExpectedPropertiesComponent} from "./source-expected-properties/source-expected-properties.component";
-import {FieldCenterCoordinatesComponent} from "./field-center-coordinates/field-center-coordinates.component";
-import {NgbCollapseModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {FormsModule} from "@angular/forms";
-import {BrowserTestingModule} from "@angular/platform-browser/testing";
-import {SexagesimalPipe} from "../../../pipes/sexagesimal.pipe";
-import {DegreesPipe} from "../../../pipes/degrees.pipe";
-import {DelayTooltipDirective} from "../../../directives/delay-tooltip.directive";
-import {SelectableComponent} from "../../selectable/selectable.component";
-import {FccRectangularComponent} from "./field-center-coordinates/fcc-rectangular/fcc-rectangular.component";
-import {FccIndividualComponent} from "./field-center-coordinates/fcc-individual/fcc-individual.component";
-import {SystemSelectorComponent} from "./system-selector/system-selector.component";
-import {FieldSetupService} from "../../../services/field-setup.service";
+import {ModularPanelComponent} from '../shared/components/modular-panel/modular-panel.component';
+import {SpacialImageComponent} from './components/spacial-image/spacial-image.component';
+import {FovParametersComponent} from './components/fov-parameters/fov-parameters.component';
+import {ImageQueryComponent} from './components/image-query/image-query.component';
+import {SourceComponent} from './components/source/source.component';
+import {SourceExpectedPropertiesComponent} from './components/source-expected-properties/source-expected-properties.component';
+import {FieldCenterCoordinatesComponent} from '../field-centre-coordinates/field-center-coordinates.component';
+import {FccRectangularComponent} from '../field-centre-coordinates/components/fcc-rectangular/fcc-rectangular.component';
+import {FccIndividualComponent} from '../field-centre-coordinates/components/fcc-individual/fcc-individual.component';
+import {SystemSelectorComponent} from '../shared/components/system-selector/system-selector.component';
+import {PersistenceService} from '../shared/services/persistence.service';
+import {DelayTooltipDirective} from '../shared/directives/delay-tooltip.directive';
+import {SexagesimalPipe} from '../shared/pipes/sexagesimal.pipe';
+import {DegreesPipe} from '../shared/pipes/degrees.pipe';
+import {FormsModule} from '@angular/forms';
 
 describe('FieldSetupComponent', () => {
   let component: FieldSetupComponent;
@@ -36,16 +34,15 @@ describe('FieldSetupComponent', () => {
         SourceComponent,
         SourceExpectedPropertiesComponent,
         FieldCenterCoordinatesComponent,
-        SexagesimalPipe,
-        DegreesPipe,
-        DelayTooltipDirective,
-        SelectableComponent,
         FccRectangularComponent,
         FccIndividualComponent,
-        SystemSelectorComponent
+        SystemSelectorComponent,
+        DelayTooltipDirective,
+        SexagesimalPipe,
+        DegreesPipe
       ],
-      imports: [DragulaModule, NgbCollapseModule, FormsModule, NgbModule.forRoot()],
-      providers: [FieldSetupService]
+      imports: [FormsModule, DragulaModule, NgbCollapseModule, NgbModule.forRoot()],
+      providers: [PersistenceService]
     })
       .compileComponents();
   }));

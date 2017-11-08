@@ -1,11 +1,11 @@
+import {HttpClientModule} from '@angular/common/http';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpModule} from '@angular/http';
+import {RouterTestingModule} from '@angular/router/testing';
 
 import {PiSelectComponent} from './pi-select.component';
-import {RouterTestingModule} from "@angular/router/testing";
-import {RefinePanelComponent} from "./refine-panel/refine-panel.component";
-import {ResultsTableComponent} from "./results-table/results-table.component";
-import {HttpModule} from "@angular/http";
-import {HttpClientModule} from "@angular/common/http";
+import {RefinePanelComponent} from './refine-panel/refine-panel.component';
+import {ResultsTableComponent} from './results-table/results-table.component';
 
 describe('PiSelectComponent', () => {
   let component: PiSelectComponent;

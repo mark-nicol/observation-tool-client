@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
 
-import { PiSearchComponent } from './pi-search.component';
-import {RouterTestingModule} from "@angular/router/testing";
+import {PiSearchComponent} from './pi-search.component';
 
 describe('PiSearchComponent', () => {
   let component: PiSearchComponent;

@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
 
-import { ModularPanelComponent } from './modular-panel.component';
-import {NgbCollapseModule} from "@ng-bootstrap/ng-bootstrap";
+import {ModularPanelComponent} from './modular-panel.component';
 
 describe('ModularPanelComponent', () => {
   let component: ModularPanelComponent;

@@ -1,9 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SystemSelectorComponent } from './system-selector.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {DelayTooltipDirective} from "../../../../directives/delay-tooltip.directive";
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DelayTooltipDirective} from '../../directives/delay-tooltip.directive';
+
+import {SystemSelectorComponent} from './system-selector.component';
 
 describe('SystemSelectorComponent', () => {
   let component: SystemSelectorComponent;

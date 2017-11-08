@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FovParametersComponent } from './fov-parameters.component';
-import {SelectableComponent} from "../../../selectable/selectable.component";
 
 describe('FovParametersComponent', () => {
   let component: FovParametersComponent;
@@ -10,8 +9,7 @@ describe('FovParametersComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        FovParametersComponent,
-        SelectableComponent
+        FovParametersComponent
       ]
     })
     .compileComponents();

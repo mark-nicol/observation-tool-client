@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {HttpModule} from '@angular/http';
 
 import {ResultsTableComponent} from './results-table.component';
-import {HttpModule} from "@angular/http";
 
 describe('ResultsTableComponent', () => {
   let component: ResultsTableComponent;

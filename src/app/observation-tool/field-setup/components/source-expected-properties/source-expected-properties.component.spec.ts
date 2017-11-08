@@ -1,8 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DelayTooltipDirective} from '../../../shared/directives/delay-tooltip.directive';
 
-import { SourceExpectedPropertiesComponent } from './source-expected-properties.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {DelayTooltipDirective} from "../../../../directives/delay-tooltip.directive";
+import {SourceExpectedPropertiesComponent} from './source-expected-properties.component';
+
 
 describe('SourceExpectedPropertiesComponent', () => {
   let component: SourceExpectedPropertiesComponent;

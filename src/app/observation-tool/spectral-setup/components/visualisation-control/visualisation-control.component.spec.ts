@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VisualisationControlComponent } from './visualisation-control.component';
-import {SelectableComponent} from "../../../selectable/selectable.component";
 
 describe('VisualisationControlComponent', () => {
   let component: VisualisationControlComponent;
@@ -10,7 +9,7 @@ describe('VisualisationControlComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        VisualisationControlComponent, SelectableComponent
+        VisualisationControlComponent
       ]
     })
     .compileComponents();

@@ -1,14 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SystemSelectorComponent} from '../../../shared/components/system-selector/system-selector.component';
+import {DelayTooltipDirective} from '../../../shared/directives/delay-tooltip.directive';
+import {DegreesPipe} from '../../../shared/pipes/degrees.pipe';
+import {SexagesimalPipe} from '../../../shared/pipes/sexagesimal.pipe';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
-import { SourceComponent } from './source.component';
-import {FormsModule} from "@angular/forms";
-import {SexagesimalPipe} from "../../../../pipes/sexagesimal.pipe";
-import {DegreesPipe} from "../../../../pipes/degrees.pipe";
-import {DelayTooltipDirective} from "../../../../directives/delay-tooltip.directive";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {SelectableComponent} from "../../../selectable/selectable.component";
-import {SystemSelectorComponent} from "../system-selector/system-selector.component";
-import {FieldSetupService} from "../../../../services/field-setup.service";
+import {SourceComponent} from './source.component';
 
 describe('SourceComponent', () => {
   let component: SourceComponent;
@@ -21,11 +20,10 @@ describe('SourceComponent', () => {
         SexagesimalPipe,
         DegreesPipe,
         DelayTooltipDirective,
-        SelectableComponent,
         SystemSelectorComponent
       ],
       imports: [ FormsModule, NgbModule.forRoot() ],
-      providers: [FieldSetupService]
+      providers: [PersistenceService]
     })
     .compileComponents();
   }));

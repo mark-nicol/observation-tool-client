@@ -1,13 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpectralSetupComponent } from './spectral-setup.component';
-import {ModularPanelComponent} from '../../modular-panel/modular-panel.component';
-import {VisualisationControlComponent} from './visualisation-control/visualisation-control.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {TypeComponent} from './type/type.component';
-import {ScienceGoalPanelService} from '../../../services/science-goal-panel.service';
-import {SelectableComponent} from '../../selectable/selectable.component';
-import {VisualisationViewerComponent} from './visualisation-viewer/visualisation-viewer.component';
+import {ModularPanelComponent} from '../shared/components/modular-panel/modular-panel.component';
+import {VisualisationControlComponent} from './components/visualisation-control/visualisation-control.component';
+import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
+import {TypeComponent} from './components/type/type.component';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 describe('SpectralSetupComponent', () => {
   let component: SpectralSetupComponent;
@@ -20,11 +19,10 @@ describe('SpectralSetupComponent', () => {
         ModularPanelComponent,
         VisualisationControlComponent,
         VisualisationViewerComponent,
-        TypeComponent,
-        SelectableComponent
+        TypeComponent
       ],
       imports: [NgbModule.forRoot()],
-      providers: [ScienceGoalPanelService]
+      providers: [PersistenceService]
     })
     .compileComponents();
   }));

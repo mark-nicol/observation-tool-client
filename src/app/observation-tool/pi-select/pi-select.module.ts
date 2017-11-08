@@ -9,11 +9,13 @@ import {PiSelectRoutingModule} from './pi-select-routing.module';
 import {PiSelectComponent} from './pi-select.component';
 import {PrimaryInvestigatorService} from './services/primary-investigator.service';
 import {PiResultsComponent} from './components/pi-results/pi-results.component';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   imports: [
     PiSelectRoutingModule,
     SharedModule,
+    HttpModule,
   ],
   declarations: [
     PiEntryComponent,

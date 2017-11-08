@@ -32,7 +32,7 @@ import {BrowserModule} from '@angular/platform-browser';
   ],
   exports: [
     CommonModule,
-    BrowserModule,
+    RouterModule,
     FormsModule,
     UnitsModule,
     ModularPanelComponent,

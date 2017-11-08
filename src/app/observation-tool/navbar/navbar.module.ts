@@ -7,7 +7,7 @@ import {RouterModule} from '@angular/router';
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule,
+    // RouterModule,
     NgbModule.forRoot(),
   ],
   declarations: [NavbarComponent],

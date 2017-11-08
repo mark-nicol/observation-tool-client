@@ -1,30 +1,30 @@
 <div class="row p-0 m-0">
   <div class="col-lg-5 col-xl-4 p-0 m-0"
        [dragula]="'main'">
-    <modular-panel [id]="'spatial'"
-                   [title]="page.panels['spatial'].title"
+    <modular-panel [id]="'spatial-image'"
+                   [title]="page.panels['spatial-image'].title"
                    [image]="'/assets/img/field_placeholder.png'"
                    (hiddenChange)="hiddenChange($event)"
-                   *ngIf="page.panels['spatial'].shown">
+                   *ngIf="page.panels['spatial-image'].shown">
       <spacial-image></spacial-image>
     </modular-panel>
     <div class="row p-0 m-0">
       <div class="col-xl p-0 m-0"
            [dragula]="'one'">
-        <modular-panel [id]="'fov'"
-                       [title]="page.panels['fov'].title"
+        <modular-panel [id]="'fov-parameters'"
+                       [title]="page.panels['fov-parameters'].title"
                        (hiddenChange)="hiddenChange($event)"
-                       *ngIf="page.panels['fov'].shown"
+                       *ngIf="page.panels['fov-parameters'].shown"
                        style="height: 100%;">
           <fov-parameters></fov-parameters>
         </modular-panel>
       </div>
       <div class="col-xl p-0 m-0"
            [dragula]="'one'">
-        <modular-panel [id]="'query'"
-                       [title]="page.panels['query'].title"
+        <modular-panel [id]="'image-query'"
+                       [title]="page.panels['image-query'].title"
                        (hiddenChange)="hiddenChange($event)"
-                       *ngIf="page.panels['query'].shown"
+                       *ngIf="page.panels['image-query'].shown"
                        style="height: 100%;">
           <image-query></image-query>
         </modular-panel>
@@ -39,16 +39,16 @@
                    *ngIf="page.panels['field-source'].shown">
       <field-source (tableHeaderEmitter)="setHeaders($event)" (targetTypeEmitter)="setTargetType($event)"></field-source>
     </modular-panel>
-    <modular-panel [id]="'expected'"
-                   [title]="page.panels['expected'].title"
+    <modular-panel [id]="'expected-source-properties'"
+                   [title]="page.panels['expected-source-properties'].title"
                    (hiddenChange)="hiddenChange($event)"
-                   *ngIf="page.panels['expected'].shown">
+                   *ngIf="page.panels['expected-source-properties'].shown">
       <source-expected-properties></source-expected-properties>
     </modular-panel>
-    <modular-panel [id]="'field-centre'"
-                   [title]="page.panels['field-centre'].title"
+    <modular-panel [id]="'field-centre-coordinates'"
+                   [title]="page.panels['field-centre-coordinates'].title"
                    (hiddenChange)="hiddenChange($event)"
-                   *ngIf="page.panels['field-centre'].shown">
+                   *ngIf="page.panels['field-centre-coordinates'].shown">
       <field-center-coordinates></field-center-coordinates>
     </modular-panel>
   </div>

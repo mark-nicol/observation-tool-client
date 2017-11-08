@@ -19,12 +19,12 @@ export const SCIENCE_GOAL_PAGES: { [id: string]: ScienceGoalPageInterface } = {
     title: 'Field Setup',
     path: 'field-setup',
     panels: {
-      'query': {title: 'Image Query', shown: true, data: {} },
-      'fov': {title: 'FOV Parameters', shown: true, data: {} },
+      'image-query': {title: 'Image Query', shown: true, data: {} },
+      'fov-parameters': {title: 'FOV Parameters', shown: true, data: {} },
       'field-source': {title: 'Source', shown: true, data: FIELD_SOURCE_DATA },
-      'spatial': {title: 'Spatial Image', shown: true, data: {} },
-      'expected': {title: 'Expected Source Properties', shown: true, data: {} },
-      'field-centre': {title: 'Field Centre Coordinates', shown: true, data: FIELD_CENTRE_COORDINATES_DATA }
+      'spatial-image': {title: 'Spatial Image', shown: true, data: {} },
+      'expected-source-properties': {title: 'Expected Source Properties', shown: true, data: {} },
+      'field-centre-coordinates': {title: 'Field Centre Coordinates', shown: true, data: FIELD_CENTRE_COORDINATES_DATA }
     }
   },
   'spectral-setup': {

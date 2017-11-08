@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FieldCentreCoordinatesInterface} from '../shared/interfaces/field-centre-coordinates.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
+import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 
 /**
  * Handles the Field Centre Coordinates component in the Field Setup
@@ -25,7 +26,7 @@ export class FieldCenterCoordinatesComponent {
    */
   constructor(private persistenceService: PersistenceService) {
     this._persistenceService = persistenceService;
-    persistenceService.getPanelData('field-setup', 'field-centre').subscribe(res => this.data = res);
+    persistenceService.getPanelData(ScienceGoalIdentifiers.FIELD_SETUP, ScienceGoalIdentifiers.FIELD_CENTRE_COORDINATES).subscribe(res => this.data = res);
   }
 
   /**

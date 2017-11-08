@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ScienceGoalPage} from '../shared/classes/science-goal-page';
 import {PersistenceService} from '../shared/services/persistence.service';
+import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 
 /**
  * Handles the field setup page of a science goal
@@ -28,7 +29,7 @@ export class FieldSetupComponent extends ScienceGoalPage {
    * @param persistenceService Passed to super for use in parent
    */
   constructor(persistenceService: PersistenceService) {
-    super(persistenceService, 'field-setup');
+    super(persistenceService, ScienceGoalIdentifiers.FIELD_SETUP);
   }
 
   /**

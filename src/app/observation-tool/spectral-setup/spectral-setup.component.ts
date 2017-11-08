@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ScienceGoalPage} from '../shared/classes/science-goal-page';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
+import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 
 @Component({
   selector: 'app-spectral-setup',
@@ -13,7 +14,7 @@ export class SpectralSetupComponent extends ScienceGoalPage implements OnInit {
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
   constructor(persistenceService: PersistenceService) {
-    super(persistenceService, 'spectral-setup');
+    super(persistenceService, ScienceGoalIdentifiers.SPECTRAL_SETUP);
   }
 
   ngOnInit() {

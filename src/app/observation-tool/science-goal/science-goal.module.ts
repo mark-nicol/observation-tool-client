@@ -9,10 +9,12 @@ import {TechnicalJustificationComponent} from './components/technical-justificat
 import {ScienceGoalRoutingModule} from './science-goal-routing.module';
 import {ScienceGoalComponent} from './science-goal.component';
 import {RouterModule} from '@angular/router';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     FieldSetupModule,
+    NgbModule.forRoot(),
     SharedModule,
     SpectralSetupModule,
     ScienceGoalRoutingModule,

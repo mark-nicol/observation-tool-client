@@ -6,4 +6,6 @@ export interface ScienceGoalPanelInterface {
   title: string;
   /** Whether the panel is displayed or not */
   shown: boolean;
+  /** All data to show in the panel */
+  data: any;
 }

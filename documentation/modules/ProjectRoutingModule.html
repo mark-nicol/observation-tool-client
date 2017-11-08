@@ -903,22 +903,21 @@ import {PlannedObservingComponent} from &#x27;./components/planned-observing/pla
 const routes: Routes &#x3D; [
   {
     path: &#x27;project&#x27;,
-    component: ProjectComponent,
-    children: [],
-  },
-  {
-    path: &#x27;proposal&#x27;,
-    component: ProposalComponent,
-    children: [],
-  },
-  {
-    path: &#x27;planned-observing&#x27;,
-    component: PlannedObservingComponent,
-    children: [],
-  },
-  {
-    path: &#x27;science-goals&#x27;,
-    loadChildren: &#x27;project/science-goal.module#ScienceGoalModule&#x27;
+    component: ProjectComponent, // TODO Change to PI Select
+    children: [
+      {
+        path: &#x27;proposal&#x27;,
+        component: ProposalComponent,
+      },
+      {
+        path: &#x27;planned-observing&#x27;,
+        component: PlannedObservingComponent,
+      },
+      {
+        path: &#x27;science-goals&#x27;,
+        loadChildren: &#x27;../science-goal/science-goal.module#ScienceGoalModule&#x27;
+      },
+    ],
   },
   {
     path: &#x27;&#x27;,
@@ -932,7 +931,8 @@ const routes: Routes &#x3D; [
   exports: [RouterModule]
 })
 
-export class ProjectRoutingModule { }
+export class ProjectRoutingModule {
+}
 </code></pre>
     </div>
 </div>

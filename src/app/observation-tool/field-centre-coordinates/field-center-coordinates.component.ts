@@ -25,7 +25,7 @@ export class FieldCenterCoordinatesComponent {
    */
   constructor(private persistenceService: PersistenceService) {
     this._fieldSetupService = persistenceService;
-    persistenceService.getPage('fieldCentreCoordinates').subscribe(res => this.data = res);
+    // persistenceService.getPage('fieldCentreCoordinates').subscribe(res => this.data = res);
   }
 
   /**

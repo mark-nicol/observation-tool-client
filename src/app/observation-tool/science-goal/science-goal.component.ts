@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ScienceGoalPageInterface} from '../shared/interfaces/science-goal-page.interface';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -24,7 +25,8 @@ export class ScienceGoalComponent {
   /**
    * Constructor
    */
-  constructor() {
+  constructor(private persistenceService: PersistenceService) {
+    this.persistenceService.getPages().subscribe(res => this.pages = res);
   }
 
 }

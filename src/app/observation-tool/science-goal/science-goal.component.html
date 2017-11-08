@@ -2,8 +2,8 @@
   <ul class="col nav nav-tabs">
     <li class="nav-item" *ngFor="let page of pageKeys(pages)">
       <a class="nav-link"
-         [class.active]="page == selectedPage"
-         [routerLink]="[{outlets: {scienceGoalOutlet: [page]}}]"
+         [class.active]="page === selectedPage"
+         [routerLink]="pages[page].path"
          (click)="selectedPage=page">
         {{pages[page].title}}
       </a>
@@ -20,11 +20,10 @@
       <button class="dropdown-item"
               type="button"
               *ngFor="let panel of pageKeys(pages[selectedPage].panels)"
-              [disabled]="pages[selectedPage].panels[panel].shown"
-              (click)="hiddenChange(panel)">
+              [disabled]="pages[selectedPage].panels[panel].shown">
         {{pages[selectedPage].panels[panel].title}}
       </button>
     </div>
   </div><!-- div.d-inline-block.nav.nav-tabs -->
 </div><!-- div.row -->
-<router-outlet name="scienceGoalOutlet"></router-outlet>
+<router-outlet></router-outlet>

@@ -1039,7 +1039,8 @@
                                                       </td>
                                                       <td>
                                                       </td>
-                                                      <td></td>
+                                                      <td><p>The injected service</p>
+    </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -1361,11 +1362,11 @@ export class FccIndividualComponent {
    * Constructor
    *
    * Sets local _fieldSetupService from injected and retrieves page data from service
-   * @param fieldSetupService The injected service
+   * @param persistenceService The injected service
    */
   constructor(private persistenceService: PersistenceService) {
     this._persistenceService &#x3D; persistenceService;
-    persistenceService.getPage(&#x27;fieldCentreCoordinates&#x27;).subscribe(res &#x3D;&gt; this.data &#x3D; res.individual);
+    persistenceService.getPanelData(&#x27;field-setup&#x27;, &#x27;fieldCentreCoordinates&#x27;).subscribe(res &#x3D;&gt; this.data &#x3D; res.individual);
   }
 
   /**

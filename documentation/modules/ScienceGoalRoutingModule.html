@@ -897,9 +897,55 @@
         <pre class="line-numbers"><code class="language-typescript">import {NgModule} from &#x27;@angular/core&#x27;;
 import {RouterModule, Routes} from &#x27;@angular/router&#x27;;
 import {ScienceGoalComponent} from &#x27;./science-goal.component&#x27;;
+import {GeneralComponent} from &#x27;./components/general/general.component&#x27;;
+import {FieldSetupComponent} from &#x27;../field-setup/field-setup.component&#x27;;
+import {CalibrationSetupComponent} from &#x27;./components/calibration-setup/calibration-setup.component&#x27;;
+import {ControlPerformanceComponent} from &#x27;./components/control-performance/control-performance.component&#x27;;
+import {TechnicalJustificationComponent} from &#x27;./components/technical-justification/technical-justification.component&#x27;;
+import {SpectralSetupComponent} from &#x27;../spectral-setup/spectral-setup.component&#x27;;
 
 const routes: Routes &#x3D; [
-  {path: &#x27;&#x27;, component: ScienceGoalComponent}
+  {
+    path: &#x27;&#x27;,
+    component: ScienceGoalComponent,
+    children: [
+      {
+        path: &#x27;general&#x27;,
+        component: GeneralComponent,
+        outlet: &#x27;scienceGoalOutlet&#x27;
+      },
+      {
+        path: &#x27;field-setup&#x27;,
+        component: FieldSetupComponent,
+        outlet: &#x27;scienceGoalOutlet&#x27;
+      },
+      {
+        path: &#x27;spectral-setup&#x27;,
+        component: SpectralSetupComponent,
+        outlet: &#x27;scienceGoalOutlet&#x27;
+      },
+      {
+        path: &#x27;calibration-setup&#x27;,
+        component: CalibrationSetupComponent,
+        outlet: &#x27;scienceGoalOutlet&#x27;
+      },
+      {
+        path: &#x27;control-performance&#x27;,
+        component: ControlPerformanceComponent,
+        outlet: &#x27;scienceGoalOutlet&#x27;
+      },
+      {
+        path: &#x27;technical-justification&#x27;,
+        component: TechnicalJustificationComponent,
+        outlet: &#x27;scienceGoalOutlet&#x27;
+      },
+      {
+        path: &#x27;&#x27;,
+        redirectTo: &#x27;general&#x27;,
+        pathMatch: &#x27;full&#x27;
+      }
+    ]
+  }
 ];
 
 @NgModule({

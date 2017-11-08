@@ -1548,7 +1548,7 @@ export class SourceComponent {
    * @param persistenceService Injected service
    */
   constructor(private persistenceService: PersistenceService) {
-    persistenceService.getPage(&#x27;source&#x27;).subscribe(data &#x3D;&gt; this.pageData &#x3D; data);
+    persistenceService.getPanelData(&#x27;field-setup&#x27;, &#x27;source&#x27;).subscribe(data &#x3D;&gt; this.pageData &#x3D; data);
   }
 
   /**

@@ -31,11 +31,11 @@ export class FccIndividualComponent {
    * Constructor
    *
    * Sets local _fieldSetupService from injected and retrieves page data from service
-   * @param fieldSetupService The injected service
+   * @param persistenceService The injected service
    */
   constructor(private persistenceService: PersistenceService) {
     this._persistenceService = persistenceService;
-    persistenceService.getPage('fieldCentreCoordinates').subscribe(res => this.data = res.individual);
+    persistenceService.getPanelData('field-setup', 'fieldCentreCoordinates').subscribe(res => this.data = res.individual);
   }
 
   /**

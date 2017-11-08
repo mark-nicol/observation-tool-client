@@ -1462,7 +1462,7 @@ export class NavbarComponent implements OnInit {
     <div class="tab-pane fade" id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;nav class&#x3D;&quot;navbar navbar-expand-md navbar-dark bg-dark&quot;&gt;
   &lt;a class&#x3D;&quot;navbar-brand&quot;
-     href&#x3D;&quot;#&quot;&gt;
+     href&#x3D;&quot;&quot;&gt;
     ALMA
   &lt;/a&gt;
   &lt;button class&#x3D;&quot;navbar-toggler&quot;
@@ -1485,44 +1485,6 @@ export class NavbarComponent implements OnInit {
     &lt;/ul&gt;
   &lt;/div&gt;
 &lt;/nav&gt;
-
-&lt;!--&lt;li--&gt;
-&lt;!--ngbDropdown--&gt;
-&lt;!--#dropdown&#x3D;&quot;ngbDropdown&quot;--&gt;
-&lt;!--[autoClose]&#x3D;&quot;false&quot;&gt;--&gt;
-&lt;!--&lt;a--&gt;
-&lt;!--class&#x3D;&quot;dropdown-toggle scienceGoals&quot;--&gt;
-&lt;!--ngbDropdownToggle&gt;--&gt;
-&lt;!--{{selectedGoal.title}}--&gt;
-&lt;!--&lt;span class&#x3D;&quot;caret&quot;&gt;&lt;/span&gt;--&gt;
-&lt;!--&lt;/a&gt;--&gt;
-&lt;!--&lt;ul--&gt;
-&lt;!--ngbDropdownMenu&gt;--&gt;
-&lt;!--&lt;li--&gt;
-&lt;!--*ngFor&#x3D;&quot;let sg of scienceGoals&quot;--&gt;
-&lt;!--[class.active]&#x3D;&quot;sg&#x3D;&#x3D;&#x3D;selectedGoal&quot;&gt;--&gt;
-&lt;!--&lt;a--&gt;
-&lt;!--(click)&#x3D;&quot;click(sg); dropdown.close()&quot;--&gt;
-&lt;!--[routerLink]&#x3D;&quot;sg.path&quot;&gt;--&gt;
-&lt;!--{{sg.title}}--&gt;
-&lt;!--&lt;/a&gt;--&gt;
-&lt;!--&lt;span--&gt;
-&lt;!--class&#x3D;&quot;btn btn-sm&quot;--&gt;
-&lt;!--(click)&#x3D;&quot;removeGoal(sg)&quot;&gt;--&gt;
-&lt;!--&amp;times;--&gt;
-&lt;!--&lt;/span&gt;--&gt;
-&lt;!--&lt;/li&gt;--&gt;
-&lt;!--&lt;li class&#x3D;&quot;divider dropdown-divider&quot;&gt;&lt;/li&gt;--&gt;
-&lt;!--&lt;li&gt;--&gt;
-&lt;!--&lt;div class&#x3D;&quot;container-fluid&quot;&gt;--&gt;
-&lt;!--&lt;button--&gt;
-&lt;!--(click)&#x3D;&quot;addGoal()&quot;--&gt;
-&lt;!--class&#x3D;&quot;btn btn-sm btn-success&quot;&gt;Add Goal--&gt;
-&lt;!--&lt;/button&gt;--&gt;
-&lt;!--&lt;/div&gt;--&gt;
-&lt;!--&lt;/li&gt;--&gt;
-&lt;!--&lt;/ul&gt;--&gt;
-&lt;!--&lt;/li&gt;--&gt;
 </code></pre>
     </div>
 
@@ -1549,7 +1511,7 @@ export class NavbarComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-expand-md navbar-dark bg-dark">  <a class="navbar-brand"     href="#">    ALMA  </a>  <button class="navbar-toggler"          (click)="isCollapsed = !isCollapsed"          [attr.aria-expanded]="!isCollapsed"          type="button">    <span class="navbar-toggler-icon"></span>  </button>  <div [ngbCollapse]="isCollapsed"       class="collapse navbar-collapse"       id="navbarSupportedContent">    <ul class="navbar-nav mr-auto">      <li class="nav-item"          *ngFor="let item of items">        <a class="nav-link"           [routerLink]="item.path">          {{item.title}}        </a>      </li>    </ul>  </div></nav><!--<li--><!--ngbDropdown--><!--#dropdown="ngbDropdown"--><!--[autoClose]="false">--><!--<a--><!--class="dropdown-toggle scienceGoals"--><!--ngbDropdownToggle>--><!--{{selectedGoal.title}}--><!--<span class="caret"></span>--><!--</a>--><!--<ul--><!--ngbDropdownMenu>--><!--<li--><!--*ngFor="let sg of scienceGoals"--><!--[class.active]="sg===selectedGoal">--><!--<a--><!--(click)="click(sg); dropdown.close()"--><!--[routerLink]="sg.path">--><!--{{sg.title}}--><!--</a>--><!--<span--><!--class="btn btn-sm"--><!--(click)="removeGoal(sg)">--><!--&times;--><!--</span>--><!--</li>--><!--<li class="divider dropdown-divider"></li>--><!--<li>--><!--<div class="container-fluid">--><!--<button--><!--(click)="addGoal()"--><!--class="btn btn-sm btn-success">Add Goal--><!--</button>--><!--</div>--><!--</li>--><!--</ul>--><!--</li>--></div>'
+        var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-expand-md navbar-dark bg-dark">  <a class="navbar-brand"     href="">    ALMA  </a>  <button class="navbar-toggler"          (click)="isCollapsed = !isCollapsed"          [attr.aria-expanded]="!isCollapsed"          type="button">    <span class="navbar-toggler-icon"></span>  </button>  <div [ngbCollapse]="isCollapsed"       class="collapse navbar-collapse"       id="navbarSupportedContent">    <ul class="navbar-nav mr-auto">      <li class="nav-item"          *ngFor="let item of items">        <a class="nav-link"           [routerLink]="item.path">          {{item.title}}        </a>      </li>    </ul>  </div></nav></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};

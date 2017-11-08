@@ -972,15 +972,45 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor()</code>
+                            <code>constructor(persistenceService: <a href="../injectables/PersistenceService.html">PersistenceService</a>)</code>
                         </td>
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/observation-tool/science-goal/science-goal.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/observation-tool/science-goal/science-goal.component.ts:23</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Constructor</p>
+    </div>
+                                <div>
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>persistenceService</td>
+                                                      <td>
+                                                                <code><a href="../injectables/PersistenceService.html" target="_self" >PersistenceService</a></code>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
     </section>
@@ -1017,7 +1047,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/observation-tool/science-goal/science-goal.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/observation-tool/science-goal/science-goal.component.ts:23</a></div>
                                 </td>
                             </tr>
     
@@ -1052,7 +1082,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/observation-tool/science-goal/science-goal.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/observation-tool/science-goal/science-goal.component.ts:20</a></div>
                                 </td>
                             </tr>
     
@@ -1086,7 +1116,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/science-goal/science-goal.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/observation-tool/science-goal/science-goal.component.ts:17</a></div>
                                 </td>
                             </tr>
     
@@ -1107,6 +1137,7 @@
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
 import {ScienceGoalPageInterface} from &#x27;../shared/interfaces/science-goal-page.interface&#x27;;
+import {PersistenceService} from &#x27;../shared/services/persistence.service&#x27;;
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -1131,7 +1162,8 @@ export class ScienceGoalComponent {
   /**
    * Constructor
    */
-  constructor() {
+  constructor(private persistenceService: PersistenceService) {
+    this.persistenceService.getPages().subscribe(res &#x3D;&gt; this.pages &#x3D; res);
   }
 
 }
@@ -1143,8 +1175,8 @@ export class ScienceGoalComponent {
   &lt;ul class&#x3D;&quot;col nav nav-tabs&quot;&gt;
     &lt;li class&#x3D;&quot;nav-item&quot; *ngFor&#x3D;&quot;let page of pageKeys(pages)&quot;&gt;
       &lt;a class&#x3D;&quot;nav-link&quot;
-         [class.active]&#x3D;&quot;page &#x3D;&#x3D; selectedPage&quot;
-         [routerLink]&#x3D;&quot;[{outlets: {scienceGoalOutlet: [page]}}]&quot;
+         [class.active]&#x3D;&quot;page &#x3D;&#x3D;&#x3D; selectedPage&quot;
+         [routerLink]&#x3D;&quot;[{outlets: {scienceGoalOutlet: [pages[page].path]}}]&quot;
          (click)&#x3D;&quot;selectedPage&#x3D;page&quot;&gt;
         {{pages[page].title}}
       &lt;/a&gt;
@@ -1161,8 +1193,7 @@ export class ScienceGoalComponent {
       &lt;button class&#x3D;&quot;dropdown-item&quot;
               type&#x3D;&quot;button&quot;
               *ngFor&#x3D;&quot;let panel of pageKeys(pages[selectedPage].panels)&quot;
-              [disabled]&#x3D;&quot;pages[selectedPage].panels[panel].shown&quot;
-              (click)&#x3D;&quot;hiddenChange(panel)&quot;&gt;
+              [disabled]&#x3D;&quot;pages[selectedPage].panels[panel].shown&quot;&gt;
         {{pages[selectedPage].panels[panel].title}}
       &lt;/button&gt;
     &lt;/div&gt;
@@ -1195,7 +1226,7 @@ export class ScienceGoalComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="row">  <ul class="col nav nav-tabs">    <li class="nav-item" *ngFor="let page of pageKeys(pages)">      <a class="nav-link"         [class.active]="page == selectedPage"         [routerLink]="[{outlets: {scienceGoalOutlet: [page]}}]"         (click)="selectedPage=page">        {{pages[page].title}}      </a>    </li>  </ul>  <div ngbDropdown class="d-inline-block nav nav-tabs">    <button class="btn btn-outline-secondary"            id="showDropdown"            ngbDropdownToggle>      Show Panel    </button>    <div ngbDropdownMenu         aria-labelledby="showDropdown">      <button class="dropdown-item"              type="button"              *ngFor="let panel of pageKeys(pages[selectedPage].panels)"              [disabled]="pages[selectedPage].panels[panel].shown"              (click)="hiddenChange(panel)">        {{pages[selectedPage].panels[panel].title}}      </button>    </div>  </div><!-- div.d-inline-block.nav.nav-tabs --></div><!-- div.row --><router-outlet name="scienceGoalOutlet"></router-outlet></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="row">  <ul class="col nav nav-tabs">    <li class="nav-item" *ngFor="let page of pageKeys(pages)">      <a class="nav-link"         [class.active]="page === selectedPage"         [routerLink]="[{outlets: {scienceGoalOutlet: [pages[page].path]}}]"         (click)="selectedPage=page">        {{pages[page].title}}      </a>    </li>  </ul>  <div ngbDropdown class="d-inline-block nav nav-tabs">    <button class="btn btn-outline-secondary"            id="showDropdown"            ngbDropdownToggle>      Show Panel    </button>    <div ngbDropdownMenu         aria-labelledby="showDropdown">      <button class="dropdown-item"              type="button"              *ngFor="let panel of pageKeys(pages[selectedPage].panels)"              [disabled]="pages[selectedPage].panels[panel].shown">        {{pages[selectedPage].panels[panel].title}}      </button>    </div>  </div><!-- div.d-inline-block.nav.nav-tabs --></div><!-- div.row --><router-outlet name="scienceGoalOutlet"></router-outlet></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'ScienceGoalComponent'};

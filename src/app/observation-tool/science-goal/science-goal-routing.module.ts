@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ScienceGoalComponent} from './science-goal.component';
 
 const routes: Routes = [
-  {path: '', component: ScienceGoalComponent}
+  {path: '', component: ScienceGoalComponent, children: []}
 ];
 
 @NgModule({

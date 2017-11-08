@@ -13,7 +13,7 @@ import {RouterModule} from '@angular/router';
 @NgModule({
   imports: [
     FieldSetupModule,
-    RouterModule,
+    // RouterModule,
     SharedModule,
     SpectralSetupModule,
     ScienceGoalRoutingModule,

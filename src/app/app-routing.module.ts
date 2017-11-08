@@ -4,7 +4,7 @@ import {RouterModule, Routes} from '@angular/router'
 const routes: Routes = [
   {
     path: 'project',
-    loadChildren: 'project/project.module#ProjectModule'
+    loadChildren: './observation-tool/project/project.module#ProjectModule',
   },
   {
     path: '',

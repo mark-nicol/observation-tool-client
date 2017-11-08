@@ -7,22 +7,21 @@ import {PlannedObservingComponent} from './components/planned-observing/planned-
 const routes: Routes = [
   {
     path: 'project',
-    component: ProjectComponent,
-    children: [],
-  },
-  {
-    path: 'proposal',
-    component: ProposalComponent,
-    children: [],
-  },
-  {
-    path: 'planned-observing',
-    component: PlannedObservingComponent,
-    children: [],
-  },
-  {
-    // path: 'science-goals',
-    // loadChildren: 'project/science-goal.module#ScienceGoalModule'
+    component: ProjectComponent, // TODO Change to PI Select
+    children: [
+      {
+        path: 'proposal',
+        component: ProposalComponent,
+      },
+      {
+        path: 'planned-observing',
+        component: PlannedObservingComponent,
+      },
+      {
+        path: 'science-goals',
+        loadChildren: '../science-goal/science-goal.module#ScienceGoalModule'
+      },
+    ],
   },
   {
     path: '',
@@ -36,4 +35,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class ProjectRoutingModule { }
+export class ProjectRoutingModule {
+}

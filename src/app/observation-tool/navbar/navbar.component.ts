@@ -27,15 +27,15 @@ export class NavbarComponent implements OnInit {
     },
     {
       title: 'Proposal',
-      path: 'proposal'
+      path: 'project/proposal'
     },
     {
       title: 'Planned Observing',
-      path: 'planned-observing'
+      path: 'project/planned-observing'
     },
     {
       title: 'Science Goals',
-      path: 'science-goals'
+      path: 'project/science-goals'
     }
   ];
 

@@ -1,3 +1,70 @@
-<p>
-  calibration-setup works!
-</p>
+<div class="card">
+  <h5 class="card-title">Goal Calibrators</h5>
+  <div class="card-body">
+    <div class="custom-controls-stacked">
+      <label class="custom-control custom-radio">
+        <input #systemRadio
+               id="systemRadio"
+               name="calibratorsRadios"
+               class="custom-control-input"
+               type="radio"
+               (change)="selectedRadio = systemRadio.id"
+               [checked]="selectedRadio === systemRadio.id">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">System-defined calibration (recommended)</span>
+      </label>
+      <label class="custom-control custom-radio">
+        <input #solarRadio
+               id="solarRadio"
+               name="calibratorsRadios"
+               class="custom-control-input"
+               type="radio"
+               (change)="selectedRadio = solarRadio.id"
+               [checked]="selectedRadio === solarRadio.id">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">System-defined calibration (force separate amplitude calibration
+          using solar-system object)</span>
+      </label>
+      <label class="custom-control custom-radio">
+        <input #userRadio
+               id="userRadio"
+               name="calibratorsRadios"
+               class="custom-control-input"
+               type="radio"
+               (change)="selectedRadio = userRadio.id"
+               [checked]="selectedRadio === userRadio.id">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">User-defined calibration</span>
+      </label>
+    </div>
+    <div *ngIf="selectedRadio === userRadio.id">
+      <table class="table">
+        <thead class="thead-default">
+          <tr>
+            <th scope="col">Calibration Intent</th>
+            <th scope="col">Target Type</th>
+            <th scope="col">Source Name</th>
+            <th scope="col">RA</th>
+            <th scope="col">Dec</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Amplitude</td>
+            <td>Dynamic Calibrator</td>
+            <td></td>
+            <td>0.0000000</td>
+            <td>0.0000000</td>
+            <td><button class="btn btn-outline-secondary">Edit Criteria</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="align-content-center btn-group">
+        <button class="btn btn-outline-secondary">Add Dynamic Calibrator</button>
+        <button class="btn btn-outline-secondary">Add Fixed Calibrator</button>
+        <button class="btn btn-outline-secondary">Delete Selected Calibration</button>
+      </div>
+    </div>
+  </div>
+</div>

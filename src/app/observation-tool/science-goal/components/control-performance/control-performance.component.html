@@ -1,3 +1,196 @@
-<p>
-  control-performance works!
-</p>
+<div class="card">
+  <h5 class="card-title">Configuration Information</h5>
+  <div class="card-body">
+    <div class="row">
+      <label class="col">Antenna Beamsize</label>
+      <div class="col">
+        <div class="row">
+          <div class="col-1"><label class="form-control-label text-xl-right">12m</label></div>
+          <div class="col"><input class="form-control form-control-plaintext" readonly value="0.000000"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-1"><label class="form-control-label text-xl-right">7m</label></div>
+          <div class="col"><input class="form-control form-control-plaintext" readonly value="0.000000"></div>
+        </div>
+      </div>
+      <span class="col"></span>
+    </div>
+    <div class="row">
+      <div class="col">Number of Antennas</div>
+      <div class="col">
+        <div class="row">
+          <div class="col-1"><label class="form-control-label text-xl-right">12m</label></div>
+          <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-1"><label class="form-control-label text-xl-right">7m</label></div>
+          <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-1"><label class="form-control-label text-xl-right">TP</label></div>
+          <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">ACA 7m configuration</div>
+      <div class="col">Most compact 12m configuration</div>
+      <div class="col">Most extended 12m configuration</div>
+    </div>
+    <div class="row">
+      <div class="col">Longest Baseline</div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+    </div>
+    <div class="row">
+      <div class="col">Synthesized Baseline</div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+    </div>
+    <div class="row">
+      <div class="col">Shortest Baseline</div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+    </div>
+    <div class="row">
+      <div class="col">Maximum recoverable scale</div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>
+    </div>
+
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-title">Desired Performance</h5>
+  <div class="card-body">
+    <div class="row form-group">
+      <div class="col-3"><label>Desired Angular Resolution (Synthesized Beam)</label></div>
+      <div class="col">
+        <label class="custom-control custom-radio">
+          <input #singleRadio
+                 id="singleRadio"
+                 name="resolutionRadios"
+                 class="custom-control-input"
+                 type="radio"
+                 [checked]="chosenRadio === singleRadio.id"
+                 (change)="chosenRadio = singleRadio.id">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Single</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input #rangeRadio
+                 id="rangeRadio"
+                 name="resolutionRadios"
+                 class="custom-control-input"
+                 type="radio"
+                 [checked]="chosenRadio === rangeRadio.id"
+                 (change)="chosenRadio = rangeRadio.id">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Range</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input #anyRadio
+                 id="anyRadio"
+                 name="resolutionRadios"
+                 class="custom-control-input"
+                 type="radio"
+                 [checked]="chosenRadio === anyRadio.id"
+                 (change)="chosenRadio = anyRadio.id">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Any</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input #standaloneRadio
+                 id="standaloneRadio"
+                 name="resolutionRadios"
+                 class="custom-control-input"
+                 type="radio"
+                 [checked]="chosenRadio === standaloneRadio.id"
+                 (change)="chosenRadio = standaloneRadio.id">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Standalone ACA</span>
+        </label>
+      </div>
+    </div>
+    <div class="row" [class.form-group]="chosenRadio === singleRadio.id || chosenRadio === rangeRadio.id">
+      <div class="col-3"></div>
+      <div class="col-4 input-group"
+           *ngIf="chosenRadio === singleRadio.id || chosenRadio === rangeRadio.id">
+        <input class="form-control">
+        <select class="form-control input-group-addon"></select>
+      </div>
+      <div class="col" *ngIf="chosenRadio === rangeRadio.id">
+        <div class="row">
+          <div class="col-2"><label>to</label></div>
+          <div class="col input-group">
+            <input class="form-control">
+            <span class="input-group-addon">arcsec</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group" *ngIf="chosenRadio != anyRadio.id">
+      <div class="col-3"><label>Largest Angular Structure in Source</label></div>
+      <div class="col input-group">
+        <input class="form-control">
+        <select class="input-group-addon form-control"></select>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-3"><label>Desired sensitivity per pointing</label></div>
+      <div class="col-4 input-group">
+        <input class="form-control">
+        <select class="input-group-addon form-control"></select>
+      </div>
+      <div class="col">
+        <div class="row">
+          <div class="col-2"><label>equivalent to</label></div>
+          <div class="col"><input class="form-control form-control-plaintext" readonly></div>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-3"><label>Bandwidth used for Sensitivity</label></div>
+      <div class="col-4"><select class="form-control"></select></div>
+      <div class="col-2"><label>Frequency width</label></div>
+      <div class="col"><input class="form-control form-control-plaintext" readonly></div>
+    </div>
+    <div class="row form-group">
+      <div class="col-3"><label>Science goal integration time estimate</label></div>
+      <div class="col">
+        <button class="btn btn-outline-secondary">Time Estimate</button>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-3"><label>Override OT's sensitivity-based time estimate</label></div>
+      <div class="col">
+        <label class="custom-control custom-checkbox">
+          <input class="custom-control-input" type="checkbox">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description"></span>
+        </label>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-3"><label>Are the observations time constrained?</label></div>
+      <div class="col">
+        <label class="custom-control custom-checkbox">
+          <input class="custom-control-input" type="checkbox">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

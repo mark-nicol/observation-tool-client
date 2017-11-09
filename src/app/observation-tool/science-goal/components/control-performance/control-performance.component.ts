@@ -12,5 +12,5 @@ import {Component} from '@angular/core';
   styleUrls: ['./control-performance.component.scss']
 })
 export class ControlPerformanceComponent {
-
+  chosenRadio = 'singleRadio';
 }

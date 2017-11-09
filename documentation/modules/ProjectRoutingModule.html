@@ -161,6 +161,9 @@
                                     <a href="../components/PiEntryComponent.html" >PiEntryComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/PiResultsComponent.html" >PiResultsComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/PiSearchComponent.html" >PiSearchComponent</a>
                                 </li>
                                 <li class="link">
@@ -580,6 +583,9 @@
                                            <a href="../components/PiEntryComponent.html" >PiEntryComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/PiResultsComponent.html" >PiResultsComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/PiSearchComponent.html" >PiSearchComponent</a>
                                        </li>
                                        <li class="link">
@@ -906,6 +912,10 @@ const routes: Routes &#x3D; [
     component: ProjectComponent, // TODO Change to PI Select
     children: [
       {
+        path: &#x27;pi-select&#x27;,
+        loadChildren: &#x27;../pi-select/pi-select.module#PiSelectModule&#x27;
+      },
+      {
         path: &#x27;proposal&#x27;,
         component: ProposalComponent,
       },
@@ -917,11 +927,16 @@ const routes: Routes &#x3D; [
         path: &#x27;science-goals&#x27;,
         loadChildren: &#x27;../science-goal/science-goal.module#ScienceGoalModule&#x27;
       },
+      {
+        path: &#x27;&#x27;,
+        redirectTo: &#x27;pi-select&#x27;,
+        pathMatch: &#x27;full&#x27;
+      }
     ],
   },
   {
     path: &#x27;&#x27;,
-    redirectTo: &#x27;project&#x27;,
+    redirectTo: &#x27;project/pi-select&#x27;,
     pathMatch: &#x27;full&#x27;
   }
 ];

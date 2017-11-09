@@ -1,1 +1,143 @@
-<p>Proposal</p>
+<div class="card">
+  <h5 class="card-title">Proposal Information</h5>
+  <div class="card-body">
+    <div class="row form-group">
+      <label class="col-2 form-control-label">Proposal Title</label>
+      <input class="col form-control align-self-baseline">
+    </div>
+    <div class="row form-group">
+      <label class="col-2 form-control-label">Proposal Cycle</label>
+      <input class="col form-control align-self-baseline">
+    </div>
+    <div class="row form-group">
+      <label class="col-2 form-control-label">Abstract</label>
+      <textarea class="col form-control align-self-baseline"></textarea>
+    </div>
+    <div class="card">
+      <h6 class="card-title">Proposal Type</h6>
+      <div class="card-body row">
+        <label class="col custom-control custom-radio" *ngFor="let typeRadio of typeRadios">
+          <input id="{{typeRadio.id}}"
+                 name="typeRadios"
+                 class="custom-control-input"
+                 type="radio"
+                 (change)="chosenType = typeRadio.id"
+                 [checked]="chosenType === typeRadio.id">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">{{typeRadio.text}}</span>
+        </label>
+      </div>
+    </div>
+    <div class="card">
+      <h6 class="card-title">Scientific Category</h6>
+      <div class="card-body">
+        <div class="row justify-content-center">
+          <label class="col custom-control custom-radio" *ngFor="let categoryRadio of categoryKeys(categoryRadios)">
+            <input id="{{categoryRadios[categoryRadio].id}}"
+                   name="categoryRadios"
+                   class="custom-control-input"
+                   type="radio"
+                   value="{{categoryRadios[categoryRadio].value}}"
+                   (change)="chosenCategory = categoryRadios[categoryRadio].value; selectedKeywords = 0"
+                   [checked]="chosenCategory === categoryRadios[categoryRadio].value">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">{{categoryRadios[categoryRadio].text}}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label class="col-2 form-control-label"
+             for="keywordSelector">Keywords (chosen {{selectedKeywords}} of 2)</label>
+      <select #keywordSelector
+              id="keywordSelector"
+              multiple
+              class="col form-control"
+              (change)="selectedKeywords = keywordSelector.selectedOptions.length">
+        <option *ngFor="let option of categoryRadios[chosenCategory].keywords"
+                [disabled]="checkKeywords(option, keywordSelector.selectedOptions)">{{option}}
+        </option>
+      </select>
+    </div>
+    <div class="row">
+      <label class="col-2 form-control-label">Student Project</label>
+      <label class="col custom-control custom-checkbox">
+        <input class="custom-control-input" type="checkbox">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description"></span>
+      </label>
+    </div>
+    <div class="row form-group">
+      <label class="col-2 form-control-label">Related Proposals</label>
+      <textarea class="col form-control"></textarea>
+    </div>
+    <div class="row form-group">
+      <label class="col-2 form-control-label">Previous Proposals</label>
+      <textarea class="col form-control"></textarea>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-title">Investigators</h5>
+  <div class="card-body">
+    <div class="row">
+      <table class="table">
+        <thead class="thead-default">
+          <tr>
+            <th scope="col">Type</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Affiliation</th>
+            <th scope="col">ALMA ID</th>
+            <th scope="col">Executive</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">PI</td>
+            <td>Not Set</td>
+            <td>Not Set</td>
+            <td>Not Set</td>
+            <td>Not Set</td>
+            <td>Non-AMLA</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row pull-right btn-group">
+      <button class="btn btn-outline-secondary">Select PI</button>
+      <button class="btn btn-outline-secondary"
+              [disabled]="chosenType === 'regularRadio' || chosenType === 'opportunityRadio'">
+        Add CoPI
+      </button>
+      <button class="btn btn-outline-secondary">Add Col</button>
+      <button class="btn btn-outline-secondary">Remove Collaborator</button>
+      <button class="btn btn-outline-secondary">Add from Proposal</button>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-title">Science Case</h5>
+  <div class="card-body row">
+    <label class="col-3 form-control-label">Science Case (Mandatory, PDF, 4 pages max.)</label>
+    <div class="col input-group">
+      <input class="form-control align-self-baseline">
+      <span class="input-group-btn align-self-baseline">
+        <button class="btn btn-outline-secondary">Attach</button>
+      </span>
+      <span class="input-group-btn align-self-baseline">
+        <button class="btn btn-outline-secondary">Detach</button>
+      </span>
+      <span class="input-group-btn align-self-baseline">
+        <button class="btn btn-outline-secondary">View</button>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-title">Duplicate Observations</h5>
+  <div class="card-body">
+    <p>Placeholder</p>
+    <textarea class="form-control"></textarea>
+  </div>
+</div>

@@ -161,6 +161,9 @@
                                     <a href="../components/PiEntryComponent.html" >PiEntryComponent</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../components/PiResultsComponent.html" >PiResultsComponent</a>
+                                </li>
+                                <li class="link">
                                     <a href="../components/PiSearchComponent.html" >PiSearchComponent</a>
                                 </li>
                                 <li class="link">
@@ -580,6 +583,9 @@
                                            <a href="../components/PiEntryComponent.html" >PiEntryComponent</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../components/PiResultsComponent.html" >PiResultsComponent</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../components/PiSearchComponent.html" >PiSearchComponent</a>
                                        </li>
                                        <li class="link">
@@ -894,13 +900,37 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {RouterModule} from &#x27;@angular/router&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {RouterModule, Routes} from &#x27;@angular/router&#x27;;
 import {NgModule} from &#x27;@angular/core&#x27;;
+import {PiEntryComponent} from &#x27;./components/pi-entry/pi-entry.component&#x27;;
+import {PiSelectComponent} from &#x27;./pi-select.component&#x27;;
+import {PiResultsComponent} from &#x27;./components/pi-results/pi-results.component&#x27;;
 
-const routes &#x3D; [];
+const routes: Routes &#x3D; [
+  {
+    path: &#x27;&#x27;,
+    component: PiSelectComponent,
+    children: [
+      {
+        path: &#x27;pi-entry&#x27;,
+        component: PiEntryComponent
+      },
+      {
+        path: &#x27;pi-results&#x27;,
+        component: PiResultsComponent
+      },
+      {
+        path: &#x27;&#x27;,
+        redirectTo: &#x27;pi-entry&#x27;,
+        pathMatch: &#x27;full&#x27;
+      }
+    ]
+  }
+
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 

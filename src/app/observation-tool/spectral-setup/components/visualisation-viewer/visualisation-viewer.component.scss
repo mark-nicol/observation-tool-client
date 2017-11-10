@@ -1,17 +1,13 @@
-.spectral-focus {
+.spectral-div {
   width: 100%;
-  height: 20em;
-}
-
-.spectral-context {
-  width: 100%;
-  height: 6em;
+  height: 30em;
 }
 
 .line {
   fill: none;
   stroke: crimson;
   stroke-width: 1.5px;
+  clip-path: url(#clip);
 }
 
 .spectral-focus .axis-label {

@@ -115,6 +115,8 @@ export class VisualisationViewerComponent implements OnInit {
     this.createData();
     this.createFocusChart();
     this.createContextChart();
+
+
   }
 
   /**
@@ -147,12 +149,18 @@ export class VisualisationViewerComponent implements OnInit {
       .attr('class', 'context')
       .attr('transform', `translate(${this.context.margin.left}, ${this.context.margin.top})`);
 
+
+
     const
       xDomain = [0, d3.max(this.sin, d => d[0])],
       yDomain = [d3.min(this.sin, d => d[1]), d3.max(this.sin, d => d[1])];
 
     this.context.xScale = d3.scaleLinear().domain(xDomain).range([0, this.context.width]);
     this.context.yScale = d3.scaleLinear().domain(yDomain).range([this.context.height, 0]);
+
+    this.brush = d3.brushX()
+      .extent([[0, 0], [this.context.width, this.context.height]])
+      .on('brush end', this.brushed);
 
     this.context.xAxis = this.context.svg.append('g')
       .attr('class', 'axis axis-x axis-x-context')
@@ -167,6 +175,11 @@ export class VisualisationViewerComponent implements OnInit {
       .data([this.sin])
       .attr('class', 'line')
       .attr('d', line);
+
+    this.context.chartArea.append('g')
+      .attr('class', 'brush')
+      .call(this.brush)
+      .call(this.brush.move, this.context.xScale.range());
   }
 
   /**
@@ -185,6 +198,8 @@ export class VisualisationViewerComponent implements OnInit {
       .attr('class', 'focus')
       .attr('transform', `translate(${this.focus.margin.left}, ${this.focus.margin.top})`);
 
+
+
     const
       xDomain = [0, d3.max(this.sin, d => d[0])],
       yDomain = [d3.min(this.sin, d => d[1]), d3.max(this.sin, d => d[1])];
@@ -192,9 +207,22 @@ export class VisualisationViewerComponent implements OnInit {
     this.focus.xScale = d3.scaleLinear().domain(xDomain).range([0, this.focus.width]);
     this.focus.yScale = d3.scaleLinear().domain(yDomain).range([this.focus.height, 0]);
 
+    this.zoom = d3.zoom()
+      .scaleExtent([1, Infinity])
+      .translateExtent([[0, 0], [this.focus.width, this.focus.height]])
+      .extent([[0, 0], [this.focus.width, this.focus.height]])
+      .on('zoom', this.zoomed);
+
     this.drawXAxes();
     this.drawLine();
     this.drawRegions();
+
+    this.focus.svg.append('rect')
+      .attr('class', 'zoom')
+      .attr('width', this.focus.width)
+      .attr('height', this.focus.height)
+      .attr('transform', `translate(${this.focus.margin.left}, ${this.focus.margin.top})`)
+      .call(this.zoom);
   }
 
   /**
@@ -331,11 +359,23 @@ export class VisualisationViewerComponent implements OnInit {
   }
 
   brushed() {
-
+    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') return;
+    const s = d3.event.selection || this.context.xScale.range();
+    this.focus.xScale.domain(s.map(this.context.xScale.invert, this.context.xScale));
+    this.focus.chartArea.select('.line').attr('d', this.sin);
+    this.focus.svg.select('.axis-x').call(this.focus.xLowerAxis);
+    this.context.svg.select('.zoom').call(this.zoom.transform, d3.zoomIdentity
+      .scale(this.context.width / (s[1] - s[0]))
+      .translate(-s[0], 0));
   }
 
   zoomed() {
-
+    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'brush') return;
+    const t = d3.event.transform;
+    this.context.xScale.domain(t.rescaleX(this.focus.xScale).domain());
+    this.focus.chartArea.select('.line').attr('d', this.sin);
+    this.focus.svg.select('.axis-x').call(this.focus.xLowerAxis);
+    this.context.svg.select('.brush').call(this.brush.move, this.context.xScale.range().map(t.invertX, t));
   }
 
 }

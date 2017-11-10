@@ -19,3 +19,9 @@
   fill: black;
   text-anchor: middle;
 }
+
+.zoom {
+  cursor: move;
+  fill: none;
+  pointer-events: all;
+}

@@ -210,6 +210,13 @@ export class VisualisationViewerComponent implements OnInit {
     if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') return;
     const s = d3.event.selection || this.context.xScale.range();
     this.focus.xScale.domain(s.map(this.context.xScale.invert, this.context.xScale));
+
+    this.focus.chartArea.selectAll('.region')
+      .attr('x', (d, i) => this.focus.xScale(this.regions[i][0]))
+      .attr('y', (d, i) => 0)
+      .attr('width', (d, i) => this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
+      .attr('height', this.focus.height);
+
     this.focus.chartArea.select('.line').attr('d', this.focus.line);
     this.focus.chartArea.select('.axis-x').call(this.focus.xAxis);
     this.svg.select('.zoom').call(this.zoom.transform, d3.zoomIdentity
@@ -222,6 +229,7 @@ export class VisualisationViewerComponent implements OnInit {
     const t = d3.event.transform;
     this.focus.xScale.domain(t.rescaleX(this.focus.xScale).domain());
     this.focus.chartArea.select('.line').attr('d', this.focus.line);
+    console.log(this.focus.chartArea.selectAll('.rect'));
     this.focus.chartArea.select('.axis-x').call(this.focus.xAxis);
     this.context.chartArea.select('.brush').call(this.brush.move, this.focus.xScale.range().map(t.invertX, t));
   }

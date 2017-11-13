@@ -165,6 +165,21 @@ export class VisualisationViewerComponent implements OnInit {
       .extent([[0, 0], [this.focus.width, this.focus.height]])
       .on('zoom', this.zoomed.bind(this));
 
+    this.regionColors = d3.scaleLinear().domain([0, this.regions.length]).range(<any[]>[
+      'limegreen',
+      'steelblue'
+    ]);
+    for (let i = 0; i < this.regions.length; i++) {
+      this.focus.chartArea.append('rect')
+        .attr('class', 'region')
+        .attr('x', d => this.focus.xScale(this.regions[i][0]))
+        .attr('y', d => 0)
+        .attr('width', this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
+        .attr('height', this.focus.height)
+        .style('fill', d => this.regionColors(i))
+        .style('opacity', '0.3')
+    }
+
     this.focus.chartArea.append('path')
       .datum(this.sin)
       .attr('class', 'line')
@@ -189,13 +204,6 @@ export class VisualisationViewerComponent implements OnInit {
       .attr('class', 'brush')
       .call(this.brush)
       .call(this.brush.move, this.context.xScale.range());
-
-    this.svg.append('rect')
-      .attr('class', 'zoom')
-      .attr('width', this.focus.width)
-      .attr('height', this.focus.height)
-      .attr('transform', `translate(${this.focus.margin.left}, ${this.focus.margin.top})`)
-      .call(this.zoom);
   }
 
   brushed() {
@@ -281,13 +289,8 @@ export class VisualisationViewerComponent implements OnInit {
    * Redraws the displayed lines on focus and context charts
    */
   redrawLines(data: any) {
-    this.focus.xScale.domain([0, d3.max(data, d => d[0])]);
     this.focus.yScale.domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])]);
-    this.context.xScale = this.focus.xScale;
     this.context.yScale.domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])]);
-    this.focus.xAxis.transition().call(d3.axisTop(this.focus.xScale));
-    // this.focus.xLowerAxis.transition().call(d3.axisBottom(this.focus.xScale));
-    this.context.xAxis.transition().call(d3.axisBottom(this.context.xScale));
 
     const focusLine = d3.line()
       .x((d: any) => this.focus.xScale(d[0]))

@@ -6,36 +6,35 @@ import {brush} from 'd3-brush';
  * Interface for a standard chart. Everything but axes
  */
 interface ChartInterface {
+  /** Margins for the chart */
   margin: Margin,
+  /** Area of the chart showing data i.e. not axes */
   chartArea: any,
+  /** Total width of the chart */
   width: number,
+  /** Total height of the chart */
   height: number,
+  /** Data -> SVG binding for the x axis */
   xScale: any,
+  /** Data -> SVG binding for the y axis */
   yScale: any,
-  line: any
-}
-
-/**
- * Interface for the focus chart, includes upper and lower axes
- */
-interface FocusChartInterface extends ChartInterface {
+  /** The X axis of the chart */
   xAxis: any,
-}
-
-/**
- * Interface for the context chart. Lower X axis only
- */
-interface ContextChartInterface extends ChartInterface {
-  xAxis: any
+  /** The line to show on the chart */
+  line: any
 }
 
 /**
  * Interface for chart margins
  */
 interface Margin {
+  /** Top margin */
   top: number,
+  /** Right margin */
   right: number,
+  /** Bottom margin */
   bottom: number,
+  /** Left margin */
   left: number
 }
 
@@ -76,10 +75,11 @@ export class VisualisationViewerComponent implements OnInit {
   private cos: Array<any>;
   private tan: Array<any>;
 
+  /** The svg element to draw the charts in */
   private svg: any;
 
   /** Object holding data for the focus chart */
-  private focus: FocusChartInterface = {
+  private focus: ChartInterface = {
     margin: {top: 20, right: 20, bottom: 110, left: 40},
     chartArea: {},
     width: 0,
@@ -91,7 +91,7 @@ export class VisualisationViewerComponent implements OnInit {
   };
 
   /** Object holding data for the context chart */
-  private context: ContextChartInterface = {
+  private context: ChartInterface = {
     margin: {top: 430, right: 20, bottom: 30, left: 40},
     chartArea: {},
     width: 0,
@@ -102,6 +102,7 @@ export class VisualisationViewerComponent implements OnInit {
     line: {}
   };
 
+  /** The brush on the context chart, used for zooming and panning */
   private brush: any;
   private zoom: any;
 

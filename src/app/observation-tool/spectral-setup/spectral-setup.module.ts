@@ -4,10 +4,13 @@ import {VisualisationControlComponent} from './components/visualisation-control/
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
 import {SpectralSetupComponent} from './spectral-setup.component';
 import {SharedModule} from '../shared/shared.module';
+import {SpectralDataService} from './services/spectral-data.service';
+import {PapaParseModule} from 'ngx-papaparse';
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    PapaParseModule
   ],
   declarations: [
     TypeComponent,
@@ -15,7 +18,7 @@ import {SharedModule} from '../shared/shared.module';
     VisualisationViewerComponent,
     SpectralSetupComponent
   ],
-  providers: [],
+  providers: [SpectralDataService],
   exports: [
     SpectralSetupComponent
   ]

@@ -123,6 +123,7 @@ export class VisualisationViewerComponent implements OnInit {
     this.drawRegions();
     this.drawContextChart();
     this.drawFocusChart();
+    this.resetView();
   }
 
   /**
@@ -279,7 +280,6 @@ export class VisualisationViewerComponent implements OnInit {
     const t = d3.event.transform;
     this.focus.xScale.domain(t.rescaleX(this.focus.xScale).domain());
     this.focus.chartArea.select('.line').attr('d', this.focus.line);
-    console.log(this.focus.chartArea.selectAll('.rect'));
     this.focus.chartArea.select('.axis-x').call(this.focus.xAxis);
     this.context.chartArea.select('.brush').call(this.brush.move, this.focus.xScale.range().map(t.invertX, t));
   }
@@ -341,6 +341,10 @@ export class VisualisationViewerComponent implements OnInit {
       .data([data])
       .transition()
       .attr('d', contextLine);
+  }
+
+  resetView() {
+    this.context.chartArea.select('.brush').call(this.brush.move, null);
   }
 
 }

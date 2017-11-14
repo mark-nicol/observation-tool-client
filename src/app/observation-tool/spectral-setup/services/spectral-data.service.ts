@@ -1,9 +1,5 @@
-import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
-interface DataInterface {
-  data: any[]
-}
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class SpectralDataService {
@@ -12,8 +8,8 @@ export class SpectralDataService {
 
   }
 
-  getData(): any {
-    return this.http.get<DataInterface>('http://localhost:8080/water-vapour/1');
+  getData(option: number): any {
+    return this.http.get(`http://localhost:8080/water-vapour/${option}`);
   }
 
 }

@@ -2,7 +2,6 @@ import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angu
 import * as d3 from 'd3';
 import {brush} from 'd3-brush';
 import {SpectralDataService} from '../../services/spectral-data.service';
-import {Observable} from 'rxjs/Observable';
 
 /**
  * Interface for a standard chart. Everything but axes
@@ -74,9 +73,6 @@ export class VisualisationViewerComponent implements OnInit {
 
   /** The data array for use within the component */
   private data: any;
-  private sin: Array<any>;
-  private cos: Array<any>;
-  private tan: Array<any>;
 
   /** The svg element to draw the charts in */
   private svg: any;
@@ -116,7 +112,7 @@ export class VisualisationViewerComponent implements OnInit {
    * Creates the data and two charts
    */
   ngOnInit() {
-    this.spectralDataService.getData().subscribe(data => this.createVisualiser(data));
+    this.spectralDataService.getData(1).subscribe(data => this.createVisualiser(data));
   }
 
   createVisualiser(data) {
@@ -317,32 +313,20 @@ export class VisualisationViewerComponent implements OnInit {
   /**
    * Changes the type of line show to demonstrate D3 transition
    */
-  changeLine(lineType: string) {
-    switch (lineType) {
-      case 'sin':
-        this.redrawLines(this.sin);
-        break;
-      case 'cos':
-        this.redrawLines(this.cos);
-        break;
-      case 'tan':
-        this.redrawLines(this.tan);
-        break;
-      default:
-        break;
-    }
+  changeLine(octile: number) {
+    this.spectralDataService.getData(octile).subscribe(data => this.redrawLines(data.data));
   }
 
   /**
    * Redraws the displayed lines on focus and context charts
    */
   redrawLines(data: any) {
-    this.focus.yScale.domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])]);
-    this.context.yScale.domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])]);
+    this.focus.yScale.domain([d3.max(data, d => d[2]), d3.min(data, d => d[2])]);
+    this.context.yScale.domain([d3.max(data, d => d[2]), d3.min(data, d => d[2])]);
 
     const focusLine = d3.line()
       .x((d: any) => this.focus.xScale(d[0]))
-      .y((d: any) => this.focus.yScale(d[1]));
+      .y((d: any) => this.focus.yScale(d[2]));
 
     this.focus.chartArea.selectAll('.line')
       .data([data])
@@ -351,7 +335,7 @@ export class VisualisationViewerComponent implements OnInit {
 
     const contextLine = d3.line()
       .x((d: any) => this.context.xScale(d[0]))
-      .y((d: any) => this.context.yScale(d[1]));
+      .y((d: any) => this.context.yScale(d[2]));
 
     this.context.chartArea.selectAll('.line')
       .data([data])

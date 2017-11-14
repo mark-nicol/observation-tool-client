@@ -30,11 +30,11 @@ export class SpectralSetupComponent extends ScienceGoalPage implements OnInit {
 
   densityRadioChange(event: string) {
     if (event === 'automatic') {
-      this.visualisationViewerComponent.changeLine('sin');
+      this.visualisationViewerComponent.changeLine(1);
     }
   }
 
-  densitySelectorChange(event: string) {
+  densitySelectorChange(event: number) {
     this.visualisationViewerComponent.changeLine(event);
   }
 

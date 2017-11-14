@@ -13,7 +13,7 @@ export class VisualisationControlComponent implements OnInit {
   @Output() transmissionCheckedEmitter = new EventEmitter<boolean>();
 
   @Output() densityRadioEmitter = new EventEmitter<string>();
-  @Output() densitySelectorEmitter = new EventEmitter<string>();
+  @Output() densitySelectorEmitter = new EventEmitter<number>();
 
   densityRadioChoice = 'automatic';
 
@@ -48,7 +48,7 @@ export class VisualisationControlComponent implements OnInit {
     this.densityRadioEmitter.emit(newRadio);
   }
 
-  densitySelectorChange(newDensity: string) {
+  densitySelectorChange(newDensity: number) {
     this.densitySelectorEmitter.emit(newDensity);
   }
 

@@ -65,8 +65,8 @@
             class="form-control form-control-sm"
             [disabled]="densityRadioChoice === autoRadio.value"
             (change)="densitySelectorChange(densitySelector.value)">
-      <option *ngFor="let choice of columnDensityChoices"
-              value="{{choice}}">{{choice}}</option>
+      <option *ngFor="let choice of columnDensityChoices; let i = index"
+              value="{{i+1}}">{{choice}}</option>
     </select>
   </div>
 </div>

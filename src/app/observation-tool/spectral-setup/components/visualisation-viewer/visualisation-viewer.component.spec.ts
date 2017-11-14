@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VisualisationViewerComponent } from './visualisation-viewer.component';
+import {SpectralDataService} from '../../services/spectral-data.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('VisualisationViewerComponent', () => {
   let component: VisualisationViewerComponent;
@@ -8,7 +10,9 @@ describe('VisualisationViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VisualisationViewerComponent ]
+      imports: [HttpClientModule],
+      declarations: [ VisualisationViewerComponent ],
+      providers: [SpectralDataService]
     })
     .compileComponents();
   }));

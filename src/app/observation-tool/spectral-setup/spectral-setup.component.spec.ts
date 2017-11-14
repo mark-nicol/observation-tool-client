@@ -7,6 +7,8 @@ import {VisualisationControlComponent} from './components/visualisation-control/
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
 import {TypeComponent} from './components/type/type.component';
 import {PersistenceService} from '../shared/services/persistence.service';
+import {SpectralDataService} from './services/spectral-data.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('SpectralSetupComponent', () => {
   let component: SpectralSetupComponent;
@@ -21,8 +23,8 @@ describe('SpectralSetupComponent', () => {
         VisualisationViewerComponent,
         TypeComponent
       ],
-      imports: [NgbModule.forRoot()],
-      providers: [PersistenceService]
+      imports: [NgbModule.forRoot(), HttpClientModule],
+      providers: [PersistenceService, SpectralDataService]
     })
     .compileComponents();
   }));

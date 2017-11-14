@@ -1,15 +1,19 @@
 import {Injectable} from '@angular/core';
-import {WV_01} from '../data/wv01';
+import {HttpClient} from '@angular/common/http';
+
+interface DataInterface {
+  data: any[]
+}
 
 @Injectable()
 export class SpectralDataService {
 
-  constructor() {
-    console.log(WV_01);
+  constructor(private http: HttpClient) {
+
   }
 
-  getData() {
-    return WV_01;
+  getData(): any {
+    return this.http.get<DataInterface>('http://localhost:8080/water-vapour/1');
   }
 
 }

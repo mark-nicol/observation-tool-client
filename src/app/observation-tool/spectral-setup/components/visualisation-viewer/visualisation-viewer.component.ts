@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angu
 import * as d3 from 'd3';
 import {brush} from 'd3-brush';
 import {SpectralDataService} from '../../services/spectral-data.service';
+import {Observable} from 'rxjs/Observable';
 
 /**
  * Interface for a standard chart. Everything but axes
@@ -72,7 +73,7 @@ export class VisualisationViewerComponent implements OnInit {
   @ViewChild('chartDiv') private chartContainer: ElementRef;
 
   /** The data array for use within the component */
-  private data: Array<any>;
+  private data: any;
   private sin: Array<any>;
   private cos: Array<any>;
   private tan: Array<any>;
@@ -108,35 +109,24 @@ export class VisualisationViewerComponent implements OnInit {
   private brush: any;
   private zoom: any;
 
-  constructor (private spectralDataService: SpectralDataService) {
+  constructor(private spectralDataService: SpectralDataService) {
   }
 
   /**
    * Creates the data and two charts
    */
   ngOnInit() {
-    this.createData();
+    this.spectralDataService.getData().subscribe(data => this.createVisualiser(data));
+  }
+
+  createVisualiser(data) {
+    this.data = data.data;
     this.setupSvg();
     this.setupCharts();
     this.setupBrushZoom();
     this.drawRegions();
     this.drawContextChart();
     this.drawFocusChart();
-  }
-
-  /**
-   * Creates the data array for the charts to use
-   */
-  createData() {
-    this.data = this.spectralDataService.getData();
-    this.sin = [];
-    this.cos = [];
-    this.tan = [];
-    for (let i = 0; i < 1000; i++) {
-      this.sin.push([i, Math.sin(i / 10)]);
-      this.cos.push([i, Math.cos(i / 20)]);
-      this.tan.push([i, Math.tan(i / 10)]);
-    }
   }
 
   /**

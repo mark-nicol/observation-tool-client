@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as d3 from 'd3';
 import {brush} from 'd3-brush';
+import {SpectralDataService} from '../../services/spectral-data.service';
 
 /**
  * Interface for a standard chart. Everything but axes
@@ -71,9 +72,7 @@ export class VisualisationViewerComponent implements OnInit {
   @ViewChild('chartDiv') private chartContainer: ElementRef;
 
   /** The data array for use within the component */
-  private sin: Array<any>;
-  private cos: Array<any>;
-  private tan: Array<any>;
+  private data: any;
 
   /** The svg element to draw the charts in */
   private svg: any;
@@ -106,31 +105,24 @@ export class VisualisationViewerComponent implements OnInit {
   private brush: any;
   private zoom: any;
 
+  constructor(private spectralDataService: SpectralDataService) {
+  }
+
   /**
    * Creates the data and two charts
    */
   ngOnInit() {
-    this.createData();
+    this.spectralDataService.getData(1).subscribe(data => this.createVisualiser(data));
+  }
+
+  createVisualiser(data) {
+    this.data = data.data;
     this.setupSvg();
     this.setupCharts();
     this.setupBrushZoom();
     this.drawRegions();
     this.drawContextChart();
     this.drawFocusChart();
-  }
-
-  /**
-   * Creates the data array for the charts to use
-   */
-  createData() {
-    this.sin = [];
-    this.cos = [];
-    this.tan = [];
-    for (let i = 0; i < 1000; i++) {
-      this.sin.push([i, Math.sin(i / 10)]);
-      this.cos.push([i, Math.cos(i / 20)]);
-      this.tan.push([i, Math.tan(i / 10)]);
-    }
   }
 
   /**
@@ -168,11 +160,11 @@ export class VisualisationViewerComponent implements OnInit {
 
     this.focus.line = d3.line()
       .x((d: any) => this.focus.xScale(d[0]))
-      .y((d: any) => this.focus.yScale(d[1]));
+      .y((d: any) => this.focus.yScale(d[2]));
 
     this.context.line = d3.line()
       .x((d: any) => this.context.xScale(d[0]))
-      .y((d: any) => this.context.yScale(d[1]));
+      .y((d: any) => this.context.yScale(d[2]));
 
     this.focus.chartArea = this.svg.append('g')
       .attr('class', 'focus')
@@ -182,8 +174,8 @@ export class VisualisationViewerComponent implements OnInit {
       .attr('class', 'context')
       .attr('transform', `translate(${this.context.margin.left}, ${this.context.margin.top})`);
 
-    this.focus.xScale.domain([0, d3.max(this.sin, d => d[0])]);
-    this.focus.yScale.domain([d3.min(this.sin, d => d[1]), d3.max(this.sin, d => d[1])]);
+    this.focus.xScale.domain([0, d3.max(this.data, d => d[0])]);
+    this.focus.yScale.domain([d3.max(this.data, d => d[2]), d3.min(this.data, d => d[2])]);
     this.context.xScale.domain(this.focus.xScale.domain());
     this.context.yScale.domain(this.focus.yScale.domain());
   }
@@ -228,7 +220,7 @@ export class VisualisationViewerComponent implements OnInit {
    */
   drawContextChart() {
     this.context.chartArea.append('path')
-      .datum(this.sin)
+      .datum(this.data)
       .attr('class', 'line')
       .attr('d', this.context.line);
 
@@ -248,7 +240,7 @@ export class VisualisationViewerComponent implements OnInit {
    */
   drawFocusChart() {
     this.focus.chartArea.append('path')
-      .datum(this.sin)
+      .datum(this.data)
       .attr('class', 'line')
       .attr('d', this.focus.line);
 
@@ -321,32 +313,20 @@ export class VisualisationViewerComponent implements OnInit {
   /**
    * Changes the type of line show to demonstrate D3 transition
    */
-  changeLine(lineType: string) {
-    switch (lineType) {
-      case 'sin':
-        this.redrawLines(this.sin);
-        break;
-      case 'cos':
-        this.redrawLines(this.cos);
-        break;
-      case 'tan':
-        this.redrawLines(this.tan);
-        break;
-      default:
-        break;
-    }
+  changeLine(octile: number) {
+    this.spectralDataService.getData(octile).subscribe(data => this.redrawLines(data.data));
   }
 
   /**
    * Redraws the displayed lines on focus and context charts
    */
   redrawLines(data: any) {
-    this.focus.yScale.domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])]);
-    this.context.yScale.domain([d3.min(data, d => d[1]), d3.max(data, d => d[1])]);
+    this.focus.yScale.domain([d3.max(data, d => d[2]), d3.min(data, d => d[2])]);
+    this.context.yScale.domain([d3.max(data, d => d[2]), d3.min(data, d => d[2])]);
 
     const focusLine = d3.line()
       .x((d: any) => this.focus.xScale(d[0]))
-      .y((d: any) => this.focus.yScale(d[1]));
+      .y((d: any) => this.focus.yScale(d[2]));
 
     this.focus.chartArea.selectAll('.line')
       .data([data])
@@ -355,7 +335,7 @@ export class VisualisationViewerComponent implements OnInit {
 
     const contextLine = d3.line()
       .x((d: any) => this.context.xScale(d[0]))
-      .y((d: any) => this.context.yScale(d[1]));
+      .y((d: any) => this.context.yScale(d[2]));
 
     this.context.chartArea.selectAll('.line')
       .data([data])

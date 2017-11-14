@@ -14,6 +14,7 @@ export class VisualisationControlComponent implements OnInit {
 
   @Output() densityRadioEmitter = new EventEmitter<string>();
   @Output() densitySelectorEmitter = new EventEmitter<number>();
+  @Output() resetEmitter = new EventEmitter();
 
   densityRadioChoice = 'automatic';
 
@@ -50,6 +51,10 @@ export class VisualisationControlComponent implements OnInit {
 
   densitySelectorChange(newDensity: number) {
     this.densitySelectorEmitter.emit(newDensity);
+  }
+
+  resetClick() {
+    this.resetEmitter.emit();
   }
 
 }

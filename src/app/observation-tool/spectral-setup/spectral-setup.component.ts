@@ -38,4 +38,8 @@ export class SpectralSetupComponent extends ScienceGoalPage implements OnInit {
     this.visualisationViewerComponent.changeLine(event);
   }
 
+  resetClick() {
+    this.visualisationViewerComponent.resetView();
+  }
+
 }

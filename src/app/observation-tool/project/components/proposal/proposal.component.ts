@@ -36,9 +36,9 @@ export class ProposalComponent {
   ];
 
   /** The currently chosen scientific category radio */
-  chosenCategory = 'cosmology';
+  chosenCategory                        = 'cosmology';
   /** Keys to loop the radios object */
-  categoryKeys = Object.keys;
+  categoryKeys                          = Object.keys;
   /** The available categories with values and keywords */
   categoryRadios: { [id: string]: any } = {
     'cosmology': {

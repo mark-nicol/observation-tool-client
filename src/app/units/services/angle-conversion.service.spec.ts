@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { AngleConversionService } from './angle-conversion.service';
+import {AngleConversionService} from './angle-conversion.service';
 
 describe('AngleConversionService', () => {
   beforeEach(() => {

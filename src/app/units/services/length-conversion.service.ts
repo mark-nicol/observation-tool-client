@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ValueConversionService} from './value-conversion.service';
 import {LENGTH_DATA} from '../data/length.data';
+import {ValueConversionService} from './value-conversion.service';
 
 @Injectable()
 export class LengthConversionService extends ValueConversionService {

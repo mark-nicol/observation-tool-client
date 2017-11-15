@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {SourceComponentInterface} from '../../../shared/interfaces/source.interface';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
+import {SourceComponentInterface} from '../../../shared/interfaces/source.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**

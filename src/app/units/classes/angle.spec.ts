@@ -1,5 +1,5 @@
-import {Angle} from './angle';
 import {AngleUnits} from '../enums/angle-units.enum';
+import {Angle} from './angle';
 
 describe('Class: Angle', () => {
   let cls: Angle;
@@ -31,7 +31,7 @@ describe('Class: Angle', () => {
     });
 
     it('10 DEG in ARCSEC should be 36000', () => {
-     expect(cls.getValueInUnits(AngleUnits.ARCSEC)).toEqual(36000);
+      expect(cls.getValueInUnits(AngleUnits.ARCSEC)).toEqual(36000);
     });
 
     it('10 DEG in ARCMIN should be 600', () => {

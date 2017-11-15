@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TechnicalJustificationComponent } from './technical-justification.component';
+import {TechnicalJustificationComponent} from './technical-justification.component';
 
 describe('TechnicalJustificationComponent', () => {
   let component: TechnicalJustificationComponent;
@@ -8,13 +8,13 @@ describe('TechnicalJustificationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TechnicalJustificationComponent ]
+      declarations: [TechnicalJustificationComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TechnicalJustificationComponent);
+    fixture   = TestBed.createComponent(TechnicalJustificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

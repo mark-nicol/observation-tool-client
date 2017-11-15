@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ValueConversionService} from './value-conversion.service';
 import {ANGLE_DATA} from '../data/angle.data';
+import {ValueConversionService} from './value-conversion.service';
 
 @Injectable()
 export class AngleConversionService extends ValueConversionService {

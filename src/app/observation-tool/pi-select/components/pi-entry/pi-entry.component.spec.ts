@@ -20,11 +20,11 @@ describe('PiEntryComponent', () => {
         ProjectInfoComponent
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PiEntryComponent);
+    fixture   = TestBed.createComponent(PiEntryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -28,9 +28,9 @@ export class VisualisationControlComponent {
   /** Emitter for the reset view button */
   @Output() resetEmitter               = new EventEmitter();
   /** Current density radio choice */
-  densityRadioChoice = 'automatic';
+  densityRadioChoice                   = 'automatic';
   /** Strings for the density selector, value is index from the ngFor */
-  columnDensityChoices = [
+  columnDensityChoices                 = [
     '0.472mm (1st Octile)',
     '0.658mm (2nd Octile)',
     '0.913mm (3rd Octile)',

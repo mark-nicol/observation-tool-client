@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ControlPerformanceComponent } from './control-performance.component';
+import {ControlPerformanceComponent} from './control-performance.component';
 
 describe('ControlPerformanceComponent', () => {
   let component: ControlPerformanceComponent;
@@ -8,13 +8,13 @@ describe('ControlPerformanceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ControlPerformanceComponent ]
+      declarations: [ControlPerformanceComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ControlPerformanceComponent);
+    fixture   = TestBed.createComponent(ControlPerformanceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

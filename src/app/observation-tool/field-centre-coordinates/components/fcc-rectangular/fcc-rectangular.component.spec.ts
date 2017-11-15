@@ -19,17 +19,17 @@ describe('FccRectangularComponent', () => {
         SystemSelectorComponent,
         DelayTooltipDirective,
         SexagesimalPipe,
-        DegreesPipe ],
+        DegreesPipe],
       imports: [
         NgbModule.forRoot(),
         FormsModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FccRectangularComponent);
+    fixture   = TestBed.createComponent(FccRectangularComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

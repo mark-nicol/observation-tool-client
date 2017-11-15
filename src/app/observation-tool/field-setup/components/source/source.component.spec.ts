@@ -22,14 +22,14 @@ describe('SourceComponent', () => {
         DelayTooltipDirective,
         SystemSelectorComponent
       ],
-      imports: [ FormsModule, NgbModule.forRoot() ],
+      imports: [FormsModule, NgbModule.forRoot()],
       providers: [PersistenceService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SourceComponent);
+    fixture   = TestBed.createComponent(SourceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

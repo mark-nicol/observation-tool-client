@@ -29,11 +29,11 @@ describe('FieldCenterCoordinatesComponent', () => {
       imports: [FormsModule, NgbModule.forRoot()],
       providers: [PersistenceService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FieldCenterCoordinatesComponent);
+    fixture   = TestBed.createComponent(FieldCenterCoordinatesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

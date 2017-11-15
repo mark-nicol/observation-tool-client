@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ImageQueryComponent } from './image-query.component';
+import {ImageQueryComponent} from './image-query.component';
 
 describe('ImageQueryComponent', () => {
   let component: ImageQueryComponent;
@@ -8,13 +8,13 @@ describe('ImageQueryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageQueryComponent ]
+      declarations: [ImageQueryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImageQueryComponent);
+    fixture   = TestBed.createComponent(ImageQueryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

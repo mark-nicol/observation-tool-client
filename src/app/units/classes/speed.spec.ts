@@ -1,5 +1,5 @@
-import {Speed} from './speed';
 import {SpeedUnits} from '../enums/speed-units.enum';
+import {Speed} from './speed';
 
 describe('Class: Speed', () => {
   let cls: Speed;

@@ -1,6 +1,6 @@
+import {Angle} from '../../../units/classes/angle';
 import {Latitude} from '../../../units/classes/latitude';
 import {Longitude} from '../../../units/classes/longitude';
-import {Angle} from '../../../units/classes/angle';
 
 /**
  * Interface for the Field Centre Coordinates Component page data

@@ -16,7 +16,7 @@ export class Sensitivity extends ValueUnitPair {
    */
   constructor(unit = SensitivityUnits.JY, value = 0.0) {
     super(unit, value, SensitivityUnits.JY);
-    const injector = ReflectiveInjector.resolveAndCreate([SensitivityConversionService]);
+    const injector               = ReflectiveInjector.resolveAndCreate([SensitivityConversionService]);
     this._valueConversionService = injector.get(SensitivityConversionService);
   }
 }

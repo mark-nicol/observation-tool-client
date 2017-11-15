@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ScienceGoalPage} from '../shared/classes/science-goal-page';
+import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
-import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 
 /**
  * Host component for the spectral setup

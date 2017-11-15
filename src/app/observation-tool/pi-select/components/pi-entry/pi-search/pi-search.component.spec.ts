@@ -10,13 +10,13 @@ describe('PiSearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [ PiSearchComponent ]
+      declarations: [PiSearchComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PiSearchComponent);
+    fixture   = TestBed.createComponent(PiSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

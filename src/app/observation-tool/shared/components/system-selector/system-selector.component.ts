@@ -142,7 +142,7 @@ export class SystemSelectorComponent implements OnInit {
       this.sexagesimalDisabled = false;
     } else {
       this.sexagesimalDisabled = true;
-      this.sexagesimalUnits = false;
+      this.sexagesimalUnits    = false;
     }
     this.systemEmitter.emit(this.systems[this.chosenSystem]);
     this.sexagesimalEmitter.emit(this.sexagesimalUnits);

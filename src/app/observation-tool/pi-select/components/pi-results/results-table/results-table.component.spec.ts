@@ -16,7 +16,7 @@ describe('ResultsTableComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ResultsTableComponent);
+    fixture   = TestBed.createComponent(ResultsTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

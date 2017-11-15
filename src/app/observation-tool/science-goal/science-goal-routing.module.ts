@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ScienceGoalComponent} from './science-goal.component';
-import {GeneralComponent} from './components/general/general.component';
 import {FieldSetupComponent} from '../field-setup/field-setup.component';
+import {SpectralSetupComponent} from '../spectral-setup/spectral-setup.component';
 import {CalibrationSetupComponent} from './components/calibration-setup/calibration-setup.component';
 import {ControlPerformanceComponent} from './components/control-performance/control-performance.component';
+import {GeneralComponent} from './components/general/general.component';
 import {TechnicalJustificationComponent} from './components/technical-justification/technical-justification.component';
-import {SpectralSetupComponent} from '../spectral-setup/spectral-setup.component';
+import {ScienceGoalComponent} from './science-goal.component';
 
 const routes: Routes = [
   {

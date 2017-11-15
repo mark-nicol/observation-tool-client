@@ -1,9 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PiSelectComponent } from './pi-select.component';
-import {RouterModule} from '@angular/router';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterTestingModule} from '@angular/router/testing';
+
+import {PiSelectComponent} from './pi-select.component';
 
 describe('PiSelectComponent', () => {
   let component: PiSelectComponent;
@@ -12,13 +11,13 @@ describe('PiSelectComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [BrowserModule, RouterTestingModule],
-      declarations: [ PiSelectComponent ]
+      declarations: [PiSelectComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PiSelectComponent);
+    fixture   = TestBed.createComponent(PiSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

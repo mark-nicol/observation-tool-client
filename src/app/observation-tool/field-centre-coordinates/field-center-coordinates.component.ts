@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
+import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 import {FieldCentreCoordinatesInterface} from '../shared/interfaces/field-centre-coordinates.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
-import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 
 /**
  * Handles the Field Centre Coordinates component in the Field Setup

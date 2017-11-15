@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {PersistenceService} from '../../../shared/services/persistence.service';
 import {ScienceGoalIdentifiers} from '../../../shared/enums/science-goal-identifiers.enum';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * Individual Field Centre Coordinates component
@@ -15,6 +15,7 @@ export class FccIndividualComponent {
 
   /** The selected radio button value from FieldCentreCoordinatesComponent */
   @Input() radioValue = 'relative';
+
   /** Units for the offset selection box */
   offsetUnits = [
     'mas',

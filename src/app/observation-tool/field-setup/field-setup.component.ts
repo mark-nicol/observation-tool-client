@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ScienceGoalPage} from '../shared/classes/science-goal-page';
-import {PersistenceService} from '../shared/services/persistence.service';
 import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
  * Handles the field setup page of a science goal

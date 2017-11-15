@@ -37,7 +37,8 @@
                    [title]="page.panels['field-source'].title"
                    (hiddenChange)="hiddenChange($event)"
                    *ngIf="page.panels['field-source'].shown">
-      <field-source (tableHeaderEmitter)="setHeaders($event)" (targetTypeEmitter)="setTargetType($event)"></field-source>
+      <field-source (tableHeaderEmitter)="setHeaders($event)"
+                    (targetTypeEmitter)="setTargetType($event)"></field-source>
     </modular-panel>
     <modular-panel [id]="'expected-source-properties'"
                    [title]="page.panels['expected-source-properties'].title"

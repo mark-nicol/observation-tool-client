@@ -16,7 +16,7 @@ export class Latitude extends ValueUnitPair {
    */
   constructor(unit = LatitudeUnits.DEG, value = 0.0) {
     super(unit, value, LatitudeUnits.DEG);
-    const injector = ReflectiveInjector.resolveAndCreate([LatitudeConversionService]);
+    const injector               = ReflectiveInjector.resolveAndCreate([LatitudeConversionService]);
     this._valueConversionService = injector.get(LatitudeConversionService);
   }
 }

@@ -9,4 +9,5 @@ import {Component} from '@angular/core';
   templateUrl: './pi-select.component.html',
   styleUrls: ['./pi-select.component.scss']
 })
-export class PiSelectComponent {}
+export class PiSelectComponent {
+}

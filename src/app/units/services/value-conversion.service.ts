@@ -20,7 +20,7 @@ export abstract class ValueConversionService {
    */
   getConversionFactor(sourceUnit: string, targetUnit: string): number {
     const sourceFactor = this._data[sourceUnit],
-      targetFactor = this._data[targetUnit];
+          targetFactor = this._data[targetUnit];
     return sourceFactor / targetFactor;
   }
 
@@ -29,7 +29,7 @@ export abstract class ValueConversionService {
    */
   getUnits(): string[] {
     const returnArray = [];
-    const dataKeys = Object.keys;
+    const dataKeys    = Object.keys;
     for (const unit of dataKeys(this._data)) {
       returnArray.push(unit);
     }

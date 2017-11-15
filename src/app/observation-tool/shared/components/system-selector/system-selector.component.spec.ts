@@ -12,14 +12,14 @@ describe('SystemSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SystemSelectorComponent, DelayTooltipDirective ],
+      declarations: [SystemSelectorComponent, DelayTooltipDirective],
       imports: [NgbModule.forRoot(), FormsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SystemSelectorComponent);
+    fixture   = TestBed.createComponent(SystemSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

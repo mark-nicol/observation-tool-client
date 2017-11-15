@@ -11,15 +11,15 @@ describe('ScienceGoalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScienceGoalComponent ],
+      declarations: [ScienceGoalComponent],
       imports: [RouterTestingModule],
       providers: [PersistenceService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScienceGoalComponent);
+    fixture   = TestBed.createComponent(ScienceGoalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

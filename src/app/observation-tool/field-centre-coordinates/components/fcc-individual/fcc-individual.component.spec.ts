@@ -27,7 +27,7 @@ describe('FccIndividualComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FccIndividualComponent);
+    fixture   = TestBed.createComponent(FccIndividualComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

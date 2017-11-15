@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {PlannedObservingComponent} from './components/planned-observing/planned-observing.component';
 import {ProposalComponent} from './components/proposal/proposal.component';
 import {ProjectComponent} from './project.component';
-import {PlannedObservingComponent} from './components/planned-observing/planned-observing.component';
 
 const routes: Routes = [
   {

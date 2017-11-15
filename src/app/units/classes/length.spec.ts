@@ -1,6 +1,5 @@
-import {Length} from './length';
-import {LengthConversionService} from '../services/length-conversion.service';
 import {LengthUnits} from '../enums/length-units.enum';
+import {Length} from './length';
 
 describe('Class: Length', () => {
   let cls: Length;
@@ -39,13 +38,15 @@ describe('Class: Length', () => {
   });
 
   it('1 PC to KM should be 3.0951e13', () => {
-    cls.unit = LengthUnits.PC;
+    cls.unit  = LengthUnits.PC;
     cls.value = 1.000;
     expect(cls.getValueInUnits(LengthUnits.KM)).toEqual(3.0951e13);
   });
 
   it('Value should remain constant', () => {
-    for (let i = 0; i < 5; i++) {cls.getValueInUnits(LengthUnits.CM); }
+    for (let i = 0; i < 5; i++) {
+      cls.getValueInUnits(LengthUnits.CM);
+    }
     expect(cls.value).toEqual(10);
   });
 

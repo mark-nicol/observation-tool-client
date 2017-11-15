@@ -72,7 +72,8 @@
             [disabled]="densityRadioChoice === autoRadio.value"
             (change)="densitySelectorChange(densitySelector.value)">
       <option *ngFor="let choice of columnDensityChoices; let i = index"
-              value="{{i+1}}">{{choice}}</option>
+              value="{{i+1}}">{{choice}}
+      </option>
     </select>
   </div>
 </div>

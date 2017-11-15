@@ -60,7 +60,7 @@ export class PiResultsComponent implements OnInit {
    */
   search(variant: string, string: string, newSearch: boolean) {
     this.isSearching = true;
-    let result = new Observable<Response>();
+    let result       = new Observable<Response>();
 
     if (newSearch)
       result = this.piService.newSearch(variant, string);

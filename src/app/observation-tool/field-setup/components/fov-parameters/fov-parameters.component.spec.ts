@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FovParametersComponent } from './fov-parameters.component';
+import {FovParametersComponent} from './fov-parameters.component';
 
 describe('FovParametersComponent', () => {
   let component: FovParametersComponent;
@@ -12,11 +12,11 @@ describe('FovParametersComponent', () => {
         FovParametersComponent
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FovParametersComponent);
+    fixture   = TestBed.createComponent(FovParametersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

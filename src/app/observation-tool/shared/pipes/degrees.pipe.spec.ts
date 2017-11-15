@@ -1,4 +1,4 @@
-import { DegreesPipe } from './degrees.pipe';
+import {DegreesPipe} from './degrees.pipe';
 
 describe('DegreesPipe', () => {
   it('create an instance', () => {

@@ -1,8 +1,8 @@
-import {Speed} from '../../../../units/classes/speed';
-import {AngularVelocity} from '../../../../units/classes/angular-velocity';
 import {Angle} from '../../../../units/classes/angle';
-import {Longitude} from '../../../../units/classes/longitude';
+import {AngularVelocity} from '../../../../units/classes/angular-velocity';
 import {Latitude} from '../../../../units/classes/latitude';
+import {Longitude} from '../../../../units/classes/longitude';
+import {Speed} from '../../../../units/classes/speed';
 
 export const FIELD_SOURCE_DATA = {
   sourceName: '',

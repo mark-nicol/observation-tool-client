@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import {ValueConversionService} from './value-conversion.service';
+import {Injectable} from '@angular/core';
 import {SPEED_DATA} from '../data/speed.data';
+import {ValueConversionService} from './value-conversion.service';
 
 @Injectable()
 export class SpeedConversionService extends ValueConversionService {

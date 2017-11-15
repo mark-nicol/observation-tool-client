@@ -28,7 +28,7 @@ describe('PiResultsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PiResultsComponent);
+    fixture   = TestBed.createComponent(PiResultsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

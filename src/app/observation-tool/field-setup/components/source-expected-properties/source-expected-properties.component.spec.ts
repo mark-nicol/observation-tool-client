@@ -11,14 +11,14 @@ describe('SourceExpectedPropertiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SourceExpectedPropertiesComponent, DelayTooltipDirective ],
+      declarations: [SourceExpectedPropertiesComponent, DelayTooltipDirective],
       imports: [NgbModule.forRoot()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SourceExpectedPropertiesComponent);
+    fixture   = TestBed.createComponent(SourceExpectedPropertiesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

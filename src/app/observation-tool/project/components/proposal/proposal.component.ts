@@ -2,8 +2,6 @@ import {Component} from '@angular/core';
 
 /**
  * The proposal component
- *
- * TODO Implement
  */
 
 @Component({
@@ -14,7 +12,10 @@ import {Component} from '@angular/core';
 
 export class ProposalComponent {
 
+  /** The currently selected proposal type */
   chosenType = 'regularRadio';
+
+  /** The available proposal types for looping over */
   typeRadios = [
     {
       id: 'regularRadio',
@@ -34,8 +35,11 @@ export class ProposalComponent {
     },
   ];
 
+  /** The currently chosen scientific category radio */
   chosenCategory = 'cosmology';
+  /** Keys to loop the radios object */
   categoryKeys = Object.keys;
+  /** The available categories with values and keywords */
   categoryRadios: { [id: string]: any } = {
     'cosmology': {
       id: 'cosmologyRadio',
@@ -132,8 +136,13 @@ export class ProposalComponent {
     }
   };
 
+  /** Count of currently selected keywords in the selection box */
   selectedKeywords = 0;
 
+  /** Validates the keywords, used for disabling the selections
+   *  @param option         The keyword clicked by the user
+   *  @param chosenKeywords Collection of currently selected keywords
+   */
   checkKeywords(option: string, chosenKeywords: HTMLCollection) {
     let chosen = false;
     if (this.selectedKeywords > 0) {

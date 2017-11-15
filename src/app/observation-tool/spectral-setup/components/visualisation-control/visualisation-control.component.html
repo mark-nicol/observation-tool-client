@@ -1,9 +1,15 @@
 <div class="row">
+  <div class="col-xl btn-group btn-group-sm justify-content-center" role="group">
+    <button class="btn btn-outline-secondary">Pan to Spectral Window</button>
+    <button class="btn btn-outline-secondary">Zoom to Band</button>
+    <button class="btn btn-outline-secondary" (click)="resetClick()">Reset</button>
+  </div>
+</div>
+<div class="row">
   <div class="col-xl-3">
     <label>Overlays</label>
   </div>
   <div class="col-xl">
-    <!--<label><input type="checkbox" (checked)="bandsChecked" (change)="bandsCheckedChange()">Receiver Bands</label>-->
     <label class="custom-control custom-checkbox">
       <input type="checkbox" class="custom-control-input" [(checked)]="bandsChecked" (change)="bandsCheckedChange()">
       <span class="custom-control-indicator"></span>
@@ -68,15 +74,5 @@
       <option *ngFor="let choice of columnDensityChoices; let i = index"
               value="{{i+1}}">{{choice}}</option>
     </select>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xl-3">
-    <label>Viewport</label>
-  </div>
-  <div class="col-xl btn-group btn-group-sm" role="group">
-    <button class="btn btn-outline-secondary">Pan to Spectral Window</button>
-    <button class="btn btn-outline-secondary">Zoom to Band</button>
-    <button class="btn btn-outline-secondary" (click)="resetClick()">Reset</button>
   </div>
 </div>

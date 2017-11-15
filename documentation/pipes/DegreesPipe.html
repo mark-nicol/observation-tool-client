@@ -323,6 +323,9 @@
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                 </li>
                                 <li class="link">
@@ -739,6 +742,9 @@
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                        </li>
                                        <li class="link">
@@ -883,6 +889,14 @@
             <code>src/app/observation-tool/shared/pipes/degrees.pipe.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Pipe to convert values to degrees</p>
+<p>Currently sets value to 8 decimal places</p>
+
+            </p>
 
 
     </div>
@@ -891,12 +905,22 @@
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import { Pipe, PipeTransform } from &#x27;@angular/core&#x27;;
 
+/**
+ * Pipe to convert values to degrees
+ *
+ * Currently sets value to 8 decimal places
+ */
+
 @Pipe({
   name: &#x27;degrees&#x27;
 })
 export class DegreesPipe implements PipeTransform {
 
-  transform(value: any, args?: any): any {
+  /**
+   * Transforms the value
+   * @param value The value to transform
+   */
+  transform(value: any): any {
     if (value) {
       return parseFloat(value).toFixed(8);
     }

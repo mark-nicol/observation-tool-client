@@ -323,6 +323,9 @@
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                 </li>
                                 <li class="link">
@@ -739,6 +742,9 @@
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                        </li>
                                        <li class="link">
@@ -954,7 +960,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:36</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:37</a></div>
                                         </td>
                                     </tr>
 
@@ -993,7 +999,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:38</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:39</a></div>
                                         </td>
                                     </tr>
 
@@ -1032,7 +1038,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:34</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:35</a></div>
                                         </td>
                                     </tr>
 
@@ -1071,7 +1077,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:32</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:33</a></div>
                                         </td>
                                     </tr>
 
@@ -1091,6 +1097,7 @@
         <pre class="line-numbers"><code class="language-typescript">import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from &#x27;@angular/core&#x27;;
 import * as d3 from &#x27;d3&#x27;;
 import {brush} from &#x27;d3-brush&#x27;;
+import {SpectralDataService} from &#x27;../../services/spectral-data.service&#x27;;
 
 /**
  * Interface for a standard chart. Everything but axes
@@ -1161,9 +1168,7 @@ export class VisualisationViewerComponent implements OnInit {
   @ViewChild(&#x27;chartDiv&#x27;) private chartContainer: ElementRef;
 
   /** The data array for use within the component */
-  private sin: Array&lt;any&gt;;
-  private cos: Array&lt;any&gt;;
-  private tan: Array&lt;any&gt;;
+  private data: any;
 
   /** The svg element to draw the charts in */
   private svg: any;
@@ -1194,49 +1199,60 @@ export class VisualisationViewerComponent implements OnInit {
 
   /** The brush on the context chart, used for zooming and panning */
   private brush: any;
+
+  /** The zoom on the focus chart, used for zooming and panning */
   private zoom: any;
+
+  /**
+   * constructor
+   *
+   * @param spectralDataService Injected service
+   */
+  constructor(private spectralDataService: SpectralDataService) {
+  }
 
   /**
    * Creates the data and two charts
    */
   ngOnInit() {
-    this.createData();
+    this.spectralDataService.getData(1).subscribe(data &#x3D;&gt; this.createVisualiser(data));
+  }
+
+  /**
+   * Creates and draws the whole visualiser
+   *
+   * Required for service callback
+   */
+  createVisualiser(data) {
+    this.data &#x3D; data.data;
     this.setupSvg();
     this.setupCharts();
     this.setupBrushZoom();
     this.drawRegions();
     this.drawContextChart();
     this.drawFocusChart();
-  }
-
-  /**
-   * Creates the data array for the charts to use
-   */
-  createData() {
-    this.sin &#x3D; [];
-    this.cos &#x3D; [];
-    this.tan &#x3D; [];
-    for (let i &#x3D; 0; i &lt; 1000; i++) {
-      this.sin.push([i, Math.sin(i / 10)]);
-      this.cos.push([i, Math.cos(i / 20)]);
-      this.tan.push([i, Math.tan(i / 10)]);
-    }
+    this.resetView();
   }
 
   /**
    * Sets up heights, widths and adds the svg element to the DOM
    */
   setupSvg() {
+    // Get the div element from the DOM
     const element       &#x3D; this.chartContainer.nativeElement;
+    // Set the width and height of the context chart
     this.context.width  &#x3D; element.offsetWidth - this.context.margin.left - this.context.margin.right;
     this.context.height &#x3D; element.offsetHeight - this.context.margin.top - this.context.margin.bottom;
+    // Set the width and height of the focus chart (width of both is the same)
     this.focus.width    &#x3D; this.context.width;
     this.focus.height   &#x3D; element.offsetHeight - this.focus.margin.top - this.focus.margin.bottom;
 
+    // Append an svg element to the div to draw the charts
     this.svg &#x3D; d3.select(element).append(&#x27;svg&#x27;)
       .attr(&#x27;width&#x27;, element.offsetWidth)
       .attr(&#x27;height&#x27;, element.offsetHeight);
 
+    // Clip path in the focus chart, keeps the line from spilling into margins
     this.svg.append(&#x27;defs&#x27;).append(&#x27;clipPath&#x27;)
       .attr(&#x27;id&#x27;, &#x27;clip&#x27;)
       .append(&#x27;rect&#x27;)
@@ -1248,32 +1264,41 @@ export class VisualisationViewerComponent implements OnInit {
    * Sets up scales, axes, and lines for both charts
    */
   setupCharts() {
+    // Set the x and y scales of each chart
     this.context.xScale &#x3D; d3.scaleLinear().range([0, this.context.width]);
     this.focus.xScale   &#x3D; d3.scaleLinear().range([0, this.focus.width]);
     this.context.yScale &#x3D; d3.scaleLinear().range([this.context.height, 0]);
     this.focus.yScale   &#x3D; d3.scaleLinear().range([this.focus.height, 0]);
 
+    // Set the axes for each chart based on x scales
     this.context.xAxis &#x3D; d3.axisBottom(this.context.xScale);
     this.focus.xAxis   &#x3D; d3.axisBottom(this.focus.xScale);
 
+    // Set the line for the focus chart based on scales
     this.focus.line &#x3D; d3.line()
       .x((d: any) &#x3D;&gt; this.focus.xScale(d[0]))
-      .y((d: any) &#x3D;&gt; this.focus.yScale(d[1]));
+      .y((d: any) &#x3D;&gt; this.focus.yScale(d[2]));
 
+    // Set the line for the context chart based on scales
     this.context.line &#x3D; d3.line()
       .x((d: any) &#x3D;&gt; this.context.xScale(d[0]))
-      .y((d: any) &#x3D;&gt; this.context.yScale(d[1]));
+      .y((d: any) &#x3D;&gt; this.context.yScale(d[2]));
 
+    // Add the focus chart area to the svg
     this.focus.chartArea &#x3D; this.svg.append(&#x27;g&#x27;)
       .attr(&#x27;class&#x27;, &#x27;focus&#x27;)
       .attr(&#x27;transform&#x27;, &#x60;translate(${this.focus.margin.left}, ${this.focus.margin.top})&#x60;);
 
+    // Add the context chart area to the svg
     this.context.chartArea &#x3D; this.svg.append(&#x27;g&#x27;)
       .attr(&#x27;class&#x27;, &#x27;context&#x27;)
       .attr(&#x27;transform&#x27;, &#x60;translate(${this.context.margin.left}, ${this.context.margin.top})&#x60;);
 
-    this.focus.xScale.domain([0, d3.max(this.sin, d &#x3D;&gt; d[0])]);
-    this.focus.yScale.domain([d3.min(this.sin, d &#x3D;&gt; d[1]), d3.max(this.sin, d &#x3D;&gt; d[1])]);
+    // Set the x domain of the focus chart (0 to largest number i.e. 0 - 1000)
+    this.focus.xScale.domain([0, d3.max(this.data, d &#x3D;&gt; d[0])]);
+    // Set the y domain of the focus chart (max y value to min y value as it could be less than 0)
+    this.focus.yScale.domain([d3.max(this.data, d &#x3D;&gt; d[2]), d3.min(this.data, d &#x3D;&gt; d[2])]);
+    // Context scale domains the same as focus
     this.context.xScale.domain(this.focus.xScale.domain());
     this.context.yScale.domain(this.focus.yScale.domain());
   }
@@ -1282,10 +1307,12 @@ export class VisualisationViewerComponent implements OnInit {
    * Sets up the brush and zoom for the charts
    */
   setupBrushZoom() {
+    // Create the brush only on the x axis smallest it can be and largest and bind the brushed function
     this.brush &#x3D; d3.brushX()
       .extent([[0, 0], [this.context.width, this.context.height]])
       .on(&#x27;brush end&#x27;, this.brushed.bind(this));
 
+    // Create the zoom area controlled by the brush
     this.zoom &#x3D; d3.zoom()
       .scaleExtent([1, Infinity])
       .translateExtent([[0, 0], [this.focus.width, this.focus.height]])
@@ -1297,10 +1324,12 @@ export class VisualisationViewerComponent implements OnInit {
    * Draws the band regions onto the focus chart
    */
   drawRegions() {
+    // Set the colors for the regions
     this.regionColors &#x3D; d3.scaleLinear().domain([0, this.regions.length]).range(&lt;any[]&gt;[
       &#x27;limegreen&#x27;,
       &#x27;steelblue&#x27;
     ]);
+
     for (let i &#x3D; 0; i &lt; this.regions.length; i++) {
       this.focus.chartArea.append(&#x27;rect&#x27;)
         .attr(&#x27;class&#x27;, &#x27;region&#x27;)
@@ -1317,16 +1346,19 @@ export class VisualisationViewerComponent implements OnInit {
    * Draws the context chart axis, line, and adds the brush
    */
   drawContextChart() {
+    // Add the line to the context chart
     this.context.chartArea.append(&#x27;path&#x27;)
-      .datum(this.sin)
+      .datum(this.data)
       .attr(&#x27;class&#x27;, &#x27;line&#x27;)
       .attr(&#x27;d&#x27;, this.context.line);
 
+    // Add the x axis to the context chart
     this.context.chartArea.append(&#x27;g&#x27;)
       .attr(&#x27;class&#x27;, &#x27;axis axis-x&#x27;)
       .attr(&#x27;transform&#x27;, &#x60;translate(${0}, ${this.context.height})&#x60;)
       .call(this.context.xAxis);
 
+    // Add the brush to the context chart
     this.context.chartArea.append(&#x27;g&#x27;)
       .attr(&#x27;class&#x27;, &#x27;brush&#x27;)
       .call(this.brush)
@@ -1337,11 +1369,13 @@ export class VisualisationViewerComponent implements OnInit {
    * Draws the focus chart and axis
    */
   drawFocusChart() {
+    // Draw the line on the focus chart
     this.focus.chartArea.append(&#x27;path&#x27;)
-      .datum(this.sin)
+      .datum(this.data)
       .attr(&#x27;class&#x27;, &#x27;line&#x27;)
       .attr(&#x27;d&#x27;, this.focus.line);
 
+    // Draw the x axis on the focus chart
     this.focus.chartArea.append(&#x27;g&#x27;)
       .attr(&#x27;class&#x27;, &#x27;axis axis-x&#x27;)
       .attr(&#x27;transform&#x27;, &#x60;translate(0, ${this.focus.height})&#x60;)
@@ -1352,21 +1386,30 @@ export class VisualisationViewerComponent implements OnInit {
    * Called when the brush is moved on the context chart
    */
   brushed() {
+    // Ignore zoom events
     if (d3.event.sourceEvent &amp;&amp; d3.event.sourceEvent.type &#x3D;&#x3D;&#x3D; &#x27;zoom&#x27;) return;
+    // Set the new scale to either the event scale or current full scale
     const s &#x3D; d3.event.selection || this.context.xScale.range();
+    // Change the domain of the focus x scale to the desired
     this.focus.xScale.domain(s.map(this.context.xScale.invert, this.context.xScale));
 
+    // Select all the band regions and re-adjust
     this.focus.chartArea.selectAll(&#x27;.region&#x27;)
       .attr(&#x27;x&#x27;, (d, i) &#x3D;&gt; this.focus.xScale(this.regions[i][0]))
       .attr(&#x27;y&#x27;, (d, i) &#x3D;&gt; 0)
       .attr(&#x27;width&#x27;, (d, i) &#x3D;&gt; this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
       .attr(&#x27;height&#x27;, this.focus.height);
 
+    // Redraw the line on the focus chart
     this.focus.chartArea.select(&#x27;.line&#x27;).attr(&#x27;d&#x27;, this.focus.line);
+
+    // Redraw the x axis on the focus chart
     this.focus.chartArea.select(&#x27;.axis-x&#x27;).call(this.focus.xAxis);
-    this.svg.select(&#x27;.zoom&#x27;).call(this.zoom.transform, d3.zoomIdentity
-      .scale(this.focus.width / (s[1] - s[0]))
-      .translate(-s[0], 0));
+
+    // Move the zoom region on the focus chart
+    // this.svg.select(&#x27;.zoom&#x27;).call(this.zoom.transform, d3.zoomIdentity
+    //   .scale(this.focus.width / (s[1] - s[0]))
+    //   .translate(-s[0], 0));
   }
 
   /**
@@ -1377,7 +1420,6 @@ export class VisualisationViewerComponent implements OnInit {
     const t &#x3D; d3.event.transform;
     this.focus.xScale.domain(t.rescaleX(this.focus.xScale).domain());
     this.focus.chartArea.select(&#x27;.line&#x27;).attr(&#x27;d&#x27;, this.focus.line);
-    console.log(this.focus.chartArea.selectAll(&#x27;.rect&#x27;));
     this.focus.chartArea.select(&#x27;.axis-x&#x27;).call(this.focus.xAxis);
     this.context.chartArea.select(&#x27;.brush&#x27;).call(this.brush.move, this.focus.xScale.range().map(t.invertX, t));
   }
@@ -1411,32 +1453,20 @@ export class VisualisationViewerComponent implements OnInit {
   /**
    * Changes the type of line show to demonstrate D3 transition
    */
-  changeLine(lineType: string) {
-    switch (lineType) {
-      case &#x27;sin&#x27;:
-        this.redrawLines(this.sin);
-        break;
-      case &#x27;cos&#x27;:
-        this.redrawLines(this.cos);
-        break;
-      case &#x27;tan&#x27;:
-        this.redrawLines(this.tan);
-        break;
-      default:
-        break;
-    }
+  changeLine(octile: number) {
+    this.spectralDataService.getData(octile).subscribe(data &#x3D;&gt; this.redrawLines(data.data));
   }
 
   /**
    * Redraws the displayed lines on focus and context charts
    */
   redrawLines(data: any) {
-    this.focus.yScale.domain([d3.min(data, d &#x3D;&gt; d[1]), d3.max(data, d &#x3D;&gt; d[1])]);
-    this.context.yScale.domain([d3.min(data, d &#x3D;&gt; d[1]), d3.max(data, d &#x3D;&gt; d[1])]);
+    this.focus.yScale.domain([d3.max(data, d &#x3D;&gt; d[2]), d3.min(data, d &#x3D;&gt; d[2])]);
+    this.context.yScale.domain([d3.max(data, d &#x3D;&gt; d[2]), d3.min(data, d &#x3D;&gt; d[2])]);
 
     const focusLine &#x3D; d3.line()
       .x((d: any) &#x3D;&gt; this.focus.xScale(d[0]))
-      .y((d: any) &#x3D;&gt; this.focus.yScale(d[1]));
+      .y((d: any) &#x3D;&gt; this.focus.yScale(d[2]));
 
     this.focus.chartArea.selectAll(&#x27;.line&#x27;)
       .data([data])
@@ -1445,12 +1475,19 @@ export class VisualisationViewerComponent implements OnInit {
 
     const contextLine &#x3D; d3.line()
       .x((d: any) &#x3D;&gt; this.context.xScale(d[0]))
-      .y((d: any) &#x3D;&gt; this.context.yScale(d[1]));
+      .y((d: any) &#x3D;&gt; this.context.yScale(d[2]));
 
     this.context.chartArea.selectAll(&#x27;.line&#x27;)
       .data([data])
       .transition()
       .attr(&#x27;d&#x27;, contextLine);
+  }
+
+  /**
+   * Resets the brush and zoom to default showing the whole chart
+   */
+  resetView() {
+    this.context.chartArea.select(&#x27;.brush&#x27;).call(this.brush.move, null);
   }
 
 }

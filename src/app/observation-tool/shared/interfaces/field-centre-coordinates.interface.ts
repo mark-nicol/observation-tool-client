@@ -1,9 +1,10 @@
-/**
- * Interface for the Field Centre Coordinates Component page data
- */
 import {Latitude} from '../../../units/classes/latitude';
 import {Longitude} from '../../../units/classes/longitude';
 import {Angle} from '../../../units/classes/angle';
+
+/**
+ * Interface for the Field Centre Coordinates Component page data
+ */
 
 export interface FieldCentreCoordinatesInterface {
   /** The currently chosen coordinates type */

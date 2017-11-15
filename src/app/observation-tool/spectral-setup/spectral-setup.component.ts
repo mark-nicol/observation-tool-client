@@ -4,40 +4,67 @@ import {PersistenceService} from '../shared/services/persistence.service';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
 import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 
+/**
+ * Host component for the spectral setup
+ *
+ * Facilitates communication between the spectral control and visualiser components
+ */
+
 @Component({
   selector: 'app-spectral-setup',
   templateUrl: './spectral-setup.component.html',
   styleUrls: ['./spectral-setup.component.scss']
 })
-export class SpectralSetupComponent extends ScienceGoalPage implements OnInit {
+export class SpectralSetupComponent extends ScienceGoalPage {
 
+  /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
+  /**
+   * Constructor
+   * @param persistenceService Injected service sent to super class
+   */
   constructor(persistenceService: PersistenceService) {
     super(persistenceService, ScienceGoalIdentifiers.SPECTRAL_SETUP);
   }
 
-  ngOnInit() {
+  /**
+   * Sends the hide/show receiver bands signal to the visualiser
+   * @param show Whether the bands are shown or not
+   */
+  bandsCheckedChange(show: boolean) {
+    this.visualisationViewerComponent.hideShowBands(show);
   }
 
-  bandsCheckedChange(event: boolean) {
-    this.visualisationViewerComponent.hideShowBands(event);
+  /**
+   * Sends the hide/show transmission line signal to the visualiser
+   * @param show Whether the line is shown or not
+   */
+  transmissionCheckedChange(show: boolean) {
+    this.visualisationViewerComponent.hideShowTransmission(show);
   }
 
-  transmissionCheckedChange(event: boolean) {
-    this.visualisationViewerComponent.hideShowTransmission(event);
-  }
-
-  densityRadioChange(event: string) {
-    if (event === 'automatic') {
+  /**
+   * Sends a signal to the visualiser when the density radio is changed, if automatic reverts to 1st octile
+   * @param option The chosen radio option
+   */
+  densityRadioChange(option: string) {
+    if (option === 'automatic') {
       this.visualisationViewerComponent.changeLine(1);
     }
   }
 
-  densitySelectorChange(event: number) {
-    this.visualisationViewerComponent.changeLine(event);
+  /**
+   * Sends a signal to the visualiser when the chosen octile is changed
+   * @param option The chosen octile index
+   */
+  densitySelectorChange(option: number) {
+    this.visualisationViewerComponent.changeLine(option);
   }
 
+  /**
+   * Signals the visualiser when the reset button is clicked
+   */
   resetClick() {
     this.visualisationViewerComponent.resetView();
   }

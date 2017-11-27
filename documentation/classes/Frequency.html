@@ -971,10 +971,10 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {ValueUnitPair} from &#x27;./value-unit-pair&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {ReflectiveInjector} from &#x27;@angular/core&#x27;;
 import {FrequencyUnits} from &#x27;../enums/frequency-units.enum&#x27;;
-import {ReflectiveInjector} from &#x27;@angular/core&#x27;;
 import {FrequencyConversionService} from &#x27;../services/frequency-conversion.service&#x27;;
+import {ValueUnitPair} from &#x27;./value-unit-pair&#x27;;
 
 /**
  * ValueUnitPair for frequency units
@@ -989,7 +989,7 @@ export class Frequency extends ValueUnitPair {
    */
   constructor(unit &#x3D; FrequencyUnits.GHZ, value &#x3D; 0.0) {
     super(unit, value, FrequencyUnits.GHZ);
-    const injector &#x3D; ReflectiveInjector.resolveAndCreate([FrequencyConversionService]);
+    const injector               &#x3D; ReflectiveInjector.resolveAndCreate([FrequencyConversionService]);
     this._valueConversionService &#x3D; injector.get(FrequencyConversionService);
   }
 }

@@ -1104,6 +1104,8 @@
 
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {NgModule} from &#x27;@angular/core&#x27;;
+import {NgbModule} from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
+import {DragulaModule} from &#x27;ng2-dragula&#x27;;
 import {FieldCentreCoordinatesModule} from &#x27;../field-centre-coordinates/field-centre-coordinates.module&#x27;;
 import {SharedModule} from &#x27;../shared/shared.module&#x27;;
 import {FovParametersComponent} from &#x27;./components/fov-parameters/fov-parameters.component&#x27;;
@@ -1112,8 +1114,6 @@ import {SourceExpectedPropertiesComponent} from &#x27;./components/source-expect
 import {SourceComponent} from &#x27;./components/source/source.component&#x27;;
 import {SpacialImageComponent} from &#x27;./components/spacial-image/spacial-image.component&#x27;;
 import {FieldSetupComponent} from &#x27;./field-setup.component&#x27;;
-import {DragulaModule} from &#x27;ng2-dragula&#x27;;
-import {NgbModule} from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
 
 @NgModule({
   imports: [
@@ -1134,7 +1134,8 @@ import {NgbModule} from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
   exports: [FieldSetupComponent]
 })
 
-export class FieldSetupModule { }
+export class FieldSetupModule {
+}
 </code></pre>
     </div>
 </div>

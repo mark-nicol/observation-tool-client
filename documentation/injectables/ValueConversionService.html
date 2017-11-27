@@ -1156,7 +1156,7 @@ export abstract class ValueConversionService {
    */
   getConversionFactor(sourceUnit: string, targetUnit: string): number {
     const sourceFactor &#x3D; this._data[sourceUnit],
-      targetFactor &#x3D; this._data[targetUnit];
+          targetFactor &#x3D; this._data[targetUnit];
     return sourceFactor / targetFactor;
   }
 
@@ -1165,7 +1165,7 @@ export abstract class ValueConversionService {
    */
   getUnits(): string[] {
     const returnArray &#x3D; [];
-    const dataKeys &#x3D; Object.keys;
+    const dataKeys    &#x3D; Object.keys;
     for (const unit of dataKeys(this._data)) {
       returnArray.push(unit);
     }

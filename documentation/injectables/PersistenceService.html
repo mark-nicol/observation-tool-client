@@ -1449,9 +1449,9 @@ export class PersistenceService {
    * Constructor, loads data and sets members
    */
   constructor() {
-    this._dataStore &#x3D; {pages: {}};
-    this._pages &#x3D; &lt;BehaviorSubject&lt;{ [id: string]: ScienceGoalPageInterface }&gt;&gt;new BehaviorSubject({});
-    this.pages &#x3D; this._pages.asObservable();
+    this._dataStore       &#x3D; {pages: {}};
+    this._pages           &#x3D; &lt;BehaviorSubject&lt;{ [id: string]: ScienceGoalPageInterface }&gt;&gt;new BehaviorSubject({});
+    this.pages            &#x3D; this._pages.asObservable();
     this._dataStore.pages &#x3D; SCIENCE_GOAL_PAGES;
     this._pages.next(Object.assign({}, this._dataStore).pages);
   }
@@ -1470,7 +1470,7 @@ export class PersistenceService {
   getPage(page: string): Observable&lt;ScienceGoalPageInterface&gt; {
     let returnPage: Observable&lt;ScienceGoalPageInterface&gt;;
     const subject &#x3D; &lt;BehaviorSubject&lt;ScienceGoalPageInterface&gt;&gt; new BehaviorSubject({});
-    returnPage &#x3D; subject.asObservable();
+    returnPage    &#x3D; subject.asObservable();
     subject.next(this._dataStore.pages[page]);
     return returnPage;
   }
@@ -1483,7 +1483,7 @@ export class PersistenceService {
   getPanelData(page: string, panel: string): Observable&lt;any&gt; {
     let returnData: Observable&lt;any&gt;;
     const subject &#x3D; &lt;BehaviorSubject&lt;any&gt;&gt; new BehaviorSubject({});
-    returnData &#x3D; subject.asObservable();
+    returnData    &#x3D; subject.asObservable();
     subject.next(this._dataStore.pages[page].panels[panel].data);
     return returnData;
   }

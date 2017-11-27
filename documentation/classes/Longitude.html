@@ -989,7 +989,7 @@ export class Longitude extends ValueUnitPair {
    */
   constructor(unit &#x3D; LongitudeUnits.DEG, value &#x3D; 0.0) {
     super(unit, value, LongitudeUnits.DEG);
-    const injector &#x3D; ReflectiveInjector.resolveAndCreate([LongitudeConversionService]);
+    const injector               &#x3D; ReflectiveInjector.resolveAndCreate([LongitudeConversionService]);
     this._valueConversionService &#x3D; injector.get(LongitudeConversionService);
   }
 }

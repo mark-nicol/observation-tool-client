@@ -971,10 +971,10 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {ValueUnitPair} from &#x27;./value-unit-pair&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {ReflectiveInjector} from &#x27;@angular/core&#x27;;
 import {AngleUnits} from &#x27;../enums/angle-units.enum&#x27;;
-import {ReflectiveInjector} from &#x27;@angular/core&#x27;;
 import {AngleConversionService} from &#x27;../services/angle-conversion.service&#x27;;
+import {ValueUnitPair} from &#x27;./value-unit-pair&#x27;;
 
 /**
  * ValueUnitPair for angular units
@@ -989,7 +989,7 @@ export class Angle extends ValueUnitPair {
    */
   constructor(unit &#x3D; AngleUnits.DEG, value &#x3D; 0.0) {
     super(unit, value, AngleUnits.DEG);
-    const injector &#x3D; ReflectiveInjector.resolveAndCreate([AngleConversionService]);
+    const injector               &#x3D; ReflectiveInjector.resolveAndCreate([AngleConversionService]);
     this._valueConversionService &#x3D; injector.get(AngleConversionService);
   }
 }

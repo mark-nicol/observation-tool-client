@@ -989,7 +989,7 @@ export class Sensitivity extends ValueUnitPair {
    */
   constructor(unit &#x3D; SensitivityUnits.JY, value &#x3D; 0.0) {
     super(unit, value, SensitivityUnits.JY);
-    const injector &#x3D; ReflectiveInjector.resolveAndCreate([SensitivityConversionService]);
+    const injector               &#x3D; ReflectiveInjector.resolveAndCreate([SensitivityConversionService]);
     this._valueConversionService &#x3D; injector.get(SensitivityConversionService);
   }
 }

@@ -886,6 +886,13 @@
             <code>src/app/units/services/frequency-conversion.service.ts</code>
         </p>
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Service to supply unit data of this type</p>
+
+            </p>
 
 
             <section>
@@ -921,7 +928,7 @@
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/units/services/frequency-conversion.service.ts:6</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/units/services/frequency-conversion.service.ts:10</a></div>
                                         </td>
                                     </tr>
             
@@ -951,12 +958,14 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/units/services/frequency-conversion.service.ts:13</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/units/services/frequency-conversion.service.ts:23</a></div>
                                         </td>
                                     </tr>
             
                             <tr>
                                 <td class="col-md-4">
+                                        <div class="io-description"><p>Loads the data specific to this type from a constant</p>
+            </div>
             
                                         <div class="io-description">
                                             <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -974,17 +983,27 @@
 
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
-import {ValueConversionService} from &#x27;./value-conversion.service&#x27;;
 import {FREQUENCY_DATA} from &#x27;../data/frequency.data&#x27;;
+import {ValueConversionService} from &#x27;./value-conversion.service&#x27;;
+
+/**
+ * Service to supply unit data of this type
+ */
 
 @Injectable()
 export class FrequencyConversionService extends ValueConversionService {
 
+  /**
+   * Constructor, calls super and loads data for this service type
+   */
   constructor() {
     super();
     this.loadData();
   }
 
+  /**
+   * Loads the data specific to this type from a constant
+   */
   loadData(): void {
     this._data &#x3D; FREQUENCY_DATA;
   }

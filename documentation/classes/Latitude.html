@@ -989,7 +989,7 @@ export class Latitude extends ValueUnitPair {
    */
   constructor(unit &#x3D; LatitudeUnits.DEG, value &#x3D; 0.0) {
     super(unit, value, LatitudeUnits.DEG);
-    const injector &#x3D; ReflectiveInjector.resolveAndCreate([LatitudeConversionService]);
+    const injector               &#x3D; ReflectiveInjector.resolveAndCreate([LatitudeConversionService]);
     this._valueConversionService &#x3D; injector.get(LatitudeConversionService);
   }
 }

@@ -1432,7 +1432,7 @@ export class PiResultsComponent implements OnInit {
    */
   search(variant: string, string: string, newSearch: boolean) {
     this.isSearching &#x3D; true;
-    let result &#x3D; new Observable&lt;Response&gt;();
+    let result       &#x3D; new Observable&lt;Response&gt;();
 
     if (newSearch)
       result &#x3D; this.piService.newSearch(variant, string);

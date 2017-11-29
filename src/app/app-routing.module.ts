@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'project',
+    redirectTo: 'project/pi-select',
     pathMatch: 'full'
   }
 ];

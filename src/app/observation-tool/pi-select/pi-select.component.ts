@@ -10,4 +10,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./pi-select.component.scss']
 })
 export class PiSelectComponent {
+
+  constructor() {
+  }
 }

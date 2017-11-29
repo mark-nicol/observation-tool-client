@@ -2,12 +2,10 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {PlannedObservingComponent} from './components/planned-observing/planned-observing.component';
 import {ProposalComponent} from './components/proposal/proposal.component';
-import {ProjectComponent} from './project.component';
 
 const routes: Routes = [
   {
     path: 'project',
-    component: ProjectComponent, // TODO Change to PI Select
     children: [
       {
         path: 'pi-select',
@@ -34,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'project/pi-select',
+    redirectTo: 'project',
     pathMatch: 'full'
   }
 ];

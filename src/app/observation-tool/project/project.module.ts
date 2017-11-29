@@ -6,6 +6,7 @@ import {PlannedObservingComponent} from './components/planned-observing/planned-
 import {ProposalComponent} from './components/proposal/proposal.component';
 import {ProjectRoutingModule} from './project-routing.module';
 import {ProjectComponent} from './project.component';
+import {SuiModule} from 'ng2-semantic-ui';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import {ProjectComponent} from './project.component';
     ScienceGoalModule,
     PiSelectModule,
     ProjectRoutingModule,
+    SuiModule
   ],
   declarations: [
     PlannedObservingComponent,

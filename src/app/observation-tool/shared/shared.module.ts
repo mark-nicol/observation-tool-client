@@ -10,6 +10,7 @@ import {DelayTooltipDirective} from './directives/delay-tooltip.directive';
 import {DegreesPipe} from './pipes/degrees.pipe';
 import {SexagesimalPipe} from './pipes/sexagesimal.pipe';
 import {PersistenceService} from './services/persistence.service';
+import {SuiModule} from 'ng2-semantic-ui';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import {PersistenceService} from './services/persistence.service';
     FormsModule,
     NgbModule.forRoot(),
     RouterModule,
+    SuiModule,
     UnitsModule,
   ],
   declarations: [

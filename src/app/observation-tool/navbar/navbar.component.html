@@ -1,25 +1,11 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<div class="ui fixed blue inverted menu">
   <a class="navbar-brand"
      href="">
     ALMA
   </a>
-  <button class="navbar-toggler"
-          (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed"
-          type="button">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div [ngbCollapse]="isCollapsed"
-       class="collapse navbar-collapse"
-       id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item"
-          *ngFor="let item of items">
-        <a class="nav-link"
-           [routerLink]="item.path">
-          {{item.title}}
-        </a>
-      </li>
-    </ul>
-  </div>
-</nav>
+  <a class="item"
+     *ngFor="let item of items"
+     [routerLink]="item.path">
+    {{item.title}}
+  </a>
+</div>

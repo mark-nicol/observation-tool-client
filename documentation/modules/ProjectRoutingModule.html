@@ -898,12 +898,10 @@
 import {RouterModule, Routes} from &#x27;@angular/router&#x27;;
 import {PlannedObservingComponent} from &#x27;./components/planned-observing/planned-observing.component&#x27;;
 import {ProposalComponent} from &#x27;./components/proposal/proposal.component&#x27;;
-import {ProjectComponent} from &#x27;./project.component&#x27;;
 
 const routes: Routes &#x3D; [
   {
     path: &#x27;project&#x27;,
-    component: ProjectComponent, // TODO Change to PI Select
     children: [
       {
         path: &#x27;pi-select&#x27;,
@@ -930,7 +928,7 @@ const routes: Routes &#x3D; [
   },
   {
     path: &#x27;&#x27;,
-    redirectTo: &#x27;project/pi-select&#x27;,
+    redirectTo: &#x27;project&#x27;,
     pathMatch: &#x27;full&#x27;
   }
 ];

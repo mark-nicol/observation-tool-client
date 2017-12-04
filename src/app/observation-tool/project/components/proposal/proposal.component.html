@@ -1,74 +1,77 @@
 <div class="ui form">
-  <h5>Proposal Information</h5>
+  <h3>Proposal Information</h3>
   <div>
     <div class="field">
       <label>Proposal Title</label>
-      <input>
+      <input type="text">
     </div>
     <div class="field">
       <label>Proposal Cycle</label>
-      <input>
+      <input type="text">
     </div>
     <div class="field">
       <label>Abstract</label>
       <textarea></textarea>
     </div>
-    <div>
-      <h6>Proposal Type</h6>
-      <div class="fields inline" *ngFor="let typeRadio of typeRadios">
-        <div class="field">
+    <div class="field">
+      <label>Proposal Type</label>
+      <div class="inline fields">
+        <div class="field" *ngFor="let typeRadio of typeRadios">
           <sui-radio-button id="{{typeRadio.id}}"
                             name="typeRadios"
                             value="{{typeRadio.id}}"
-                            (change)="chosenType = typeRadio.id">{{typeRadio.text}}</sui-radio-button>
+                            [(ngModel)]="chosenType">
+            {{typeRadio.text}}
+          </sui-radio-button>
         </div>
       </div>
     </div>
-    <div>
-      <h6>Scientific Category</h6>
-      <div>
-        <div>
-          <label *ngFor="let categoryRadio of categoryKeys(categoryRadios)">
-            <input id="{{categoryRadios[categoryRadio].id}}"
-                   name="categoryRadios"
-                   type="radio"
-                   value="{{categoryRadios[categoryRadio].value}}"
-                   (change)="chosenCategory = categoryRadios[categoryRadio].value; selectedKeywords = 0"
-                   [checked]="chosenCategory === categoryRadios[categoryRadio].value">
-            <span>{{categoryRadios[categoryRadio].text}}</span>
-          </label>
+    <div class="field">
+      <label>Scientific Category</label>
+      <div class="inline fields">
+        <div class="field" *ngFor="let categoryRadio of categoryKeys(categoryRadios)">
+          <sui-radio-button id="{{categoryRadios[categoryRadio].value}}"
+                            name="categoryRadios"
+                            value="{{categoryRadios[categoryRadio].value}}"
+                            [(ngModel)]="chosenCategory"
+                            (currentValueChange)="categoryRadioChange()">
+            {{categoryRadios[categoryRadio].text}}
+          </sui-radio-button>
         </div>
       </div>
     </div>
-    <div>
-      <label for="keywordSelector">Keywords (chosen {{selectedKeywords}} of 2)</label>
-      <select #keywordSelector
-              id="keywordSelector"
-              multiple
-              (change)="selectedKeywords = keywordSelector.selectedOptions.length">
-        <option *ngFor="let option of categoryRadios[chosenCategory].keywords"
-                [disabled]="checkKeywords(option, keywordSelector.selectedOptions)">{{option}}
-        </option>
-      </select>
+    <div class="field">
+      <label for="keywordSelector">Keywords (chosen {{selectedKeywordCount}} of 2)</label>
+      <sui-multi-select #keywordSelector
+                        id="keywordSelector"
+                        class="selection"
+                        [(ngModel)]="selectedKeywordValues"
+                        (maxSelected)="2"
+                        (selectedOptionsChange)="keywordsChange()">
+        <sui-select-option *ngFor="let option of categoryRadios[chosenCategory].keywords"
+                           [value]="option">
+          {{option}}
+        </sui-select-option>
+      </sui-multi-select>
     </div>
     <div class="field">
       <sui-checkbox>Student project</sui-checkbox>
     </div>
-    <div>
+    <div class="field">
       <label>Related Proposals</label>
-      <textarea></textarea>
+      <textarea rows="5"></textarea>
     </div>
-    <div>
+    <div class="field">
       <label>Previous Proposals</label>
-      <textarea></textarea>
+      <textarea rows="5"></textarea>
     </div>
   </div>
 </div>
-<div>
+<div class="ui form">
   <h5>Investigators</h5>
   <div>
     <div>
-      <table>
+      <table class="ui celled table">
         <thead>
           <tr>
             <th>Type</th>
@@ -91,39 +94,33 @@
         </tbody>
       </table>
     </div>
-    <div>
-      <button>Select PI</button>
-      <button [disabled]="chosenType === 'regularRadio' || chosenType === 'opportunityRadio'">
+    <div class="ui tiny compact buttons">
+      <button class="ui blue button">Select PI</button>
+      <button class="ui blue button"
+              [disabled]="chosenType === 'regularRadio' || chosenType === 'opportunityRadio'">
         Add CoPI
       </button>
-      <button>Add Col</button>
-      <button>Remove Collaborator</button>
-      <button>Add from Proposal</button>
+      <button class="ui blue button">Add Col</button>
+      <button class="ui blue button">Add from Proposal</button>
+      <button class="ui red button">Remove Collaborator</button>
     </div>
   </div>
 </div>
-<div>
-  <h5>Science Case</h5>
-  <div>
+<div class="ui form">
+  <div class="field">
     <label>Science Case (Mandatory, PDF, 4 pages max.)</label>
-    <div>
-      <input>
-      <span>
-        <button>Attach</button>
-      </span>
-      <span>
-        <button>Detach</button>
-      </span>
-      <span>
-        <button>View</button>
-      </span>
+    <div class="ui small action input">
+      <input class="ui input" type="text">
+      <button class="ui blue button">Attach</button>
+      <button class="ui basic blue button">View</button>
+      <button class="ui red button">Detach</button>
     </div>
+    <p>PDF, 4 pages max.</p>
   </div>
 </div>
-<div>
-  <h5>Duplicate Observations</h5>
-  <div>
-    <p>Placeholder</p>
-    <textarea></textarea>
+<div class="ui form">
+  <div class="field">
+    <label>Duplicate Observations</label>
+    <textarea rows="5"></textarea>
   </div>
 </div>

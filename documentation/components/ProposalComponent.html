@@ -963,7 +963,10 @@
                                  <a href="#chosenType">chosenType</a>
                             </li>
                             <li>
-                                 <a href="#selectedKeywords">selectedKeywords</a>
+                                 <a href="#selectedKeywordCount">selectedKeywordCount</a>
+                            </li>
+                            <li>
+                                 <a href="#selectedKeywordValues">selectedKeywordValues</a>
                             </li>
                             <li>
                                  <a href="#typeRadios">typeRadios</a>
@@ -980,7 +983,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                 <a href="#checkKeywords">checkKeywords</a>
+                                 <a href="#categoryRadioChange">categoryRadioChange</a>
+                            </li>
+                            <li>
+                                 <a href="#keywordsChange">keywordsChange</a>
                             </li>
                         </ul>
                     </td>
@@ -1003,20 +1009,54 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <a name="checkKeywords"></a>
-                            <span class="name"><b> checkKeywords</b><a href="#checkKeywords"><span class="fa fa-link"></span></a></span>
+                            <a name="categoryRadioChange"></a>
+                            <span class="name"><b> categoryRadioChange</b><a href="#categoryRadioChange"><span class="fa fa-link"></span></a></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-    <code>checkKeywords(option: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, chosenKeywords: HTMLCollection)</code>
+    <code>categoryRadioChange()</code>
                         </td>
                     </tr>
     
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/observation-tool/project/components/proposal/proposal.component.ts:146</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/observation-tool/project/components/proposal/proposal.component.ts:141</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Resets the keyword selector when the chosen category changes</p>
+    </div>
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="keywordsChange"></a>
+                            <span class="name"><b> keywordsChange</b><a href="#keywordsChange"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>keywordsChange()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/app/observation-tool/project/components/proposal/proposal.component.ts:149</a></div>
                                 </td>
                             </tr>
     
@@ -1026,49 +1066,9 @@
     </div>
     
                                 <div class="io-description">
-                                        <b>Parameters :</b>
-                                        <table class="params">
-                                            <thead>
-                                                <tr>
-                                                    <td>Name</td>
-                                                    <td>Type</td>
-                                                    <td>Optional</td>
-                                                    <td>Description</td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                    <tr>
-                                                      <td>option</td>
-                                                      <td>
-                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                      </td>
-                                                      <td>
-                                                      </td>
-                                                      <td><p>The keyword clicked by the user</p>
-    </td>
-                                                    </tr>
-                                                    <tr>
-                                                      <td>chosenKeywords</td>
-                                                      <td>
-                                                              <code>HTMLCollection</code>
-                                                      </td>
-                                                      <td>
-                                                      </td>
-                                                      <td><p>Collection of currently selected keywords</p>
-    </td>
-                                                    </tr>
-                                            </tbody>
-                                        </table>
-                                </div>
-                                <div>
-                                </div>
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
     
                                 </div>
-                                    <div class="io-description">
-                                        
-                                    </div>
                         </td>
                     </tr>
                 </tbody>
@@ -1216,13 +1216,13 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <a name="selectedKeywords"></a>
-                            <span class="name"><b> selectedKeywords</b><a href="#selectedKeywords"><span class="fa fa-link"></span></a></span>
+                            <a name="selectedKeywordCount"></a>
+                            <span class="name"><b> selectedKeywordCount</b><a href="#selectedKeywordCount"><span class="fa fa-link"></span></a></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>selectedKeywords:     <code></code>
+                            <code>selectedKeywordCount:     <code></code>
     </code>
                         </td>
                     </tr>
@@ -1233,7 +1233,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/observation-tool/project/components/proposal/proposal.component.ts:140</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/observation-tool/project/components/proposal/proposal.component.ts:135</a></div>
                                 </td>
                             </tr>
     
@@ -1243,6 +1243,35 @@
     </div>
                         </td>
                     </tr>
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="selectedKeywordValues"></a>
+                            <span class="name"><b> selectedKeywordValues</b><a href="#selectedKeywordValues"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>selectedKeywordValues:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+    
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/app/observation-tool/project/components/proposal/proposal.component.ts:136</a></div>
+                                </td>
+                            </tr>
+    
     
                 </tbody>
             </table>
@@ -1325,7 +1354,6 @@ export class ProposalComponent {
   /** The available categories with values and keywords */
   categoryRadios: { [id: string]: any } &#x3D; {
     &#x27;cosmology&#x27;: {
-      id: &#x27;cosmologyRadio&#x27;,
       text: &#x27;Cosmology and the High Redshift Universe&#x27;,
       value: &#x27;cosmology&#x27;,
       keywords: [
@@ -1343,7 +1371,6 @@ export class ProposalComponent {
       ]
     },
     &#x27;galaxies&#x27;: {
-      id: &#x27;galaxiesRadio&#x27;,
       text: &#x27;Galaxies and the Galactic Nuclei&#x27;,
       value: &#x27;galaxies&#x27;,
       keywords: [
@@ -1363,7 +1390,6 @@ export class ProposalComponent {
       ]
     },
     &#x27;ism&#x27;: {
-      id: &#x27;ismRadio&#x27;,
       text: &#x27;ISM, star formation and astrochemisty&#x27;,
       value: &#x27;ism&#x27;,
       keywords: [
@@ -1380,7 +1406,6 @@ export class ProposalComponent {
       ]
     },
     &#x27;exoplanets&#x27;: {
-      id: &#x27;exoplanetsRadio&#x27;,
       text: &#x27;Circumstellar disks, exoplanets, and the solar system&#x27;,
       value: &#x27;exoplanets&#x27;,
       keywords: [
@@ -1396,7 +1421,6 @@ export class ProposalComponent {
       ]
     },
     &#x27;stars&#x27;: {
-      id: &#x27;starRadio&#x27;,
       text: &#x27;Stellar Evolution and the Sun&#x27;,
       value: &#x27;stars&#x27;,
       keywords: [
@@ -1420,21 +1444,23 @@ export class ProposalComponent {
   };
 
   /** Count of currently selected keywords in the selection box */
-  selectedKeywords &#x3D; 0;
+  selectedKeywordCount &#x3D; 0;
+  selectedKeywordValues: any;
 
-  /** Validates the keywords, used for disabling the selections
-   *  @param option         The keyword clicked by the user
-   *  @param chosenKeywords Collection of currently selected keywords
+  /**
+   * Resets the keyword selector when the chosen category changes
    */
-  checkKeywords(option: string, chosenKeywords: HTMLCollection) {
-    let chosen &#x3D; false;
-    if (this.selectedKeywords &gt; 0) {
-      for (let i &#x3D; 0; i &lt; chosenKeywords.length; i++) {
-        chosen &#x3D; chosenKeywords.item(i).innerHTML &#x3D;&#x3D;&#x3D; option;
-        if (chosen) break;
-      }
-    }
-    return this.selectedKeywords &gt;&#x3D; 2 &amp;&amp; !chosen;
+  categoryRadioChange() {
+    this.selectedKeywordValues &#x3D; [];
+    this.selectedKeywordCount  &#x3D; 0;
+  }
+
+  /**
+   * Validates the keywords, used for disabling the selections
+   */
+  keywordsChange() {
+    this.selectedKeywordCount &#x3D; this.selectedKeywordValues.length;
+    console.log(this.selectedKeywordCount, this.selectedKeywordValues);
   }
 
 }
@@ -1442,103 +1468,93 @@ export class ProposalComponent {
     </div>
 
     <div class="tab-pane fade" id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;card&quot;&gt;
-  &lt;h5 class&#x3D;&quot;card-title&quot;&gt;Proposal Information&lt;/h5&gt;
-  &lt;div class&#x3D;&quot;card-body&quot;&gt;
-    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
-      &lt;label class&#x3D;&quot;col-2 form-control-label&quot;&gt;Proposal Title&lt;/label&gt;
-      &lt;input class&#x3D;&quot;col form-control align-self-baseline&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;ui form&quot;&gt;
+  &lt;h3&gt;Proposal Information&lt;/h3&gt;
+  &lt;div&gt;
+    &lt;div class&#x3D;&quot;field&quot;&gt;
+      &lt;label&gt;Proposal Title&lt;/label&gt;
+      &lt;input type&#x3D;&quot;text&quot;&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
-      &lt;label class&#x3D;&quot;col-2 form-control-label&quot;&gt;Proposal Cycle&lt;/label&gt;
-      &lt;input class&#x3D;&quot;col form-control align-self-baseline&quot;&gt;
+    &lt;div class&#x3D;&quot;field&quot;&gt;
+      &lt;label&gt;Proposal Cycle&lt;/label&gt;
+      &lt;input type&#x3D;&quot;text&quot;&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
-      &lt;label class&#x3D;&quot;col-2 form-control-label&quot;&gt;Abstract&lt;/label&gt;
-      &lt;textarea class&#x3D;&quot;col form-control align-self-baseline&quot;&gt;&lt;/textarea&gt;
+    &lt;div class&#x3D;&quot;field&quot;&gt;
+      &lt;label&gt;Abstract&lt;/label&gt;
+      &lt;textarea&gt;&lt;/textarea&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;card&quot;&gt;
-      &lt;h6 class&#x3D;&quot;card-title&quot;&gt;Proposal Type&lt;/h6&gt;
-      &lt;div class&#x3D;&quot;card-body row&quot;&gt;
-        &lt;label class&#x3D;&quot;col custom-control custom-radio&quot; *ngFor&#x3D;&quot;let typeRadio of typeRadios&quot;&gt;
-          &lt;input id&#x3D;&quot;{{typeRadio.id}}&quot;
-                 name&#x3D;&quot;typeRadios&quot;
-                 class&#x3D;&quot;custom-control-input&quot;
-                 type&#x3D;&quot;radio&quot;
-                 (change)&#x3D;&quot;chosenType &#x3D; typeRadio.id&quot;
-                 [checked]&#x3D;&quot;chosenType &#x3D;&#x3D;&#x3D; typeRadio.id&quot;&gt;
-          &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
-          &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;{{typeRadio.text}}&lt;/span&gt;
-        &lt;/label&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;card&quot;&gt;
-      &lt;h6 class&#x3D;&quot;card-title&quot;&gt;Scientific Category&lt;/h6&gt;
-      &lt;div class&#x3D;&quot;card-body&quot;&gt;
-        &lt;div class&#x3D;&quot;row justify-content-center&quot;&gt;
-          &lt;label class&#x3D;&quot;col custom-control custom-radio&quot; *ngFor&#x3D;&quot;let categoryRadio of categoryKeys(categoryRadios)&quot;&gt;
-            &lt;input id&#x3D;&quot;{{categoryRadios[categoryRadio].id}}&quot;
-                   name&#x3D;&quot;categoryRadios&quot;
-                   class&#x3D;&quot;custom-control-input&quot;
-                   type&#x3D;&quot;radio&quot;
-                   value&#x3D;&quot;{{categoryRadios[categoryRadio].value}}&quot;
-                   (change)&#x3D;&quot;chosenCategory &#x3D; categoryRadios[categoryRadio].value; selectedKeywords &#x3D; 0&quot;
-                   [checked]&#x3D;&quot;chosenCategory &#x3D;&#x3D;&#x3D; categoryRadios[categoryRadio].value&quot;&gt;
-            &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
-            &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;{{categoryRadios[categoryRadio].text}}&lt;/span&gt;
-          &lt;/label&gt;
+    &lt;div class&#x3D;&quot;field&quot;&gt;
+      &lt;label&gt;Proposal Type&lt;/label&gt;
+      &lt;div class&#x3D;&quot;inline fields&quot;&gt;
+        &lt;div class&#x3D;&quot;field&quot; *ngFor&#x3D;&quot;let typeRadio of typeRadios&quot;&gt;
+          &lt;sui-radio-button id&#x3D;&quot;{{typeRadio.id}}&quot;
+                            name&#x3D;&quot;typeRadios&quot;
+                            value&#x3D;&quot;{{typeRadio.id}}&quot;
+                            [(ngModel)]&#x3D;&quot;chosenType&quot;&gt;
+            {{typeRadio.text}}
+          &lt;/sui-radio-button&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
-      &lt;label class&#x3D;&quot;col-2 form-control-label&quot;
-             for&#x3D;&quot;keywordSelector&quot;&gt;Keywords (chosen {{selectedKeywords}} of 2)&lt;/label&gt;
-      &lt;select #keywordSelector
-              id&#x3D;&quot;keywordSelector&quot;
-              multiple
-              class&#x3D;&quot;col form-control&quot;
-              (change)&#x3D;&quot;selectedKeywords &#x3D; keywordSelector.selectedOptions.length&quot;&gt;
-        &lt;option *ngFor&#x3D;&quot;let option of categoryRadios[chosenCategory].keywords&quot;
-                [disabled]&#x3D;&quot;checkKeywords(option, keywordSelector.selectedOptions)&quot;&gt;{{option}}
-        &lt;/option&gt;
-      &lt;/select&gt;
+    &lt;div class&#x3D;&quot;field&quot;&gt;
+      &lt;label&gt;Scientific Category&lt;/label&gt;
+      &lt;div class&#x3D;&quot;inline fields&quot;&gt;
+        &lt;div class&#x3D;&quot;field&quot; *ngFor&#x3D;&quot;let categoryRadio of categoryKeys(categoryRadios)&quot;&gt;
+          &lt;sui-radio-button id&#x3D;&quot;{{categoryRadios[categoryRadio].value}}&quot;
+                            name&#x3D;&quot;categoryRadios&quot;
+                            value&#x3D;&quot;{{categoryRadios[categoryRadio].value}}&quot;
+                            [(ngModel)]&#x3D;&quot;chosenCategory&quot;
+                            (currentValueChange)&#x3D;&quot;categoryRadioChange()&quot;&gt;
+            {{categoryRadios[categoryRadio].text}}
+          &lt;/sui-radio-button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;row&quot;&gt;
-      &lt;label class&#x3D;&quot;col-2 form-control-label&quot;&gt;Student Project&lt;/label&gt;
-      &lt;label class&#x3D;&quot;col custom-control custom-checkbox&quot;&gt;
-        &lt;input class&#x3D;&quot;custom-control-input&quot; type&#x3D;&quot;checkbox&quot;&gt;
-        &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
-        &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;&lt;/span&gt;
-      &lt;/label&gt;
+    &lt;div class&#x3D;&quot;field&quot;&gt;
+      &lt;label for&#x3D;&quot;keywordSelector&quot;&gt;Keywords (chosen {{selectedKeywordCount}} of 2)&lt;/label&gt;
+      &lt;sui-multi-select #keywordSelector
+                        id&#x3D;&quot;keywordSelector&quot;
+                        class&#x3D;&quot;selection&quot;
+                        [(ngModel)]&#x3D;&quot;selectedKeywordValues&quot;
+                        (maxSelected)&#x3D;&quot;2&quot;
+                        (selectedOptionsChange)&#x3D;&quot;keywordsChange()&quot;&gt;
+        &lt;sui-select-option *ngFor&#x3D;&quot;let option of categoryRadios[chosenCategory].keywords&quot;
+                           [value]&#x3D;&quot;option&quot;&gt;
+          {{option}}
+        &lt;/sui-select-option&gt;
+      &lt;/sui-multi-select&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
-      &lt;label class&#x3D;&quot;col-2 form-control-label&quot;&gt;Related Proposals&lt;/label&gt;
-      &lt;textarea class&#x3D;&quot;col form-control&quot;&gt;&lt;/textarea&gt;
+    &lt;div class&#x3D;&quot;field&quot;&gt;
+      &lt;sui-checkbox&gt;Student project&lt;/sui-checkbox&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
-      &lt;label class&#x3D;&quot;col-2 form-control-label&quot;&gt;Previous Proposals&lt;/label&gt;
-      &lt;textarea class&#x3D;&quot;col form-control&quot;&gt;&lt;/textarea&gt;
+    &lt;div class&#x3D;&quot;field&quot;&gt;
+      &lt;label&gt;Related Proposals&lt;/label&gt;
+      &lt;textarea rows&#x3D;&quot;5&quot;&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;field&quot;&gt;
+      &lt;label&gt;Previous Proposals&lt;/label&gt;
+      &lt;textarea rows&#x3D;&quot;5&quot;&gt;&lt;/textarea&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class&#x3D;&quot;card&quot;&gt;
-  &lt;h5 class&#x3D;&quot;card-title&quot;&gt;Investigators&lt;/h5&gt;
-  &lt;div class&#x3D;&quot;card-body&quot;&gt;
-    &lt;div class&#x3D;&quot;row&quot;&gt;
-      &lt;table class&#x3D;&quot;table&quot;&gt;
-        &lt;thead class&#x3D;&quot;thead-default&quot;&gt;
+&lt;div class&#x3D;&quot;ui form&quot;&gt;
+  &lt;h5&gt;Investigators&lt;/h5&gt;
+  &lt;div&gt;
+    &lt;div&gt;
+      &lt;table class&#x3D;&quot;ui celled table&quot;&gt;
+        &lt;thead&gt;
           &lt;tr&gt;
-            &lt;th scope&#x3D;&quot;col&quot;&gt;Type&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot;&gt;Full Name&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot;&gt;Email&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot;&gt;Affiliation&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot;&gt;ALMA ID&lt;/th&gt;
-            &lt;th scope&#x3D;&quot;col&quot;&gt;Executive&lt;/th&gt;
+            &lt;th&gt;Type&lt;/th&gt;
+            &lt;th&gt;Full Name&lt;/th&gt;
+            &lt;th&gt;Email&lt;/th&gt;
+            &lt;th&gt;Affiliation&lt;/th&gt;
+            &lt;th&gt;ALMA ID&lt;/th&gt;
+            &lt;th&gt;Executive&lt;/th&gt;
           &lt;/tr&gt;
         &lt;/thead&gt;
         &lt;tbody&gt;
           &lt;tr&gt;
-            &lt;td scope&#x3D;&quot;row&quot;&gt;PI&lt;/td&gt;
+            &lt;td&gt;PI&lt;/td&gt;
             &lt;td&gt;Not Set&lt;/td&gt;
             &lt;td&gt;Not Set&lt;/td&gt;
             &lt;td&gt;Not Set&lt;/td&gt;
@@ -1548,41 +1564,34 @@ export class ProposalComponent {
         &lt;/tbody&gt;
       &lt;/table&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;row pull-right btn-group&quot;&gt;
-      &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Select PI&lt;/button&gt;
-      &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;
+    &lt;div class&#x3D;&quot;ui tiny compact buttons&quot;&gt;
+      &lt;button class&#x3D;&quot;ui blue button&quot;&gt;Select PI&lt;/button&gt;
+      &lt;button class&#x3D;&quot;ui blue button&quot;
               [disabled]&#x3D;&quot;chosenType &#x3D;&#x3D;&#x3D; &#x27;regularRadio&#x27; || chosenType &#x3D;&#x3D;&#x3D; &#x27;opportunityRadio&#x27;&quot;&gt;
         Add CoPI
       &lt;/button&gt;
-      &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Add Col&lt;/button&gt;
-      &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Remove Collaborator&lt;/button&gt;
-      &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Add from Proposal&lt;/button&gt;
+      &lt;button class&#x3D;&quot;ui blue button&quot;&gt;Add Col&lt;/button&gt;
+      &lt;button class&#x3D;&quot;ui blue button&quot;&gt;Add from Proposal&lt;/button&gt;
+      &lt;button class&#x3D;&quot;ui red button&quot;&gt;Remove Collaborator&lt;/button&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class&#x3D;&quot;card&quot;&gt;
-  &lt;h5 class&#x3D;&quot;card-title&quot;&gt;Science Case&lt;/h5&gt;
-  &lt;div class&#x3D;&quot;card-body row&quot;&gt;
-    &lt;label class&#x3D;&quot;col-3 form-control-label&quot;&gt;Science Case (Mandatory, PDF, 4 pages max.)&lt;/label&gt;
-    &lt;div class&#x3D;&quot;col input-group&quot;&gt;
-      &lt;input class&#x3D;&quot;form-control align-self-baseline&quot;&gt;
-      &lt;span class&#x3D;&quot;input-group-btn align-self-baseline&quot;&gt;
-        &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Attach&lt;/button&gt;
-      &lt;/span&gt;
-      &lt;span class&#x3D;&quot;input-group-btn align-self-baseline&quot;&gt;
-        &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Detach&lt;/button&gt;
-      &lt;/span&gt;
-      &lt;span class&#x3D;&quot;input-group-btn align-self-baseline&quot;&gt;
-        &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;View&lt;/button&gt;
-      &lt;/span&gt;
+&lt;div class&#x3D;&quot;ui form&quot;&gt;
+  &lt;div class&#x3D;&quot;field&quot;&gt;
+    &lt;label&gt;Science Case (Mandatory, PDF, 4 pages max.)&lt;/label&gt;
+    &lt;div class&#x3D;&quot;ui small action input&quot;&gt;
+      &lt;input class&#x3D;&quot;ui input&quot; type&#x3D;&quot;text&quot;&gt;
+      &lt;button class&#x3D;&quot;ui blue button&quot;&gt;Attach&lt;/button&gt;
+      &lt;button class&#x3D;&quot;ui basic blue button&quot;&gt;View&lt;/button&gt;
+      &lt;button class&#x3D;&quot;ui red button&quot;&gt;Detach&lt;/button&gt;
     &lt;/div&gt;
+    &lt;p&gt;PDF, 4 pages max.&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class&#x3D;&quot;card&quot;&gt;
-  &lt;h5 class&#x3D;&quot;card-title&quot;&gt;Duplicate Observations&lt;/h5&gt;
-  &lt;div class&#x3D;&quot;card-body&quot;&gt;
-    &lt;p&gt;Placeholder&lt;/p&gt;
-    &lt;textarea class&#x3D;&quot;form-control&quot;&gt;&lt;/textarea&gt;
+&lt;div class&#x3D;&quot;ui form&quot;&gt;
+  &lt;div class&#x3D;&quot;field&quot;&gt;
+    &lt;label&gt;Duplicate Observations&lt;/label&gt;
+    &lt;textarea rows&#x3D;&quot;5&quot;&gt;&lt;/textarea&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
@@ -1611,7 +1620,7 @@ export class ProposalComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="card">  <h5 class="card-title">Proposal Information</h5>  <div class="card-body">    <div class="row form-group">      <label class="col-2 form-control-label">Proposal Title</label>      <input class="col form-control align-self-baseline">    </div>    <div class="row form-group">      <label class="col-2 form-control-label">Proposal Cycle</label>      <input class="col form-control align-self-baseline">    </div>    <div class="row form-group">      <label class="col-2 form-control-label">Abstract</label>      <textarea class="col form-control align-self-baseline"></textarea>    </div>    <div class="card">      <h6 class="card-title">Proposal Type</h6>      <div class="card-body row">        <label class="col custom-control custom-radio" *ngFor="let typeRadio of typeRadios">          <input id="{{typeRadio.id}}"                 name="typeRadios"                 class="custom-control-input"                 type="radio"                 (change)="chosenType = typeRadio.id"                 [checked]="chosenType === typeRadio.id">          <span class="custom-control-indicator"></span>          <span class="custom-control-description">{{typeRadio.text}}</span>        </label>      </div>    </div>    <div class="card">      <h6 class="card-title">Scientific Category</h6>      <div class="card-body">        <div class="row justify-content-center">          <label class="col custom-control custom-radio" *ngFor="let categoryRadio of categoryKeys(categoryRadios)">            <input id="{{categoryRadios[categoryRadio].id}}"                   name="categoryRadios"                   class="custom-control-input"                   type="radio"                   value="{{categoryRadios[categoryRadio].value}}"                   (change)="chosenCategory = categoryRadios[categoryRadio].value; selectedKeywords = 0"                   [checked]="chosenCategory === categoryRadios[categoryRadio].value">            <span class="custom-control-indicator"></span>            <span class="custom-control-description">{{categoryRadios[categoryRadio].text}}</span>          </label>        </div>      </div>    </div>    <div class="row form-group">      <label class="col-2 form-control-label"             for="keywordSelector">Keywords (chosen {{selectedKeywords}} of 2)</label>      <select #keywordSelector              id="keywordSelector"              multiple              class="col form-control"              (change)="selectedKeywords = keywordSelector.selectedOptions.length">        <option *ngFor="let option of categoryRadios[chosenCategory].keywords"                [disabled]="checkKeywords(option, keywordSelector.selectedOptions)">{{option}}        </option>      </select>    </div>    <div class="row">      <label class="col-2 form-control-label">Student Project</label>      <label class="col custom-control custom-checkbox">        <input class="custom-control-input" type="checkbox">        <span class="custom-control-indicator"></span>        <span class="custom-control-description"></span>      </label>    </div>    <div class="row form-group">      <label class="col-2 form-control-label">Related Proposals</label>      <textarea class="col form-control"></textarea>    </div>    <div class="row form-group">      <label class="col-2 form-control-label">Previous Proposals</label>      <textarea class="col form-control"></textarea>    </div>  </div></div><div class="card">  <h5 class="card-title">Investigators</h5>  <div class="card-body">    <div class="row">      <table class="table">        <thead class="thead-default">          <tr>            <th scope="col">Type</th>            <th scope="col">Full Name</th>            <th scope="col">Email</th>            <th scope="col">Affiliation</th>            <th scope="col">ALMA ID</th>            <th scope="col">Executive</th>          </tr>        </thead>        <tbody>          <tr>            <td scope="row">PI</td>            <td>Not Set</td>            <td>Not Set</td>            <td>Not Set</td>            <td>Not Set</td>            <td>Non-AMLA</td>          </tr>        </tbody>      </table>    </div>    <div class="row pull-right btn-group">      <button class="btn btn-outline-secondary">Select PI</button>      <button class="btn btn-outline-secondary"              [disabled]="chosenType === \'regularRadio\' || chosenType === \'opportunityRadio\'">        Add CoPI      </button>      <button class="btn btn-outline-secondary">Add Col</button>      <button class="btn btn-outline-secondary">Remove Collaborator</button>      <button class="btn btn-outline-secondary">Add from Proposal</button>    </div>  </div></div><div class="card">  <h5 class="card-title">Science Case</h5>  <div class="card-body row">    <label class="col-3 form-control-label">Science Case (Mandatory, PDF, 4 pages max.)</label>    <div class="col input-group">      <input class="form-control align-self-baseline">      <span class="input-group-btn align-self-baseline">        <button class="btn btn-outline-secondary">Attach</button>      </span>      <span class="input-group-btn align-self-baseline">        <button class="btn btn-outline-secondary">Detach</button>      </span>      <span class="input-group-btn align-self-baseline">        <button class="btn btn-outline-secondary">View</button>      </span>    </div>  </div></div><div class="card">  <h5 class="card-title">Duplicate Observations</h5>  <div class="card-body">    <p>Placeholder</p>    <textarea class="form-control"></textarea>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="ui form">  <h3>Proposal Information</h3>  <div>    <div class="field">      <label>Proposal Title</label>      <input type="text">    </div>    <div class="field">      <label>Proposal Cycle</label>      <input type="text">    </div>    <div class="field">      <label>Abstract</label>      <textarea></textarea>    </div>    <div class="field">      <label>Proposal Type</label>      <div class="inline fields">        <div class="field" *ngFor="let typeRadio of typeRadios">          <sui-radio-button id="{{typeRadio.id}}"                            name="typeRadios"                            value="{{typeRadio.id}}"                            [(ngModel)]="chosenType">            {{typeRadio.text}}          </sui-radio-button>        </div>      </div>    </div>    <div class="field">      <label>Scientific Category</label>      <div class="inline fields">        <div class="field" *ngFor="let categoryRadio of categoryKeys(categoryRadios)">          <sui-radio-button id="{{categoryRadios[categoryRadio].value}}"                            name="categoryRadios"                            value="{{categoryRadios[categoryRadio].value}}"                            [(ngModel)]="chosenCategory"                            (currentValueChange)="categoryRadioChange()">            {{categoryRadios[categoryRadio].text}}          </sui-radio-button>        </div>      </div>    </div>    <div class="field">      <label for="keywordSelector">Keywords (chosen {{selectedKeywordCount}} of 2)</label>      <sui-multi-select #keywordSelector                        id="keywordSelector"                        class="selection"                        [(ngModel)]="selectedKeywordValues"                        (maxSelected)="2"                        (selectedOptionsChange)="keywordsChange()">        <sui-select-option *ngFor="let option of categoryRadios[chosenCategory].keywords"                           [value]="option">          {{option}}        </sui-select-option>      </sui-multi-select>    </div>    <div class="field">      <sui-checkbox>Student project</sui-checkbox>    </div>    <div class="field">      <label>Related Proposals</label>      <textarea rows="5"></textarea>    </div>    <div class="field">      <label>Previous Proposals</label>      <textarea rows="5"></textarea>    </div>  </div></div><div class="ui form">  <h5>Investigators</h5>  <div>    <div>      <table class="ui celled table">        <thead>          <tr>            <th>Type</th>            <th>Full Name</th>            <th>Email</th>            <th>Affiliation</th>            <th>ALMA ID</th>            <th>Executive</th>          </tr>        </thead>        <tbody>          <tr>            <td>PI</td>            <td>Not Set</td>            <td>Not Set</td>            <td>Not Set</td>            <td>Not Set</td>            <td>Non-AMLA</td>          </tr>        </tbody>      </table>    </div>    <div class="ui tiny compact buttons">      <button class="ui blue button">Select PI</button>      <button class="ui blue button"              [disabled]="chosenType === \'regularRadio\' || chosenType === \'opportunityRadio\'">        Add CoPI      </button>      <button class="ui blue button">Add Col</button>      <button class="ui blue button">Add from Proposal</button>      <button class="ui red button">Remove Collaborator</button>    </div>  </div></div><div class="ui form">  <div class="field">    <label>Science Case (Mandatory, PDF, 4 pages max.)</label>    <div class="ui small action input">      <input class="ui input" type="text">      <button class="ui blue button">Attach</button>      <button class="ui basic blue button">View</button>      <button class="ui red button">Detach</button>    </div>    <p>PDF, 4 pages max.</p>  </div></div><div class="ui form">  <div class="field">    <label>Duplicate Observations</label>    <textarea rows="5"></textarea>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiResultsComponent', 'selector': 'app-pi-results'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'ProposalComponent'};

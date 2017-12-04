@@ -42,7 +42,6 @@ export class ProposalComponent {
   /** The available categories with values and keywords */
   categoryRadios: { [id: string]: any } = {
     'cosmology': {
-      id: 'cosmologyRadio',
       text: 'Cosmology and the High Redshift Universe',
       value: 'cosmology',
       keywords: [
@@ -60,7 +59,6 @@ export class ProposalComponent {
       ]
     },
     'galaxies': {
-      id: 'galaxiesRadio',
       text: 'Galaxies and the Galactic Nuclei',
       value: 'galaxies',
       keywords: [
@@ -80,7 +78,6 @@ export class ProposalComponent {
       ]
     },
     'ism': {
-      id: 'ismRadio',
       text: 'ISM, star formation and astrochemisty',
       value: 'ism',
       keywords: [
@@ -97,7 +94,6 @@ export class ProposalComponent {
       ]
     },
     'exoplanets': {
-      id: 'exoplanetsRadio',
       text: 'Circumstellar disks, exoplanets, and the solar system',
       value: 'exoplanets',
       keywords: [
@@ -113,7 +109,6 @@ export class ProposalComponent {
       ]
     },
     'stars': {
-      id: 'starRadio',
       text: 'Stellar Evolution and the Sun',
       value: 'stars',
       keywords: [
@@ -137,21 +132,23 @@ export class ProposalComponent {
   };
 
   /** Count of currently selected keywords in the selection box */
-  selectedKeywords = 0;
+  selectedKeywordCount = 0;
+  selectedKeywordValues: any;
 
-  /** Validates the keywords, used for disabling the selections
-   *  @param option         The keyword clicked by the user
-   *  @param chosenKeywords Collection of currently selected keywords
+  /**
+   * Resets the keyword selector when the chosen category changes
    */
-  checkKeywords(option: string, chosenKeywords: HTMLCollection) {
-    let chosen = false;
-    if (this.selectedKeywords > 0) {
-      for (let i = 0; i < chosenKeywords.length; i++) {
-        chosen = chosenKeywords.item(i).innerHTML === option;
-        if (chosen) break;
-      }
-    }
-    return this.selectedKeywords >= 2 && !chosen;
+  categoryRadioChange() {
+    this.selectedKeywordValues = [];
+    this.selectedKeywordCount  = 0;
+  }
+
+  /**
+   * Validates the keywords, used for disabling the selections
+   */
+  keywordsChange() {
+    this.selectedKeywordCount = this.selectedKeywordValues.length;
+    console.log(this.selectedKeywordCount, this.selectedKeywordValues);
   }
 
 }

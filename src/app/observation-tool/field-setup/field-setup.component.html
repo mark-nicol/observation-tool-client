@@ -1,16 +1,14 @@
-<div class="row p-0 m-0">
-  <div class="col-lg-5 col-xl-4 p-0 m-0"
-       [dragula]="'main'">
-    <modular-panel [id]="'spatial-image'"
-                   [title]="page.panels['spatial-image'].title"
-                   [image]="'/assets/img/field_placeholder.png'"
-                   (hiddenChange)="hiddenChange($event)"
-                   *ngIf="page.panels['spatial-image'].shown">
+<div>
+  <div>
+    <!--<modular-panel [id]="'spatial-image'"-->
+                   <!--[title]="page.panels['spatial-image'].title"-->
+                   <!--[image]="'/assets/img/field_placeholder.png'"-->
+                   <!--(hiddenChange)="hiddenChange($event)"-->
+                   <!--*ngIf="page.panels['spatial-image'].shown">-->
       <spacial-image></spacial-image>
-    </modular-panel>
-    <div class="row p-0 m-0">
-      <div class="col-xl p-0 m-0"
-           [dragula]="'one'">
+    <!--</modular-panel>-->
+    <div>
+      <div>
         <modular-panel [id]="'fov-parameters'"
                        [title]="page.panels['fov-parameters'].title"
                        (hiddenChange)="hiddenChange($event)"
@@ -19,8 +17,7 @@
           <fov-parameters></fov-parameters>
         </modular-panel>
       </div>
-      <div class="col-xl p-0 m-0"
-           [dragula]="'one'">
+      <div>
         <modular-panel [id]="'image-query'"
                        [title]="page.panels['image-query'].title"
                        (hiddenChange)="hiddenChange($event)"
@@ -31,8 +28,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-7 col-xl-8 p-0 m-0"
-       [dragula]="'main'">
+  <div>
     <modular-panel [id]="'field-source'"
                    [title]="page.panels['field-source'].title"
                    (hiddenChange)="hiddenChange($event)"

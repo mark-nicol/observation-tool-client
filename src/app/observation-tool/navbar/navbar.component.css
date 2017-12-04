@@ -1,3 +1,13 @@
 .scienceGoals:hover {
   cursor: pointer;
 }
+
+.ui.inverted.blue.menu .active.item {
+  background-color: white;
+  color: #2185D0;
+}
+
+.esoVersion {
+  font-size: 0.7em;
+  font-weight: normal;
+}

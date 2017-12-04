@@ -1,11 +1,25 @@
 <div class="ui fixed blue inverted menu">
-  <a class="navbar-brand"
-     href="">
-    ALMA
-  </a>
-  <a class="item"
-     *ngFor="let item of items"
-     [routerLink]="item.path">
-    {{item.title}}
-  </a>
+  <div class="ui fluid container">
+    <div class="item">
+      <b>Observation Tool</b>
+    </div>
+    <a class="item"
+       *ngFor="let item of items"
+       [routerLink]="item.path">
+      {{item.title}}
+    </a>
+    <div class="ui right dropdown item" suiDropdown>
+      <i class="user icon"></i>
+      User
+      <i class="dropdown icon"></i>
+      <div class="menu" suiDropdownMenu>
+        <div class="item">
+          <i class="sign out icon"></i> Logout
+        </div>
+        <a class="item" href="http://www.eso.org/UserPortal">
+          <i class="setting icon"></i> User Portal
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

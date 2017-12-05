@@ -1,9 +1,9 @@
-<div class="ui grid">
-  <div class="row">
+<div class="ui form">
+  <div class="field">
     <img src="../../../../../assets/img/field_placeholder.png">
   </div>
-  <div class="row">
-    <div class="ui icon buttons">
+  <div class="field">
+    <div class="ui blue icon buttons">
       <button class="ui button"
               ngbTooltip="Open a FITS file"
               #openButtonTooltip="ngbTooltip"
@@ -49,7 +49,7 @@
     </div>
 
 
-    <div class="ui icon buttons">
+    <div class="ui blue icon buttons">
       <button class="ui button"
               ngbTooltip="Zoom in"
               #zoomInButtonTooltip="ngbTooltip"
@@ -76,31 +76,34 @@
       </button>
     </div>
   </div>
- <div class="row">
-    <div class="ui form">
+  <div class="fields">
+    <div class="field">
       <input placeholder="1x"
-             style="width: 2.5em; text-align: center"
+             style="text-align: center"
              ngbTooltip="Current magnification"
              #magInputTooltip="ngbTooltip"
              [tooltip-delay]="magInputTooltip">
+    </div>
+    <div class="field">
       <input placeholder="432, 276"
-             style="width: 6em; text-align: center"
+             style="text-align: center"
              ngbTooltip="Image pixel coordinates at mouse position"
              #mouseCoordsTooltip="ngbTooltip"
              [tooltip-delay]="mouseCoordsTooltip">
+    </div>
+    <div class="field">
       <input placeholder="0.0"
-             style="width: 6em; text-align: center"
+             style="text-align: center"
              ngbTooltip="Image pixel value at mouse position"
              #pxValTooltip="ngbTooltip"
              [tooltip-delay]="pxValTooltip">
     </div>
- </div>
-  <div class="row">
-    <div class="ui form">
-      <div class="field">
-        <label for="filenameNote">Image Filename</label>
-        <input id="filenameNote">
-      </div>
-    </div>
+  </div>
+
+  <div class="field">
+    <label for="filenameNote">Image Filename</label>
+    <input id="filenameNote">
   </div>
 </div>
+
+

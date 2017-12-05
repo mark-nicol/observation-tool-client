@@ -1,22 +1,20 @@
-<div class="field">
-  <label for="systemSelector"
-         ngbTooltip="Coordinate system type"
-         #systemSelectorTooltip="ngbTooltip"
-         [tooltip-delay]="systemSelectorTooltip">
-    System
-  </label>
-  <div>
-    <sui-select id="systemSelector"
-                [(ngModel)]="chosenSystem"
-                (ngModelChange)="systemChange()">
-      <sui-select-option *ngFor="let system of systemKeys(systems)"
-                         [value]="system">
-        {{system}}
-      </sui-select-option>
-    </sui-select>
-    <sui-checkbox *ngIf="!sexagesimalHidden"
-                  [(ngModel)]="sexagesimalUnits"
-                  (checkChange)="sexagesimalChange()"
-                  data-tooltip="Sexagesimal display"></sui-checkbox>
-  </div>
+<label for="systemSelector"
+       ngbTooltip="Coordinate system type"
+       #systemSelectorTooltip="ngbTooltip"
+       [tooltip-delay]="systemSelectorTooltip">
+  <b>System</b>
+</label>
+<div>
+  <sui-select id="systemSelector"
+              [(ngModel)]="chosenSystem"
+              (ngModelChange)="systemChange()">
+    <sui-select-option *ngFor="let system of systemKeys(systems)"
+                       [value]="system">
+      {{system}}
+    </sui-select-option>
+  </sui-select>
+  <sui-checkbox *ngIf="!sexagesimalHidden"
+                [(ngModel)]="sexagesimalUnits"
+                (checkChange)="sexagesimalChange()"
+                data-tooltip="Sexagesimal display"></sui-checkbox>
 </div>

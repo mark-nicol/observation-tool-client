@@ -26,3 +26,22 @@
     </button>
   </div><!-- panel-body -->
 </div><!-- panel panel-default -->
+
+<div class="ui segment">
+  <h4 class="ui dividing header">Refine Search</h4>
+  <div class="ui form">
+    <div class="field">
+      <sui-select class="selection">
+        <sui-select-option value="name">Name</sui-select-option>
+        <sui-select-option value="email">Email</sui-select-option>
+        <sui-select-option value="affiliation">Affiliation</sui-select-option>
+        <sui-select-option value="uid">ALMA ID</sui-select-option>
+      </sui-select>
+      <div class="contains">Contains</div>
+      <input type="text">
+    </div>
+    <button (click)="refineClick(refineSelector.value, refineInput.value)" class="ui blue button">
+      Find Investigator
+    </button>
+  </div>
+</div>

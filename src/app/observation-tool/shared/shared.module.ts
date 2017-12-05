@@ -41,6 +41,7 @@ import {SuiModule} from 'ng2-semantic-ui';
     DelayTooltipDirective,
     DegreesPipe,
     SexagesimalPipe,
+    SuiModule
   ]
 })
 

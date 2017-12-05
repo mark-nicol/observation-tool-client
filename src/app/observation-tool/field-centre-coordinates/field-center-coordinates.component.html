@@ -1,43 +1,15 @@
-<div class="row">
-  <!--Target type label-->
-  <div class="col">
+<div class="ui form">
+  <div class="field">
     <label>Coord Type</label>
+    <sui-radio-button name="coordTypeRadios" value="relative" [(ngModel)]="this.data.coordType">Relative</sui-radio-button>
+    <sui-radio-button name="coordTypeRadios" value="absolute" [(ngModel)]="this.data.coordType">Absolute</sui-radio-button>
   </div>
-  <!--Target type radios-->
-  <div class="col">
-    <label class="custom-control custom-radio">
-      <input #relativeRadio
-             id="relativeRadio"
-             name="coordTypeRadios"
-             type="radio"
-             class="custom-control-input"
-             value="relative"
-             [(ngModel)]="data.coordType"
-             (change)="changeCoordType(relativeRadio.value)"
-             checked>
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Relative</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input #absoluteRadio
-             id="absoluteRadio"
-             name="coordTypeRadios"
-             type="radio"
-             value="absolute"
-             [(ngModel)]="data.coordType"
-             (change)="changeCoordType(absoluteRadio.value)"
-             class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Absolute</span>
-    </label>
-  </div><!-- div.col -->
-</div><!--div.row-->
 
-<div class="row"
-     *ngIf="(_persistenceService.getDataItem('field-setup', 'field-source', 'targetType') === 'individual'); then individualComponent; else rectangularComponent"></div>
-<ng-template #individualComponent>
-  <fcc-individual [radioValue]="data.coordType"></fcc-individual>
-</ng-template>
-<ng-template #rectangularComponent>
-  <fcc-rectangular [radioValue]="data.coordType"></fcc-rectangular>
-</ng-template>
+  <div *ngIf="(_persistenceService.getDataItem('field-setup', 'field-source', 'targetType') === 'individual'); then individualComponent; else rectangularComponent"></div>
+  <ng-template #individualComponent>
+    <fcc-individual [radioValue]="data.coordType"></fcc-individual>
+  </ng-template>
+  <ng-template #rectangularComponent>
+    <fcc-rectangular [radioValue]="data.coordType"></fcc-rectangular>
+  </ng-template>
+</div>

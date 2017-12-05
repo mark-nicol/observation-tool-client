@@ -1,23 +1,15 @@
-<div class="row p-0 m-0">
-  <div class="col-lg-7 p-0 m-0">
-    <modular-panel [title]="page.panels['visualisation'].title"
-                   [id]="'visualisation'"
-                   (hiddenChange)="hiddenChange($event)"
-                   *ngIf="page.panels['visualisation'].shown">
-      <app-visualisation-viewer></app-visualisation-viewer>
-      <app-visualisation-control (bandsCheckedEmitter)="bandsCheckedChange($event)"
-                                 (transmissionCheckedEmitter)="transmissionCheckedChange($event)"
-                                 (densitySelectorEmitter)="densitySelectorChange($event)"
-                                 (densityRadioEmitter)="densityRadioChange($event)"
-                                 (resetEmitter)="resetClick()"></app-visualisation-control>
-    </modular-panel>
+<div class="ui internally celled two column stackable grid">
+  <div class="ten wide column">
+    <h3 class="ui dividing header">Visualisation</h3>
+    <app-visualisation-viewer></app-visualisation-viewer>
+    <app-visualisation-control (bandsCheckedEmitter)="bandsCheckedChange($event)"
+                               (transmissionCheckedEmitter)="transmissionCheckedChange($event)"
+                               (densitySelectorEmitter)="densitySelectorChange($event)"
+                               (densityRadioEmitter)="densityRadioChange($event)"
+                               (resetEmitter)="resetClick()"></app-visualisation-control>
   </div>
-  <div class="col-lg-5 p-0 m-0">
-    <modular-panel [title]="page.panels['spectralType'].title"
-                   [id]="'spectralType'"
-                   (hiddenChange)="hiddenChange($event)"
-                   *ngIf="page.panels['spectralType'].shown">
-      <app-type></app-type>
-    </modular-panel>
+  <div class="six wide column">
+    <h3 class="ui dividing header">Spectral Type</h3>
+    <app-type></app-type>
   </div>
 </div>

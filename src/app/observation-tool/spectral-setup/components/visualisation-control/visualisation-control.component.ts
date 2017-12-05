@@ -44,7 +44,6 @@ export class VisualisationControlComponent {
    * Flips the bool of the bands checkbox and emits
    */
   bandsCheckedChange() {
-    this.bandsChecked = !this.bandsChecked;
     this.bandsCheckedEmitter.emit(this.bandsChecked);
   }
 
@@ -52,7 +51,6 @@ export class VisualisationControlComponent {
    * Flips the bool of the transmission checkbox and emits
    */
   transmissionCheckedChange() {
-    this.transmissionChecked = !this.transmissionChecked;
     this.transmissionCheckedEmitter.emit(this.transmissionChecked);
   }
 
@@ -60,9 +58,8 @@ export class VisualisationControlComponent {
    * Sets the density radio choice and emits
    * @param newRadio The new value to use
    */
-  densityRadioChange(newRadio: string) {
-    this.densityRadioChoice = newRadio;
-    this.densityRadioEmitter.emit(newRadio);
+  densityRadioChange() {
+    this.densityRadioEmitter.emit(this.densityRadioChoice);
   }
 
   /**

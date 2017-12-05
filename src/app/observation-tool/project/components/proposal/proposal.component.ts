@@ -135,6 +135,8 @@ export class ProposalComponent {
   selectedKeywordCount = 0;
   selectedKeywordValues: any;
 
+  remainingChars = 1200;
+
   /**
    * Resets the keyword selector when the chosen category changes
    */
@@ -149,6 +151,10 @@ export class ProposalComponent {
   keywordsChange() {
     this.selectedKeywordCount = this.selectedKeywordValues.length;
     console.log(this.selectedKeywordCount, this.selectedKeywordValues);
+  }
+
+  checkChars(charCount: any) {
+    this.remainingChars = 1200 - charCount.length;
   }
 
 }

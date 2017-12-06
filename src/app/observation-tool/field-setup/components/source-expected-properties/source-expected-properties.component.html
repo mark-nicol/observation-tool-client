@@ -1,9 +1,13 @@
 <div class="ui form">
   <div class="two fields">
     <!-- Peak flux input -->
-    <div class="field">
-      <label for="peakContInput"
-             data-html="Expected peak flux density of source continuum for the <b>weakest</b> source component that you wish to detect">
+    <div class="field"
+         suiPopup
+         [popupTemplate]="peakFluxPopupTemplate">
+      <ng-template #peakFluxPopupTemplate>
+        Expected peak flux density of source continuum for the <b>weakest</b> source component that you wish to detect
+      </ng-template>
+      <label for="peakContInput">
         Peak Continuum Flux Density per Synthesized Beam
       </label>
       <div class="ui action input">
@@ -17,10 +21,15 @@
     </div>
 
     <!-- Peak line flux input -->
-    <div class="field">
-      <label for="peakFluxPerInput"
-             data-html="Expected peak flux density of line emission relative to the continuum for the <b>weakest</b> source component that
-        you wish to detect">
+    <div class="field"
+         suiPopup
+         [popupTemplate]="peakLinePopupTemplate">
+      <ng-template #peakLinePopupTemplate>
+        Expected peak flux density of line emission relative to the continuum for the <b>weakest</b> source component
+        that
+        you wish to detect
+      </ng-template>
+      <label for="peakFluxPerInput">
         Peak Line Flux Density per Synthesized Beam
       </label>
       <div class="ui action input">
@@ -36,11 +45,10 @@
 
   <div class="three fields">
     <!-- Line width input -->
-    <div class="field">
-      <label for="lineWidthInput"
-             ngbTooltip="Expected width of the lines to be observed (FWHM)"
-             #lineWidthTooltip="ngbTooltip"
-             [tooltip-delay]="lineWidthTooltip">
+    <div class="field"
+         suiPopup
+         popupText="Expected width of the lines to be observed (FWHM)">
+      <label for="lineWidthInput">
         Line Width
       </label>
       <div class="ui action input">
@@ -54,11 +62,10 @@
     </div>
 
     <!-- Line polarization input -->
-    <div class="field">
-      <label for="linePolInput"
-             ngbTooltip="Expected polarization of the line in percent"
-             #linePercentageTooltip="ngbTooltip"
-             [tooltip-delay]="linePercentageTooltip">
+    <div class="field"
+         suiPopup
+         popupText="Expected polarization of the line in percent">
+      <label for="linePolInput">
         Line Polarization Percentage
       </label>
       <div class="ui right labeled input">
@@ -70,11 +77,10 @@
     </div>
 
     <!-- Cont polarization input -->
-    <div class="field">
-      <label for="contPolInput"
-             ngbTooltip="Expected polarization of the source in percent"
-             #continuumPercentageTooltip="ngbTooltip"
-             [tooltip-delay]="continuumPercentageTooltip">
+    <div class="field"
+         suiPopup
+         popupText="Expected polarization of the source in percent">
+      <label for="contPolInput">
         Continuum Polarization Percentage
       </label>
       <div class="ui right labeled input">

@@ -94,25 +94,31 @@
           <td>Non-AMLA</td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="6">
+            <div class="ui tiny compact right floated buttons">
+              <button class="ui blue button"
+                      [disabled]="chosenType === 'regularRadio' || chosenType === 'opportunityRadio'">
+                Add CoPI
+              </button>
+              <button class="ui blue button">Add Col</button>
+              <button class="ui red button">Remove Collaborator</button>
+            </div>
+            <button class="ui tiny compact right floated blue button">Add from Proposal</button>
+            <button class="ui tiny compact right floated blue button">Select PI</button>
+          </th>
+        </tr>
+      </tfoot>
     </table>
-    <button class="ui tiny compact blue button">Select PI</button>
-    <button class="ui tiny compact blue button">Add from Proposal</button>
-    <div class="ui tiny compact buttons">
-      <button class="ui blue button"
-              [disabled]="chosenType === 'regularRadio' || chosenType === 'opportunityRadio'">
-        Add CoPI
-      </button>
-      <button class="ui blue button">Add Col</button>
-      <button class="ui red button">Remove Collaborator</button>
-    </div>
   </div>
   <div class="ui segment">
     <h4 class="ui dividing header">Science Case (Mandatory, PDF, 4 pages max.)</h4>
-    <div class="ui small action input">
-      <input class="ui input" type="text">
-      <button class="ui blue button">Attach</button>
-      <button class="ui basic blue button">View</button>
-      <button class="ui red button">Detach</button>
+    <div class="ui fluid mini action input">
+      <input type="text">
+      <button class="ui tiny blue button">Attach</button>
+      <button class="ui tiny basic blue button">View</button>
+      <button class="ui tiny red button">Detach</button>
     </div>
     <p>PDF, 4 pages max.</p>
   </div>

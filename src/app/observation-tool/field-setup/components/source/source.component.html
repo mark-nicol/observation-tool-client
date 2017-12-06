@@ -3,7 +3,7 @@
   <div class="field">
     <label for="sourceNameInput">Source Name</label>
     <div class="ui action input">
-      <input id="sourceNameInput">
+      <input id="sourceNameInput" [(ngModel)]="pageData.sourceName">
       <button class="ui blue button">Resolve</button>
     </div>
   </div>
@@ -11,14 +11,16 @@
   <div class="three fields">
     <!-- Solar checkbox -->
     <div class="field">
-      <sui-checkbox (checkChange)="solarCheckboxClicked()">Choose a Solar System Object?</sui-checkbox>
+      <sui-checkbox [(ngModel)]="pageData.solarSystemObject">Choose a Solar System Object?</sui-checkbox>
     </div>
 
     <!-- Solar selector -->
     <div class="field">
       <label for="solarSystemSelector">Name of Object</label>
       <sui-select id="solarSystemSelector"
-                  [isDisabled]="!pageData.solarSystemObject">
+                  class="selection"
+                  [isDisabled]="!pageData.solarSystemObject"
+                  [(ngModel)]="pageData.chosenSolarObject">
         <sui-select-option *ngFor="let body of solarBodies" [value]="body">{{body}}</sui-select-option>
       </sui-select>
     </div>
@@ -100,9 +102,11 @@
         </label>
         <div class="ui action input">
           <input id="parallaxInput"
-                 placeholder="0.00000">
+                 placeholder="0.00000"
+                 [ngModel]="pageData.parallax.value">
           <sui-select class="selection"
-                      title="Parallax unit selector">
+                      title="Parallax unit selector"
+                      [(ngModel)]="pageData.parallax.unit">
             <sui-select-option value="mas">mas</sui-select-option>
             <sui-select-option value="arcsec">arcsec</sui-select-option>
           </sui-select>
@@ -118,9 +122,11 @@
         </label>
         <div class="ui action input">
           <input id="pmRaInput"
-                 placeholder="0.00000">
+                 placeholder="0.00000"
+                 [ngModel]="pageData.properMotionCross.value">
           <sui-select class="selection"
-                      title="Proper motion ra unit selector">
+                      title="Proper motion ra unit selector"
+                      [(ngModel)]="pageData.properMotionCross.unit">
             <sui-select-option value="mas/yr">mas/yr</sui-select-option>
             <sui-select-option value="arcsec/s">arcsec/s</sui-select-option>
             <sui-select-option value="arcmin/s">arcmin/s</sui-select-option>
@@ -138,9 +144,11 @@
         </label>
         <div class="ui action input">
           <input id="plgecInput"
-                 placeholder="0.00000">
+                 placeholder="0.00000"
+                 [ngModel]="pageData.properMotionDeclination.value">
           <sui-select class="selection"
-                      title="proper motion declination unit selector">
+                      title="proper motion declination unit selector"
+                      [(ngModel)]="pageData.properMotionDeclination.unit">
             <sui-select-option value="mas/yr">mas/yr</sui-select-option>
             <sui-select-option value="arcsec/s">arcsec/s</sui-select-option>
             <sui-select-option value="arcmin/s">arcmin/s</sui-select-option>
@@ -149,7 +157,6 @@
         </div>
       </div>
     </div>
-
 
     <div class="fields">
       <!-- Radial input -->
@@ -161,14 +168,17 @@
         </label>
         <div class="ui action input">
           <input id="radialVelocityInput"
-                 placeholder="0.000">
+                 placeholder="0.000"
+                 [ngModel]="pageData.radialVelocity.value">
           <sui-select class="selection"
-                      title="Radial velocity unit selector">
+                      title="Radial velocity unit selector"
+                      [(ngModel)]="pageData.radialVelocity.unit">
             <sui-select-option value="m/s">m/s</sui-select-option>
             <sui-select-option value="km/s">km/s</sui-select-option>
           </sui-select>
           <sui-select class="selection"
-                      title="Radial velocity reference frame selector">
+                      title="Radial velocity reference frame selector"
+                      [(ngModel)]="pageData.radialVelocityReferenceFrame">
             <sui-select-option value="bar">bar</sui-select-option>
             <sui-select-option value="lsrk">lsrk</sui-select-option>
             <sui-select-option value="topo">topo</sui-select-option>
@@ -177,7 +187,7 @@
         </div>
       </div>
 
-      <!-- Z input -->
+      <!-- Redshift input -->
       <div class="four wide field"
            suiPopup
            popupText="Astronomical redshift, calculated using the specified velocity convention">
@@ -185,7 +195,8 @@
           Z
         </label>
         <input id="zInput"
-               placeholder="0.000000000">
+               placeholder="0.000000000"
+               [ngModel]="pageData.redshift">
       </div>
 
       <!-- Doppler selector -->
@@ -195,7 +206,9 @@
         <label for="dopplerSelect">
           Doppler Type
         </label>
-        <sui-select class="selection" id="dopplerSelect">
+        <sui-select class="selection"
+                    id="dopplerSelect"
+                    [(ngModel)]="pageData.dopplerType">
           <sui-select-option value="radio">Radio</sui-select-option>
           <sui-select-option value="optical">Optical</sui-select-option>
           <sui-select-option value="relativistic">Relativistic</sui-select-option>

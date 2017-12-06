@@ -22,7 +22,6 @@ export class SourceComponent {
 
   /** Selectable solar system bodies for selection box */
   solarBodies = [
-    '',
     'Mercury',
     'Venus',
     'Moon',

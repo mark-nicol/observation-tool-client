@@ -6,7 +6,8 @@
     </div>
     <a class="item"
        *ngFor="let item of items"
-       [routerLink]="item.path">
+       [routerLink]="item.path"
+       [ngClass]="{'active': router.url.indexOf(item.path) > -1}">
       {{item.title}}
     </a>
     <div class="ui right dropdown item" suiDropdown>

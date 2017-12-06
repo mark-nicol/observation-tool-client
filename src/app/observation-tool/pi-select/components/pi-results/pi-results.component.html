@@ -1,17 +1,8 @@
 <div class="ui container">
-  <app-refine-panel #refinePanel [name]="this.name" (refineSearch)="refineSearch($event)"></app-refine-panel>
-  <app-results-table #resultsTable [searchResults]="results"></app-results-table>
-  <div class="pull-right">
-    <a [routerLink]="['/pi-entry', {selectedPi: true}]">
-      <button class="btn btn-outline-success"
-              [disabled]="!resultsTable.selectedPi">
-        Select PI
-      </button>
-    </a>
-    <a routerLink="/pi-entry">
-      <button class="btn btn-outline-danger">
-        Cancel
-      </button>
-    </a>
+  <div class="ui segment">
+    <app-refine-panel #refinePanel [name]="this.name" (refineSearch)="refineSearch($event)"></app-refine-panel>
+  </div>
+  <div class="ui segment">
+    <app-results-table #resultsTable [searchResults]="results"></app-results-table>
   </div>
 </div>

@@ -5,45 +5,38 @@
   <div class="row">
     <div class="ui blue icon buttons">
       <button class="ui button"
-              ngbTooltip="Open a FITS file"
-              #openButtonTooltip="ngbTooltip"
-              [tooltip-delay]="openButtonTooltip">
+              suiPopup
+              popupText="Open a FITS file">
         <i class="fa fa-folder-open-o"></i>
       </button>
       <button class="ui button"
-              ngbTooltip="Save image as.."
-              #saveButtonTooltip="ngbTooltip"
-              [tooltip-delay]="saveButtonTooltip">
+              suiPopup
+              popupText="Save image as..">
         <i class="fa fa-save"></i>
       </button>
       <button class="ui button"
-              ngbTooltip="Cut selected FOVs"
-              #cutButtonTooltip="ngbTooltip"
-              [tooltip-delay]="cutButtonTooltip">
+              suiPopup
+              popupText="Cut selected FOVs">
         <i class="fa fa-cut"></i>
       </button>
       <button class="ui button"
-              ngbTooltip="Select FOVs in a rectangle region"
-              #rectSelectTooltip="ngbTooltip"
-              [tooltip-delay]="rectSelectTooltip">
+              suiPopup
+              popupText="Select FOVs in a rectangle region">
         <i class="fa fa-square-o"></i>
       </button>
       <button class="ui button"
-              ngbTooltip="Select target centre"
-              #centreSelectTooltip="ngbTooltip"
-              [tooltip-delay]="centreSelectTooltip">
+              suiPopup
+              popupText="Select target centre">
         <i class="fa fa-times"></i>
       </button>
       <button class="ui button"
-              ngbTooltip="Add an FOV"
-              #addButtonTooltip="ngbTooltip"
-              [tooltip-delay]="addButtonTooltip">
+              suiPopup
+              popupText="Add an FOV">
         <i class="fa fa-times-circle-o"></i>
       </button>
       <button class="ui button"
-              ngbTooltip="Image cut levels"
-              #levelsButtonTooltip="ngbTooltip"
-              [tooltip-delay]="levelsButtonTooltip">
+              suiPopup
+              popupText="Image cut levels">
         <i class="fa fa-area-chart"></i>
       </button>
     </div>
@@ -55,21 +48,18 @@
         <i class="fa fa-search-plus"></i>
       </button>
       <button class="ui button"
-              ngbTooltip="Zoom out"
-              #zoomOutButtonTooltip="ngbTooltip"
-              [tooltip-delay]="zoomOutButtonTooltip">
+              suiPopup
+              popupText="Zoom out">
         <i class="fa fa-search-minus"></i>
       </button>
       <button class="ui button"
-              ngbTooltip="Zoom to fit the window"
-              #fitButtonTooltip="ngbTooltip"
-              [tooltip-delay]="fitButtonTooltip">
+              suiPopup
+              popupText="Zoom to fit the window">
         <i class="fa fa-square-o"></i>
       </button>
       <button class="ui button"
-              ngbTooltip="Normal zoom"
-              #normalButtonTooltip="ngbTooltip"
-              [tooltip-delay]="normalButtonTooltip">
+              suiPopup
+              popupText="Normal zoom">
         <i class="fa fa-search"></i>
       </button>
     </div>
@@ -78,26 +68,23 @@
 
 <div class="ui form">
   <div class="three fields">
-    <div class="field">
+    <div class="field"
+         suiPopup
+         popupText="Current magnification">
       <input placeholder="1x"
-             style="text-align: center"
-             ngbTooltip="Current magnification"
-             #magInputTooltip="ngbTooltip"
-             [tooltip-delay]="magInputTooltip">
+             style="text-align: center">
     </div>
-    <div class="field">
+    <div class="field"
+    suiPopup
+    popupText="Image pixel coordinates at mouse position">
       <input placeholder="432, 276"
-             style="text-align: center"
-             ngbTooltip="Image pixel coordinates at mouse position"
-             #mouseCoordsTooltip="ngbTooltip"
-             [tooltip-delay]="mouseCoordsTooltip">
+             style="text-align: center">
     </div>
-    <div class="field">
+    <div class="field"
+    suiPopup
+    popupText="Image pixel value at mouse position">
       <input placeholder="0.0"
-             style="text-align: center"
-             ngbTooltip="Image pixel value at mouse position"
-             #pxValTooltip="ngbTooltip"
-             [tooltip-delay]="pxValTooltip">
+             style="text-align: center">
     </div>
   </div>
 

@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {ScienceGoalPage} from '../shared/classes/science-goal-page';
 import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 import {PersistenceService} from '../shared/services/persistence.service';
@@ -27,9 +28,11 @@ export class FieldSetupComponent extends ScienceGoalPage {
   /**
    * Calls super
    * @param persistenceService Passed to super for use in parent
+   * @param config             Config for the popups, used to delay showing
    */
-  constructor(persistenceService: PersistenceService) {
+  constructor(persistenceService: PersistenceService, private config: SuiPopupConfig) {
     super(persistenceService, ScienceGoalIdentifiers.FIELD_SETUP);
+    this.config.delay = 1000;
   }
 
   /**

@@ -47,11 +47,10 @@
       </div>
 
       <!-- Lat input -->
-      <div class="field">
-        <label for="latInput"
-               ngbTooltip="The latitude of the source"
-               #latInputTooltip="ngbTooltip"
-               [tooltip-delay]="latInputTooltip">
+      <div class="field"
+           suiPopup
+           popupText="The latitude of the source">
+        <label for="latInput">
           {{pageData.sexagesimalUnits ?
           pageData.chosenSystem.sexagesimalLabels.latLabel :
           pageData.chosenSystem.normalLabels.latLabel}}
@@ -69,11 +68,10 @@
       </div>
 
       <!-- Long input -->
-      <div class="field">
-        <label for="lonInput"
-               ngbTooltip="The longitude of the source"
-               #lonInputTooltip="ngbTooltip"
-               [tooltip-delay]="lonInputTooltip">
+      <div class="field"
+           suiPopup
+           popupText="The longitude of the source">
+        <label for="lonInput">
           {{pageData.sexagesimalUnits ?
           pageData.chosenSystem.sexagesimalLabels.lonLabel :
           pageData.chosenSystem.normalLabels.lonLabel
@@ -94,11 +92,10 @@
 
     <div class="three fields">
       <!-- Parallax input -->
-      <div class="field">
-        <label for="parallaxInput"
-               ngbTooltip="The parallax angle of the source"
-               #parallaxInputTooltip="ngbTooltip"
-               [tooltip-delay]="parallaxInputTooltip">
+      <div class="field"
+           suiPopup
+           popupText="The parallax angle of the source">
+        <label for="parallaxInput">
           Parallax
         </label>
         <div class="ui action input">
@@ -113,11 +110,10 @@
       </div>
 
       <!-- PM RA input -->
-      <div class="field">
-        <label for="pmRaInput"
-               ngbTooltip="Proper motion along cross-declination direction"
-               #pmLonTooltip="ngbTooltip"
-               [tooltip-delay]="pmLonTooltip">
+      <div class="field"
+           suiPopup
+           popupText="Proper motion along cross-declination direction">
+        <label for="pmRaInput">
           PM RA
         </label>
         <div class="ui action input">
@@ -134,11 +130,10 @@
       </div>
 
       <!-- PM Dec input -->
-      <div class="field">
-        <label for="plgecInput"
-               ngbTooltip="Proper motion along declination direction"
-               #pmLatTooltip="ngbTooltip"
-               [tooltip-delay]="pmLatTooltip">
+      <div class="field"
+           suiPopup
+           popupText="Proper motion along declination direction">
+        <label for="plgecInput">
           PM DEC
         </label>
         <div class="ui action input">
@@ -158,11 +153,10 @@
 
     <div class="fields">
       <!-- Radial input -->
-      <div class="field">
-        <label for="radialVelocityInput"
-               ngbTooltip="Velocity value in your desired units"
-               #radialInputTooltip="ngbTooltip"
-               [tooltip-delay]="radialInputTooltip">
+      <div class="field"
+           suiPopup
+           popupText="Velocity value in your desired units">
+        <label for="radialVelocityInput">
           Radial Velocity
         </label>
         <div class="ui action input">
@@ -185,8 +179,8 @@
 
       <!-- Z input -->
       <div class="four wide field"
-           data-tooltip="Astronomical redshift, calculated using the specified velocity convention"
-           data-position="top left">
+           suiPopup
+           popupText="Astronomical redshift, calculated using the specified velocity convention">
         <label for="zInput">
           Z
         </label>
@@ -195,20 +189,18 @@
       </div>
 
       <!-- Doppler selector -->
-      <div class="two wide field">
-        <label for="dopplerSelect"
-               ngbTooltip="Doppler calculation convention to be used"
-               #dopplerInputTooltip="ngbTooltip"
-               [tooltip-delay]="dopplerInputTooltip">
+      <div class="two wide field"
+           suiPopup
+           popupText="Doppler calculation convention to be used">
+        <label for="dopplerSelect">
           Doppler Type
         </label>
-        <sui-select class="selction" id="dopplerSelect">
+        <sui-select class="selection" id="dopplerSelect">
           <sui-select-option value="radio">Radio</sui-select-option>
           <sui-select-option value="optical">Optical</sui-select-option>
           <sui-select-option value="relativistic">Relativistic</sui-select-option>
         </sui-select>
       </div>
     </div>
-
   </div><!-- div *ngIf -->
 </div><!-- div.ui.form -->

@@ -18,10 +18,12 @@ export class ResultsTableComponent {
 
   /** Search results from PI search */
   @Input() searchResults: Observable<PrimaryInvestigatorInterface[]>;
-  /** True if a search is being carried out, used to hide table */
-  @Input() isSearching: boolean;
+
   /** The clicked PI in the table, used for highlighting */
   selectedPi: PrimaryInvestigatorInterface;
+
+  constructor() {
+  }
 
   /**
    * Called when a table row is clicked. Sets a new PI in session storage.

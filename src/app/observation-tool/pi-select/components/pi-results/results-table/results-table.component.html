@@ -1,4 +1,5 @@
 <h4 class="ui dividing header">Results</h4>
+
 <table class="ui selectable table">
   <thead>
     <tr>
@@ -20,7 +21,7 @@
     <tr>
       <th colspan="4">
         <div class="ui right floated buttons">
-          <!-- TODO Change from links to actual buttons, route programmatically, Add loader -->
+          <!-- TODO Change from links to actual buttons, route programmatically -->
           <a [routerLink]="['/pi-entry', {selectedPi: true}]">
             <button class="ui blue button"
                     [disabled]="!resultsTable.selectedPi">
@@ -37,4 +38,3 @@
     </tr>
   </tfoot>
 </table>
-<h4 *ngIf="isSearching">Loading Results .....</h4>

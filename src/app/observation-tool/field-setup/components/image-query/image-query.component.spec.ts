@@ -1,4 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SuiModule} from 'ng2-semantic-ui';
 
 import {ImageQueryComponent} from './image-query.component';
 
@@ -8,7 +9,8 @@ describe('ImageQueryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ImageQueryComponent]
+      declarations: [ImageQueryComponent],
+      imports: [SuiModule]
     })
       .compileComponents();
   }));

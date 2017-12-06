@@ -2,6 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SuiModule} from 'ng2-semantic-ui';
 import {DelayTooltipDirective} from '../../directives/delay-tooltip.directive';
 
 import {SystemSelectorComponent} from './system-selector.component';
@@ -13,7 +14,7 @@ describe('SystemSelectorComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SystemSelectorComponent, DelayTooltipDirective],
-      imports: [NgbModule.forRoot(), FormsModule]
+      imports: [NgbModule.forRoot(), FormsModule, SuiModule]
     })
       .compileComponents();
   }));

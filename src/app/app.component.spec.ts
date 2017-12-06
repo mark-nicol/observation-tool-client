@@ -2,6 +2,7 @@ import {async, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {NgbDropdownConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import 'jasmine';
+import {SuiModule} from 'ng2-semantic-ui';
 import {ContextMenuModule} from 'ngx-contextmenu';
 
 import {AppComponent} from './app.component';
@@ -14,7 +15,8 @@ describe('AppComponent', () => {
         RouterTestingModule,
         // TreeModule,
         ContextMenuModule,
-        NgbModule
+        NgbModule,
+        SuiModule
       ],
       declarations: [
         AppComponent,

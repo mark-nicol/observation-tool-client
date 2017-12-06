@@ -2,6 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {NgbCollapseModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DragulaModule} from 'ng2-dragula';
+import {SuiModule} from 'ng2-semantic-ui';
 import {FccIndividualComponent} from '../field-centre-coordinates/components/fcc-individual/fcc-individual.component';
 import {FccRectangularComponent} from '../field-centre-coordinates/components/fcc-rectangular/fcc-rectangular.component';
 import {FieldCenterCoordinatesComponent} from '../field-centre-coordinates/field-center-coordinates.component';
@@ -41,7 +42,7 @@ describe('FieldSetupComponent', () => {
         SexagesimalPipe,
         DegreesPipe
       ],
-      imports: [FormsModule, DragulaModule, NgbCollapseModule, NgbModule.forRoot()],
+      imports: [FormsModule, DragulaModule, NgbCollapseModule, NgbModule.forRoot(), SuiModule],
       providers: [PersistenceService]
     })
       .compileComponents();

@@ -1,6 +1,8 @@
 import {HttpClientModule} from '@angular/common/http';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SuiModule} from 'ng2-semantic-ui';
 import {ModularPanelComponent} from '../shared/components/modular-panel/modular-panel.component';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {TypeComponent} from './components/type/type.component';
@@ -23,7 +25,7 @@ describe('SpectralSetupComponent', () => {
         VisualisationViewerComponent,
         TypeComponent
       ],
-      imports: [NgbModule.forRoot(), HttpClientModule],
+      imports: [NgbModule.forRoot(), FormsModule, HttpClientModule, SuiModule],
       providers: [PersistenceService, SpectralDataService]
     })
       .compileComponents();

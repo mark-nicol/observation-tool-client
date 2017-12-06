@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SuiModule} from 'ng2-semantic-ui';
 import {SystemSelectorComponent} from '../shared/components/system-selector/system-selector.component';
 import {DelayTooltipDirective} from '../shared/directives/delay-tooltip.directive';
 import {DegreesPipe} from '../shared/pipes/degrees.pipe';
@@ -26,7 +27,7 @@ describe('FieldCenterCoordinatesComponent', () => {
         FccRectangularComponent,
         SystemSelectorComponent
       ],
-      imports: [FormsModule, NgbModule.forRoot()],
+      imports: [FormsModule, NgbModule.forRoot(), SuiModule],
       providers: [PersistenceService]
     })
       .compileComponents();

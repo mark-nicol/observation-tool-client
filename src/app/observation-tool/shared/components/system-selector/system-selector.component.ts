@@ -152,6 +152,7 @@ export class SystemSelectorComponent implements OnInit {
    * Controls a change of the sexagesimal state
    */
   sexagesimalChange() {
+    this.sexagesimalUnits = !this.sexagesimalUnits;
     this.sexagesimalEmitter.emit(this.sexagesimalUnits);
   }
 

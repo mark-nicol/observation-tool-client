@@ -1,11 +1,11 @@
-<div class="field">
-  <label for="offsetSelector"
-         ngbTooltip="Unit of offset pointings"
-         #offsetTooltip="ngbTooltip"
-         [tooltip-delay]="offsetTooltip">
+<div class="field"
+     suiPopup
+     popupText="Unit of offset pointings">
+  <label for="offsetSelector">
     Offset Unit
   </label>
   <sui-select id="offsetSelector"
+              class="selection"
               [(ngModel)]="data.offsetUnit"
               [disabled]="radioValue === 'absolute'">
     <sui-select-option *ngFor="let unit of offsetUnits"
@@ -17,12 +17,11 @@
 </div>
 
 
-<div class="field">
+<div class="field"
+     suiPopup
+     popupText="Number of pointings in this field">
   <div class="ui mini statistic">
-    <label class="label"
-           ngbTooltip="Number of pointings in this field"
-           #pointingsLableTooltip="ngbTooltip"
-           [tooltip-delay]="pointingsLableTooltip">
+    <label class="label">
       # Pointings
     </label>
     <p class="value">{{data.rows.length}}</p>
@@ -30,10 +29,11 @@
 </div>
 
 
-<table class="ui celled table">
+<table class="ui celled table"
+       suiPopup
+       popupText="Coordinate offsets for each pointing">
   <thead>
-    <tr *ngIf="radioValue === 'relative'"
-        ngbTooltip="Coordinate offsets for each pointing">
+    <tr *ngIf="radioValue === 'relative'">
       <th>
         {{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').latHeader}}
         [{{data.offsetUnit}}]
@@ -64,31 +64,25 @@
 
 <div class="ui blue icon buttons">
   <button class="ui button"
-    (click)="addRow()"
-          ngbTooltip="Add a pointing"
-          #addButtonTooltip="ngbTooltip"
-          placement="left"
-          [tooltip-delay]="addButtonTooltip">
+          (click)="addRow()"
+          suiPopup
+          popupText="Add a pointing">
     <i class="plus icon"></i>
   </button>
   <button class="ui button"
-    (click)="removeRow()"
-          ngbTooltip="Remove a pointing"
-          #removeButtonTooltip="ngbTooltip"
-          [tooltip-delay]="removeButtonTooltip">
+          (click)="removeRow()"
+          suiPopup
+          popupText="Remove a pointing">
     <i class="minus icon"></i>
   </button>
   <button class="ui button"
-          ngbTooltip="Import pointings"
-          #importButtonTooltip="ngbTooltip"
-          [tooltip-delay]="importButtonTooltip">
+          suiPopup
+          popupText="Import pointings">
     <i class="download icon"></i>
   </button>
   <button class="ui button"
-          ngbTooltip="Export current pointings"
-          #exportButtonTooltip="ngbTooltip"
-          placement="right"
-          [tooltip-delay]="exportButtonTooltip">
+          suiPopup
+          popupText="Export current pointings">
     <i class="upload icon"></i>
   </button>
 </div>

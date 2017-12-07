@@ -2,7 +2,7 @@
  * Interface for primary investigators retrieved from ALMA user lookup
  */
 
-export interface PrincipleInvestigatorInterface {
+export interface AlmaInvestigatorInterface {
   uid: string;
   firstName: string;
   lastName: string;

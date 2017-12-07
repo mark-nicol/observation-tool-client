@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PrincipleInvestigatorInterface} from '../../../../shared/interfaces/principle-investigator.interface';
+import {AlmaInvestigatorInterface} from '../../../../shared/interfaces/alma-investigator.interface';
 
 /**
  * Initial PI search component
@@ -17,7 +17,7 @@ export class PiSearchComponent implements OnInit {
   INPUT_PLACEHOLDER = 'Enter Principle Investigator name';
 
   /** The chosen PI passed back from piSelect */
-  passedPi: PrincipleInvestigatorInterface;
+  passedPi: AlmaInvestigatorInterface;
 
   /**
    * Checks for a chosen PI in session storage and sets if available

@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {json} from 'd3-request';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {SCIENCE_GOAL_PAGES} from '../data/science-goal-pages';
-import {ScienceGoalPageInterface} from '../interfaces/science-goal-page.interface';
+import {ScienceGoalInterface} from '../interfaces/science-goal.interface';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -14,12 +13,12 @@ import {ScienceGoalPageInterface} from '../interfaces/science-goal-page.interfac
 export class PersistenceService {
 
   /** The public observable of the pages data */
-  pages: Observable<{ [id: string]: ScienceGoalPageInterface }>;
+  pages: Observable<{ [id: string]: ScienceGoalInterface }>;
   /** Private subject of the page data */
-  private _pages: BehaviorSubject<{ [id: string]: ScienceGoalPageInterface }>;
+  private _pages: BehaviorSubject<{ [id: string]: ScienceGoalInterface }>;
   /** Data store of the data in memory, allows changes */
   private _dataStore: {
-    pages: { [id: string]: ScienceGoalPageInterface };
+    pages: { [id: string]: ScienceGoalInterface };
   };
 
   /**
@@ -27,7 +26,7 @@ export class PersistenceService {
    */
   constructor() {
     this._dataStore       = {pages: {}};
-    this._pages           = <BehaviorSubject<{ [id: string]: ScienceGoalPageInterface }>>new BehaviorSubject({});
+    this._pages           = <BehaviorSubject<{ [id: string]: ScienceGoalInterface }>>new BehaviorSubject({});
     this.pages            = this._pages.asObservable();
     this._dataStore.pages = SCIENCE_GOAL_PAGES;
     this._pages.next(Object.assign({}, this._dataStore).pages);
@@ -36,7 +35,7 @@ export class PersistenceService {
   /**
    * Returns the pages observable
    */
-  getPages(): Observable<{ [id: string]: ScienceGoalPageInterface }> {
+  getPages(): Observable<{ [id: string]: ScienceGoalInterface }> {
     return this.pages;
   }
 
@@ -44,9 +43,9 @@ export class PersistenceService {
    * Returns an observable of a single page's data
    * @param page I.D. of the page to retrieve data for
    */
-  getPage(page: string): Observable<ScienceGoalPageInterface> {
-    let returnPage: Observable<ScienceGoalPageInterface>;
-    const subject = <BehaviorSubject<ScienceGoalPageInterface>> new BehaviorSubject({});
+  getPage(page: string): Observable<ScienceGoalInterface> {
+    let returnPage: Observable<ScienceGoalInterface>;
+    const subject = <BehaviorSubject<ScienceGoalInterface>> new BehaviorSubject({});
     returnPage    = subject.asObservable();
     subject.next(this._dataStore.pages[page]);
     return returnPage;

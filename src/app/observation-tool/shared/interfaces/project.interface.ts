@@ -1,8 +1,8 @@
-import {PrincipleInvestigatorInterface} from './principle-investigator.interface';
+import {AlmaInvestigatorInterface} from './alma-investigator.interface';
 import {ProposalInterface} from './proposal.interface';
 
 export interface ProjectInterface {
-  principleInvestigator: PrincipleInvestigatorInterface,
+  principleInvestigator: AlmaInvestigatorInterface,
   priority: number,
   projectCode: string,
   proposal: ProposalInterface

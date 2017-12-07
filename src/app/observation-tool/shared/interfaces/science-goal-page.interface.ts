@@ -1,4 +1,4 @@
-import {ScienceGoalPanelInterface} from './science-goal-panel.interface';
+import {ScienceGoalSectionInterface} from './science-goal-section.interface';
 
 /**
  * Interface for a science goal page
@@ -8,6 +8,6 @@ export interface ScienceGoalPageInterface {
   title: string;
   /** The routing path of the page */
   path: string;
-  /** The panels to show on the page */
-  panels: { [id: string]: ScienceGoalPanelInterface };
+  /** The sections to show on the page */
+  sections: { [id: string]: ScienceGoalSectionInterface };
 }

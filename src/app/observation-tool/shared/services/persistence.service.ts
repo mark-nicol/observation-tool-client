@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
+import {json} from 'd3-request';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {SCIENCE_GOAL_PAGES} from '../data/science-goal-pages';
 import {ScienceGoalPageInterface} from '../interfaces/science-goal-page.interface';
 
 /**
- * Service to supply data to pages and panels from stored objects
+ * Service to supply data to pages and sections from stored objects
  *
- * Also manages the hiding and showing of panels for persistence
+ * Also manages the hiding and showing of sections for persistence
  */
 @Injectable()
 export class PersistenceService {
@@ -60,7 +61,7 @@ export class PersistenceService {
     let returnData: Observable<any>;
     const subject = <BehaviorSubject<any>> new BehaviorSubject({});
     returnData    = subject.asObservable();
-    subject.next(this._dataStore.pages[page].panels[panel].data);
+    subject.next(this._dataStore.pages[page].sections[panel].data);
     return returnData;
   }
 
@@ -71,17 +72,17 @@ export class PersistenceService {
    * @param item  I.D. of the item to retrieve data from
    */
   getDataItem(page: string, panel: string, item: string): any {
-    return this._dataStore.pages[page].panels[panel].data[item];
+    return this._dataStore.pages[page].sections[panel].data[item];
   }
 
-  /**
-   * Switches the shown bool for a panel
-   * @param page  The page which holds the panel to hide
-   * @param panel I.D. of the panel to hide
-   */
-  hiddenChange(page: string, panel: string) {
-    this._dataStore.pages[page].panels[panel].shown = !this._dataStore.pages[page].panels[panel].shown;
-  }
+  // /**
+  //  * Switches the shown bool for a panel
+  //  * @param page  The page which holds the panel to hide
+  //  * @param panel I.D. of the panel to hide
+  //  */
+  // hiddenChange(page: string, panel: string) {
+  //   this._dataStore.pages[page].sections[panel].shown = !this._dataStore.pages[page].sections[panel].shown;
+  // }
 
   /**
    *

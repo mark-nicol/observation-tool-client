@@ -4,7 +4,7 @@ import {PersistenceService} from '../services/persistence.service';
 /**
  * Abstract class defining science goal pages
  *
- * Handles ID setting, data loading, and hiding and showing panels
+ * Handles ID setting, data loading, and hiding and showing sections
  */
 
 export abstract class ScienceGoalPage {
@@ -25,12 +25,12 @@ export abstract class ScienceGoalPage {
     this.persistenceService.getPage(this.id).subscribe(data => this.page = data);
   }
 
-  /**
-   * Handles closing or opening of panels
-   * @param panel The id of the panel to change state
-   */
-  hiddenChange(panel: string) {
-    this.persistenceService.hiddenChange(this.id, panel);
-  }
+  // /**
+  //  * Handles closing or opening of sections
+  //  * @param panel The id of the panel to change state
+  //  */
+  // hiddenChange(panel: string) {
+  //   this.persistenceService.hiddenChange(this.id, panel);
+  // }
 
 }

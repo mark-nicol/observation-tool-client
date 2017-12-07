@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {PrimaryInvestigatorInterface} from '../../../../shared/interfaces/primary-investigator'
+import {PrincipleInvestigatorInterface} from '../../../../shared/interfaces/principle-investigator.interface'
 
 /**
  * Results table component.
@@ -17,10 +17,10 @@ import {PrimaryInvestigatorInterface} from '../../../../shared/interfaces/primar
 export class ResultsTableComponent {
 
   /** Search results from PI search */
-  @Input() searchResults: Observable<PrimaryInvestigatorInterface[]>;
+  @Input() searchResults: Observable<PrincipleInvestigatorInterface[]>;
 
   /** The clicked PI in the table, used for highlighting */
-  selectedPi: PrimaryInvestigatorInterface;
+  selectedPi: PrincipleInvestigatorInterface;
 
   constructor() {
   }
@@ -29,7 +29,7 @@ export class ResultsTableComponent {
    * Called when a table row is clicked. Sets a new PI in session storage.
    * @param pi The clicked PI
    */
-  rowClick(pi: PrimaryInvestigatorInterface) {
+  rowClick(pi: PrincipleInvestigatorInterface) {
     this.selectedPi = this.selectedPi === pi ? null : pi;
     sessionStorage.setItem('selectedPi', JSON.stringify(this.selectedPi));
   }

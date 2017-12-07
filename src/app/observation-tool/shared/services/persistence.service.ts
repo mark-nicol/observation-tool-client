@@ -2,53 +2,69 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {SCIENCE_GOAL_PAGES} from '../data/science-goal-pages';
-import {ScienceGoalInterface} from '../interfaces/science-goal.interface';
+import {ProjectInterface} from '../interfaces/project.interface';
 
 /**
  * Service to supply data to pages and sections from stored objects
- *
- * Also manages the hiding and showing of sections for persistence
  */
 @Injectable()
 export class PersistenceService {
 
-  /** The public observable of the pages data */
-  pages: Observable<{ [id: string]: ScienceGoalInterface }>;
-  /** Private subject of the page data */
-  private _pages: BehaviorSubject<{ [id: string]: ScienceGoalInterface }>;
+  /** The public observable of the project data */
+  project: Observable<ProjectInterface>;
+  /** Private subject of the project data */
+  private _project: BehaviorSubject<ProjectInterface>;
   /** Data store of the data in memory, allows changes */
   private _dataStore: {
-    pages: { [id: string]: ScienceGoalInterface };
+    project: any
   };
 
   /**
    * Constructor, loads data and sets members
    */
   constructor() {
-    this._dataStore       = {pages: {}};
-    this._pages           = <BehaviorSubject<{ [id: string]: ScienceGoalInterface }>>new BehaviorSubject({});
-    this.pages            = this._pages.asObservable();
-    this._dataStore.pages = SCIENCE_GOAL_PAGES;
-    this._pages.next(Object.assign({}, this._dataStore).pages);
+    this._dataStore         = {project: {}};
+    this._project           = <BehaviorSubject<ProjectInterface>>new BehaviorSubject({});
+    this.project            = this._project.asObservable();
+    this._dataStore.project = SCIENCE_GOAL_PAGES;
+    /*UPDATE*/
+    this._project.next(Object.assign({}, this._dataStore).project);
   }
 
   /**
-   * Returns the pages observable
+   * Returns the project observable
    */
-  getPages(): Observable<{ [id: string]: ScienceGoalInterface }> {
-    return this.pages;
+  getProject(): Observable<ProjectInterface> {
+    return this.project;
   }
 
   /**
    * Returns an observable of a single page's data
    * @param page I.D. of the page to retrieve data for
    */
-  getPage(page: string): Observable<ScienceGoalInterface> {
-    let returnPage: Observable<ScienceGoalInterface>;
-    const subject = <BehaviorSubject<ScienceGoalInterface>> new BehaviorSubject({});
+  getPage(page: string): Observable</*UPDATE*/> {
+    let returnPage: Observable</*UPDATE*/>;
+    const subject = <BehaviorSubject</*UPDATE*/>> new BehaviorSubject({});
     returnPage    = subject.asObservable();
     subject.next(this._dataStore.pages[page]);
+    /*UPDATE*/
     return returnPage;
+  }
+
+  getScienceGoal() {
+
+  }
+
+  getScienceGoalPage() {
+
+  }
+
+  getScienceGoalPageSection() {
+
+  }
+
+  getScienceGoalDataItem() {
+
   }
 
   /**
@@ -61,6 +77,7 @@ export class PersistenceService {
     const subject = <BehaviorSubject<any>> new BehaviorSubject({});
     returnData    = subject.asObservable();
     subject.next(this._dataStore.pages[page].sections[panel].data);
+    /*UPDATE*/
     return returnData;
   }
 
@@ -72,6 +89,7 @@ export class PersistenceService {
    */
   getDataItem(page: string, panel: string, item: string): any {
     return this._dataStore.pages[page].sections[panel].data[item];
+    /*UPDATE*/
   }
 
   // /**
@@ -88,6 +106,7 @@ export class PersistenceService {
    */
   saveProject() {
     console.log(this._dataStore.pages);
+    /*UPDATE*/
   }
 
 }

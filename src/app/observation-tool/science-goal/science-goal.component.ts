@@ -26,7 +26,7 @@ export class ScienceGoalComponent {
    * Constructor
    */
   constructor(private persistenceService: PersistenceService) {
-    this.persistenceService.getPages().subscribe(res => this.pages = res);
+    this.persistenceService.getProject().subscribe(res => this.pages = res);
   }
 
 }

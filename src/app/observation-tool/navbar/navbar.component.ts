@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as _ from 'lodash';
 import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
  * The navbar component at the top of the application
@@ -60,7 +61,7 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private persistenceService: PersistenceService) {
 
   }
 
@@ -100,5 +101,8 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  exportClick() {
+    this.persistenceService.saveProject();
+  }
 
 }

@@ -83,4 +83,11 @@ export class PersistenceService {
     this._dataStore.pages[page].panels[panel].shown = !this._dataStore.pages[page].panels[panel].shown;
   }
 
+  /**
+   *
+   */
+  saveProject() {
+    console.log(this._dataStore.pages);
+  }
+
 }

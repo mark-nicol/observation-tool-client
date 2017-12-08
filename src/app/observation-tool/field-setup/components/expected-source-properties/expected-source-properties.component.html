@@ -12,8 +12,10 @@
       </label>
       <div class="ui action input">
         <input id="peakContInput"
-               placeholder="0.00000">
-        <sui-select class="selection">
+               placeholder="0.00000"
+               [(ngModel)]="data.continuumFluxDensity.value">
+        <sui-select class="selection"
+                    [(ngModel)]="data.continuumFluxDensity.unit">
           <sui-select-option value="mjy">mJy</sui-select-option>
           <sui-select-option value="jy">Jy</sui-select-option>
         </sui-select>
@@ -34,8 +36,10 @@
       </label>
       <div class="ui action input">
         <input id="peakFluxPerInput"
-               placeholder="0.00000">
-        <sui-select class="selection">
+               placeholder="0.00000"
+               [(ngModel)]="data.lineFluxDensity.value">
+        <sui-select class="selection"
+                    [(ngModel)]="data.lineFluxDensity.unit">
           <sui-select-option value="mjy">mJy</sui-select-option>
           <sui-select-option value="jy">Jy</sui-select-option>
         </sui-select>
@@ -53,8 +57,10 @@
       </label>
       <div class="ui action input">
         <input id="lineWidthInput"
-               placeholder="0.00000">
-        <sui-select class="selection">
+               placeholder="0.00000"
+               [(ngModel)]="data.lineWidth.value">
+        <sui-select class="selection"
+                    [(ngModel)]="data.lineWidth.unit">
           <sui-select-option value="m/s">m/s</sui-select-option>
           <sui-select-option value="km/s">km/s</sui-select-option>
         </sui-select>
@@ -71,7 +77,8 @@
       <div class="ui right labeled input">
         <input id="linePolInput"
                type="number"
-               placeholder="0.0">
+               placeholder="0.0"
+               [(ngModel)]="data.linePolarization">
         <div class="ui label">%</div>
       </div>
     </div>
@@ -86,7 +93,8 @@
       <div class="ui right labeled input">
         <input id="contPolInput"
                type="number"
-               placeholder="0.0">
+               placeholder="0.0"
+               [(ngModel)]="data.continuumPolarization">
         <div class="ui label">%</div>
       </div>
     </div>

@@ -118,7 +118,7 @@ export class SystemSelectorComponent implements OnInit {
   sexagesimalUnits = false;
 
   /** Emitter for a selected system change */
-  @Output() systemEmitter = new EventEmitter<string>();
+  @Output() systemEmitter = new EventEmitter<CoordSystemInterface>();
 
   /** Emitter for a sexagesimal check change */
   @Output() sexagesimalEmitter = new EventEmitter<boolean>();
@@ -127,7 +127,7 @@ export class SystemSelectorComponent implements OnInit {
    * Emits the current system and sexagesimal state
    */
   ngOnInit() {
-    this.systemEmitter.emit(this.chosenSystem);
+    this.systemEmitter.emit(this.systems[this.chosenSystem]);
     this.sexagesimalEmitter.emit(this.sexagesimalUnits);
   }
 
@@ -144,7 +144,7 @@ export class SystemSelectorComponent implements OnInit {
       this.sexagesimalDisabled = true;
       this.sexagesimalUnits    = false;
     }
-    this.systemEmitter.emit(this.chosenSystem);
+    this.systemEmitter.emit(this.systems[this.chosenSystem]);
     this.sexagesimalEmitter.emit(this.sexagesimalUnits);
   }
 

@@ -105,7 +105,7 @@ export class SourceComponent {
    * Handles a change of system in the system selector
    * @param system The new system type to be used
    */
-  systemChange(system: string) {
+  systemChange(system: CoordSystemInterface) {
     this.pageData.chosenSystem = system;
   }
 

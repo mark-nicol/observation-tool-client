@@ -47,32 +47,17 @@ export class PersistenceService {
 
   getScienceGoal(goalId: number): Observable<ScienceGoalInterface> {
     return PersistenceService.createDataObservable(this._dataStore.project.scienceGoals[goalId]);
-    // const subject    = <BehaviorSubject<ScienceGoalInterface>> new BehaviorSubject({}),
-    //       returnGoal = subject.asObservable();
-    // subject.next(this._dataStore.project.proposal.scienceGoals[goalId]);
-    // return returnGoal;
   }
 
   getScienceGoalPage(goalId: number, page: string): Observable<any> {
     return PersistenceService.createDataObservable(this._dataStore.project.scienceGoals[goalId][page]);
-    // const subject    = <BehaviorSubject<any>> new BehaviorSubject({}),
-    //       returnGoal = subject.asObservable();
-    // subject.next(this._dataStore.project.proposal.scienceGoals[goalId][page]);
-    // return returnGoal;
   }
 
   getScienceGoalPageSection(goalId: number, page: string, section: string): Observable<any> {
     return PersistenceService.createDataObservable(this._dataStore.project.scienceGoals[goalId][page][section]);
-    // const subject    = <BehaviorSubject<any>> new BehaviorSubject({}),
-    //       returnGoal = subject.asObservable();
-    // subject.next(this._dataStore.project.proposal.scienceGoals[goalId][page][section]);
-    // return returnGoal;
   }
 
   getSource(goalId: number, sourceId: number) {
-    console.log(this._dataStore.project
-      .scienceGoals[goalId]['fieldSetup']
-      .sources[sourceId]);
     return PersistenceService.createDataObservable(this._dataStore.project
       .scienceGoals[goalId]['fieldSetup']
       .sources[sourceId]);

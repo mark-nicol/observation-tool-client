@@ -1,13 +1,12 @@
-<!--<modular-panel [id]="'general'"-->
-<!--[title]="'General'">-->
 <div class="ui form">
   <div class="field">
     <label for="name-input">Science Goal Name</label>
-    <input id="name-input">
+    <input id="name-input"
+           [(ngModel)]="data.name">
   </div>
   <div class="field">
     <label for="description-input">Description</label>
-    <textarea id="description-input"></textarea>
+    <textarea id="description-input"
+              [(ngModel)]="data.description"></textarea>
   </div>
 </div>
-<!--</modular-panel>-->

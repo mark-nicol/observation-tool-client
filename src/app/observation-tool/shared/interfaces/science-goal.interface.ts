@@ -6,7 +6,6 @@ import {SpectralSetupInterface} from './science-goal-interfaces/spectral-setup.i
 import {TechnicalJustificationInterface} from './science-goal-interfaces/technical-justification.interface';
 
 export interface ScienceGoalInterface {
-  name: string,
   general: ScienceGoalGeneralInterface,
   fieldSetup: FieldSetupInterface,
   spectralSetup: SpectralSetupInterface,

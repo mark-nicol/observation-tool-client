@@ -5,7 +5,7 @@
     <sui-radio-button name="coordTypeRadios" value="absolute" [(ngModel)]="this.data.coordType">Absolute</sui-radio-button>
   </div>
 
-  <div *ngIf="(_persistenceService.getDataItem('field-setup', 'field-source', 'targetType') === 'individual'); then individualComponent; else rectangularComponent"></div>
+  <div *ngIf="(_persistenceService.getSourceTargetType() === 'individual'); then individualComponent else rectangularComponent"></div>
   <ng-template #individualComponent>
     <fcc-individual [radioValue]="data.coordType"></fcc-individual>
   </ng-template>

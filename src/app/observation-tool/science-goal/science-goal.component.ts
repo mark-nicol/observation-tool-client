@@ -13,20 +13,42 @@ import {PersistenceService} from '../shared/services/persistence.service';
 })
 export class ScienceGoalComponent {
 
-  /** The currently selected goal page */
+  pages = {
+    'general': {
+      path: 'general',
+      text: 'General'
+    },
+    'fieldSetup': {
+      path: 'field-setup',
+      text: 'Field Setup'
+    },
+    'spectralSetup': {
+      path: 'spectral-setup',
+      text: 'Spectral Setup'
+    },
+    'calibrationSetup': {
+      path: 'calibration-setup',
+      text: 'Calibration Setup'
+    },
+    'controlPerformance': {
+      path: 'control-performance',
+      text: 'Control and Performance'
+    },
+    'technicalJustification': {
+      path: 'technical-justification',
+      text: 'Technical Justification'
+    }
+  };
+
+  pageKeys = Object.keys;
+
   selectedPage = 'general';
-
-  /** Dict of all science goal page data */
-  pages: { [id: string]: ScienceGoalInterface };
-
-  /** Iterator for pages */
-  pageKeys: (o) => string[] = Object.keys;
 
   /**
    * Constructor
    */
   constructor(private persistenceService: PersistenceService) {
-    // this.persistenceService.getProject().subscribe(res => this.pages = res);
+
   }
 
 }

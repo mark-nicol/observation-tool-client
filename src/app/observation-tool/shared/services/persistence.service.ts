@@ -35,7 +35,6 @@ export class PersistenceService {
     this._project           = <BehaviorSubject<ProjectInterface>>new BehaviorSubject({});
     this.project            = this._project.asObservable();
     this._dataStore.project = NEW_PROJECT;
-    /*UPDATE*/
     this._project.next(Object.assign({}, this._dataStore).project);
   }
 
@@ -73,17 +72,6 @@ export class PersistenceService {
   getScienceGoalDataItem() {
 
   }
-
-  // /**
-  //  * Returns a single item from a panel, used for reading radio values or bools
-  //  * @param page  I.D. of the page which contains the panel
-  //  * @param panel I.D. of the panel with contains the item
-  //  * @param item  I.D. of the item to retrieve data from
-  //  */
-  // getDataItem(page: string, panel: string, item: string): any {
-  //   return this._dataStore.pages[page].sections[panel].data[item];
-  //   /*UPDATE*/
-  // }
 
   /**
    *

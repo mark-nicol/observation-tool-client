@@ -20,6 +20,7 @@
     <button *ngIf="!sexagesimalHidden"
             class="ui toggle button"
             [class.active]="sexagesimalUnits"
+            [disabled]="sexagesimalDisabled"
             (click)="sexagesimalChange()">
       Sexagesimal
     </button>

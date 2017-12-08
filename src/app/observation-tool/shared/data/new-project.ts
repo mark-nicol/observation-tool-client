@@ -55,7 +55,20 @@ export const NEW_PROJECT: ProjectInterface = {
             solarSystemObject: false,
             chosenSolarObject: null,
             targetType: 'individual',
-            chosenSystem: 'ICRS', /*TODO change to object*/
+            chosenSystem: {
+              sexagesimalLabels: {
+                latLabel: 'Dec',
+                lonLabel: 'RA',
+              },
+              normalLabels: {
+                latLabel: 'Dec(deg)',
+                lonLabel: 'RA(deg)',
+              },
+              latPlaceholder: '0',
+              lonPlaceholder: '0',
+              lonHeader: 'RA',
+              latHeader: 'Dec'
+            },
             sexagesimalUnits: false,
             lat: new Latitude(),
             lon: new Longitude(),

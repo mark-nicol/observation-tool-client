@@ -67,10 +67,6 @@ export class PersistenceService {
     return this._dataStore.project.scienceGoals[0]['fieldSetup'].sources[0].targetType;
   }
 
-  getScienceGoalDataItem() {
-
-  }
-
   /**
    *
    */

@@ -16,8 +16,6 @@ export class FieldCenterCoordinatesComponent {
   /** The page data from the fieldSetupService */
   data: FieldCentreCoordinatesInterface;
 
-  targetType: string;
-
   /** Field Setup Service to be used in HTML template */
   protected _persistenceService: PersistenceService;
 
@@ -30,7 +28,6 @@ export class FieldCenterCoordinatesComponent {
     this.persistenceService.getSource(0, 0)
       .subscribe(res => {
         this.data = res.fieldCentreCoordinates;
-        this.targetType = res.targetType;
       });
   }
 
@@ -40,11 +37,6 @@ export class FieldCenterCoordinatesComponent {
    */
   changeCoordType(newCoordType: string) {
     this.data.coordType = newCoordType;
-  }
-
-  checkTargetType() {
-    console.log(this.targetType);
-    return 'individual';
   }
 
 }

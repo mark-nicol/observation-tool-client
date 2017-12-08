@@ -21,5 +21,5 @@ export interface ProposalInterface {
   investigators: [AlmaInvestigatorInterface],
   scienceCase: any,
   duplicateObservations: string,
-  scienceGoals: [ScienceGoalInterface]
+  scienceGoals: {[id: number]: ScienceGoalInterface}
 }

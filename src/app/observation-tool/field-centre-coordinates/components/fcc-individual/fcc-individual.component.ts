@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {ScienceGoalIdentifiers} from '../../../shared/enums/science-goal-identifiers.enum';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -37,7 +36,8 @@ export class FccIndividualComponent {
    */
   constructor(private persistenceService: PersistenceService) {
     this._persistenceService = persistenceService;
-    persistenceService.getPanelData(ScienceGoalIdentifiers.FIELD_SETUP, ScienceGoalIdentifiers.FIELD_CENTRE_COORDINATES).subscribe(res => this.data = res.individual);
+    this.data = {};
+    // persistenceService.getPanelData(ScienceGoalIdentifiers.FIELD_SETUP, ScienceGoalIdentifiers.FIELD_CENTRE_COORDINATES).subscribe(res => this.data = res.individual);
   }
 
   /**

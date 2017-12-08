@@ -1,4 +1,3 @@
-import {ScienceGoalPageInterface} from '../interfaces/science-goal-page.interface';
 import {PersistenceService} from '../services/persistence.service';
 
 /**
@@ -13,7 +12,7 @@ export abstract class ScienceGoalPage {
   id: string;
 
   /** ScienceGoalPageInterface data */
-  page: ScienceGoalPageInterface;
+  page: any;
 
   /**
    * Sets the id and loads page data
@@ -22,7 +21,7 @@ export abstract class ScienceGoalPage {
    */
   constructor(private persistenceService: PersistenceService, id: string) {
     this.id = id;
-    this.persistenceService.getPage(this.id).subscribe(data => this.page = data);
+    this.persistenceService.getScienceGoalPage(1, this.id).subscribe(data => this.page = data);
   }
 
   // /**

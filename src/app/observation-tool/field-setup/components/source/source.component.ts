@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
-import {SourceComponentInterface} from '../../../shared/interfaces/source.interface';
+import {SourceInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/source.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -11,14 +11,14 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 
 @Component({
   selector: 'field-source',
-  host: {'(document:click)': 'unfocus($event)'},
+  host: {'(document:click)': 'unfocus($event)'}, // TODO fix host binding
   templateUrl: './source.component.html',
   styleUrls: ['./source.component.css']
 })
 export class SourceComponent {
 
   /** ScienceGoalPageInterface data loaded from Field Setup Service */
-  pageData: SourceComponentInterface;
+  pageData: SourceInterface;
 
   /** Selectable solar system bodies for selection box */
   solarBodies = [
@@ -49,7 +49,8 @@ export class SourceComponent {
    * @param persistenceService Injected service
    */
   constructor(private persistenceService: PersistenceService) {
-    persistenceService.getPanelData('field-setup', 'field-source').subscribe(data => this.pageData = data);
+    this.pageData = null;
+    // persistenceService.getPanelData('field-setup', 'field-source').subscribe(data => this.pageData = data);
   }
 
   /**

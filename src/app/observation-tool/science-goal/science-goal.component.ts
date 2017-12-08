@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ScienceGoalPageInterface} from '../shared/interfaces/science-goal-page.interface';
+import {ScienceGoalInterface} from '../shared/interfaces/science-goal.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
@@ -17,7 +17,7 @@ export class ScienceGoalComponent {
   selectedPage = 'general';
 
   /** Dict of all science goal page data */
-  pages: { [id: string]: ScienceGoalPageInterface };
+  pages: { [id: string]: ScienceGoalInterface };
 
   /** Iterator for pages */
   pageKeys: (o) => string[] = Object.keys;
@@ -26,7 +26,7 @@ export class ScienceGoalComponent {
    * Constructor
    */
   constructor(private persistenceService: PersistenceService) {
-    this.persistenceService.getProject().subscribe(res => this.pages = res);
+    // this.persistenceService.getProject().subscribe(res => this.pages = res);
   }
 
 }

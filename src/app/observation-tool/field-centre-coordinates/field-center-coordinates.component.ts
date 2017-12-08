@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
-import {FieldCentreCoordinatesInterface} from '../shared/interfaces/field-centre-coordinates.interface';
+import {FieldCentreCoordinatesInterface} from '../shared/interfaces/science-goal-interfaces/field-setup-interfaces/field-centre-coordinates.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
@@ -26,7 +25,8 @@ export class FieldCenterCoordinatesComponent {
    */
   constructor(private persistenceService: PersistenceService) {
     this._persistenceService = persistenceService;
-    persistenceService.getPanelData(ScienceGoalIdentifiers.FIELD_SETUP, ScienceGoalIdentifiers.FIELD_CENTRE_COORDINATES).subscribe(res => this.data = res);
+    this.data = null;
+    // persistenceService.getPanelData(ScienceGoalIdentifiers.FIELD_SETUP, ScienceGoalIdentifiers.FIELD_CENTRE_COORDINATES).subscribe(res => this.data = res);
   }
 
   /**

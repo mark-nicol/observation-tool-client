@@ -63,10 +63,10 @@
                (keyup.enter)="setLatLon(latInput.value, latInput)"
                (blur)="setLatLon(latInput.value, latInput)"
                placeholder="{{
-                      pageData.sexagesimalUnits ?
-                      (pageData.chosenSystem.latPlaceholder | sexagesimal) :
-                      (pageData.chosenSystem.latPlaceholder | degrees)
-                       }}">
+        pageData.sexagesimalUnits ?
+        (pageData.chosenSystem.latPlaceholder | sexagesimal) :
+        (pageData.chosenSystem.latPlaceholder | degrees)
+        }}">
       </div>
 
       <!-- Long input -->
@@ -84,10 +84,10 @@
                (keyup.enter)="setLatLon(lonInput.value, lonInput)"
                (blur)="setLatLon(lonInput.value, lonInput)"
                placeholder="{{
-                      pageData.sexagesimalUnits ?
-                      (pageData.chosenSystem.lonPlaceholder | sexagesimal) :
-                      (pageData.chosenSystem.lonPlaceholder | degrees)
-                    }}">
+        pageData.sexagesimalUnits ?
+        (pageData.chosenSystem.lonPlaceholder | sexagesimal) :
+        (pageData.chosenSystem.lonPlaceholder | degrees)
+        }}">
       </div>
     </div>
 

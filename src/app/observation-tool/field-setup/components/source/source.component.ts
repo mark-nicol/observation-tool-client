@@ -49,8 +49,8 @@ export class SourceComponent {
    * @param persistenceService Injected service
    */
   constructor(private persistenceService: PersistenceService) {
-    this.pageData = null;
-    // persistenceService.getPanelData('field-setup', 'field-source').subscribe(data => this.pageData = data);
+    persistenceService.getSource(0, 0)
+      .subscribe(res => this.pageData = res);
   }
 
   /**

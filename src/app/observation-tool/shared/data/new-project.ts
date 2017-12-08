@@ -49,53 +49,55 @@ export const NEW_PROJECT: ProjectInterface = {
           imageServer: '1',
           imageSize: 10.0
         },
-        sources: [{
-          sourceName: '',
-          solarSystemObject: false,
-          chosenSolarObject: null,
-          targetType: 'individual',
-          chosenSystem: 'ICRS', /*TODO change to object*/
-          sexagesimalUnits: false,
-          lat: new Latitude(),
-          lon: new Longitude(),
-          parallax: new Angle(AngleUnits.MAS),
-          properMotionCross: new AngularVelocity(AngularVelocityUnits.MAS_YR),
-          properMotionDeclination: new AngularVelocity(AngularVelocityUnits.MAS_YR),
-          radialVelocity: new Speed(SpeedUnits.KM_S),
-          radialVelocityReferenceFrame: 'bar',
-          redshift: 0.00000,
-          dopplerType: 'radio',
-          expectedSourceProperties: {
-            continuumFluxDensity: new Sensitivity(),
-            continuumPolarization: 0.0,
-            lineFluxDensity: new Sensitivity(),
-            lineWidth: new Speed(),
-            linePolarization: 0.0
-          },
-          fieldCentreCoordinates: {
-            coordType: 'relative',
-            individual: {
-              offsetUnit: 'arcsec',
-              rows: [
-                {
-                  lat: new Latitude(),
-                  lon: new Longitude()
-                }
-              ]
+        sources: {
+          0: {
+            sourceName: '',
+            solarSystemObject: false,
+            chosenSolarObject: null,
+            targetType: 'individual',
+            chosenSystem: 'ICRS', /*TODO change to object*/
+            sexagesimalUnits: false,
+            lat: new Latitude(),
+            lon: new Longitude(),
+            parallax: new Angle(AngleUnits.MAS),
+            properMotionCross: new AngularVelocity(AngularVelocityUnits.MAS_YR),
+            properMotionDeclination: new AngularVelocity(AngularVelocityUnits.MAS_YR),
+            radialVelocity: new Speed(SpeedUnits.KM_S),
+            radialVelocityReferenceFrame: 'bar',
+            redshift: 0.00000,
+            dopplerType: 'radio',
+            expectedSourceProperties: {
+              continuumFluxDensity: new Sensitivity(),
+              continuumPolarization: 0.0,
+              lineFluxDensity: new Sensitivity(),
+              lineWidth: new Speed(),
+              linePolarization: 0.0
             },
-            rectangular: {
-              chosenSystem: 'icrs',
-              sexagesimalUnits: false,
-              lonOffset: new Angle(AngleUnits.ARCSEC),
-              latOffset: new Angle(AngleUnits.ARCSEC),
-              pLength: new Angle(AngleUnits.ARCSEC),
-              qLength: new Angle(AngleUnits.ARCSEC),
-              positionAngle: new Angle(),
-              spacing: 0.51093,
-              spacingUnits: 'fraction'
+            fieldCentreCoordinates: {
+              coordType: 'relative',
+              individual: {
+                offsetUnit: 'arcsec',
+                rows: [
+                  {
+                    lat: new Latitude(),
+                    lon: new Longitude()
+                  }
+                ]
+              },
+              rectangular: {
+                chosenSystem: 'icrs',
+                sexagesimalUnits: false,
+                lonOffset: new Angle(AngleUnits.ARCSEC),
+                latOffset: new Angle(AngleUnits.ARCSEC),
+                pLength: new Angle(AngleUnits.ARCSEC),
+                qLength: new Angle(AngleUnits.ARCSEC),
+                positionAngle: new Angle(),
+                spacing: 0.51093,
+                spacingUnits: 'fraction'
+              }
             }
           }
-        }]
+        }
       },
       spectralSetup: null,
       calibrationSetup: null,

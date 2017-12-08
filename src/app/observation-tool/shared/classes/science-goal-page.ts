@@ -21,15 +21,7 @@ export abstract class ScienceGoalPage {
    */
   constructor(private persistenceService: PersistenceService, id: string) {
     this.id = id;
-    this.persistenceService.getScienceGoalPage(1, this.id).subscribe(data => this.page = data);
+    this.persistenceService.getScienceGoalPage(0, this.id).subscribe(data => this.page = data);
   }
-
-  // /**
-  //  * Handles closing or opening of sections
-  //  * @param panel The id of the panel to change state
-  //  */
-  // hiddenChange(panel: string) {
-  //   this.persistenceService.hiddenChange(this.id, panel);
-  // }
 
 }

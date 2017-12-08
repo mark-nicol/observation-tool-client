@@ -69,6 +69,15 @@ export class PersistenceService {
     // return returnGoal;
   }
 
+  getSource(goalId: number, sourceId: number) {
+    console.log(this._dataStore.project
+      .scienceGoals[goalId]['fieldSetup']
+      .sources[sourceId]);
+    return PersistenceService.createDataObservable(this._dataStore.project
+      .scienceGoals[goalId]['fieldSetup']
+      .sources[sourceId]);
+  }
+
   getScienceGoalDataItem() {
 
   }

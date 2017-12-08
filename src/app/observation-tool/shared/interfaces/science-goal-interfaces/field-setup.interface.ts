@@ -7,5 +7,5 @@ export interface FieldSetupInterface {
   spatialImage: SpatialImageInterface,
   fovParameters: FovParametersInterface,
   imageQuery: ImageQueryInterface,
-  sources: [SourceInterface]
+  sources: { [id: number]: SourceInterface }
 }

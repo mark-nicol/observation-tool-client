@@ -59,7 +59,9 @@
         </label>
         <input #latInput
                id="latInput"
-               [ngModel]="pageData.sexagesimalUnits && pageData.lat ? (pageData.lat.value | sexagesimal: false) : pageData.lat.value"
+               [ngModel]="pageData.sexagesimalUnits && pageData.lat ?
+                         (pageData.lat.value | sexagesimal: false) :
+                          pageData.lat.value.toFixed(8)"
                (keyup.enter)="setLatLon(latInput.value, latInput)"
                (blur)="setLatLon(latInput.value, latInput)"
                placeholder="{{
@@ -80,7 +82,9 @@
           }}</label>
         <input #lonInput
                id="lonInput"
-               [ngModel]="pageData.sexagesimalUnits && pageData.lon ? (pageData.lon.value | sexagesimal: true) : pageData.lon.value"
+               [ngModel]="pageData.sexagesimalUnits && pageData.lon ?
+                         (pageData.lon.value | sexagesimal: true) :
+                          pageData.lon.value.toFixed(8)"
                (keyup.enter)="setLatLon(lonInput.value, lonInput)"
                (blur)="setLatLon(lonInput.value, lonInput)"
                placeholder="{{
@@ -103,7 +107,7 @@
         <div class="ui action input">
           <input id="parallaxInput"
                  placeholder="0.00000"
-                 [ngModel]="pageData.parallax.value">
+                 [ngModel]="pageData.parallax.value.toFixed(5)">
           <sui-select class="selection"
                       title="Parallax unit selector"
                       [(ngModel)]="pageData.parallax.unit">
@@ -123,7 +127,7 @@
         <div class="ui action input">
           <input id="pmRaInput"
                  placeholder="0.00000"
-                 [ngModel]="pageData.properMotionCross.value">
+                 [ngModel]="pageData.properMotionCross.value.toFixed(5)">
           <sui-select class="selection"
                       title="Proper motion ra unit selector"
                       [(ngModel)]="pageData.properMotionCross.unit">
@@ -145,7 +149,7 @@
         <div class="ui action input">
           <input id="plgecInput"
                  placeholder="0.00000"
-                 [ngModel]="pageData.properMotionDeclination.value">
+                 [ngModel]="pageData.properMotionDeclination.value.toFixed(5)">
           <sui-select class="selection"
                       title="proper motion declination unit selector"
                       [(ngModel)]="pageData.properMotionDeclination.unit">
@@ -169,7 +173,7 @@
         <div class="ui action input">
           <input id="radialVelocityInput"
                  placeholder="0.000"
-                 [ngModel]="pageData.radialVelocity.value">
+                 [ngModel]="pageData.radialVelocity.value.toFixed(3)">
           <sui-select class="selection"
                       title="Radial velocity unit selector"
                       [(ngModel)]="pageData.radialVelocity.unit">
@@ -196,7 +200,7 @@
         </label>
         <input id="zInput"
                placeholder="0.000000000"
-               [ngModel]="pageData.redshift">
+               [ngModel]="pageData.redshift.toFixed(7)">
       </div>
 
       <!-- Doppler selector -->

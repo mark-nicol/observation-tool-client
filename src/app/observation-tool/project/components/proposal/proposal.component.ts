@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ProposalInterface} from '../../../shared/interfaces/proposal.interface';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * The proposal component
@@ -10,7 +12,9 @@ import {Component} from '@angular/core';
   styleUrls: ['./proposal.component.css']
 })
 
-export class ProposalComponent {
+export class ProposalComponent implements OnInit {
+
+  data: ProposalInterface;
 
   /** The currently selected proposal type */
   chosenType = 'regularRadio';
@@ -18,19 +22,19 @@ export class ProposalComponent {
   /** The available proposal types for looping over */
   typeRadios = [
     {
-      id: 'regularRadio',
+      id: 'regular',
       text: 'Regular'
     },
     {
-      id: 'opportunityRadio',
+      id: 'opportunity',
       text: 'Target of Opportunit'
     },
     {
-      id: 'vlbiRadio',
+      id: 'vlbi',
       text: 'VLBI'
     },
     {
-      id: 'largeRadio',
+      id: 'large',
       text: 'Large Program'
     },
   ];
@@ -135,26 +139,19 @@ export class ProposalComponent {
   selectedKeywordCount = 0;
   selectedKeywordValues: any;
 
-  remainingChars = 1200;
+  constructor(private persistenceService: PersistenceService) {
+
+  }
+
+  ngOnInit() {
+    this.persistenceService.getProject().subscribe(res => this.data = res.proposal)
+  }
 
   /**
    * Resets the keyword selector when the chosen category changes
    */
   categoryRadioChange() {
-    this.selectedKeywordValues = [];
-    this.selectedKeywordCount  = 0;
-  }
-
-  /**
-   * Validates the keywords, used for disabling the selections
-   */
-  keywordsChange() {
-    this.selectedKeywordCount = this.selectedKeywordValues.length;
-    console.log(this.selectedKeywordCount, this.selectedKeywordValues);
-  }
-
-  checkChars(charCount: any) {
-    this.remainingChars = 1200 - charCount.length;
+    this.data.keywords = null;
   }
 
 }

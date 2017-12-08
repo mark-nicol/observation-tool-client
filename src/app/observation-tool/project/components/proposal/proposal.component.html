@@ -2,29 +2,41 @@
   <div class="ui segment">
     <h4 class="ui dividing header">Proposal Information</h4>
     <div class="field">
-      <label>Proposal Title</label>
-      <input type="text">
+      <label for="titleInput">Proposal Title</label>
+      <input id="titleInput"
+             type="text"
+             [(ngModel)]="data.title">
     </div>
     <div class="field">
-      <label>Proposal Cycle</label>
-      <input type="text">
+      <label for="cycleInput">Proposal Cycle</label>
+      <input id="cycleInput"
+             type="text"
+             [(ngModel)]="data.cycle">
     </div>
     <div class="field">
-      <label>Abstract</label>
-      <textarea #abstractTextArea rows="5" (keyup)="checkChars(abstractTextArea.value)"></textarea>
-      <p>Characters remaining: {{remainingChars}}</p>
+      <label for="abstractTextArea">Abstract</label>
+      <textarea #abstractTextArea
+                id="abstractTextArea"
+                rows="5"
+                [(ngModel)]="data.abstract"></textarea>
+      <p>Characters remaining: {{1200-abstractTextArea.value.length}}</p>
     </div>
     <div class="field">
-      <label>Related Proposals</label>
-      <textarea rows="5"></textarea>
+      <label for="relatedProposalsTextArea">Related Proposals</label>
+      <textarea id="relatedProposalsTextArea"
+                rows="5"
+                [(ngModel)]="data.relatedProposals"></textarea>
     </div>
     <div class="field">
-      <label>Previous Proposals</label>
-      <textarea rows="5"></textarea>
+      <label for="previousProposalsTextArea">Previous Proposals</label>
+      <textarea id="previousProposalsTextArea"
+                rows="5"
+                [(ngModel)]="data.previousProposals"></textarea>
     </div>
     <div class="field">
       <label>Student Project</label>
-      <sui-checkbox class="toggle"></sui-checkbox>
+      <sui-checkbox class="toggle"
+                    [(ngModel)]="data.studentProject"></sui-checkbox>
     </div>
   </div>
   <div class="ui segment">
@@ -35,7 +47,7 @@
           <sui-radio-button id="{{typeRadio.id}}"
                             name="typeRadios"
                             value="{{typeRadio.id}}"
-                            [(ngModel)]="chosenType">
+                            [(ngModel)]="data.proposalType">
             {{typeRadio.text}}
           </sui-radio-button>
         </div>
@@ -49,7 +61,7 @@
         <sui-radio-button id="{{categoryRadios[categoryRadio].value}}"
                           name="categoryRadios"
                           value="{{categoryRadios[categoryRadio].value}}"
-                          [(ngModel)]="chosenCategory"
+                          [(ngModel)]="data.scientificCategory"
                           (currentValueChange)="categoryRadioChange()">
           {{categoryRadios[categoryRadio].text}}
         </sui-radio-button>
@@ -57,14 +69,13 @@
     </div>
 
     <div class="field">
-      <label for="keywordSelector">Keywords (chosen {{selectedKeywordCount}} of 2)</label>
+      <label for="keywordSelector">Keywords (chosen {{data.keywords === null ? 0 : data.keywords.length}} of 2)</label>
       <sui-multi-select #keywordSelector
                         id="keywordSelector"
                         class="selection"
-                        [(ngModel)]="selectedKeywordValues"
-                        (maxSelected)="2"
-                        (selectedOptionsChange)="keywordsChange()">
-        <sui-select-option *ngFor="let option of categoryRadios[chosenCategory].keywords"
+                        [(ngModel)]="data.keywords"
+                        (maxSelected)="2">
+        <sui-select-option *ngFor="let option of categoryRadios[data.scientificCategory].keywords"
                            [value]="option">
           {{option}}
         </sui-select-option>
@@ -99,7 +110,7 @@
           <th colspan="6">
             <div class="ui tiny compact right floated buttons">
               <button class="ui blue button"
-                      [disabled]="chosenType === 'regularRadio' || chosenType === 'opportunityRadio'">
+                      [disabled]="data.proposalType === 'regular' || data.proposalType === 'opportunity'">
                 Add CoPI
               </button>
               <button class="ui blue button">Add Col</button>
@@ -115,7 +126,7 @@
   <div class="ui segment">
     <h4 class="ui dividing header">Science Case (Mandatory, PDF, 4 pages max.)</h4>
     <div class="ui fluid mini action input">
-      <input type="text">
+      <input title="science case input" type="text">
       <button class="ui tiny blue button">Attach</button>
       <button class="ui tiny basic blue button">View</button>
       <button class="ui tiny red button">Detach</button>
@@ -124,6 +135,8 @@
   </div>
   <div class="ui segment">
     <h4 class="ui dividing header">Duplicate Observations</h4>
-    <textarea rows="5"></textarea>
+    <textarea title="Duplicate observations input"
+              rows="5"
+              [(ngModel)]="data.duplicateObservations"></textarea>
   </div>
 </div>

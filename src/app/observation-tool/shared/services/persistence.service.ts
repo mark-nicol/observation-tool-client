@@ -1,8 +1,9 @@
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
-import {NEW_PROJECT} from '../data/new-project';
 import {ProjectInterface} from '../interfaces/project.interface';
+import {SourceInterface} from '../interfaces/science-goal-interfaces/field-setup-interfaces/source.interface';
 import {ScienceGoalInterface} from '../interfaces/science-goal.interface';
 
 /**
@@ -19,6 +20,7 @@ export class PersistenceService {
   private _dataStore: {
     project: any
   };
+  baseUrl = 'http://localhost:8080/projects/0';
 
   private static createDataObservable(data): Observable<any> {
     const subject  = <BehaviorSubject<any>> new BehaviorSubject({}),
@@ -30,11 +32,11 @@ export class PersistenceService {
   /**
    * Constructor, loads data and sets members
    */
-  constructor() {
-    this._dataStore         = {project: {}};
-    this._project           = <BehaviorSubject<ProjectInterface>>new BehaviorSubject({});
-    this.project            = this._project.asObservable();
-    this._dataStore.project = NEW_PROJECT;
+  constructor(private http: HttpClient) {
+    this._dataStore = {project: null};
+    this._project   = <BehaviorSubject<ProjectInterface>>new BehaviorSubject({});
+    this.project    = this._project.asObservable();
+    this.http.get(this.baseUrl).subscribe(res => this._dataStore.project = res);
     this._project.next(Object.assign({}, this._dataStore).project);
   }
 
@@ -50,14 +52,16 @@ export class PersistenceService {
   }
 
   getScienceGoalPage(goalId: number, page: string): Observable<any> {
-    return PersistenceService.createDataObservable(this._dataStore.project.scienceGoals[goalId][page]);
+    if (this._dataStore.project) {
+      return PersistenceService.createDataObservable(this._dataStore.project.scienceGoals[goalId][page]);
+    }
   }
 
   getScienceGoalPageSection(goalId: number, page: string, section: string): Observable<any> {
     return PersistenceService.createDataObservable(this._dataStore.project.scienceGoals[goalId][page][section]);
   }
 
-  getSource(goalId: number, sourceId: number) {
+  getSource(goalId: number, sourceId: number): Observable<SourceInterface> {
     return PersistenceService.createDataObservable(this._dataStore.project
       .scienceGoals[goalId]['fieldSetup']
       .sources[sourceId]);

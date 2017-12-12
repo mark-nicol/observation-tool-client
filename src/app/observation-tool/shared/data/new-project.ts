@@ -10,11 +10,9 @@ import {SpeedUnits} from '../../../units/enums/speed-units.enum';
 import {ProjectInterface} from '../interfaces/project.interface';
 
 export const NEW_PROJECT: ProjectInterface = {
-  project: {
-    principleInvestigator: null,
-    priority: 1,
-    projectCode: 'ABC123'
-  },
+  principleInvestigator: null,
+  priority: 1,
+  projectCode: 'ABC123',
   proposal: {
     title: null,
     cycle: null,

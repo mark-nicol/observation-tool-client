@@ -19,30 +19,26 @@
     <button class="ui blue button">Select Lines to Overlay</button>
   </div>
 
-  <div class="grouped fields">
-    <div class="field">
-      <label>Water Vapour Column Density</label>
-      <sui-radio-button name="densityRadios"
-                        value="automatic"
-                        [(ngModel)]="densityRadioChoice"
-                        (currentValueChange)="densityRadioChange()">Automatic
-      </sui-radio-button>
-    </div>
-    <div class="field">
-      <sui-radio-button name="densityRadios"
-                        value="manual"
-                        [(ngModel)]="densityRadioChoice"
-                        (currentValueChange)="densityRadioChange()">Manual
-      </sui-radio-button>
-      <sui-select #densitySelector
-                  class="selection"
-                  [isDisabled]="densityRadioChoice === 'automatic'"
-                  (selectedOptionChange)="densitySelectorChange(densitySelector.selectedOption)">
-        <sui-select-option *ngFor="let choice of columnDensityChoices; let i = index"
-                           [value]="choice">{{choice}}
-        </sui-select-option>
-      </sui-select>
-    </div>
 
+  <div class="field">
+    <label>Water Vapour Column Density</label>
+    <sui-radio-button name="densityRadios"
+                      value="automatic"
+                      [(ngModel)]="densityRadioChoice"
+                      (currentValueChange)="densityRadioChange()">Automatic
+    </sui-radio-button>
   </div>
+  <sui-radio-button name="densityRadios"
+                    value="manual"
+                    [(ngModel)]="densityRadioChoice"
+                    (currentValueChange)="densityRadioChange()">Manual
+  </sui-radio-button>
+  <sui-select #densitySelector
+              class="selection"
+              [isDisabled]="densityRadioChoice === 'automatic'"
+              (selectedOptionChange)="densitySelectorChange(densitySelector.selectedOption)">
+    <sui-select-option *ngFor="let choice of columnDensityChoices; let i = index"
+                       [value]="choice">{{choice}}
+    </sui-select-option>
+  </sui-select>
 </div>

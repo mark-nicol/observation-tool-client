@@ -57,7 +57,6 @@ export class VisualisationControlComponent {
 
   /**
    * Sets the density radio choice and emits
-   * @param newRadio The new value to use
    */
   densityRadioChange() {
     this.densityRadioEmitter.emit(this.densityRadioChoice);

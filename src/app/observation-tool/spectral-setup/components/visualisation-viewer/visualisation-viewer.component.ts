@@ -91,7 +91,7 @@ export class VisualisationViewerComponent implements OnInit {
 
   /** Object holding data for the context chart */
   private context: ChartInterface = {
-    margin: {top: 430, right: 20, bottom: 30, left: 40},
+    margin: {top: 350, right: 20, bottom: 30, left: 40},
     chartArea: {},
     width: 0,
     height: 0,
@@ -133,7 +133,7 @@ export class VisualisationViewerComponent implements OnInit {
     this.setupCharts();
     this.setupBrushZoom();
     this.drawRegions();
-    // this.drawContextChart();
+    this.drawContextChart();
     this.drawFocusChart();
     this.resetView();
   }
@@ -143,9 +143,9 @@ export class VisualisationViewerComponent implements OnInit {
    */
   setupSvg() {
     // Get the div element from the DOM
-    const element       = this.chartContainer.nativeElement;
+    const element      = this.chartContainer.nativeElement;
     // Set the width and height of the context chart
-    this.context.width  = element.offsetWidth - this.context.margin.left - this.context.margin.right;
+    this.context.width = element.offsetWidth - this.context.margin.left - this.context.margin.right;
     this.context.height = element.offsetHeight - this.context.margin.top - this.context.margin.bottom;
     // Set the width and height of the focus chart (width of both is the same)
     this.focus.width    = this.context.width;
@@ -311,9 +311,9 @@ export class VisualisationViewerComponent implements OnInit {
     this.focus.chartArea.select('.axis-x').call(this.focus.xAxis);
 
     // Move the zoom region on the focus chart
-    // this.svg.select('.zoom').call(this.zoom.transform, d3.zoomIdentity
-    //   .scale(this.focus.width / (s[1] - s[0]))
-    //   .translate(-s[0], 0));
+    this.svg.select('.zoom').call(this.zoom.transform, d3.zoomIdentity
+      .scale(this.focus.width / (s[1] - s[0]))
+      .translate(-s[0], 0));
   }
 
   /**

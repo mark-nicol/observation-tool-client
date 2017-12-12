@@ -35,11 +35,11 @@
                         (currentValueChange)="densityRadioChange()">Manual
       </sui-radio-button>
       <sui-select #densitySelector
-                  class="form-control form-control-sm"
+                  class="selection"
                   [isDisabled]="densityRadioChoice === 'automatic'"
-                  (change)="densitySelectorChange(densitySelector.value)">
+                  (selectedOptionChange)="densitySelectorChange(densitySelector.selectedOption)">
         <sui-select-option *ngFor="let choice of columnDensityChoices; let i = index"
-                           value="{{i+1}}">{{choice}}
+                           [value]="choice">{{choice}}
         </sui-select-option>
       </sui-select>
     </div>

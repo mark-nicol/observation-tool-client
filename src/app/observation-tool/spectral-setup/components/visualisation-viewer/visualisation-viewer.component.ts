@@ -128,12 +128,12 @@ export class VisualisationViewerComponent implements OnInit {
    * Required for service callback
    */
   createVisualiser(data) {
-    this.data = data.data;
+    this.data = data;
     this.setupSvg();
     this.setupCharts();
     this.setupBrushZoom();
     this.drawRegions();
-    this.drawContextChart();
+    // this.drawContextChart();
     this.drawFocusChart();
     this.resetView();
   }
@@ -358,7 +358,7 @@ export class VisualisationViewerComponent implements OnInit {
    * Changes the type of line show to demonstrate D3 transition
    */
   changeLine(octile: number) {
-    this.spectralDataService.getData(octile).subscribe(data => this.redrawLines(data.data));
+    this.spectralDataService.getData(octile).subscribe(data => this.redrawLines(data));
   }
 
   /**

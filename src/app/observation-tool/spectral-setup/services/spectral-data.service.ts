@@ -21,7 +21,7 @@ export class SpectralDataService {
    * @param option The octile to retrieve data for
    */
   getData(option: number): any {
-    return this.http.get(`http://localhost:8080/water-vapour/${option}`);
+    return this.http.get(`http://localhost:8080/spectral-data/${option}`);
   }
 
 }

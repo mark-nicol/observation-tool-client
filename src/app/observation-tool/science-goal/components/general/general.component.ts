@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * General science goal page component
- *
- * Currently inactive
  */
 
 @Component({
@@ -15,7 +12,7 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 
 export class GeneralComponent implements OnInit {
 
-  constructor(private persistenceService: PersistenceService) {
+  constructor() {
 
   }
 

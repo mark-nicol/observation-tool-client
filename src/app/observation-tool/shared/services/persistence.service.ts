@@ -52,9 +52,9 @@ export class PersistenceService {
   }
 
   getScienceGoalPage(goalId: number, page: string): Observable<any> {
-    if (this._dataStore.project) {
-      return PersistenceService.createDataObservable(this._dataStore.project.scienceGoals[goalId][page]);
-    }
+    console.log('returning', goalId, page);
+    console.log(this._dataStore.project);
+    return PersistenceService.createDataObservable(this._dataStore.project.scienceGoals[goalId][page]);
   }
 
   getScienceGoalPageSection(goalId: number, page: string, section: string): Observable<any> {

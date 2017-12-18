@@ -23,8 +23,10 @@ export class FccIndividualComponent {
     'deg',
     'rad'
   ];
+
   /** ScienceGoalPageInterface data for fields and table rows */
   data: any;
+
   /** Field Setup Service to be used in template */
   protected _persistenceService: PersistenceService;
 

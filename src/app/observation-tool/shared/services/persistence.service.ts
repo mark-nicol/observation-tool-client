@@ -20,7 +20,7 @@ export class PersistenceService {
   private _dataStore: {
     project: any
   };
-  baseUrl = 'http://localhost:8080/projects/0';
+  baseUrl = 'http://localhost:8080/projects/ABC123';
 
   private static createDataObservable(data): Observable<any> {
     const subject  = <BehaviorSubject<any>> new BehaviorSubject({}),
@@ -43,8 +43,10 @@ export class PersistenceService {
   /**
    * Returns the project observable
    */
-  getProject(): Observable<ProjectInterface> {
-    return this.project;
+  getProject(): any {
+    this.project.subscribe(res => {
+      return res
+    });
   }
 
   getScienceGoal(goalId: number): Observable<ScienceGoalInterface> {

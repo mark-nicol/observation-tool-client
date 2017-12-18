@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import {ProjectInterface} from '../../../../shared/interfaces/project.interface';
 import {PersistenceService} from '../../../../shared/services/persistence.service';
 
@@ -19,7 +20,9 @@ export class ProjectInfoComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.persistenceService.getProject().subscribe(res => this.data = res);
+    // this.persistenceService.getProject().subscribe(res => this.data = res);
+    this.data = this.persistenceService.getProject();
+    console.log(this.data);
   }
 
 }

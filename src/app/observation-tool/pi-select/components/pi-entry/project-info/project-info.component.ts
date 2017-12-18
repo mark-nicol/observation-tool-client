@@ -13,16 +13,15 @@ import {PersistenceService} from '../../../../shared/services/persistence.servic
   templateUrl: './project-info.component.html',
   styleUrls: ['./project-info.component.css']
 })
-export class ProjectInfoComponent implements OnInit{
+export class ProjectInfoComponent implements OnInit {
 
-  data: ProjectInterface;
+  project$: Observable<ProjectInterface>;
 
   constructor(private persistenceService: PersistenceService) {
   }
 
   ngOnInit(): void {
-    this.persistenceService.getProject(CURRENT_PROJECT);
-    console.log(this.data);
+    this.project$ = this.persistenceService.getProject(CURRENT_PROJECT);
   }
 
 }

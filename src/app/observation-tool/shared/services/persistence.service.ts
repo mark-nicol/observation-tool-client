@@ -28,8 +28,8 @@ export class PersistenceService {
   /**
    * GET /projects/{projectCode}
    */
-  getProject(projectCode: string): Observable<ProjectInterface> {
-    return this.http.get<ProjectInterface>(this.apiUrl.concat('/', projectCode));
+  getProject(projectCode: string): Promise<ProjectInterface> {
+    return this.http.get<ProjectInterface>(this.apiUrl.concat('/', projectCode)).toPromise();
   }
 
   saveProject() {

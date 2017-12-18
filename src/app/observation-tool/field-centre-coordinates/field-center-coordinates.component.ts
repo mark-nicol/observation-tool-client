@@ -25,10 +25,10 @@ export class FieldCenterCoordinatesComponent {
    */
   constructor(private persistenceService: PersistenceService) {
     this._persistenceService = persistenceService;
-    this.persistenceService.getSource(0, 0)
-      .subscribe(res => {
-        this.data = res.fieldCentreCoordinates;
-      });
+    // this.persistenceService.getSource(0, 0)
+    //   .subscribe(res => {
+    //     this.data = res.fieldCentreCoordinates;
+    //   });
   }
 
   /**

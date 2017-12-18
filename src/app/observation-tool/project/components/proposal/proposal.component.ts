@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CURRENT_PROJECT} from '../../../shared/data/current-project';
 import {ProposalInterface} from '../../../shared/interfaces/proposal.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
@@ -144,7 +145,7 @@ export class ProposalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getProject().subscribe(res => this.data = res.proposal)
+    this.persistenceService.getProject(CURRENT_PROJECT).subscribe(res => this.data = res.proposal)
   }
 
   /**

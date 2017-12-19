@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CURRENT_GOAL} from '../../../shared/data/current-goal';
 import {SpatialImageInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/spatial-image.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
@@ -10,10 +9,10 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
  */
 
 @Component({
-  selector: 'spacial-image',
-  templateUrl: './spacial-image.component.html',
-  styleUrls: ['./spacial-image.component.css']
-})
+             selector: 'spacial-image',
+             templateUrl: './spacial-image.component.html',
+             styleUrls: ['./spacial-image.component.css']
+           })
 export class SpacialImageComponent implements OnInit {
 
   data: SpatialImageInterface;

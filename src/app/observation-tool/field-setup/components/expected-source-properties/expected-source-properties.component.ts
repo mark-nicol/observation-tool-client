@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CURRENT_GOAL} from '../../../shared/data/current-goal';
 import {ExpectedSourcePropertiesInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/expected-source-properties.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 

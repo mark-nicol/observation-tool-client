@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {CURRENT_GOAL} from '../../../shared/data/current-goal';
 import {ImageQueryInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/image-query.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 

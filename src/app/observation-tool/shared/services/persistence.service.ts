@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
+import {NEW_PROJECT_CODE} from '../data/new-project-code';
 import {ProjectInterface} from '../interfaces/project.interface';
 
 /**
@@ -34,7 +35,7 @@ export class PersistenceService {
     this._dataStore = {project: null};
     this._project   = <BehaviorSubject<ProjectInterface>>new BehaviorSubject({});
     this.project    = this._project.asObservable();
-    this.loadProject('ABC123');
+    this.loadProject(NEW_PROJECT_CODE);
   }
 
 

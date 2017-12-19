@@ -1,42 +1,42 @@
-<div class="ui form container">
+<form class="ui form container">
   <div class="ui segment">
     <h4 class="ui dividing header">Proposal Information</h4>
     <div class="field">
       <label for="titleInput">Proposal Title</label>
       <input id="titleInput"
              type="text"
-             [(ngModel)]="project?.proposal.title">
+             [ngModel]="(project | async)?.proposal.title">
     </div>
     <div class="field">
       <label for="cycleInput">Proposal Cycle</label>
       <input id="cycleInput"
              type="text"
-             [(ngModel)]="project?.proposal.cycle">
+             [ngModel]="(project | async)?.proposal.cycle">
     </div>
     <div class="field">
       <label for="abstractTextArea">Abstract</label>
       <textarea #abstractTextArea
                 id="abstractTextArea"
                 rows="5"
-                [(ngModel)]="project?.proposal.abstract"></textarea>
+                [ngModel]="(project | async)?.proposal.abstract"></textarea>
       <p>Characters remaining: {{1200-abstractTextArea.value.length}}</p>
     </div>
     <div class="field">
       <label for="relatedProposalsTextArea">Related Proposals</label>
       <textarea id="relatedProposalsTextArea"
                 rows="5"
-                [(ngModel)]="project?.proposal.relatedProposals"></textarea>
+                [ngModel]="(project | async)?.proposal.relatedProposals"></textarea>
     </div>
     <div class="field">
       <label for="previousProposalsTextArea">Previous Proposals</label>
       <textarea id="previousProposalsTextArea"
                 rows="5"
-                [(ngModel)]="project?.proposal.previousProposals"></textarea>
+                [ngModel]="(project | async)?.proposal.previousProposals"></textarea>
     </div>
     <div class="field">
       <label>Student Project</label>
       <sui-checkbox class="toggle"
-                    [(ngModel)]="project?.proposal.studentProject"></sui-checkbox>
+                    [ngModel]="(project | async)?.proposal.studentProject"></sui-checkbox>
     </div>
   </div>
   <div class="ui segment">
@@ -47,7 +47,7 @@
           <sui-radio-button id="{{typeRadio.id}}"
                             name="typeRadios"
                             value="{{typeRadio.id}}"
-                            [(ngModel)]="project?.proposal.proposalType">
+                            [ngModel]="(project | async)?.proposal.proposalType">
             {{typeRadio.text}}
           </sui-radio-button>
         </div>
@@ -61,7 +61,7 @@
         <sui-radio-button id="{{categoryRadios[categoryRadio].value}}"
                           name="categoryRadios"
                           value="{{categoryRadios[categoryRadio].value}}"
-                          [(ngModel)]="project?.proposal.scientificCategory"
+                          [ngModel]="(project | async)?.proposal.scientificCategory"
                           (currentValueChange)="categoryRadioChange($event)">
           {{categoryRadios[categoryRadio].text}}
         </sui-radio-button>
@@ -70,15 +70,15 @@
 
     <div class="field">
       <label for="keywordSelector">Keywords (chosen {{
-        project?.proposal.keywords === null ? 0 :
-        project?.proposal.keywords.length}} of 2)</label>
+        (project | async)?.proposal.keywords === null ? 0 :
+        (project | async)?.proposal.keywords.length}} of 2)</label>
       <sui-multi-select #keywordSelector
                         id="keywordSelector"
                         class="selection"
-                        [(ngModel)]="project?.proposal.keywords"
+                        [ngModel]="(project | async)?.proposal.keywords"
                         [isSearchable]="true"
                         (maxSelected)="2"
-                        [options]="categoryRadios[scientificCategory].keywords">
+                        [options]="categoryRadios[chosenCategory].keywords">
         <sui-select-option *ngFor="let option of keywordSelector.filteredOptions"
                            [value]="option">
         </sui-select-option>
@@ -113,7 +113,7 @@
           <th colspan="6">
             <div class="ui tiny compact right floated buttons">
               <button class="ui blue button"
-                      [disabled]="project?.proposal.proposalType === 'regular' || project?.proposal.proposalType === 'opportunity'">
+                      [disabled]="(project | async)?.proposal.proposalType === 'regular' || (project | async)?.proposal.proposalType === 'opportunity'">
                 Add CoPI
               </button>
               <button class="ui blue button">Add Col</button>
@@ -140,6 +140,6 @@
     <h4 class="ui dividing header">Duplicate Observations</h4>
     <textarea title="Duplicate observations input"
               rows="5"
-              [(ngModel)]="project?.proposal.duplicateObservations"></textarea>
+              [ngModel]="(project | async)?.proposal.duplicateObservations"></textarea>
   </div>
-</div>
+</form>

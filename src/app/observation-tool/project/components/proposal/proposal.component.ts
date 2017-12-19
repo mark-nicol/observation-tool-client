@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {CURRENT_PROJECT} from '../../../shared/data/current-project';
 import {ProjectInterface} from '../../../shared/interfaces/project.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
@@ -14,7 +16,7 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 
 export class ProposalComponent implements OnInit {
 
-  project: ProjectInterface;
+  project: Observable<ProjectInterface>;
 
   /** The currently selected proposal type */
   chosenType = 'regularRadio';
@@ -138,7 +140,6 @@ export class ProposalComponent implements OnInit {
   /** Count of currently selected keywords in the selection box */
   selectedKeywordCount = 0;
   selectedKeywordValues: any;
-  scientificCategory   = 'cosmology';
 
   log(event) {
     console.log(event);
@@ -148,15 +149,15 @@ export class ProposalComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.persistenceService.getProject().subscribe(result => this.project = result);
+    this.project = this.persistenceService.getProject(CURRENT_PROJECT);
   }
 
   /**
    * Resets the keyword selector when the chosen category changes
    */
   categoryRadioChange(newCategory: string) {
-    this.scientificCategory = newCategory;
-    this.project.proposal.keywords = null;
+    this.chosenCategory = newCategory;
+    // this.project.proposal.keywords = null;
   }
 
 }

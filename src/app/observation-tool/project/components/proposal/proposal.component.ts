@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CURRENT_PROJECT} from '../../../shared/data/current-project';
 import {ProjectInterface} from '../../../shared/interfaces/project.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
@@ -15,7 +14,6 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 
 export class ProposalComponent implements OnInit {
 
-  project$: Promise<ProjectInterface>;
   project: ProjectInterface;
 
   /** The currently selected proposal type */
@@ -147,10 +145,10 @@ export class ProposalComponent implements OnInit {
   }
 
   constructor(private persistenceService: PersistenceService) {
-
   }
 
   ngOnInit() {
+    // this.persistenceService.getProject().subscribe(result => this.project = result);
   }
 
   /**

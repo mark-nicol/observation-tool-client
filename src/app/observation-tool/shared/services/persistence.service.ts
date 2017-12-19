@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {NEW_PROJECT_CODE} from '../data/new-project-code';
 import {ProjectInterface} from '../interfaces/project.interface';
+import {ScienceGoalInterface} from '../interfaces/science-goal.interface';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -38,17 +39,26 @@ export class PersistenceService {
     this.loadProject(NEW_PROJECT_CODE);
   }
 
-
   /**
    * GET /projects/{projectCode}
    */
   loadProject(projectCode: string) {
-    this.http.get(this.baseUrl.concat('/', projectCode)).subscribe(result => this._dataStore.project = result);
-    this._project.next(Object.assign({}, this._dataStore).project);
+    this.project = this.http.get<ProjectInterface>(this.baseUrl.concat('/', projectCode));
+    this.project.subscribe(result => this._dataStore.project = result);
   }
 
   saveProject() {
-    console.log('Save');
+    console.log(this._dataStore.project);
+  }
+
+  getProject() {
+    console.log('get Project');
+    console.log(this._dataStore.project);
+    return this._dataStore.project;
+  }
+
+  getScienceGoal(scienceGoalId: string): Observable<ScienceGoalInterface> {
+    return PersistenceService.createDataObservable(this._dataStore.project.scienceGoals[scienceGoalId]);
   }
 
 }

@@ -15,10 +15,13 @@ import {PersistenceService} from '../../../../shared/services/persistence.servic
 })
 export class ProjectInfoComponent implements OnInit {
 
+  project: ProjectInterface;
+
   constructor(private persistenceService: PersistenceService) {
   }
 
   ngOnInit(): void {
+    this.project = this.persistenceService.getProject();
   }
 
 }

@@ -7,5 +7,5 @@ export interface ProjectInterface {
   priority: number,
   projectCode: string,
   proposal: ProposalInterface
-  scienceGoals: { [id: number]: ScienceGoalInterface }
+  scienceGoals: { [id: string]: ScienceGoalInterface }
 }

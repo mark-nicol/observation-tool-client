@@ -151,7 +151,6 @@ export class ProposalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getProject(CURRENT_PROJECT).subscribe(result => this.project = result);
   }
 
   /**

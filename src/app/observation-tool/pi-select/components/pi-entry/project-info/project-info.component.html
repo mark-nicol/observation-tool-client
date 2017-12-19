@@ -1,12 +1,5 @@
 <h4 class="ui dividing header">Main Project Information</h4>
-<div *ngIf="project$ | async; else loader">
-  <h5>Project Priority</h5>
-  <p>{{(project$ | async)?.priority}}</p>
-  <h5>Assigned Project Code</h5>
-  <p>{{(project$ | async)?.projectCode}}</p>
-</div>
-<ng-template #loader>
-  <div class="ui active inverted dimmer">
-    <div class="ui loader"></div>
-  </div>
-</ng-template>
+<h5>Project Priority</h5>
+<p></p>
+<h5>Assigned Project Code</h5>
+<p></p>

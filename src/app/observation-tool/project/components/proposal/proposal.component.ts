@@ -151,23 +151,14 @@ export class ProposalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getProject(CURRENT_PROJECT).then(result => {
-      this.project = result;
-      this.scientificCategory = result.proposal.scientificCategory;
-    });
-    // this.project$.subscribe(async result => { await this.setProject(result) });
-    // console.log(this.project);
-  }
-
-  setProject(project) {
-    console.log('Setting project');
-    this.project = project;
+    this.persistenceService.getProject(CURRENT_PROJECT).subscribe(result => this.project = result);
   }
 
   /**
    * Resets the keyword selector when the chosen category changes
    */
-  categoryRadioChange() {
+  categoryRadioChange(newCategory: string) {
+    this.scientificCategory = newCategory;
     this.project.proposal.keywords = null;
   }
 

@@ -23,8 +23,10 @@ export class FccIndividualComponent {
     'deg',
     'rad'
   ];
+
   /** ScienceGoalPageInterface data for fields and table rows */
   data: any;
+
   /** Field Setup Service to be used in template */
   protected _persistenceService: PersistenceService;
 
@@ -36,7 +38,7 @@ export class FccIndividualComponent {
    */
   constructor(private persistenceService: PersistenceService) {
     this._persistenceService = persistenceService;
-    this.persistenceService.getSource(0, 0).subscribe(res => this.data = res.fieldCentreCoordinates.individual);
+    // this.persistenceService.getSource(0, 0).subscribe(res => this.data = res.fieldCentreCoordinates.individual);
   }
 
   /**

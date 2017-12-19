@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CURRENT_GOAL} from '../../../shared/data/current-science-goal';
+import {CURRENT_GOAL} from '../../../shared/data/current-goal';
 import {ExpectedSourcePropertiesInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/expected-source-properties.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
@@ -21,8 +21,8 @@ export class ExpectedSourcePropertiesComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.persistenceService.getSource(CURRENT_GOAL, 0)
-      .subscribe(res => this.data = res.expectedSourceProperties);
+    // this.persistenceService.getSource(CURRENT_GOAL, 0)
+    //   .subscribe(res => this.data = res.expectedSourceProperties);
   }
 
 }

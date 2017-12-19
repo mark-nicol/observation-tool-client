@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ScienceGoalGeneralInterface} from '../../../shared/interfaces/science-goal-interfaces/general.interface';
-import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * General science goal page component
- *
- * Currently inactive
  */
 
 @Component({
@@ -16,14 +12,11 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 
 export class GeneralComponent implements OnInit {
 
-  data: ScienceGoalGeneralInterface;
-
-  constructor(private persistenceService: PersistenceService) {
+  constructor() {
 
   }
 
   ngOnInit() {
-    this.persistenceService.getScienceGoalPage(0, 'general').subscribe(res => this.data = res);
   }
 
 }

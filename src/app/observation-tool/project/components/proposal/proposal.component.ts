@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ProposalInterface} from '../../../shared/interfaces/proposal.interface';
+import {CURRENT_PROJECT} from '../../../shared/data/current-project';
+import {ProjectInterface} from '../../../shared/interfaces/project.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -14,7 +15,8 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 
 export class ProposalComponent implements OnInit {
 
-  data: ProposalInterface;
+  project$: Promise<ProjectInterface>;
+  project: ProjectInterface;
 
   /** The currently selected proposal type */
   chosenType = 'regularRadio';
@@ -138,20 +140,26 @@ export class ProposalComponent implements OnInit {
   /** Count of currently selected keywords in the selection box */
   selectedKeywordCount = 0;
   selectedKeywordValues: any;
+  scientificCategory   = 'cosmology';
+
+  log(event) {
+    console.log(event);
+  }
 
   constructor(private persistenceService: PersistenceService) {
 
   }
 
   ngOnInit() {
-    this.persistenceService.getProject().subscribe(res => this.data = res.proposal)
+    this.persistenceService.getProject(CURRENT_PROJECT).subscribe(result => this.project = result);
   }
 
   /**
    * Resets the keyword selector when the chosen category changes
    */
-  categoryRadioChange() {
-    this.data.keywords = null;
+  categoryRadioChange(newCategory: string) {
+    this.scientificCategory = newCategory;
+    this.project.proposal.keywords = null;
   }
 
 }

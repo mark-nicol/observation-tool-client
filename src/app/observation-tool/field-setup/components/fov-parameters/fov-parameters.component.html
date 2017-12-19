@@ -3,8 +3,7 @@
     <label for="freqInput">Representative Frequency (Sky)</label>
     <div class="ui right labeled input">
       <input id="freqInput"
-             placeholder="0.000"
-             [(ngModel)]="data.representativeFrequency">
+             placeholder="0.000">
       <div class="ui label">GHz</div>
     </div>
   </div>
@@ -12,8 +11,7 @@
     <div class="field">
       <label>Antenna Diameter</label>
       <sui-radio-button name="antennaSizeRadios"
-                        value="12"
-                        [(ngModel)]="data.antennaDiameter">
+                        value="12">
         12m
       </sui-radio-button>
     </div>
@@ -21,13 +19,12 @@
       <label for="beamInput">Antenna Beamsize (HPBW)</label>
       <div class="ui right labeled input">
         <input id="beamInput"
-               placeholder="0.000 arcsec"
-               [(ngModel)]="data.antennaBeamsize">
+               placeholder="0.000 arcsec">
         <div class="ui label">arcsec</div>
       </div>
     </div>
     <div class="field">
-      <sui-checkbox [(ngModel)]="data.showBeamsize">Show Antenna Beamsize</sui-checkbox>
+      <sui-checkbox>Show Antenna Beamsize</sui-checkbox>
     </div>
   </div>
 </div>

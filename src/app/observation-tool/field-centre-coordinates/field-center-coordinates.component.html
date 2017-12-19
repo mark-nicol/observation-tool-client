@@ -1,15 +1,16 @@
 <div class="ui form">
   <div class="field">
     <label>Coord Type</label>
-    <sui-radio-button name="coordTypeRadios" value="relative" [(ngModel)]="this.data.coordType">Relative</sui-radio-button>
-    <sui-radio-button name="coordTypeRadios" value="absolute" [(ngModel)]="this.data.coordType">Absolute</sui-radio-button>
+    <sui-radio-button name="coordTypeRadios" value="relative">Relative</sui-radio-button>
+    <sui-radio-button name="coordTypeRadios" value="absolute">Absolute</sui-radio-button>
   </div>
 
-  <div *ngIf="(_persistenceService.getSourceTargetType() === 'individual'); then individualComponent else rectangularComponent"></div>
+  <!--<div *ngIf="(_persistenceService.getSourceTargetType() === 'individual'); then individualComponent else rectangularComponent"></div>-->
+  <div *ngIf="true; then individualComponent else rectangularComponent"></div>
   <ng-template #individualComponent>
-    <fcc-individual [radioValue]="data.coordType"></fcc-individual>
+    <fcc-individual [radioValue]="'relative'"></fcc-individual>
   </ng-template>
   <ng-template #rectangularComponent>
-    <fcc-rectangular [radioValue]="data.coordType"></fcc-rectangular>
+    <fcc-rectangular [radioValue]="'relative'"></fcc-rectangular>
   </ng-template>
 </div>

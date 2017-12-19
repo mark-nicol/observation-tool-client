@@ -13,9 +13,9 @@ export class PersistenceService {
 
   /** The public observable of the project data */
   project$: Observable<ProjectInterface>;
-  project?;
+  project;
   /** Data store of the data in memory, allows changes */
-  baseUrl = 'http://localhost:8080/projects';
+  baseUrl = 'http://localhost:8080';
 
   private static createDataObservable(data): Observable<any> {
     const subject  = <BehaviorSubject<any>> new BehaviorSubject({}),
@@ -28,22 +28,26 @@ export class PersistenceService {
    * Constructor, loads data and sets members
    */
   constructor(private http: HttpClient) {
-    // this.loadProject(NEW_PROJECT_CODE);
+
   }
 
   /**
    * GET /projects/{projectCode}
    */
   getProject(projectCode: string): Observable<ProjectInterface> {
-    return this.http.get<ProjectInterface>(`${this.baseUrl}/${projectCode}`);
+    return this.http.get<ProjectInterface>(`${this.baseUrl}/projects/${projectCode}`);
   }
 
   saveProject() {
     console.log(this.project);
   }
 
-  getScienceGoal(scienceGoalId: string): Observable<ScienceGoalInterface> {
-    return PersistenceService.createDataObservable(this.project.scienceGoals[scienceGoalId]);
+
+  /**
+   * GET /projects/{projectCode}/science-goals/{goalId}
+   */
+  getScienceGoal(projectCode: string, scienceGoalId: string): Observable<ScienceGoalInterface> {
+    return this.http.get<ScienceGoalInterface>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}`);
   }
 
 }

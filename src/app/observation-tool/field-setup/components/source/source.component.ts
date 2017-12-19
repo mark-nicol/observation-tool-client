@@ -1,6 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {CURRENT_PROJECT} from '../../../shared/data/current-project';
+import {CURRENT_SCIENCE_GOAL} from '../../../shared/data/current-science-goal';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
-import {SourceInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/source.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -10,15 +12,14 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
  */
 
 @Component({
-  selector: 'field-source',
-  host: {'(document:click)': 'unfocus($event)'}, // TODO fix host binding
-  templateUrl: './source.component.html',
-  styleUrls: ['./source.component.css']
-})
-export class SourceComponent {
+             selector: 'field-source',
+             host: {'(document:click)': 'unfocus($event)'}, // TODO fix host binding
+             templateUrl: './source.component.html',
+             styleUrls: ['./source.component.css']
+           })
+export class SourceComponent implements OnInit {
 
-  /** ScienceGoalPageInterface data loaded from Field Setup Service */
-  pageData: SourceInterface;
+  sourceForm: FormGroup;
 
   /** Selectable solar system bodies for selection box */
   solarBodies = [
@@ -47,10 +48,24 @@ export class SourceComponent {
   /**
    * Retrieves data from service
    * @param persistenceService Injected service
+   * @param formBuilder
    */
-  constructor(private persistenceService: PersistenceService) {
-    // persistenceService.getSource(0, 0)
-    //   .subscribe(res => this.pageData = res);
+  constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
+    this.sourceForm = this.formBuilder.group({
+                                               sourceName: '',
+                                               solarSystemObject: false,
+                                               chosenSolarObject: '',
+                                               targetType: '',
+                                               radialVelocityReferenceFrame: '',
+                                               dopplerType: '',
+                                               sexagesimalUnits: true,
+                                               redshift: 0
+                                             })
+  }
+
+  ngOnInit() {
+    this.persistenceService.getScienceGoal(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL)
+        .subscribe(result => this.sourceForm.patchValue(result.fieldSetup.sources[0]));
   }
 
   /**
@@ -69,7 +84,7 @@ export class SourceComponent {
    * Changes use of a solar system object, hides most of the component from use
    */
   solarCheckboxClicked() {
-    this.pageData.solarSystemObject = !this.pageData.solarSystemObject;
+    // this.pageData.solarSystemObject = !this.pageData.solarSystemObject;
   }
 
   /**
@@ -79,9 +94,9 @@ export class SourceComponent {
    */
   setLatLon(value: number, element: Element) {
     if (element.id === 'latInput') {
-      this.pageData.lat.value = value;
+      // this.pageData.lat.value = value;
     } else {
-      this.pageData.lon.value = value;
+      // this.pageData.lon.value = value;
     }
   }
 
@@ -90,7 +105,7 @@ export class SourceComponent {
    * @param targetType The new target type to be set
    */
   targetChange(targetType: string) {
-    this.pageData.targetType = targetType;
+    // this.pageData.targetType = targetType;
   }
 
   /**
@@ -98,7 +113,7 @@ export class SourceComponent {
    * @param units True if checkbox is selected
    */
   sexagesimalChange(units: boolean) {
-    this.pageData.sexagesimalUnits = units;
+    // this.pageData.sexagesimalUnits = units;
   }
 
   /**
@@ -106,7 +121,7 @@ export class SourceComponent {
    * @param system The new system type to be used
    */
   systemChange(system: CoordSystemInterface) {
-    this.pageData.chosenSystem = system;
+    // this.pageData.chosenSystem = system;
   }
 
 }

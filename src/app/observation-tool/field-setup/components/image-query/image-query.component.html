@@ -4,8 +4,7 @@
       Image Server
     </label>
     <sui-select id=serverInput
-                class="selection"
-                [(ngModel)]="data.imageServer">
+                class="selection">
       <sui-select-option value="1">1</sui-select-option>
       <sui-select-option value="2">2</sui-select-option>
       <sui-select-option value="3">3</sui-select-option>
@@ -16,8 +15,7 @@
     <label for="imgSizeInput">Image Size (arcmin)</label>
     <div class="ui action input">
       <input id="imgSizeInput"
-             type="number"
-             [(ngModel)]="data.imageSize">
+             type="number">
       <button class="ui blue button">Query</button>
     </div>
   </div>

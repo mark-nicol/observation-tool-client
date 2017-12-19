@@ -6,8 +6,7 @@
   </label>
   <sui-select id="offsetSelector"
               class="selection"
-              [(ngModel)]="data.offsetUnit"
-              [disabled]="radioValue === 'absolute'">
+              [isDisabled]="radioValue === 'absolute'">
     <sui-select-option *ngFor="let unit of offsetUnits"
                        value="{{unit}}"
                        (selcted)="unit === 'mas'">
@@ -24,40 +23,40 @@
     <label class="label">
       # Pointings
     </label>
-    <p class="value">{{data.rows.length}}</p>
+    <p class="value"></p>
   </div>
 </div>
 
 
-<table class="ui celled table"
-       suiPopup
-       popupText="Coordinate offsets for each pointing">
-  <thead>
-    <tr *ngIf="radioValue === 'relative'">
-      <th>
-        [{{data.offsetUnit}}]
-      </th>
-      <th>
-        [{{data.offsetUnit}}]
-      </th>
-    </tr>
-    <tr *ngIf="radioValue === 'absolute'">
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of data.rows"
-        (keyup.enter)="log('enter')">
-      <td contenteditable (blur)="log('blur')">
-        {{radioValue === 'absolute' ? (row.lon.value | sexagesimal) : (row.lon.value | degrees)}}
-      </td>
-      <td contenteditable>
-        {{radioValue === 'absolute' ? (row.lat.value | sexagesimal) : (row.lat.value | degrees)}}
-      </td>
-    </tr>
-  </tbody>
-</table>
+<!--<table class="ui celled table"-->
+       <!--suiPopup-->
+       <!--popupText="Coordinate offsets for each pointing">-->
+  <!--<thead>-->
+    <!--<tr *ngIf="radioValue === 'relative'">-->
+      <!--<th>-->
+
+      <!--</th>-->
+      <!--<th>-->
+
+      <!--</th>-->
+    <!--</tr>-->
+    <!--<tr *ngIf="radioValue === 'absolute'">-->
+      <!--<th></th>-->
+      <!--<th></th>-->
+    <!--</tr>-->
+  <!--</thead>-->
+  <!--<tbody>-->
+    <!--<tr *ngFor="let row of data.rows"-->
+        <!--(keyup.enter)="log('enter')">-->
+      <!--<td contenteditable (blur)="log('blur')">-->
+        <!--{{radioValue === 'absolute' ? (row.lon.value | sexagesimal) : (row.lon.value | degrees)}}-->
+      <!--</td>-->
+      <!--<td contenteditable>-->
+        <!--{{radioValue === 'absolute' ? (row.lat.value | sexagesimal) : (row.lat.value | degrees)}}-->
+      <!--</td>-->
+    <!--</tr>-->
+  <!--</tbody>-->
+<!--</table>-->
 
 
 <div class="ui blue icon buttons">

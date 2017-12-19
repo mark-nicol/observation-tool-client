@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DragulaModule} from 'ng2-dragula';
 import {SuiModule} from 'ng2-semantic-ui';
@@ -17,6 +18,7 @@ import {FieldSetupComponent} from './field-setup.component';
     DragulaModule,
     SharedModule,
     SuiModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
   ],
   declarations: [

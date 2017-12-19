@@ -16,7 +16,7 @@ export const NEW_PROJECT: ProjectInterface = {
   proposal: {
     title: null,
     cycle: null,
-    abstract: null,
+    abs: null,
     proposalType: 'regular',
     scientificCategory: 'cosmology',
     keywords: null,

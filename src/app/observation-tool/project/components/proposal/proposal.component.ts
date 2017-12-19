@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {CURRENT_PROJECT} from '../../../shared/data/current-project';
 import {ProjectInterface} from '../../../shared/interfaces/project.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
@@ -9,14 +9,15 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
  */
 
 @Component({
-  selector: 'app-proposal',
-  templateUrl: './proposal.component.html',
-  styleUrls: ['./proposal.component.css']
-})
+             selector: 'app-proposal',
+             templateUrl: './proposal.component.html',
+             styleUrls: ['./proposal.component.css']
+           })
 
 export class ProposalComponent implements OnInit {
 
-  project: Observable<ProjectInterface>;
+  proposal: FormGroup;
+  project: ProjectInterface;
 
   /** The currently selected proposal type */
   chosenType = 'regularRadio';
@@ -145,11 +146,29 @@ export class ProposalComponent implements OnInit {
     console.log(event);
   }
 
-  constructor(private persistenceService: PersistenceService) {
+  constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
+    this.createForm();
   }
 
   ngOnInit() {
-    this.project = this.persistenceService.getProject(CURRENT_PROJECT);
+    this.persistenceService.getProject(CURRENT_PROJECT)
+        .subscribe(result => this.proposal.setValue(result.proposal));
+
+  }
+
+  createForm() {
+    this.proposal = this.formBuilder.group({
+                                             title: '',
+                                             cycle: '',
+                                             abs: '',
+                                             relatedProposals: '',
+                                             previousProposals: '',
+                                             studentProject: false,
+                                             proposalType: '',
+                                             scientificCategory: '',
+                                             duplicateObservations: '',
+                                             keywords: []
+                                           });
   }
 
   /**

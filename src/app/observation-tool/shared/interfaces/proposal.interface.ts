@@ -11,7 +11,7 @@ import {ScienceGoalInterface} from './science-goal.interface';
 export interface ProposalInterface {
   title: string,
   cycle: string,
-  abstract: string,
+  abs: string,
   proposalType: string,
   scientificCategory: string,
   keywords: [string],

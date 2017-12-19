@@ -49,8 +49,8 @@ export class SourceComponent {
    * @param persistenceService Injected service
    */
   constructor(private persistenceService: PersistenceService) {
-    persistenceService.getSource(0, 0)
-      .subscribe(res => this.pageData = res);
+    // persistenceService.getSource(0, 0)
+    //   .subscribe(res => this.pageData = res);
   }
 
   /**

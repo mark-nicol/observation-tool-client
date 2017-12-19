@@ -1,6 +1,5 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {ProjectInterface} from '../interfaces/project.interface';
 
@@ -37,6 +36,7 @@ export class PersistenceService {
     this.loadProject('ABC123');
   }
 
+
   /**
    * GET /projects/{projectCode}
    */
@@ -46,11 +46,14 @@ export class PersistenceService {
   }
 
   /**
-   *
+   * GET /projects/{projectCode}
    */
+  getProject(projectCode: string): Observable<ProjectInterface> {
+    return this.http.get<ProjectInterface>(this.apiUrl.concat('/', projectCode));
+  }
+
   saveProject() {
-    console.log(this._dataStore.project);
-    /*UPDATE*/
+    console.log('Save');
   }
 
 }

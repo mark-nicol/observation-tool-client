@@ -156,8 +156,11 @@ export class SourceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getScienceGoal(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL)
-        .subscribe(result => this.sourceForm.setValue(result.fieldSetup.sources[0]));
+    this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, '0')
+        .subscribe(result => {
+          console.log(result);
+          this.sourceForm.patchValue(result);
+        });
   }
 
   /**
@@ -176,7 +179,6 @@ export class SourceComponent implements OnInit {
    * Changes use of a solar system object, hides most of the component from use
    */
   solarCheckboxClicked() {
-    // this.pageData.solarSystemObject = !this.pageData.solarSystemObject;
   }
 
   /**
@@ -186,9 +188,7 @@ export class SourceComponent implements OnInit {
    */
   setLatLon(value: number, element: Element) {
     if (element.id === 'latInput') {
-      // this.pageData.lat.value = value;
     } else {
-      // this.pageData.lon.value = value;
     }
   }
 
@@ -197,7 +197,6 @@ export class SourceComponent implements OnInit {
    * @param targetType The new target type to be set
    */
   targetChange(targetType: string) {
-    // this.pageData.targetType = targetType;
   }
 
   /**
@@ -205,7 +204,6 @@ export class SourceComponent implements OnInit {
    * @param units True if checkbox is selected
    */
   sexagesimalChange(units: boolean) {
-    // this.pageData.sexagesimalUnits = units;
   }
 
   /**
@@ -213,7 +211,6 @@ export class SourceComponent implements OnInit {
    * @param system The new system type to be used
    */
   systemChange(system: CoordSystemInterface) {
-    // this.pageData.chosenSystem = system;
   }
 
 }

@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {ProjectInterface} from '../interfaces/project.interface';
+import {SourceInterface} from '../interfaces/science-goal-interfaces/field-setup-interfaces/source.interface';
 import {ScienceGoalInterface} from '../interfaces/science-goal.interface';
 
 /**
@@ -48,6 +49,10 @@ export class PersistenceService {
    */
   getScienceGoal(projectCode: string, scienceGoalId: string): Observable<ScienceGoalInterface> {
     return this.http.get<ScienceGoalInterface>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}`);
+  }
+
+  getSource(projectCode: string, scienceGoalId: string, sourceId: string): Observable<SourceInterface> {
+    return this.http.get<SourceInterface>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}/sources/${sourceId}`);
   }
 
 }

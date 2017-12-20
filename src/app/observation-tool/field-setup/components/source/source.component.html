@@ -43,9 +43,11 @@
     <div class="three fields">
       <div class="field">
         <!-- System Selector -->
-        <system-selector (systemEmitter)="systemChange($event)"
-                         (sexagesimalEmitter)="sexagesimalChange($event)"
-                         formControlName="sexagesimalUnits"></system-selector>
+        <label>System</label>
+          <sui-select class="selection" formControlName="chosenSystem">
+            <sui-select-option *ngFor="let system of systemKeys(systems)" value="{{system}}"></sui-select-option>
+          </sui-select>
+          <sui-checkbox formControlName="sexagesimalUnits">Sexagesimal Units</sui-checkbox>
       </div>
 
       <!-- Lat input -->

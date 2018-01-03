@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CURRENT_PROJECT} from '../../../shared/data/current-project';
 import {CURRENT_SCIENCE_GOAL} from '../../../shared/data/current-science-goal';
+import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {SystemService} from '../../../shared/services/system.service';
 
 /**
  * Source Component in Field Setup
@@ -45,103 +47,19 @@ export class SourceComponent implements OnInit {
     'Ephemeris'
   ];
 
-  /** Iterator for the systems */
-  systemKeys: (o) => string[] = Object.keys;
+  currentSystem: CoordSystemInterface;
 
-  /** Possible system choices dict */
-  systems: { [id: string]: CoordSystemInterface } = {
-    'icrs': {
-      sexagesimalLabels: {
-        latLabel: 'Dec',
-        lonLabel: 'RA',
-      },
-      normalLabels: {
-        latLabel: 'Dec(deg)',
-        lonLabel: 'RA(deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Dec'
-    },
-    'FK5 J2000': {
-      sexagesimalLabels: {
-        latLabel: 'Dec',
-        lonLabel: 'RA',
-      },
-      normalLabels: {
-        latLabel: 'Dec(deg)',
-        lonLabel: 'RA(deg)'
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Dec'
-    },
-    'galactic': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Lat(deg)',
-        lonLabel: 'Lon(deg)',
-      },
-      latPlaceholder: '-60.18855219',
-      lonPlaceholder: '96.33728304',
-      lonHeader: 'Lon',
-      latHeader: 'Lat',
-    },
-    'eliptic': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Lat (deg)',
-        lonLabel: 'Lon (deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Deg'
-    },
-    'horizon': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Alt(deg)',
-        lonLabel: 'Az(deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Deg'
-    },
-    'azel': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Alt(deg)',
-        lonLabel: 'Az(deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Deg'
-    }
-  };
+  sexagesimalCheckboxDisabled = false;
 
   /**
    * Retrieves data from service
    * @param persistenceService Injected service
    * @param formBuilder
+   * @param systemService
    */
-  constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
+  constructor(private persistenceService: PersistenceService,
+              private formBuilder: FormBuilder,
+              protected systemService: SystemService) {
     this.sourceForm = this.formBuilder.group({
                                                sourceName: '',
                                                solarSystemObject: false,
@@ -156,10 +74,10 @@ export class SourceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, '0')
+    this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
         .subscribe(result => {
-          console.log(result);
           this.sourceForm.patchValue(result);
+          this.systemChange();
         });
   }
 
@@ -203,14 +121,22 @@ export class SourceComponent implements OnInit {
    * Handles a change of the sexagesimal checkbox in the system selector
    * @param units True if checkbox is selected
    */
-  sexagesimalChange(units: boolean) {
+  sexagesimalChange() {
+    console.log(this.sourceForm.value);
   }
 
   /**
    * Handles a change of system in the system selector
    * @param system The new system type to be used
    */
-  systemChange(system: CoordSystemInterface) {
+  systemChange() {
+    this.currentSystem = this.systemService.getSystem(this.sourceForm.value.chosenSystem);
+    if (this.sourceForm.value.chosenSystem === 'icrs' || this.sourceForm.value.chosenSystem === 'FK5 J2000') {
+      this.sexagesimalCheckboxDisabled = false;
+    } else {
+      this.sourceForm.value.sexagesimalUnits = false;
+      this.sexagesimalCheckboxDisabled = true;
+    }
   }
 
 }

@@ -44,15 +44,17 @@
       <div class="field">
         <!-- System Selector -->
         <label>System</label>
-        <sui-select class="selection"
-                    formControlName="chosenSystem"
-                    (selectedOptionChange)="systemChange()">
-          <sui-select-option *ngFor="let system of systemService.getSystems()"
-                             value="{{system}}"></sui-select-option>
-        </sui-select>
-        <sui-checkbox formControlName="sexagesimalUnits"
-                      [isDisabled]="sexagesimalCheckboxDisabled">Sexagesimal Units
-        </sui-checkbox>
+        <div class="inline field">
+          <sui-select class="selection"
+                      formControlName="chosenSystem"
+                      (selectedOptionChange)="systemChange()">
+            <sui-select-option *ngFor="let system of systemService.getSystems()"
+                               value="{{system}}"></sui-select-option>
+          </sui-select>
+          <sui-checkbox formControlName="sexagesimalUnits"
+                        [isDisabled]="sexagesimalCheckboxDisabled">Sexagesimal Units
+          </sui-checkbox>
+        </div>
       </div>
 
       <!-- Lat input -->

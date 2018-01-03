@@ -5,6 +5,7 @@ import {CURRENT_SCIENCE_GOAL} from '../../../shared/data/current-science-goal';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {SystemService} from '../../../shared/services/system.service';
 
 /**
  * Source Component in Field Setup
@@ -46,103 +47,14 @@ export class SourceComponent implements OnInit {
     'Ephemeris'
   ];
 
-  /** Iterator for the systems */
-  systemKeys: (o) => string[] = Object.keys;
-
-  /** Possible system choices dict */
-  systems: { [id: string]: CoordSystemInterface } = {
-    'icrs': {
-      sexagesimalLabels: {
-        latLabel: 'Dec',
-        lonLabel: 'RA',
-      },
-      normalLabels: {
-        latLabel: 'Dec(deg)',
-        lonLabel: 'RA(deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Dec'
-    },
-    'FK5 J2000': {
-      sexagesimalLabels: {
-        latLabel: 'Dec',
-        lonLabel: 'RA',
-      },
-      normalLabels: {
-        latLabel: 'Dec(deg)',
-        lonLabel: 'RA(deg)'
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Dec'
-    },
-    'galactic': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Lat(deg)',
-        lonLabel: 'Lon(deg)',
-      },
-      latPlaceholder: '-60.18855219',
-      lonPlaceholder: '96.33728304',
-      lonHeader: 'Lon',
-      latHeader: 'Lat',
-    },
-    'eliptic': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Lat (deg)',
-        lonLabel: 'Lon (deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Deg'
-    },
-    'horizon': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Alt(deg)',
-        lonLabel: 'Az(deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Deg'
-    },
-    'azel': {
-      sexagesimalLabels: {
-        latLabel: '',
-        lonLabel: '',
-      },
-      normalLabels: {
-        latLabel: 'Alt(deg)',
-        lonLabel: 'Az(deg)',
-      },
-      latPlaceholder: '0',
-      lonPlaceholder: '0',
-      lonHeader: 'RA',
-      latHeader: 'Deg'
-    }
-  };
-
   /**
    * Retrieves data from service
    * @param persistenceService Injected service
    * @param formBuilder
    */
-  constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
+  constructor(private persistenceService: PersistenceService,
+              private formBuilder: FormBuilder,
+              protected systemService: SystemService) {
     this.sourceForm = this.formBuilder.group({
                                                sourceName: '',
                                                solarSystemObject: false,

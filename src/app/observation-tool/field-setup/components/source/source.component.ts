@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CURRENT_PROJECT} from '../../../shared/data/current-project';
 import {CURRENT_SCIENCE_GOAL} from '../../../shared/data/current-science-goal';
+import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
@@ -156,9 +157,8 @@ export class SourceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, '0')
+    this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
         .subscribe(result => {
-          console.log(result);
           this.sourceForm.patchValue(result);
         });
   }

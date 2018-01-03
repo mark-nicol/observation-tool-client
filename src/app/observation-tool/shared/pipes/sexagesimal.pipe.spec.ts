@@ -1,4 +1,4 @@
-import { SexagesimalPipe } from './sexagesimal.pipe';
+import {SexagesimalPipe} from './sexagesimal.pipe';
 
 describe('SexagesimalPipe', () => {
   it('create an instance', () => {

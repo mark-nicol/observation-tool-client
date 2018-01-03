@@ -323,6 +323,9 @@
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                 </li>
                                 <li class="link">
@@ -346,16 +349,10 @@
                                     <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/Margin.html" >Margin</a>
@@ -745,6 +742,9 @@
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                        </li>
                                        <li class="link">
@@ -768,16 +768,10 @@
                                            <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/Margin.html" >Margin</a>
@@ -902,13 +896,13 @@
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {NgModule} from &#x27;@angular/core&#x27;;
 import {RouterModule, Routes} from &#x27;@angular/router&#x27;;
-import {ScienceGoalComponent} from &#x27;./science-goal.component&#x27;;
-import {GeneralComponent} from &#x27;./components/general/general.component&#x27;;
 import {FieldSetupComponent} from &#x27;../field-setup/field-setup.component&#x27;;
+import {SpectralSetupComponent} from &#x27;../spectral-setup/spectral-setup.component&#x27;;
 import {CalibrationSetupComponent} from &#x27;./components/calibration-setup/calibration-setup.component&#x27;;
 import {ControlPerformanceComponent} from &#x27;./components/control-performance/control-performance.component&#x27;;
+import {GeneralComponent} from &#x27;./components/general/general.component&#x27;;
 import {TechnicalJustificationComponent} from &#x27;./components/technical-justification/technical-justification.component&#x27;;
-import {SpectralSetupComponent} from &#x27;../spectral-setup/spectral-setup.component&#x27;;
+import {ScienceGoalComponent} from &#x27;./science-goal.component&#x27;;
 
 const routes: Routes &#x3D; [
   {
@@ -945,12 +939,7 @@ const routes: Routes &#x3D; [
         pathMatch: &#x27;full&#x27;
       }
     ]
-  },
-  // {
-  //   path: &#x27;&#x27;,
-  //   redirectTo: &#x27;science-goals&#x27;,
-  //   pathMatch: &#x27;full&#x27;
-  // }
+  }
 ];
 
 @NgModule({

@@ -323,6 +323,9 @@
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                 </li>
                                 <li class="link">
@@ -346,16 +349,10 @@
                                     <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/Margin.html" >Margin</a>
@@ -745,6 +742,9 @@
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                        </li>
                                        <li class="link">
@@ -768,16 +768,10 @@
                                            <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/Margin.html" >Margin</a>
@@ -977,8 +971,8 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {SpeedUnits} from &#x27;../enums/speed-units.enum&#x27;;
-import {ReflectiveInjector} from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {ReflectiveInjector} from &#x27;@angular/core&#x27;;
+import {SpeedUnits} from &#x27;../enums/speed-units.enum&#x27;;
 import {SpeedConversionService} from &#x27;../services/speed-conversion.service&#x27;;
 import {ValueUnitPair} from &#x27;./value-unit-pair&#x27;;
 
@@ -997,7 +991,7 @@ export class Speed extends ValueUnitPair {
    */
   constructor(unit &#x3D; SpeedUnits.KM_S, value &#x3D; 0.0) {
     super(unit, value, SpeedUnits.KM_S);
-    const injector &#x3D; ReflectiveInjector.resolveAndCreate([SpeedConversionService]);
+    const injector               &#x3D; ReflectiveInjector.resolveAndCreate([SpeedConversionService]);
     this._valueConversionService &#x3D; injector.get(SpeedConversionService);
   }
 }

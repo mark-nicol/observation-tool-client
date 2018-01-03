@@ -1,93 +1,90 @@
-<div class="row">
-  <label for="offsetSelector"
-         class="col"
-         ngbTooltip="Unit of offset pointings"
-         #offsetTooltip="ngbTooltip"
-         [tooltip-delay]="offsetTooltip">
+<div class="field"
+     suiPopup
+     popupText="Unit of offset pointings">
+  <label for="offsetSelector">
     Offset Unit
   </label>
-  <select id="offsetSelector"
-          class="col form-control form-control-sm"
-          [(ngModel)]="data.offsetUnit"
-          [disabled]="radioValue === 'absolute'">
-    <option *ngFor="let unit of offsetUnits"
-            value="{{unit}}"
-            (selcted)="unit === 'mas'">
+  <sui-select id="offsetSelector"
+              class="selection"
+              [(ngModel)]="data.offsetUnit"
+              [disabled]="radioValue === 'absolute'">
+    <sui-select-option *ngFor="let unit of offsetUnits"
+                       value="{{unit}}"
+                       (selcted)="unit === 'mas'">
       {{unit}}
-    </option>
-  </select>
+    </sui-select-option>
+  </sui-select>
 </div>
-<div class="row">
-  <label class="col"
-         ngbTooltip="Number of pointings in this field"
-         #pointingsLableTooltip="ngbTooltip"
-         [tooltip-delay]="pointingsLableTooltip">
-    # Pointings
-  </label>
-  <p class="col form-control-static">{{data.rows.length}}</p>
-</div>
-<div class="row">
-  <table class="table table-sm">
-    <thead>
-      <tr *ngIf="radioValue === 'relative'"
-          ngbTooltip="Coordinate offsets for each pointing">
-        <th>
-          {{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').latHeader}}
-          [{{data.offsetUnit}}]
-        </th>
-        <th>
-          {{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').lonHeader}}
-          [{{data.offsetUnit}}]
-        </th>
-      </tr>
-      <tr *ngIf="radioValue === 'absolute'">
-        <th>{{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').latHeader}}</th>
-        <th>{{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').lonHeader}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of data.rows"
-          (keyup.enter)="log('enter')">
-        <td contenteditable (blur)="log('blur')">
-          {{radioValue === 'absolute' ? (row.lon.value | sexagesimal) : (row.lon.value | degrees)}}
-        </td>
-        <td contenteditable>
-          {{radioValue === 'absolute' ? (row.lat.value | sexagesimal) : (row.lat.value | degrees)}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="row justify-content-center">
-  <div class="btn-group"
-       role="group">
-    <button class="btn btn-outline-secondary"
-            (click)="addRow()"
-            ngbTooltip="Add a pointing"
-            #addButtonTooltip="ngbTooltip"
-            placement="left"
-            [tooltip-delay]="addButtonTooltip">
-      <i class="fa fa-plus"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            (click)="removeRow()"
-            ngbTooltip="Remove a pointing"
-            #removeButtonTooltip="ngbTooltip"
-            [tooltip-delay]="removeButtonTooltip">
-      <i class="fa fa-minus"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Import pointings"
-            #importButtonTooltip="ngbTooltip"
-            [tooltip-delay]="importButtonTooltip">
-      <i class="fa fa-download"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Export current pointings"
-            #exportButtonTooltip="ngbTooltip"
-            placement="right"
-            [tooltip-delay]="exportButtonTooltip">
-      <i class="fa fa-upload"></i>
-    </button>
+
+
+<div class="field"
+     suiPopup
+     popupText="Number of pointings in this field">
+  <div class="ui mini statistic">
+    <label class="label">
+      # Pointings
+    </label>
+    <p class="value">{{data.rows.length}}</p>
   </div>
 </div>
+
+
+<table class="ui celled table"
+       suiPopup
+       popupText="Coordinate offsets for each pointing">
+  <thead>
+    <tr *ngIf="radioValue === 'relative'">
+      <th>
+        {{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').latHeader}}
+        [{{data.offsetUnit}}]
+      </th>
+      <th>
+        {{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').lonHeader}}
+        [{{data.offsetUnit}}]
+      </th>
+    </tr>
+    <tr *ngIf="radioValue === 'absolute'">
+      <th>{{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').latHeader}}</th>
+      <th>{{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').lonHeader}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data.rows"
+        (keyup.enter)="log('enter')">
+      <td contenteditable (blur)="log('blur')">
+        {{radioValue === 'absolute' ? (row.lon.value | sexagesimal) : (row.lon.value | degrees)}}
+      </td>
+      <td contenteditable>
+        {{radioValue === 'absolute' ? (row.lat.value | sexagesimal) : (row.lat.value | degrees)}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div class="ui blue icon buttons">
+  <button class="ui button"
+          (click)="addRow()"
+          suiPopup
+          popupText="Add a pointing">
+    <i class="plus icon"></i>
+  </button>
+  <button class="ui button"
+          (click)="removeRow()"
+          suiPopup
+          popupText="Remove a pointing">
+    <i class="minus icon"></i>
+  </button>
+  <button class="ui button"
+          suiPopup
+          popupText="Import pointings">
+    <i class="download icon"></i>
+  </button>
+  <button class="ui button"
+          suiPopup
+          popupText="Export current pointings">
+    <i class="upload icon"></i>
+  </button>
+</div>
+
+

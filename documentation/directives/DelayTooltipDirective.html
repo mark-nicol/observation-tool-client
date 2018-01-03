@@ -323,6 +323,9 @@
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                 </li>
                                 <li class="link">
@@ -346,16 +349,10 @@
                                     <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/Margin.html" >Margin</a>
@@ -745,6 +742,9 @@
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                        </li>
                                        <li class="link">
@@ -768,16 +768,10 @@
                                            <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/Margin.html" >Margin</a>
@@ -1017,7 +1011,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/observation-tool/shared/directives/delay-tooltip.directive.ts:22</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/observation-tool/shared/directives/delay-tooltip.directive.ts:23</a></div>
                                         </td>
                                     </tr>
             
@@ -1040,7 +1034,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/observation-tool/shared/directives/delay-tooltip.directive.ts:29</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/observation-tool/shared/directives/delay-tooltip.directive.ts:33</a></div>
                                         </td>
                                     </tr>
             
@@ -1106,7 +1100,7 @@ import {NgbTooltip} from &#x27;@ng-bootstrap/ng-bootstrap&#x27;;
 @Directive({
   selector: &#x27;[tooltip-delay]&#x27;
 })
-export class DelayTooltipDirective{
+export class DelayTooltipDirective {
 
   /** The tooltip to delay opening */
   @Input(&#x27;tooltip-delay&#x27;) tooltip: NgbTooltip;
@@ -1117,14 +1111,18 @@ export class DelayTooltipDirective{
   /**
    * Listens for a mouseenter on the tooltipped element and delays the opening
    */
-  @HostListener(&#x27;mouseenter&#x27;) onMouseEnter() {
-    this.openCode &#x3D; setTimeout(() &#x3D;&gt; { this.tooltip.open(); }, 1000);
+  @HostListener(&#x27;mouseenter&#x27;)
+  onMouseEnter() {
+    this.openCode &#x3D; setTimeout(() &#x3D;&gt; {
+      this.tooltip.open();
+    }, 1000);
   }
 
   /**
    * Listens for a mouseleave on the tooltipped element, removes the timeout, and closes
    */
-  @HostListener(&#x27;mouseleave&#x27;) onMouseLeave() {
+  @HostListener(&#x27;mouseleave&#x27;)
+  onMouseLeave() {
     clearTimeout(this.openCode);
     this.tooltip.close();
   }

@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SuiModule} from 'ng2-semantic-ui';
 import {SystemSelectorComponent} from '../../../shared/components/system-selector/system-selector.component';
 import {DelayTooltipDirective} from '../../../shared/directives/delay-tooltip.directive';
 import {DegreesPipe} from '../../../shared/pipes/degrees.pipe';
@@ -19,17 +20,18 @@ describe('FccRectangularComponent', () => {
         SystemSelectorComponent,
         DelayTooltipDirective,
         SexagesimalPipe,
-        DegreesPipe ],
+        DegreesPipe],
       imports: [
         NgbModule.forRoot(),
-        FormsModule
+        FormsModule,
+        SuiModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FccRectangularComponent);
+    fixture   = TestBed.createComponent(FccRectangularComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

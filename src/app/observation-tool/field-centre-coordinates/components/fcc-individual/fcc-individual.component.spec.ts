@@ -1,6 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SuiModule} from 'ng2-semantic-ui';
 import {DelayTooltipDirective} from '../../../shared/directives/delay-tooltip.directive';
 import {DegreesPipe} from '../../../shared/pipes/degrees.pipe';
 import {SexagesimalPipe} from '../../../shared/pipes/sexagesimal.pipe';
@@ -16,18 +17,17 @@ describe('FccIndividualComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         FccIndividualComponent,
-        DelayTooltipDirective,
         SexagesimalPipe,
-        DegreesPipe
+        DegreesPipe,
       ],
-      imports: [NgbModule.forRoot(), FormsModule],
+      imports: [NgbModule.forRoot(), FormsModule, SuiModule],
       providers: [PersistenceService]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FccIndividualComponent);
+    fixture   = TestBed.createComponent(FccIndividualComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

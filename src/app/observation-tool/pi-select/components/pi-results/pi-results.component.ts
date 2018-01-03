@@ -23,7 +23,7 @@ export class PiResultsComponent implements OnInit {
   name: string;
   /** Results returned by the search service */
   results: any;
-  /** True if waiting for a search to return */
+
   isSearching: boolean;
 
   /**
@@ -60,13 +60,14 @@ export class PiResultsComponent implements OnInit {
    */
   search(variant: string, string: string, newSearch: boolean) {
     this.isSearching = true;
-    let result = new Observable<Response>();
-
+    let result       = new Observable<Response>();
     if (newSearch)
       result = this.piService.newSearch(variant, string);
     else
       result = this.piService.search(variant, string);
-    result.subscribe(response => this.results = response.json(), (error) => console.log(error), () => this.isSearching = false);
+    result.subscribe(response => this.results = response.json(),
+      (error) => console.log(error),
+      () => this.isSearching = false);
   }
 
 }

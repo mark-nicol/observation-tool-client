@@ -1,5 +1,5 @@
-import {Sensitivity} from './sensitivity';
 import {SensitivityUnits} from '../enums/sensitivity-units.enum';
+import {Sensitivity} from './sensitivity';
 
 describe('Class: Sensitivity', () => {
   let cls: Sensitivity;

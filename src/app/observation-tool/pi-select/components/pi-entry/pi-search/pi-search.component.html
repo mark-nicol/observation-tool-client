@@ -1,26 +1,15 @@
-<div class="card">
-  <h5 class="card-title">Principal Investigator</h5>
-  <div class="card-body">
-    <form>
-      <div class="input-group">
-        <input #piSearchInput
-               id="pi-search-txt-box"
-               (keyup)="0"
-               class="form-control"
-               placeholder="{{this.passedPi ? null : this.INPUT_PLACEHOLDER}}"
-               value="{{this.passedPi ? this.passedPi.fullName : null}}"
-               [disabled]="this.passedPi">
-        <div class="input-group-btn">
-          <a [routerLink]="['/pi-results', {Name: passedPi ? passedPi.fullName : piSearchInput.value}]">
-            <button
-              id="pi-search-submit-btn"
-              class="btn btn-outline-secondary"
-              [disabled]="piSearchInput.value === ''">
-              SelectPI
-            </button>
-          </a>
-        </div>
-      </div>
-    </form>
-  </div>
+<h4 class="ui dividing header">Principal Investigator</h4>
+<div class="ui fluid action input">
+  <input #piSearchInput
+         id="pi-search-txt-box"
+         type="text"
+         (keyup)="0"
+         placeholder="{{this.passedPi ? null : this.INPUT_PLACEHOLDER}}"
+         value="{{this.passedPi ? this.passedPi.fullName : null}}"
+         [disabled]="this.passedPi">
+  <a id="pi-search-submit-btn"
+     class="ui blue button"
+     [routerLink]="['/pi-results', {Name: passedPi ? passedPi.fullName : piSearchInput.value}]">
+    SelectPI
+  </a>
 </div>

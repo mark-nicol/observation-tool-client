@@ -1,6 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SuiModule} from 'ng2-semantic-ui';
 
-import { FovParametersComponent } from './fov-parameters.component';
+import {FovParametersComponent} from './fov-parameters.component';
 
 describe('FovParametersComponent', () => {
   let component: FovParametersComponent;
@@ -10,13 +11,14 @@ describe('FovParametersComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         FovParametersComponent
-      ]
+      ],
+      imports: [SuiModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FovParametersComponent);
+    fixture   = TestBed.createComponent(FovParametersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

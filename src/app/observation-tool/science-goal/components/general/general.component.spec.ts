@@ -12,14 +12,14 @@ describe('GeneralComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneralComponent, ModularPanelComponent ],
+      declarations: [GeneralComponent, ModularPanelComponent],
       imports: [FormsModule, NgbModule.forRoot()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GeneralComponent);
+    fixture   = TestBed.createComponent(GeneralComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

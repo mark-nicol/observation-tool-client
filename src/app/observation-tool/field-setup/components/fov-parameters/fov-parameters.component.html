@@ -1,34 +1,21 @@
-<div class="row form-group">
-  <label for="freqInput">
-    Representative Frequency (Sky)
-  </label>
-  <input class="form-control form-control-sm align-self-baseline"
-         id="freqInput"
-         placeholder="0.000 GHz">
-</div>
-<div class="row form-group">
-  <label>
-    Antenna Diameter
-  </label>
-  <label class="custom-control custom-radio">
-    <input id="12mRadio" name="antennaSizeRadios" type="radio" class="custom-control-input">
-    <span class="custom-control-indicator"></span>
-    <span class="custom-control-description">12m</span>
-  </label>
-
-</div>
-<div class="row form-group">
-  <label for="beamInput">
-    Antenna Beamsize (HPBW)
-  </label>
-  <input class="form-control form-control-sm align-self-baseline"
-         id="beamInput"
-         placeholder="0.000 arcsec">
-</div>
-<div class="row form-group">
-  <label class="custom-control custom-checkbox">
-    <input id="beamsizeCheckbox" type="checkbox" class="custom-control-input">
-    <span class="custom-control-indicator"></span>
-    <span class="custom-control-description">Show Antenna Beamsize</span>
-  </label>
+<div class="ui form">
+  <div class="field">
+    <label for="freqInput">Representative Frequency (Sky)</label>
+    <input id="freqInput"
+           placeholder="0.000 GHz">
+  </div>
+  <div class="three fields">
+    <div class="field">
+      <label>Antenna Diameter</label>
+      <sui-radio-button name="antennaSizeRadios">12m</sui-radio-button>
+    </div>
+    <div class="field">
+      <label for="beamInput">Antenna Beamsize (HPBW)</label>
+      <input id="beamInput"
+             placeholder="0.000 arcsec">
+    </div>
+    <div class="field">
+      <sui-checkbox>Show Antenna Beamsize</sui-checkbox>
+    </div>
+  </div>
 </div>

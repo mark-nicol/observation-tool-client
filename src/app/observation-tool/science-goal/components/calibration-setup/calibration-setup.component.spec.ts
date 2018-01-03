@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CalibrationSetupComponent } from './calibration-setup.component';
+import {CalibrationSetupComponent} from './calibration-setup.component';
 
 describe('CalibrationSetupComponent', () => {
   let component: CalibrationSetupComponent;
@@ -8,13 +8,13 @@ describe('CalibrationSetupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalibrationSetupComponent ]
+      declarations: [CalibrationSetupComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CalibrationSetupComponent);
+    fixture   = TestBed.createComponent(CalibrationSetupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

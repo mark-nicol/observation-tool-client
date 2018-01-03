@@ -3,13 +3,13 @@
  */
 
 export interface PrimaryInvestigatorInterface {
-  uid:           string;
-  firstName:     string;
-  lastName:      string;
-  fullName:      string;
-  email:         string;
-  affiliation:   string;
+  uid: string;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  email: string;
+  affiliation: string;
   affiliationId: number;
-  telephone:     string;
-  executive:     string;
+  telephone: string;
+  executive: string;
 }

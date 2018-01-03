@@ -29,9 +29,15 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "core-js": "^2.4.1",
+    "csv-parse": "^2.0.0",
+    "csv-parser": "^1.12.0",
     "d3": "^4.11.0",
     "equatorial": "^1.1.0",
+    "fs": "0.0.1-security",
+    "ng2-semantic-ui": "^0.9.6",
+    "ngx-papaparse": "^1.2.5",
     "rxjs": "^5.4.2",
+    "semantic-ui": "^2.2.13",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
@@ -47,6 +53,7 @@
     "bootstrap": "^4.0.0-beta",
     "codelyzer": "~3.2.1",
     "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
     "intl": "^1.2.5",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",

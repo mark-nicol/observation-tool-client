@@ -323,6 +323,9 @@
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                 </li>
                                 <li class="link">
@@ -346,16 +349,10 @@
                                     <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/Margin.html" >Margin</a>
@@ -745,6 +742,9 @@
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                        </li>
                                        <li class="link">
@@ -768,16 +768,10 @@
                                            <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/Margin.html" >Margin</a>
@@ -1466,31 +1460,17 @@ export class NavbarComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade" id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;nav class&#x3D;&quot;navbar navbar-expand-md navbar-dark bg-dark&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;ui fixed blue inverted menu&quot;&gt;
   &lt;a class&#x3D;&quot;navbar-brand&quot;
      href&#x3D;&quot;&quot;&gt;
     ALMA
   &lt;/a&gt;
-  &lt;button class&#x3D;&quot;navbar-toggler&quot;
-          (click)&#x3D;&quot;isCollapsed &#x3D; !isCollapsed&quot;
-          [attr.aria-expanded]&#x3D;&quot;!isCollapsed&quot;
-          type&#x3D;&quot;button&quot;&gt;
-    &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;/span&gt;
-  &lt;/button&gt;
-  &lt;div [ngbCollapse]&#x3D;&quot;isCollapsed&quot;
-       class&#x3D;&quot;collapse navbar-collapse&quot;
-       id&#x3D;&quot;navbarSupportedContent&quot;&gt;
-    &lt;ul class&#x3D;&quot;navbar-nav mr-auto&quot;&gt;
-      &lt;li class&#x3D;&quot;nav-item&quot;
-          *ngFor&#x3D;&quot;let item of items&quot;&gt;
-        &lt;a class&#x3D;&quot;nav-link&quot;
-           [routerLink]&#x3D;&quot;item.path&quot;&gt;
-          {{item.title}}
-        &lt;/a&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/nav&gt;
+  &lt;a class&#x3D;&quot;item&quot;
+     *ngFor&#x3D;&quot;let item of items&quot;
+     [routerLink]&#x3D;&quot;item.path&quot;&gt;
+    {{item.title}}
+  &lt;/a&gt;
+&lt;/div&gt;
 </code></pre>
     </div>
 
@@ -1517,7 +1497,7 @@ export class NavbarComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-expand-md navbar-dark bg-dark">  <a class="navbar-brand"     href="">    ALMA  </a>  <button class="navbar-toggler"          (click)="isCollapsed = !isCollapsed"          [attr.aria-expanded]="!isCollapsed"          type="button">    <span class="navbar-toggler-icon"></span>  </button>  <div [ngbCollapse]="isCollapsed"       class="collapse navbar-collapse"       id="navbarSupportedContent">    <ul class="navbar-nav mr-auto">      <li class="nav-item"          *ngFor="let item of items">        <a class="nav-link"           [routerLink]="item.path">          {{item.title}}        </a>      </li>    </ul>  </div></nav></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="ui fixed blue inverted menu">  <a class="navbar-brand"     href="">    ALMA  </a>  <a class="item"     *ngFor="let item of items"     [routerLink]="item.path">    {{item.title}}  </a></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiResultsComponent', 'selector': 'app-pi-results'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};

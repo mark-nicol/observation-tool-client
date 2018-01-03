@@ -323,6 +323,9 @@
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                 </li>
                                 <li class="link">
@@ -346,16 +349,10 @@
                                     <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/Margin.html" >Margin</a>
@@ -745,6 +742,9 @@
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                        </li>
                                        <li class="link">
@@ -768,16 +768,10 @@
                                            <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/Margin.html" >Margin</a>
@@ -1097,11 +1091,12 @@
         <pre class="line-numbers"><code class="language-typescript">import {NgModule} from &#x27;@angular/core&#x27;;
 import {PiSelectModule} from &#x27;../pi-select/pi-select.module&#x27;;
 import {ScienceGoalModule} from &#x27;../science-goal/science-goal.module&#x27;;
+import {SharedModule} from &#x27;../shared/shared.module&#x27;;
 import {PlannedObservingComponent} from &#x27;./components/planned-observing/planned-observing.component&#x27;;
 import {ProposalComponent} from &#x27;./components/proposal/proposal.component&#x27;;
 import {ProjectRoutingModule} from &#x27;./project-routing.module&#x27;;
 import {ProjectComponent} from &#x27;./project.component&#x27;;
-import {SharedModule} from &#x27;../shared/shared.module&#x27;;
+import {SuiModule} from &#x27;ng2-semantic-ui&#x27;;
 
 @NgModule({
   imports: [
@@ -1109,6 +1104,7 @@ import {SharedModule} from &#x27;../shared/shared.module&#x27;;
     ScienceGoalModule,
     PiSelectModule,
     ProjectRoutingModule,
+    SuiModule
   ],
   declarations: [
     PlannedObservingComponent,

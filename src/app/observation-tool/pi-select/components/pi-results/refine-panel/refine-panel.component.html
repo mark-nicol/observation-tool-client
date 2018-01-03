@@ -1,27 +1,35 @@
-<div class="card">
-  <h5 class="card-title">Refine Search</h5>
-  <div class="card-body">
-    <form class="form-inline">
-      <div class="form-group">
-        <select #refineSelector
-                class="form-control"
-                title="Attribute">
-          <option value="Name">Name</option>
-          <option value="email">Email</option>
-          <option value="affiliation">Affiliation</option>
-          <option value="uid">ALMA ID</option>
-        </select>
-        <label for="refineInput"
-               style="padding-left: 0.5em; padding-right: 0.5em">contains</label>
-        <input class="form-control"
-               title="refineInput"
-               id="refineInput"
-               #refineInput
-               value="{{this.name}}">
+<h4 class="ui dividing header">Refine Search</h4>
+<div class="ui grid">
+  <div class="one column row">
+    <div class="column">
+      <div class="ui form">
+        <div class="three fields">
+          <div class="field">
+            <sui-select #refineSelector
+                        class="selection">
+              <sui-select-option value="name">Name</sui-select-option>
+              <sui-select-option value="email">Email</sui-select-option>
+              <sui-select-option value="affiliation">Affiliation</sui-select-option>
+              <sui-select-option value="uid">ALMA ID</sui-select-option>
+            </sui-select>
+          </div>
+          <div class="field">
+            <h5>Contains</h5>
+          </div>
+          <div class="field">
+            <input type="text"
+                   #refineInput>
+          </div>
+        </div>
       </div>
-    </form>
-    <button (click)="refineClick(refineSelector.value, refineInput.value)" class="btn btn-outline-secondary pull-right">Find
-      Investigator
-    </button>
-  </div><!-- panel-body -->
-</div><!-- panel panel-default -->
+    </div>
+  </div>
+  <div class="two column row">
+    <div class="right floated column">
+      <button (click)="refineClick(refineSelector.value, refineInput.value)" class="ui right floated blue button">
+        Find Investigator
+      </button>
+    </div>
+  </div>
+</div>
+

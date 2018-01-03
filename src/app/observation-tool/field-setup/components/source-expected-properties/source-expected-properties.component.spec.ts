@@ -1,5 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SuiModule} from 'ng2-semantic-ui';
 import {DelayTooltipDirective} from '../../../shared/directives/delay-tooltip.directive';
 
 import {SourceExpectedPropertiesComponent} from './source-expected-properties.component';
@@ -11,14 +12,14 @@ describe('SourceExpectedPropertiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SourceExpectedPropertiesComponent, DelayTooltipDirective ],
-      imports: [NgbModule.forRoot()]
+      declarations: [SourceExpectedPropertiesComponent, DelayTooltipDirective],
+      imports: [NgbModule.forRoot(), SuiModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SourceExpectedPropertiesComponent);
+    fixture   = TestBed.createComponent(SourceExpectedPropertiesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

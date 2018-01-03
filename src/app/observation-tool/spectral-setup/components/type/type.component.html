@@ -1,50 +1,57 @@
-<div class="row">
-  <label class="col-5">Spectral Type</label>
-  <div class="col-7">
-    <label class="custom-control custom-radio">
-      <input id="lineRadio" name="typeRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Spectral Line</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="contRadio" name="typeRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Single Continuum</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="scanRadio" name="typeRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Spectral Scan</span>
-    </label>
+<div class="ui form">
+  <div class="inline fields">
+    <label>Spectral Type</label>
+    <div class="field">
+      <sui-radio-button name="spectralRadios"
+                        [(ngModel)]="spectralTypeRadioChoice"
+                        value="line">
+        Spectral Line
+      </sui-radio-button>
+    </div>
+    <div class="field">
+      <sui-radio-button name="spectralRadios"
+                        [(ngModel)]="spectralTypeRadioChoice"
+                        value="single">
+        Single Continuum
+      </sui-radio-button>
+    </div>
+    <div class="field">
+      <sui-radio-button name="spectralRadios"
+                        [(ngModel)]="spectralTypeRadioChoice"
+                        value="scan">
+        Spectral Scan
+      </sui-radio-button>
+    </div>
+  </div>
+
+  <div class="field">
+    <sui-checkbox>Produce Image Sidebands (Bands 9 and 10 only)</sui-checkbox>
+  </div>
+
+  <div class="inline fields">
+    <label>Polarization Products Desired</label>
+    <div class="field">
+      <sui-radio-button name="polarizationRadios"
+                        [(ngModel)]="polarizationRadioChoice"
+                        value="xx">
+        XX
+      </sui-radio-button>
+    </div>
+    <div class="field">
+      <sui-radio-button name="polarizationRadios"
+                        [(ngModel)]="polarizationRadioChoice"
+                        value="dual">
+        DUAL
+      </sui-radio-button>
+    </div>
+    <div class="field">
+      <sui-radio-button name="polarizationRadios"
+                        [(ngModel)]="polarizationRadioChoice"
+                        value="full">
+        FULL
+      </sui-radio-button>
+    </div>
   </div>
 </div>
-<div class="row">
-  <label class="col-5">Produce Image Sidebands (Bands 9 and 10 only)</label>
-  <div class="col-7">
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description"></span>
-    </label>
-  </div>
-</div>
-<div class="row">
-  <label class="col-5">Polarization Products Desired</label>
-  <div class="col-7">
-    <label class="custom-control custom-radio">
-      <input id="xxRadio" name="polarRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">XX</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="dualRadio" name="polarRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">DUAL</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input id="fullRadio" name="polarRadios" type="radio" class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">FULL</span>
-    </label>
-  </div>
-</div>
+
+

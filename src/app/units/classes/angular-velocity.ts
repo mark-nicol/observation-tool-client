@@ -16,7 +16,7 @@ export class AngularVelocity extends ValueUnitPair {
    */
   constructor(unit = AngularVelocityUnits.DEG_S, value = 0.0) {
     super(unit, value, AngularVelocityUnits.DEG_S);
-    const injector = ReflectiveInjector.resolveAndCreate([AngularVelocityConversionService]);
+    const injector               = ReflectiveInjector.resolveAndCreate([AngularVelocityConversionService]);
     this._valueConversionService = injector.get(AngularVelocityConversionService);
   }
 }

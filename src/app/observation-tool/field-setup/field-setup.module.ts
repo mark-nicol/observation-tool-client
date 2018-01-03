@@ -1,4 +1,7 @@
 import {NgModule} from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DragulaModule} from 'ng2-dragula';
+import {SuiModule} from 'ng2-semantic-ui';
 import {FieldCentreCoordinatesModule} from '../field-centre-coordinates/field-centre-coordinates.module';
 import {SharedModule} from '../shared/shared.module';
 import {FovParametersComponent} from './components/fov-parameters/fov-parameters.component';
@@ -7,14 +10,13 @@ import {SourceExpectedPropertiesComponent} from './components/source-expected-pr
 import {SourceComponent} from './components/source/source.component';
 import {SpacialImageComponent} from './components/spacial-image/spacial-image.component';
 import {FieldSetupComponent} from './field-setup.component';
-import {DragulaModule} from 'ng2-dragula';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     FieldCentreCoordinatesModule,
     DragulaModule,
     SharedModule,
+    SuiModule,
     NgbModule.forRoot(),
   ],
   declarations: [
@@ -29,4 +31,5 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   exports: [FieldSetupComponent]
 })
 
-export class FieldSetupModule { }
+export class FieldSetupModule {
+}

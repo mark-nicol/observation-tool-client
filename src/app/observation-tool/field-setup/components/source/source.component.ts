@@ -47,10 +47,15 @@ export class SourceComponent implements OnInit {
     'Ephemeris'
   ];
 
+  currentSystem: CoordSystemInterface;
+
+  sexagesimalCheckboxDisabled = false;
+
   /**
    * Retrieves data from service
    * @param persistenceService Injected service
    * @param formBuilder
+   * @param systemService
    */
   constructor(private persistenceService: PersistenceService,
               private formBuilder: FormBuilder,
@@ -72,6 +77,7 @@ export class SourceComponent implements OnInit {
     this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
         .subscribe(result => {
           this.sourceForm.patchValue(result);
+          this.systemChange();
         });
   }
 
@@ -115,14 +121,22 @@ export class SourceComponent implements OnInit {
    * Handles a change of the sexagesimal checkbox in the system selector
    * @param units True if checkbox is selected
    */
-  sexagesimalChange(units: boolean) {
+  sexagesimalChange() {
+    console.log(this.sourceForm.value);
   }
 
   /**
    * Handles a change of system in the system selector
    * @param system The new system type to be used
    */
-  systemChange(system: CoordSystemInterface) {
+  systemChange() {
+    this.currentSystem = this.systemService.getSystem(this.sourceForm.value.chosenSystem);
+    if (this.sourceForm.value.chosenSystem === 'icrs' || this.sourceForm.value.chosenSystem === 'FK5 J2000') {
+      this.sexagesimalCheckboxDisabled = false;
+    } else {
+      this.sourceForm.value.sexagesimalUnits = false;
+      this.sexagesimalCheckboxDisabled = true;
+    }
   }
 
 }

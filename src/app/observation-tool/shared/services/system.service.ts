@@ -11,8 +11,8 @@ export class SystemService {
         lonLabel: 'RA',
       },
       normalLabels: {
-        latLabel: 'Dec(deg)',
-        lonLabel: 'RA(deg)',
+        latLabel: 'Dec (deg)',
+        lonLabel: 'RA (deg)',
       },
       latPlaceholder: '0',
       lonPlaceholder: '0',
@@ -25,8 +25,8 @@ export class SystemService {
         lonLabel: 'RA',
       },
       normalLabels: {
-        latLabel: 'Dec(deg)',
-        lonLabel: 'RA(deg)'
+        latLabel: 'Dec (deg)',
+        lonLabel: 'RA (deg)'
       },
       latPlaceholder: '0',
       lonPlaceholder: '0',
@@ -39,8 +39,8 @@ export class SystemService {
         lonLabel: '',
       },
       normalLabels: {
-        latLabel: 'Lat(deg)',
-        lonLabel: 'Lon(deg)',
+        latLabel: 'Lat (deg)',
+        lonLabel: 'Lon (deg)',
       },
       latPlaceholder: '-60.18855219',
       lonPlaceholder: '96.33728304',
@@ -67,8 +67,8 @@ export class SystemService {
         lonLabel: '',
       },
       normalLabels: {
-        latLabel: 'Alt(deg)',
-        lonLabel: 'Az(deg)',
+        latLabel: 'Alt (deg)',
+        lonLabel: 'Az (deg)',
       },
       latPlaceholder: '0',
       lonPlaceholder: '0',
@@ -81,8 +81,8 @@ export class SystemService {
         lonLabel: '',
       },
       normalLabels: {
-        latLabel: 'Alt(deg)',
-        lonLabel: 'Az(deg)',
+        latLabel: 'Alt (deg)',
+        lonLabel: 'Az (deg)',
       },
       latPlaceholder: '0',
       lonPlaceholder: '0',

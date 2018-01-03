@@ -1,12 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SpectralSetupComponent } from './spectral-setup.component';
+import {HttpClientModule} from '@angular/common/http';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SuiModule} from 'ng2-semantic-ui';
 import {ModularPanelComponent} from '../shared/components/modular-panel/modular-panel.component';
+import {PersistenceService} from '../shared/services/persistence.service';
+import {TypeComponent} from './components/type/type.component';
 import {VisualisationControlComponent} from './components/visualisation-control/visualisation-control.component';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
-import {TypeComponent} from './components/type/type.component';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {SpectralDataService} from './services/spectral-data.service';
+
+import {SpectralSetupComponent} from './spectral-setup.component';
 
 describe('SpectralSetupComponent', () => {
   let component: SpectralSetupComponent;
@@ -21,14 +25,14 @@ describe('SpectralSetupComponent', () => {
         VisualisationViewerComponent,
         TypeComponent
       ],
-      imports: [NgbModule.forRoot()],
-      providers: [PersistenceService]
+      imports: [NgbModule.forRoot(), FormsModule, HttpClientModule, SuiModule],
+      providers: [PersistenceService, SpectralDataService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpectralSetupComponent);
+    fixture   = TestBed.createComponent(SpectralSetupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,4 @@
-import { DelayTooltipDirective } from './delay-tooltip.directive';
+import {DelayTooltipDirective} from './delay-tooltip.directive';
 
 describe('DelayTooltipDirective', () => {
   it('should create an instance', () => {

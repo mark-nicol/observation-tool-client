@@ -1,143 +1,129 @@
-<div class="card">
-  <h5 class="card-title">Proposal Information</h5>
-  <div class="card-body">
-    <div class="row form-group">
-      <label class="col-2 form-control-label">Proposal Title</label>
-      <input class="col form-control align-self-baseline">
+<div class="ui form container">
+  <div class="ui segment">
+    <h4 class="ui dividing header">Proposal Information</h4>
+    <div class="field">
+      <label>Proposal Title</label>
+      <input type="text">
     </div>
-    <div class="row form-group">
-      <label class="col-2 form-control-label">Proposal Cycle</label>
-      <input class="col form-control align-self-baseline">
+    <div class="field">
+      <label>Proposal Cycle</label>
+      <input type="text">
     </div>
-    <div class="row form-group">
-      <label class="col-2 form-control-label">Abstract</label>
-      <textarea class="col form-control align-self-baseline"></textarea>
+    <div class="field">
+      <label>Abstract</label>
+      <textarea #abstractTextArea rows="5" (keyup)="checkChars(abstractTextArea.value)"></textarea>
+      <p>Characters remaining: {{remainingChars}}</p>
     </div>
-    <div class="card">
-      <h6 class="card-title">Proposal Type</h6>
-      <div class="card-body row">
-        <label class="col custom-control custom-radio" *ngFor="let typeRadio of typeRadios">
-          <input id="{{typeRadio.id}}"
-                 name="typeRadios"
-                 class="custom-control-input"
-                 type="radio"
-                 (change)="chosenType = typeRadio.id"
-                 [checked]="chosenType === typeRadio.id">
-          <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">{{typeRadio.text}}</span>
-        </label>
-      </div>
+    <div class="field">
+      <label>Related Proposals</label>
+      <textarea rows="5"></textarea>
     </div>
-    <div class="card">
-      <h6 class="card-title">Scientific Category</h6>
-      <div class="card-body">
-        <div class="row justify-content-center">
-          <label class="col custom-control custom-radio" *ngFor="let categoryRadio of categoryKeys(categoryRadios)">
-            <input id="{{categoryRadios[categoryRadio].id}}"
-                   name="categoryRadios"
-                   class="custom-control-input"
-                   type="radio"
-                   value="{{categoryRadios[categoryRadio].value}}"
-                   (change)="chosenCategory = categoryRadios[categoryRadio].value; selectedKeywords = 0"
-                   [checked]="chosenCategory === categoryRadios[categoryRadio].value">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">{{categoryRadios[categoryRadio].text}}</span>
-          </label>
+    <div class="field">
+      <label>Previous Proposals</label>
+      <textarea rows="5"></textarea>
+    </div>
+    <div class="field">
+      <label>Student Project</label>
+      <sui-checkbox class="toggle"></sui-checkbox>
+    </div>
+  </div>
+  <div class="ui segment">
+    <div class="field">
+      <h4 class="ui dividing header">Proposal Type</h4>
+      <div class="inline fields">
+        <div class="field" *ngFor="let typeRadio of typeRadios">
+          <sui-radio-button id="{{typeRadio.id}}"
+                            name="typeRadios"
+                            value="{{typeRadio.id}}"
+                            [(ngModel)]="chosenType">
+            {{typeRadio.text}}
+          </sui-radio-button>
         </div>
       </div>
     </div>
-    <div class="row form-group">
-      <label class="col-2 form-control-label"
-             for="keywordSelector">Keywords (chosen {{selectedKeywords}} of 2)</label>
-      <select #keywordSelector
-              id="keywordSelector"
-              multiple
-              class="col form-control"
-              (change)="selectedKeywords = keywordSelector.selectedOptions.length">
-        <option *ngFor="let option of categoryRadios[chosenCategory].keywords"
-                [disabled]="checkKeywords(option, keywordSelector.selectedOptions)">{{option}}
-        </option>
-      </select>
+  </div>
+  <div class="ui segment">
+    <h4 class="ui dividing header">Scientific Category</h4>
+    <div class="inline fields">
+      <div class="field" *ngFor="let categoryRadio of categoryKeys(categoryRadios)">
+        <sui-radio-button id="{{categoryRadios[categoryRadio].value}}"
+                          name="categoryRadios"
+                          value="{{categoryRadios[categoryRadio].value}}"
+                          [(ngModel)]="chosenCategory"
+                          (currentValueChange)="categoryRadioChange()">
+          {{categoryRadios[categoryRadio].text}}
+        </sui-radio-button>
+      </div>
     </div>
-    <div class="row">
-      <label class="col-2 form-control-label">Student Project</label>
-      <label class="col custom-control custom-checkbox">
-        <input class="custom-control-input" type="checkbox">
-        <span class="custom-control-indicator"></span>
-        <span class="custom-control-description"></span>
-      </label>
-    </div>
-    <div class="row form-group">
-      <label class="col-2 form-control-label">Related Proposals</label>
-      <textarea class="col form-control"></textarea>
-    </div>
-    <div class="row form-group">
-      <label class="col-2 form-control-label">Previous Proposals</label>
-      <textarea class="col form-control"></textarea>
+
+    <div class="field">
+      <label for="keywordSelector">Keywords (chosen {{selectedKeywordCount}} of 2)</label>
+      <sui-multi-select #keywordSelector
+                        id="keywordSelector"
+                        class="selection"
+                        [(ngModel)]="selectedKeywordValues"
+                        (maxSelected)="2"
+                        (selectedOptionsChange)="keywordsChange()">
+        <sui-select-option *ngFor="let option of categoryRadios[chosenCategory].keywords"
+                           [value]="option">
+          {{option}}
+        </sui-select-option>
+      </sui-multi-select>
     </div>
   </div>
-</div>
-<div class="card">
-  <h5 class="card-title">Investigators</h5>
-  <div class="card-body">
-    <div class="row">
-      <table class="table">
-        <thead class="thead-default">
-          <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Full Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Affiliation</th>
-            <th scope="col">ALMA ID</th>
-            <th scope="col">Executive</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td scope="row">PI</td>
-            <td>Not Set</td>
-            <td>Not Set</td>
-            <td>Not Set</td>
-            <td>Not Set</td>
-            <td>Non-AMLA</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="row pull-right btn-group">
-      <button class="btn btn-outline-secondary">Select PI</button>
-      <button class="btn btn-outline-secondary"
-              [disabled]="chosenType === 'regularRadio' || chosenType === 'opportunityRadio'">
-        Add CoPI
-      </button>
-      <button class="btn btn-outline-secondary">Add Col</button>
-      <button class="btn btn-outline-secondary">Remove Collaborator</button>
-      <button class="btn btn-outline-secondary">Add from Proposal</button>
-    </div>
+  <div class="ui segment">
+    <h4 class="ui dividing header">Investigators</h4>
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Full Name</th>
+          <th>Email</th>
+          <th>Affiliation</th>
+          <th>ALMA ID</th>
+          <th>Executive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PI</td>
+          <td>Not Set</td>
+          <td>Not Set</td>
+          <td>Not Set</td>
+          <td>Not Set</td>
+          <td>Non-AMLA</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="6">
+            <div class="ui tiny compact right floated buttons">
+              <button class="ui blue button"
+                      [disabled]="chosenType === 'regularRadio' || chosenType === 'opportunityRadio'">
+                Add CoPI
+              </button>
+              <button class="ui blue button">Add Col</button>
+              <button class="ui red button">Remove Collaborator</button>
+            </div>
+            <button class="ui tiny compact right floated blue button">Add from Proposal</button>
+            <button class="ui tiny compact right floated blue button">Select PI</button>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
   </div>
-</div>
-<div class="card">
-  <h5 class="card-title">Science Case</h5>
-  <div class="card-body row">
-    <label class="col-3 form-control-label">Science Case (Mandatory, PDF, 4 pages max.)</label>
-    <div class="col input-group">
-      <input class="form-control align-self-baseline">
-      <span class="input-group-btn align-self-baseline">
-        <button class="btn btn-outline-secondary">Attach</button>
-      </span>
-      <span class="input-group-btn align-self-baseline">
-        <button class="btn btn-outline-secondary">Detach</button>
-      </span>
-      <span class="input-group-btn align-self-baseline">
-        <button class="btn btn-outline-secondary">View</button>
-      </span>
+  <div class="ui segment">
+    <h4 class="ui dividing header">Science Case (Mandatory, PDF, 4 pages max.)</h4>
+    <div class="ui fluid mini action input">
+      <input type="text">
+      <button class="ui tiny blue button">Attach</button>
+      <button class="ui tiny basic blue button">View</button>
+      <button class="ui tiny red button">Detach</button>
     </div>
+    <p>PDF, 4 pages max.</p>
   </div>
-</div>
-<div class="card">
-  <h5 class="card-title">Duplicate Observations</h5>
-  <div class="card-body">
-    <p>Placeholder</p>
-    <textarea class="form-control"></textarea>
+  <div class="ui segment">
+    <h4 class="ui dividing header">Duplicate Observations</h4>
+    <textarea rows="5"></textarea>
   </div>
 </div>

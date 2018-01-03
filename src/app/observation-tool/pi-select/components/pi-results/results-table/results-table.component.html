@@ -1,21 +1,40 @@
-<div class="card" style="max-height: 50em; overflow: auto">
-  <table class="card-body table table-hover">
-    <thead>
-      <tr>
-        <th>ALMA ID</th>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Affiliation</th>
-      </tr>
-    </thead>
-    <tr *ngFor="let pi of searchResults"
-        [class.table-secondary]="pi === selectedPi"
-        (click)="rowClick(pi)">
-      <td>{{pi.uid}}</td>
-      <td>{{pi.fullName}}</td>
-      <td>{{pi.email}}</td>
-      <td>{{pi.affiliation}}</td>
+<h4 class="ui dividing header">Results</h4>
+
+<table class="ui selectable table">
+  <thead>
+    <tr>
+      <th>ALMA ID</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Affiliation</th>
     </tr>
-  </table>
-  <h4 *ngIf="isSearching">Loading Results .....</h4>
-</div>
+  </thead>
+  <tr *ngFor="let pi of searchResults"
+      [class.table-secondary]="pi === selectedPi"
+      (click)="rowClick(pi)">
+    <td>{{pi.uid}}</td>
+    <td>{{pi.fullName}}</td>
+    <td>{{pi.email}}</td>
+    <td>{{pi.affiliation}}</td>
+  </tr>
+  <tfoot>
+    <tr>
+      <th colspan="4">
+        <div class="ui right floated buttons">
+          <!-- TODO Change from links to actual buttons, route programmatically -->
+          <a [routerLink]="['/pi-entry', {selectedPi: true}]">
+            <button class="ui blue button"
+                    [disabled]="!resultsTable.selectedPi">
+              Select PI
+            </button>
+          </a>
+          <a routerLink="/pi-entry">
+            <button class="ui red button">
+              Cancel
+            </button>
+          </a>
+        </div>
+      </th>
+    </tr>
+  </tfoot>
+</table>

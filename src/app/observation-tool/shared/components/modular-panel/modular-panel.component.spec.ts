@@ -9,14 +9,14 @@ describe('ModularPanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModularPanelComponent ],
-      imports: [ NgbCollapseModule ]
+      declarations: [ModularPanelComponent],
+      imports: [NgbCollapseModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModularPanelComponent);
+    fixture   = TestBed.createComponent(ModularPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

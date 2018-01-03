@@ -323,6 +323,9 @@
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                 </li>
                                 <li class="link">
@@ -346,16 +349,10 @@
                                     <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/Margin.html" >Margin</a>
@@ -745,6 +742,9 @@
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                        </li>
                                        <li class="link">
@@ -768,16 +768,10 @@
                                            <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/Margin.html" >Margin</a>
@@ -1187,7 +1181,8 @@ export class RefinePanelComponent {
                value&#x3D;&quot;{{this.name}}&quot;&gt;
       &lt;/div&gt;
     &lt;/form&gt;
-    &lt;button (click)&#x3D;&quot;refineClick(refineSelector.value, refineInput.value)&quot; class&#x3D;&quot;btn btn-outline-secondary pull-right&quot;&gt;Find
+    &lt;button (click)&#x3D;&quot;refineClick(refineSelector.value, refineInput.value)&quot; class&#x3D;&quot;btn btn-outline-secondary pull-right&quot;&gt;
+      Find
       Investigator
     &lt;/button&gt;
   &lt;/div&gt;&lt;!-- panel-body --&gt;
@@ -1218,7 +1213,7 @@ export class RefinePanelComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="card">  <h5 class="card-title">Refine Search</h5>  <div class="card-body">    <form class="form-inline">      <div class="form-group">        <select #refineSelector                class="form-control"                title="Attribute">          <option value="Name">Name</option>          <option value="email">Email</option>          <option value="affiliation">Affiliation</option>          <option value="uid">ALMA ID</option>        </select>        <label for="refineInput"               style="padding-left: 0.5em; padding-right: 0.5em">contains</label>        <input class="form-control"               title="refineInput"               id="refineInput"               #refineInput               value="{{this.name}}">      </div>    </form>    <button (click)="refineClick(refineSelector.value, refineInput.value)" class="btn btn-outline-secondary pull-right">Find      Investigator    </button>  </div><!-- panel-body --></div><!-- panel panel-default --></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="card">  <h5 class="card-title">Refine Search</h5>  <div class="card-body">    <form class="form-inline">      <div class="form-group">        <select #refineSelector                class="form-control"                title="Attribute">          <option value="Name">Name</option>          <option value="email">Email</option>          <option value="affiliation">Affiliation</option>          <option value="uid">ALMA ID</option>        </select>        <label for="refineInput"               style="padding-left: 0.5em; padding-right: 0.5em">contains</label>        <input class="form-control"               title="refineInput"               id="refineInput"               #refineInput               value="{{this.name}}">      </div>    </form>    <button (click)="refineClick(refineSelector.value, refineInput.value)" class="btn btn-outline-secondary pull-right">      Find      Investigator    </button>  </div><!-- panel-body --></div><!-- panel panel-default --></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiResultsComponent', 'selector': 'app-pi-results'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'RefinePanelComponent'};

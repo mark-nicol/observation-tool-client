@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { SpeedConversionService } from './speed-conversion.service';
+import {SpeedConversionService} from './speed-conversion.service';
 
 describe('SpeedConversionService', () => {
   beforeEach(() => {

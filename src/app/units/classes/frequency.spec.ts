@@ -1,5 +1,5 @@
-import {Frequency} from './frequency';
 import {FrequencyUnits} from '../enums/frequency-units.enum';
+import {Frequency} from './frequency';
 
 describe('Class: Frequency', () => {
   let cls: Frequency;

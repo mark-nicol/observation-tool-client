@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { ValueConversionService } from './value-conversion.service';
+import {ValueConversionService} from './value-conversion.service';
 
 describe('ValueConversionService', () => {
   beforeEach(() => {

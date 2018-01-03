@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
+import {SuiModule} from 'ng2-semantic-ui';
 
-import { VisualisationControlComponent } from './visualisation-control.component';
+import {VisualisationControlComponent} from './visualisation-control.component';
 
 describe('VisualisationControlComponent', () => {
   let component: VisualisationControlComponent;
@@ -10,13 +12,14 @@ describe('VisualisationControlComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         VisualisationControlComponent
-      ]
+      ],
+      imports: [FormsModule, SuiModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VisualisationControlComponent);
+    fixture   = TestBed.createComponent(VisualisationControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

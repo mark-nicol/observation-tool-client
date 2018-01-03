@@ -11,14 +11,14 @@ describe('SpacialImageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpacialImageComponent, DelayTooltipDirective ],
-      imports: [ NgbModule.forRoot() ]
+      declarations: [SpacialImageComponent, DelayTooltipDirective],
+      imports: [NgbModule.forRoot()]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpacialImageComponent);
+    fixture   = TestBed.createComponent(SpacialImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

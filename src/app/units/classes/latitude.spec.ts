@@ -1,5 +1,5 @@
-import {Latitude} from './latitude';
 import {LatitudeUnits} from '../enums/latitude-units.enum';
+import {Latitude} from './latitude';
 
 describe('Class: Latitude', () => {
   let cls: Latitude;

@@ -16,13 +16,10 @@ export class FccRectangularComponent implements OnChanges {
 
   /** The selected radio value from FieldCentreCoordinates component */
   @Input() radioValue = 'relative';
-
-  /** The chosen coordinates system from the selector */
-  chosenSystem: CoordSystemInterface;
-
   /** Controls if the sexagesimal checkbox is shown in the system selector */
   sexagesimalHidden = (this.radioValue === 'relative');
-
+  /** The chosen coordinates system from the selector */
+  chosenSystem: CoordSystemInterface;
   /** True if the sexagesimal checkbox is selected */
   sexagesimalUnits: boolean;
 

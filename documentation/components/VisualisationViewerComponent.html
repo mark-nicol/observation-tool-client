@@ -323,6 +323,9 @@
                                     <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                </li>
+                                <li class="link">
                                     <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                 </li>
                                 <li class="link">
@@ -346,16 +349,10 @@
                                     <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                </li>
-                                <li class="link">
                                     <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                 </li>
                                 <li class="link">
                                     <a href="../interfaces/Margin.html" >Margin</a>
@@ -745,6 +742,9 @@
                                            <a href="../injectables/SensitivityConversionService.html" >SensitivityConversionService</a>
                                        </li>
                                        <li class="link">
+                                           <a href="../injectables/SpectralDataService.html" >SpectralDataService</a>
+                                       </li>
+                                       <li class="link">
                                            <a href="../injectables/SpeedConversionService.html" >SpeedConversionService</a>
                                        </li>
                                        <li class="link">
@@ -768,16 +768,10 @@
                                            <a href="../interfaces/ChartInterface.html" >ChartInterface</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../interfaces/ContextChartInterface.html" >ContextChartInterface</a>
-                                       </li>
-                                       <li class="link">
                                            <a href="../interfaces/CoordSystemInterface.html" >CoordSystemInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/FieldCentreCoordinatesInterface.html" >FieldCentreCoordinatesInterface</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../interfaces/FocusChartInterface.html" >FocusChartInterface</a>
                                        </li>
                                        <li class="link">
                                            <a href="../interfaces/Margin.html" >Margin</a>
@@ -971,19 +965,16 @@
                                 <span class="modifier">Private</span> <a href="#brush">brush</a>
                             </li>
                             <li>
+                                <span class="modifier">Private</span> <a href="#chartContainer">chartContainer</a>
+                            </li>
+                            <li>
                                 <span class="modifier">Private</span> <a href="#context">context</a>
                             </li>
                             <li>
-                                <span class="modifier">Private</span> <a href="#contextContainer">contextContainer</a>
-                            </li>
-                            <li>
-                                <span class="modifier">Private</span> <a href="#cos">cos</a>
+                                <span class="modifier">Private</span> <a href="#data">data</a>
                             </li>
                             <li>
                                 <span class="modifier">Private</span> <a href="#focus">focus</a>
-                            </li>
-                            <li>
-                                <span class="modifier">Private</span> <a href="#focusContainer">focusContainer</a>
                             </li>
                             <li>
                                 <span class="modifier">Private</span> <a href="#regionColors">regionColors</a>
@@ -992,10 +983,7 @@
                                 <span class="modifier">Private</span> <a href="#regions">regions</a>
                             </li>
                             <li>
-                                <span class="modifier">Private</span> <a href="#sin">sin</a>
-                            </li>
-                            <li>
-                                <span class="modifier">Private</span> <a href="#tan">tan</a>
+                                <span class="modifier">Private</span> <a href="#svg">svg</a>
                             </li>
                             <li>
                                 <span class="modifier">Private</span> <a href="#zoom">zoom</a>
@@ -1018,22 +1006,16 @@
                                  <a href="#changeLine">changeLine</a>
                             </li>
                             <li>
-                                 <a href="#createContextChart">createContextChart</a>
+                                 <a href="#createVisualiser">createVisualiser</a>
                             </li>
                             <li>
-                                 <a href="#createData">createData</a>
+                                 <a href="#drawContextChart">drawContextChart</a>
                             </li>
                             <li>
-                                 <a href="#createFocusChart">createFocusChart</a>
-                            </li>
-                            <li>
-                                 <a href="#drawLine">drawLine</a>
+                                 <a href="#drawFocusChart">drawFocusChart</a>
                             </li>
                             <li>
                                  <a href="#drawRegions">drawRegions</a>
-                            </li>
-                            <li>
-                                 <a href="#drawXAxes">drawXAxes</a>
                             </li>
                             <li>
                                  <a href="#hideShowBands">hideShowBands</a>
@@ -1048,6 +1030,18 @@
                                  <a href="#redrawLines">redrawLines</a>
                             </li>
                             <li>
+                                 <a href="#resetView">resetView</a>
+                            </li>
+                            <li>
+                                 <a href="#setupBrushZoom">setupBrushZoom</a>
+                            </li>
+                            <li>
+                                 <a href="#setupCharts">setupCharts</a>
+                            </li>
+                            <li>
+                                 <a href="#setupSvg">setupSvg</a>
+                            </li>
+                            <li>
                                  <a href="#zoomed">zoomed</a>
                             </li>
                         </ul>
@@ -1057,6 +1051,55 @@
         </table>
     </section>
 
+    <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>constructor(spectralDataService: <a href="../injectables/SpectralDataService.html">SpectralDataService</a>)</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:108</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>constructor</p>
+    </div>
+                                <div>
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>spectralDataService</td>
+                                                      <td>
+                                                                <code><a href="../injectables/SpectralDataService.html" target="_self" >SpectralDataService</a></code>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td><p>Injected service</p>
+    </td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
 
 
 
@@ -1084,12 +1127,14 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="333" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:333</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="292" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:292</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Called when the brush is moved on the context chart</p>
+    </div>
     
                                 <div class="io-description">
                                     <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1109,14 +1154,14 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-    <code>changeLine(lineType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+    <code>changeLine(octile: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                         </td>
                     </tr>
     
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="286" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:286</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="360" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:360</a></div>
                                 </td>
                             </tr>
     
@@ -1138,9 +1183,9 @@
                                             </thead>
                                             <tbody>
                                                     <tr>
-                                                      <td>lineType</td>
+                                                      <td>octile</td>
                                                       <td>
-                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                                       </td>
                                                       <td>
                                                       </td>
@@ -1166,26 +1211,89 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <a name="createContextChart"></a>
-                            <span class="name"><b> createContextChart</b><a href="#createContextChart"><span class="fa fa-link"></span></a></span>
+                            <a name="createVisualiser"></a>
+                            <span class="name"><b> createVisualiser</b><a href="#createVisualiser"><span class="fa fa-link"></span></a></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-    <code>createContextChart()</code>
+    <code>createVisualiser(data: )</code>
                         </td>
                     </tr>
     
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:137</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:130</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Creates and draws the smaller context chart</p>
+                                <div class="io-description"><p>Creates and draws the whole visualiser</p>
+    <p>Required for service callback</p>
+    </div>
+    
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>data</td>
+                                                      <td>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="drawContextChart"></a>
+                            <span class="name"><b> drawContextChart</b><a href="#drawContextChart"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>drawContextChart()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="252" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:252</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Draws the context chart axis, line, and adds the brush</p>
     </div>
     
                                 <div class="io-description">
@@ -1200,94 +1308,26 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <a name="createData"></a>
-                            <span class="name"><b> createData</b><a href="#createData"><span class="fa fa-link"></span></a></span>
+                            <a name="drawFocusChart"></a>
+                            <span class="name"><b> drawFocusChart</b><a href="#drawFocusChart"><span class="fa fa-link"></span></a></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-    <code>createData()</code>
-                        </td>
-                    </tr>
-    
-    
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:123</a></div>
-                                </td>
-                            </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Creates the data array for the charts to use</p>
-    </div>
-    
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-    
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <a name="createFocusChart"></a>
-                            <span class="name"><b> createFocusChart</b><a href="#createFocusChart"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-    <code>createFocusChart()</code>
+    <code>drawFocusChart()</code>
                         </td>
                     </tr>
     
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="175" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:175</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="275" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:275</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Creates and draws the larger focus chart</p>
-    </div>
-    
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-    
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <a name="drawLine"></a>
-                            <span class="name"><b> drawLine</b><a href="#drawLine"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-    <code>drawLine()</code>
-                        </td>
-                    </tr>
-    
-    
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="246" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:246</a></div>
-                                </td>
-                            </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Draws the line on the focus chart</p>
+                                <div class="io-description"><p>Draws the focus chart and axis</p>
     </div>
     
                                 <div class="io-description">
@@ -1315,47 +1355,13 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="226" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:226</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:230</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-description"><p>Draws the receiver band regions on the focus chart</p>
-    </div>
-    
-                                <div class="io-description">
-                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-    
-                                </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <a name="drawXAxes"></a>
-                            <span class="name"><b> drawXAxes</b><a href="#drawXAxes"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-    <code>drawXAxes()</code>
-                        </td>
-                    </tr>
-    
-    
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="203" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:203</a></div>
-                                </td>
-                            </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-description"><p>Draws the x axes for the focus chart</p>
+                                <div class="io-description"><p>Draws the band regions onto the focus chart</p>
     </div>
     
                                 <div class="io-description">
@@ -1383,7 +1389,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="260" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:260</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="334" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:334</a></div>
                                 </td>
                             </tr>
     
@@ -1447,7 +1453,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="273" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:273</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="347" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:347</a></div>
                                 </td>
                             </tr>
     
@@ -1511,7 +1517,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:114</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:121</a></div>
                                 </td>
                             </tr>
     
@@ -1545,7 +1551,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="305" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:305</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="367" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:367</a></div>
                                 </td>
                             </tr>
     
@@ -1595,6 +1601,142 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
+                            <a name="resetView"></a>
+                            <span class="name"><b> resetView</b><a href="#resetView"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>resetView()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="393" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:393</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Resets the brush and zoom to default showing the whole chart</p>
+    </div>
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="setupBrushZoom"></a>
+                            <span class="name"><b> setupBrushZoom</b><a href="#setupBrushZoom"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>setupBrushZoom()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="213" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:213</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Sets up the brush and zoom for the charts</p>
+    </div>
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="setupCharts"></a>
+                            <span class="name"><b> setupCharts</b><a href="#setupCharts"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>setupCharts()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="170" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:170</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Sets up scales, axes, and lines for both charts</p>
+    </div>
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="setupSvg"></a>
+                            <span class="name"><b> setupSvg</b><a href="#setupSvg"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+    <code>setupSvg()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:144</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Sets up heights, widths and adds the svg element to the DOM</p>
+    </div>
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
                             <a name="zoomed"></a>
                             <span class="name"><b> zoomed</b><a href="#zoomed"><span class="fa fa-link"></span></a></span>
                         </td>
@@ -1608,12 +1750,14 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="337" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:337</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="322" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:322</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Called when the focus is zoomed</p>
+    </div>
     
                                 <div class="io-description">
                                     <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1652,10 +1796,56 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:108</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:105</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>The brush on the context chart, used for zooming and panning </p>
+    </div>
+                        </td>
+                    </tr>
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="chartContainer"></a>
+                            <span class="name"><b><span class="modifier">Private</span> chartContainer</b><a href="#chartContainer"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <span class="modifier-icon fa fa-lock"></span><code>chartContainer:     <code>ElementRef</code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code>ElementRef</code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Decorators : </i><code>ViewChild</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:72</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Reference to the div in the template to hold the focus chartArea </p>
+    </div>
+                        </td>
+                    </tr>
     
                 </tbody>
             </table>
@@ -1669,19 +1859,19 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <span class="modifier-icon fa fa-lock"></span><code>context:     <code><a href="../interfaces/ContextChartInterface.html" target="_self" >ContextChartInterface</a></code>
+                            <span class="modifier-icon fa fa-lock"></span><code>context:     <code><a href="../interfaces/ChartInterface.html" target="_self" >ChartInterface</a></code>
     </code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Type : </i>    <code><a href="../interfaces/ContextChartInterface.html" target="_self" >ContextChartInterface</a></code>
+                                <i>Type : </i>    <code><a href="../interfaces/ChartInterface.html" target="_self" >ChartInterface</a></code>
     
                             </td>
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:97</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:93</a></div>
                                 </td>
                             </tr>
     
@@ -1698,68 +1888,34 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <a name="contextContainer"></a>
-                            <span class="name"><b><span class="modifier">Private</span> contextContainer</b><a href="#contextContainer"><span class="fa fa-link"></span></a></span>
+                            <a name="data"></a>
+                            <span class="name"><b><span class="modifier">Private</span> data</b><a href="#data"><span class="fa fa-link"></span></a></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <span class="modifier-icon fa fa-lock"></span><code>contextContainer:     <code>ElementRef</code>
+                            <span class="modifier-icon fa fa-lock"></span><code>data:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
     </code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Type : </i>    <code>ElementRef</code>
+                                <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
     
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <i>Decorators : </i><code>ViewChild</code>
                             </td>
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:76</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:75</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-description"><p>Reference to the div in the template to hold the context chartArea </p>
+                            <div class="io-description"><p>The data array for use within the component </p>
     </div>
                         </td>
                     </tr>
-    
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <a name="cos"></a>
-                            <span class="name"><b><span class="modifier">Private</span> cos</b><a href="#cos"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <span class="modifier-icon fa fa-lock"></span><code>cos:     <code>Array&lt;any&gt;</code>
-    </code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <i>Type : </i>    <code>Array&lt;any&gt;</code>
-    
-                            </td>
-                        </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:80</a></div>
-                                </td>
-                            </tr>
-    
     
                 </tbody>
             </table>
@@ -1773,65 +1929,25 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <span class="modifier-icon fa fa-lock"></span><code>focus:     <code><a href="../interfaces/FocusChartInterface.html" target="_self" >FocusChartInterface</a></code>
+                            <span class="modifier-icon fa fa-lock"></span><code>focus:     <code><a href="../interfaces/ChartInterface.html" target="_self" >ChartInterface</a></code>
     </code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Type : </i>    <code><a href="../interfaces/FocusChartInterface.html" target="_self" >FocusChartInterface</a></code>
+                                <i>Type : </i>    <code><a href="../interfaces/ChartInterface.html" target="_self" >ChartInterface</a></code>
     
                             </td>
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:84</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:81</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
                             <div class="io-description"><p>Object holding data for the focus chart </p>
-    </div>
-                        </td>
-                    </tr>
-    
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <a name="focusContainer"></a>
-                            <span class="name"><b><span class="modifier">Private</span> focusContainer</b><a href="#focusContainer"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <span class="modifier-icon fa fa-lock"></span><code>focusContainer:     <code>ElementRef</code>
-    </code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <i>Type : </i>    <code>ElementRef</code>
-    
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <i>Decorators : </i><code>ViewChild</code>
-                            </td>
-                        </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:73</a></div>
-                                </td>
-                            </tr>
-    
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-description"><p>Reference to the div in the template to hold the focus chartArea </p>
     </div>
                         </td>
                     </tr>
@@ -1860,7 +1976,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:70</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:69</a></div>
                                 </td>
                             </tr>
     
@@ -1889,7 +2005,7 @@
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:58</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:57</a></div>
                                 </td>
                             </tr>
     
@@ -1906,63 +2022,34 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <a name="sin"></a>
-                            <span class="name"><b><span class="modifier">Private</span> sin</b><a href="#sin"><span class="fa fa-link"></span></a></span>
+                            <a name="svg"></a>
+                            <span class="name"><b><span class="modifier">Private</span> svg</b><a href="#svg"><span class="fa fa-link"></span></a></span>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <span class="modifier-icon fa fa-lock"></span><code>sin:     <code>Array&lt;any&gt;</code>
+                            <span class="modifier-icon fa fa-lock"></span><code>svg:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
     </code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                <i>Type : </i>    <code>Array&lt;any&gt;</code>
+                                <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
     
                             </td>
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:79</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:78</a></div>
                                 </td>
                             </tr>
     
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-description"><p>The data array for use within the component </p>
+                            <div class="io-description"><p>The svg element to draw the charts in </p>
     </div>
                         </td>
                     </tr>
-    
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <a name="tan"></a>
-                            <span class="name"><b><span class="modifier">Private</span> tan</b><a href="#tan"><span class="fa fa-link"></span></a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <span class="modifier-icon fa fa-lock"></span><code>tan:     <code>Array&lt;any&gt;</code>
-    </code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <i>Type : </i>    <code>Array&lt;any&gt;</code>
-    
-                            </td>
-                        </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:81</a></div>
-                                </td>
-                            </tr>
-    
     
                 </tbody>
             </table>
@@ -1988,10 +2075,16 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:109</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/observation-tool/spectral-setup/components/visualisation-viewer/visualisation-viewer.component.ts:108</a></div>
                                 </td>
                             </tr>
     
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>The zoom on the focus chart, used for zooming and panning </p>
+    </div>
+                        </td>
+                    </tr>
     
                 </tbody>
             </table>
@@ -2004,42 +2097,41 @@
         <pre class="line-numbers"><code class="language-typescript">import {Component, ElementRef, OnInit, ViewChild, ViewEncapsulation} from &#x27;@angular/core&#x27;;
 import * as d3 from &#x27;d3&#x27;;
 import {brush} from &#x27;d3-brush&#x27;;
+import {SpectralDataService} from &#x27;../../services/spectral-data.service&#x27;;
 
 /**
  * Interface for a standard chart. Everything but axes
  */
 interface ChartInterface {
-  svg: any,
+  /** Margins for the chart */
   margin: Margin,
+  /** Area of the chart showing data i.e. not axes */
   chartArea: any,
+  /** Total width of the chart */
   width: number,
+  /** Total height of the chart */
   height: number,
+  /** Data -&gt; SVG binding for the x axis */
   xScale: any,
+  /** Data -&gt; SVG binding for the y axis */
   yScale: any,
-}
-
-/**
- * Interface for the focus chart, includes upper and lower axes
- */
-interface FocusChartInterface extends ChartInterface {
-  xUpperAxis: any,
-  xLowerAxis: any
-}
-
-/**
- * Interface for the context chart. Lower X axis only
- */
-interface ContextChartInterface extends ChartInterface {
-  xAxis: any
+  /** The X axis of the chart */
+  xAxis: any,
+  /** The line to show on the chart */
+  line: any
 }
 
 /**
  * Interface for chart margins
  */
 interface Margin {
+  /** Top margin */
   top: number,
+  /** Right margin */
   right: number,
+  /** Bottom margin */
   bottom: number,
+  /** Left margin */
   left: number
 }
 
@@ -2073,164 +2165,171 @@ export class VisualisationViewerComponent implements OnInit {
   private regionColors: any;
 
   /** Reference to the div in the template to hold the focus chartArea */
-  @ViewChild(&#x27;focus&#x27;) private focusContainer: ElementRef;
-
-  /** Reference to the div in the template to hold the context chartArea */
-  @ViewChild(&#x27;context&#x27;) private contextContainer: ElementRef;
+  @ViewChild(&#x27;chartDiv&#x27;) private chartContainer: ElementRef;
 
   /** The data array for use within the component */
-  private sin: Array&lt;any&gt;;
-  private cos: Array&lt;any&gt;;
-  private tan: Array&lt;any&gt;;
+  private data: any;
+
+  /** The svg element to draw the charts in */
+  private svg: any;
 
   /** Object holding data for the focus chart */
-  private focus: FocusChartInterface &#x3D; {
-    svg: {},
-    margin: {top: 40, right: 20, bottom: 40, left: 20},
+  private focus: ChartInterface &#x3D; {
+    margin: {top: 20, right: 20, bottom: 110, left: 40},
     chartArea: {},
     width: 0,
     height: 0,
     xScale: {},
     yScale: {},
-    xUpperAxis: {},
-    xLowerAxis: {}
+    xAxis: {},
+    line: {}
   };
 
   /** Object holding data for the context chart */
-  private context: ContextChartInterface &#x3D; {
-    svg: {},
-    margin: {top: 0, right: 20, bottom: 40, left: 20},
+  private context: ChartInterface &#x3D; {
+    margin: {top: 430, right: 20, bottom: 30, left: 40},
     chartArea: {},
     width: 0,
     height: 0,
     xScale: {},
     yScale: {},
-    xAxis: {}
+    xAxis: {},
+    line: {}
   };
 
+  /** The brush on the context chart, used for zooming and panning */
   private brush: any;
+
+  /** The zoom on the focus chart, used for zooming and panning */
   private zoom: any;
+
+  /**
+   * constructor
+   *
+   * @param spectralDataService Injected service
+   */
+  constructor(private spectralDataService: SpectralDataService) {
+  }
 
   /**
    * Creates the data and two charts
    */
   ngOnInit() {
-    this.createData();
-    this.createFocusChart();
-    this.createContextChart();
+    this.spectralDataService.getData(1).subscribe(data &#x3D;&gt; this.createVisualiser(data));
   }
 
   /**
-   * Creates the data array for the charts to use
+   * Creates and draws the whole visualiser
+   *
+   * Required for service callback
    */
-  createData() {
-    this.sin &#x3D; [];
-    this.cos &#x3D; [];
-    this.tan &#x3D; [];
-    for (let i &#x3D; 0; i &lt; 1000; i++) {
-      this.sin.push([i, Math.sin(i / 10)]);
-      this.cos.push([i, Math.cos(i / 20)]);
-      this.tan.push([i, Math.tan(i / 10)]);
-    }
+  createVisualiser(data) {
+    this.data &#x3D; data.data;
+    this.setupSvg();
+    this.setupCharts();
+    this.setupBrushZoom();
+    this.drawRegions();
+    this.drawContextChart();
+    this.drawFocusChart();
+    this.resetView();
   }
 
   /**
-   * Creates and draws the smaller context chart
+   * Sets up heights, widths and adds the svg element to the DOM
    */
-  createContextChart() {
-    const element &#x3D; this.contextContainer.nativeElement;
-    this.context.width &#x3D; element.offsetWidth - this.context.margin.left - this.context.margin.right;
+  setupSvg() {
+    // Get the div element from the DOM
+    const element       &#x3D; this.chartContainer.nativeElement;
+    // Set the width and height of the context chart
+    this.context.width  &#x3D; element.offsetWidth - this.context.margin.left - this.context.margin.right;
     this.context.height &#x3D; element.offsetHeight - this.context.margin.top - this.context.margin.bottom;
+    // Set the width and height of the focus chart (width of both is the same)
+    this.focus.width    &#x3D; this.context.width;
+    this.focus.height   &#x3D; element.offsetHeight - this.focus.margin.top - this.focus.margin.bottom;
 
-    this.context.svg &#x3D; d3.select(element).append(&#x27;svg&#x27;)
+    // Append an svg element to the div to draw the charts
+    this.svg &#x3D; d3.select(element).append(&#x27;svg&#x27;)
       .attr(&#x27;width&#x27;, element.offsetWidth)
       .attr(&#x27;height&#x27;, element.offsetHeight);
 
-    this.context.chartArea &#x3D; this.context.svg.append(&#x27;g&#x27;)
-      .attr(&#x27;class&#x27;, &#x27;context&#x27;)
-      .attr(&#x27;transform&#x27;, &#x60;translate(${this.context.margin.left}, ${this.context.margin.top})&#x60;);
-
-    const
-      xDomain &#x3D; [0, d3.max(this.sin, d &#x3D;&gt; d[0])],
-      yDomain &#x3D; [d3.min(this.sin, d &#x3D;&gt; d[1]), d3.max(this.sin, d &#x3D;&gt; d[1])];
-
-    this.context.xScale &#x3D; d3.scaleLinear().domain(xDomain).range([0, this.context.width]);
-    this.context.yScale &#x3D; d3.scaleLinear().domain(yDomain).range([this.context.height, 0]);
-
-    this.context.xAxis &#x3D; this.context.svg.append(&#x27;g&#x27;)
-      .attr(&#x27;class&#x27;, &#x27;axis axis-x axis-x-context&#x27;)
-      .attr(&#x27;transform&#x27;, &#x60;translate(${this.context.margin.left}, ${this.context.margin.top + this.context.height})&#x60;)
-      .call(d3.axisBottom(this.context.xScale));
-
-    const line &#x3D; d3.line()
-      .x((d: any) &#x3D;&gt; this.context.xScale(d[0]))
-      .y((d: any) &#x3D;&gt; this.context.yScale(d[1]));
-
-    this.context.chartArea.append(&#x27;path&#x27;)
-      .data([this.sin])
-      .attr(&#x27;class&#x27;, &#x27;line&#x27;)
-      .attr(&#x27;d&#x27;, line);
+    // Clip path in the focus chart, keeps the line from spilling into margins
+    this.svg.append(&#x27;defs&#x27;).append(&#x27;clipPath&#x27;)
+      .attr(&#x27;id&#x27;, &#x27;clip&#x27;)
+      .append(&#x27;rect&#x27;)
+      .attr(&#x27;width&#x27;, this.focus.width)
+      .attr(&#x27;height&#x27;, this.focus.height);
   }
 
   /**
-   * Creates and draws the larger focus chart
+   * Sets up scales, axes, and lines for both charts
    */
-  createFocusChart() {
-    const element &#x3D; this.focusContainer.nativeElement;
-    this.focus.width &#x3D; element.offsetWidth - this.focus.margin.left - this.focus.margin.right;
-    this.focus.height &#x3D; element.offsetHeight - this.focus.margin.top - this.focus.margin.bottom;
+  setupCharts() {
+    // Set the x and y scales of each chart
+    this.context.xScale &#x3D; d3.scaleLinear().range([0, this.context.width]);
+    this.focus.xScale   &#x3D; d3.scaleLinear().range([0, this.focus.width]);
+    this.context.yScale &#x3D; d3.scaleLinear().range([this.context.height, 0]);
+    this.focus.yScale   &#x3D; d3.scaleLinear().range([this.focus.height, 0]);
 
-    this.focus.svg &#x3D; d3.select(element).append(&#x27;svg&#x27;)
-      .attr(&#x27;width&#x27;, element.offsetWidth)
-      .attr(&#x27;height&#x27;, element.offsetHeight);
+    // Set the axes for each chart based on x scales
+    this.context.xAxis &#x3D; d3.axisBottom(this.context.xScale);
+    this.focus.xAxis   &#x3D; d3.axisBottom(this.focus.xScale);
 
-    this.focus.chartArea &#x3D; this.focus.svg.append(&#x27;g&#x27;)
+    // Set the line for the focus chart based on scales
+    this.focus.line &#x3D; d3.line()
+      .x((d: any) &#x3D;&gt; this.focus.xScale(d[0]))
+      .y((d: any) &#x3D;&gt; this.focus.yScale(d[2]));
+
+    // Set the line for the context chart based on scales
+    this.context.line &#x3D; d3.line()
+      .x((d: any) &#x3D;&gt; this.context.xScale(d[0]))
+      .y((d: any) &#x3D;&gt; this.context.yScale(d[2]));
+
+    // Add the focus chart area to the svg
+    this.focus.chartArea &#x3D; this.svg.append(&#x27;g&#x27;)
       .attr(&#x27;class&#x27;, &#x27;focus&#x27;)
       .attr(&#x27;transform&#x27;, &#x60;translate(${this.focus.margin.left}, ${this.focus.margin.top})&#x60;);
 
-    const
-      xDomain &#x3D; [0, d3.max(this.sin, d &#x3D;&gt; d[0])],
-      yDomain &#x3D; [d3.min(this.sin, d &#x3D;&gt; d[1]), d3.max(this.sin, d &#x3D;&gt; d[1])];
+    // Add the context chart area to the svg
+    this.context.chartArea &#x3D; this.svg.append(&#x27;g&#x27;)
+      .attr(&#x27;class&#x27;, &#x27;context&#x27;)
+      .attr(&#x27;transform&#x27;, &#x60;translate(${this.context.margin.left}, ${this.context.margin.top})&#x60;);
 
-    this.focus.xScale &#x3D; d3.scaleLinear().domain(xDomain).range([0, this.focus.width]);
-    this.focus.yScale &#x3D; d3.scaleLinear().domain(yDomain).range([this.focus.height, 0]);
-
-    this.drawXAxes();
-    this.drawLine();
-    this.drawRegions();
+    // Set the x domain of the focus chart (0 to largest number i.e. 0 - 1000)
+    this.focus.xScale.domain([0, d3.max(this.data, d &#x3D;&gt; d[0])]);
+    // Set the y domain of the focus chart (max y value to min y value as it could be less than 0)
+    this.focus.yScale.domain([d3.max(this.data, d &#x3D;&gt; d[2]), d3.min(this.data, d &#x3D;&gt; d[2])]);
+    // Context scale domains the same as focus
+    this.context.xScale.domain(this.focus.xScale.domain());
+    this.context.yScale.domain(this.focus.yScale.domain());
   }
 
   /**
-   * Draws the x axes for the focus chart
+   * Sets up the brush and zoom for the charts
    */
-  drawXAxes() {
-    this.focus.xUpperAxis &#x3D; this.focus.svg.append(&#x27;g&#x27;)
-      .attr(&#x27;class&#x27;, &#x27;axis axis-x axis-x-upper&#x27;)
-      .attr(&#x27;transform&#x27;, &#x60;translate(${this.focus.margin.left}, ${this.focus.margin.top})&#x60;)
-      .call(d3.axisTop(this.focus.xScale))
-      .append(&#x27;text&#x27;)
-      .attr(&#x27;class&#x27;, &#x27;axis-label axis-x-upper-label&#x27;)
-      .attr(&#x27;transform&#x27;, &#x60;translate(${this.focus.margin.left + (this.focus.width / 2)}, ${-this.focus.margin.top * 0.66})&#x60;)
-      .text(&#x27;Observed Frequency&#x27;);
+  setupBrushZoom() {
+    // Create the brush only on the x axis smallest it can be and largest and bind the brushed function
+    this.brush &#x3D; d3.brushX()
+      .extent([[0, 0], [this.context.width, this.context.height]])
+      .on(&#x27;brush end&#x27;, this.brushed.bind(this));
 
-    this.focus.xLowerAxis &#x3D; this.focus.svg.append(&#x27;g&#x27;)
-      .attr(&#x27;class&#x27;, &#x27;axis axis-x axis-x-lower&#x27;)
-      .attr(&#x27;transform&#x27;, &#x60;translate(${this.focus.margin.left}, ${this.focus.margin.top + this.focus.height})&#x60;)
-      .call(d3.axisBottom(this.focus.xScale))
-      .append(&#x27;text&#x27;)
-      .attr(&#x27;class&#x27;, &#x27;axis-label axis-x-upper-label&#x27;)
-      .attr(&#x27;transform&#x27;, &#x60;translate(${this.focus.margin.left + (this.focus.width / 2)}, ${this.focus.margin.bottom * 0.66})&#x60;)
-      .text(&#x27;Rest Frequency&#x27;);
+    // Create the zoom area controlled by the brush
+    this.zoom &#x3D; d3.zoom()
+      .scaleExtent([1, Infinity])
+      .translateExtent([[0, 0], [this.focus.width, this.focus.height]])
+      .extent([[0, 0], [this.focus.width, this.focus.height]])
+      .on(&#x27;zoom&#x27;, this.zoomed.bind(this));
   }
 
   /**
-   * Draws the receiver band regions on the focus chart
+   * Draws the band regions onto the focus chart
    */
   drawRegions() {
+    // Set the colors for the regions
     this.regionColors &#x3D; d3.scaleLinear().domain([0, this.regions.length]).range(&lt;any[]&gt;[
       &#x27;limegreen&#x27;,
       &#x27;steelblue&#x27;
     ]);
+
     for (let i &#x3D; 0; i &lt; this.regions.length; i++) {
       this.focus.chartArea.append(&#x27;rect&#x27;)
         .attr(&#x27;class&#x27;, &#x27;region&#x27;)
@@ -2244,17 +2343,85 @@ export class VisualisationViewerComponent implements OnInit {
   }
 
   /**
-   * Draws the line on the focus chart
+   * Draws the context chart axis, line, and adds the brush
    */
-  drawLine() {
-    const line &#x3D; d3.line()
-      .x((d: any) &#x3D;&gt; this.focus.xScale(d[0]))
-      .y((d: any) &#x3D;&gt; this.focus.yScale(d[1]));
-
-    this.focus.chartArea.append(&#x27;path&#x27;)
-      .data([this.sin])
+  drawContextChart() {
+    // Add the line to the context chart
+    this.context.chartArea.append(&#x27;path&#x27;)
+      .datum(this.data)
       .attr(&#x27;class&#x27;, &#x27;line&#x27;)
-      .attr(&#x27;d&#x27;, line);
+      .attr(&#x27;d&#x27;, this.context.line);
+
+    // Add the x axis to the context chart
+    this.context.chartArea.append(&#x27;g&#x27;)
+      .attr(&#x27;class&#x27;, &#x27;axis axis-x&#x27;)
+      .attr(&#x27;transform&#x27;, &#x60;translate(${0}, ${this.context.height})&#x60;)
+      .call(this.context.xAxis);
+
+    // Add the brush to the context chart
+    this.context.chartArea.append(&#x27;g&#x27;)
+      .attr(&#x27;class&#x27;, &#x27;brush&#x27;)
+      .call(this.brush)
+      .call(this.brush.move, this.context.xScale.range());
+  }
+
+  /**
+   * Draws the focus chart and axis
+   */
+  drawFocusChart() {
+    // Draw the line on the focus chart
+    this.focus.chartArea.append(&#x27;path&#x27;)
+      .datum(this.data)
+      .attr(&#x27;class&#x27;, &#x27;line&#x27;)
+      .attr(&#x27;d&#x27;, this.focus.line);
+
+    // Draw the x axis on the focus chart
+    this.focus.chartArea.append(&#x27;g&#x27;)
+      .attr(&#x27;class&#x27;, &#x27;axis axis-x&#x27;)
+      .attr(&#x27;transform&#x27;, &#x60;translate(0, ${this.focus.height})&#x60;)
+      .call(this.focus.xAxis);
+  }
+
+  /**
+   * Called when the brush is moved on the context chart
+   */
+  brushed() {
+    // Ignore zoom events
+    if (d3.event.sourceEvent &amp;&amp; d3.event.sourceEvent.type &#x3D;&#x3D;&#x3D; &#x27;zoom&#x27;) return;
+    // Set the new scale to either the event scale or current full scale
+    const s &#x3D; d3.event.selection || this.context.xScale.range();
+    // Change the domain of the focus x scale to the desired
+    this.focus.xScale.domain(s.map(this.context.xScale.invert, this.context.xScale));
+
+    // Select all the band regions and re-adjust
+    this.focus.chartArea.selectAll(&#x27;.region&#x27;)
+      .attr(&#x27;x&#x27;, (d, i) &#x3D;&gt; this.focus.xScale(this.regions[i][0]))
+      .attr(&#x27;y&#x27;, (d, i) &#x3D;&gt; 0)
+      .attr(&#x27;width&#x27;, (d, i) &#x3D;&gt; this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
+      .attr(&#x27;height&#x27;, this.focus.height);
+
+    // Redraw the line on the focus chart
+    this.focus.chartArea.select(&#x27;.line&#x27;).attr(&#x27;d&#x27;, this.focus.line);
+
+    // Redraw the x axis on the focus chart
+    this.focus.chartArea.select(&#x27;.axis-x&#x27;).call(this.focus.xAxis);
+
+    // Move the zoom region on the focus chart
+    // this.svg.select(&#x27;.zoom&#x27;).call(this.zoom.transform, d3.zoomIdentity
+    //   .scale(this.focus.width / (s[1] - s[0]))
+    //   .translate(-s[0], 0));
+  }
+
+  /**
+   * Called when the focus is zoomed
+   */
+  zoomed() {
+    if (d3.event.sourceEvent &amp;&amp; d3.event.sourceEvent.type &#x3D;&#x3D;&#x3D; &#x27;brush&#x27;) return;
+    const t &#x3D; d3.event.transform;
+    this.focus.xScale.domain(t.rescaleX(this.focus.xScale).domain());
+    this.focus.chartArea.select(&#x27;.line&#x27;).attr(&#x27;d&#x27;, this.focus.line);
+    this.focus.chartArea.select(&#x27;.axis-x&#x27;).call(this.focus.xAxis);
+    this.context.chartArea.select(&#x27;.brush&#x27;).call(this.brush.move, this.focus.xScale.range().map(t.invertX, t));
   }
 
   /**
@@ -2286,37 +2453,20 @@ export class VisualisationViewerComponent implements OnInit {
   /**
    * Changes the type of line show to demonstrate D3 transition
    */
-  changeLine(lineType: string) {
-    switch (lineType) {
-      case &#x27;sin&#x27;:
-        this.redrawLines(this.sin);
-        break;
-      case &#x27;cos&#x27;:
-        this.redrawLines(this.cos);
-        break;
-      case &#x27;tan&#x27;:
-        this.redrawLines(this.tan);
-        break;
-      default:
-        break;
-    }
+  changeLine(octile: number) {
+    this.spectralDataService.getData(octile).subscribe(data &#x3D;&gt; this.redrawLines(data.data));
   }
 
   /**
    * Redraws the displayed lines on focus and context charts
    */
   redrawLines(data: any) {
-    this.focus.xScale.domain([0, d3.max(data, d &#x3D;&gt; d[0])]);
-    this.focus.yScale.domain([d3.min(data, d &#x3D;&gt; d[1]), d3.max(data, d &#x3D;&gt; d[1])]);
-    this.context.xScale &#x3D; this.focus.xScale;
-    this.context.yScale.domain([d3.min(data, d &#x3D;&gt; d[1]), d3.max(data, d &#x3D;&gt; d[1])]);
-    this.focus.xUpperAxis.transition().call(d3.axisTop(this.focus.xScale));
-    this.focus.xLowerAxis.transition().call(d3.axisBottom(this.focus.xScale));
-    this.context.xAxis.transition().call(d3.axisBottom(this.context.xScale));
+    this.focus.yScale.domain([d3.max(data, d &#x3D;&gt; d[2]), d3.min(data, d &#x3D;&gt; d[2])]);
+    this.context.yScale.domain([d3.max(data, d &#x3D;&gt; d[2]), d3.min(data, d &#x3D;&gt; d[2])]);
 
     const focusLine &#x3D; d3.line()
       .x((d: any) &#x3D;&gt; this.focus.xScale(d[0]))
-      .y((d: any) &#x3D;&gt; this.focus.yScale(d[1]));
+      .y((d: any) &#x3D;&gt; this.focus.yScale(d[2]));
 
     this.focus.chartArea.selectAll(&#x27;.line&#x27;)
       .data([data])
@@ -2325,7 +2475,7 @@ export class VisualisationViewerComponent implements OnInit {
 
     const contextLine &#x3D; d3.line()
       .x((d: any) &#x3D;&gt; this.context.xScale(d[0]))
-      .y((d: any) &#x3D;&gt; this.context.yScale(d[1]));
+      .y((d: any) &#x3D;&gt; this.context.yScale(d[2]));
 
     this.context.chartArea.selectAll(&#x27;.line&#x27;)
       .data([data])
@@ -2333,12 +2483,11 @@ export class VisualisationViewerComponent implements OnInit {
       .attr(&#x27;d&#x27;, contextLine);
   }
 
-  brushed() {
-
-  }
-
-  zoomed() {
-
+  /**
+   * Resets the brush and zoom to default showing the whole chart
+   */
+  resetView() {
+    this.context.chartArea.select(&#x27;.brush&#x27;).call(this.brush.move, null);
   }
 
 }
@@ -2346,8 +2495,7 @@ export class VisualisationViewerComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade" id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;spectral-focus&quot; #focus&gt;&lt;/div&gt;
-&lt;div class&#x3D;&quot;spectral-context&quot; #context&gt;&lt;/div&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;spectral-div&quot; #chartDiv&gt;&lt;/div&gt;
 </code></pre>
     </div>
 
@@ -2374,7 +2522,7 @@ export class VisualisationViewerComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="spectral-focus" #focus></div><div class="spectral-context" #context></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="spectral-div" #chartDiv></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiResultsComponent', 'selector': 'app-pi-results'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'VisualisationViewerComponent'};

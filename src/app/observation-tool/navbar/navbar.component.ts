@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import * as _ from 'lodash';
 import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
 
@@ -58,6 +59,10 @@ export class NavbarComponent implements OnInit {
       path: 'sciGoals'
     }
   ];
+
+  constructor(private router: Router) {
+
+  }
 
   /**
    * Sets the currently selected goal to the first in the list

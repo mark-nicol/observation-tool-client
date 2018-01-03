@@ -1,5 +1,6 @@
 import {Directive, HostListener, Input} from '@angular/core';
 import {NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
+import {SuiPopup} from 'ng2-semantic-ui/dist';
 
 /**
  * Directive to delay the opening of NgbTooltips by 1 second
@@ -8,10 +9,10 @@ import {NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
 @Directive({
   selector: '[tooltip-delay]'
 })
-export class DelayTooltipDirective{
+export class DelayTooltipDirective {
 
   /** The tooltip to delay opening */
-  @Input('tooltip-delay') tooltip: NgbTooltip;
+  @Input('tooltip-delay') tooltip: SuiPopup;
 
   /** Used to store the open tooltip for closing later on */
   openCode: any;
@@ -19,14 +20,18 @@ export class DelayTooltipDirective{
   /**
    * Listens for a mouseenter on the tooltipped element and delays the opening
    */
-  @HostListener('mouseenter') onMouseEnter() {
-    this.openCode = setTimeout(() => { this.tooltip.open(); }, 1000);
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.openCode = setTimeout(() => {
+      this.tooltip.open();
+    }, 1000);
   }
 
   /**
    * Listens for a mouseleave on the tooltipped element, removes the timeout, and closes
    */
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener('mouseleave')
+  onMouseLeave() {
     clearTimeout(this.openCode);
     this.tooltip.close();
   }

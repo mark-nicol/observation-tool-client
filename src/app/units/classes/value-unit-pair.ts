@@ -9,18 +9,6 @@ import {ValueConversionService} from '../services/value-conversion.service';
 
 export abstract class ValueUnitPair {
 
-  /** The current unit */
-  private _unit: string;
-
-  /** The current value */
-  private _value: number;
-
-  /** The default unit for a value of this type */
-  protected _defaultUnit: string;
-
-  /** The conversion service for a value of this type */
-  protected _valueConversionService: ValueConversionService;
-
   /**
    * Constructor, sets the unit, value, and default units
    * @param unit        The units to use
@@ -28,19 +16,15 @@ export abstract class ValueUnitPair {
    * @param defaultUnit The default units for a value of this type
    */
   constructor(unit: string, value = 0.0, defaultUnit?: string) {
-    this.unit = unit;
+    this.unit  = unit;
     this.value = value;
     if (defaultUnit) {
       this._defaultUnit = defaultUnit;
     }
   }
 
-  /**
-   * Returns the default unit type
-   */
-  get defaultUnit(): string {
-    return this._defaultUnit;
-  }
+  /** The current unit */
+  private _unit: string;
 
   /**
    * Returns the current unit
@@ -57,6 +41,9 @@ export abstract class ValueUnitPair {
     this._unit = newUnit;
   }
 
+  /** The current value */
+  private _value: number;
+
   /**
    * Returns the current value
    */
@@ -71,6 +58,19 @@ export abstract class ValueUnitPair {
   set value(newValue: number) {
     this._value = newValue;
   }
+
+  /** The default unit for a value of this type */
+  protected _defaultUnit: string;
+
+  /**
+   * Returns the default unit type
+   */
+  get defaultUnit(): string {
+    return this._defaultUnit;
+  }
+
+  /** The conversion service for a value of this type */
+  protected _valueConversionService: ValueConversionService;
 
   /**
    * Returns the correct conversion service for a value of this type

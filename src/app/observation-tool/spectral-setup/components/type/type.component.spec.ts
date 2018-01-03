@@ -1,4 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
+import {SuiModule} from 'ng2-semantic-ui';
 
 import {TypeComponent} from './type.component';
 
@@ -11,13 +13,14 @@ describe('TypeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         TypeComponent,
-      ]
+      ],
+      imports: [FormsModule, SuiModule]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TypeComponent);
+    fixture   = TestBed.createComponent(TypeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

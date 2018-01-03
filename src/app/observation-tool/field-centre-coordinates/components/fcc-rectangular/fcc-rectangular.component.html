@@ -1,150 +1,134 @@
-<div class="row">
-  <div class="col-md">
+<div class="three fields">
+  <div class="field">
     <system-selector [sexagesimalHidden]="sexagesimalHidden"
                      (systemEmitter)="systemChange($event)"
                      (sexagesimalEmitter)="sexagesimalChange($event)"></system-selector>
   </div>
+
   <!-- Lon offset input -->
-  <div class="col-md">
-    <div class="row" style="white-space: nowrap">
-      <div *ngIf="radioValue === 'absolute'; then absoluteLonLabel; else relativeLonLabel"></div>
+  <div class="field">
+    <div *ngIf="radioValue === 'absolute'; then absoluteLonLabel; else relativeLonLabel"></div>
+    <div class="field">
       <ng-template #absoluteLonLabel>
-        <label class="col-xl-4 text-xl-right">
+        <label>
           {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.lonLabel : chosenSystem.normalLabels.lonLabel}}
         </label>
       </ng-template>
       <ng-template #relativeLonLabel>
-        <label class="col-xl-4 text-xl-right">
+        <label>
           Offset(Lon)
         </label>
       </ng-template>
-      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
-        <input class="form-control form-control-sm"
-               placeholder="{{
-               sexagesimalUnits ?
-               (chosenSystem.lonPlaceholder | sexagesimal) :
-               (chosenSystem.lonPlaceholder | degrees)}}">
-        <select class="input-group-addon form-control-sm"
-                *ngIf="radioValue === 'relative'">
-          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
-        </select>
+      <div class="ui action input">
+        <input placeholder="{{
+                       sexagesimalUnits ?
+                       (chosenSystem.lonPlaceholder | sexagesimal) :
+                       (chosenSystem.lonPlaceholder | degrees)}}">
+        <sui-select class="selection" *ngIf="radioValue === 'relative'">
+          <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
+        </sui-select>
       </div>
     </div>
   </div>
 
   <!-- Lat offset input -->
-  <div class="col-md">
-    <div class="row" style="white-space: nowrap">
-      <div *ngIf="radioValue === 'absolute'; then absoluteLatLabel; else relativeLatLabel"></div>
-      <ng-template #absoluteLatLabel>
-        <label class="col-xl-4 text-xl-right">
-          {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
-        </label>
-      </ng-template>
-      <ng-template #relativeLatLabel>
-        <label class="col-xl-4 text-xl-right">
-          Offset(Lat)
-        </label>
-      </ng-template>
-      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
-        <input class="form-control form-control-sm"
-               placeholder="{{
-               sexagesimalUnits ?
-               (chosenSystem.latPlaceholder | sexagesimal) :
-               (chosenSystem.latPlaceholder | degrees)}}">
-        <select class="input-group-addon form-control-sm"
-                *ngIf="radioValue === 'relative'">
-          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
-        </select>
-      </div>
+  <div class="field">
+    <div *ngIf="radioValue === 'absolute'; then absoluteLatLabel else relativeLatLabel"></div>
+    <ng-template #absoluteLatLabel>
+      <label>
+        {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
+      </label>
+    </ng-template>
+    <ng-template #relativeLatLabel>
+      <label>
+        Offset(Lat)
+      </label>
+    </ng-template>
+    <div class="ui action input">
+      <input placeholder="{{
+                     sexagesimalUnits ?
+                     (chosenSystem.latPlaceholder | sexagesimal) :
+                     (chosenSystem.latPlaceholder | degrees)}}">
+      <sui-select class="selection" *ngIf="radioValue === 'relative'">
+        <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
+      </sui-select>
     </div>
   </div>
 </div>
 
-<div class="row">
+<div class="three fields">
   <!-- p length input -->
-  <div class="col-md">
-    <div class="row">
-      <label class="col-xl-4 text-xl-right">
-        p length
-      </label>
-      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
-        <input class="form-control form-control-sm"
-               placeholder="0.00000">
-        <select class="input-group-addon form-control-sm">
-          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
-        </select>
-      </div>
+  <div class="field">
+    <label>
+      p length
+    </label>
+    <div class="ui action input">
+      <input placeholder="0.00000" type="number">
+      <sui-select class="selection">
+        <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
+      </sui-select>
     </div>
   </div>
 
   <!-- q length input -->
-  <div class="col-md">
-    <div class="row">
-      <label class="col-xl-4 text-xl-right">
-        q length
-      </label>
-      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
-        <input class="form-control form-control-sm"
-               placeholder="0.00000">
-        <select class="input-group-addon form-control-sm">
-          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
-        </select>
-      </div>
+  <div class="field">
+    <label>
+      q length
+    </label>
+    <div class="ui action input">
+      <input placeholder="0.00000" type="number">
+      <sui-select class="selection">
+        <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
+      </sui-select>
     </div>
   </div>
 
   <!-- Position angle -->
-  <div class="col-md">
-    <div class="row" style="white-space: nowrap">
-      <label class="col-xl-4 text-xl-right">
-        Position Angle
-      </label>
-      <div class="col-xl pl-0 pr-0 align-self-baseline input-group">
-        <input class="form-control form-control-sm"
-               placeholder="0.00000">
-        <select class="input-group-addon form-control-sm">
-          <option *ngFor="let unit of offsetUnits">{{unit}}</option>
-        </select>
-      </div>
+  <div class="field">
+    <label>
+      Position Angle
+    </label>
+    <div class="ui action input">
+      <input placeholder="0.00000" type="number">
+      <sui-select class="selection">
+        <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
+      </sui-select>
     </div>
   </div>
 </div>
 
-<div class="row">
-
+<div class="fields">
   <!-- Spacing input -->
-  <div class="col">
-    <div class="row" style="white-space: nowrap">
-      <label class="col-xl-2 text-xl-right">
-        Spacing
-      </label>
-      <div class="col-xl align-self-baseline input-group">
-        <div class="row">
-          <input class="col-md-3 col-lg-3 col-xl-3 form-control form-control-sm"
-                 placeholder="0.51093">
-          <select class="col-md col-lg col-xl input-group-addon form-control-sm">
-            <option>Fraction of antenna beamsize</option>
-            <option>arcsec</option>
-          </select>
-        </div>
-
-      </div>
-      <span class="col-xl pl-0">
-          <button class="btn btn-sm btn-outline-secondary" type="button">Reset to Nyquist</button>
-        </span>
+  <div class="field">
+    <label>
+      Spacing
+    </label>
+    <div class="ui right action input">
+      <input placeholder="0.51093" type="number">
+      <sui-select class="selection">
+        <sui-select-option value="fraction">Fraction of antenna beamsize</sui-select-option>
+        <sui-select-option value="arcsec">arcsec</sui-select-option>
+      </sui-select>
+      <button class="ui blue button">Reset to Nyquist</button>
     </div>
   </div>
 
   <!-- Number of pointings -->
-  <div class="col-4">
-    <div class="row" style="white-space: nowrap">
-      <label class="col-xl text-xl-right align-self-baseline"># Pointings</label>
-      <label class="col align-self-baseline">12m Array</label>
-      <label class="col form-control-static align-self-baseline">0</label>
+  <div class="four wide field">
+    <label># Pointings</label>
+    <div class="ui statistics">
+      <div class="statistic">
+        <div class="label">7m Array</div>
+        <div class="value">0</div>
+      </div>
+      <div class="statistic">
+        <div class="label">12m Array</div>
+        <div class="value">0</div>
+      </div>
     </div>
   </div>
 
+  <div class="two wide field">
+    <button class="ui blue button" type="button">Export</button>
+  </div>
 </div>
-
-<button class="btn btn-sm btn-outline-secondary pull-right" type="button">Export</button>

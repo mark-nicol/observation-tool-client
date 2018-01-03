@@ -1,7 +1,7 @@
-import {FieldCentreCoordinatesInterface} from '../../interfaces/field-centre-coordinates.interface';
+import {Angle} from '../../../../units/classes/angle';
 import {Latitude} from '../../../../units/classes/latitude';
 import {Longitude} from '../../../../units/classes/longitude';
-import {Angle} from '../../../../units/classes/angle';
+import {FieldCentreCoordinatesInterface} from '../../interfaces/field-centre-coordinates.interface';
 
 export const FIELD_CENTRE_COORDINATES_DATA: FieldCentreCoordinatesInterface = {
   coordType: 'relative',

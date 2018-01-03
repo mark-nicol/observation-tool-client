@@ -1,4 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SuiModule} from 'ng2-semantic-ui';
 
 import {RefinePanelComponent} from './refine-panel.component';
 
@@ -8,13 +9,14 @@ describe('RefinePanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RefinePanelComponent ]
+      declarations: [RefinePanelComponent],
+      imports: [SuiModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RefinePanelComponent);
+    fixture   = TestBed.createComponent(RefinePanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {ScienceGoalPageInterface} from '../shared/interfaces/science-goal-page.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 
@@ -25,7 +26,7 @@ export class ScienceGoalComponent {
   /**
    * Constructor
    */
-  constructor(private persistenceService: PersistenceService) {
+  constructor(private persistenceService: PersistenceService, private router: Router) {
     this.persistenceService.getPages().subscribe(res => this.pages = res);
   }
 

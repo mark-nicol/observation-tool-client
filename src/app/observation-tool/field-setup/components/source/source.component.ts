@@ -65,18 +65,49 @@ export class SourceComponent implements OnInit {
                                                solarSystemObject: false,
                                                chosenSolarObject: '',
                                                targetType: '',
+                                               chosenSystem: '',
+                                               sexagesimalUnits: true,
+                                               latValue: 0.0,
+                                               lonValue: 0.0,
+                                               parallaxUnit: '',
+                                               parallaxValue: 0.0,
+                                               properMotionCrossUnit: '',
+                                               properMotionCrossValue: 0.0,
+                                               properMotionDeclinationUnit: '',
+                                               properMotionDeclinationValue: 0.0,
+                                               radialVelocityUnit: '',
+                                               radialVelocityValue: 0.0,
                                                radialVelocityReferenceFrame: '',
                                                dopplerType: '',
-                                               sexagesimalUnits: true,
                                                redshift: 0,
-                                               chosenSystem: ''
-                                             })
+
+                                             });
   }
 
   ngOnInit() {
     this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
         .subscribe(result => {
-          this.sourceForm.patchValue(result);
+          this.sourceForm.setValue({
+                                     sourceName: result.sourceName,
+                                     solarSystemObject: result.solarSystemObject,
+                                     chosenSolarObject: result.chosenSolarObject,
+                                     targetType: result.targetType,
+                                     radialVelocityReferenceFrame: result.radialVelocityReferenceFrame,
+                                     dopplerType: result.dopplerType,
+                                     sexagesimalUnits: result.sexagesimalUnits,
+                                     redshift: result.redshift,
+                                     chosenSystem: result.chosenSystem,
+                                     latValue: result.lat.value,
+                                     lonValue: result.lon.value,
+                                     parallaxUnit: result.parallax.unit,
+                                     parallaxValue: result.parallax.value,
+                                     properMotionCrossUnit: result.properMotionCross.unit,
+                                     properMotionCrossValue: result.properMotionCross.value,
+                                     properMotionDeclinationUnit: result.properMotionDeclination.unit,
+                                     properMotionDeclinationValue: result.properMotionDeclination.value,
+                                     radialVelocityUnit: result.radialVelocity.unit,
+                                     radialVelocityValue: result.radialVelocity.value,
+                                   });
           this.systemChange();
         });
   }
@@ -135,7 +166,7 @@ export class SourceComponent implements OnInit {
       this.sexagesimalCheckboxDisabled = false;
     } else {
       this.sourceForm.value.sexagesimalUnits = false;
-      this.sexagesimalCheckboxDisabled = true;
+      this.sexagesimalCheckboxDisabled       = true;
     }
   }
 

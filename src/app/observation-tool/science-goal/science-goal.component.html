@@ -1,7 +1,7 @@
 <div class="ui top attached tabular menu">
   <a class="item"
      *ngFor="let page of pageKeys(pages)"
-     [class.active]="page === selectedPage"
+     [ngClass]="{'active': router.url.indexOf(pages[page].path) > -1}"
      [routerLink]="pages[page].path"
      (click)="selectedPage = page">
     {{pages[page].text}}

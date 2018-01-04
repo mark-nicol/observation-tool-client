@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 import {ScienceGoalInterface} from '../shared/interfaces/science-goal.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 
@@ -13,42 +14,20 @@ import {PersistenceService} from '../shared/services/persistence.service';
 })
 export class ScienceGoalComponent {
 
-  pages = {
-    'general': {
-      path: 'general',
-      text: 'General'
-    },
-    'fieldSetup': {
-      path: 'field-setup',
-      text: 'Field Setup'
-    },
-    'spectralSetup': {
-      path: 'spectral-setup',
-      text: 'Spectral Setup'
-    },
-    'calibrationSetup': {
-      path: 'calibration-setup',
-      text: 'Calibration Setup'
-    },
-    'controlPerformance': {
-      path: 'control-performance',
-      text: 'Control and Performance'
-    },
-    'technicalJustification': {
-      path: 'technical-justification',
-      text: 'Technical Justification'
-    }
-  };
-
-  pageKeys = Object.keys;
-
+  /** The currently selected goal page */
   selectedPage = 'general';
+
+  /** Dict of all science goal page data */
+  pages: { [id: string]: ScienceGoalInterface };
+
+  /** Iterator for pages */
+  pageKeys: (o) => string[] = Object.keys;
 
   /**
    * Constructor
    */
-  constructor(private persistenceService: PersistenceService) {
-
+  constructor(private persistenceService: PersistenceService, private router: Router) {
+    // this.persistenceService.getPages().subscribe(res => this.pages = res);
   }
 
 }

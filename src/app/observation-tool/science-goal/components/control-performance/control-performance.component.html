@@ -111,14 +111,25 @@
         <div class="inline field">
           <div class="ui action input">
             <input>
-            <sui-select class="selection"></sui-select>
+            <sui-select class="selection"
+                        [(ngModel)]="angularResUnits"
+                        [ngModelOptions]="{standalone: true}">
+              <sui-select-option value="mas"></sui-select-option>
+              <sui-select-option value="arcsec"></sui-select-option>
+            </sui-select>
           </div>
           <div class="ui labeled input" *ngIf="chosenRadio === 'range'">
             <div class="ui basic label" style="border: none">to</div>
           </div>
           <div class="ui action input" *ngIf="chosenRadio === 'range'">
             <input>
-            <sui-select class="selection"></sui-select>
+            <sui-select class="selection"
+                        [isDisabled]="true"
+                        [(ngModel)]="angularResUnits"
+                        [ngModelOptions]="{standalone: true}">
+              <sui-select-option value="mas"></sui-select-option>
+              <sui-select-option value="arcsec"></sui-select-option>
+            </sui-select>
           </div>
         </div>
 
@@ -126,7 +137,11 @@
           <label>Largest Angular Structure in Source</label>
           <div class="ui action input">
             <input>
-            <sui-select class="selection"></sui-select>
+            <sui-select class="selection">
+              <sui-select-option value="arcsec"></sui-select-option>
+              <sui-select-option value="arcmin"></sui-select-option>
+              <sui-select-option value="deg"></sui-select-option>
+            </sui-select>
           </div>
         </div>
       </div>
@@ -135,18 +150,87 @@
         <label>Desired sensitivity per pointing</label>
         <div class="ui right labeled action input">
           <input>
-          <sui-select class="selection"></sui-select>
+          <sui-select class="selection">
+            <sui-select-option value="uJy"></sui-select-option>
+            <sui-select-option value="mJy"></sui-select-option>
+            <sui-select-option value="Jy"></sui-select-option>
+            <sui-select-option value="mK"></sui-select-option>
+            <sui-select-option value="K"></sui-select-option>
+          </sui-select>
           <div class="ui left pointing label">equivalent to {{'infinty k'}}</div>
         </div>
       </div>
 
       <div class="field">
         <label>Bandwidth used for Sensitivity</label>
-        <sui-select class="selection"></sui-select>
+        <sui-select class="selection">
+          <sui-select-option value="Representative Window Bandwidth"></sui-select-option>
+          <sui-select-option value="Representative Window Resolution"></sui-select-option>
+          <sui-select-option value="Aggregate Bandwidth"></sui-select-option>
+          <sui-select-option value="Largest Window Bandwidth"></sui-select-option>
+          <sui-select-option value="Finest Resolution"></sui-select-option>
+          <sui-select-option value="User"></sui-select-option>
+        </sui-select>
       </div>
+
       <div class="field">
         <label>Frequency width</label>
         <input>
+      </div>
+
+      <div class="inline field">
+        <label>Science goal integration time estimate</label>
+        <button class="ui blue button">Time Estimate</button>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Override OT's sensitivity-based time estimate</label>
+          <sui-checkbox [(ngModel)]="overrideSensitivity"
+                        [ngModelOptions]="{standalone: true}"></sui-checkbox>
+        </div>
+        <div class="field" *ngIf="overrideSensitivity">
+          <label>Enter total time estimate</label>
+          <div class="ui action input">
+            <input>
+            <sui-select class="selection">
+              <sui-select-option value="sec"></sui-select-option>
+              <sui-select-option value="min"></sui-select-option>
+              <sui-select-option value="hr"></sui-select-option>
+            </sui-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Are the observations time-constrained?</label>
+        <sui-checkbox [(ngModel)]="timeConstrained"
+                      [ngModelOptions]="{standalone: true}"></sui-checkbox>
+      </div>
+
+      <div *ngIf="timeConstrained">
+        <div class="field">
+          <label>Simultaneous 12m and 7m observations</label>
+          <sui-checkbox></sui-checkbox>
+        </div>
+
+        <div class="field">
+          <label>Time Windows</label>
+          <sui-radio-button name="timeWindowRadios"
+                            value="none">None
+          </sui-radio-button>
+          <sui-radio-button name="timeWindowRadios"
+                            value="single">Single Visit
+          </sui-radio-button>
+          <sui-radio-button name="timeWindowRadios"
+                            value="multiple">Multiple Visits
+          </sui-radio-button>
+        </div>
+
+        <div class="field">
+          <label>Other relevant timing information</label>
+          <textarea rows="6"></textarea>
+        </div>
       </div>
     </form>
   </div>

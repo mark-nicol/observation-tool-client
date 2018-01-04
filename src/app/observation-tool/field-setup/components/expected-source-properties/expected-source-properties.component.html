@@ -1,4 +1,4 @@
-<div class="ui form">
+<form class="ui form" [formGroup]="expectedSourcePropertiesForm">
   <div class="two fields">
     <!-- Peak flux input -->
     <div class="field"
@@ -12,8 +12,10 @@
       </label>
       <div class="ui action input">
         <input id="peakContInput"
-               placeholder="0.00000">
-        <sui-select class="selection">
+               placeholder="0.00000"
+               formControlName="continuumFluxDensityValue">
+        <sui-select class="selection"
+                    formControlName="continuumFluxDensityUnit">
           <sui-select-option value="mjy">mJy</sui-select-option>
           <sui-select-option value="jy">Jy</sui-select-option>
         </sui-select>
@@ -34,8 +36,10 @@
       </label>
       <div class="ui action input">
         <input id="peakFluxPerInput"
-               placeholder="0.00000">
-        <sui-select class="selection">
+               placeholder="0.00000"
+               formControlName="lineFluxDensityValue">
+        <sui-select class="selection"
+                    formControlName="lineFluxDensityUnit">
           <sui-select-option value="mjy">mJy</sui-select-option>
           <sui-select-option value="jy">Jy</sui-select-option>
         </sui-select>
@@ -53,8 +57,10 @@
       </label>
       <div class="ui action input">
         <input id="lineWidthInput"
-               placeholder="0.00000">
-        <sui-select class="selection">
+               placeholder="0.00000"
+               formControlName="lineWidthValue">
+        <sui-select class="selection"
+                    formControlName="lineWidthUnit">
           <sui-select-option value="m/s">m/s</sui-select-option>
           <sui-select-option value="km/s">km/s</sui-select-option>
         </sui-select>
@@ -71,7 +77,8 @@
       <div class="ui right labeled input">
         <input id="linePolInput"
                type="number"
-               placeholder="0.0">
+               placeholder="0.0"
+               formControlName="linePolarization">
         <div class="ui label">%</div>
       </div>
     </div>
@@ -86,9 +93,10 @@
       <div class="ui right labeled input">
         <input id="contPolInput"
                type="number"
-               placeholder="0.0">
+               placeholder="0.0"
+               formControlName="continuumPolarization">
         <div class="ui label">%</div>
       </div>
     </div>
   </div>
-</div>
+</form>

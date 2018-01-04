@@ -19,7 +19,8 @@
       <label for="solarSystemSelector">Name of Object</label>
       <sui-select id="solarSystemSelector"
                   class="selection"
-                  formControlName="chosenSolarObject">
+                  formControlName="chosenSolarObject"
+                  [isDisabled]="!sourceForm.value.solarSystemObject">
         <sui-select-option *ngFor="let body of solarBodies" [value]="body">{{body}}</sui-select-option>
       </sui-select>
     </div>

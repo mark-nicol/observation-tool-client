@@ -102,7 +102,6 @@ export class NavbarComponent implements OnInit {
   }
 
   exportClick() {
-    this.persistenceService.saveProject();
   }
 
 }

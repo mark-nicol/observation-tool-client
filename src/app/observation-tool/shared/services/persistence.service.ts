@@ -12,9 +12,6 @@ import {ScienceGoalInterface} from '../interfaces/science-goal.interface';
 @Injectable()
 export class PersistenceService {
 
-  /** The public observable of the project data */
-  project$: Observable<ProjectInterface>;
-  project;
   /** Data store of the data in memory, allows changes */
   baseUrl = 'http://localhost:8080';
 
@@ -29,7 +26,6 @@ export class PersistenceService {
    * Constructor, loads data and sets members
    */
   constructor(private http: HttpClient) {
-
   }
 
   /**
@@ -38,11 +34,6 @@ export class PersistenceService {
   getProject(projectCode: string): Observable<ProjectInterface> {
     return this.http.get<ProjectInterface>(`${this.baseUrl}/projects/${projectCode}`);
   }
-
-  saveProject() {
-    console.log(this.project);
-  }
-
 
   /**
    * GET /projects/{projectCode}/science-goals/{goalId}

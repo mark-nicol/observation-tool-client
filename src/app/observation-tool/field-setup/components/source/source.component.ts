@@ -80,7 +80,6 @@ export class SourceComponent implements OnInit {
                                                radialVelocityReferenceFrame: '',
                                                dopplerType: '',
                                                redshift: 0,
-
                                              });
   }
 
@@ -93,9 +92,7 @@ export class SourceComponent implements OnInit {
                                      chosenSolarObject: result.chosenSolarObject,
                                      targetType: result.targetType,
                                      radialVelocityReferenceFrame: result.radialVelocityReferenceFrame,
-                                     dopplerType: result.dopplerType,
                                      sexagesimalUnits: result.sexagesimalUnits,
-                                     redshift: result.redshift,
                                      chosenSystem: result.chosenSystem,
                                      latValue: result.lat.value,
                                      lonValue: result.lon.value,
@@ -107,6 +104,8 @@ export class SourceComponent implements OnInit {
                                      properMotionDeclinationValue: result.properMotionDeclination.value,
                                      radialVelocityUnit: result.radialVelocity.unit,
                                      radialVelocityValue: result.radialVelocity.value,
+                                     dopplerType: result.dopplerType,
+                                     redshift: result.redshift,
                                    });
           this.systemChange();
         });

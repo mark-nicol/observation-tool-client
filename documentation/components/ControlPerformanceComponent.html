@@ -939,6 +939,27 @@
     </table>
 </section>
 
+    <section>
+        <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                 <a href="#chosenRadio">chosenRadio</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
 
 
@@ -946,6 +967,40 @@
 
 
 
+    <section>
+        
+            <h3 id="inputs">
+                Properties
+            </h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="chosenRadio"></a>
+                            <span class="name"><b> chosenRadio</b><a href="#chosenRadio"><span class="fa fa-link"></span></a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>chosenRadio:     <code></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value : </i><code>singleRadio</code>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/observation-tool/science-goal/components/control-performance/control-performance.component.ts:15</a></div>
+                                </td>
+                            </tr>
+    
+    
+                </tbody>
+            </table>
+    </section>
 
 </div>
 
@@ -965,15 +1020,212 @@
   styleUrls: [&#x27;./control-performance.component.scss&#x27;]
 })
 export class ControlPerformanceComponent {
-
+  chosenRadio &#x3D; &#x27;singleRadio&#x27;;
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade" id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;p&gt;
-  control-performance works!
-&lt;/p&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;card&quot;&gt;
+  &lt;h5 class&#x3D;&quot;card-title&quot;&gt;Configuration Information&lt;/h5&gt;
+  &lt;div class&#x3D;&quot;card-body&quot;&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;label class&#x3D;&quot;col&quot;&gt;Antenna Beamsize&lt;/label&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col-1&quot;&gt;&lt;label class&#x3D;&quot;form-control-label text-xl-right&quot;&gt;12m&lt;/label&gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0.000000&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col-1&quot;&gt;&lt;label class&#x3D;&quot;form-control-label text-xl-right&quot;&gt;7m&lt;/label&gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0.000000&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;span class&#x3D;&quot;col&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;Number of Antennas&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col-1&quot;&gt;&lt;label class&#x3D;&quot;form-control-label text-xl-right&quot;&gt;12m&lt;/label&gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col-1&quot;&gt;&lt;label class&#x3D;&quot;form-control-label text-xl-right&quot;&gt;7m&lt;/label&gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col-1&quot;&gt;&lt;label class&#x3D;&quot;form-control-label text-xl-right&quot;&gt;TP&lt;/label&gt;&lt;/div&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;ACA 7m configuration&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;Most compact 12m configuration&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;Most extended 12m configuration&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;Longest Baseline&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;Synthesized Baseline&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;Shortest Baseline&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;Maximum recoverable scale&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly value&#x3D;&quot;0&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class&#x3D;&quot;card&quot;&gt;
+  &lt;h5 class&#x3D;&quot;card-title&quot;&gt;Desired Performance&lt;/h5&gt;
+  &lt;div class&#x3D;&quot;card-body&quot;&gt;
+    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
+      &lt;div class&#x3D;&quot;col-3&quot;&gt;&lt;label&gt;Desired Angular Resolution (Synthesized Beam)&lt;/label&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;label class&#x3D;&quot;custom-control custom-radio&quot;&gt;
+          &lt;input #singleRadio
+                 id&#x3D;&quot;singleRadio&quot;
+                 name&#x3D;&quot;resolutionRadios&quot;
+                 class&#x3D;&quot;custom-control-input&quot;
+                 type&#x3D;&quot;radio&quot;
+                 [checked]&#x3D;&quot;chosenRadio &#x3D;&#x3D;&#x3D; singleRadio.id&quot;
+                 (change)&#x3D;&quot;chosenRadio &#x3D; singleRadio.id&quot;&gt;
+          &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;Single&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;label class&#x3D;&quot;custom-control custom-radio&quot;&gt;
+          &lt;input #rangeRadio
+                 id&#x3D;&quot;rangeRadio&quot;
+                 name&#x3D;&quot;resolutionRadios&quot;
+                 class&#x3D;&quot;custom-control-input&quot;
+                 type&#x3D;&quot;radio&quot;
+                 [checked]&#x3D;&quot;chosenRadio &#x3D;&#x3D;&#x3D; rangeRadio.id&quot;
+                 (change)&#x3D;&quot;chosenRadio &#x3D; rangeRadio.id&quot;&gt;
+          &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;Range&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;label class&#x3D;&quot;custom-control custom-radio&quot;&gt;
+          &lt;input #anyRadio
+                 id&#x3D;&quot;anyRadio&quot;
+                 name&#x3D;&quot;resolutionRadios&quot;
+                 class&#x3D;&quot;custom-control-input&quot;
+                 type&#x3D;&quot;radio&quot;
+                 [checked]&#x3D;&quot;chosenRadio &#x3D;&#x3D;&#x3D; anyRadio.id&quot;
+                 (change)&#x3D;&quot;chosenRadio &#x3D; anyRadio.id&quot;&gt;
+          &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;Any&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;label class&#x3D;&quot;custom-control custom-radio&quot;&gt;
+          &lt;input #standaloneRadio
+                 id&#x3D;&quot;standaloneRadio&quot;
+                 name&#x3D;&quot;resolutionRadios&quot;
+                 class&#x3D;&quot;custom-control-input&quot;
+                 type&#x3D;&quot;radio&quot;
+                 [checked]&#x3D;&quot;chosenRadio &#x3D;&#x3D;&#x3D; standaloneRadio.id&quot;
+                 (change)&#x3D;&quot;chosenRadio &#x3D; standaloneRadio.id&quot;&gt;
+          &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;Standalone ACA&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row&quot; [class.form-group]&#x3D;&quot;chosenRadio &#x3D;&#x3D;&#x3D; singleRadio.id || chosenRadio &#x3D;&#x3D;&#x3D; rangeRadio.id&quot;&gt;
+      &lt;div class&#x3D;&quot;col input-group&quot; *ngIf&#x3D;&quot;chosenRadio &#x3D;&#x3D;&#x3D; singleRadio.id || chosenRadio &#x3D;&#x3D;&#x3D; rangeRadio.id&quot;&gt;
+        &lt;input class&#x3D;&quot;form-control&quot;&gt;
+        &lt;select class&#x3D;&quot;form-control input-group-addon&quot;&gt;&lt;/select&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot; *ngIf&#x3D;&quot;chosenRadio &#x3D;&#x3D;&#x3D; rangeRadio.id&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;
+            &lt;label&gt;to&lt;/label&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;col input-group&quot;&gt;
+            &lt;input class&#x3D;&quot;form-control&quot;&gt;
+            &lt;span class&#x3D;&quot;input-group-addon&quot;&gt;arcsec&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row form-group&quot; *ngIf&#x3D;&quot;chosenRadio !&#x3D; anyRadio.id&quot;&gt;
+      &lt;div class&#x3D;&quot;col-3&quot;&gt;&lt;label&gt;Largest Angular Structure in Source&lt;/label&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col input-group&quot;&gt;
+        &lt;input class&#x3D;&quot;form-control&quot;&gt;
+        &lt;select class&#x3D;&quot;input-group-addon form-control&quot;&gt;&lt;/select&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
+      &lt;div class&#x3D;&quot;col-3&quot;&gt;&lt;label&gt;Desired sensitivity per pointing&lt;/label&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col input-group&quot;&gt;
+        &lt;input class&#x3D;&quot;form-control&quot;&gt;
+        &lt;select class&#x3D;&quot;input-group-addon form-control&quot;&gt;&lt;/select&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;
+            &lt;label&gt;equivalent to&lt;/label&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;col&quot;&gt;
+            &lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
+      &lt;div class&#x3D;&quot;col-3&quot;&gt;&lt;label&gt;Bandwidth used for Sensitivity&lt;/label&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;select class&#x3D;&quot;form-control&quot;&gt;&lt;/select&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;label&gt;Frequency width&lt;/label&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;&lt;input class&#x3D;&quot;form-control form-control-plaintext&quot; readonly&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
+      &lt;div class&#x3D;&quot;col-3&quot;&gt;&lt;label&gt;Science goal integration time estimate&lt;/label&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;button class&#x3D;&quot;btn btn-outline-secondary&quot;&gt;Time Estimate&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
+      &lt;div class&#x3D;&quot;col-3&quot;&gt;&lt;label&gt;Override OT&#x27;s sensitivity-based time estimate&lt;/label&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;label class&#x3D;&quot;custom-control custom-checkbox&quot;&gt;
+          &lt;input class&#x3D;&quot;custom-control-input&quot; type&#x3D;&quot;checkbox&quot;&gt;
+          &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class&#x3D;&quot;row form-group&quot;&gt;
+      &lt;div class&#x3D;&quot;col-3&quot;&gt;&lt;label&gt;Are the observations time constrained?&lt;/label&gt;&lt;/div&gt;
+      &lt;div class&#x3D;&quot;col&quot;&gt;
+        &lt;label class&#x3D;&quot;custom-control custom-checkbox&quot;&gt;
+          &lt;input class&#x3D;&quot;custom-control-input&quot; type&#x3D;&quot;checkbox&quot;&gt;
+          &lt;span class&#x3D;&quot;custom-control-indicator&quot;&gt;&lt;/span&gt;
+          &lt;span class&#x3D;&quot;custom-control-description&quot;&gt;&lt;/span&gt;
+        &lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
     </div>
 
@@ -1000,7 +1252,7 @@ export class ControlPerformanceComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>  control-performance works!</p></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="card">  <h5 class="card-title">Configuration Information</h5>  <div class="card-body">    <div class="row">      <label class="col">Antenna Beamsize</label>      <div class="col">        <div class="row">          <div class="col-1"><label class="form-control-label text-xl-right">12m</label></div>          <div class="col"><input class="form-control form-control-plaintext" readonly value="0.000000"></div>        </div>      </div>      <div class="col">        <div class="row">          <div class="col-1"><label class="form-control-label text-xl-right">7m</label></div>          <div class="col"><input class="form-control form-control-plaintext" readonly value="0.000000"></div>        </div>      </div>      <span class="col"></span>    </div>    <div class="row">      <div class="col">Number of Antennas</div>      <div class="col">        <div class="row">          <div class="col-1"><label class="form-control-label text-xl-right">12m</label></div>          <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>        </div>      </div>      <div class="col">        <div class="row">          <div class="col-1"><label class="form-control-label text-xl-right">7m</label></div>          <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>        </div>      </div>      <div class="col">        <div class="row">          <div class="col-1"><label class="form-control-label text-xl-right">TP</label></div>          <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>        </div>      </div>    </div>    <div class="row">      <div class="col"></div>      <div class="col">ACA 7m configuration</div>      <div class="col">Most compact 12m configuration</div>      <div class="col">Most extended 12m configuration</div>    </div>    <div class="row">      <div class="col">Longest Baseline</div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>    </div>    <div class="row">      <div class="col">Synthesized Baseline</div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>    </div>    <div class="row">      <div class="col">Shortest Baseline</div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>    </div>    <div class="row">      <div class="col">Maximum recoverable scale</div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>      <div class="col"><input class="form-control form-control-plaintext" readonly value="0"></div>    </div>  </div></div><div class="card">  <h5 class="card-title">Desired Performance</h5>  <div class="card-body">    <div class="row form-group">      <div class="col-3"><label>Desired Angular Resolution (Synthesized Beam)</label></div>      <div class="col">        <label class="custom-control custom-radio">          <input #singleRadio                 id="singleRadio"                 name="resolutionRadios"                 class="custom-control-input"                 type="radio"                 [checked]="chosenRadio === singleRadio.id"                 (change)="chosenRadio = singleRadio.id">          <span class="custom-control-indicator"></span>          <span class="custom-control-description">Single</span>        </label>        <label class="custom-control custom-radio">          <input #rangeRadio                 id="rangeRadio"                 name="resolutionRadios"                 class="custom-control-input"                 type="radio"                 [checked]="chosenRadio === rangeRadio.id"                 (change)="chosenRadio = rangeRadio.id">          <span class="custom-control-indicator"></span>          <span class="custom-control-description">Range</span>        </label>        <label class="custom-control custom-radio">          <input #anyRadio                 id="anyRadio"                 name="resolutionRadios"                 class="custom-control-input"                 type="radio"                 [checked]="chosenRadio === anyRadio.id"                 (change)="chosenRadio = anyRadio.id">          <span class="custom-control-indicator"></span>          <span class="custom-control-description">Any</span>        </label>        <label class="custom-control custom-radio">          <input #standaloneRadio                 id="standaloneRadio"                 name="resolutionRadios"                 class="custom-control-input"                 type="radio"                 [checked]="chosenRadio === standaloneRadio.id"                 (change)="chosenRadio = standaloneRadio.id">          <span class="custom-control-indicator"></span>          <span class="custom-control-description">Standalone ACA</span>        </label>      </div>    </div>    <div class="row" [class.form-group]="chosenRadio === singleRadio.id || chosenRadio === rangeRadio.id">      <div class="col input-group" *ngIf="chosenRadio === singleRadio.id || chosenRadio === rangeRadio.id">        <input class="form-control">        <select class="form-control input-group-addon"></select>      </div>      <div class="col" *ngIf="chosenRadio === rangeRadio.id">        <div class="row">          <div class="col">            <label>to</label>          </div>          <div class="col input-group">            <input class="form-control">            <span class="input-group-addon">arcsec</span>          </div>        </div>      </div>    </div>    <div class="row form-group" *ngIf="chosenRadio != anyRadio.id">      <div class="col-3"><label>Largest Angular Structure in Source</label></div>      <div class="col input-group">        <input class="form-control">        <select class="input-group-addon form-control"></select>      </div>    </div>    <div class="row form-group">      <div class="col-3"><label>Desired sensitivity per pointing</label></div>      <div class="col input-group">        <input class="form-control">        <select class="input-group-addon form-control"></select>      </div>      <div class="col">        <div class="row">          <div class="col">            <label>equivalent to</label>          </div>          <div class="col">            <input class="form-control form-control-plaintext" readonly>          </div>        </div>      </div>    </div>    <div class="row form-group">      <div class="col-3"><label>Bandwidth used for Sensitivity</label></div>      <div class="col"><select class="form-control"></select></div>      <div class="col"><label>Frequency width</label></div>      <div class="col"><input class="form-control form-control-plaintext" readonly></div>    </div>    <div class="row form-group">      <div class="col-3"><label>Science goal integration time estimate</label></div>      <div class="col">        <button class="btn btn-outline-secondary">Time Estimate</button>      </div>    </div>    <div class="row form-group">      <div class="col-3"><label>Override OT\'s sensitivity-based time estimate</label></div>      <div class="col">        <label class="custom-control custom-checkbox">          <input class="custom-control-input" type="checkbox">          <span class="custom-control-indicator"></span>          <span class="custom-control-description"></span>        </label>      </div>    </div>    <div class="row form-group">      <div class="col-3"><label>Are the observations time constrained?</label></div>      <div class="col">        <label class="custom-control custom-checkbox">          <input class="custom-control-input" type="checkbox">          <span class="custom-control-indicator"></span>          <span class="custom-control-description"></span>        </label>      </div>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CalibrationSetupComponent', 'selector': 'app-calibration-setup'},{'name': 'ControlPerformanceComponent', 'selector': 'app-control-performance'},{'name': 'FccIndividualComponent', 'selector': 'fcc-individual'},{'name': 'FccRectangularComponent', 'selector': 'fcc-rectangular'},{'name': 'FieldCenterCoordinatesComponent', 'selector': 'field-center-coordinates'},{'name': 'FieldSetupComponent', 'selector': 'field-setup'},{'name': 'FovParametersComponent', 'selector': 'fov-parameters'},{'name': 'GeneralComponent', 'selector': 'app-general'},{'name': 'ImageQueryComponent', 'selector': 'image-query'},{'name': 'ModularPanelComponent', 'selector': 'modular-panel'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PiEntryComponent', 'selector': 'app-pi-entry'},{'name': 'PiResultsComponent', 'selector': 'app-pi-results'},{'name': 'PiSearchComponent', 'selector': 'app-pi-search'},{'name': 'PiSelectComponent', 'selector': 'app-pi-select'},{'name': 'PlannedObservingComponent', 'selector': 'app-planned-observing'},{'name': 'ProjectComponent', 'selector': 'app-project'},{'name': 'ProjectInfoComponent', 'selector': 'app-project-info'},{'name': 'ProposalComponent', 'selector': 'app-proposal'},{'name': 'RefinePanelComponent', 'selector': 'app-refine-panel'},{'name': 'ResultsTableComponent', 'selector': 'app-results-table'},{'name': 'ScienceGoalComponent', 'selector': 'app-science-goal'},{'name': 'SourceComponent', 'selector': 'field-source'},{'name': 'SourceExpectedPropertiesComponent', 'selector': 'source-expected-properties'},{'name': 'SpacialImageComponent', 'selector': 'spacial-image'},{'name': 'SpectralSetupComponent', 'selector': 'app-spectral-setup'},{'name': 'SystemSelectorComponent', 'selector': 'system-selector'},{'name': 'TechnicalJustificationComponent', 'selector': 'app-technical-justification'},{'name': 'TypeComponent', 'selector': 'app-type'},{'name': 'VisualisationControlComponent', 'selector': 'app-visualisation-control'},{'name': 'VisualisationViewerComponent', 'selector': 'app-visualisation-viewer'}];
     var DIRECTIVES = [{'name': 'DelayTooltipDirective', 'selector': '[tooltip-delay]'}];
     var ACTUAL_COMPONENT = {'name': 'ControlPerformanceComponent'};

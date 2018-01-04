@@ -1,24 +1,47 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {ScienceGoalInterface} from '../shared/interfaces/science-goal.interface';
-import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
  * Science goal component which contains tabbed science goal pages
  */
 
 @Component({
-  selector: 'app-science-goal',
-  templateUrl: './science-goal.component.html',
-  styleUrls: ['./science-goal.component.scss']
-})
+             selector: 'app-science-goal',
+             templateUrl: './science-goal.component.html',
+             styleUrls: ['./science-goal.component.scss']
+           })
 export class ScienceGoalComponent {
 
   /** The currently selected goal page */
   selectedPage = 'general';
 
   /** Dict of all science goal page data */
-  pages: { [id: string]: ScienceGoalInterface };
+  pages = {
+    'general': {
+      text: 'General',
+      path: 'general'
+    },
+    'fieldSetup': {
+      text: 'Field Setup',
+      path: 'field-setup'
+    },
+    'spectralSetup': {
+      text: 'Spectral Setup',
+      path: 'spectral-setup'
+    },
+    'calibrationSetup': {
+      text: 'Calibration Setup',
+      path: 'calibration-setup'
+    },
+    'controlPerformance': {
+      text: 'Control and Performance',
+      path: 'control-performance'
+    },
+    'technicalJustification': {
+      text: 'Technical Justification',
+      path: 'technical-justification'
+    }
+  };
 
   /** Iterator for pages */
   pageKeys: (o) => string[] = Object.keys;
@@ -26,8 +49,7 @@ export class ScienceGoalComponent {
   /**
    * Constructor
    */
-  constructor(private persistenceService: PersistenceService, private router: Router) {
-    // this.persistenceService.getPages().subscribe(res => this.pages = res);
+  constructor(private router: Router) {
   }
 
 }

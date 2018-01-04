@@ -1,16 +1,40 @@
-<div class="ui form">
-  <div class="field">
-    <label>Coord Type</label>
-    <sui-radio-button name="coordTypeRadios" value="relative">Relative</sui-radio-button>
-    <sui-radio-button name="coordTypeRadios" value="absolute">Absolute</sui-radio-button>
-  </div>
+<form class="ui form"
+      [formGroup]="fieldCentreCoordinatesForm">
+  <div class="two fields">
+    <div class="field">
+      <label>Coord Type</label>
+      <sui-radio-button name="coordTypeRadios"
+                        value="relative"
+                        formControlName="coordType">Relative
+      </sui-radio-button>
+      <sui-radio-button name="coordTypeRadios"
+                        value="absolute"
+                        formControlName="coordType">Absolute
+      </sui-radio-button>
+    </div>
 
-  <!--<div *ngIf="(_persistenceService.getSourceTargetType() === 'individual'); then individualComponent else rectangularComponent"></div>-->
-  <div *ngIf="true; then individualComponent else rectangularComponent"></div>
-  <ng-template #individualComponent>
-    <fcc-individual [radioValue]="'relative'"></fcc-individual>
-  </ng-template>
-  <ng-template #rectangularComponent>
-    <fcc-rectangular [radioValue]="'relative'"></fcc-rectangular>
-  </ng-template>
-</div>
+    <!--Target type radios-->
+    <div class="field">
+      <label>Target Type</label>
+      <sui-radio-button name="targetTypeRadios"
+                        value="individual"
+                        formControlName="targetType">Individual Pointing(s)
+      </sui-radio-button>
+      <sui-radio-button name="targetTypeRadios"
+                        value="rectangular"
+                        formControlName="targetType">Rectangular Field
+      </sui-radio-button>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="fieldCentreCoordinatesForm.value.targetType === 'individual';
+  then individualComponent
+  else rectangularComponent"></div>
+<ng-template #individualComponent>
+  <fcc-individual [radioValue]="'relative'"></fcc-individual>
+</ng-template>
+<ng-template #rectangularComponent>
+  <fcc-rectangular [radioValue]="'relative'"
+                   [group]="fieldCentreCoordinatesForm.controls.rectangular"></fcc-rectangular>
+</ng-template>

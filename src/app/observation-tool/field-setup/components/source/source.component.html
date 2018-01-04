@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div class="three fields">
+  <div class="two fields">
     <!-- Solar checkbox -->
     <div class="field">
       <sui-checkbox formControlName="solarSystemObject">Choose a Solar System Object?</sui-checkbox>
@@ -24,21 +24,7 @@
         <sui-select-option *ngFor="let body of solarBodies" [value]="body">{{body}}</sui-select-option>
       </sui-select>
     </div>
-
-    <!--Target type radios-->
-    <div class="field">
-      <label>Target Type</label>
-      <sui-radio-button name="targetTypeRadios"
-                        value="individual"
-                        formControlName="targetType">Individual Pointing(s)
-      </sui-radio-button>
-      <sui-radio-button name="targetTypeRadios"
-                        value="rectangular"
-                        formControlName="targetType">Rectangular Field
-      </sui-radio-button>
-    </div>
   </div>
-
   <div *ngIf="!sourceForm.value.solarSystemObject">
 
     <div class="three fields">

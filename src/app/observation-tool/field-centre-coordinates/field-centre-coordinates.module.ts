@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ReactiveFormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 import {SharedModule} from '../shared/shared.module';
 import {FccIndividualComponent} from './components/fcc-individual/fcc-individual.component';
@@ -10,7 +10,7 @@ import {FieldCenterCoordinatesComponent} from './field-center-coordinates.compon
   imports: [
     SharedModule,
     SuiModule,
-    NgbModule.forRoot(),
+    ReactiveFormsModule
   ],
   declarations: [
     FccIndividualComponent,

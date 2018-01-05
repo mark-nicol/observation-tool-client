@@ -1,16 +1,23 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {CURRENT_PROJECT} from '../../../shared/data/current-project';
+import {ProjectInterface} from '../../../shared/interfaces/project.interface';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * The proposal component
  */
 
 @Component({
-  selector: 'app-proposal',
-  templateUrl: './proposal.component.html',
-  styleUrls: ['./proposal.component.css']
-})
+             selector: 'app-proposal',
+             templateUrl: './proposal.component.html',
+             styleUrls: ['./proposal.component.css']
+           })
 
-export class ProposalComponent {
+export class ProposalComponent implements OnInit {
+
+  proposal: FormGroup;
+  project: ProjectInterface;
 
   /** The currently selected proposal type */
   chosenType = 'regularRadio';
@@ -18,19 +25,19 @@ export class ProposalComponent {
   /** The available proposal types for looping over */
   typeRadios = [
     {
-      id: 'regularRadio',
+      id: 'regular',
       text: 'Regular'
     },
     {
-      id: 'opportunityRadio',
+      id: 'opportunity',
       text: 'Target of Opportunit'
     },
     {
-      id: 'vlbiRadio',
+      id: 'vlbi',
       text: 'VLBI'
     },
     {
-      id: 'largeRadio',
+      id: 'large',
       text: 'Large Program'
     },
   ];
@@ -135,26 +142,41 @@ export class ProposalComponent {
   selectedKeywordCount = 0;
   selectedKeywordValues: any;
 
-  remainingChars = 1200;
+  log(event) {
+    console.log(event);
+  }
+
+  constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
+    this.createForm();
+  }
+
+  ngOnInit() {
+    this.persistenceService.getProject(CURRENT_PROJECT)
+        .subscribe(result => this.proposal.setValue(result.proposal));
+
+  }
+
+  createForm() {
+    this.proposal = this.formBuilder.group({
+                                             title: '',
+                                             cycle: '',
+                                             abs: '',
+                                             relatedProposals: '',
+                                             previousProposals: '',
+                                             studentProject: false,
+                                             proposalType: '',
+                                             scientificCategory: '',
+                                             duplicateObservations: '',
+                                             keywords: []
+                                           });
+  }
 
   /**
    * Resets the keyword selector when the chosen category changes
    */
-  categoryRadioChange() {
-    this.selectedKeywordValues = [];
-    this.selectedKeywordCount  = 0;
-  }
-
-  /**
-   * Validates the keywords, used for disabling the selections
-   */
-  keywordsChange() {
-    this.selectedKeywordCount = this.selectedKeywordValues.length;
-    console.log(this.selectedKeywordCount, this.selectedKeywordValues);
-  }
-
-  checkChars(charCount: any) {
-    this.remainingChars = 1200 - charCount.length;
+  categoryRadioChange(newCategory: string) {
+    this.chosenCategory = newCategory;
+    // this.project.proposal.keywords = null;
   }
 
 }

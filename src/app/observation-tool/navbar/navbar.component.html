@@ -15,11 +15,17 @@
       User
       <i class="dropdown icon"></i>
       <div class="menu" suiDropdownMenu>
+        <div class="item" (click)="exportClick()">
+          <i class="upload icon"></i>Export Project
+        </div>
         <div class="item">
-          <i class="sign out icon"></i> Logout
+          <i class="download icon"></i>Import Project
+        </div>
+        <div class="item">
+          <i class="sign out icon"></i>Logout
         </div>
         <a class="item" href="http://www.eso.org/UserPortal">
-          <i class="setting icon"></i> User Portal
+          <i class="setting icon"></i>User Portal
         </a>
       </div>
     </div>

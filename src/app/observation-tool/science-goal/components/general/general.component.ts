@@ -1,9 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 /**
  * General science goal page component
- *
- * Currently inactive
  */
 
 @Component({
@@ -12,6 +10,13 @@ import {Component} from '@angular/core';
   styleUrls: ['./general.component.scss']
 })
 
-export class GeneralComponent {
+export class GeneralComponent implements OnInit {
+
+  constructor() {
+
+  }
+
+  ngOnInit() {
+  }
 
 }

@@ -28,7 +28,7 @@ export class SystemSelectorComponent implements OnInit {
 
   /** Possible system choices dict */
   systems: { [id: string]: CoordSystemInterface } = {
-    'ICRS': {
+    'icrs': {
       sexagesimalLabels: {
         latLabel: 'Dec',
         lonLabel: 'RA',

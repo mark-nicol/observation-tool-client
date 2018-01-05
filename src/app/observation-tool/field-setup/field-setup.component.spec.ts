@@ -14,7 +14,7 @@ import {SexagesimalPipe} from '../shared/pipes/sexagesimal.pipe';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {FovParametersComponent} from './components/fov-parameters/fov-parameters.component';
 import {ImageQueryComponent} from './components/image-query/image-query.component';
-import {SourceExpectedPropertiesComponent} from './components/source-expected-properties/source-expected-properties.component';
+import {ExpectedSourcePropertiesComponent} from './components/expected-source-properties/expected-source-properties.component';
 import {SourceComponent} from './components/source/source.component';
 import {SpacialImageComponent} from './components/spacial-image/spacial-image.component';
 
@@ -33,7 +33,7 @@ describe('FieldSetupComponent', () => {
         FovParametersComponent,
         ImageQueryComponent,
         SourceComponent,
-        SourceExpectedPropertiesComponent,
+        ExpectedSourcePropertiesComponent,
         FieldCenterCoordinatesComponent,
         FccRectangularComponent,
         FccIndividualComponent,

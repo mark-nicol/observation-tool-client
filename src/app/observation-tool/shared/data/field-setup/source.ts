@@ -11,7 +11,6 @@ export const FIELD_SOURCE_DATA = {
   sourceName: '',
   solarSystemObject: false,
   chosenSolarObject: null,
-  targetType: 'individual',
   chosenSystem: 'ICRS', /*TODO change to object*/
   sexagesimalUnits: false,
   lat: new Latitude(),

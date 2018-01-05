@@ -78,13 +78,13 @@
 <path fill="none" stroke="#000000" d="M995,-122.027C995,-138.3976 995,-160 995,-160 995,-160 760.2582,-160 760.2582,-160"/>
 <polygon fill="#000000" stroke="#000000" points="760.2582,-156.5001 750.2582,-160 760.2582,-163.5001 760.2582,-156.5001"/>
 </g>
-<!-- SourceExpectedPropertiesComponent -->
+<!-- ExpectedSourcePropertiesComponent -->
 <g id="node4" class="node">
 <title>SourceExpectedPropertiesComponent</title>
 <polygon fill="#ffffb3" stroke="#000000" points="901.5506,-122 672.4494,-122 672.4494,-86 901.5506,-86 901.5506,-122"/>
 <text text-anchor="middle" x="787" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SourceExpectedPropertiesComponent</text>
 </g>
-<!-- SourceExpectedPropertiesComponent&#45;&gt;FieldSetupModule -->
+<!-- ExpectedSourcePropertiesComponent&#45;&gt;FieldSetupModule -->
 <g id="edge4" class="edge">
 <title>SourceExpectedPropertiesComponent&#45;&gt;FieldSetupModule</title>
 <path fill="none" stroke="#000000" d="M711.2914,-122.1061C711.2914,-122.1061 711.2914,-140.991 711.2914,-140.991"/>

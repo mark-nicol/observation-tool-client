@@ -1,17 +1,18 @@
-<div class="ui form">
+<h4 class="ui dividing header">Source</h4>
+<form class="ui form" [formGroup]="sourceForm">
   <!-- Source selector -->
   <div class="field">
     <label for="sourceNameInput">Source Name</label>
     <div class="ui action input">
-      <input id="sourceNameInput" [(ngModel)]="pageData.sourceName">
+      <input id="sourceNameInput" formControlName="sourceName">
       <button class="ui blue button">Resolve</button>
     </div>
   </div>
 
-  <div class="three fields">
+  <div class="two fields">
     <!-- Solar checkbox -->
     <div class="field">
-      <sui-checkbox [(ngModel)]="pageData.solarSystemObject">Choose a Solar System Object?</sui-checkbox>
+      <sui-checkbox formControlName="solarSystemObject">Choose a Solar System Object?</sui-checkbox>
     </div>
 
     <!-- Solar selector -->
@@ -19,33 +20,29 @@
       <label for="solarSystemSelector">Name of Object</label>
       <sui-select id="solarSystemSelector"
                   class="selection"
-                  [isDisabled]="!pageData.solarSystemObject"
-                  [(ngModel)]="pageData.chosenSolarObject">
+                  formControlName="chosenSolarObject"
+                  [isDisabled]="!sourceForm.value.solarSystemObject">
         <sui-select-option *ngFor="let body of solarBodies" [value]="body">{{body}}</sui-select-option>
       </sui-select>
     </div>
-
-    <!--Target type radios-->
-    <div class="field">
-      <label>Target Type</label>
-      <sui-radio-button name="targetTypeRadios"
-                        value="individual"
-                        [(ngModel)]="pageData.targetType">Individual Pointing(s)
-      </sui-radio-button>
-      <sui-radio-button name="targetTypeRadios"
-                        value="rectangular"
-                        [(ngModel)]="pageData.targetType">Rectangular Field
-      </sui-radio-button>
-    </div>
   </div>
-
-  <div *ngIf="!pageData.solarSystemObject">
+  <div *ngIf="!sourceForm.value.solarSystemObject">
 
     <div class="three fields">
       <div class="field">
         <!-- System Selector -->
-        <system-selector (systemEmitter)="systemChange($event)"
-                         (sexagesimalEmitter)="sexagesimalChange($event)"></system-selector>
+        <label>System</label>
+        <div class="inline field">
+          <sui-select class="selection"
+                      formControlName="chosenSystem"
+                      (selectedOptionChange)="systemChange()">
+            <sui-select-option *ngFor="let system of systemService.getSystems()"
+                               value="{{system}}"></sui-select-option>
+          </sui-select>
+          <sui-checkbox formControlName="sexagesimalUnits"
+                        [isDisabled]="sexagesimalCheckboxDisabled">Sexagesimal Units
+          </sui-checkbox>
+        </div>
       </div>
 
       <!-- Lat input -->
@@ -53,20 +50,18 @@
            suiPopup
            popupText="The latitude of the source">
         <label for="latInput">
-          {{pageData.sexagesimalUnits ?
-          pageData.chosenSystem.sexagesimalLabels.latLabel :
-          pageData.chosenSystem.normalLabels.latLabel}}
+          {{
+          this.sourceForm.value.sexagesimalUnits ?
+          this.currentSystem?.sexagesimalLabels.latLabel :
+          this.currentSystem?.normalLabels.latLabel
+          }}
         </label>
         <input #latInput
                id="latInput"
-               [ngModel]="pageData.sexagesimalUnits && pageData.lat ? (pageData.lat.value | sexagesimal: false) : pageData.lat.value"
+               formControlName="latValue"
                (keyup.enter)="setLatLon(latInput.value, latInput)"
                (blur)="setLatLon(latInput.value, latInput)"
-               placeholder="{{
-                      pageData.sexagesimalUnits ?
-                      (pageData.chosenSystem.latPlaceholder | sexagesimal) :
-                      (pageData.chosenSystem.latPlaceholder | degrees)
-                       }}">
+               placeholder="0">
       </div>
 
       <!-- Long input -->
@@ -74,20 +69,18 @@
            suiPopup
            popupText="The longitude of the source">
         <label for="lonInput">
-          {{pageData.sexagesimalUnits ?
-          pageData.chosenSystem.sexagesimalLabels.lonLabel :
-          pageData.chosenSystem.normalLabels.lonLabel
-          }}</label>
+          {{
+          this.sourceForm.value.sexagesimalUnits ?
+          this.currentSystem?.sexagesimalLabels.lonLabel :
+          this.currentSystem?.normalLabels.lonLabel
+          }}
+        </label>
         <input #lonInput
                id="lonInput"
-               [ngModel]="pageData.sexagesimalUnits && pageData.lon ? (pageData.lon.value | sexagesimal: true) : pageData.lon.value"
+               formControlName="lonValue"
                (keyup.enter)="setLatLon(lonInput.value, lonInput)"
                (blur)="setLatLon(lonInput.value, lonInput)"
-               placeholder="{{
-                      pageData.sexagesimalUnits ?
-                      (pageData.chosenSystem.lonPlaceholder | sexagesimal) :
-                      (pageData.chosenSystem.lonPlaceholder | degrees)
-                    }}">
+               placeholder="0">
       </div>
     </div>
 
@@ -103,10 +96,10 @@
         <div class="ui action input">
           <input id="parallaxInput"
                  placeholder="0.00000"
-                 [ngModel]="pageData.parallax.value">
+                 formControlName="parallaxValue">
           <sui-select class="selection"
                       title="Parallax unit selector"
-                      [(ngModel)]="pageData.parallax.unit">
+                      formControlName="parallaxUnit">
             <sui-select-option value="mas">mas</sui-select-option>
             <sui-select-option value="arcsec">arcsec</sui-select-option>
           </sui-select>
@@ -123,10 +116,10 @@
         <div class="ui action input">
           <input id="pmRaInput"
                  placeholder="0.00000"
-                 [ngModel]="pageData.properMotionCross.value">
+                 formControlName="properMotionCrossValue">
           <sui-select class="selection"
                       title="Proper motion ra unit selector"
-                      [(ngModel)]="pageData.properMotionCross.unit">
+                      formControlName="properMotionCrossUnit">
             <sui-select-option value="mas/yr">mas/yr</sui-select-option>
             <sui-select-option value="arcsec/s">arcsec/s</sui-select-option>
             <sui-select-option value="arcmin/s">arcmin/s</sui-select-option>
@@ -145,10 +138,10 @@
         <div class="ui action input">
           <input id="plgecInput"
                  placeholder="0.00000"
-                 [ngModel]="pageData.properMotionDeclination.value">
+                 formControlName="properMotionDeclinationValue">
           <sui-select class="selection"
                       title="proper motion declination unit selector"
-                      [(ngModel)]="pageData.properMotionDeclination.unit">
+                      formControlName="properMotionDeclinationUnit">
             <sui-select-option value="mas/yr">mas/yr</sui-select-option>
             <sui-select-option value="arcsec/s">arcsec/s</sui-select-option>
             <sui-select-option value="arcmin/s">arcmin/s</sui-select-option>
@@ -169,16 +162,16 @@
         <div class="ui action input">
           <input id="radialVelocityInput"
                  placeholder="0.000"
-                 [ngModel]="pageData.radialVelocity.value">
+                 formControlName="radialVelocityValue">
           <sui-select class="selection"
                       title="Radial velocity unit selector"
-                      [(ngModel)]="pageData.radialVelocity.unit">
+                      formControlName="radialVelocityUnit">
             <sui-select-option value="m/s">m/s</sui-select-option>
             <sui-select-option value="km/s">km/s</sui-select-option>
           </sui-select>
           <sui-select class="selection"
                       title="Radial velocity reference frame selector"
-                      [(ngModel)]="pageData.radialVelocityReferenceFrame">
+                      formControlName="radialVelocityReferenceFrame">
             <sui-select-option value="bar">bar</sui-select-option>
             <sui-select-option value="lsrk">lsrk</sui-select-option>
             <sui-select-option value="topo">topo</sui-select-option>
@@ -196,7 +189,7 @@
         </label>
         <input id="zInput"
                placeholder="0.000000000"
-               [ngModel]="pageData.redshift">
+               formControlName="redshift">
       </div>
 
       <!-- Doppler selector -->
@@ -208,7 +201,7 @@
         </label>
         <sui-select class="selection"
                     id="dopplerSelect"
-                    [(ngModel)]="pageData.dopplerType">
+                    formControlName="dopplerType">
           <sui-select-option value="radio">Radio</sui-select-option>
           <sui-select-option value="optical">Optical</sui-select-option>
           <sui-select-option value="relativistic">Relativistic</sui-select-option>
@@ -216,4 +209,4 @@
       </div>
     </div>
   </div><!-- div *ngIf -->
-</div><!-- div.ui.form -->
+</form><!-- div.ui.form -->

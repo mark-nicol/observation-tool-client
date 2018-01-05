@@ -1,90 +1,87 @@
-<div class="field"
-     suiPopup
-     popupText="Unit of offset pointings">
-  <label for="offsetSelector">
-    Offset Unit
-  </label>
-  <sui-select id="offsetSelector"
-              class="selection"
-              [(ngModel)]="data.offsetUnit"
-              [disabled]="radioValue === 'absolute'">
-    <sui-select-option *ngFor="let unit of offsetUnits"
-                       value="{{unit}}"
-                       (selcted)="unit === 'mas'">
-      {{unit}}
-    </sui-select-option>
-  </sui-select>
-</div>
+<form class="ui form"
+      [formGroup]="individualForm">
 
-
-<div class="field"
-     suiPopup
-     popupText="Number of pointings in this field">
-  <div class="ui mini statistic">
-    <label class="label">
-      # Pointings
-    </label>
-    <p class="value">{{data.rows.length}}</p>
-  </div>
-</div>
-
-
-<table class="ui celled table"
+  <div class="field"
        suiPopup
-       popupText="Coordinate offsets for each pointing">
-  <thead>
-    <tr *ngIf="radioValue === 'relative'">
-      <th>
-        {{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').latHeader}}
-        [{{data.offsetUnit}}]
-      </th>
-      <th>
-        {{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').lonHeader}}
-        [{{data.offsetUnit}}]
-      </th>
-    </tr>
-    <tr *ngIf="radioValue === 'absolute'">
-      <th>{{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').latHeader}}</th>
-      <th>{{_persistenceService.getDataItem('field-setup', 'field-source', 'chosenSystem').lonHeader}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of data.rows"
-        (keyup.enter)="log('enter')">
-      <td contenteditable (blur)="log('blur')">
-        {{radioValue === 'absolute' ? (row.lon.value | sexagesimal) : (row.lon.value | degrees)}}
-      </td>
-      <td contenteditable>
-        {{radioValue === 'absolute' ? (row.lat.value | sexagesimal) : (row.lat.value | degrees)}}
-      </td>
-    </tr>
-  </tbody>
-</table>
+       popupText="Unit of offset pointings">
+    <label for="offsetSelector">
+      Offset Unit
+    </label>
+    <sui-select id="offsetSelector"
+                class="selection"
+                [isDisabled]="radioValue === 'absolute'"
+                formControlName="offsetUnit">
+      <sui-select-option *ngFor="let unit of offsetUnits"
+                         value="{{unit}}">
+        {{unit}}
+      </sui-select-option>
+    </sui-select>
+  </div>
 
+  <div class="field"
+       suiPopup
+       popupText="Number of pointings in this field">
+    <div class="ui mini statistic">
+      <label class="label">
+        # Pointings
+      </label>
+      <p class="value">{{rows.length}}</p>
+    </div>
+  </div>
 
-<div class="ui blue icon buttons">
-  <button class="ui button"
-          (click)="addRow()"
-          suiPopup
-          popupText="Add a pointing">
-    <i class="plus icon"></i>
-  </button>
-  <button class="ui button"
-          (click)="removeRow()"
-          suiPopup
-          popupText="Remove a pointing">
-    <i class="minus icon"></i>
-  </button>
-  <button class="ui button"
-          suiPopup
-          popupText="Import pointings">
-    <i class="download icon"></i>
-  </button>
-  <button class="ui button"
-          suiPopup
-          popupText="Export current pointings">
-    <i class="upload icon"></i>
-  </button>
-</div>
-
+  <table class="ui celled table"
+         suiPopup
+         popupText="Coordinate offsets for each pointing">
+    <thead>
+      <tr>
+        <th>
+          Head{{radioValue === 'relative' ? ' ['+individualForm.value.offsetUnit+']' : null}}
+        </th>
+        <th>
+          Head{{radioValue === 'relative' ? ' ['+individualForm.value.offsetUnit+']' : null}}
+        </th>
+      </tr>
+    </thead>
+    <tbody formArrayName="rows">
+      <tr *ngFor="let row of rows.controls; let i=index" [formGroupName]="i">
+        <td contenteditable>
+          {{row.value.lon.value}}
+        </td>
+        <td contenteditable>
+          {{row.value.lat.value}}
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2">
+          <div class="ui right floated blue icon buttons">
+            <button class="ui button"
+                    (click)="addRow()"
+                    suiPopup
+                    popupText="Add a pointing">
+              <i class="plus icon"></i>
+            </button>
+            <button class="ui button"
+                    (click)="removeRow()"
+                    suiPopup
+                    popupText="Remove a pointing">
+              <i class="minus icon"></i>
+            </button>
+            <button class="ui button"
+                    suiPopup
+                    popupText="Import pointings">
+              <i class="download icon"></i>
+            </button>
+            <button class="ui button"
+                    suiPopup
+                    popupText="Export current pointings">
+              <i class="upload icon"></i>
+            </button>
+          </div>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</form>
 

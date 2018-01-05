@@ -1,6 +1,4 @@
 import {Component, ViewChild} from '@angular/core';
-import {ScienceGoalPage} from '../shared/classes/science-goal-page';
-import {ScienceGoalIdentifiers} from '../shared/enums/science-goal-identifiers.enum';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
 
@@ -15,7 +13,7 @@ import {VisualisationViewerComponent} from './components/visualisation-viewer/vi
   templateUrl: './spectral-setup.component.html',
   styleUrls: ['./spectral-setup.component.scss']
 })
-export class SpectralSetupComponent extends ScienceGoalPage {
+export class SpectralSetupComponent {
 
   /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
@@ -24,8 +22,8 @@ export class SpectralSetupComponent extends ScienceGoalPage {
    * Constructor
    * @param persistenceService Injected service sent to super class
    */
-  constructor(persistenceService: PersistenceService) {
-    super(persistenceService, ScienceGoalIdentifiers.SPECTRAL_SETUP);
+  constructor(private persistenceService: PersistenceService) {
+
   }
 
   /**

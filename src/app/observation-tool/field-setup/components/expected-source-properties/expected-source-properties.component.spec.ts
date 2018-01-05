@@ -3,23 +3,23 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SuiModule} from 'ng2-semantic-ui';
 import {DelayTooltipDirective} from '../../../shared/directives/delay-tooltip.directive';
 
-import {SourceExpectedPropertiesComponent} from './source-expected-properties.component';
+import {ExpectedSourcePropertiesComponent} from './expected-source-properties.component';
 
 
-describe('SourceExpectedPropertiesComponent', () => {
-  let component: SourceExpectedPropertiesComponent;
-  let fixture: ComponentFixture<SourceExpectedPropertiesComponent>;
+describe('ExpectedSourcePropertiesComponent', () => {
+  let component: ExpectedSourcePropertiesComponent;
+  let fixture: ComponentFixture<ExpectedSourcePropertiesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SourceExpectedPropertiesComponent, DelayTooltipDirective],
+      declarations: [ExpectedSourcePropertiesComponent, DelayTooltipDirective],
       imports: [NgbModule.forRoot(), SuiModule]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture   = TestBed.createComponent(SourceExpectedPropertiesComponent);
+    fixture   = TestBed.createComponent(ExpectedSourcePropertiesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

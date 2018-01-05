@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FovParametersInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/fov-parameters.interface';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * FOV Parameters component
@@ -11,6 +13,17 @@ import {Component} from '@angular/core';
   templateUrl: './fov-parameters.component.html',
   styleUrls: ['./fov-parameters.component.css']
 })
-export class FovParametersComponent {
+export class FovParametersComponent implements OnInit {
+
+  data: FovParametersInterface;
+
+  constructor(private persistenceService: PersistenceService) {
+
+  }
+
+  ngOnInit() {
+    // this.persistenceService.getScienceGoalPageSection(CURRENT_GOAL, 'fieldSetup', 'fovParameters')
+    //   .subscribe(res => this.data = res);
+  }
 
 }

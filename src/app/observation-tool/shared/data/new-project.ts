@@ -52,7 +52,6 @@ export const NEW_PROJECT: ProjectInterface = {
             sourceName: '',
             solarSystemObject: false,
             chosenSolarObject: null,
-            targetType: 'individual',
             chosenSystem: {
               sexagesimalLabels: {
                 latLabel: 'Dec',
@@ -86,6 +85,7 @@ export const NEW_PROJECT: ProjectInterface = {
             },
             fieldCentreCoordinates: {
               coordType: 'relative',
+              targetType: 'individual',
               individual: {
                 offsetUnit: 'arcsec',
                 rows: [

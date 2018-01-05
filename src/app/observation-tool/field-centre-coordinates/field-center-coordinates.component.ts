@@ -58,11 +58,10 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   ngOnInit() {
     this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
         .subscribe(result => {
-          console.log(result.fieldCentreCoordinates);
           const fcc = result.fieldCentreCoordinates;
           this.fieldCentreCoordinatesForm.patchValue({
                                                        coordType: fcc.coordType,
-                                                       targetType: fcc.coordType,
+                                                       targetType: fcc.targetType,
                                                        individual: fcc.individual,
                                                        rectangular: {
                                                          chosenSystem: fcc.rectangular.chosenSystem,

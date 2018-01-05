@@ -9,6 +9,7 @@ import {Longitude} from '../../../../../units/classes/longitude';
 export interface FieldCentreCoordinatesInterface {
   /** The currently chosen coordinates type */
   coordType: string,
+  targetType: string,
   /** Data for if individual component is being used */
   individual: {
     offsetUnit: string,

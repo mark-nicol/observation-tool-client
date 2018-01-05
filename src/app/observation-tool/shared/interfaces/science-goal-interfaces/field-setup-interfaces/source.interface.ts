@@ -15,7 +15,6 @@ export interface SourceInterface {
   sourceName: string,
   solarSystemObject: boolean,
   chosenSolarObject: string,
-  targetType: string,
   chosenSystem: CoordSystemInterface,
   sexagesimalUnits: boolean,
   lat: Latitude,

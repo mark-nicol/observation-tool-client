@@ -5,6 +5,7 @@ import {FieldCentreCoordinatesInterface} from '../../interfaces/science-goal-int
 
 export const FIELD_CENTRE_COORDINATES_DATA: FieldCentreCoordinatesInterface = {
   coordType: 'relative',
+  targetType: 'individual',
   /** Data for if individual component is being used */
   individual: {
     offsetUnit: 'mas',

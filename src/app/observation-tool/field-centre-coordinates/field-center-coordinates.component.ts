@@ -10,6 +10,17 @@ import {PersistenceService} from '../shared/services/persistence.service';
  * Handles the Field Centre Coordinates component in the Field Setup
  */
 
+export interface TableRow {
+  lat: {
+    unit: string,
+    value: number
+  }
+  lon: {
+    unit: string,
+    value: number
+  }
+}
+
 @Component({
              selector: 'field-center-coordinates',
              templateUrl: './field-center-coordinates.component.html',
@@ -20,8 +31,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   /** The page data from the fieldSetupService */
   data: FieldCentreCoordinatesInterface;
   fieldCentreCoordinatesForm: FormGroup;
-  individualForm: FormGroup;
-  rectangularForm: FormGroup;
+  tableRows: any;
 
   /** Field Setup Service to be used in HTML template */
   protected _persistenceService: PersistenceService;
@@ -35,7 +45,10 @@ export class FieldCenterCoordinatesComponent implements OnInit {
     this.fieldCentreCoordinatesForm = formBuilder.group({
                                                           coordType: '',
                                                           targetType: '',
-                                                          individual: formBuilder.group({}),
+                                                          individual: formBuilder.group({
+                                                                                          offsetUnit: '',
+                                                                                          rows: this.formBuilder.array([])
+                                                                                        }),
                                                           rectangular: formBuilder.group({
                                                                                            chosenSystem: '',
                                                                                            sexagesimalUnits: false,
@@ -58,11 +71,14 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   ngOnInit() {
     this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
         .subscribe(result => {
-          const fcc = result.fieldCentreCoordinates;
+          const fcc      = result.fieldCentreCoordinates;
+          this.tableRows = fcc.individual.rows;
           this.fieldCentreCoordinatesForm.patchValue({
                                                        coordType: fcc.coordType,
                                                        targetType: fcc.targetType,
-                                                       individual: fcc.individual,
+                                                       individual: {
+                                                         offsetUnit: fcc.individual.offsetUnit
+                                                       },
                                                        rectangular: {
                                                          chosenSystem: fcc.rectangular.chosenSystem,
                                                          sexagesimalUnits: fcc.rectangular.sexagesimalUnits,
@@ -80,16 +96,8 @@ export class FieldCenterCoordinatesComponent implements OnInit {
                                                          spacingUnits: fcc.rectangular.spacingUnits
                                                        }
                                                      });
+
         })
-  }
-
-
-  /**
-   * Handles changes to the chosen coordinate type, sets new type in page data
-   * @param newCoordType
-   */
-  changeCoordType(newCoordType: string) {
-    this.data.coordType = newCoordType;
   }
 
 }

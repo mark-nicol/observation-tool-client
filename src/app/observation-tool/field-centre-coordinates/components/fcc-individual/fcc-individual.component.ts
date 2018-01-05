@@ -1,19 +1,27 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {TableRow} from '../../field-center-coordinates.component';
 
 /**
  * Individual Field Centre Coordinates component
  */
 
 @Component({
-  selector: 'fcc-individual',
-  templateUrl: './fcc-individual.component.html',
-  styleUrls: ['./fcc-individual.component.scss']
-})
-export class FccIndividualComponent {
+             selector: 'fcc-individual',
+             templateUrl: './fcc-individual.component.html',
+             styleUrls: ['./fcc-individual.component.scss']
+           })
+export class FccIndividualComponent implements OnInit {
 
   /** The selected radio button value from FieldCentreCoordinatesComponent */
-  @Input() radioValue = 'relative';
+  @Input() radioValue;
+
+  @Input('group')
+  individualForm: FormGroup;
+
+  @Input()
+  tableRows: any;
 
   /** Units for the offset selection box */
   offsetUnits = [
@@ -24,35 +32,42 @@ export class FccIndividualComponent {
     'rad'
   ];
 
-  /** ScienceGoalPageInterface data for fields and table rows */
-  data: any;
-
-  /** Field Setup Service to be used in template */
-  protected _persistenceService: PersistenceService;
-
   /**
    * Constructor
    *
    * Sets local _fieldSetupService from injected and retrieves page data from service
    * @param persistenceService The injected service
+   * @param formBuilder
    */
-  constructor(private persistenceService: PersistenceService) {
-    this._persistenceService = persistenceService;
-    // this.persistenceService.getSource(0, 0).subscribe(res => this.data = res.fieldCentreCoordinates.individual);
+  constructor(private persistenceService: PersistenceService,
+              private formBuilder: FormBuilder) {
+  }
+
+  ngOnInit() {
+    this.setRows(this.tableRows);
+  }
+
+  setRows(rows: TableRow[]) {
+    const rowFormGroups = rows.map(tableRow => this.formBuilder.group(tableRow));
+    const rowFormArray  = this.formBuilder.array(rowFormGroups);
+    this.individualForm.setControl('rows', rowFormArray);
+  }
+
+  get rows(): FormArray {
+    console.log(this.individualForm.get('rows') as FormArray);
+    return this.individualForm.get('rows') as FormArray;
   }
 
   /**
    * Adds a new row to the page data
    */
   addRow() {
-    this.data.rows.push({lat: '0', lon: '0'});
   }
 
   /**
    * Removes the last row from the page data
    */
   removeRow() {
-    this.data.rows.pop();
   }
 
   /**

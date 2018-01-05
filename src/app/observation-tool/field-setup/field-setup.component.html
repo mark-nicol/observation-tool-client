@@ -1,19 +1,14 @@
 <div class="ui internally celled two column stackable grid">
   <div class="six wide column">
-    <h4 class="ui dividing header">Spacial Image</h4>
     <spacial-image></spacial-image>
-    <h4 class="ui dividing header">FOV Parameters</h4>
     <fov-parameters></fov-parameters>
-    <h4 class="ui dividing header">Image Query</h4>
     <image-query></image-query>
   </div>
   <div class="ten wide column">
-    <h4 class="ui dividing header">Source</h4>
     <field-source (tableHeaderEmitter)="setHeaders($event)"
                   (targetTypeEmitter)="setTargetType($event)"></field-source>
-    <h4 class="ui dividing header">Expected Source Properties</h4>
+
     <source-expected-properties></source-expected-properties>
-    <h4 class="ui dividing header">Field Centre Coordinates</h4>
     <field-center-coordinates></field-center-coordinates>
   </div>
 </div>

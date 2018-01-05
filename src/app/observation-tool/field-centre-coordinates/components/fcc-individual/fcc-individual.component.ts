@@ -54,7 +54,6 @@ export class FccIndividualComponent implements OnInit {
   }
 
   get rows(): FormArray {
-    console.log(this.individualForm.get('rows') as FormArray);
     return this.individualForm.get('rows') as FormArray;
   }
 

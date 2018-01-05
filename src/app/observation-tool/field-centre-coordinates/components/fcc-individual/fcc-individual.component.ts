@@ -62,6 +62,7 @@ export class FccIndividualComponent implements OnInit {
    * Adds a new row to the page data
    */
   addRow() {
+    this.rows.push(this.formBuilder.group(new TableRow()));
   }
 
   /**

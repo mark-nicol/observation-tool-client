@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Latitude} from '../../units/classes/latitude';
+import {Longitude} from '../../units/classes/longitude';
 import {CURRENT_PROJECT} from '../shared/data/current-project';
 import {CURRENT_SCIENCE_GOAL} from '../shared/data/current-science-goal';
 import {CURRENT_SOURCE} from '../shared/data/current-source';
@@ -10,14 +12,13 @@ import {PersistenceService} from '../shared/services/persistence.service';
  * Handles the Field Centre Coordinates component in the Field Setup
  */
 
-export interface TableRow {
-  lat: {
-    unit: string,
-    value: number
-  }
-  lon: {
-    unit: string,
-    value: number
+export class TableRow {
+  lat: Latitude;
+  lon: Longitude;
+
+  constructor() {
+    this.lat = new Latitude();
+    this.lon = new Longitude();
   }
 }
 

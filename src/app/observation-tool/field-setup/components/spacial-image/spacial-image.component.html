@@ -1,5 +1,6 @@
 <h4 class="ui dividing header">Spacial Image</h4>
-<div class="ui center aligned grid">
+<div class="ui center aligned grid"
+     style="padding-bottom: 1em">
   <div class="row">
     <img src="../../../../../assets/img/field_placeholder.png">
   </div>
@@ -7,23 +8,43 @@
     <div class="ui blue icon buttons">
       <button class="ui button"
               suiPopup
+              popupText="Zoom in">
+        <i class="zoom icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Zoom out">
+        <i class="zoom out icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Zoom to fit the window">
+        <i class="window maximize icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Normal zoom">
+        <i class="window restore icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
               popupText="Open a FITS file">
-        <i class="fa fa-folder-open-o"></i>
+        <i class="folder open icon"></i>
       </button>
       <button class="ui button"
               suiPopup
               popupText="Save image as..">
-        <i class="fa fa-save"></i>
+        <i class="save icon"></i>
       </button>
       <button class="ui button"
               suiPopup
               popupText="Cut selected FOVs">
-        <i class="fa fa-cut"></i>
+        <i class="cut icon"></i>
       </button>
       <button class="ui button"
               suiPopup
               popupText="Select FOVs in a rectangle region">
-        <i class="fa fa-square-o"></i>
+        <i class="add square icon"></i>
       </button>
       <button class="ui button"
               suiPopup
@@ -40,33 +61,14 @@
               popupText="Image cut levels">
         <i class="fa fa-area-chart"></i>
       </button>
-    </div>
-    <div class="ui blue icon buttons">
-      <button class="ui button"
-              ngbTooltip="Zoom in"
-              #zoomInButtonTooltip="ngbTooltip"
-              [tooltip-delay]="zoomInButtonTooltip">
-        <i class="fa fa-search-plus"></i>
-      </button>
       <button class="ui button"
               suiPopup
-              popupText="Zoom out">
-        <i class="fa fa-search-minus"></i>
-      </button>
-      <button class="ui button"
-              suiPopup
-              popupText="Zoom to fit the window">
-        <i class="fa fa-square-o"></i>
-      </button>
-      <button class="ui button"
-              suiPopup
-              popupText="Normal zoom">
-        <i class="fa fa-search"></i>
+              popupText="Show/Hide grid">
+        <i class="grid layout icon"></i>
       </button>
     </div>
   </div>
 </div>
-
 <div class="ui form">
   <div class="three fields">
     <div class="field"
@@ -76,14 +78,14 @@
              style="text-align: center">
     </div>
     <div class="field"
-    suiPopup
-    popupText="Image pixel coordinates at mouse position">
+         suiPopup
+         popupText="Image pixel coordinates at mouse position">
       <input placeholder="432, 276"
              style="text-align: center">
     </div>
     <div class="field"
-    suiPopup
-    popupText="Image pixel value at mouse position">
+         suiPopup
+         popupText="Image pixel value at mouse position">
       <input placeholder="0.0"
              style="text-align: center">
     </div>
@@ -94,5 +96,4 @@
     <input id="filenameNote">
   </div>
 </div>
-
-
+<div style="height: 1em"></div>

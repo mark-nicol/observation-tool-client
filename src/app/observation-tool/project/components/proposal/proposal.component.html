@@ -110,16 +110,13 @@
       <tfoot>
         <tr>
           <th colspan="6">
-            <div class="ui tiny compact right floated buttons">
-              <button class="ui blue button"
-                [disabled]="proposal[proposalType] === 'regular' || proposal[proposalType] === 'opportunity'">
-                Add CoPI
-              </button>
-              <button class="ui blue button">Add Col</button>
-              <button class="ui red button">Remove Collaborator</button>
+            <div class="ui right floated tiny compact icon buttons">
+              <button class="ui blue button"><i class="add user icon"></i> Select PI</button>
+              <button class="ui blue button"><i class="add user icon"></i> Add CoPI</button>
+              <button class="ui blue button"><i class="add user icon"></i> Add Collaborator</button>
+              <button class="ui red button"><i class="remove user icon"></i> Remove Collaborator</button>
+              <button class="ui basic blue button"><i class="file icon"></i> Add from Proposal</button>
             </div>
-            <button class="ui tiny compact right floated blue button">Add from Proposal</button>
-            <button class="ui tiny compact right floated blue button">Select PI</button>
           </th>
         </tr>
       </tfoot>
@@ -127,13 +124,17 @@
   </div>
   <div class="ui segment">
     <h4 class="ui dividing header">Science Case (Mandatory, PDF, 4 pages max.)</h4>
-    <div class="ui fluid mini action input">
+    <div class="field">
       <input title="science case input" type="text">
-      <button class="ui tiny blue button">Attach</button>
-      <button class="ui tiny basic blue button">View</button>
-      <button class="ui tiny red button">Detach</button>
     </div>
-    <p>PDF, 4 pages max.</p>
+    <div class="field">
+      <div class="ui right floated tiny compact icon buttons">
+        <button class="ui blue button"><i class="attach icon"></i> Attach</button>
+        <button class="ui red button"><i class="remove icon"></i> Detach</button>
+        <button class="ui basic blue button"><i class="unhide icon"></i> View</button>
+      </div>
+    </div>
+    <div style="height: 2em"></div>
   </div>
   <div class="ui segment">
     <h4 class="ui dividing header">Duplicate Observations</h4>

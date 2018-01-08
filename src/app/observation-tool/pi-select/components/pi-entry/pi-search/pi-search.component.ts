@@ -1,15 +1,17 @@
 import {Component, OnInit} from '@angular/core';
+import {SuiModalService} from 'ng2-semantic-ui';
 import {AlmaInvestigatorInterface} from '../../../../shared/interfaces/alma-investigator.interface';
+import {PiSelectModal} from '../modal/modal.component';
 
 /**
  * Initial PI search component
  */
 
 @Component({
-  selector: 'app-pi-search',
-  templateUrl: './pi-search.component.html',
-  styleUrls: ['./pi-search.component.css']
-})
+             selector: 'app-pi-search',
+             templateUrl: './pi-search.component.html',
+             styleUrls: ['./pi-search.component.css']
+           })
 
 export class PiSearchComponent implements OnInit {
 
@@ -19,6 +21,10 @@ export class PiSearchComponent implements OnInit {
   /** The chosen PI passed back from piSelect */
   passedPi: AlmaInvestigatorInterface;
 
+  constructor(private suiModalService: SuiModalService) {
+
+  }
+
   /**
    * Checks for a chosen PI in session storage and sets if available
    */
@@ -26,5 +32,12 @@ export class PiSearchComponent implements OnInit {
     if (sessionStorage['selectedPi']) {
       this.passedPi = JSON.parse(sessionStorage.getItem('selectedPi'));
     }
+  }
+
+  makeModal() {
+    this.suiModalService
+      .open(new PiSelectModal('Hi', 'hello'))
+      .onApprove(() => alert('Approve'))
+      .onDeny(() => alert('deny'));
   }
 }

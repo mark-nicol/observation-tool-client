@@ -24,7 +24,7 @@ export class AlmaInvestigatorSearchModalComponent {
   constructor(public modal: SuiModal<ModalContext>,
               private almaInvestigatorSearchService: AlmaInvestigatorSearchService) {
     console.log(this.modal.context.name);
-    this.searchResults = this.almaInvestigatorSearchService.newSearch('Name', this.modal.context.name);
+    this.searchResults = this.almaInvestigatorSearchService.search('Name', this.modal.context.name);
   }
 
 }
@@ -40,5 +40,6 @@ export class AlmaInvestigatorSearchModal extends ComponentModalConfig<ModalConte
     this.transitionDuration = 200;
     this.size               = size;
     this.isInverted         = true;
+    this.mustScroll         = true;
   }
 }

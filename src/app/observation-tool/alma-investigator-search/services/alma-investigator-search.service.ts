@@ -30,16 +30,6 @@ export class AlmaInvestigatorSearchService {
   }
 
   /**
-   * Start a new search, resets the search params
-   * @param searchVariant The category to search in
-   * @param searchStrings The terms to search for
-   */
-  newSearch(searchVariant: string, searchStrings: string): Observable<AlmaInvestigatorInterface[]> {
-    this.searchParams = new URLSearchParams();
-    return this.search(searchVariant, searchStrings);
-  }
-
-  /**
    * Search or refine the ALMA user lookup
    * @param searchVariant The category to search in
    * @param searchStrings The terms to search for

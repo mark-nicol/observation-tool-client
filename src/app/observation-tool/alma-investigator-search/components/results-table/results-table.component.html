@@ -8,8 +8,9 @@
       <th>Affiliation</th>
     </tr>
   </thead>
-  <tr *ngFor="let pi of searchResults"
-      (click)="rowClick(pi)">
+  <tr *ngFor="let pi of testResults"
+      (click)="rowClick(pi)"
+      [class.active]="pi === selectedPi">
     <td>{{pi.uid}}</td>
     <td>{{pi.fullName}}</td>
     <td>{{pi.email}}</td>

@@ -34,10 +34,17 @@ export class PiSearchComponent implements OnInit {
     }
   }
 
+  newPi() {
+    if (sessionStorage['selectedPi']) {
+      this.passedPi = JSON.parse(sessionStorage.getItem('selectedPi'));
+    }
+  }
+
   makeModal() {
     this.suiModalService
         .open(new AlmaInvestigatorSearchModal())
-        .onApprove(() => alert('Approve'))
-        .onDeny(() => alert('deny'));
+        .onApprove(() => this.newPi())
+        .onDeny(() => {
+        });
   }
 }

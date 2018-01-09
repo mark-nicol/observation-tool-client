@@ -40,9 +40,9 @@ export class PiSearchComponent implements OnInit {
     }
   }
 
-  makeModal() {
+  makeModal(piName: string) {
     this.suiModalService
-        .open(new AlmaInvestigatorSearchModal())
+        .open(new AlmaInvestigatorSearchModal(piName))
         .onApprove(() => this.newPi())
         .onDeny(() => {
         });

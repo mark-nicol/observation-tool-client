@@ -1,5 +1,5 @@
 <p></p>
-<table class="ui selectable table">
+<table class="ui compact selectable celled table">
   <thead>
     <tr>
       <th>ALMA ID</th>
@@ -8,12 +8,14 @@
       <th>Affiliation</th>
     </tr>
   </thead>
-  <tr *ngFor="let pi of testResults"
-      (click)="rowClick(pi)"
-      [class.active]="pi === selectedPi">
-    <td>{{pi.uid}}</td>
-    <td>{{pi.fullName}}</td>
-    <td>{{pi.email}}</td>
-    <td>{{pi.affiliation}}</td>
-  </tr>
+  <tbody style="width: 100%; height: 3em; overflow: scroll">
+    <tr *ngFor="let pi of searchResults | async"
+        (click)="rowClick(pi)"
+        [class.active]="pi === selectedPi">
+      <td>{{pi.uid}}</td>
+      <td>{{pi.fullName}}</td>
+      <td>{{pi.email}}</td>
+      <td>{{pi.affiliation}}</td>
+    </tr>
+  </tbody>
 </table>

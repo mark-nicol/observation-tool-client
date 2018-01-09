@@ -4,9 +4,8 @@
          id="pi-search-txt-box"
          type="text"
          (keyup)="0"
-         placeholder="this.INPUT_PLACEHOLDER"
-         value="{{this.passedPi ? this.passedPi.fullName : null}}"
-         readonly>
+         placeholder="{{this.INPUT_PLACEHOLDER}}"
+         value="{{this.passedPi ? this.passedPi.fullName : null}}">
   <button class="ui blue labeled icon button"
-          (click)="makeModal()"><i class="add user icon"></i> Select PI</button>
+          (click)="makeModal(piSearchInput.value)"><i class="add user icon"></i> Select PI</button>
 </div>

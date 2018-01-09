@@ -19,31 +19,6 @@ export class ResultsTableComponent {
   /** Search results from PI search */
   @Input() searchResults: Observable<AlmaInvestigatorInterface[]>;
 
-  testResults = [
-    {
-      uid: '123ABC',
-      firstName: 'Jason',
-      lastName: 'Bloggs',
-      fullName: 'Jason Bloggs',
-      email: 'j.bloggs@test.com',
-      affiliation: 'JB University',
-      affiliationId: 1,
-      telephone: '123',
-      executive: '?',
-    },
-    {
-      uid: '456DEF',
-      firstName: 'Henry',
-      lastName: 'Dilmand',
-      fullName: 'Henry Dilmand',
-      email: 'h.dilmand@test.com',
-      affiliation: 'JB University',
-      affiliationId: 1,
-      telephone: '456',
-      executive: '?',
-    }
-  ];
-
   /** The clicked PI in the table, used for highlighting */
   selectedPi: AlmaInvestigatorInterface;
 

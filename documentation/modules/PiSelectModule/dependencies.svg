@@ -166,13 +166,13 @@
 <path fill="none" stroke="#000000" d="M331,-122.1289C331,-142.5724 331,-173 331,-173 331,-173 838.1428,-173 838.1428,-173"/>
 <polygon fill="#000000" stroke="#000000" points="838.1428,-176.5001 848.1428,-173 838.1428,-169.5001 838.1428,-176.5001"/>
 </g>
-<!-- PrimaryInvestigatorService -->
+<!-- AlmaInvestigatorSearchService -->
 <g id="node12" class="node">
 <title>PrimaryInvestigatorService</title>
 <ellipse fill="#fdb462" stroke="#000000" cx="141" cy="-104" rx="117.449" ry="18"/>
 <text text-anchor="middle" x="141" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">PrimaryInvestigatorService</text>
 </g>
-<!-- PrimaryInvestigatorService&#45;&gt;PiSearchModule -->
+<!-- AlmaInvestigatorSearchService&#45;&gt;PiSearchModule -->
 <g id="edge11" class="edge">
 <title>PrimaryInvestigatorService&#45;&gt;PiSelectModule</title>
 <path fill="none" stroke="#000000" d="M141,-122.0109C141,-144.4852 141,-180 141,-180 141,-180 838.1617,-180 838.1617,-180"/>

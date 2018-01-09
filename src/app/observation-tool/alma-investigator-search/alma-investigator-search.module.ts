@@ -15,7 +15,7 @@ import {ResultsTableComponent} from './components/results-table/results-table.co
               RefinePanelComponent,
               ResultsTableComponent
             ],
-            providers: [],
+            providers: [HttpClientModule],
             exports: [],
             entryComponents: [AlmaInvestigatorSearchModalComponent]
           })

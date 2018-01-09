@@ -1,35 +1,26 @@
 <h4 class="ui dividing header">Search Constraints</h4>
-<div class="ui grid">
-  <div class="one column row">
-    <div class="column">
-      <div class="ui form">
-        <div class="three fields">
-          <div class="field">
-            <sui-select #refineSelector
-                        class="selection">
-              <sui-select-option value="name">Name</sui-select-option>
-              <sui-select-option value="email">Email</sui-select-option>
-              <sui-select-option value="affiliation">Affiliation</sui-select-option>
-              <sui-select-option value="uid">ALMA ID</sui-select-option>
-            </sui-select>
-          </div>
-          <div class="field">
-            <h5>Contains</h5>
-          </div>
-          <div class="field">
-            <input type="text"
-                   #refineInput>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="two column row">
-    <div class="right floated column">
-      <button (click)="refineClick(refineSelector.value, refineInput.value)" class="ui right floated blue button">
-        Find Investigator
-      </button>
-    </div>
+<div class="ui form">
+  <div class="inline field">
+    <sui-select #refineSelector
+                class="selection">
+      <sui-select-option value="name">Name</sui-select-option>
+      <sui-select-option value="email">Email</sui-select-option>
+      <sui-select-option value="affiliation">Affiliation</sui-select-option>
+      <sui-select-option value="uid">ALMA ID</sui-select-option>
+    </sui-select>
+
+    <label>contains</label>
+
+    <input type="text"
+           #refineInput>
   </div>
 </div>
+
+
+<button class="ui tiny compact right floated blue labeled icon button"
+        (click)="refineClick(refineSelector.value, refineInput.value)">
+  <i class="search icon"></i>
+  Find Investigator
+</button>
+
 

@@ -4,6 +4,8 @@
   <app-results-table></app-results-table>
 </div>
 <div class="actions">
-  <button class="ui blue button" (click)="modal.approve()">Approve</button>
-  <button class="ui red button" (click)="modal.deny()">Deny</button>
+  <button class="ui tiny compact blue labeled icon button"
+          (click)="modal.approve()"><i class="add user icon"></i> Select Investigator</button>
+  <button class="ui tiny compact red  labeled icon button" (click)="modal.deny()"><i class="remove icon"></i> Cancel
+  </button>
 </div>

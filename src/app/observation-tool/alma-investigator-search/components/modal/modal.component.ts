@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {ComponentModalConfig, ModalSize, SuiModal} from 'ng2-semantic-ui';
-import {Observable} from 'rxjs/Observable';
 import {AlmaInvestigatorInterface} from '../../../shared/interfaces/alma-investigator.interface';
 import {AlmaInvestigatorSearchService} from '../../services/alma-investigator-search.service';
 
@@ -19,12 +18,18 @@ interface ModalContext {
 
 export class AlmaInvestigatorSearchModalComponent {
 
-  searchResults: Observable<AlmaInvestigatorInterface[]>;
+  searchResults: AlmaInvestigatorInterface[];
+  isSearching = false;
 
   constructor(public modal: SuiModal<ModalContext>,
               private almaInvestigatorSearchService: AlmaInvestigatorSearchService) {
-    console.log(this.modal.context.name);
-    this.searchResults = this.almaInvestigatorSearchService.search('Name', this.modal.context.name);
+    this.isSearching = true;
+    this.almaInvestigatorSearchService.search('Name', this.modal.context.name)
+        .subscribe(
+          results => this.searchResults = results,
+          () => {
+          },
+          () => this.isSearching = false);
   }
 
 }

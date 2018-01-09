@@ -2,25 +2,27 @@
 <div class="ui form">
   <div class="inline field">
     <sui-select #refineSelector
-                class="selection">
-      <sui-select-option value="name">Name</sui-select-option>
-      <sui-select-option value="email">Email</sui-select-option>
-      <sui-select-option value="affiliation">Affiliation</sui-select-option>
-      <sui-select-option value="uid">ALMA ID</sui-select-option>
+                class="selection"
+                [(ngModel)]="searchType">
+      <sui-select-option value="Name">Name</sui-select-option>
+      <sui-select-option value="Email">Email</sui-select-option>
+      <sui-select-option value="ALMA ID">ALMA ID</sui-select-option>
     </sui-select>
 
     <label>contains</label>
 
     <input type="text"
-           #refineInput>
+           title="refine input box"
+           value="{{name}}">
   </div>
 </div>
 
 
 <button class="ui tiny compact right floated blue labeled icon button"
-        (click)="refineClick(refineSelector.value, refineInput.value)">
+        (click)="refineClick()">
   <i class="search icon"></i>
   Find Investigator
 </button>
+<p></p>
 
 

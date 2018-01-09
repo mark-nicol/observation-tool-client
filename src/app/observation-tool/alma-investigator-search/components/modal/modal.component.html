@@ -1,6 +1,10 @@
+<div class="ui inverted dimmer"
+     [class.active]="isSearching">
+  <div class="ui text loader">Searching...</div>
+</div>
 <div class="header">{{modal.context.title}}</div>
 <div class="content">
-  <app-refine-panel></app-refine-panel>
+  <app-refine-panel [name]="this.modal.context.name"></app-refine-panel>
   <app-results-table [searchResults]="searchResults"></app-results-table>
 </div>
 <div class="actions">

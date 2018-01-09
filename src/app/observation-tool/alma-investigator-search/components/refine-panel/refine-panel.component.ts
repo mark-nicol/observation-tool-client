@@ -17,6 +17,8 @@ export class RefinePanelComponent {
   /** Emits chosen search parameters */
   @Output() refineSearch = new EventEmitter<string[]>();
 
+  searchType = 'Name';
+
   /**
    * Called when refine button is clicked, emits the search parameters
    * @param searchVariant The type of search to be made

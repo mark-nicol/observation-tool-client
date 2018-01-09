@@ -1,4 +1,3 @@
-<p></p>
 <table class="ui compact selectable celled table">
   <thead>
     <tr>
@@ -8,8 +7,8 @@
       <th>Affiliation</th>
     </tr>
   </thead>
-  <tbody style="width: 100%; height: 3em; overflow: scroll">
-    <tr *ngFor="let pi of searchResults | async"
+  <tbody style="width: 100%; height: 20em; overflow: scroll">
+    <tr *ngFor="let pi of searchResults"
         (click)="rowClick(pi)"
         [class.active]="pi === selectedPi">
       <td>{{pi.uid}}</td>

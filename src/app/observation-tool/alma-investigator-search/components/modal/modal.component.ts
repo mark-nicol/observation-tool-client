@@ -12,16 +12,16 @@ interface ModalContext {
              styleUrls: ['./modal.component.css']
            })
 
-export class AlmaPrimaryInvestigatorSelectModalComponent {
+export class AlmaInvestigatorSearchModalComponent {
 
   constructor(public modal: SuiModal<ModalContext>) {
   }
 
 }
 
-export class AlmaPrimaryInvestigatorSelectModal extends ComponentModalConfig<ModalContext, void, void> {
-  constructor(title: string, question: string, size = ModalSize.Large) {
-    super(AlmaPrimaryInvestigatorSelectModalComponent, {title, question});
+export class AlmaInvestigatorSearchModal extends ComponentModalConfig<ModalContext, void, void> {
+  constructor(title = 'Investigator Search', question = '', size = ModalSize.Large) {
+    super(AlmaInvestigatorSearchModalComponent, {title, question});
     this.isClosable         = false;
     this.transitionDuration = 200;
     this.size               = size;

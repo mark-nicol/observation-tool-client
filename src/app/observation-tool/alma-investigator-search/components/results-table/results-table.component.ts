@@ -20,7 +20,7 @@ export class ResultsTableComponent {
   @Input() searchResults: Observable<AlmaInvestigatorInterface[]>;
 
   /** The clicked PI in the table, used for highlighting */
-  selectedPi: AlmaInvestigatorInterface;
+  // selectedPi: AlmaInvestigatorInterface;
 
   constructor() {
   }
@@ -30,8 +30,8 @@ export class ResultsTableComponent {
    * @param pi The clicked PI
    */
   rowClick(pi: AlmaInvestigatorInterface) {
-    this.selectedPi = this.selectedPi === pi ? null : pi;
-    sessionStorage.setItem('selectedPi', JSON.stringify(this.selectedPi));
+    // this.selectedPi = this.selectedPi === pi ? null : pi;
+    // sessionStorage.setItem('selectedPi', JSON.stringify(this.selectedPi));
   }
 
 }

@@ -12,20 +12,19 @@ interface ModalContext {
              styleUrls: ['./modal.component.css']
            })
 
-export class ModalComponent {
+export class AlmaPrimaryInvestigatorSelectModalComponent {
 
   constructor(public modal: SuiModal<ModalContext>) {
   }
 
 }
 
-
-export class PiSelectModal extends ComponentModalConfig<ModalContext, void, void> {
+export class AlmaPrimaryInvestigatorSelectModal extends ComponentModalConfig<ModalContext, void, void> {
   constructor(title: string, question: string, size = ModalSize.Large) {
-    super(ModalComponent, {title, question});
-    this.isClosable = false;
+    super(AlmaPrimaryInvestigatorSelectModalComponent, {title, question});
+    this.isClosable         = false;
     this.transitionDuration = 200;
-    this.size = size;
-    this.isInverted = true;
+    this.size               = size;
+    this.isInverted         = true;
   }
 }

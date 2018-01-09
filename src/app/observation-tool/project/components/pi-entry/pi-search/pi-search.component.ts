@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {AlmaInvestigatorInterface} from '../../../../shared/interfaces/alma-investigator.interface';
-import {PiSelectModal} from '../modal/modal.component';
 
 /**
  * Initial PI search component
@@ -34,10 +33,10 @@ export class PiSearchComponent implements OnInit {
     }
   }
 
-  makeModal() {
-    this.suiModalService
-      .open(new PiSelectModal('Hi', 'hello'))
-      .onApprove(() => alert('Approve'))
-      .onDeny(() => alert('deny'));
-  }
+  // makeModal() {
+  //   this.suiModalService
+  //       .open(new PiSelectModal('Hi', 'hello'))
+  //       .onApprove(() => alert('Approve'))
+  //       .onDeny(() => alert('deny'));
+  // }
 }

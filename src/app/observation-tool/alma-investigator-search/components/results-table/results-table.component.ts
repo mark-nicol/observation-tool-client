@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {AlmaInvestigatorInterface} from '../../../../shared/interfaces/alma-investigator.interface'
+import {AlmaInvestigatorInterface} from '../../../shared/interfaces/alma-investigator.interface';
 
 /**
  * Results table component.

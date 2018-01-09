@@ -18,6 +18,8 @@ export class PrimaryInvestigatorService {
 
   /**
    * Sets search params to new
+   *
+   * TODO Change to HttpClient
    * @param http Injected Http service
    */
   constructor(private http: Http) {

@@ -114,13 +114,13 @@
 <path fill="none" stroke="#000000" d="M375,-122.027C375,-138.3976 375,-160 375,-160 375,-160 447.0965,-160 447.0965,-160"/>
 <polygon fill="#000000" stroke="#000000" points="447.0965,-163.5001 457.0965,-160 447.0964,-156.5001 447.0965,-163.5001"/>
 </g>
-<!-- PiSelectModule -->
+<!-- PiSearchModule -->
 <g id="node7" class="node">
 <title>PiSelectModule</title>
 <polygon fill="#8dd3c7" stroke="#000000" points="291.9315,-122 288.9315,-126 267.9315,-126 264.9315,-122 186.0685,-122 186.0685,-86 291.9315,-86 291.9315,-122"/>
 <text text-anchor="middle" x="239" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">PiSelectModule</text>
 </g>
-<!-- PiSelectModule&#45;&gt;ProjectModule -->
+<!-- PiSearchModule&#45;&gt;ProjectModule -->
 <g id="edge6" class="edge">
 <title>PiSelectModule&#45;&gt;ProjectModule</title>
 <path fill="none" stroke="#000000" d="M239,-122.1061C239,-141.3391 239,-169 239,-169 239,-169 447.2193,-169 447.2193,-169"/>

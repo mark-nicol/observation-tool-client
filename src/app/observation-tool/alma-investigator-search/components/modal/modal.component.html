@@ -4,7 +4,9 @@
 </div>
 <div class="header">{{modal.context.title}}</div>
 <div class="content">
-  <app-refine-panel [name]="this.modal.context.name"></app-refine-panel>
+  <app-refine-panel [name]="this.modal.context.name"
+                    (refineSearch)="search($event[0], $event[1])"></app-refine-panel>
+  <h4>No Results</h4>
   <app-results-table [searchResults]="searchResults"></app-results-table>
 </div>
 <div class="actions">

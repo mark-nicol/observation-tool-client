@@ -1,10 +1,8 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, URLSearchParams} from '@angular/http';
+import {URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import {Observable} from 'rxjs/Observable';
-import {AlmaInvestigatorInterface} from '../../shared/interfaces/alma-investigator.interface';
 
 /**
  * Service to retrieve primary investigators from the ALMA user lookup

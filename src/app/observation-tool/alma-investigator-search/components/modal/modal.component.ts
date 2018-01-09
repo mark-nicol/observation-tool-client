@@ -6,7 +6,6 @@ import {AlmaInvestigatorSearchService} from '../../services/alma-investigator-se
 interface ModalContext {
   name: string;
   title: string;
-  question: string;
 }
 
 @Component({
@@ -23,11 +22,20 @@ export class AlmaInvestigatorSearchModalComponent {
 
   constructor(public modal: SuiModal<ModalContext>,
               private almaInvestigatorSearchService: AlmaInvestigatorSearchService) {
+    this.search('Name', this.modal.context.name);
+  }
+
+  search(searchType, searchString) {
+    if (searchType === 'ALMA ID') {
+      searchType = 'Uid';
+    }
     this.isSearching = true;
-    this.almaInvestigatorSearchService.search('Name', this.modal.context.name)
+    this.almaInvestigatorSearchService.search(searchType, searchString)
         .subscribe(
           results => this.searchResults = results,
-          () => {
+          error => {
+            this.isSearching = false;
+            console.log(error);
           },
           () => this.isSearching = false);
   }
@@ -38,13 +46,13 @@ export class AlmaInvestigatorSearchModal extends ComponentModalConfig<ModalConte
 
   constructor(name?,
               title    = 'Investigator Search',
-              question = '',
               size     = ModalSize.Large) {
-    super(AlmaInvestigatorSearchModalComponent, {name, title, question});
+    super(AlmaInvestigatorSearchModalComponent, {name, title});
     this.isClosable         = false;
     this.transitionDuration = 200;
     this.size               = size;
     this.isInverted         = true;
     this.mustScroll         = true;
+    this.isClosable         = true;
   }
 }

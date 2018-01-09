@@ -9,11 +9,11 @@
       <sui-select-option value="ALMA ID">ALMA ID</sui-select-option>
     </sui-select>
 
-    <label>contains</label>
+    <label>{{searchType === 'ALMA ID' ? 'is' : 'contains'}}</label>
 
     <input type="text"
            title="refine input box"
-           value="{{name}}">
+           [(ngModel)]="searchString">
   </div>
 </div>
 

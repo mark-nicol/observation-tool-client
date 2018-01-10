@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {TableRow} from '../../field-center-coordinates.component';
 
@@ -18,10 +18,13 @@ export class FccIndividualComponent implements OnInit {
   @Input() radioValue;
 
   @Input('group')
-  individualForm: FormGroup;
+  individualForm = new FormGroup({
+                                   offsetUnit: new FormControl(),
+                                   rows: new FormArray([])
+                                 });
 
   @Input()
-  tableRows: any;
+  tableRows = [];
 
   /** Units for the offset selection box */
   offsetUnits = [

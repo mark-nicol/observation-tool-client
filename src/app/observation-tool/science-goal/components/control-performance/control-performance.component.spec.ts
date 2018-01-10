@@ -1,4 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SuiModule} from 'ng2-semantic-ui';
 
 import {ControlPerformanceComponent} from './control-performance.component';
 
@@ -8,7 +10,14 @@ describe('ControlPerformanceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ControlPerformanceComponent]
+      declarations: [
+        ControlPerformanceComponent
+      ],
+      imports: [
+        ReactiveFormsModule,
+        FormsModule,
+        SuiModule
+      ]
     })
       .compileComponents();
   }));

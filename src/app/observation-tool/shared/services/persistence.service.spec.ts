@@ -1,3 +1,4 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {inject, TestBed} from '@angular/core/testing';
 
 import {PersistenceService} from './persistence.service';
@@ -5,7 +6,12 @@ import {PersistenceService} from './persistence.service';
 describe('PersistenceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PersistenceService]
+      imports: [
+        HttpClientTestingModule
+      ],
+      providers: [
+        PersistenceService
+      ]
     });
   });
 

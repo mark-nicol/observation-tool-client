@@ -1,5 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
+import {SuiModule} from 'ng2-semantic-ui';
+import {ToastModule} from 'ng2-toastr';
 
 import {PiSearchComponent} from './pi-search.component';
 
@@ -9,8 +11,17 @@ describe('PiSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [PiSearchComponent]
+      imports: [
+        RouterTestingModule,
+        SuiModule,
+        ToastModule.forRoot()
+      ],
+      declarations: [
+        PiSearchComponent
+      ],
+      providers: [
+
+      ]
     })
       .compileComponents();
   }));

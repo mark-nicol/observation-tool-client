@@ -1,7 +1,8 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ReactiveFormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
-import {DelayTooltipDirective} from '../../../shared/directives/delay-tooltip.directive';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 import {ExpectedSourcePropertiesComponent} from './expected-source-properties.component';
 
@@ -12,10 +13,19 @@ describe('ExpectedSourcePropertiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ExpectedSourcePropertiesComponent, DelayTooltipDirective],
-      imports: [NgbModule.forRoot(), SuiModule]
-    })
-      .compileComponents();
+                                     declarations: [
+                                       ExpectedSourcePropertiesComponent
+                                     ],
+                                     imports: [
+                                       ReactiveFormsModule,
+                                       SuiModule,
+                                       HttpClientTestingModule
+                                     ],
+                                     providers: [
+                                       PersistenceService
+                                     ]
+                                   })
+           .compileComponents();
   }));
 
   beforeEach(() => {

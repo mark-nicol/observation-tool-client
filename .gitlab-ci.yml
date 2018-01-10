@@ -6,6 +6,15 @@ image: node:latest
 #        # - ./ci/install-browsers
 #        - npm install
 
+before_script:
+    # make sure autoInstall is enabled.
+    - "grep -q '\"autoInstall\": true' semantic.json"
+    # make sure version is not specified.
+    - "! grep -q '\"version\":' semantic.json"
+    - npm install -g gulp
+    - npm install semantic-ui --save
+
+
 cache:
     paths:
         - node_modules/

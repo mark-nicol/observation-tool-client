@@ -12,3 +12,4 @@ apt-get install -y google-chrome-stable
 
 # Install Virtual Display emulator
 apt-get install -y xvfb
+

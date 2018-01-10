@@ -1,10 +1,8 @@
 image: node:latest
 
-#before-script:
-#    script:
-#        # - chmod +x ci/install-browsers
-#        # - ./ci/install-browsers
-#        - npm install
+before_script:
+    - chmod +x ci/install-browsers
+    - ./ci/install-browsers
 
 cache:
     paths:
@@ -13,5 +11,5 @@ cache:
 test:
     script:
         - npm install
-        - ./node_modules/@angular/cli/bin/ng test --browser=PhantomJS --single-run=true --watch=false
+        - ./node_modules/@angular/cli/bin/ng test --browser=Chrome --single-run=true --watch=false
 

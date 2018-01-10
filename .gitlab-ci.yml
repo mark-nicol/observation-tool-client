@@ -12,8 +12,8 @@ before_script:
     - "apt-get update -yqqq"
     - "apt-get install -y google-chrome-stable"
     - "apt-get install -y xvfb"
-    - npm install -g gulp
-    - npm install semantic-ui --save
+    #- npm install -g gulp
+    #- npm install semantic-ui
 
 
 cache:

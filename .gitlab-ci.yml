@@ -2,7 +2,7 @@ image: node:latest
 
 before_script:
     - chmod +x ci/install-browsers
-    - ./ci/install-browsers
+    - ci/install-browsers
 
 cache:
     paths:

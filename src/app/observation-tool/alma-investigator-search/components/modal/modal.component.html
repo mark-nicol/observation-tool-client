@@ -1,0 +1,23 @@
+<div class="ui inverted dimmer"
+     [class.active]="isSearching">
+  <div class="ui text loader">Searching...</div>
+</div>
+<div class="header">{{modal.context.title}}</div>
+<div class="content">
+  <app-refine-panel [name]="this.modal.context.name"
+                    (refineSearch)="search($event[0], $event[1])"></app-refine-panel>
+  <div *ngIf="searchResults; else noResults">
+    <app-results-table [searchResults]="searchResults"></app-results-table>
+  </div>
+  <ng-template #noResults><h4>No Results</h4></ng-template>
+</div>
+<div class="actions">
+  <button class="ui tiny compact blue labeled icon button"
+          (click)="modal.approve()">
+    <i class="add user icon"></i> Select Investigator
+  </button>
+  <button class="ui tiny compact red  labeled icon button"
+          (click)="modal.deny()">
+    <i class="remove icon"></i> Cancel
+  </button>
+</div>

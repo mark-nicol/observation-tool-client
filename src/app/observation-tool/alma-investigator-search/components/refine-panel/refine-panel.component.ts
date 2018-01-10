@@ -12,18 +12,18 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class RefinePanelComponent {
 
-  /** The name originally searched for */
-  @Input() name;
   /** Emits chosen search parameters */
   @Output() refineSearch = new EventEmitter<string[]>();
 
+  searchType = 'Name';
+  @Input('name')
+  searchString: string;
+
   /**
    * Called when refine button is clicked, emits the search parameters
-   * @param searchVariant The type of search to be made
-   * @param searchString  The string to search for
    */
-  refineClick(searchVariant: string, searchString: string) {
-    this.refineSearch.emit([searchVariant, searchString]);
+  refineClick() {
+    this.refineSearch.emit([this.searchType, this.searchString]);
   }
 
 }

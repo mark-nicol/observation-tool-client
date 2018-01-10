@@ -1,9 +1,9 @@
 <div class="ui center aligned grid">
   <div class="column">
-    <div class="ui buttons">
-      <button class="ui blue button">Pan to Spectral Window</button>
-      <button class="ui blue button">Zoom to Band</button>
-      <button class="ui blue button" (click)="resetClick()">Reset</button>
+    <div class="ui tiny compact labeled icon buttons">
+      <button class="ui blue button"><i class="exchange icon"></i> Pan to Spectral Window</button>
+      <button class="ui blue button"><i class="zoom icon"></i> Zoom to Band</button>
+      <button class="ui blue button" (click)="resetClick()"><i class="refresh icon"></i> Reset</button>
     </div>
   </div>
 </div>
@@ -16,7 +16,9 @@
     </sui-checkbox>
     <sui-checkbox>DSB Image</sui-checkbox>
     <sui-checkbox>Spectral Lines</sui-checkbox>
-    <button class="ui blue button">Select Lines to Overlay</button>
+    <button class="ui tiny compact blue labeled icon button"><i class="signal icon"></i> Select Lines to
+      Overlay
+    </button>
   </div>
 
 

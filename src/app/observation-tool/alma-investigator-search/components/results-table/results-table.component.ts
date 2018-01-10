@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {AlmaInvestigatorInterface} from '../../../../shared/interfaces/alma-investigator.interface'
+import {AlmaInvestigatorInterface} from '../../../shared/interfaces/alma-investigator.interface';
 
 /**
  * Results table component.
@@ -9,10 +9,10 @@ import {AlmaInvestigatorInterface} from '../../../../shared/interfaces/alma-inve
  */
 
 @Component({
-  selector: 'app-results-table',
-  templateUrl: './results-table.component.html',
-  styleUrls: ['./results-table.component.css']
-})
+             selector: 'app-results-table',
+             templateUrl: './results-table.component.html',
+             styleUrls: ['./results-table.component.css']
+           })
 
 export class ResultsTableComponent {
 

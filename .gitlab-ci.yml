@@ -1,6 +1,8 @@
-image: andthensome/alpine-node-bash
+image: ubuntu
 
 before_script:
+    - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+    - sudo apt-get install -y nodejs
     - chmod +x ci/install-browsers
     - sh ci/install-browsers
 

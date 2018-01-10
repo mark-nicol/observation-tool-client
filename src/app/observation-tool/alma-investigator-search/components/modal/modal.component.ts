@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Component, ViewContainerRef} from '@angular/core';
 import {ComponentModalConfig, ModalSize, SuiModal} from 'ng2-semantic-ui';
+import {ToastsManager} from 'ng2-toastr';
 import {AlmaInvestigatorInterface} from '../../../shared/interfaces/alma-investigator.interface';
 import {AlmaInvestigatorSearchService} from '../../services/alma-investigator-search.service';
 
@@ -33,9 +35,11 @@ export class AlmaInvestigatorSearchModalComponent {
     this.almaInvestigatorSearchService.search(searchType, searchString)
         .subscribe(
           results => this.searchResults = results,
-          error => {
+          (error: HttpErrorResponse) => {
             this.isSearching = false;
             console.log(error);
+            sessionStorage.setItem('modalError', 'unknown error');
+            this.modal.deny(undefined);
           },
           () => this.isSearching = false);
   }
@@ -45,13 +49,12 @@ export class AlmaInvestigatorSearchModalComponent {
 export class AlmaInvestigatorSearchModal extends ComponentModalConfig<ModalContext, void, void> {
 
   constructor(name?,
-              title    = 'Investigator Search',
-              size     = ModalSize.Large) {
+              title = 'Investigator Search',
+              size  = ModalSize.Large) {
     super(AlmaInvestigatorSearchModalComponent, {name, title});
     this.isClosable         = false;
     this.transitionDuration = 200;
     this.size               = size;
-    this.isInverted         = true;
     this.mustScroll         = true;
     this.isClosable         = true;
   }

@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {SuiModalService} from 'ng2-semantic-ui';
+import {ToastsManager} from 'ng2-toastr';
 import {AlmaInvestigatorSearchModal} from '../../../../alma-investigator-search/components/modal/modal.component';
 import {AlmaInvestigatorInterface} from '../../../../shared/interfaces/alma-investigator.interface';
 
@@ -21,8 +22,10 @@ export class PiSearchComponent implements OnInit {
   /** The chosen PI passed back from piSelect */
   passedPi: AlmaInvestigatorInterface;
 
-  constructor(private suiModalService: SuiModalService) {
-
+  constructor(private suiModalService: SuiModalService,
+              private toastMgr: ToastsManager,
+              viewContainerRef: ViewContainerRef) {
+    this.toastMgr.setRootViewContainerRef(viewContainerRef);
   }
 
   /**
@@ -43,8 +46,12 @@ export class PiSearchComponent implements OnInit {
   makeModal(piName: string) {
     this.suiModalService
         .open(new AlmaInvestigatorSearchModal(piName))
-        .onApprove(() => this.newPi())
-        .onDeny(() => {
+        .onApprove(result => console.log(result)/*this.newPi()*/)
+        .onDeny(result => {
+          if (sessionStorage.getItem('modalError') === 'unknown error') {
+            this.toastMgr.error('Could not contact user lookup server', 'Error');
+            sessionStorage.removeItem('modalError');
+          }
         });
   }
 }

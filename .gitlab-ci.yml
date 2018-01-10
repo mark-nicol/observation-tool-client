@@ -1,10 +1,10 @@
-image: ubuntu
+image: node:latest
 
-before_script:
-    - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-    - sudo apt-get install -y nodejs
-    - chmod +x ci/install-browsers
-    - sh ci/install-browsers
+#before_script:
+#    script:
+#        # - chmod +x ci/install-browsers
+#        # - ./ci/install-browsers
+#        - npm install
 
 cache:
     paths:
@@ -13,5 +13,5 @@ cache:
 test:
     script:
         - npm install
-        - ./node_modules/@angular/cli/bin/ng test --browser=Chrome --single-run=true --watch=false
+        - ./node_modules/@angular/cli/bin/ng test --browser=PhantomJS --single-run=true --watch=false
 

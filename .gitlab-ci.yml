@@ -1,8 +1,8 @@
 image: andthensome/alpine-node-bash
 
 before_script:
-    - chmod +x ci\install-browsers
-    - ci\install-browsers
+    - chmod +x ci/install-browsers
+    - sh ci/install-browsers
 
 cache:
     paths:
@@ -11,5 +11,5 @@ cache:
 test:
     script:
         - npm install
-        - .\node_modules\@angular\cli\bin\ng test --browser=Chrome --single-run=true --watch=false
+        - ./node_modules/@angular/cli/bin/ng test --browser=Chrome --single-run=true --watch=false
 

@@ -24,5 +24,5 @@ cache:
 
 test:
     script:
-        - ./node_modules/@angular/cli/bin/ng test -c
+        - ./node_modules/@angular/cli/bin/ng test -c --single-run=true --watch=false
 

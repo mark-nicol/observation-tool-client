@@ -1,7 +1,9 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DelayTooltipDirective} from '../../../shared/directives/delay-tooltip.directive';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 import {SpacialImageComponent} from './spacial-image.component';
 
@@ -11,8 +13,13 @@ describe('SpacialImageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SpacialImageComponent, DelayTooltipDirective],
-      imports: [NgbModule.forRoot()]
+      declarations: [SpacialImageComponent],
+      imports: [
+        HttpClientTestingModule
+      ],
+      providers: [
+        PersistenceService
+      ]
     })
       .compileComponents();
   }));

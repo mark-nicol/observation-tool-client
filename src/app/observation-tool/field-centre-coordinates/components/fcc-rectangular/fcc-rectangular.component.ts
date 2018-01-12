@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {SystemService} from '../../../shared/services/system.service';
 
@@ -19,10 +19,25 @@ export class FccRectangularComponent implements OnChanges {
   /** The selected radio value from FieldCentreCoordinates component */
   @Input() radioValue = 'relative';
 
-  @Input('group') rectangularForm: FormGroup;
+  @Input('group') rectangularForm = new FormGroup({
+                                                    chosenSystem: new FormControl(),
+                                                    sexagesimalUnits: new FormControl(),
+                                                    lonOffsetUnit: new FormControl(),
+                                                    lonOffsetValue: new FormControl(),
+                                                    latOffsetUnit: new FormControl(),
+                                                    latOffsetValue: new FormControl(),
+                                                    pLengthUnit: new FormControl(),
+                                                    pLengthValue: new FormControl(),
+                                                    qLengthUnit: new FormControl(),
+                                                    qLengthValue: new FormControl(),
+                                                    positionAngleUnit: new FormControl(),
+                                                    positionAngleValue: new FormControl(),
+                                                    spacing: new FormControl(),
+                                                    spacingUnits: new FormControl(),
+                                                  });
 
   /** Controls if the sexagesimal checkbox is shown in the system selector */
-  sexagesimalHidden   = (this.radioValue === 'relative');
+  sexagesimalHidden = (this.radioValue === 'relative');
   /** The chosen coordinates system from the selector */
   chosenSystem: CoordSystemInterface;
   /** True if the sexagesimal checkbox is selected */

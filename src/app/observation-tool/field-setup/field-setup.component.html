@@ -1,13 +1,18 @@
-<div class="ui internally celled two column stackable grid">
-  <div class="six wide column">
+<div class="ui internally celled two column grid">
+  <div class="sixteen wide tablet six wide large screen seven wide widescreen column">
     <spacial-image></spacial-image>
-    <fov-parameters></fov-parameters>
-    <image-query></image-query>
+    <div class="ui grid">
+      <div class="sixteen wide large screen eight wide widescreen column">
+        <fov-parameters></fov-parameters>
+      </div>
+      <div class="sixteen wide large screen eight wide widescreen column">
+        <image-query></image-query>
+      </div>
+    </div>
   </div>
-  <div class="ten wide column">
+  <div class="sixteen wide tablet ten wide large screen nine wide widescreen column">
     <field-source (tableHeaderEmitter)="setHeaders($event)"
                   (targetTypeEmitter)="setTargetType($event)"></field-source>
-
     <source-expected-properties></source-expected-properties>
     <field-center-coordinates></field-center-coordinates>
   </div>

@@ -24,5 +24,5 @@ cache:
 test:
     script:
         - npm install
-        - ./node_modules/@angular/cli/bin/ng test --browser=PhantomJS --single-run=true --watch=false
+        - ./node_modules/@angular/cli/bin/ng test --browser=Chrome --single-run=true --watch=false
 

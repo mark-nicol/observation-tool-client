@@ -36,7 +36,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: [
-      'ChromeHeadless'
+      'chrome_no_sandbox'
       // 'PhantomJS'
       // 'IE',
       // 'Firefox',
@@ -46,6 +46,12 @@ module.exports = function (config) {
       // 'Safari'
     ],
     singleRun: false,
-    watch: false
+    watch: false,
+    customLaunchers: {
+      chrome_no_sandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    }
   });
 };

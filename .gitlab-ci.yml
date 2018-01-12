@@ -12,9 +12,8 @@ before_script:
     - "apt-get update -yqqq"
     - "apt-get install -y google-chrome-stable"
     - "apt-get install -y xvfb"
-    - npm install
-#    - npm install -g gulp
-#    - npm install semantic-ui --save
+    - npm install -g gulp
+    - npm install semantic-ui --save
 #    - gulp build sematic/
 
 
@@ -24,5 +23,6 @@ cache:
 
 test:
     script:
-        - ./node_modules/@angular/cli/bin/ng test -c ci-karma.conf.js
+        - npm install
+        - ./node_modules/@angular/cli/bin/ng test --browser=PhantomJS --single-run=true --watch=false
 

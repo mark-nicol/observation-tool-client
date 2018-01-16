@@ -3,14 +3,21 @@
   <!-- Source selector -->
   <div class="field">
     <label for="sourceNameInput">Source Name</label>
-    <input id="sourceNameInput" formControlName="sourceName">
-    <button class="ui right floated tiny compact blue labeled icon button"><i class="search icon"></i> Resolve</button>
+    <input id="sourceNameInput"
+           type="text"
+           formControlName="sourceName">
+    <button class="ui right floated tiny compact blue labeled icon button">
+      <i class="search icon"></i> Resolve
+    </button>
+    <div style="height: 1.5em;"></div>
   </div>
 
   <div class="two fields">
     <!-- Solar checkbox -->
     <div class="field">
-      <sui-checkbox formControlName="solarSystemObject">Choose a Solar System Object?</sui-checkbox>
+      <label>Choose a Solar System Object?</label>
+      <sui-checkbox class="toggle"
+                    formControlName="solarSystemObject"></sui-checkbox>
     </div>
 
     <!-- Solar selector -->
@@ -24,9 +31,10 @@
       </sui-select>
     </div>
   </div>
-  <div *ngIf="!sourceForm.value.solarSystemObject">
 
-    <div class="three fields">
+  <div class="ui form" *ngIf="!sourceForm.value.solarSystemObject">
+
+    <div class="four fields">
       <div class="field">
         <!-- System Selector -->
         <label>System</label>
@@ -37,11 +45,17 @@
             <sui-select-option *ngFor="let system of systemService.getSystems()"
                                value="{{system}}"></sui-select-option>
           </sui-select>
-          <sui-checkbox formControlName="sexagesimalUnits"
-                        [isDisabled]="sexagesimalCheckboxDisabled">Sexagesimal Units
-          </sui-checkbox>
         </div>
       </div>
+
+      <div class="three wide field">
+        <label>Sexagesimal Units</label>
+        <sui-checkbox class="toggle"
+                      formControlName="sexagesimalUnits"
+                      [isDisabled]="sexagesimalCheckboxDisabled">
+        </sui-checkbox>
+      </div>
+
 
       <!-- Lat input -->
       <div class="field"
@@ -62,6 +76,7 @@
                placeholder="0">
       </div>
 
+
       <!-- Long input -->
       <div class="field"
            suiPopup
@@ -81,7 +96,6 @@
                placeholder="0">
       </div>
     </div>
-
 
     <div class="three fields">
       <!-- Parallax input -->
@@ -139,7 +153,8 @@
                  formControlName="properMotionDeclinationValue">
           <sui-select class="selection"
                       title="proper motion declination unit selector"
-                      formControlName="properMotionDeclinationUnit">
+                      formControlName="properMotionDeclinationUnit"
+                      style="width: 5em;">
             <sui-select-option value="mas/yr">mas/yr</sui-select-option>
             <sui-select-option value="arcsec/s">arcsec/s</sui-select-option>
             <sui-select-option value="arcmin/s">arcmin/s</sui-select-option>
@@ -149,7 +164,8 @@
       </div>
     </div>
 
-    <div class="fields">
+
+    <div class="three fields">
       <!-- Radial input -->
       <div class="field"
            suiPopup
@@ -179,7 +195,7 @@
       </div>
 
       <!-- Redshift input -->
-      <div class="four wide field"
+      <div class="field"
            suiPopup
            popupText="Astronomical redshift, calculated using the specified velocity convention">
         <label for="zInput">
@@ -188,10 +204,10 @@
         <input id="zInput"
                placeholder="0.000000000"
                formControlName="redshift">
-      </div>
+      </div><!-- div.field -->
 
       <!-- Doppler selector -->
-      <div class="two wide field"
+      <div class="field"
            suiPopup
            popupText="Doppler calculation convention to be used">
         <label for="dopplerSelect">
@@ -204,7 +220,8 @@
           <sui-select-option value="optical">Optical</sui-select-option>
           <sui-select-option value="relativistic">Relativistic</sui-select-option>
         </sui-select>
-      </div>
+      </div><!-- div.field -->
     </div>
-  </div><!-- div *ngIf -->
-</form><!-- div.ui.form -->
+
+  </div>
+</form><!-- form.ui.grid.form -->

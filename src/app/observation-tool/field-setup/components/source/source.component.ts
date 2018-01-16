@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CURRENT_PROJECT} from '../../../shared/data/current-project';
 import {CURRENT_SCIENCE_GOAL} from '../../../shared/data/current-science-goal';
@@ -17,7 +17,8 @@ import {SystemService} from '../../../shared/services/system.service';
              selector: 'field-source',
              host: {'(document:click)': 'unfocus($event)'}, // TODO fix host binding
              templateUrl: './source.component.html',
-             styleUrls: ['./source.component.css']
+             styleUrls: ['./source.component.css'],
+             encapsulation: ViewEncapsulation.None
            })
 export class SourceComponent implements OnInit {
 

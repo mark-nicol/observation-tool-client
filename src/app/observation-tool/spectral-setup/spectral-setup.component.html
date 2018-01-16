@@ -1,5 +1,5 @@
-<div class="ui internally celled two column stackable grid">
-  <div class="ten wide column">
+<div class="ui internally celled two column grid">
+  <div class="sixteen wide tablet ten wide large screen centered column">
     <h4 class="ui dividing header">Visualisation</h4>
     <app-visualisation-viewer></app-visualisation-viewer>
     <app-visualisation-control (bandsCheckedEmitter)="bandsCheckedChange($event)"
@@ -8,7 +8,7 @@
                                (densityRadioEmitter)="densityRadioChange($event)"
                                (resetEmitter)="resetClick()"></app-visualisation-control>
   </div>
-  <div class="six wide column">
+  <div class="sixteen wide tablet six wide large screen column">
     <h4 class="ui dividing header">Spectral Type</h4>
     <app-type></app-type>
   </div>

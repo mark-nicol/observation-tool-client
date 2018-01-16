@@ -42,6 +42,10 @@ export class PersistenceService {
     return this.http.get<ScienceGoalInterface>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}`);
   }
 
+
+  /**
+   * GET /projects/{projectCode}/science-goals/{goalId}/sources/{sourceId}
+   */
   getSource(projectCode: string, scienceGoalId: string, sourceId: string): Observable<SourceInterface> {
     return this.http.get<SourceInterface>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}/sources/${sourceId}`);
   }

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 import {PersistenceService} from '../../../../shared/services/persistence.service';
 
 /**
@@ -12,15 +13,16 @@ import {PersistenceService} from '../../../../shared/services/persistence.servic
            })
 export class ProjectInfoComponent implements OnInit {
 
-  project?: any;
+  // project?: any;
 
-  // project: Observable<any>;
+  project?: Observable<any>;
 
   constructor(private persistenceService: PersistenceService) {
   }
 
   ngOnInit(): void {
-    this.persistenceService.getProject('').subscribe(result => this.project = result);
+    // this.persistenceService.getProject('').subscribe(result => this.project = result);
+    this.project = this.persistenceService.getProject('');
   }
 
 }

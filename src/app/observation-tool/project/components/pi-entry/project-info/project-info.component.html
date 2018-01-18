@@ -1,5 +1,5 @@
 <h4 class="ui dividing header">Main Project Information</h4>
 <h5>Project Priority</h5>
-<p>{{(project | async)?.priority}}</p>
+<p *ngIf="project">{{project['prj:ObsProgram']['prj:ObsPlan']['prj:ObsUnitControl']['prj:userPriority']}}</p>
 <h5>Assigned Project Code</h5>
-<p>{{(project | async)?.projectCode}}</p>
+<p *ngIf="project">{{project['prj:code']}}</p>

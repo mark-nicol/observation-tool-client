@@ -31,8 +31,10 @@ export class PersistenceService {
   /**
    * GET /projects/{projectCode}
    */
-  getProject(projectCode: string): Observable<ProjectInterface> {
-    return this.http.get<ProjectInterface>(`${this.baseUrl}/projects/${projectCode}`);
+  getProject(projectCode: string): Observable<any> {
+    this.http.get(`${this.baseUrl}/xml`).subscribe(result => console.log(result));
+    return this.http.get(`${this.baseUrl}/xml`);
+    // return this.http.get<ProjectInterface>(`${this.baseUrl}/projects/${projectCode}`);
   }
 
   /**

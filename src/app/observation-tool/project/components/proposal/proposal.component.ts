@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CURRENT_PROJECT} from '../../../shared/data/current-project';
-import {ProjectInterface} from '../../../shared/interfaces/project.interface';
+import {ObsProject} from '../../../shared/interfaces/project/obsproject';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -17,7 +17,7 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 export class ProposalComponent implements OnInit {
 
   proposal: FormGroup;
-  project: ProjectInterface;
+  project: ObsProject;
 
   /** The currently selected proposal type */
   chosenType = 'regularRadio';

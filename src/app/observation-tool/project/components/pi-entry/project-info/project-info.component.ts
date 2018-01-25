@@ -21,7 +21,6 @@ export class ProjectInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.persistenceService.getProject('').subscribe(result => this.project = result);
     this.project = this.persistenceService.getProject('');
   }
 

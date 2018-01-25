@@ -5,7 +5,6 @@ import {Longitude} from '../../units/classes/longitude';
 import {CURRENT_PROJECT} from '../shared/data/current-project';
 import {CURRENT_SCIENCE_GOAL} from '../shared/data/current-science-goal';
 import {CURRENT_SOURCE} from '../shared/data/current-source';
-import {FieldCentreCoordinatesInterface} from '../shared/interfaces/science-goal-interfaces/field-setup-interfaces/field-centre-coordinates.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
@@ -30,7 +29,7 @@ export class TableRow {
 export class FieldCenterCoordinatesComponent implements OnInit {
 
   /** The page data from the fieldSetupService */
-  data: FieldCentreCoordinatesInterface;
+  data: any;
   fieldCentreCoordinatesForm: FormGroup;
   tableRows: any;
 

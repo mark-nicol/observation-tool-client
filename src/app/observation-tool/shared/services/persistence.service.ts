@@ -2,9 +2,6 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
-import {ProjectInterface} from '../interfaces/project.interface';
-import {SourceInterface} from '../interfaces/science-goal-interfaces/field-setup-interfaces/source.interface';
-import {ScienceGoalInterface} from '../interfaces/science-goal.interface';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -40,16 +37,16 @@ export class PersistenceService {
   /**
    * GET /projects/{projectCode}/science-goals/{goalId}
    */
-  getScienceGoal(projectCode: string, scienceGoalId: string): Observable<ScienceGoalInterface> {
-    return this.http.get<ScienceGoalInterface>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}`);
+  getScienceGoal(projectCode: string, scienceGoalId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}`);
   }
 
 
   /**
    * GET /projects/{projectCode}/science-goals/{goalId}/sources/{sourceId}
    */
-  getSource(projectCode: string, scienceGoalId: string, sourceId: string): Observable<SourceInterface> {
-    return this.http.get<SourceInterface>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}/sources/${sourceId}`);
+  getSource(projectCode: string, scienceGoalId: string, sourceId: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}/sources/${sourceId}`);
   }
 
 }

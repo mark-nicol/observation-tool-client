@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FovParametersInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/fov-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -15,7 +14,7 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 })
 export class FovParametersComponent implements OnInit {
 
-  data: FovParametersInterface;
+  data: any;
 
   constructor(private persistenceService: PersistenceService) {
 

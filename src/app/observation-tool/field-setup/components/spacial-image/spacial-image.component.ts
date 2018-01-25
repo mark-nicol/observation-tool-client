@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {SpatialImageInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/spatial-image.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -15,7 +14,7 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
            })
 export class SpacialImageComponent implements OnInit {
 
-  data: SpatialImageInterface;
+  data: any;
 
   constructor(private persistenceService: PersistenceService) {
 

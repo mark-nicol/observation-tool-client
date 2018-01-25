@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {CURRENT_PROJECT} from '../../../shared/data/current-project';
 import {CURRENT_SCIENCE_GOAL} from '../../../shared/data/current-science-goal';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
-import {ExpectedSourcePropertiesInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/expected-source-properties.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -17,7 +16,7 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
            })
 export class ExpectedSourcePropertiesComponent implements OnInit {
 
-  data: ExpectedSourcePropertiesInterface;
+  data: any;
   expectedSourcePropertiesForm: FormGroup;
 
   constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {

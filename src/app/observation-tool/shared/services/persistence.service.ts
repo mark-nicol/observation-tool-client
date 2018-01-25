@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
+import {ObsProject} from '../classes/obsproject';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -28,10 +29,12 @@ export class PersistenceService {
   /**
    * GET /projects/{projectCode}
    */
-  getProject(projectCode: string): Observable<any> {
-    this.http.get(`${this.baseUrl}/xml`).subscribe(result => console.log(result));
-    return this.http.get(`${this.baseUrl}/xml`);
-    // return this.http.get<ProjectInterface>(`${this.baseUrl}/projects/${projectCode}`);
+  getProject(projectCode: string): Observable<ObsProject> {
+    this.http.get<any>(`${this.baseUrl}/xml`).subscribe(result => console.log(result));
+    return this.http.get<any>(`${this.baseUrl}/xml`)
+               .map(result => {
+                 return new ObsProject().initFromJson(result);
+               });
   }
 
   /**

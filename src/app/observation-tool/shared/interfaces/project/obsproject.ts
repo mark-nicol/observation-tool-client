@@ -1,9 +1,13 @@
-export interface ObsProject {
+import {IAlmaProjectDataModel} from './almaprojectdatamodel';
+import {IObsProgram} from './obsprogram';
+
+export interface IObsProject extends IAlmaProjectDataModel {
+  status: string;
+  revision: number;
   projectName: string;
   pI: string;
   version: string;
   code: string;
-  assignedPriority: number;
   timeOfCreation: string;
   manualMode: boolean;
   simulationMode: boolean;
@@ -16,4 +20,5 @@ export interface ObsProject {
   consensusReport: string;
   p2gAttention: boolean;
   p2gAttentionReasons: string;
+  ObsProgram: IObsProgram;
 }

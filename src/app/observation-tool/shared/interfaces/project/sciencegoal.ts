@@ -1,4 +1,6 @@
-export interface ScienceGoal {
+import {IAlmaProjectDataModel} from './almaprojectdatamodel';
+
+export interface IScienceGoal extends IAlmaProjectDataModel {
   name: string;
   note: string;
   estimatedTotalTime: number;

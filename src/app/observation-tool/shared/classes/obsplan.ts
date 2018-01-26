@@ -1,5 +1,5 @@
-import {IObsPlan} from '../interfaces/project/obsplan';
-import {IObsUnitControl} from '../interfaces/project/obsunitcontrol';
+import {IObsPlan} from '../interfaces/project/obsplan.interface';
+import {IObsUnitControl} from '../interfaces/project/obsunitcontrol.interface';
 import {ObsUnitControl} from './obsunitcontrol';
 
 export class ObsPlan implements IObsPlan {

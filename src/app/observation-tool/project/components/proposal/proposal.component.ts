@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {CURRENT_PROJECT} from '../../../shared/data/current-project';
-import {IObsProject} from '../../../shared/interfaces/project/obsproject';
+import {IObsProject} from '../../../shared/interfaces/project/obsproject.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**

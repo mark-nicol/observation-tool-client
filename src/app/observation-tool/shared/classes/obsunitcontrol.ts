@@ -1,4 +1,4 @@
-import {IObsUnitControl} from '../interfaces/project/obsunitcontrol';
+import {IObsUnitControl} from '../interfaces/project/obsunitcontrol.interface';
 
 export class ObsUnitControl implements IObsUnitControl {
   arrayRequested: string;

@@ -2,7 +2,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {Component, ViewContainerRef} from '@angular/core';
 import {ComponentModalConfig, ModalSize, SuiModal} from 'ng2-semantic-ui';
 import {ToastsManager} from 'ng2-toastr';
-import {AlmaInvestigatorInterface} from '../../../shared/interfaces/alma-investigator.interface';
+import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.interface';
 import {AlmaInvestigatorSearchService} from '../../services/alma-investigator-search.service';
 
 interface ModalContext {
@@ -19,7 +19,7 @@ interface ModalContext {
 
 export class AlmaInvestigatorSearchModalComponent {
 
-  searchResults: AlmaInvestigatorInterface[];
+  searchResults: IAlmaInvestigator[];
   isSearching = false;
 
   constructor(public modal: SuiModal<ModalContext>,

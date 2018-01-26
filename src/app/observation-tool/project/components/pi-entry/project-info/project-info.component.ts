@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../../../../shared/classes/obsproject';
-import {IObsProject} from '../../../../shared/interfaces/project/obsproject';
+import {IObsProject} from '../../../../shared/interfaces/project/obsproject.interface';
 import {PersistenceService} from '../../../../shared/services/persistence.service';
 
 /**

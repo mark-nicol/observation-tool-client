@@ -1,4 +1,4 @@
-import {IAlmaProjectDataModel} from './almaprojectdatamodel';
+import {IAlmaProjectDataModel} from './almaprojectdatamodel.interface';
 
 export interface IObsUnitControl extends IAlmaProjectDataModel {
   arrayRequested: string;

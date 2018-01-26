@@ -13,7 +13,7 @@ const routes: Routes = [
         component: PiEntryComponent
       },
       {
-        path: 'proposal',
+        path:      'proposalForm',
         component: ProposalComponent,
       },
       {

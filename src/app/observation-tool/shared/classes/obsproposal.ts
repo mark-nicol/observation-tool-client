@@ -27,27 +27,70 @@ export class ObsProposal implements IObsProposal {
   principalInvestigator: IAlmaInvestigator;
   coPrincipalInvestigators: IAlmaInvestigator[];
   coInvestigators: IAlmaInvestigator[];
-  scienceGoals: IScienceGoal[];
+  // scienceGoals: IScienceGoal[];
+  scienceGoals: IScienceGoal;
   proposalFeedback: IProposalFeedback;
 
+
+  constructor(title?: string,
+              code?: string,
+              abstract?: string,
+              relatedProposals?: string,
+              dateReceived?: Date,
+              cycle?: string,
+              studentProject?: boolean,
+              continuation?: boolean,
+              recentPublications?: string,
+              scientificCategoryCode?: string,
+              proposalTypeCode?: string,
+              scientificCategoryString?: string,
+              proposalTypeString?: string,
+              keywords?: string[],
+              keywordCode?: string[],
+              resubmittedProjectCode?: string,
+              isResubmission?: boolean,
+              duplicateObservationJustification?: string,
+              principalInvestigator?: IAlmaInvestigator,
+              coPrincipalInvestigators?: IAlmaInvestigator[],
+              coInvestigators?: IAlmaInvestigator[],
+              scienceGoals?: IScienceGoal,
+              proposalFeedback?: IProposalFeedback) {
+    this.title                             = title;
+    this.code                              = code;
+    this.abstract                          = abstract;
+    this.relatedProposals                  = relatedProposals;
+    this.dateReceived                      = dateReceived;
+    this.cycle                             = cycle;
+    this.studentProject                    = studentProject;
+    this.continuation                      = continuation;
+    this.recentPublications                = recentPublications;
+    this.scientificCategoryCode            = scientificCategoryCode;
+    this.proposalTypeCode                  = proposalTypeCode;
+    this.scientificCategoryString          = scientificCategoryString;
+    this.proposalTypeString                = proposalTypeString;
+    this.keywords                          = keywords;
+    this.keywordCode                       = keywordCode;
+    this.resubmittedProjectCode            = resubmittedProjectCode;
+    this.isResubmission                    = isResubmission;
+    this.duplicateObservationJustification = duplicateObservationJustification;
+    this.principalInvestigator             = principalInvestigator;
+    this.coPrincipalInvestigators          = coPrincipalInvestigators;
+    this.coInvestigators                   = coInvestigators;
+    this.scienceGoals                      = scienceGoals;
+    this.proposalFeedback                  = proposalFeedback;
+  }
+
   initFromJson(json: any) {
-    this.title                             = json['prp:title'];
-    this.code                              = json['prp:code'];
-    this.abstract                          = json['prp:abstract'];
-    this.relatedProposals                  = json['prp:relatedProposals'];
-    this.dateReceived                      = json['prp:dateReceived'];
-    this.cycle                             = json['prp:cycle'];
-    this.studentProject                    = json['prp:studentProject'];
-    this.continuation                      = json['prp:continuation'];
-    this.recentPublications                = json['prp:recentPublications'];
-    this.scientificCategoryCode            = json['prp:scientificCategoryCode'];
-    this.proposalTypeCode                  = json['prp:proposalTypeCode'];
-    this.scientificCategoryString          = json['prp:scientificCategoryString'];
-    this.proposalTypeString                = json['prp:proposalTypeString'];
-    this.resubmittedProjectCode            = json['prp:resubmittedProjectCode'];
-    this.isResubmission                    = json['prp:isResubmission'];
-    this.duplicateObservationJustification = json['prp:duplicateObservationJustification'];
-    this.scienceGoals                      = [new ScienceGoal().initFromJson(json['prj:ScienceGoal'])];
+    Object.keys(this).forEach(key => {
+      if (json['prj:' + key] !== undefined) {
+        this[key] = json['prj:' + key];
+      } else if (json['prp:' + key] !== undefined) {
+        this[key] = json['prp:' + key];
+      } else {
+        this[key] = json[key];
+      }
+    });
+    this.scienceGoals = new ScienceGoal().initFromJson(json['prj:ScienceGoal']);
     return this;
   }
 

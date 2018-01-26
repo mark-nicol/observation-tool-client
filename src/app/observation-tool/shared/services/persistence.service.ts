@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../classes/obsproject';
 import {ObsProposal} from '../classes/obsproposal';
+import {ScienceGoal} from '../classes/science-goal/science-goal';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -44,12 +45,19 @@ export class PersistenceService {
                })
   }
 
-  /**
-   * GET /projects/{projectCode}/science-goals/{goalId}
-   */
-  getScienceGoal(projectCode: string, scienceGoalId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}`);
+  getScienceGoal(): Observable<ScienceGoal> {
+    return this.http.get<any>(`${this.baseUrl}/projects/science-goals/goal`)
+               .map(result => {
+                 return new ScienceGoal().initFromJson(result);
+               })
   }
+
+  // /**
+  //  * GET /projects/{projectCode}/science-goals/{goalId}
+  //  */
+  // getScienceGoal(projectCode: string, scienceGoalId: string): Observable<any> {
+  //   return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}`);
+  // }
 
 
   /**

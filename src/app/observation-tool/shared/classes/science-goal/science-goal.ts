@@ -71,6 +71,7 @@ export class ScienceGoal implements IScienceGoal {
   }
 
   initFromJson(json: any): ScienceGoal {
+    console.log(json);
     Object.keys(this).forEach(key => {
       if (json['prj:' + key] !== undefined) {
         this[key] = json['prj:' + key];
@@ -83,6 +84,7 @@ export class ScienceGoal implements IScienceGoal {
     this.CalibrationSetupParameters = new CalibrationSetupParameters().initFromJson(json['prj:CalibrationSetupParameters']);
     this.PerformanceParameters = new PerformanceParameters().initFromJson(json['prj:PerformanceParameters']);
     this.SpectralSetupParameters = new SpectralSetupParameters().initFromJson(json['prj:SpectralSetupParameters']);
+    console.log(this);
     return this;
   }
 

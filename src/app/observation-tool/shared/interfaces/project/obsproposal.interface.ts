@@ -25,6 +25,6 @@ export interface IObsProposal extends IAlmaProjectDataModel {
   principalInvestigator: IAlmaInvestigator;
   coPrincipalInvestigators: IAlmaInvestigator[];
   coInvestigators: IAlmaInvestigator[];
-  scienceGoals: IScienceGoal[];
+  scienceGoals: IScienceGoal;
   proposalFeedback: IProposalFeedback;
 }

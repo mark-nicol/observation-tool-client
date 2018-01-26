@@ -1,3 +1,3 @@
 export interface IAlmaProjectDataModel {
-  initFromJson(json: any);
+  initFromJson(json: any, object: any);
 }

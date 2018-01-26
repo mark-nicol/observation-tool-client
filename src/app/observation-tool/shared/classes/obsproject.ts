@@ -5,7 +5,6 @@ import {ObsProgram} from './obsprogram';
 export class ObsProject implements IObsProject {
 
   ObsProgram: IObsProgram;
-
   status: string;
   revision: number;
   projectName: string;
@@ -40,7 +39,8 @@ export class ObsProject implements IObsProject {
               taMainComments?: string,
               consensusReport?: string,
               p2gAttention?: boolean,
-              p2gAttentionReasons?: string) {
+              p2gAttentionReasons?: string,
+              revision?: number) {
     this.projectName         = projectName;
     this.pI                  = pI;
     this.version             = version;
@@ -57,29 +57,20 @@ export class ObsProject implements IObsProject {
     this.consensusReport     = consensusReport;
     this.p2gAttention        = p2gAttention;
     this.p2gAttentionReasons = p2gAttentionReasons;
+    this.revision            = revision;
   }
 
   initFromJson(json: any) {
     console.log('ObsProject', 'initFromJson');
-    this.projectName         = json['prj:projectName'];
-    this.pI                  = json['prj:pI'];
-    this.version             = json['prj:version'];
-    this.code                = json['prj:code'];
-    this.timeOfCreation      = json['prj:timeOfCreation'];
-    this.manualMode          = json['prj:manualMode'];
-    this.simulationMode      = json['prj:simulationMode'];
-    this.isCommissioning     = json['prj:isCommissioning'];
-    this.isCalibration       = json['prj:isCalibration'];
-    this.letterGrade         = json['prj:letterGrade'];
-    this.staffProjectNote    = json['prj:staffProjectNote'];
-    this.taPhase2Comments    = json['prj:taPhase2Comments'];
-    this.taMainComments      = json['prj:taMainComments'];
-    this.consensusReport     = json['prj:consensusReport'];
-    this.p2gAttention        = json['prj:p2gAttention'];
-    this.p2gAttentionReasons = json['prj:p2gAttentionReasons'];
-    this.status              = json.status;
-    this.revision            = json.revision;
-    this.ObsProgram          = new ObsProgram().initFromJson(json['prj:ObsProgram']);
+    Object.keys(this).forEach(key => {
+      if (json['prj:' + key] !== undefined) {
+        this[key] = json['prj:' + key];
+      } else if (json[key] !== undefined) {
+        this[key] = json[key];
+      }
+    });
+    this.ObsProgram = new ObsProgram().initFromJson(json['prj:ObsProgram']);
+    console.log(this);
     return this;
   }
 

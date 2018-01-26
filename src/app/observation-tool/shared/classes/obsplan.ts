@@ -10,13 +10,30 @@ export class ObsPlan implements IObsPlan {
   scienceProcessingScript: any;
   runSciencePipeline: boolean;
 
+  constructor(name?: string,
+              note?: string,
+              obsUnitControl?: IObsUnitControl,
+              scienceProcessingScript?: any,
+              runSciencePipeline?: boolean) {
+    this.name                    = name;
+    this.note                    = note;
+    this.ObsUnitControl          = obsUnitControl;
+    this.scienceProcessingScript = scienceProcessingScript;
+    this.runSciencePipeline      = runSciencePipeline;
+  }
+
   initFromJson(json: any) {
     console.log('ObsPlan', 'initFromJson');
-    this.name                    = json['prj:name'];
-    this.note                    = json['prj:note'];
-    this.ObsUnitControl          = new ObsUnitControl().initFromJson(json['prj:ObsUnitControl']);
-    this.scienceProcessingScript = json['prj:scienceProcessingScript'];
-    this.runSciencePipeline      = json['prj:runSciencePipeline'];
+    Object.keys(this).forEach(key => {
+      if (json['prj:' + key] !== undefined) {
+        this[key] = json['prj:' + key];
+      } else if (json['prp:' + key] !== undefined) {
+        this[key] = json['prp:' + key];
+      } else {
+        this[key] = json[key];
+      }
+    });
+    this.ObsUnitControl = new ObsUnitControl().initFromJson(json['prj:ObsUnitControl']);
     return this;
   }
 

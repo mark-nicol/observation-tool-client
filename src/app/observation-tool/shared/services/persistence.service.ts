@@ -31,7 +31,7 @@ export class PersistenceService {
    */
   getProject(projectCode: string): Observable<ObsProject> {
     this.http.get<any>(`${this.baseUrl}/xml`).subscribe(result => console.log(result));
-    return this.http.get<any>(`${this.baseUrl}/xml`)
+    return this.http.get<any>(`${this.baseUrl}/projects/project`)
                .map(result => {
                  return new ObsProject().initFromJson(result);
                });

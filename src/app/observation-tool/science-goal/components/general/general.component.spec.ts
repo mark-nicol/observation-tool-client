@@ -1,8 +1,7 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {FormsModule} from '@angular/forms';
-
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ModularPanelComponent} from '../../../shared/components/modular-panel/modular-panel.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 import {GeneralComponent} from './general.component';
 
@@ -12,10 +11,18 @@ describe('GeneralComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GeneralComponent, ModularPanelComponent],
-      imports: [FormsModule, NgbModule.forRoot()]
-    })
-      .compileComponents();
+                                     declarations: [
+                                       GeneralComponent
+                                     ],
+                                     providers:    [
+                                       PersistenceService
+                                     ],
+                                     imports:      [
+                                       ReactiveFormsModule,
+                                       HttpClientTestingModule
+                                     ]
+                                   })
+           .compileComponents();
   }));
 
   beforeEach(() => {

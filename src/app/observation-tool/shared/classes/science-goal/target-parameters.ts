@@ -60,14 +60,15 @@ export class TargetParameters implements ITargetParameters {
   }
 
   initFromJson(json: any) {
-    console.log('Target Parameters', 'initFromJson');
-    console.log(json);
+    this.pmRA     = new AngularVelocity(json['prj:pmRA'].unit, json['prj:pmRA'].content);
+    this.pmDec    = new AngularVelocity(json['prj:pmDec'].unit, json['prj:pmDec'].content);
+    this.parallax = new Angle(json['prj:parallax'].unit, json['prj:parallax'].content);
     Object.keys(this).forEach(key => {
-      if (json['prj:' + key] !== undefined) {
+      if (json['prj:' + key] !== undefined && this[key] === undefined) {
         this[key] = json['prj:' + key];
       } else if (json['prp:' + key] !== undefined) {
         this[key] = json['prp:' + key];
-      } else {
+      } else if (this[key] === undefined) {
         this[key] = json[key];
       }
     });

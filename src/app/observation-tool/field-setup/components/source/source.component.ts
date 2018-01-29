@@ -85,6 +85,7 @@ export class SourceComponent implements OnInit {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
           const targetParams = result.TargetParameters[CURRENT_SOURCE];
+          console.log(targetParams);
           this.sourceForm.patchValue({
                                        sourceName:                    targetParams.sourceName,
                                        solarSystemObject:             targetParams.solarSystemObject !== 'Unspecified',
@@ -92,16 +93,16 @@ export class SourceComponent implements OnInit {
                                        radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
                                        // sexagesimalUnits: result.sexagesimalUnits,
                                        // chosenSystem: result.chosenSystem,
-                                       latValue:                      targetParams.sourceCoordinates['val:latitude'].content,
-                                       lonValue:                      targetParams.sourceCoordinates['val:longitude'].content,
+                                       latValue:                      targetParams.sourceCoordinates.latitude.content,
+                                       lonValue:                      targetParams.sourceCoordinates.longitude.content,
                                        parallaxUnit:                  targetParams.parallax.unit,
                                        parallaxValue:                 targetParams.parallax.content,
                                        properMotionCrossUnit:         targetParams.pmRA.unit,
                                        properMotionCrossValue:        targetParams.pmRA.content,
                                        properMotionDeclinationUnit:   targetParams.pmDec.unit,
                                        properMotionDeclinationValue:  targetParams.pmDec.content,
-                                       radialVelocityUnit:            targetParams.sourceVelocity['val:centerVelocity'].unit,
-                                       radialVelocityValue:           targetParams.sourceVelocity['val:centerVelocity'].content,
+                                       radialVelocityUnit:            targetParams.sourceVelocity.centerVelocity.unit,
+                                       radialVelocityValue:           targetParams.sourceVelocity.centerVelocity.content,
                                        dopplerType:                   targetParams.sourceVelocity.dopplerCalcType,
                                        // redshift: ,
                                      });

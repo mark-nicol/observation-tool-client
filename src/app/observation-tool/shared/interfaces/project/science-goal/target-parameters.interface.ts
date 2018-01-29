@@ -1,19 +1,22 @@
 import {Angle} from '../../../../../units/classes/angle';
 import {AngularVelocity} from '../../../../../units/classes/angular-velocity';
 import {Frequency} from '../../../../../units/classes/frequency';
+import {Latitude} from '../../../../../units/classes/latitude';
+import {Longitude} from '../../../../../units/classes/longitude';
+import {Speed} from '../../../../../units/classes/speed';
 
 export interface ITargetParameters {
   type: string;
   isMosaic: boolean;
   sourceName: string;
-  sourceCoordinates: any; // TODO Change
+  sourceCoordinates: ISourceCoordinates;
   pmRA: AngularVelocity;
   pmDec: AngularVelocity;
   parallax: Angle;
   nonSiderealMotion: boolean;
   solarSystemObject: any; // TODO Change
   sourceEphemeris: string;
-  sourceVelocity: any; // TODO Change
+  sourceVelocity: ISourceVelocity;
   ephemerisFileName: string;
   index: number;
   sdReferencePosition: any; // TODO Change
@@ -35,6 +38,18 @@ export interface IRectangle extends IField {
   short: Angle;
   spacing: Angle;
   referenceFrequency: Frequency;
+}
+
+export interface ISourceCoordinates {
+  latitude: Latitude;
+  longitude: Longitude;
+  fieldName: string;
+}
+
+export interface ISourceVelocity {
+  referenceSystem: string; // TODO Make enums
+  dopplerCalcType: string;
+  centerVelocity: Speed;
 }
 
 export interface IExpectedProperties {

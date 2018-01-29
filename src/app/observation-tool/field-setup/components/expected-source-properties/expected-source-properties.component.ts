@@ -38,12 +38,12 @@ export class ExpectedSourcePropertiesComponent implements OnInit {
     //       const esp = res.expectedSourceProperties;
     //       this.expectedSourcePropertiesForm.setValue({
     //                                                    continuumFluxDensityUnit: esp.continuumFluxDensity.unit,
-    //                                                    continuumFluxDensityValue: esp.continuumFluxDensity.value,
+    //                                                    continuumFluxDensityValue: esp.continuumFluxDensity.content,
     //                                                    continuumPolarization: esp.continuumPolarization,
     //                                                    lineFluxDensityUnit: esp.lineFluxDensity.unit,
-    //                                                    lineFluxDensityValue: esp.lineFluxDensity.value,
+    //                                                    lineFluxDensityValue: esp.lineFluxDensity.content,
     //                                                    lineWidthUnit: esp.lineWidth.unit,
-    //                                                    lineWidthValue: esp.lineWidth.value,
+    //                                                    lineWidthValue: esp.lineWidth.content,
     //                                                    linePolarization: esp.linePolarization
     //                                                  })
     //     });

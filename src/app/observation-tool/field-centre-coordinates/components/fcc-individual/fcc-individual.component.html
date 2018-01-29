@@ -45,10 +45,10 @@
     <tbody formArrayName="rows">
       <tr *ngFor="let row of rows.controls; let i=index" [formGroupName]="i">
         <td contenteditable>
-          {{row.value.lon.value}}
+          {{row.value.lon.content}}
         </td>
         <td contenteditable>
-          {{row.value.lat.value}}
+          {{row.value.lat.content}}
         </td>
       </tr>
     </tbody>

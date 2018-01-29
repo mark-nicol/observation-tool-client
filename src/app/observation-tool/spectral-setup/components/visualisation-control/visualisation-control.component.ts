@@ -29,7 +29,7 @@ export class VisualisationControlComponent {
   @Output() resetEmitter               = new EventEmitter();
   /** Current density radio choice */
   densityRadioChoice                   = 'automatic';
-  /** Strings for the density selector, value is index from the ngFor */
+  /** Strings for the density selector, content is index from the ngFor */
 
   columnDensityChoices                 = [
     '0.472mm (1st Octile)',

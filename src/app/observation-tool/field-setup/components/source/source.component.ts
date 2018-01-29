@@ -95,11 +95,11 @@ export class SourceComponent implements OnInit {
                                        latValue:                      targetParams.sourceCoordinates['val:latitude'].content,
                                        lonValue:                      targetParams.sourceCoordinates['val:longitude'].content,
                                        parallaxUnit:                  targetParams.parallax.unit,
-                                       parallaxValue:                 targetParams.parallax.value,
+                                       parallaxValue:                 targetParams.parallax.content,
                                        properMotionCrossUnit:         targetParams.pmRA.unit,
-                                       properMotionCrossValue:        targetParams.pmRA.value,
+                                       properMotionCrossValue:        targetParams.pmRA.content,
                                        properMotionDeclinationUnit:   targetParams.pmDec.unit,
-                                       properMotionDeclinationValue:  targetParams.pmDec.value,
+                                       properMotionDeclinationValue:  targetParams.pmDec.content,
                                        radialVelocityUnit:            targetParams.sourceVelocity['val:centerVelocity'].unit,
                                        radialVelocityValue:           targetParams.sourceVelocity['val:centerVelocity'].content,
                                        dopplerType:                   targetParams.sourceVelocity.dopplerCalcType,
@@ -129,7 +129,7 @@ export class SourceComponent implements OnInit {
 
   /**
    * Sets the lat and lon page values from input boxes
-   * @param value   The value to set lat/lon to
+   * @param value   The content to set lat/lon to
    * @param element The id of element initiating the change
    */
   setLatLon(value: number, element: Element) {

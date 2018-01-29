@@ -1,12 +1,11 @@
 import {Frequency} from '../../../../../units/classes/frequency';
-import {IAlmaProjectDataModel} from '../almaprojectdatamodel.interface';
 
-export interface IAdvancedSpectralSetup extends IAlmaProjectDataModel {
+export interface IAdvancedSpectralSetup {
   sideBandsSeparation: boolean;
   fastMode: boolean;
 }
 
-export interface IScienceSpectralWindow extends IAlmaProjectDataModel {
+export interface IScienceSpectralWindow {
   index: number;
   transitionName: string;
   centerFrequency: Frequency;
@@ -20,7 +19,7 @@ export interface IScienceSpectralWindow extends IAlmaProjectDataModel {
   AdvancedWindowSetup: IAdvancedWindowSetup;
 }
 
-export interface IAdvancedWindowSetup extends IAlmaProjectDataModel {
+export interface IAdvancedWindowSetup {
   smoothingFactor: number;
   smoothingFunction: string;
   oversampling: boolean;
@@ -29,7 +28,7 @@ export interface IAdvancedWindowSetup extends IAlmaProjectDataModel {
   useThis: boolean;
 }
 
-export interface ISpectralSetupParameters extends IAlmaProjectDataModel {
+export interface ISpectralSetupParameters {
   polarisation: string;
   type: string;
   representativeFrequency: Frequency;

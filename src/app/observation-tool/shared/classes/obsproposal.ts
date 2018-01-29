@@ -80,18 +80,4 @@ export class ObsProposal implements IObsProposal {
     this.proposalFeedback                  = proposalFeedback;
   }
 
-  initFromJson(json: any) {
-    Object.keys(this).forEach(key => {
-      if (json['prj:' + key] !== undefined) {
-        this[key] = json['prj:' + key];
-      } else if (json['prp:' + key] !== undefined) {
-        this[key] = json['prp:' + key];
-      } else {
-        this[key] = json[key];
-      }
-    });
-    this.scienceGoals = new ScienceGoal().initFromJson(json['prj:ScienceGoal']);
-    return this;
-  }
-
 }

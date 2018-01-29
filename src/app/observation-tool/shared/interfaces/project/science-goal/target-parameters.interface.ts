@@ -1,9 +1,8 @@
 import {Angle} from '../../../../../units/classes/angle';
 import {AngularVelocity} from '../../../../../units/classes/angular-velocity';
 import {Frequency} from '../../../../../units/classes/frequency';
-import {IAlmaProjectDataModel} from '../almaprojectdatamodel.interface';
 
-export interface ITargetParameters extends IAlmaProjectDataModel {
+export interface ITargetParameters {
   type: string;
   isMosaic: boolean;
   sourceName: string;
@@ -22,15 +21,15 @@ export interface ITargetParameters extends IAlmaProjectDataModel {
   fields: IField[];
 }
 
-export interface IField extends IAlmaProjectDataModel {
+export interface IField {
   name: string;
   centre: any; // TODO Change
 }
 
-export interface ISinglePoint extends IField, IAlmaProjectDataModel {
+export interface ISinglePoint extends IField {
 }
 
-export interface IRectangle extends IField, IAlmaProjectDataModel {
+export interface IRectangle extends IField {
   pALong: Angle;
   long: Angle;
   short: Angle;
@@ -38,7 +37,7 @@ export interface IRectangle extends IField, IAlmaProjectDataModel {
   referenceFrequency: Frequency;
 }
 
-export interface IExpectedProperties extends IAlmaProjectDataModel {
+export interface IExpectedProperties {
   expectedPeakFluxDensity: any; // TODO Change
   desiredPolarizationPercentage: number;
   expectedLineWidth: Frequency;

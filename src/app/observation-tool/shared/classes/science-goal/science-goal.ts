@@ -71,21 +71,4 @@ export class ScienceGoal implements IScienceGoal {
     this.TechnicalJustifications    = TechnicalJustifications;
   }
 
-  initFromJson(json: any): ScienceGoal {
-    Object.keys(this).forEach(key => {
-      if (json['prj:' + key] !== undefined) {
-        this[key] = json['prj:' + key];
-      } else if (json['prp:' + key] !== undefined) {
-        this[key] = json['prp:' + key];
-      } else {
-        this[key] = json[key];
-      }
-    });
-    this.CalibrationSetupParameters = new CalibrationSetupParameters().initFromJson(json['prj:CalibrationSetupParameters']);
-    this.PerformanceParameters = new PerformanceParameters().initFromJson(json['prj:PerformanceParameters']);
-    this.SpectralSetupParameters = new SpectralSetupParameters().initFromJson(json['prj:SpectralSetupParameters']);
-    this.TargetParameters = json['prj:TargetParameters'].map(item => new TargetParameters().initFromJson(item));
-    return this;
-  }
-
 }

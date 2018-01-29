@@ -22,19 +22,4 @@ export class ObsPlan implements IObsPlan {
     this.runSciencePipeline      = runSciencePipeline;
   }
 
-  initFromJson(json: any) {
-    console.log('ObsPlan', 'initFromJson');
-    Object.keys(this).forEach(key => {
-      if (json['prj:' + key] !== undefined) {
-        this[key] = json['prj:' + key];
-      } else if (json['prp:' + key] !== undefined) {
-        this[key] = json['prp:' + key];
-      } else {
-        this[key] = json[key];
-      }
-    });
-    this.ObsUnitControl = new ObsUnitControl().initFromJson(json['prj:ObsUnitControl']);
-    return this;
-  }
-
 }

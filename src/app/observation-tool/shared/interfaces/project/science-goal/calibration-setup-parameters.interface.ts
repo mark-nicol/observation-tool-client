@@ -1,5 +1,3 @@
-import {IAlmaProjectDataModel} from '../almaprojectdatamodel.interface';
-
-export interface ICalibrationSetupParameters extends IAlmaProjectDataModel{
+export interface ICalibrationSetupParameters {
   selection: string;
 }

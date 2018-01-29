@@ -60,11 +60,12 @@ export class PersistenceService {
   // }
 
 
-  /**
-   * GET /projects/{projectCode}/science-goals/{goalId}/sources/{sourceId}
-   */
+  // /**
+  //  * GET /projects/{projectCode}/science-goals/{goalId}/sources/{sourceId}
+  //  */
   getSource(projectCode: string, scienceGoalId: string, sourceId: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}/sources/${sourceId}`);
+    return null;
+  //   return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}/sources/${sourceId}`);
   }
 
 }

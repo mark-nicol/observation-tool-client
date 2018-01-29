@@ -1,7 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {CURRENT_PROJECT} from '../../../shared/data/current-project';
-import {CURRENT_SCIENCE_GOAL} from '../../../shared/data/current-science-goal';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
@@ -14,10 +12,10 @@ import {SystemService} from '../../../shared/services/system.service';
  */
 
 @Component({
-             selector: 'field-source',
-             host: {'(document:click)': 'unfocus($event)'}, // TODO fix host binding
-             templateUrl: './source.component.html',
-             styleUrls: ['./source.component.css'],
+             selector:      'field-source',
+             host:          {'(document:click)': 'unfocus($event)'}, // TODO fix host binding
+             templateUrl:   './source.component.html',
+             styleUrls:     ['./source.component.css'],
              encapsulation: ViewEncapsulation.None
            })
 export class SourceComponent implements OnInit {
@@ -62,50 +60,51 @@ export class SourceComponent implements OnInit {
               private formBuilder: FormBuilder,
               protected systemService: SystemService) {
     this.sourceForm = this.formBuilder.group({
-                                               sourceName: '',
-                                               solarSystemObject: false,
-                                               chosenSolarObject: '',
-                                               chosenSystem: '',
-                                               sexagesimalUnits: true,
-                                               latValue: 0.0,
-                                               lonValue: 0.0,
-                                               parallaxUnit: '',
-                                               parallaxValue: 0.0,
-                                               properMotionCrossUnit: '',
-                                               properMotionCrossValue: 0.0,
-                                               properMotionDeclinationUnit: '',
-                                               properMotionDeclinationValue: 0.0,
-                                               radialVelocityUnit: '',
-                                               radialVelocityValue: 0.0,
-                                               radialVelocityReferenceFrame: '',
-                                               dopplerType: '',
-                                               redshift: 0,
+                                               sourceName:                    '',
+                                               solarSystemObject:             false,
+                                               chosenSolarObject:             '',
+                                               chosenSystem:                  '',
+                                               sexagesimalUnits:              true,
+                                               latValue:                      0.0,
+                                               lonValue:                      0.0,
+                                               parallaxUnit:                  '',
+                                               parallaxValue:                 0.0,
+                                               properMotionCrossUnit:         '',
+                                               properMotionCrossValue:        0.0,
+                                               properMotionDeclinationUnit:   '',
+                                               properMotionDeclinationValue:  0.0,
+                                               radialVelocityUnit:            '',
+                                               radialVelocityValue:           0.0,
+                                               radialVelocityReferenceSystem: '',
+                                               dopplerType:                   '',
+                                               redshift:                      0,
                                              });
   }
 
   ngOnInit() {
-    this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
+    this.persistenceService.getScienceGoal()
         .subscribe(result => {
-          this.sourceForm.setValue({
-                                     sourceName: result.sourceName,
-                                     solarSystemObject: result.solarSystemObject,
-                                     chosenSolarObject: result.chosenSolarObject,
-                                     radialVelocityReferenceFrame: result.radialVelocityReferenceFrame,
-                                     sexagesimalUnits: result.sexagesimalUnits,
-                                     chosenSystem: result.chosenSystem,
-                                     latValue: result.lat.value,
-                                     lonValue: result.lon.value,
-                                     parallaxUnit: result.parallax.unit,
-                                     parallaxValue: result.parallax.value,
-                                     properMotionCrossUnit: result.properMotionCross.unit,
-                                     properMotionCrossValue: result.properMotionCross.value,
-                                     properMotionDeclinationUnit: result.properMotionDeclination.unit,
-                                     properMotionDeclinationValue: result.properMotionDeclination.value,
-                                     radialVelocityUnit: result.radialVelocity.unit,
-                                     radialVelocityValue: result.radialVelocity.value,
-                                     dopplerType: result.dopplerType,
-                                     redshift: result.redshift,
-                                   });
+          const targetParams = result.TargetParameters[CURRENT_SOURCE];
+          this.sourceForm.patchValue({
+                                       sourceName:                    targetParams.sourceName,
+                                       solarSystemObject:             targetParams.solarSystemObject !== 'Unspecified',
+                                       // chosenSolarObject: result.chosenSolarObject,
+                                       radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
+                                       // sexagesimalUnits: result.sexagesimalUnits,
+                                       // chosenSystem: result.chosenSystem,
+                                       latValue:                      targetParams.sourceCoordinates['val:latitude'].content,
+                                       lonValue:                      targetParams.sourceCoordinates['val:longitude'].content,
+                                       parallaxUnit:                  targetParams.parallax.unit,
+                                       parallaxValue:                 targetParams.parallax.content,
+                                       properMotionCrossUnit:         targetParams.pmRA.unit,
+                                       properMotionCrossValue:        targetParams.pmRA.content,
+                                       properMotionDeclinationUnit:   targetParams.pmDec.unit,
+                                       properMotionDeclinationValue:  targetParams.pmDec.content,
+                                       radialVelocityUnit:            targetParams.sourceVelocity['val:centerVelocity'].unit,
+                                       radialVelocityValue:           targetParams.sourceVelocity['val:centerVelocity'].content,
+                                       dopplerType:                   targetParams.sourceVelocity.dopplerCalcType,
+                                       // redshift: ,
+                                     });
           this.systemChange();
         });
   }
@@ -167,5 +166,17 @@ export class SourceComponent implements OnInit {
       this.sexagesimalCheckboxDisabled       = true;
     }
   }
+
+  // getRedshift(velocity: number, dopplerType: string): number {
+  //   const voc = ;
+  //   switch (dopplerType) {
+  //     case 'RELATIVISTIC':
+  //       return Math.sqrt((1.0 + voc) / (1.0 - voc)) - 1;
+  //     case 'OPTICAL':
+  //       return voc;
+  //     case 'RADIO':
+  //       return voc / (1.0 - voc);
+  //   }
+  // }
 
 }

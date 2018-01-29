@@ -7,6 +7,7 @@ import {ITechnicalJustification} from '../../interfaces/project/science-goal/tec
 import {CalibrationSetupParameters} from './calibration-setup-parameters';
 import {PerformanceParameters} from './performance-parameters';
 import {SpectralSetupParameters} from './spectral-setup-parameters';
+import {TargetParameters} from './target-parameters';
 
 export class ScienceGoal implements IScienceGoal {
   name: string;
@@ -71,7 +72,6 @@ export class ScienceGoal implements IScienceGoal {
   }
 
   initFromJson(json: any): ScienceGoal {
-    console.log(json);
     Object.keys(this).forEach(key => {
       if (json['prj:' + key] !== undefined) {
         this[key] = json['prj:' + key];
@@ -84,7 +84,7 @@ export class ScienceGoal implements IScienceGoal {
     this.CalibrationSetupParameters = new CalibrationSetupParameters().initFromJson(json['prj:CalibrationSetupParameters']);
     this.PerformanceParameters = new PerformanceParameters().initFromJson(json['prj:PerformanceParameters']);
     this.SpectralSetupParameters = new SpectralSetupParameters().initFromJson(json['prj:SpectralSetupParameters']);
-    console.log(this);
+    this.TargetParameters = json['prj:TargetParameters'].map(item => new TargetParameters().initFromJson(item));
     return this;
   }
 

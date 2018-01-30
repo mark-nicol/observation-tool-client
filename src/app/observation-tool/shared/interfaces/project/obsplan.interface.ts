@@ -1,7 +1,6 @@
-import {IAlmaProjectDataModel} from './almaprojectdatamodel.interface';
 import {IObsUnitControl} from './obsunitcontrol.interface';
 
-export interface IObsPlan extends IAlmaProjectDataModel {
+export interface IObsPlan {
   name: string;
   note: string;
   ObsUnitControl: IObsUnitControl;

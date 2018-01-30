@@ -1,9 +1,8 @@
 import {IAlmaInvestigator} from '../alma-investigator.interface';
-import {IAlmaProjectDataModel} from './almaprojectdatamodel.interface';
 import {IProposalFeedback} from './propsal-feedback.interface';
 import {IScienceGoal} from './science-goal/sciencegoal.interface';
 
-export interface IObsProposal extends IAlmaProjectDataModel {
+export interface IObsProposal {
   title: string;
   code: string;
   abstract: string;

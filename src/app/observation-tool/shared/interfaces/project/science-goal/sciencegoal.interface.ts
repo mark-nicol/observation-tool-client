@@ -1,11 +1,10 @@
-import {IAlmaProjectDataModel} from '../almaprojectdatamodel.interface';
 import {ICalibrationSetupParameters} from './calibration-setup-parameters.interface';
 import {IPerformanceParameters} from './performance-parameters.interface';
 import {ISpectralSetupParameters} from './spectral-setup-parameters-interface';
 import {ITargetParameters} from './target-parameters.interface';
 import {ITechnicalJustification} from './technical-justification.interface';
 
-export interface IScienceGoal extends IAlmaProjectDataModel {
+export interface IScienceGoal {
   name: string;
   note: string;
   estimatedTotalTime: number;

@@ -1,7 +1,6 @@
-import {IAlmaProjectDataModel} from './almaprojectdatamodel.interface';
 import {IObsProgram} from './obsprogram.interface';
 
-export interface IObsProject extends IAlmaProjectDataModel {
+export interface IObsProject {
   status: string;
   revision: number;
   projectName: string;

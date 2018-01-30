@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 /**
- * Service to convert a value of a type from one unit to another
+ * Service to convert a content of a type from one unit to another
  */
 
 @Injectable()
@@ -25,7 +25,7 @@ export abstract class ValueConversionService {
   }
 
   /**
-   * Get all the possible units for the current value type
+   * Get all the possible units for the current content type
    */
   getUnits(): string[] {
     const returnArray = [];

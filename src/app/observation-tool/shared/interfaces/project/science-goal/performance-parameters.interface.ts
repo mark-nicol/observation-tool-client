@@ -1,9 +1,8 @@
 import {Angle} from '../../../../../units/classes/angle';
 import {Frequency} from '../../../../../units/classes/frequency';
 import {Sensitivity} from '../../../../../units/classes/sensitivity';
-import {IAlmaProjectDataModel} from '../almaprojectdatamodel.interface';
 
-export interface IPerformanceParameters extends IAlmaProjectDataModel{
+export interface IPerformanceParameters {
   desiredAngularResolution: Angle;
   desiredLargestScale: Angle;
   desiredSensitivity: Sensitivity;

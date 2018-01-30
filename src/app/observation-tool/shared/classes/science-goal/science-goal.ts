@@ -7,6 +7,7 @@ import {ITechnicalJustification} from '../../interfaces/project/science-goal/tec
 import {CalibrationSetupParameters} from './calibration-setup-parameters';
 import {PerformanceParameters} from './performance-parameters';
 import {SpectralSetupParameters} from './spectral-setup-parameters';
+import {TargetParameters} from './target-parameters';
 
 export class ScienceGoal implements IScienceGoal {
   name: string;
@@ -47,7 +48,7 @@ export class ScienceGoal implements IScienceGoal {
               calibrationSetupParameters?: ICalibrationSetupParameters,
               performanceParameters?: IPerformanceParameters,
               spectralSetupParameters?: ISpectralSetupParameters,
-              TargetParameters?: ITargetParameters[],
+              targetParameters?: ITargetParameters[],
               TechnicalJustifications?: ITechnicalJustification[]) {
     this.name                       = name;
     this.note                       = note;
@@ -66,26 +67,8 @@ export class ScienceGoal implements IScienceGoal {
     this.CalibrationSetupParameters = calibrationSetupParameters;
     this.PerformanceParameters      = performanceParameters;
     this.SpectralSetupParameters    = spectralSetupParameters;
-    this.TargetParameters           = TargetParameters;
+    this.TargetParameters           = targetParameters;
     this.TechnicalJustifications    = TechnicalJustifications;
-  }
-
-  initFromJson(json: any): ScienceGoal {
-    console.log(json);
-    Object.keys(this).forEach(key => {
-      if (json['prj:' + key] !== undefined) {
-        this[key] = json['prj:' + key];
-      } else if (json['prp:' + key] !== undefined) {
-        this[key] = json['prp:' + key];
-      } else {
-        this[key] = json[key];
-      }
-    });
-    this.CalibrationSetupParameters = new CalibrationSetupParameters().initFromJson(json['prj:CalibrationSetupParameters']);
-    this.PerformanceParameters = new PerformanceParameters().initFromJson(json['prj:PerformanceParameters']);
-    this.SpectralSetupParameters = new SpectralSetupParameters().initFromJson(json['prj:SpectralSetupParameters']);
-    console.log(this);
-    return this;
   }
 
 }

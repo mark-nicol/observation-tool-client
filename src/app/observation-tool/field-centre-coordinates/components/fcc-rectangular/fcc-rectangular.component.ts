@@ -16,7 +16,7 @@ import {SystemService} from '../../../shared/services/system.service';
            })
 export class FccRectangularComponent implements OnChanges {
 
-  /** The selected radio value from FieldCentreCoordinates component */
+  /** The selected radio content from FieldCentreCoordinates component */
   @Input() radioValue = 'relative';
 
   @Input('group') rectangularForm = new FormGroup({
@@ -56,7 +56,7 @@ export class FccRectangularComponent implements OnChanges {
   }
 
   /**
-   * Sets the visibility of the sexagesimal checkbox depending on a radio value change
+   * Sets the visibility of the sexagesimal checkbox depending on a radio content change
    */
   ngOnChanges() {
     this.sexagesimalHidden = (this.radioValue === 'relative');

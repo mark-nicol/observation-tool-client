@@ -69,35 +69,35 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
-        .subscribe(result => {
-          const fcc      = result.fieldCentreCoordinates;
-          this.tableRows = fcc.individual.rows;
-          this.fieldCentreCoordinatesForm.patchValue({
-                                                       coordType: fcc.coordType,
-                                                       targetType: fcc.targetType,
-                                                       individual: {
-                                                         offsetUnit: fcc.individual.offsetUnit
-                                                       },
-                                                       rectangular: {
-                                                         chosenSystem: fcc.rectangular.chosenSystem,
-                                                         sexagesimalUnits: fcc.rectangular.sexagesimalUnits,
-                                                         lonOffsetUnit: fcc.rectangular.lonOffset.unit,
-                                                         lonOffsetValue: fcc.rectangular.lonOffset.value,
-                                                         latOffsetUnit: fcc.rectangular.latOffset.unit,
-                                                         latOffsetValue: fcc.rectangular.latOffset.value,
-                                                         pLengthUnit: fcc.rectangular.pLength.unit,
-                                                         pLengthValue: fcc.rectangular.pLength.value,
-                                                         qLengthUnit: fcc.rectangular.qLength.unit,
-                                                         qLengthValue: fcc.rectangular.qLength.value,
-                                                         positionAngleUnit: fcc.rectangular.positionAngle.unit,
-                                                         positionAngleValue: fcc.rectangular.positionAngle.value,
-                                                         spacing: fcc.rectangular.spacing,
-                                                         spacingUnits: fcc.rectangular.spacingUnits
-                                                       }
-                                                     });
-
-        })
+    // this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
+    //     .subscribe(result => {
+    //       const fcc      = result.fieldCentreCoordinates;
+    //       this.tableRows = fcc.individual.rows;
+    //       this.fieldCentreCoordinatesForm.patchValue({
+    //                                                    coordType: fcc.coordType,
+    //                                                    targetType: fcc.targetType,
+    //                                                    individual: {
+    //                                                      offsetUnit: fcc.individual.offsetUnit
+    //                                                    },
+    //                                                    rectangular: {
+    //                                                      chosenSystem: fcc.rectangular.chosenSystem,
+    //                                                      sexagesimalUnits: fcc.rectangular.sexagesimalUnits,
+    //                                                      lonOffsetUnit: fcc.rectangular.lonOffset.unit,
+    //                                                      lonOffsetValue: fcc.rectangular.lonOffset.content,
+    //                                                      latOffsetUnit: fcc.rectangular.latOffset.unit,
+    //                                                      latOffsetValue: fcc.rectangular.latOffset.content,
+    //                                                      pLengthUnit: fcc.rectangular.pLength.unit,
+    //                                                      pLengthValue: fcc.rectangular.pLength.content,
+    //                                                      qLengthUnit: fcc.rectangular.qLength.unit,
+    //                                                      qLengthValue: fcc.rectangular.qLength.content,
+    //                                                      positionAngleUnit: fcc.rectangular.positionAngle.unit,
+    //                                                      positionAngleValue: fcc.rectangular.positionAngle.content,
+    //                                                      spacing: fcc.rectangular.spacing,
+    //                                                      spacingUnits: fcc.rectangular.spacingUnits
+    //                                                    }
+    //                                                  });
+    //
+    //     })
   }
 
 }

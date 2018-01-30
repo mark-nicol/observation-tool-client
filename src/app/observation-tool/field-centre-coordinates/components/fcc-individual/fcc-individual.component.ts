@@ -14,7 +14,7 @@ import {TableRow} from '../../field-center-coordinates.component';
            })
 export class FccIndividualComponent implements OnInit {
 
-  /** The selected radio button value from FieldCentreCoordinatesComponent */
+  /** The selected radio button content from FieldCentreCoordinatesComponent */
   @Input() radioValue;
 
   @Input('group')

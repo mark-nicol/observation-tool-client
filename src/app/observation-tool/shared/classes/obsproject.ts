@@ -60,18 +60,4 @@ export class ObsProject implements IObsProject {
     this.revision            = revision;
   }
 
-  initFromJson(json: any) {
-    console.log('ObsProject', 'initFromJson');
-    Object.keys(this).forEach(key => {
-      if (json['prj:' + key] !== undefined) {
-        this[key] = json['prj:' + key];
-      } else if (json[key] !== undefined) {
-        this[key] = json[key];
-      }
-    });
-    this.ObsProgram = new ObsProgram().initFromJson(json['prj:ObsProgram']);
-    console.log(this);
-    return this;
-  }
-
 }

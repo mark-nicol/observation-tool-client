@@ -33,18 +33,19 @@ export class ExpectedSourcePropertiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
-        .subscribe(res => {
-          const esp = res.expectedSourceProperties;
-          this.expectedSourcePropertiesForm.setValue({
-                                                       continuumFluxDensityUnit: esp.continuumFluxDensity.unit,
-                                                       continuumFluxDensityValue: esp.continuumFluxDensity.value,
-                                                       continuumPolarization: esp.continuumPolarization,
-                                                       lineFluxDensityUnit: esp.lineFluxDensity.unit,
-                                                       lineFluxDensityValue: esp.lineFluxDensity.value,
-                                                       lineWidthUnit: esp.lineWidth.unit,
-                                                       lineWidthValue: esp.lineWidth.value,
-                                                       linePolarization: esp.linePolarization
+    this.persistenceService.getScienceGoal()
+        .subscribe(result => {
+          const esp = result.TargetParameters[CURRENT_SOURCE].ExpectedProperties;
+          console.log(esp);
+          this.expectedSourcePropertiesForm.patchValue({
+                                                       continuumFluxDensityUnit: esp.expectedPeakFluxDensity.unit,
+                                                       continuumFluxDensityValue: esp.expectedPeakFluxDensity.content,
+                                                       continuumPolarization: esp.desiredCircularPolarizationPercentage,
+                                                       lineFluxDensityUnit: esp.expectedPeakLineFluxDensity.unit,
+                                                       lineFluxDensityValue: esp.expectedPeakLineFluxDensity.content,
+                                                       lineWidthUnit: esp.expectedLineWidth.userUnit,
+                                                       lineWidthValue: esp.expectedLineWidth.content,
+                                                       linePolarization: esp.desiredLinePolarizationPercentage
                                                      })
         });
   }

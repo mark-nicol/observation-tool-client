@@ -4,29 +4,30 @@ import {Frequency} from '../../../../../units/classes/frequency';
 import {Latitude} from '../../../../../units/classes/latitude';
 import {Longitude} from '../../../../../units/classes/longitude';
 import {Speed} from '../../../../../units/classes/speed';
+import {SolarSystemObjects} from '../../../enums/solar-system-objects.enum';
 
 export interface ITargetParameters {
   type: string;
   isMosaic: boolean;
   sourceName: string;
-  sourceCoordinates: ISourceCoordinates;
+  sourceCoordinates: ISkyCoordinates;
   pmRA: AngularVelocity;
   pmDec: AngularVelocity;
   parallax: Angle;
   nonSiderealMotion: boolean;
-  solarSystemObject: any; // TODO Change
+  solarSystemObject: SolarSystemObjects;
   sourceEphemeris: string;
   sourceVelocity: ISourceVelocity;
   ephemerisFileName: string;
   index: number;
-  sdReferencePosition: any; // TODO Change
+  sdReferencePosition: ISkyCoordinates;
   ExpectedProperties: IExpectedProperties;
   fields: IField[];
 }
 
 export interface IField {
   name: string;
-  centre: any; // TODO Change
+  centre: ISkyCoordinates;
 }
 
 export interface ISinglePoint extends IField {
@@ -40,7 +41,7 @@ export interface IRectangle extends IField {
   referenceFrequency: Frequency;
 }
 
-export interface ISourceCoordinates {
+export interface ISkyCoordinates {
   system: string;
   type: string;
   latitude: Latitude;

@@ -5,11 +5,11 @@
     <div class="field">
       <label>Coord Type</label>
       <sui-radio-button name="coordTypeRadios"
-                        value="relative"
+                        value="RELATIVE"
                         formControlName="coordType">Relative
       </sui-radio-button>
       <sui-radio-button name="coordTypeRadios"
-                        value="absolute"
+                        value="ABSOLUTE"
                         formControlName="coordType">Absolute
       </sui-radio-button>
     </div>
@@ -18,18 +18,18 @@
     <div class="field">
       <label>Target Type</label>
       <sui-radio-button name="targetTypeRadios"
-                        value="individual"
+                        value="F_MultiplePoints"
                         formControlName="targetType">Individual Pointing(s)
       </sui-radio-button>
       <sui-radio-button name="targetTypeRadios"
-                        value="rectangular"
+                        value="F_SingleRectangle"
                         formControlName="targetType">Rectangular Field
       </sui-radio-button>
     </div>
   </div>
 </form>
 
-<div *ngIf="fieldCentreCoordinatesForm.value.targetType === 'individual';
+<div *ngIf="fieldCentreCoordinatesForm.value.targetType === 'F_MultiplePoints';
   then individualComponent
   else rectangularComponent"></div>
 <ng-template #individualComponent>

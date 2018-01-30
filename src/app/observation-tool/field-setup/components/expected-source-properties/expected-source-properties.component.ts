@@ -36,7 +36,6 @@ export class ExpectedSourcePropertiesComponent implements OnInit {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
           const esp = result.TargetParameters[CURRENT_SOURCE].ExpectedProperties;
-          console.log(esp);
           this.expectedSourcePropertiesForm.patchValue({
                                                        continuumFluxDensityUnit: esp.expectedPeakFluxDensity.unit,
                                                        continuumFluxDensityValue: esp.expectedPeakFluxDensity.content,

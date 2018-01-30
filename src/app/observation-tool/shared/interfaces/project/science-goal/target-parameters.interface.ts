@@ -1,5 +1,6 @@
 import {Angle} from '../../../../../units/classes/angle';
 import {AngularVelocity} from '../../../../../units/classes/angular-velocity';
+import {Flux} from '../../../../../units/classes/flux';
 import {Frequency} from '../../../../../units/classes/frequency';
 import {Latitude} from '../../../../../units/classes/latitude';
 import {Longitude} from '../../../../../units/classes/longitude';
@@ -56,11 +57,11 @@ export interface ISourceVelocity {
 }
 
 export interface IExpectedProperties {
-  expectedPeakFluxDensity: any; // TODO Change
+  expectedPeakFluxDensity: Flux;
   desiredPolarizationPercentage: number;
   expectedLineWidth: Frequency;
   referenceFrequency: Frequency;
-  expectedPeakLineFluxDensity: any; // TODO Change
+  expectedPeakLineFluxDensity: Flux;
   expectedSpectralDynamicRange: number;
   expectedImageDynamicRange: number;
   desiredLinePolarizationPercentage: number;

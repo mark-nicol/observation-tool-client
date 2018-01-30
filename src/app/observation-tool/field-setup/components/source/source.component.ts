@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Speed} from '../../../../units/classes/speed';
+import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
@@ -50,6 +52,19 @@ export class SourceComponent implements OnInit {
 
   sexagesimalCheckboxDisabled = false;
 
+  static getRedshift(centerVelocity: Speed, dopplerType: string): number {
+    console.log(centerVelocity.getValueInDefaultUnits());
+    const voc = centerVelocity.getValueInUnits('m/s') / Speed.C;
+    switch (dopplerType) {
+      case 'RELATIVISTIC':
+        return Math.sqrt((1.0 + voc) / (1.0 - voc)) - 1;
+      case 'OPTICAL':
+        return voc;
+      case 'RADIO':
+        return voc / (1.0 - voc);
+    }
+  }
+
   /**
    * Retrieves data from service
    * @param persistenceService Injected service
@@ -81,11 +96,11 @@ export class SourceComponent implements OnInit {
                                              });
   }
 
+
   ngOnInit() {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
           const targetParams = result.TargetParameters[CURRENT_SOURCE];
-          console.log(targetParams);
           this.sourceForm.patchValue({
                                        sourceName:                    targetParams.sourceName,
                                        solarSystemObject:             targetParams.solarSystemObject !== 'Unspecified',
@@ -104,7 +119,8 @@ export class SourceComponent implements OnInit {
                                        radialVelocityUnit:            targetParams.sourceVelocity.centerVelocity.unit,
                                        radialVelocityValue:           targetParams.sourceVelocity.centerVelocity.content,
                                        dopplerType:                   targetParams.sourceVelocity.dopplerCalcType,
-                                       // redshift: ,
+                                       redshift:                      SourceComponent.getRedshift(Object.assign(new Speed, targetParams.sourceVelocity.centerVelocity),
+                                                                                                  targetParams.sourceVelocity.dopplerCalcType),
                                      });
           this.systemChange();
         });
@@ -167,17 +183,5 @@ export class SourceComponent implements OnInit {
       this.sexagesimalCheckboxDisabled       = true;
     }
   }
-
-  // getRedshift(velocity: number, dopplerType: string): number {
-  //   const voc = ;
-  //   switch (dopplerType) {
-  //     case 'RELATIVISTIC':
-  //       return Math.sqrt((1.0 + voc) / (1.0 - voc)) - 1;
-  //     case 'OPTICAL':
-  //       return voc;
-  //     case 'RADIO':
-  //       return voc / (1.0 - voc);
-  //   }
-  // }
 
 }

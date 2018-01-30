@@ -9,7 +9,7 @@ import {ValueUnitPair} from './value-unit-pair';
 
 export class Speed extends ValueUnitPair {
 
-  // TODO: Add light speed
+  static C = 2.99792458e8;
 
   /**
    * Calls super constructor, injects correct conversion service

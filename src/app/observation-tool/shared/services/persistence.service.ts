@@ -1,10 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../classes/obsproject';
 import {ObsProposal} from '../classes/obsproposal';
 import {ScienceGoal} from '../classes/science-goal/science-goal';
+import * as _ from 'lodash';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -26,7 +26,9 @@ export class PersistenceService {
   getProject(projectCode: string): Observable<ObsProject> {
     return this.http.get<any>(`${this.baseUrl}/projects/project`)
                .map(result => {
-                 return Object.assign(new ObsProject, result);
+                 return _.merge(new ObsProject, result);
+                 // return Object.assign(new ObsProject, result);
+                 // return Object.assign(new ObsProject, result);
                  // return new ObsProject().initFromJson(result);
                });
   }
@@ -34,7 +36,8 @@ export class PersistenceService {
   getProposal(): Observable<ObsProposal> {
     return this.http.get<any>(`${this.baseUrl}/projects/proposal`)
                .map(result => {
-                 return Object.assign(new ObsProposal, result);
+                 return _.merge(new ObsProposal, result);
+                 // return Object.assign(new ObsProposal, result);
                  // return new ObsProposal().initFromJson(result);
                })
   }
@@ -42,7 +45,8 @@ export class PersistenceService {
   getScienceGoal(): Observable<ScienceGoal> {
     return this.http.get<any>(`${this.baseUrl}/projects/science-goals/goal`)
                .map(result => {
-                 return Object.assign(new ScienceGoal, result);
+                 return _.merge(new ScienceGoal(), result);
+                 // return Object.assign(new ScienceGoal, result);
                  // return new ScienceGoal().initFromJson(result);
                })
   }

@@ -5,7 +5,7 @@ import {CoordSystemInterface} from '../interfaces/coord-system.interface';
 export class SystemService {
 
   private systems: { [id: string]: CoordSystemInterface } = {
-    'icrs': {
+    'ICRS': {
       sexagesimalLabels: {
         latLabel: 'Dec',
         lonLabel: 'RA',

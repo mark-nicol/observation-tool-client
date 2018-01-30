@@ -38,7 +38,7 @@
       <div class="field">
         <!-- System Selector -->
         <label>System</label>
-        <div class="inline field">
+        <div class="field">
           <sui-select class="selection"
                       formControlName="chosenSystem"
                       (selectedOptionChange)="systemChange()">
@@ -214,7 +214,8 @@
         </label>
         <sui-select class="selection"
                     id="dopplerSelect"
-                    formControlName="dopplerType">
+                    formControlName="dopplerType"
+                    (selectedOptionChange)="setRedshift()">
           <sui-select-option value="RADIO">Radio</sui-select-option>
           <sui-select-option value="OPTICAL">Optical</sui-select-option>
           <sui-select-option value="RELATIVISTIC">Relativistic</sui-select-option>

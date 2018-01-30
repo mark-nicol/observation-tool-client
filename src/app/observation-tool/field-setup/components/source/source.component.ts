@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Speed} from '../../../../units/classes/speed';
-import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {SystemService} from '../../../shared/services/system.service';
+import {SexagesimalPipe} from '../../../shared/pipes/sexagesimal.pipe';
 
 /**
  * Source Component in Field Setup
@@ -53,7 +53,6 @@ export class SourceComponent implements OnInit {
   sexagesimalCheckboxDisabled = false;
 
   static getRedshift(centerVelocity: Speed, dopplerType: string): number {
-    console.log(centerVelocity.getValueInDefaultUnits());
     const voc = centerVelocity.getValueInUnits('m/s') / Speed.C;
     switch (dopplerType) {
       case 'RELATIVISTIC':
@@ -106,8 +105,8 @@ export class SourceComponent implements OnInit {
                                        solarSystemObject:             targetParams.solarSystemObject !== 'Unspecified',
                                        // chosenSolarObject: result.chosenSolarObject,
                                        radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
-                                       // sexagesimalUnits: result.sexagesimalUnits,
-                                       // chosenSystem: result.chosenSystem,
+                                       sexagesimalUnits:              targetParams.sourceCoordinates.type === 'ABSOLUTE',
+                                       chosenSystem:                  targetParams.sourceCoordinates.system,
                                        latValue:                      targetParams.sourceCoordinates.latitude.content,
                                        lonValue:                      targetParams.sourceCoordinates.longitude.content,
                                        parallaxUnit:                  targetParams.parallax.unit,
@@ -119,12 +118,14 @@ export class SourceComponent implements OnInit {
                                        radialVelocityUnit:            targetParams.sourceVelocity.centerVelocity.unit,
                                        radialVelocityValue:           targetParams.sourceVelocity.centerVelocity.content,
                                        dopplerType:                   targetParams.sourceVelocity.dopplerCalcType,
-                                       redshift:                      SourceComponent.getRedshift(Object.assign(new Speed, targetParams.sourceVelocity.centerVelocity),
+                                       redshift:                      SourceComponent.getRedshift(Object.assign(new Speed,
+                                                                                                                targetParams.sourceVelocity.centerVelocity),
                                                                                                   targetParams.sourceVelocity.dopplerCalcType),
                                      });
           this.systemChange();
         });
   }
+
 
   /**
    * Removes focus from the currently focused DOM element when clicked out
@@ -176,12 +177,21 @@ export class SourceComponent implements OnInit {
    */
   systemChange() {
     this.currentSystem = this.systemService.getSystem(this.sourceForm.value.chosenSystem);
-    if (this.sourceForm.value.chosenSystem === 'icrs' || this.sourceForm.value.chosenSystem === 'FK5 J2000') {
+    if (this.sourceForm.value.chosenSystem === 'ICRS' || this.sourceForm.value.chosenSystem === 'FK5 J2000') {
       this.sexagesimalCheckboxDisabled = false;
     } else {
       this.sourceForm.value.sexagesimalUnits = false;
       this.sexagesimalCheckboxDisabled       = true;
     }
+  }
+
+  setRedshift() {
+    this.sourceForm.patchValue({
+                                 redshift: SourceComponent.getRedshift(
+                                   new Speed(this.sourceForm.value.radialVelocityUnit,
+                                             this.sourceForm.value.radialVelocityValue),
+                                   this.sourceForm.value.dopplerType)
+                               });
   }
 
 }

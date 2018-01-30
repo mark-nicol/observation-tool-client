@@ -41,6 +41,8 @@ export interface IRectangle extends IField {
 }
 
 export interface ISourceCoordinates {
+  system: string;
+  type: string;
   latitude: Latitude;
   longitude: Longitude;
   fieldName: string;

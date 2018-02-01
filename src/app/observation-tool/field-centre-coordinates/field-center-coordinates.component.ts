@@ -1,24 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Latitude} from '../../units/classes/latitude';
-import {Longitude} from '../../units/classes/longitude';
-import {TargetParameters} from '../shared/classes/science-goal/target-parameters';
 import {CURRENT_SOURCE} from '../shared/data/current-source';
+import {ISinglePoint} from '../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
  * Handles the Field Centre Coordinates component in the Field Setup
  */
-
-export class TableRow {
-  lat: Latitude;
-  lon: Longitude;
-
-  constructor() {
-    this.lat = new Latitude();
-    this.lon = new Longitude();
-  }
-}
 
 @Component({
              selector:    'field-center-coordinates',
@@ -27,10 +15,8 @@ export class TableRow {
            })
 export class FieldCenterCoordinatesComponent implements OnInit {
 
-  /** The page data from the fieldSetupService */
-  data: any;
   fieldCentreCoordinatesForm: FormGroup;
-  tableRows: any;
+  tableRows: ISinglePoint[];
 
   /** Field Setup Service to be used in HTML template */
   protected _persistenceService: PersistenceService;
@@ -73,10 +59,14 @@ export class FieldCenterCoordinatesComponent implements OnInit {
           console.log(result.TargetParameters[CURRENT_SOURCE].type);
           this.fieldCentreCoordinatesForm.patchValue({targetType: result.TargetParameters[CURRENT_SOURCE].type});
           if (result.TargetParameters[CURRENT_SOURCE].type === 'F_MultiplePoints') { // TODO Enum
-            console.log('Individual pointings');
+            console.log(result.TargetParameters[CURRENT_SOURCE]);
             this.fieldCentreCoordinatesForm.patchValue({
-                                                         coordType: result.TargetParameters[CURRENT_SOURCE].SinglePoint[0].centre.type,
+                                                         coordType:  result.TargetParameters[CURRENT_SOURCE].SinglePoint[0].centre.type,
+                                                         individual: {
+                                                           offsetUnit: result.TargetParameters[CURRENT_SOURCE].SinglePoint[0].centre.latitude.unit
+                                                         }
                                                        });
+            this.tableRows = result.TargetParameters[CURRENT_SOURCE].SinglePoint;
           } else {
             console.log('Rectangular');
           }

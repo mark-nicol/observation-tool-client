@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {SinglePoint} from '../../../shared/classes/science-goal/single-point';
+import {ISinglePoint} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
-import {TableRow} from '../../field-center-coordinates.component';
 
 /**
  * Individual Field Centre Coordinates component
@@ -50,7 +51,8 @@ export class FccIndividualComponent implements OnInit {
     this.setRows(this.tableRows);
   }
 
-  setRows(rows: TableRow[]) {
+  setRows(rows: ISinglePoint[]) {
+    console.log(rows);
     const rowFormGroups = rows.map(tableRow => this.formBuilder.group(tableRow));
     const rowFormArray  = this.formBuilder.array(rowFormGroups);
     this.individualForm.setControl('rows', rowFormArray);
@@ -64,7 +66,7 @@ export class FccIndividualComponent implements OnInit {
    * Adds a new row to the page data
    */
   addRow() {
-    this.rows.push(this.formBuilder.group(new TableRow()));
+    this.rows.push(this.formBuilder.group(new SinglePoint()));
   }
 
   /**

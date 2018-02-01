@@ -1,10 +1,13 @@
-<div class="ui form">
+<form class="ui form"
+      [formGroup]="generalForm">
   <div class="field">
     <label for="name-input">Science Goal Name</label>
-    <input id="name-input">
+    <input id="name-input"
+           formControlName="name">
   </div>
   <div class="field">
     <label for="description-input">Description</label>
-    <textarea id="description-input"></textarea>
+    <textarea id="description-input"
+              formControlName="note"></textarea>
   </div>
-</div>
+</form>

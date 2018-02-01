@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FieldSetupModule} from '../field-setup/field-setup.module';
 import {SharedModule} from '../shared/shared.module';
@@ -17,6 +18,7 @@ import {ScienceGoalComponent} from './science-goal.component';
     SharedModule,
     SpectralSetupModule,
     ScienceGoalRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     CalibrationSetupComponent,

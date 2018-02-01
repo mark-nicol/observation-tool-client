@@ -1,4 +1,4 @@
-<div class="ui top attached tabular menu">
+<div class="ui fixed sticky top attached tabular menu">
   <a class="item"
      *ngFor="let page of pageKeys(pages)"
      [ngClass]="{'active': router.url.indexOf(pages[page].path) > -1}"
@@ -7,6 +7,7 @@
     {{pages[page].text}}
   </a>
 </div>
+<p style="height: 1.95em"></p>
 <div class="ui bottom attached segment">
   <router-outlet></router-outlet>
 </div>

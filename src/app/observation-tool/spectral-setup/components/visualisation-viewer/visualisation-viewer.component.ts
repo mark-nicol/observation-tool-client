@@ -200,7 +200,7 @@ export class VisualisationViewerComponent implements OnInit {
 
     // Set the x domain of the focus chart (0 to largest number i.e. 0 - 1000)
     this.focus.xScale.domain([0, d3.max(this.data, d => d[0])]);
-    // Set the y domain of the focus chart (max y value to min y value as it could be less than 0)
+    // Set the y domain of the focus chart (max y content to min y content as it could be less than 0)
     this.focus.yScale.domain([d3.max(this.data, d => d[2]), d3.min(this.data, d => d[2])]);
     // Context scale domains the same as focus
     this.context.xScale.domain(this.focus.xScale.domain());

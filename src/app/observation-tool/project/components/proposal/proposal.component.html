@@ -1,4 +1,4 @@
-<form class="ui form container" [formGroup]="proposal">
+<form class="ui form container" [formGroup]="proposalForm">
   <div class="ui segment">
     <h4 class="ui dividing header">Proposal Information</h4>
     <div class="field">
@@ -59,7 +59,7 @@
       <div class="field" *ngFor="let categoryRadio of categoryKeys(categoryRadios)">
         <sui-radio-button id="{{categoryRadios[categoryRadio].value}}"
                           name="categoryRadios"
-                          value="{{categoryRadios[categoryRadio].value}}"
+                          value="{{categoryRadios[categoryRadio].text}}"
                           (currentValueChange)="categoryRadioChange($event)"
                           formControlName="scientificCategory">
           {{categoryRadios[categoryRadio].text}}
@@ -69,8 +69,8 @@
 
     <div class="field">
       <!--<label for="keywordSelector">Keywords (chosen {{-->
-      <!--(project | async)?.proposal.keywords === null ? 0 :-->
-      <!--(project | async)?.proposal.keywords.length}} of 2)</label>-->
+      <!--(project | async)?.proposalForm.keywords === null ? 0 :-->
+      <!--(project | async)?.proposalForm.keywords.length}} of 2)</label>-->
       <sui-multi-select #keywordSelector
                         id="keywordSelector"
                         class="selection"

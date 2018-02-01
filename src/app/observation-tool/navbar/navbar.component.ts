@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
     },
     {
       title: 'Proposal',
-      path: 'project/proposal'
+      path: 'project/proposalForm'
     },
     {
       title: 'Planned Observing',

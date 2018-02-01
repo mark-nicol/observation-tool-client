@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {CURRENT_PROJECT} from '../../../shared/data/current-project';
 import {CURRENT_SCIENCE_GOAL} from '../../../shared/data/current-science-goal';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
-import {ExpectedSourcePropertiesInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/expected-source-properties.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -17,7 +16,7 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
            })
 export class ExpectedSourcePropertiesComponent implements OnInit {
 
-  data: ExpectedSourcePropertiesInterface;
+  data: any;
   expectedSourcePropertiesForm: FormGroup;
 
   constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
@@ -34,18 +33,18 @@ export class ExpectedSourcePropertiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getSource(CURRENT_PROJECT, CURRENT_SCIENCE_GOAL, CURRENT_SOURCE)
-        .subscribe(res => {
-          const esp = res.expectedSourceProperties;
-          this.expectedSourcePropertiesForm.setValue({
-                                                       continuumFluxDensityUnit: esp.continuumFluxDensity.unit,
-                                                       continuumFluxDensityValue: esp.continuumFluxDensity.value,
-                                                       continuumPolarization: esp.continuumPolarization,
-                                                       lineFluxDensityUnit: esp.lineFluxDensity.unit,
-                                                       lineFluxDensityValue: esp.lineFluxDensity.value,
-                                                       lineWidthUnit: esp.lineWidth.unit,
-                                                       lineWidthValue: esp.lineWidth.value,
-                                                       linePolarization: esp.linePolarization
+    this.persistenceService.getScienceGoal()
+        .subscribe(result => {
+          const esp = result.TargetParameters[CURRENT_SOURCE].ExpectedProperties;
+          this.expectedSourcePropertiesForm.patchValue({
+                                                       continuumFluxDensityUnit: esp.expectedPeakFluxDensity.unit,
+                                                       continuumFluxDensityValue: esp.expectedPeakFluxDensity.content,
+                                                       continuumPolarization: esp.desiredCircularPolarizationPercentage,
+                                                       lineFluxDensityUnit: esp.expectedPeakLineFluxDensity.unit,
+                                                       lineFluxDensityValue: esp.expectedPeakLineFluxDensity.content,
+                                                       lineWidthUnit: esp.expectedLineWidth.userUnit,
+                                                       lineWidthValue: esp.expectedLineWidth.content,
+                                                       linePolarization: esp.desiredLinePolarizationPercentage
                                                      })
         });
   }

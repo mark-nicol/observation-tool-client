@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {SystemService} from '../../../shared/services/system.service';
@@ -14,9 +14,9 @@ import {SystemService} from '../../../shared/services/system.service';
              templateUrl: './fcc-rectangular.component.html',
              styleUrls: ['./fcc-rectangular.component.scss']
            })
-export class FccRectangularComponent implements OnChanges {
+export class FccRectangularComponent implements OnInit, OnChanges {
 
-  /** The selected radio value from FieldCentreCoordinates component */
+  /** The selected radio content from FieldCentreCoordinates component */
   @Input() radioValue = 'relative';
 
   @Input('group') rectangularForm = new FormGroup({
@@ -32,7 +32,7 @@ export class FccRectangularComponent implements OnChanges {
                                                     qLengthValue: new FormControl(),
                                                     positionAngleUnit: new FormControl(),
                                                     positionAngleValue: new FormControl(),
-                                                    spacing: new FormControl(),
+                                                    spacingValue: new FormControl(),
                                                     spacingUnits: new FormControl(),
                                                   });
 
@@ -55,8 +55,12 @@ export class FccRectangularComponent implements OnChanges {
   constructor(protected systemService: SystemService) {
   }
 
+  ngOnInit(): void {
+    this.chosenSystem = this.systemService.getSystem(this.rectangularForm.value.chosenSystem);
+  }
+
   /**
-   * Sets the visibility of the sexagesimal checkbox depending on a radio value change
+   * Sets the visibility of the sexagesimal checkbox depending on a radio content change
    */
   ngOnChanges() {
     this.sexagesimalHidden = (this.radioValue === 'relative');
@@ -67,6 +71,7 @@ export class FccRectangularComponent implements OnChanges {
    * @param system The newly selected system
    */
   systemChange(system: CoordSystemInterface) {
+    console.log(system);
     this.chosenSystem = system;
   }
 

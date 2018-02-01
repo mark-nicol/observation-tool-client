@@ -2,7 +2,7 @@ import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ToastsManager} from 'ng2-toastr';
 import {AlmaInvestigatorSearchModal} from '../../../../alma-investigator-search/components/modal/modal.component';
-import {AlmaInvestigatorInterface} from '../../../../shared/interfaces/alma-investigator.interface';
+import {IAlmaInvestigator} from '../../../../shared/interfaces/alma-investigator.interface';
 
 /**
  * Initial PI search component
@@ -20,7 +20,7 @@ export class PiSearchComponent implements OnInit {
   INPUT_PLACEHOLDER = 'Enter Principle Investigator name';
 
   /** The chosen PI passed back from piSelect */
-  passedPi: AlmaInvestigatorInterface;
+  passedPi: IAlmaInvestigator;
 
   constructor(private suiModalService: SuiModalService,
               private toastMgr: ToastsManager,

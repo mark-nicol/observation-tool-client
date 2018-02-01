@@ -38,7 +38,6 @@ import {SystemService} from './services/system.service';
     RouterModule,
     FormsModule,
     UnitsModule,
-    ModularPanelComponent,
     SystemSelectorComponent,
     DelayTooltipDirective,
     DegreesPipe,

@@ -1,5 +1,4 @@
-import {Component} from '@angular/core';
-import {ImageQueryInterface} from '../../../shared/interfaces/science-goal-interfaces/field-setup-interfaces/image-query.interface';
+import {Component, OnInit} from '@angular/core';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -13,9 +12,9 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
   templateUrl: './image-query.component.html',
   styleUrls: ['./image-query.component.css']
 })
-export class ImageQueryComponent {
+export class ImageQueryComponent implements OnInit{
 
-  data: ImageQueryInterface;
+  data: any;
 
   constructor(private persistenceService: PersistenceService) {}
 

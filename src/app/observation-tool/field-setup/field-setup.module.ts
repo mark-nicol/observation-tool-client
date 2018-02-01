@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 import {FieldCentreCoordinatesModule} from '../field-centre-coordinates/field-centre-coordinates.module';
+import {SexagesimalPipe} from '../shared/pipes/sexagesimal.pipe';
 import {SharedModule} from '../shared/shared.module';
 import {ExpectedSourcePropertiesComponent} from './components/expected-source-properties/expected-source-properties.component';
 import {FovParametersComponent} from './components/fov-parameters/fov-parameters.component';
@@ -15,7 +16,7 @@ import {FieldSetupComponent} from './field-setup.component';
     FieldCentreCoordinatesModule,
     SharedModule,
     SuiModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     FieldSetupComponent,

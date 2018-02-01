@@ -38,8 +38,8 @@ describe('Class: Length', () => {
   });
 
   it('1 PC to KM should be 3.0951e13', () => {
-    cls.unit  = LengthUnits.PC;
-    cls.value = 1.000;
+    cls.unit    = LengthUnits.PC;
+    cls.content = 1.000;
     expect(cls.getValueInUnits(LengthUnits.KM)).toEqual(3.0951e13);
   });
 
@@ -47,7 +47,7 @@ describe('Class: Length', () => {
     for (let i = 0; i < 5; i++) {
       cls.getValueInUnits(LengthUnits.CM);
     }
-    expect(cls.value).toEqual(10);
+    expect(cls.content).toEqual(10);
   });
 
 });

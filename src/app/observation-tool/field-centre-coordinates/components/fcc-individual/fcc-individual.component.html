@@ -9,7 +9,7 @@
     </label>
     <sui-select id="offsetSelector"
                 class="selection"
-                [isDisabled]="radioValue === 'absolute'"
+                [isDisabled]="radioValue === 'ABSOLUTE'"
                 formControlName="offsetUnit">
       <sui-select-option *ngFor="let unit of offsetUnits"
                          value="{{unit}}">
@@ -29,26 +29,28 @@
     </div>
   </div>
 
-  <table class="ui celled table"
+  <table class="ui compact celled table"
          suiPopup
          popupText="Coordinate offsets for each pointing">
     <thead>
       <tr>
         <th>
-          Head{{radioValue === 'relative' ? ' ['+individualForm.value.offsetUnit+']' : null}}
+          {{sourceCoordinatesSystem?.lonHeader}}{{radioValue === 'RELATIVE' ? ' ['+individualForm.value.offsetUnit+']'
+          : null}}
         </th>
         <th>
-          Head{{radioValue === 'relative' ? ' ['+individualForm.value.offsetUnit+']' : null}}
+          {{sourceCoordinatesSystem?.latHeader}}{{radioValue === 'RELATIVE' ? ' ['+individualForm.value.offsetUnit+']'
+          : null}}
         </th>
       </tr>
     </thead>
     <tbody formArrayName="rows">
       <tr *ngFor="let row of rows.controls; let i=index" [formGroupName]="i">
         <td contenteditable>
-          {{row.value.lon.value}}
+          {{row.value.centre.longitude.content}}
         </td>
         <td contenteditable>
-          {{row.value.lat.value}}
+          {{row.value.centre.latitude.content}}
         </td>
       </tr>
     </tbody>

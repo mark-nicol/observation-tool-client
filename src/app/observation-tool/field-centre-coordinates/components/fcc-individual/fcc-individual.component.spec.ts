@@ -6,6 +6,7 @@ import {SuiModule} from 'ng2-semantic-ui';
 import {DegreesPipe} from '../../../shared/pipes/degrees.pipe';
 import {SexagesimalPipe} from '../../../shared/pipes/sexagesimal.pipe';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {SystemService} from '../../../shared/services/system.service';
 
 import {FccIndividualComponent} from './fcc-individual.component';
 
@@ -27,7 +28,8 @@ describe('FccIndividualComponent', () => {
                                        HttpClientTestingModule
                                      ],
                                      providers: [
-                                       PersistenceService
+                                       PersistenceService,
+                                       SystemService
                                      ]
                                    })
            .compileComponents();

@@ -32,7 +32,7 @@ export class FccRectangularComponent implements OnInit, OnChanges {
                                                     qLengthValue: new FormControl(),
                                                     positionAngleUnit: new FormControl(),
                                                     positionAngleValue: new FormControl(),
-                                                    spacing: new FormControl(),
+                                                    spacingValue: new FormControl(),
                                                     spacingUnits: new FormControl(),
                                                   });
 

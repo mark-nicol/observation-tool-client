@@ -10,6 +10,7 @@ import {ImageQueryComponent} from './components/image-query/image-query.componen
 import {SourceComponent} from './components/source/source.component';
 import {SpacialImageComponent} from './components/spacial-image/spacial-image.component';
 import {FieldSetupComponent} from './field-setup.component';
+import { AladinComponent } from './components/aladin/aladin.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import {FieldSetupComponent} from './field-setup.component';
     ImageQueryComponent,
     ExpectedSourcePropertiesComponent,
     SourceComponent,
-    SpacialImageComponent
+    SpacialImageComponent,
+    AladinComponent
   ],
   providers: [],
   exports: [FieldSetupComponent]

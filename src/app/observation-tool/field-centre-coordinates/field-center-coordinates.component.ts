@@ -17,6 +17,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
 
   fieldCentreCoordinatesForm: FormGroup;
   tableRows: ISinglePoint[];
+  sourceCoordinatesSystem = 'ICRS';
 
   /** Field Setup Service to be used in HTML template */
   protected _persistenceService: PersistenceService;
@@ -56,6 +57,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   ngOnInit() {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
+          this.sourceCoordinatesSystem = result.TargetParameters[CURRENT_SOURCE].sourceCoordinates.system;
           console.log(result.TargetParameters[CURRENT_SOURCE].type);
           this.fieldCentreCoordinatesForm.patchValue({targetType: result.TargetParameters[CURRENT_SOURCE].type});
           if (result.TargetParameters[CURRENT_SOURCE].type === 'F_MultiplePoints') { // TODO Enum

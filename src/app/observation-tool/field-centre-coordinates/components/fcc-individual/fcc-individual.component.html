@@ -29,16 +29,18 @@
     </div>
   </div>
 
-  <table class="ui celled table"
+  <table class="ui compact celled table"
          suiPopup
          popupText="Coordinate offsets for each pointing">
     <thead>
       <tr>
         <th>
-          Head{{radioValue === 'RELATIVE' ? ' ['+individualForm.value.offsetUnit+']' : null}}
+          {{sourceCoordinatesSystem.lonHeader}}{{radioValue === 'RELATIVE' ? ' ['+individualForm.value.offsetUnit+']'
+          : null}}
         </th>
         <th>
-          Head{{radioValue === 'RELATIVE' ? ' ['+individualForm.value.offsetUnit+']' : null}}
+          {{sourceCoordinatesSystem.latHeader}}{{radioValue === 'RELATIVE' ? ' ['+individualForm.value.offsetUnit+']'
+          : null}}
         </th>
       </tr>
     </thead>

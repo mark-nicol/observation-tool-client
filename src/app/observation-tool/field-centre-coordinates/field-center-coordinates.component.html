@@ -35,7 +35,8 @@
 <ng-template #individualComponent>
   <fcc-individual [radioValue]="fieldCentreCoordinatesForm.value.coordType"
                   [group]="fieldCentreCoordinatesForm.controls.individual"
-                  [tableRows]="tableRows"></fcc-individual>
+                  [tableRows]="tableRows"
+                  [sourceCoordinatesSystemString]="sourceCoordinatesSystem"></fcc-individual>
 </ng-template>
 <ng-template #rectangularComponent>
   <fcc-rectangular [radioValue]="fieldCentreCoordinatesForm.value.coordType"

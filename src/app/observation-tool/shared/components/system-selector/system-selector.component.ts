@@ -28,7 +28,7 @@ export class SystemSelectorComponent implements OnInit {
 
   /** Possible system choices dict */
   systems: { [id: string]: CoordSystemInterface } = {
-    'ICRS': {
+    'icrs': {
       sexagesimalLabels: {
         latLabel: 'Dec',
         lonLabel: 'RA',
@@ -152,6 +152,7 @@ export class SystemSelectorComponent implements OnInit {
    * Controls a change of the sexagesimal state
    */
   sexagesimalChange() {
+    this.sexagesimalUnits = !this.sexagesimalUnits;
     this.sexagesimalEmitter.emit(this.sexagesimalUnits);
   }
 

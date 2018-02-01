@@ -1,102 +1,99 @@
-<div class="row btn-toolbar justify-content-center">
-  <div class="btn-group mr-2"
-       role="group">
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Open a FITS file"
-            #openButtonTooltip="ngbTooltip"
-            [tooltip-delay]="openButtonTooltip">
-      <i class="fa fa-folder-open-o"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Save image as.."
-            #saveButtonTooltip="ngbTooltip"
-            [tooltip-delay]="saveButtonTooltip">
-      <i class="fa fa-save"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Cut selected FOVs"
-            #cutButtonTooltip="ngbTooltip"
-            [tooltip-delay]="cutButtonTooltip">
-      <i class="fa fa-cut"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Select FOVs in a rectangle region"
-            #rectSelectTooltip="ngbTooltip"
-            [tooltip-delay]="rectSelectTooltip">
-      <i class="fa fa-square-o"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Select target centre"
-            #centreSelectTooltip="ngbTooltip"
-            [tooltip-delay]="centreSelectTooltip">
-      <i class="fa fa-times"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Add an FOV"
-            #addButtonTooltip="ngbTooltip"
-            [tooltip-delay]="addButtonTooltip">
-      <i class="fa fa-times-circle-o"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Image cut levels"
-            #levelsButtonTooltip="ngbTooltip"
-            [tooltip-delay]="levelsButtonTooltip">
-      <i class="fa fa-area-chart"></i>
-    </button>
+<h4 class="ui dividing header">Spacial Image</h4>
+<div class="ui center aligned grid"
+     style="padding-bottom: 1em">
+  <div class="row">
+    <img src="../../../../../assets/img/field_placeholder.png">
   </div>
-  <div class="btn-group ml-2"
-       role="group">
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Zoom in"
-            #zoomInButtonTooltip="ngbTooltip"
-            [tooltip-delay]="zoomInButtonTooltip">
-      <i class="fa fa-search-plus"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Zoom out"
-            #zoomOutButtonTooltip="ngbTooltip"
-            [tooltip-delay]="zoomOutButtonTooltip">
-      <i class="fa fa-search-minus"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Zoom to fit the window"
-            #fitButtonTooltip="ngbTooltip"
-            [tooltip-delay]="fitButtonTooltip">
-      <i class="fa fa-square-o"></i>
-    </button>
-    <button class="btn btn-outline-secondary"
-            ngbTooltip="Normal zoom"
-            #normalButtonTooltip="ngbTooltip"
-            [tooltip-delay]="normalButtonTooltip">
-      <i class="fa fa-search"></i>
-    </button>
+  <div class="row">
+    <div class="ui blue icon buttons">
+      <button class="ui button"
+              suiPopup
+              popupText="Zoom in">
+        <i class="zoom icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Zoom out">
+        <i class="zoom out icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Zoom to fit the window">
+        <i class="window maximize icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Normal zoom">
+        <i class="window restore icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Open a FITS file">
+        <i class="folder open icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Save image as..">
+        <i class="save icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Cut selected FOVs">
+        <i class="cut icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Select FOVs in a rectangle region">
+        <i class="add square icon"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Select target centre">
+        <i class="fa fa-times"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Add an FOV">
+        <i class="fa fa-times-circle-o"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Image cut levels">
+        <i class="fa fa-area-chart"></i>
+      </button>
+      <button class="ui button"
+              suiPopup
+              popupText="Show/Hide grid">
+        <i class="grid layout icon"></i>
+      </button>
+    </div>
   </div>
 </div>
-<div class="row form-group justify-content-center">
-  <input class="form-control form-control-sm"
-         placeholder="1x"
-         style="width: 2.5em; text-align: center"
-         ngbTooltip="Current magnification"
-         #magInputTooltip="ngbTooltip"
-         [tooltip-delay]="magInputTooltip">
-  <input class="form-control form-control-sm"
-         placeholder="432, 276"
-         style="width: 6em; text-align: center"
-         ngbTooltip="Image pixel coordinates at mouse position"
-         #mouseCoordsTooltip="ngbTooltip"
-         [tooltip-delay]="mouseCoordsTooltip">
-  <input class="form-control form-control-sm"
-         placeholder="0.0"
-         style="width: 6em; text-align: center"
-         ngbTooltip="Image pixel value at mouse position"
-         #pxValTooltip="ngbTooltip"
-         [tooltip-delay]="pxValTooltip">
+<div class="ui form">
+  <div class="three fields">
+    <div class="field"
+         suiPopup
+         popupText="Current magnification">
+      <input placeholder="1x"
+             style="text-align: center">
+    </div>
+    <div class="field"
+         suiPopup
+         popupText="Image pixel coordinates at mouse position">
+      <input placeholder="432, 276"
+             style="text-align: center">
+    </div>
+    <div class="field"
+         suiPopup
+         popupText="Image pixel value at mouse position">
+      <input placeholder="0.0"
+             style="text-align: center">
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="filenameNote">Image Filename</label>
+    <input id="filenameNote">
+  </div>
 </div>
-<div class="row form-group justify-content-center">
-  <label class="col-3"
-         for="filenameNote">
-    Image Filename
-  </label>
-  <input class="col-9 align-self-baseline form-control form-control-sm"
-         id="filenameNote">
-</div>
+<div style="height: 1em"></div>

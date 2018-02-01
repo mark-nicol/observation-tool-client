@@ -13,4 +13,6 @@ import {Component} from '@angular/core';
 })
 export class CalibrationSetupComponent {
 
+  selectedRadio = 'user';
+
 }

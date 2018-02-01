@@ -1,4 +1,7 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SuiModule} from 'ng2-semantic-ui';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 import {FovParametersComponent} from './fov-parameters.component';
 
@@ -10,6 +13,13 @@ describe('FovParametersComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         FovParametersComponent
+      ],
+      imports: [
+        HttpClientTestingModule,
+        SuiModule
+      ],
+      providers: [
+        PersistenceService
       ]
     })
       .compileComponents();

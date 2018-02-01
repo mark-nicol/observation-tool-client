@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {PiEntryComponent} from './components/pi-entry/pi-entry.component';
 import {PlannedObservingComponent} from './components/planned-observing/planned-observing.component';
 import {ProposalComponent} from './components/proposal/proposal.component';
 
@@ -8,11 +9,11 @@ const routes: Routes = [
     path: 'project',
     children: [
       {
-        path: 'pi-select',
-        loadChildren: '../pi-select/pi-select.module#PiSelectModule'
+        path: 'pi-entry',
+        component: PiEntryComponent
       },
       {
-        path: 'proposal',
+        path:      'proposalForm',
         component: ProposalComponent,
       },
       {
@@ -25,14 +26,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'pi-select',
+        redirectTo: 'pi-entry',
         pathMatch: 'full'
       }
     ],
   },
   {
     path: '',
-    redirectTo: 'project',
+    redirectTo: 'project/pi-entry',
     pathMatch: 'full'
   }
 ];

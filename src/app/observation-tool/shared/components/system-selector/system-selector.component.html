@@ -1,35 +1,28 @@
-<div class="row">
-  <label class="col-xl-4 text-xl-right"
-         for="systemSelector"
-         ngbTooltip="Coordinate system type"
+<div class="field"
+     suiPopup
+     popupText="Coordinate system type">
+  <label for="systemSelector"
+         ngbTooltip=""
          #systemSelectorTooltip="ngbTooltip"
          [tooltip-delay]="systemSelectorTooltip">
-    System
+    <b>System</b>
   </label>
-  <div class="col-xl-8 pl-0 pr-0 input-group align-self-baseline ">
-    <select id="systemSelector"
-            class="form-control form-control-sm"
-            [(ngModel)]="chosenSystem"
-            (ngModelChange)="systemChange()">
-      <option *ngFor="let system of systemKeys(systems)"
-              [value]="system">
+  <div class="ui inline input">
+    <sui-select id="systemSelector"
+                class="selection"
+                [(ngModel)]="chosenSystem"
+                (ngModelChange)="systemChange()">
+      <sui-select-option *ngFor="let system of systemKeys(systems)"
+                         [value]="system">
         {{system}}
-      </option>
-    </select>
-    <label class="input-group-addon custom-control custom-checkbox mr-0"
-           placement="right"
-           ngbTooltip="Sexagesimal display"
-           #sexagesimalCheckboxTooltip="ngbTooltip"
-           [tooltip-delay]="sexagesimalCheckboxTooltip"
-           *ngIf="!sexagesimalHidden">
-      <input id="sexagesimalCheck"
-             class="custom-control-input"
-             type="checkbox"
-             title="sexagesimal checkbox"
-             [(ngModel)]="sexagesimalUnits"
-             [disabled]="sexagesimalDisabled"
-             (change)="sexagesimalChange()">
-      <span class="custom-control-indicator ml-2 mt-1"></span>
-    </label>
+      </sui-select-option>
+    </sui-select>
+    <button *ngIf="!sexagesimalHidden"
+            class="ui toggle button"
+            [class.active]="sexagesimalUnits"
+            [disabled]="sexagesimalDisabled"
+            (click)="sexagesimalChange()">
+      Sexagesimal
+    </button>
   </div>
 </div>

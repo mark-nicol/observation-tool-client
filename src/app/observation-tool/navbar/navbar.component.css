@@ -1,3 +1,25 @@
 .scienceGoals:hover {
   cursor: pointer;
 }
+
+.ui.inverted.blue.menu .active.item {
+  background-color: white;
+  color: #2185D0;
+}
+
+.titleField {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 5px;
+}
+
+.esoLogo {
+  border: 1px solid white;
+  height: 2em;
+  width: auto;
+}
+
+.esoVersion {
+  font-size: 0.7em;
+  font-weight: normal;
+}

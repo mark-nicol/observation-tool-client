@@ -1,11 +1,11 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {FormsModule} from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {SystemSelectorComponent} from '../../../shared/components/system-selector/system-selector.component';
-import {DelayTooltipDirective} from '../../../shared/directives/delay-tooltip.directive';
+import {ReactiveFormsModule} from '@angular/forms';
+import {SuiModule} from 'ng2-semantic-ui';
 import {DegreesPipe} from '../../../shared/pipes/degrees.pipe';
 import {SexagesimalPipe} from '../../../shared/pipes/sexagesimal.pipe';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {SystemService} from '../../../shared/services/system.service';
 
 import {SourceComponent} from './source.component';
 
@@ -15,17 +15,22 @@ describe('SourceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        SourceComponent,
-        SexagesimalPipe,
-        DegreesPipe,
-        DelayTooltipDirective,
-        SystemSelectorComponent
-      ],
-      imports: [FormsModule, NgbModule.forRoot()],
-      providers: [PersistenceService]
-    })
-      .compileComponents();
+                                     declarations: [
+                                       SourceComponent,
+                                       SexagesimalPipe,
+                                       DegreesPipe,
+                                     ],
+                                     imports: [
+                                       HttpClientTestingModule,
+                                       ReactiveFormsModule,
+                                       SuiModule
+                                     ],
+                                     providers: [
+                                       PersistenceService,
+                                       SystemService
+                                     ]
+                                   })
+           .compileComponents();
   }));
 
   beforeEach(() => {

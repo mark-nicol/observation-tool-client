@@ -1,10 +1,10 @@
 import {Angle} from '../../../../units/classes/angle';
 import {Latitude} from '../../../../units/classes/latitude';
 import {Longitude} from '../../../../units/classes/longitude';
-import {FieldCentreCoordinatesInterface} from '../../interfaces/field-centre-coordinates.interface';
 
-export const FIELD_CENTRE_COORDINATES_DATA: FieldCentreCoordinatesInterface = {
+export const FIELD_CENTRE_COORDINATES_DATA: any = {
   coordType: 'relative',
+  targetType: 'individual',
   /** Data for if individual component is being used */
   individual: {
     offsetUnit: 'mas',
@@ -27,4 +27,4 @@ export const FIELD_CENTRE_COORDINATES_DATA: FieldCentreCoordinatesInterface = {
     spacing: 0.51093,
     spacingUnits: 'Fraction of antenna beamsize'
   }
-}
+};

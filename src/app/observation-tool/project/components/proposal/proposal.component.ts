@@ -1,36 +1,43 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
+import {ObsProposal} from '../../../shared/classes/obsproposal';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
- * The proposal component
+ * The proposalForm component
  */
 
 @Component({
-  selector: 'app-proposal',
-  templateUrl: './proposal.component.html',
-  styleUrls: ['./proposal.component.css']
-})
+             selector:    'app-proposal',
+             templateUrl: './proposal.component.html',
+             styleUrls:   ['./proposal.component.css']
+           })
 
-export class ProposalComponent {
+export class ProposalComponent implements OnInit {
 
-  /** The currently selected proposal type */
+  proposalForm: FormGroup;
+  proposal: Observable<ObsProposal>;
+
+  /** The currently selected proposalForm type */
   chosenType = 'regularRadio';
 
-  /** The available proposal types for looping over */
+  /** The available proposalForm types for looping over */
   typeRadios = [
     {
-      id: 'regularRadio',
+      id:   'Regular',
       text: 'Regular'
     },
     {
-      id: 'opportunityRadio',
+      id:   'opportunity',
       text: 'Target of Opportunit'
     },
     {
-      id: 'vlbiRadio',
+      id:   'vlbi',
       text: 'VLBI'
     },
     {
-      id: 'largeRadio',
+      id:   'large',
       text: 'Large Program'
     },
   ];
@@ -41,10 +48,9 @@ export class ProposalComponent {
   categoryKeys                          = Object.keys;
   /** The available categories with values and keywords */
   categoryRadios: { [id: string]: any } = {
-    'cosmology': {
-      id: 'cosmologyRadio',
-      text: 'Cosmology and the High Redshift Universe',
-      value: 'cosmology',
+    'cosmology':  {
+      text:     'Cosmology and the High Redshift Universe',
+      value:    'cosmology',
       keywords: [
         'Lyman Alpha Emitters/Blobs (LAE/LAB)',
         'Lyman Break Galaxies (LBG)',
@@ -59,10 +65,9 @@ export class ProposalComponent {
         'Galaxy Clusters'
       ]
     },
-    'galaxies': {
-      id: 'galaxiesRadio',
-      text: 'Galaxies and the Galactic Nuclei',
-      value: 'galaxies',
+    'galaxies':   {
+      text:     'Galaxies and the Galactic Nuclei',
+      value:    'galaxies',
       keywords: [
         'Starbursts, Star Formation',
         'Active Galactic Nuclei (AGN)/Quasars (QSO)',
@@ -79,10 +84,9 @@ export class ProposalComponent {
         'Giant Molecular Clouds (GMC) Properties'
       ]
     },
-    'ism': {
-      id: 'ismRadio',
-      text: 'ISM, star formation and astrochemisty',
-      value: 'ism',
+    'ism':        {
+      text:     'ISM, star formation and astrochemisty',
+      value:    'ism',
       keywords: [
         'Outflows, Jets, and Ionized Winds',
         'High-mass Star Formation',
@@ -97,9 +101,8 @@ export class ProposalComponent {
       ]
     },
     'exoplanets': {
-      id: 'exoplanetsRadio',
-      text: 'Circumstellar disks, exoplanets, and the solar system',
-      value: 'exoplanets',
+      text:     'Circumstellar disks, exoplanets, and the solar system',
+      value:    'exoplanets',
       keywords: [
         'Debris Disks',
         'Disks around Low-mass Stars',
@@ -112,10 +115,9 @@ export class ProposalComponent {
         'Solar system - Asteroids',
       ]
     },
-    'stars': {
-      id: 'starRadio',
-      text: 'Stellar Evolution and the Sun',
-      value: 'stars',
+    'stars':      {
+      text:     'Stellar Evolution and the Sun',
+      value:    'stars',
       keywords: [
         'The Sun',
         'Main sequence stars',
@@ -137,21 +139,55 @@ export class ProposalComponent {
   };
 
   /** Count of currently selected keywords in the selection box */
-  selectedKeywords = 0;
+  selectedKeywordCount = 0;
+  selectedKeywordValues: any;
 
-  /** Validates the keywords, used for disabling the selections
-   *  @param option         The keyword clicked by the user
-   *  @param chosenKeywords Collection of currently selected keywords
+  log(event) {
+    console.log(event);
+  }
+
+  constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
+    this.createForm();
+  }
+
+  ngOnInit() {
+    this.persistenceService.getProposal().subscribe(result => {
+      console.log(result);
+      this.proposalForm.patchValue({
+                                     title:                 result.title,
+                                     cycle:                 result.cycle,
+                                     abs:                   result.abstract,
+                                     relatedProposals:      result.relatedProposals,
+                                     previousProposals:     result.recentPublications,
+                                     studentProject:        result.studentProject,
+                                     proposalType:          result.proposalTypeString,
+                                     scientificCategory:    result.scientificCategoryString,
+                                     duplicateObservations: result.duplicateObservationJustification,
+                                   });
+    });
+  }
+
+  createForm() {
+    this.proposalForm = this.formBuilder.group({
+                                                 title:                 '',
+                                                 cycle:                 '',
+                                                 abs:                   '',
+                                                 relatedProposals:      '',
+                                                 previousProposals:     '',
+                                                 studentProject:        false,
+                                                 proposalType:          '',
+                                                 scientificCategory:    '',
+                                                 duplicateObservations: '',
+                                                 keywords:              []
+                                               });
+  }
+
+  /**
+   * Resets the keyword selector when the chosen category changes
    */
-  checkKeywords(option: string, chosenKeywords: HTMLCollection) {
-    let chosen = false;
-    if (this.selectedKeywords > 0) {
-      for (let i = 0; i < chosenKeywords.length; i++) {
-        chosen = chosenKeywords.item(i).innerHTML === option;
-        if (chosen) break;
-      }
-    }
-    return this.selectedKeywords >= 2 && !chosen;
+  categoryRadioChange(newCategory: string) {
+    this.chosenCategory = newCategory;
+    // this.project.proposalForm.keywords = null;
   }
 
 }

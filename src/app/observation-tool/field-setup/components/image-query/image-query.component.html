@@ -1,27 +1,23 @@
-<div class="row">
-  <label class="col-2 col-sm"
-         for="serverInput">
-    Image Server
-  </label>
-  <select id=serverInput
-          class="col-10 col-sm form-control form-control-sm">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-  </select>
+<h4 class="ui dividing header">Image Query</h4>
+<div class="ui form">
+  <div class="field">
+    <label for="serverInput">
+      Image Server
+    </label>
+    <sui-select id=serverInput
+                class="selection">
+      <sui-select-option value="1">1</sui-select-option>
+      <sui-select-option value="2">2</sui-select-option>
+      <sui-select-option value="3">3</sui-select-option>
+      <sui-select-option value="4">4</sui-select-option>
+    </sui-select>
+  </div>
+  <div class="field">
+    <label for="imgSizeInput">Image Size (arcmin)</label>
+    <input id="imgSizeInput"
+           type="number">
+    <button class="ui right floated tiny compact blue labeled icon button"><i class="search icon"></i> Query</button>
+  </div>
 </div>
 
-<div class="row">
-  <label class="col-2 col-sm"
-         for="imgSizeInput">
-    Image Size (arcmin)
-  </label>
-  <input id="imgSizeInput"
-         class="col-10 col-sm form-control form-control-sm align-self-baseline">
-</div>
-
-<div class="row justify-content-end">
-  <button class="btn btn-outline-secondary">Query</button>
-</div>
 

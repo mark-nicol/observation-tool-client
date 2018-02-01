@@ -1,43 +1,44 @@
-<div class="row">
-  <!--Target type label-->
-  <div class="col">
-    <label>Coord Type</label>
-  </div>
-  <!--Target type radios-->
-  <div class="col">
-    <label class="custom-control custom-radio">
-      <input #relativeRadio
-             id="relativeRadio"
-             name="coordTypeRadios"
-             type="radio"
-             class="custom-control-input"
-             value="relative"
-             [(ngModel)]="data.coordType"
-             (change)="changeCoordType(relativeRadio.value)"
-             checked>
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Relative</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input #absoluteRadio
-             id="absoluteRadio"
-             name="coordTypeRadios"
-             type="radio"
-             value="absolute"
-             [(ngModel)]="data.coordType"
-             (change)="changeCoordType(absoluteRadio.value)"
-             class="custom-control-input">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Absolute</span>
-    </label>
-  </div><!-- div.col -->
-</div><!--div.row-->
+<h4 class="ui dividing header">Field Centre Coordinates</h4>
+<form class="ui form"
+      [formGroup]="fieldCentreCoordinatesForm">
+  <div class="two fields">
+    <div class="field">
+      <label>Coord Type</label>
+      <sui-radio-button name="coordTypeRadios"
+                        value="RELATIVE"
+                        formControlName="coordType">Relative
+      </sui-radio-button>
+      <sui-radio-button name="coordTypeRadios"
+                        value="ABSOLUTE"
+                        formControlName="coordType">Absolute
+      </sui-radio-button>
+    </div>
 
-<div class="row"
-     *ngIf="(_persistenceService.getDataItem('field-setup', 'field-source', 'targetType') === 'individual'); then individualComponent; else rectangularComponent"></div>
+    <!--Target type radios-->
+    <div class="field">
+      <label>Target Type</label>
+      <sui-radio-button name="targetTypeRadios"
+                        value="F_MultiplePoints"
+                        formControlName="targetType">Individual Pointing(s)
+      </sui-radio-button>
+      <sui-radio-button name="targetTypeRadios"
+                        value="F_SingleRectangle"
+                        formControlName="targetType">Rectangular Field
+      </sui-radio-button>
+    </div>
+  </div>
+</form>
+
+<div *ngIf="fieldCentreCoordinatesForm.value.targetType === 'F_MultiplePoints';
+  then individualComponent
+  else rectangularComponent"></div>
 <ng-template #individualComponent>
-  <fcc-individual [radioValue]="data.coordType"></fcc-individual>
+  <fcc-individual [radioValue]="fieldCentreCoordinatesForm.value.coordType"
+                  [group]="fieldCentreCoordinatesForm.controls.individual"
+                  [tableRows]="tableRows"
+                  [sourceCoordinatesSystemString]="sourceCoordinatesSystem"></fcc-individual>
 </ng-template>
 <ng-template #rectangularComponent>
-  <fcc-rectangular [radioValue]="data.coordType"></fcc-rectangular>
+  <fcc-rectangular [radioValue]="fieldCentreCoordinatesForm.value.coordType"
+                   [group]="fieldCentreCoordinatesForm.controls.rectangular"></fcc-rectangular>
 </ng-template>

@@ -1,34 +1,31 @@
-<div class="row form-group">
-  <label for="freqInput">
-    Representative Frequency (Sky)
-  </label>
-  <input class="form-control form-control-sm align-self-baseline"
-         id="freqInput"
-         placeholder="0.000 GHz">
-</div>
-<div class="row form-group">
-  <label>
-    Antenna Diameter
-  </label>
-  <label class="custom-control custom-radio">
-    <input id="12mRadio" name="antennaSizeRadios" type="radio" class="custom-control-input">
-    <span class="custom-control-indicator"></span>
-    <span class="custom-control-description">12m</span>
-  </label>
-
-</div>
-<div class="row form-group">
-  <label for="beamInput">
-    Antenna Beamsize (HPBW)
-  </label>
-  <input class="form-control form-control-sm align-self-baseline"
-         id="beamInput"
-         placeholder="0.000 arcsec">
-</div>
-<div class="row form-group">
-  <label class="custom-control custom-checkbox">
-    <input id="beamsizeCheckbox" type="checkbox" class="custom-control-input">
-    <span class="custom-control-indicator"></span>
-    <span class="custom-control-description">Show Antenna Beamsize</span>
-  </label>
+<h4 class="ui dividing header">FOV Parameters</h4>
+<div class="ui form">
+  <div class="field">
+    <label for="freqInput">Representative Frequency (Sky)</label>
+    <div class="ui right labeled input">
+      <input id="freqInput"
+             placeholder="0.000">
+      <div class="ui label">GHz</div>
+    </div>
+  </div>
+  <div class="three fields">
+    <div class="field">
+      <label>Antenna Diameter</label>
+      <sui-radio-button name="antennaSizeRadios"
+                        value="12">
+        12m
+      </sui-radio-button>
+    </div>
+    <div class="field">
+      <label for="beamInput">Antenna Beamsize (HPBW)</label>
+      <div class="ui right labeled input">
+        <input id="beamInput"
+               placeholder="0.000 arcsec">
+        <div class="ui label">arcsec</div>
+      </div>
+    </div>
+    <div class="field">
+      <sui-checkbox>Show Antenna Beamsize</sui-checkbox>
+    </div>
+  </div>
 </div>

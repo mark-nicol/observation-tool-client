@@ -13,4 +13,7 @@ import {Component} from '@angular/core';
 })
 export class TypeComponent {
 
+  spectralTypeRadioChoice = 'line';
+  polarizationRadioChoice = 'xx';
+
 }

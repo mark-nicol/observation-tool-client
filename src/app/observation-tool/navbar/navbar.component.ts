@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import * as _ from 'lodash';
 import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
  * The navbar component at the top of the application
@@ -23,11 +25,11 @@ export class NavbarComponent implements OnInit {
   items: NavItemInterface[] = [
     {
       title: 'Project',
-      path: 'project/pi-select'
+      path: 'project/pi-entry'
     },
     {
       title: 'Proposal',
-      path: 'project/proposal'
+      path: 'project/proposalForm'
     },
     {
       title: 'Planned Observing',
@@ -58,6 +60,10 @@ export class NavbarComponent implements OnInit {
       path: 'sciGoals'
     }
   ];
+
+  constructor(private router: Router, private persistenceService: PersistenceService) {
+
+  }
 
   /**
    * Sets the currently selected goal to the first in the list
@@ -95,5 +101,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  exportClick() {
+  }
 
 }

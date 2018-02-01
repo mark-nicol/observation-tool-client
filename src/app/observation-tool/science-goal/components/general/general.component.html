@@ -1,7 +1,13 @@
-<modular-panel [id]="'general'"
-               [title]="'General'">
-  <label for="name-input">Science Goal Name</label>
-  <input class="form-control" id="name-input">
-  <label for="description-input">Description</label>
-  <textarea class="form-control" id="description-input"></textarea>
-</modular-panel>
+<form class="ui form"
+      [formGroup]="generalForm">
+  <div class="field">
+    <label for="name-input">Science Goal Name</label>
+    <input id="name-input"
+           formControlName="name">
+  </div>
+  <div class="field">
+    <label for="description-input">Description</label>
+    <textarea id="description-input"
+              formControlName="note"></textarea>
+  </div>
+</form>

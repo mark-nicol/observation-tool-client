@@ -1,4 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
+import {SuiModule} from 'ng2-semantic-ui';
 
 import {VisualisationControlComponent} from './visualisation-control.component';
 
@@ -10,7 +12,8 @@ describe('VisualisationControlComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         VisualisationControlComponent
-      ]
+      ],
+      imports: [FormsModule, SuiModule]
     })
       .compileComponents();
   }));

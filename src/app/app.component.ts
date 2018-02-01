@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
+import {SuiPopupConfig} from 'ng2-semantic-ui';
 
 /**
  * The main app component
@@ -24,7 +25,7 @@ export class AppComponent {
    *
    * @param {NgbTooltipConfig} config The tooltip config injection
    */
-  constructor(config: NgbTooltipConfig) {
-    config.triggers = 'manual';
+  constructor(config: SuiPopupConfig) {
+    config.delay = 1000;
   }
 }

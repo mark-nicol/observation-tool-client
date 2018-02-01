@@ -1,281 +1,227 @@
-<div class="row">
+<h4 class="ui dividing header">Source</h4>
+<form class="ui form" [formGroup]="sourceForm">
   <!-- Source selector -->
-  <div class="col form-group">
+  <div class="field">
     <label for="sourceNameInput">Source Name</label>
-    <div class="input-group">
-      <input id="sourceNameInput"
-             class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-outline-secondary">Resolve</button>
-      </span>
-    </div><!--div.input-group-->
-  </div><!--div.col.form-group-->
-</div><!--div.row-->
-<div class="row">
-  <!-- Solar checkbox -->
-  <div class="col form-check">
-    <label class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" (change)="solarCheckboxClicked()">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Choose a Solar System Object?</span>
-    </label>
+    <input id="sourceNameInput"
+           type="text"
+           formControlName="sourceName">
+    <button class="ui right floated tiny compact blue labeled icon button">
+      <i class="search icon"></i> Resolve
+    </button>
+    <div style="height: 1.5em;"></div>
   </div>
-  <!-- Solar selector -->
-  <div class="col">
-    <div class="row">
-      <label for="solarSystemSelector"
-             class="col">
-        Name of Object
-      </label>
-      <select id="solarSystemSelector"
-              class="col form-control form-control-sm ml-2"
-              [disabled]="!pageData.solarSystemObject"
-              [value]="pageData.chosenSolarObject">
-        <option *ngFor="let body of solarBodies">{{body}}</option>
-      </select>
-    </div><!--div.row-->
-  </div><!--div.col.form-group-->
-</div><!--div.row-->
 
-<div class="row"
-     (click)="unfocus()">
-  <!--Target type label-->
-  <div class="col">
-    <label>Target Type</label>
-  </div>
-  <!--Target type radios-->
-  <div class="col">
-    <label class="custom-control custom-radio">
-      <input #indvRadio
-             id="indvRadio"
-             name="targetTypeRadios"
-             type="radio"
-             class="custom-control-input"
-             value="individual"
-             (change)="targetChange(indvRadio.value)"
-             [checked]="pageData.targetType === indvRadio.value">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Individual Pointing(s)</span>
-    </label>
-    <label class="custom-control custom-radio">
-      <input #rectRadio
-             id="rectRadio"
-             name="targetTypeRadios"
-             type="radio"
-             class="custom-control-input"
-             value="rectangular"
-             (change)="targetChange(rectRadio.value)"
-             [checked]="pageData.targetType === rectRadio.value">
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Rectangular Field</span>
-    </label>
-  </div><!-- div.col -->
-</div><!--div.row-->
-
-<div class="form-group"
-     *ngIf="!pageData.solarSystemObject">
-  <!-- Label -->
-  <div class="row">
-    <h6>Source Coordinates</h6>
-  </div><!-- div.row -->
-  <!-- System, Lat, Long -->
-  <div class="row">
-    <!-- System Selector -->
-    <div class="col-md">
-      <system-selector (systemEmitter)="systemChange($event)"
-                       (sexagesimalEmitter)="sexagesimalChange($event)"></system-selector>
+  <div class="two fields">
+    <!-- Solar checkbox -->
+    <div class="field">
+      <label>Choose a Solar System Object?</label>
+      <sui-checkbox class="toggle"
+                    formControlName="solarSystemObject"></sui-checkbox>
     </div>
-    <!-- Lat input -->
-    <div class="col-md">
-      <div class="row" style="white-space: nowrap">
-        <label class="form-control-label col-xl-4 text-xl-right"
-               for="latInput"
-               ngbTooltip="The latitude of the source"
-               #latInputTooltip="ngbTooltip"
-               [tooltip-delay]="latInputTooltip">
-          {{pageData.sexagesimalUnits ?
-          pageData.chosenSystem.sexagesimalLabels.latLabel :
-          pageData.chosenSystem.normalLabels.latLabel}}
+
+    <!-- Solar selector -->
+    <div class="field">
+      <label for="solarSystemSelector">Name of Object</label>
+      <sui-select id="solarSystemSelector"
+                  class="selection"
+                  formControlName="chosenSolarObject"
+                  [isDisabled]="!sourceForm.value.solarSystemObject">
+        <sui-select-option *ngFor="let body of solarBodies" [value]="body">{{body}}</sui-select-option>
+      </sui-select>
+    </div>
+  </div>
+
+  <div class="ui form" *ngIf="!sourceForm.value.solarSystemObject">
+
+    <div class="four fields">
+      <div class="field">
+        <!-- System Selector -->
+        <label>System</label>
+        <div class="field">
+          <sui-select class="selection"
+                      formControlName="chosenSystem"
+                      (selectedOptionChange)="systemChange()">
+            <sui-select-option *ngFor="let system of systemService.getSystems()"
+                               value="{{system}}"></sui-select-option>
+          </sui-select>
+        </div>
+      </div>
+
+      <div class="three wide field">
+        <label>Sexagesimal Units</label>
+        <sui-checkbox class="toggle"
+                      formControlName="sexagesimalUnits"
+                      [isDisabled]="sexagesimalCheckboxDisabled">
+        </sui-checkbox>
+      </div>
+
+
+      <!-- Lat input -->
+      <div class="field"
+           suiPopup
+           popupText="The latitude of the source">
+        <label for="latInput">
+          {{
+          this.sourceForm.value.sexagesimalUnits ?
+          this.currentSystem?.sexagesimalLabels.latLabel :
+          this.currentSystem?.normalLabels.latLabel
+          }}
         </label>
         <input #latInput
                id="latInput"
-               class="col-xl-8 align-self-baseline form-control form-control-sm"
-               [ngModel]="pageData.sexagesimalUnits && pageData.lat ? (pageData.lat.value | sexagesimal: false) : pageData.lat.value"
+               formControlName="latValue"
                (keyup.enter)="setLatLon(latInput.value, latInput)"
                (blur)="setLatLon(latInput.value, latInput)"
-               placeholder="{{
-            pageData.sexagesimalUnits ?
-            (pageData.chosenSystem.latPlaceholder | sexagesimal) :
-            (pageData.chosenSystem.latPlaceholder | degrees)
-             }}">
+               placeholder="0">
       </div>
-    </div>
-    <!-- Long input -->
-    <div class="col-md">
-      <div class="row"
-           style="white-space: nowrap">
-        <label class="col-xl-4 text-xl-right"
-               for="lonInput"
-               ngbTooltip="The longitude of the source"
-               #lonInputTooltip="ngbTooltip"
-               [tooltip-delay]="lonInputTooltip">
-          {{pageData.sexagesimalUnits ?
-          pageData.chosenSystem.sexagesimalLabels.lonLabel :
-          pageData.chosenSystem.normalLabels.lonLabel
-          }}</label>
+
+
+      <!-- Long input -->
+      <div class="field"
+           suiPopup
+           popupText="The longitude of the source">
+        <label for="lonInput">
+          {{
+          this.sourceForm.value.sexagesimalUnits ?
+          this.currentSystem?.sexagesimalLabels.lonLabel :
+          this.currentSystem?.normalLabels.lonLabel
+          }}
+        </label>
         <input #lonInput
                id="lonInput"
-               class="col-xl-8 align-self-baseline form-control form-control-sm"
-               [ngModel]="pageData.sexagesimalUnits && pageData.lon ? (pageData.lon.value | sexagesimal: true) : pageData.lon.value"
+               formControlName="lonValue"
                (keyup.enter)="setLatLon(lonInput.value, lonInput)"
                (blur)="setLatLon(lonInput.value, lonInput)"
-               placeholder="{{
-            pageData.sexagesimalUnits ?
-            (pageData.chosenSystem.lonPlaceholder | sexagesimal) :
-            (pageData.chosenSystem.lonPlaceholder | degrees)
-          }}">
+               placeholder="0">
       </div>
     </div>
-  </div><!-- div.row -->
-  <!-- Parallax, PM RA, PM DEC -->
-  <div class="row">
-    <!-- Parallax input -->
-    <div class="col-md">
-      <div class="row">
-        <label class="col-xl-4 text-xl-right"
-               for="parallaxInput"
-               ngbTooltip="The parallax angle of the source"
-               #parallaxInputTooltip="ngbTooltip"
-               [tooltip-delay]="parallaxInputTooltip">
+
+    <div class="three fields">
+      <!-- Parallax input -->
+      <div class="field"
+           suiPopup
+           popupText="The parallax angle of the source">
+        <label for="parallaxInput">
           Parallax
         </label>
-        <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
+        <div class="ui action input">
           <input id="parallaxInput"
-                 class="form-control form-control-sm"
-                 placeholder="0.00000">
-          <select class="input-group-addon form-control-sm"
-                  title="Parallax unit selector">
-            <option>mas</option>
-            <option>arcsec</option>
-          </select>
+                 placeholder="0.00000"
+                 formControlName="parallaxValue">
+          <sui-select class="selection"
+                      title="Parallax unit selector"
+                      formControlName="parallaxUnit">
+            <sui-select-option value="mas">mas</sui-select-option>
+            <sui-select-option value="arcsec">arcsec</sui-select-option>
+          </sui-select>
         </div>
       </div>
-    </div>
-    <!-- PM RA input -->
-    <div class="col-md">
-      <div class="row">
-        <label class="col-xl-4 text-xl-right"
-               for="pmRaInput"
-               ngbTooltip="Proper motion along cross-declination direction"
-               #pmLonTooltip="ngbTooltip"
-               [tooltip-delay]="pmLonTooltip">
+
+      <!-- PM RA input -->
+      <div class="field"
+           suiPopup
+           popupText="Proper motion along cross-declination direction">
+        <label for="pmRaInput">
           PM RA
         </label>
-        <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
+        <div class="ui action input">
           <input id="pmRaInput"
-                 class="form-control form-control-sm"
-                 placeholder="0.00000">
-          <select class="input-group-addon form-control-sm"
-                  title="Proper motion ra unit selector">
-            <option>mas/yr</option>
-            <option>arcsec/s</option>
-            <option>arcmin/s</option>
-            <option>deg/s</option>
-          </select>
+                 placeholder="0.00000"
+                 formControlName="properMotionCrossValue">
+          <sui-select class="selection"
+                      title="Proper motion ra unit selector"
+                      formControlName="properMotionCrossUnit">
+            <sui-select-option value="mas/yr">mas/yr</sui-select-option>
+            <sui-select-option value="arcsec/s">arcsec/s</sui-select-option>
+            <sui-select-option value="arcmin/s">arcmin/s</sui-select-option>
+            <sui-select-option value="deg/s">deg/s</sui-select-option>
+          </sui-select>
         </div>
       </div>
-    </div>
-    <!-- PM Dec input -->
-    <div class="col-md">
-      <div class="row"
-           style="white-space: nowrap">
-        <label class="col-xl-4 text-xl-right"
-               for="plgecInput"
-               ngbTooltip="Proper motion along declination direction"
-               #pmLatTooltip="ngbTooltip"
-               [tooltip-delay]="pmLatTooltip">
+
+      <!-- PM Dec input -->
+      <div class="field"
+           suiPopup
+           popupText="Proper motion along declination direction">
+        <label for="plgecInput">
           PM DEC
         </label>
-        <div class="col-xl-8 pl-0 pr-0 align-self-baseline input-group">
+        <div class="ui action input">
           <input id="plgecInput"
-                 class="form-control form-control-sm"
-                 placeholder="0.00000">
-          <select class="input-group-addon form-control-sm"
-                  title="proper motion declination unit selector">
-            <option>mas/yr</option>
-            <option>arcsec/s</option>
-            <option>arcmin/s</option>
-            <option>deg/s</option>
-          </select>
+                 placeholder="0.00000"
+                 formControlName="properMotionDeclinationValue">
+          <sui-select class="selection"
+                      title="proper motion declination unit selector"
+                      formControlName="properMotionDeclinationUnit">
+            <sui-select-option value="mas/yr">mas/yr</sui-select-option>
+            <sui-select-option value="arcsec/s">arcsec/s</sui-select-option>
+            <sui-select-option value="arcmin/s">arcmin/s</sui-select-option>
+            <sui-select-option value="deg/s">deg/s</sui-select-option>
+          </sui-select>
         </div>
       </div>
     </div>
-  </div><!-- div.row -->
-  <!-- Radial, Z, Doppler -->
-  <div class="row">
-    <!-- Radial input -->
-    <div class="col-md">
-      <div class="row"
-           style="white-space: nowrap">
-        <label class="col-xl-4 text-xl-right"
-               for="radialVelocityInput"
-               ngbTooltip="Velocity value in your desired units"
-               #radialInputTooltip="ngbTooltip"
-               [tooltip-delay]="radialInputTooltip">
+
+
+    <div class="three fields">
+      <!-- Radial input -->
+      <div class="field"
+           suiPopup
+           popupText="Velocity value in your desired units">
+        <label for="radialVelocityInput">
           Radial Velocity
         </label>
-        <div class="col-xl-8 pl-0 pr-0 input-group">
+        <div class="ui action input">
           <input id="radialVelocityInput"
-                 class="align-self-baseline form-control form-control-sm"
-                 placeholder="0.000">
-          <select class="input-group-addon form-control-sm"
-                  title="Radial velocity unit selector">
-            <option>m/s</option>
-            <option>km/s</option>
-          </select>
-          <select class="input-group-addon form-control-sm"
-                  title="Radial velocity reference frame selector">
-            <option>bar</option>
-            <option>lsrk</option>
-            <option>topo</option>
-            <option>hel</option>
-          </select>
+                 placeholder="0.000"
+                 formControlName="radialVelocityValue">
+          <sui-select class="selection"
+                      title="Radial velocity unit selector"
+                      formControlName="radialVelocityUnit">
+            <sui-select-option value="m/s">m/s</sui-select-option>
+            <sui-select-option value="km/s">km/s</sui-select-option>
+          </sui-select>
+          <sui-select class="selection"
+                      title="Radial velocity reference frame selector"
+                      formControlName="radialVelocityReferenceSystem">
+            <sui-select-option value="bar">bar</sui-select-option>
+            <sui-select-option value="lsrk">lsrk</sui-select-option>
+            <sui-select-option value="topo">topo</sui-select-option>
+            <sui-select-option value="hel">hel</sui-select-option>
+          </sui-select>
         </div>
       </div>
-    </div>
-    <!-- Z input -->
-    <div class="col-md">
-      <div class="row">
-        <label class="col-xl-4 text-xl-right"
-               for="zInput"
-               ngbTooltip="Astronomical redshift, calculated using the specified velocity convention"
-               #zInputTooltip="ngbTooltip"
-               [tooltip-delay]="zInputTooltip">
+
+      <!-- Redshift input -->
+      <div class="field"
+           suiPopup
+           popupText="Astronomical redshift, calculated using the specified velocity convention">
+        <label for="zInput">
           Z
         </label>
         <input id="zInput"
-               class="col-xl-8 align-self-baseline form-control form-control-sm"
-               placeholder="0.000000000">
-      </div>
-    </div>
-    <!-- Doppler selector -->
-    <div class="col-md">
-      <div class="row"
-           style="white-space: nowrap">
-        <label class="col-xl-4 text-xl-right"
-               for="dopplerSelect"
-               ngbTooltip="Doppler calculation convention to be used"
-               #dopplerInputTooltip="ngbTooltip"
-               [tooltip-delay]="dopplerInputTooltip">
+               placeholder="0.000000000"
+               formControlName="redshift">
+      </div><!-- div.field -->
+
+      <!-- Doppler selector -->
+      <div class="field"
+           suiPopup
+           popupText="Doppler calculation convention to be used">
+        <label for="dopplerSelect">
           Doppler Type
         </label>
-        <select id="dopplerSelect"
-                class="col-xl-8 form-control form-control-sm">
-          <option>Radio</option>
-          <option>Optical</option>
-          <option>Relativistic</option>
-        </select>
-      </div>
+        <sui-select class="selection"
+                    id="dopplerSelect"
+                    formControlName="dopplerType"
+                    (selectedOptionChange)="setRedshift()">
+          <sui-select-option value="RADIO">Radio</sui-select-option>
+          <sui-select-option value="OPTICAL">Optical</sui-select-option>
+          <sui-select-option value="RELATIVISTIC">Relativistic</sui-select-option>
+        </sui-select>
+      </div><!-- div.field -->
     </div>
-  </div><!-- div.row -->
-</div><!-- div *ngIf -->
+
+  </div>
+</form><!-- form.ui.grid.form -->

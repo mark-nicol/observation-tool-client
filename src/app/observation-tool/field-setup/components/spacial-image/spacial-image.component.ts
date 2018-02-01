@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * Spacial image component
@@ -7,10 +8,21 @@ import {Component} from '@angular/core';
  */
 
 @Component({
-  selector: 'spacial-image',
-  templateUrl: './spacial-image.component.html',
-  styleUrls: ['./spacial-image.component.css']
-})
-export class SpacialImageComponent {
+             selector: 'spacial-image',
+             templateUrl: './spacial-image.component.html',
+             styleUrls: ['./spacial-image.component.css']
+           })
+export class SpacialImageComponent implements OnInit {
+
+  data: any;
+
+  constructor(private persistenceService: PersistenceService) {
+
+  }
+
+  ngOnInit() {
+    // this.persistenceService.getScienceGoalPageSection(CURRENT_GOAL, 'fieldSetup', 'spatialImage')
+    //   .subscribe(res => this.data = res);
+  }
 
 }

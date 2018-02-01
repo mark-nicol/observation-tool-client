@@ -29,7 +29,8 @@ export class VisualisationControlComponent {
   @Output() resetEmitter               = new EventEmitter();
   /** Current density radio choice */
   densityRadioChoice                   = 'automatic';
-  /** Strings for the density selector, value is index from the ngFor */
+  /** Strings for the density selector, content is index from the ngFor */
+
   columnDensityChoices                 = [
     '0.472mm (1st Octile)',
     '0.658mm (2nd Octile)',
@@ -44,7 +45,6 @@ export class VisualisationControlComponent {
    * Flips the bool of the bands checkbox and emits
    */
   bandsCheckedChange() {
-    this.bandsChecked = !this.bandsChecked;
     this.bandsCheckedEmitter.emit(this.bandsChecked);
   }
 
@@ -52,25 +52,22 @@ export class VisualisationControlComponent {
    * Flips the bool of the transmission checkbox and emits
    */
   transmissionCheckedChange() {
-    this.transmissionChecked = !this.transmissionChecked;
     this.transmissionCheckedEmitter.emit(this.transmissionChecked);
   }
 
   /**
    * Sets the density radio choice and emits
-   * @param newRadio The new value to use
    */
-  densityRadioChange(newRadio: string) {
-    this.densityRadioChoice = newRadio;
-    this.densityRadioEmitter.emit(newRadio);
+  densityRadioChange() {
+    this.densityRadioEmitter.emit(this.densityRadioChoice);
   }
 
   /**
    * Emits the newly chosen density from the selector
    * @param newDensity The new density octile to use
    */
-  densitySelectorChange(newDensity: number) {
-    this.densitySelectorEmitter.emit(newDensity);
+  densitySelectorChange(newDensity: string) {
+    this.densitySelectorEmitter.emit(this.columnDensityChoices.indexOf(newDensity) + 1);
   }
 
   /**

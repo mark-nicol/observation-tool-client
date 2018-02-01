@@ -1,86 +1,70 @@
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
-import {SCIENCE_GOAL_PAGES} from '../data/science-goal-pages';
-import {ScienceGoalPageInterface} from '../interfaces/science-goal-page.interface';
+import {ObsProject} from '../classes/obsproject';
+import {ObsProposal} from '../classes/obsproposal';
+import {ScienceGoal} from '../classes/science-goal/science-goal';
+import * as _ from 'lodash';
 
 /**
- * Service to supply data to pages and panels from stored objects
- *
- * Also manages the hiding and showing of panels for persistence
+ * Service to supply data to pages and sections from stored objects
  */
 @Injectable()
 export class PersistenceService {
 
-  /** The public observable of the pages data */
-  pages: Observable<{ [id: string]: ScienceGoalPageInterface }>;
-  /** Private subject of the page data */
-  private _pages: BehaviorSubject<{ [id: string]: ScienceGoalPageInterface }>;
-  /** Data store of the data in memory, allows changes */
-  private _dataStore: {
-    pages: { [id: string]: ScienceGoalPageInterface };
-  };
+  baseUrl = 'http://localhost:8080';
 
   /**
    * Constructor, loads data and sets members
    */
-  constructor() {
-    this._dataStore       = {pages: {}};
-    this._pages           = <BehaviorSubject<{ [id: string]: ScienceGoalPageInterface }>>new BehaviorSubject({});
-    this.pages            = this._pages.asObservable();
-    this._dataStore.pages = SCIENCE_GOAL_PAGES;
-    this._pages.next(Object.assign({}, this._dataStore).pages);
+  constructor(private http: HttpClient) {
   }
 
   /**
-   * Returns the pages observable
+   * GET /projects/{projectCode}
    */
-  getPages(): Observable<{ [id: string]: ScienceGoalPageInterface }> {
-    return this.pages;
+  getProject(projectCode: string): Observable<ObsProject> {
+    return this.http.get<any>(`${this.baseUrl}/projects/project`)
+               .map(result => {
+                 return _.merge(new ObsProject, result);
+                 // return Object.assign(new ObsProject, result);
+                 // return Object.assign(new ObsProject, result);
+                 // return new ObsProject().initFromJson(result);
+               });
   }
 
-  /**
-   * Returns an observable of a single page's data
-   * @param page I.D. of the page to retrieve data for
-   */
-  getPage(page: string): Observable<ScienceGoalPageInterface> {
-    let returnPage: Observable<ScienceGoalPageInterface>;
-    const subject = <BehaviorSubject<ScienceGoalPageInterface>> new BehaviorSubject({});
-    returnPage    = subject.asObservable();
-    subject.next(this._dataStore.pages[page]);
-    return returnPage;
+  getProposal(): Observable<ObsProposal> {
+    return this.http.get<any>(`${this.baseUrl}/projects/proposal`)
+               .map(result => {
+                 return _.merge(new ObsProposal, result);
+                 // return Object.assign(new ObsProposal, result);
+                 // return new ObsProposal().initFromJson(result);
+               })
   }
 
-  /**
-   * Returns an observable of a single panel's data
-   * @param page  I.D. of the page which contains the panel
-   * @param panel I.D. of the panel to retrieve data for
-   */
-  getPanelData(page: string, panel: string): Observable<any> {
-    let returnData: Observable<any>;
-    const subject = <BehaviorSubject<any>> new BehaviorSubject({});
-    returnData    = subject.asObservable();
-    subject.next(this._dataStore.pages[page].panels[panel].data);
-    return returnData;
+  getScienceGoal(): Observable<ScienceGoal> {
+    return this.http.get<any>(`${this.baseUrl}/projects/science-goals/goal`)
+               .map(result => {
+                 return _.merge(new ScienceGoal(), result);
+                 // return Object.assign(new ScienceGoal, result);
+                 // return new ScienceGoal().initFromJson(result);
+               })
   }
 
-  /**
-   * Returns a single item from a panel, used for reading radio values or bools
-   * @param page  I.D. of the page which contains the panel
-   * @param panel I.D. of the panel with contains the item
-   * @param item  I.D. of the item to retrieve data from
-   */
-  getDataItem(page: string, panel: string, item: string): any {
-    return this._dataStore.pages[page].panels[panel].data[item];
-  }
+  // /**
+  //  * GET /projects/{projectCode}/science-goals/{goalId}
+  //  */
+  // getScienceGoal(projectCode: string, scienceGoalId: string): Observable<any> {
+  //   return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}`);
+  // }
 
-  /**
-   * Switches the shown bool for a panel
-   * @param page  The page which holds the panel to hide
-   * @param panel I.D. of the panel to hide
-   */
-  hiddenChange(page: string, panel: string) {
-    this._dataStore.pages[page].panels[panel].shown = !this._dataStore.pages[page].panels[panel].shown;
+
+  // /**
+  //  * GET /projects/{projectCode}/science-goals/{goalId}/sources/{sourceId}
+  //  */
+  getSource(projectCode: string, scienceGoalId: string, sourceId: string): Observable<any> {
+    return null;
+  //   return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}/sources/${sourceId}`);
   }
 
 }

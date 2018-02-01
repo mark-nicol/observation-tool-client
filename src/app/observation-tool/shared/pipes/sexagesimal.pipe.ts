@@ -13,8 +13,8 @@ import * as eq from 'equatorial';
 export class SexagesimalPipe implements PipeTransform {
 
   /**
-   * Transforms the value
-   * @param value The value to transform
+   * Transforms the content
+   * @param value The content to transform
    */
   transform(value: any): any {
     return eq.decDeg2Hms(value);

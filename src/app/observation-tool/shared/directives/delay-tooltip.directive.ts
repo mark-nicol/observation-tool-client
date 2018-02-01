@@ -1,5 +1,6 @@
 import {Directive, HostListener, Input} from '@angular/core';
 import {NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
+import {SuiPopup} from 'ng2-semantic-ui/dist';
 
 /**
  * Directive to delay the opening of NgbTooltips by 1 second
@@ -11,7 +12,7 @@ import {NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
 export class DelayTooltipDirective {
 
   /** The tooltip to delay opening */
-  @Input('tooltip-delay') tooltip: NgbTooltip;
+  @Input('tooltip-delay') tooltip: SuiPopup;
 
   /** Used to store the open tooltip for closing later on */
   openCode: any;

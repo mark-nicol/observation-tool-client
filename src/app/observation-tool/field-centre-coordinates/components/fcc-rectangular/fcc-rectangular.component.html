@@ -17,7 +17,7 @@
 
     <!-- Lon offset input -->
     <div class="field">
-      <div *ngIf="radioValue === 'absolute'; then absoluteLonLabel else relativeLonLabel"></div>
+      <div *ngIf="radioValue === 'ABSOLUTE'; then absoluteLonLabel else relativeLonLabel"></div>
       <div class="field">
         <ng-template #absoluteLonLabel>
           <label>
@@ -33,7 +33,7 @@
           <input formControlName="lonOffsetValue">
           <sui-select class="selection"
                       formControlName="lonOffsetUnit"
-                      *ngIf="radioValue === 'relative'">
+                      *ngIf="radioValue === 'RELATIVE'">
             <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
           </sui-select>
         </div>
@@ -42,7 +42,7 @@
 
     <!-- Lat offset input -->
     <div class="field">
-      <div *ngIf="radioValue === 'absolute'; then absoluteLatLabel else relativeLatLabel"></div>
+      <div *ngIf="radioValue === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
       <ng-template #absoluteLatLabel>
         <label>
           {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
@@ -56,7 +56,7 @@
       <div class="ui action input">
         <input formControlName="latOffsetValue">
         <sui-select class="selection"
-                    *ngIf="radioValue === 'relative'"
+                    *ngIf="radioValue === 'RELATIVE'"
                     formControlName="latOffsetUnit">
           <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
         </sui-select>
@@ -123,10 +123,10 @@
       <div class="ui right action input">
         <input placeholder="0.51093"
                type="number"
-               fromControlName="spacing">
+               formControlName="spacingValue">
         <sui-select class="selection"
                     formControlName="spacingUnits">
-          <sui-select-option value="fraction">Fraction of antenna beamsize</sui-select-option>
+          <sui-select-option value="fraction of main beam">Fraction of antenna beamsize</sui-select-option>
           <sui-select-option value="arcsec">arcsec</sui-select-option>
         </sui-select>
         <button class="ui blue button">Reset to Nyquist</button>

@@ -48,7 +48,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
                                                                                            qLengthValue:       0.0,
                                                                                            positionAngleUnit:  '',
                                                                                            positionAngleValue: 0.0,
-                                                                                           spacing:            0.0,
+                                                                                           spacingValue:       0.0,
                                                                                            spacingUnits:       ''
                                                                                          })
                                                         });
@@ -58,10 +58,8 @@ export class FieldCenterCoordinatesComponent implements OnInit {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
           this.sourceCoordinatesSystem = result.TargetParameters[CURRENT_SOURCE].sourceCoordinates.system;
-          console.log(result.TargetParameters[CURRENT_SOURCE].type);
           this.fieldCentreCoordinatesForm.patchValue({targetType: result.TargetParameters[CURRENT_SOURCE].type});
           if (result.TargetParameters[CURRENT_SOURCE].type === 'F_MultiplePoints') { // TODO Enum
-            console.log(result.TargetParameters[CURRENT_SOURCE]);
             this.fieldCentreCoordinatesForm.patchValue({
                                                          coordType:  result.TargetParameters[CURRENT_SOURCE].SinglePoint[0].centre.type,
                                                          individual: {
@@ -70,7 +68,27 @@ export class FieldCenterCoordinatesComponent implements OnInit {
                                                        });
             this.tableRows = result.TargetParameters[CURRENT_SOURCE].SinglePoint;
           } else {
-            console.log('Rectangular');
+            const rect = result.TargetParameters[CURRENT_SOURCE].Rectangle;
+            console.log(rect.spacing);
+            this.fieldCentreCoordinatesForm.patchValue({
+                                                         coordType:   rect.centre.type,
+                                                         rectangular: {
+                                                           chosenSystem:       rect.centre.system,
+                                                           sexagesimalUnits:   rect.centre.type === 'ABSOLUTE',
+                                                           lonOffsetUnit:      rect.centre.longitude.unit,
+                                                           lonOffsetValue:     rect.centre.longitude.content,
+                                                           latOffsetUnit:      rect.centre.latitude.unit,
+                                                           latOffsetValue:     rect.centre.latitude.content,
+                                                           pLengthUnit:        rect.long.unit,
+                                                           pLengthValue:       rect.long.content,
+                                                           qLengthUnit:        rect.short.unit,
+                                                           qLengthValue:       rect.short.content,
+                                                           positionAngleUnit:  rect.pALong.unit,
+                                                           positionAngleValue: rect.pALong.content,
+                                                           spacingValue:       rect.spacing.content,
+                                                           spacingUnits:       rect.spacing.userUnit
+                                                         }
+                                                       })
           }
           // this.tableRows = fcc.individual.rows;
           // this.fieldCentreCoordinatesForm.patchValue({

@@ -46,11 +46,11 @@ interface Margin {
  */
 
 @Component({
-  selector: 'app-visualisation-viewer',
-  templateUrl: './visualisation-viewer.component.html',
-  styleUrls: ['./visualisation-viewer.component.scss'],
-  encapsulation: ViewEncapsulation.None
-})
+             selector:      'app-visualisation-viewer',
+             templateUrl:   './visualisation-viewer.component.html',
+             styleUrls:     ['./visualisation-viewer.component.scss'],
+             encapsulation: ViewEncapsulation.None
+           })
 export class VisualisationViewerComponent implements OnInit {
 
   /** Regions for receiver bands */
@@ -79,26 +79,26 @@ export class VisualisationViewerComponent implements OnInit {
 
   /** Object holding data for the focus chart */
   private focus: ChartInterface = {
-    margin: {top: 20, right: 20, bottom: 110, left: 40},
+    margin:    {top: 20, right: 20, bottom: 110, left: 40},
     chartArea: {},
-    width: 0,
-    height: 0,
-    xScale: {},
-    yScale: {},
-    xAxis: {},
-    line: {}
+    width:     0,
+    height:    0,
+    xScale:    {},
+    yScale:    {},
+    xAxis:     {},
+    line:      {}
   };
 
   /** Object holding data for the context chart */
   private context: ChartInterface = {
-    margin: {top: 350, right: 20, bottom: 30, left: 40},
+    margin:    {top: 350, right: 20, bottom: 30, left: 40},
     chartArea: {},
-    width: 0,
-    height: 0,
-    xScale: {},
-    yScale: {},
-    xAxis: {},
-    line: {}
+    width:     0,
+    height:    0,
+    xScale:    {},
+    yScale:    {},
+    xAxis:     {},
+    line:      {}
   };
 
   /** The brush on the context chart, used for zooming and panning */
@@ -135,6 +135,7 @@ export class VisualisationViewerComponent implements OnInit {
     this.drawRegions();
     this.drawContextChart();
     this.drawFocusChart();
+    this.drawLine();
     this.resetView();
   }
 
@@ -143,9 +144,9 @@ export class VisualisationViewerComponent implements OnInit {
    */
   setupSvg() {
     // Get the div element from the DOM
-    const element      = this.chartContainer.nativeElement;
+    const element       = this.chartContainer.nativeElement;
     // Set the width and height of the context chart
-    this.context.width = element.offsetWidth - this.context.margin.left - this.context.margin.right;
+    this.context.width  = element.offsetWidth - this.context.margin.left - this.context.margin.right;
     this.context.height = element.offsetHeight - this.context.margin.top - this.context.margin.bottom;
     // Set the width and height of the focus chart (width of both is the same)
     this.focus.width    = this.context.width;
@@ -153,15 +154,15 @@ export class VisualisationViewerComponent implements OnInit {
 
     // Append an svg element to the div to draw the charts
     this.svg = d3.select(element).append('svg')
-      .attr('width', element.offsetWidth)
-      .attr('height', element.offsetHeight);
+                 .attr('width', element.offsetWidth)
+                 .attr('height', element.offsetHeight);
 
     // Clip path in the focus chart, keeps the line from spilling into margins
     this.svg.append('defs').append('clipPath')
-      .attr('id', 'clip')
-      .append('rect')
-      .attr('width', this.focus.width)
-      .attr('height', this.focus.height);
+        .attr('id', 'clip')
+        .append('rect')
+        .attr('width', this.focus.width)
+        .attr('height', this.focus.height);
   }
 
   /**
@@ -180,23 +181,23 @@ export class VisualisationViewerComponent implements OnInit {
 
     // Set the line for the focus chart based on scales
     this.focus.line = d3.line()
-      .x((d: any) => this.focus.xScale(d[0]))
-      .y((d: any) => this.focus.yScale(d[2]));
+                        .x((d: any) => this.focus.xScale(d[0]))
+                        .y((d: any) => this.focus.yScale(d[2]));
 
     // Set the line for the context chart based on scales
     this.context.line = d3.line()
-      .x((d: any) => this.context.xScale(d[0]))
-      .y((d: any) => this.context.yScale(d[2]));
+                          .x((d: any) => this.context.xScale(d[0]))
+                          .y((d: any) => this.context.yScale(d[2]));
 
     // Add the focus chart area to the svg
     this.focus.chartArea = this.svg.append('g')
-      .attr('class', 'focus')
-      .attr('transform', `translate(${this.focus.margin.left}, ${this.focus.margin.top})`);
+                               .attr('class', 'focus')
+                               .attr('transform', `translate(${this.focus.margin.left}, ${this.focus.margin.top})`);
 
     // Add the context chart area to the svg
     this.context.chartArea = this.svg.append('g')
-      .attr('class', 'context')
-      .attr('transform', `translate(${this.context.margin.left}, ${this.context.margin.top})`);
+                                 .attr('class', 'context')
+                                 .attr('transform', `translate(${this.context.margin.left}, ${this.context.margin.top})`);
 
     // Set the x domain of the focus chart (0 to largest number i.e. 0 - 1000)
     this.focus.xScale.domain([0, d3.max(this.data, d => d[0])]);
@@ -213,15 +214,15 @@ export class VisualisationViewerComponent implements OnInit {
   setupBrushZoom() {
     // Create the brush only on the x axis smallest it can be and largest and bind the brushed function
     this.brush = d3.brushX()
-      .extent([[0, 0], [this.context.width, this.context.height]])
-      .on('brush end', this.brushed.bind(this));
+                   .extent([[0, 0], [this.context.width, this.context.height]])
+                   .on('brush end', this.brushed.bind(this));
 
     // Create the zoom area controlled by the brush
     this.zoom = d3.zoom()
-      .scaleExtent([1, Infinity])
-      .translateExtent([[0, 0], [this.focus.width, this.focus.height]])
-      .extent([[0, 0], [this.focus.width, this.focus.height]])
-      .on('zoom', this.zoomed.bind(this));
+                  .scaleExtent([1, Infinity])
+                  .translateExtent([[0, 0], [this.focus.width, this.focus.height]])
+                  .extent([[0, 0], [this.focus.width, this.focus.height]])
+                  .on('zoom', this.zoomed.bind(this));
   }
 
   /**
@@ -236,14 +237,26 @@ export class VisualisationViewerComponent implements OnInit {
 
     for (let i = 0; i < this.regions.length; i++) {
       this.focus.chartArea.append('rect')
-        .attr('class', 'region')
-        .attr('x', d => this.focus.xScale(this.regions[i][0]))
-        .attr('y', d => 0)
-        .attr('width', this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
-        .attr('height', this.focus.height)
-        .style('fill', d => this.regionColors(i))
-        .style('opacity', '0.3')
+          .attr('class', 'region')
+          .attr('x', d => this.focus.xScale(this.regions[i][0]))
+          .attr('y', d => 0)
+          .attr('width', this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
+          .attr('height', this.focus.height)
+          .style('fill', d => this.regionColors(i))
+          .style('opacity', '0.3')
     }
+  }
+
+  drawLine() {
+    this.focus.chartArea.append('line')
+        .attr('class', 'line')
+        .attr('x1', this.focus.xScale(350))
+        .attr('y1', this.focus.yScale(0))
+        .attr('x2', this.focus.xScale(350))
+        .attr('y2', this.focus.yScale(this.focus.height))
+        .style('stroke-width', 2)
+        .style('stroke', 'red')
+        .style('fill', 'none');
   }
 
   /**
@@ -252,21 +265,21 @@ export class VisualisationViewerComponent implements OnInit {
   drawContextChart() {
     // Add the line to the context chart
     this.context.chartArea.append('path')
-      .datum(this.data)
-      .attr('class', 'line')
-      .attr('d', this.context.line);
+        .datum(this.data)
+        .attr('class', 'line')
+        .attr('d', this.context.line);
 
     // Add the x axis to the context chart
     this.context.chartArea.append('g')
-      .attr('class', 'axis axis-x')
-      .attr('transform', `translate(${0}, ${this.context.height})`)
-      .call(this.context.xAxis);
+        .attr('class', 'axis axis-x')
+        .attr('transform', `translate(${0}, ${this.context.height})`)
+        .call(this.context.xAxis);
 
     // Add the brush to the context chart
     this.context.chartArea.append('g')
-      .attr('class', 'brush')
-      .call(this.brush)
-      .call(this.brush.move, this.context.xScale.range());
+        .attr('class', 'brush')
+        .call(this.brush)
+        .call(this.brush.move, this.context.xScale.range());
   }
 
   /**
@@ -275,15 +288,15 @@ export class VisualisationViewerComponent implements OnInit {
   drawFocusChart() {
     // Draw the line on the focus chart
     this.focus.chartArea.append('path')
-      .datum(this.data)
-      .attr('class', 'line')
-      .attr('d', this.focus.line);
+        .datum(this.data)
+        .attr('class', 'line')
+        .attr('d', this.focus.line);
 
     // Draw the x axis on the focus chart
     this.focus.chartArea.append('g')
-      .attr('class', 'axis axis-x')
-      .attr('transform', `translate(0, ${this.focus.height})`)
-      .call(this.focus.xAxis);
+        .attr('class', 'axis axis-x')
+        .attr('transform', `translate(0, ${this.focus.height})`)
+        .call(this.focus.xAxis);
   }
 
   /**
@@ -299,10 +312,10 @@ export class VisualisationViewerComponent implements OnInit {
 
     // Select all the band regions and re-adjust
     this.focus.chartArea.selectAll('.region')
-      .attr('x', (d, i) => this.focus.xScale(this.regions[i][0]))
-      .attr('y', (d, i) => 0)
-      .attr('width', (d, i) => this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
-      .attr('height', this.focus.height);
+        .attr('x', (d, i) => this.focus.xScale(this.regions[i][0]))
+        .attr('y', (d, i) => 0)
+        .attr('width', (d, i) => this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
+        .attr('height', this.focus.height);
 
     // Redraw the line on the focus chart
     this.focus.chartArea.select('.line').attr('d', this.focus.line);
@@ -312,8 +325,8 @@ export class VisualisationViewerComponent implements OnInit {
 
     // Move the zoom region on the focus chart
     this.svg.select('.zoom').call(this.zoom.transform, d3.zoomIdentity
-      .scale(this.focus.width / (s[1] - s[0]))
-      .translate(-s[0], 0));
+                                                         .scale(this.focus.width / (s[1] - s[0]))
+                                                         .translate(-s[0], 0));
   }
 
   /**
@@ -334,10 +347,10 @@ export class VisualisationViewerComponent implements OnInit {
   hideShowBands(show?: boolean) {
     if (show) {
       this.focus.chartArea.selectAll('.region').transition().delay((d, i) => i * 50)
-        .style('opacity', '0.3');
+          .style('opacity', '0.3');
     } else {
       this.focus.chartArea.selectAll('.region').transition().delay((d, i) => i * 50)
-        .style('opacity', '0.0');
+          .style('opacity', '0.0');
     }
   }
 
@@ -347,10 +360,10 @@ export class VisualisationViewerComponent implements OnInit {
   hideShowTransmission(show?: boolean) {
     if (show) {
       this.focus.chartArea.selectAll('.line').transition()
-        .style('opacity', '1.0');
+          .style('opacity', '1.0');
     } else {
       this.focus.chartArea.selectAll('.line').transition()
-        .style('opacity', '0.0');
+          .style('opacity', '0.0');
     }
   }
 
@@ -369,22 +382,22 @@ export class VisualisationViewerComponent implements OnInit {
     this.context.yScale.domain([d3.max(data, d => d[2]), d3.min(data, d => d[2])]);
 
     const focusLine = d3.line()
-      .x((d: any) => this.focus.xScale(d[0]))
-      .y((d: any) => this.focus.yScale(d[2]));
+                        .x((d: any) => this.focus.xScale(d[0]))
+                        .y((d: any) => this.focus.yScale(d[2]));
 
     this.focus.chartArea.selectAll('.line')
-      .data([data])
-      .transition()
-      .attr('d', focusLine);
+        .data([data])
+        .transition()
+        .attr('d', focusLine);
 
     const contextLine = d3.line()
-      .x((d: any) => this.context.xScale(d[0]))
-      .y((d: any) => this.context.yScale(d[2]));
+                          .x((d: any) => this.context.xScale(d[0]))
+                          .y((d: any) => this.context.yScale(d[2]));
 
     this.context.chartArea.selectAll('.line')
-      .data([data])
-      .transition()
-      .attr('d', contextLine);
+        .data([data])
+        .transition()
+        .attr('d', contextLine);
   }
 
   /**

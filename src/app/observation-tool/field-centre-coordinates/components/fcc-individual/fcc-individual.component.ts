@@ -59,7 +59,6 @@ export class FccIndividualComponent implements OnInit {
   }
 
   setRows(rows: ISinglePoint[]) {
-    console.log(rows);
     const rowFormGroups = rows.map(tableRow => this.formBuilder.group(tableRow));
     const rowFormArray  = this.formBuilder.array(rowFormGroups);
     this.individualForm.setControl('rows', rowFormArray);

@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {AladinComponent} from '../aladin/aladin.component';
 
 /**
  * Spacial image component
@@ -15,14 +16,26 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 export class SpacialImageComponent implements OnInit {
 
   data: any;
+  @ViewChild(AladinComponent) aladin: AladinComponent;
 
   constructor(private persistenceService: PersistenceService) {
 
   }
 
   ngOnInit() {
-    // this.persistenceService.getScienceGoalPageSection(CURRENT_GOAL, 'fieldSetup', 'spatialImage')
-    //   .subscribe(res => this.data = res);
+
+  }
+
+  zoomIn() {
+
+  }
+
+  zoomOut() {
+
+  }
+
+  normalView() {
+    this.aladin.setFov(60);
   }
 
 }

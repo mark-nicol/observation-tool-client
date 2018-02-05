@@ -1,0 +1,15 @@
+export interface IAladinConfig {
+  target: string | number[],
+  cooFrame: string,
+  survey: string,
+  fov: number,
+  showReticle: boolean,
+  showZoomControl: boolean,
+  showLayersControl: boolean,
+  showGotoControl: boolean,
+  showShareControl: boolean,
+  showFrame: boolean,
+  fullScreen: boolean,
+  reticleColor: string,
+  reticleSize: number,
+}

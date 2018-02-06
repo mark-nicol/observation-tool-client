@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {IAladinConfig} from '../../../shared/interfaces/aladin-config.interface';
-import {IScienceGoal} from '../../../shared/interfaces/project/science-goal/sciencegoal.interface';
 import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
@@ -14,7 +13,7 @@ declare let A: any;
            })
 export class AladinComponent implements OnInit {
 
-  @Input() desiredFov = 20;
+  @Output() coordinatesEmitter = new EventEmitter();
 
   target?: ITargetParameters;
   initialConfig: IAladinConfig = {
@@ -27,7 +26,7 @@ export class AladinComponent implements OnInit {
     showLayersControl: true,
     showGotoControl:   false,
     showShareControl:  false,
-    showFrame:         true,
+    showFrame:         false,
     fullScreen:        false,
     reticleColor:      'rgb(178, 50, 178)',
     reticleSize:       22,
@@ -53,6 +52,21 @@ export class AladinComponent implements OnInit {
 
   setFov(newFov: number) {
     this.map.setFov(newFov);
+  }
+
+  mouseMove(event: MouseEvent) {
+    this.coordinatesEmitter.emit({
+                                   pixel: [event.layerX, event.layerY],
+                                   world: this.map.pix2world(event.layerX, event.layerY)
+                                 });
+  }
+
+  mouseLeave(event: MouseEvent) {
+    this.coordinatesEmitter.emit({
+                                   pixel: [document.getElementById('aladin-lite-div').offsetWidth / 2,
+                                           document.getElementById('aladin-lite-div').offsetHeight / 2],
+                                   world: this.map.getRaDec()
+                                 });
   }
 
 }

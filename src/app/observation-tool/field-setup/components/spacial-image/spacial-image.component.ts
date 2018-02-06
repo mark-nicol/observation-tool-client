@@ -17,9 +17,11 @@ export class SpacialImageComponent implements OnInit {
 
   @ViewChild(AladinComponent) aladin: AladinComponent;
 
-  defaultFov = 60;
-  currentFov = this.defaultFov;
-  zoomStep   = 1.5;
+  defaultFov  = 60;
+  currentFov  = this.defaultFov;
+  zoomStep    = 1.5;
+  pixelCoords = [0, 0];
+  worldCoords = [0, 0];
 
   constructor(private persistenceService: PersistenceService) {
 
@@ -48,6 +50,11 @@ export class SpacialImageComponent implements OnInit {
   normalView() {
     this.currentFov = this.defaultFov;
     this.aladin.setFov(this.defaultFov);
+  }
+
+  updateCoords(coords: any) {
+    this.pixelCoords = coords.pixel;
+    this.worldCoords = coords.world;
   }
 
 }

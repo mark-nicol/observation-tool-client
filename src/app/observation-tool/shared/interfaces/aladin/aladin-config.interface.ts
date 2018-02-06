@@ -1,5 +1,5 @@
 export interface IAladinConfig {
-  target: string | number[],
+  target?: string | number[],
   cooFrame: string,
   survey: string,
   fov: number,

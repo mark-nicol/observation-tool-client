@@ -20,7 +20,8 @@
       </button>
       <button class="ui button"
               suiPopup
-              popupText="Zoom to fit the window">
+              popupText="Zoom to fit the window"
+              (click)="resetView()">
         <i class="window maximize icon"></i>
       </button>
       <button class="ui button"
@@ -41,7 +42,8 @@
       </button>
       <button class="ui button"
               suiPopup
-              popupText="Cut selected FOVs">
+              popupText="Cut selected FOVs"
+              (click)="cutLayers()">
         <i class="cut icon"></i>
       </button>
       <button class="ui button"
@@ -56,7 +58,8 @@
       </button>
       <button class="ui button"
               suiPopup
-              popupText="Add an FOV">
+              popupText="Add an FOV"
+              (click)="drawCircle()">
         <i class="fa fa-times-circle-o"></i>
       </button>
       <button class="ui button"

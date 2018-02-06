@@ -57,4 +57,16 @@ export class SpacialImageComponent implements OnInit {
     this.worldCoords = coords.world;
   }
 
+  drawCircle() {
+    this.aladin.drawCircle();
+  }
+
+  cutLayers() {
+    this.aladin.cutItems();
+  }
+
+  resetView() {
+    this.aladin.resetView();
+  }
+
 }

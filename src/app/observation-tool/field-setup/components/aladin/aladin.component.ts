@@ -21,9 +21,9 @@ export class AladinComponent implements OnInit {
     target:            'm31',
     cooFrame:          'ICRS',
     survey:            'P/DSS2/color',
-    fov:               4,
+    fov:               60,
     showReticle:       true,
-    showZoomControl:   true,
+    showZoomControl:   false,
     showLayersControl: true,
     showGotoControl:   false,
     showShareControl:  false,
@@ -32,7 +32,7 @@ export class AladinComponent implements OnInit {
     reticleColor:      'rgb(178, 50, 178)',
     reticleSize:       22,
   };
-  private map;
+  map;
 
   constructor(private persistenceService: PersistenceService) {
   }
@@ -41,7 +41,7 @@ export class AladinComponent implements OnInit {
     this.initAladin();
     this.persistenceService.getScienceGoal().subscribe(result => {
       this.target = result.TargetParameters[CURRENT_SOURCE];
-      this.map.goTo(this.target.sourceName);
+      // this.map.goTo(this.target.sourceName);
       console.log(this.target);
     });
   }

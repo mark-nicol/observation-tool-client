@@ -8,12 +8,14 @@
     <div class="ui blue icon buttons">
       <button class="ui button"
               suiPopup
-              popupText="Zoom in">
+              popupText="Zoom in"
+              (click)="zoomIn()">
         <i class="zoom icon"></i>
       </button>
       <button class="ui button"
               suiPopup
-              popupText="Zoom out">
+              popupText="Zoom out"
+              (click)="zoomOut()">
         <i class="zoom out icon"></i>
       </button>
       <button class="ui button"
@@ -64,32 +66,38 @@
       </button>
       <button class="ui button"
               suiPopup
-              popupText="Show/Hide grid">
+              popupText="Show/Hide grid"
+              (click)="checkFov()">
         <i class="grid layout icon"></i>
       </button>
     </div>
   </div>
 </div>
 <div class="ui form">
-  <div class="three fields">
+  <div class="equal width fields">
+    <!--<div class="field"-->
+         <!--suiPopup-->
+         <!--popupText="Current magnification">-->
+      <!--<input placeholder="1x"-->
+             <!--style="text-align: center">-->
+    <!--</div>-->
     <div class="field"
          suiPopup
-         popupText="Current magnification">
-      <input placeholder="1x"
-             style="text-align: center">
-    </div>
-    <div class="field"
-         suiPopup
-         popupText="Image pixel coordinates at mouse position">
+         popupText="Image coordinates at mouse position">
       <input placeholder="432, 276"
              style="text-align: center">
     </div>
     <div class="field"
          suiPopup
-         popupText="Image pixel value at mouse position">
-      <input placeholder="0.0"
-             style="text-align: center">
+         popupText="Sky coordinates at mouse position (J2000)">
+      <input style="text-align: center">
     </div>
+    <!--<div class="field"-->
+         <!--suiPopup-->
+         <!--popupText="Image pixel value at mouse position">-->
+      <!--<input placeholder="0.0"-->
+             <!--style="text-align: center">-->
+    <!--</div>-->
   </div>
 
   <div class="field">

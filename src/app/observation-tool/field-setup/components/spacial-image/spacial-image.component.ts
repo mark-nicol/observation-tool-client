@@ -9,14 +9,17 @@ import {AladinComponent} from '../aladin/aladin.component';
  */
 
 @Component({
-             selector: 'spacial-image',
+             selector:    'spacial-image',
              templateUrl: './spacial-image.component.html',
-             styleUrls: ['./spacial-image.component.css']
+             styleUrls:   ['./spacial-image.component.css']
            })
 export class SpacialImageComponent implements OnInit {
 
-  data: any;
   @ViewChild(AladinComponent) aladin: AladinComponent;
+
+  defaultFov = 60;
+  currentFov = this.defaultFov;
+  zoomStep   = 1.5;
 
   constructor(private persistenceService: PersistenceService) {
 
@@ -26,16 +29,25 @@ export class SpacialImageComponent implements OnInit {
 
   }
 
-  zoomIn() {
+  checkFov() {
+    console.log(this.aladin.map.getFov());
+  }
 
+  zoomIn() {
+    // this.currentFov -= this.zoomStep;
+    // console.log('zoom in', this.currentFov);
+    this.aladin.setFov(this.aladin.map.getFov()[0] / this.zoomStep);
   }
 
   zoomOut() {
-
+    // this.currentFov += this.zoomStep;
+    // console.log('zoom out', this.currentFov);
+    this.aladin.setFov(this.aladin.map.getFov()[0] * this.zoomStep);
   }
 
   normalView() {
-    this.aladin.setFov(60);
+    this.currentFov = this.defaultFov;
+    this.aladin.setFov(this.defaultFov);
   }
 
 }

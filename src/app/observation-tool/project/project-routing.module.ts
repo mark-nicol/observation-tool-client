@@ -21,10 +21,6 @@ const routes: Routes = [
         component: PlannedObservingComponent,
       },
       {
-        path:         'science-goals',
-        loadChildren: '../science-goal/science-goal.module#ScienceGoalModule'
-      },
-      {
         path:       '',
         redirectTo: 'pi-entry',
         pathMatch:  'full'

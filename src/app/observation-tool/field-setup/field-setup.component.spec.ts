@@ -8,6 +8,7 @@ import {FieldCenterCoordinatesComponent} from '../field-centre-coordinates/field
 import {DegreesPipe} from '../shared/pipes/degrees.pipe';
 import {SexagesimalPipe} from '../shared/pipes/sexagesimal.pipe';
 import {PersistenceService} from '../shared/services/persistence.service';
+import {SimbadService} from '../shared/services/simbad.service';
 import {SystemService} from '../shared/services/system.service';
 import {ExpectedSourcePropertiesComponent} from './components/expected-source-properties/expected-source-properties.component';
 import {FovParametersComponent} from './components/fov-parameters/fov-parameters.component';
@@ -43,7 +44,8 @@ describe('FieldSetupComponent', () => {
                                      ],
                                      providers: [
                                        PersistenceService,
-                                       SystemService
+                                       SystemService,
+                                       SimbadService
                                      ]
                                    })
            .compileComponents();

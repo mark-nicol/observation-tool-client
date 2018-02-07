@@ -1,3 +1,4 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 
 import { SimbadService } from './simbad.service';
@@ -5,6 +6,7 @@ import { SimbadService } from './simbad.service';
 describe('SimbadService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [SimbadService]
     });
   });

@@ -4,6 +4,7 @@ import {Speed} from '../../../../units/classes/speed';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {SimbadService} from '../../../shared/services/simbad.service';
 import {SystemService} from '../../../shared/services/system.service';
 import {SexagesimalPipe} from '../../../shared/pipes/sexagesimal.pipe';
 
@@ -69,10 +70,13 @@ export class SourceComponent implements OnInit {
    * @param persistenceService Injected service
    * @param formBuilder
    * @param systemService
+   * @param simbadService
    */
   constructor(private persistenceService: PersistenceService,
               private formBuilder: FormBuilder,
-              protected systemService: SystemService) {
+              protected systemService: SystemService,
+              private simbadService: SimbadService) {
+    this.simbadService.queryByIdentifier('Betelgeuse');
     this.sourceForm = this.formBuilder.group({
                                                sourceName:                    '',
                                                solarSystemObject:             false,

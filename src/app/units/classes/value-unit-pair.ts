@@ -91,6 +91,7 @@ export abstract class ValueUnitPair {
    * @param targetUnits The units to covert the content into
    */
   getValueInUnits(targetUnits: string): number {
+    console.log('Get val in units');
     return this.content * this._valueConversionService.getConversionFactor(this.unit, targetUnits);
   }
 

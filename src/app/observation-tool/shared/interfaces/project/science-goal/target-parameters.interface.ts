@@ -23,7 +23,8 @@ export interface ITargetParameters {
   index: number;
   sdReferencePosition: ISkyCoordinates;
   ExpectedProperties: IExpectedProperties;
-  fields: IField[];
+  SinglePoint?: ISinglePoint[]
+  Rectangle?: IRectangle;
 }
 
 export interface IField {

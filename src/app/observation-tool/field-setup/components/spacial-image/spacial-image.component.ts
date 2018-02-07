@@ -17,9 +17,6 @@ export class SpacialImageComponent implements OnInit {
 
   @ViewChild(AladinComponent) aladin: AladinComponent;
 
-  defaultFov  = 60;
-  currentFov  = this.defaultFov;
-  zoomStep    = 1.5;
   pixelCoords = [0, 0];
   worldCoords = [0, 0];
 
@@ -31,34 +28,21 @@ export class SpacialImageComponent implements OnInit {
 
   }
 
-  checkFov() {
-    console.log(this.aladin.map.getFov());
-  }
-
   zoomIn() {
-    // this.currentFov -= this.zoomStep;
-    // console.log('zoom in', this.currentFov);
-    this.aladin.setFov(this.aladin.map.getFov()[0] / this.zoomStep);
+    this.aladin.zoomIn();
   }
 
   zoomOut() {
-    // this.currentFov += this.zoomStep;
-    // console.log('zoom out', this.currentFov);
-    this.aladin.setFov(this.aladin.map.getFov()[0] * this.zoomStep);
+    this.aladin.zoomOut();
   }
 
-  normalView() {
-    this.currentFov = this.defaultFov;
-    this.aladin.setFov(this.defaultFov);
+  normalZoom() {
+    this.aladin.normalZoom();
   }
 
   updateCoords(coords: any) {
     this.pixelCoords = coords.pixel;
     this.worldCoords = coords.world;
-  }
-
-  drawCircle() {
-    this.aladin.drawCircle();
   }
 
   cutLayers() {

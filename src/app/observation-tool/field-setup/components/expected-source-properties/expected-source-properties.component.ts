@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {CURRENT_PROJECT} from '../../../shared/data/current-project';
-import {CURRENT_SCIENCE_GOAL} from '../../../shared/data/current-science-goal';
-import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -35,7 +32,7 @@ export class ExpectedSourcePropertiesComponent implements OnInit {
   ngOnInit() {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
-          const esp = result.TargetParameters[CURRENT_SOURCE].ExpectedProperties;
+          const esp = result.TargetParameters[this.persistenceService.currentTarget].ExpectedProperties;
           this.expectedSourcePropertiesForm.patchValue({
                                                        continuumFluxDensityUnit: esp.expectedPeakFluxDensity.unit,
                                                        continuumFluxDensityValue: esp.expectedPeakFluxDensity.content,

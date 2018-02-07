@@ -2,10 +2,19 @@
   <a class="item"
      *ngFor="let page of pageKeys(pages)"
      [ngClass]="{'active': router.url.indexOf(pages[page].path) > -1}"
-     [routerLink]="pages[page].path"
-     (click)="selectedPage = page">
+     [routerLink]="pages[page].path">
     {{pages[page].text}}
   </a>
+  <div class="right menu"
+       *ngIf="router.url.indexOf('field-setup') > -1 && targets !== undefined">
+    <a class="item"
+       *ngFor="let target of targets"
+       [class.active]="target.sourceName === selectedTarget"
+       (click)="changeTarget(target.sourceName, target.index)">
+      {{target.sourceName}}
+    </a>
+    <div class="link item"><i class="add icon"></i></div>
+  </div>
 </div>
 <p style="height: 1.95em"></p>
 <div class="ui bottom attached segment">

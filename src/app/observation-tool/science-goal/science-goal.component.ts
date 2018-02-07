@@ -1,19 +1,18 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {ITargetParameters} from '../shared/interfaces/project/science-goal/target-parameters.interface';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 /**
  * Science goal component which contains tabbed science goal pages
  */
 
 @Component({
-             selector: 'app-science-goal',
-             templateUrl: './science-goal.component.html',
-             styleUrls: ['./science-goal.component.scss']
-           })
-export class ScienceGoalComponent {
-
-  /** The currently selected goal page */
-  selectedPage = 'general';
+  selector: 'app-science-goal',
+  templateUrl: './science-goal.component.html',
+  styleUrls: ['./science-goal.component.scss']
+})
+export class ScienceGoalComponent implements OnInit {
 
   /** Dict of all science goal page data */
   pages = {
@@ -43,13 +42,28 @@ export class ScienceGoalComponent {
     }
   };
 
+  targets: ITargetParameters[];
+  selectedTarget: string;
+
   /** Iterator for pages */
   pageKeys: (o) => string[] = Object.keys;
 
   /**
    * Constructor
    */
-  constructor(private router: Router) {
+  constructor(protected router: Router, private persistenceService: PersistenceService) {
+  }
+
+  ngOnInit() {
+    this.persistenceService.getScienceGoal().subscribe(result => {
+      this.targets        = result.TargetParameters;
+      this.selectedTarget = this.targets[0].sourceName;
+    });
+  }
+
+  changeTarget(sourceName: string, index: number) {
+    this.selectedTarget = sourceName;
+    this.persistenceService.currentTarget = index;
   }
 
 }

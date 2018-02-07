@@ -1,10 +1,10 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import * as _ from 'lodash';
 import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../classes/obsproject';
 import {ObsProposal} from '../classes/obsproposal';
 import {ScienceGoal} from '../classes/science-goal/science-goal';
-import * as _ from 'lodash';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -12,7 +12,8 @@ import * as _ from 'lodash';
 @Injectable()
 export class PersistenceService {
 
-  baseUrl = 'http://localhost:8080';
+  private baseUrl        = 'http://localhost:8080';
+  private _currentTarget = 0;
 
   /**
    * Constructor, loads data and sets members
@@ -20,16 +21,21 @@ export class PersistenceService {
   constructor(private http: HttpClient) {
   }
 
+  get currentTarget(): number {
+    return this._currentTarget;
+  }
+
+  set currentTarget(value: number) {
+    this._currentTarget = value + 1;
+  }
+
   /**
    * GET /projects/{projectCode}
    */
-  getProject(projectCode: string): Observable<ObsProject> {
+  getProject(): Observable<ObsProject> {
     return this.http.get<any>(`${this.baseUrl}/projects/project`)
                .map(result => {
                  return _.merge(new ObsProject, result);
-                 // return Object.assign(new ObsProject, result);
-                 // return Object.assign(new ObsProject, result);
-                 // return new ObsProject().initFromJson(result);
                });
   }
 
@@ -37,8 +43,6 @@ export class PersistenceService {
     return this.http.get<any>(`${this.baseUrl}/projects/proposal`)
                .map(result => {
                  return _.merge(new ObsProposal, result);
-                 // return Object.assign(new ObsProposal, result);
-                 // return new ObsProposal().initFromJson(result);
                })
   }
 
@@ -46,25 +50,7 @@ export class PersistenceService {
     return this.http.get<any>(`${this.baseUrl}/projects/science-goals/goal`)
                .map(result => {
                  return _.merge(new ScienceGoal(), result);
-                 // return Object.assign(new ScienceGoal, result);
-                 // return new ScienceGoal().initFromJson(result);
                })
-  }
-
-  // /**
-  //  * GET /projects/{projectCode}/science-goals/{goalId}
-  //  */
-  // getScienceGoal(projectCode: string, scienceGoalId: string): Observable<any> {
-  //   return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}`);
-  // }
-
-
-  // /**
-  //  * GET /projects/{projectCode}/science-goals/{goalId}/sources/{sourceId}
-  //  */
-  getSource(projectCode: string, scienceGoalId: string, sourceId: string): Observable<any> {
-    return null;
-  //   return this.http.get<any>(`${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}/sources/${sourceId}`);
   }
 
 }

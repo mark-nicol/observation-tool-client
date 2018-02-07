@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {CURRENT_SOURCE} from '../shared/data/current-source';
 import {ISinglePoint} from '../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 
@@ -57,18 +56,18 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   ngOnInit() {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
-          this.sourceCoordinatesSystem = result.TargetParameters[CURRENT_SOURCE].sourceCoordinates.system;
-          this.fieldCentreCoordinatesForm.patchValue({targetType: result.TargetParameters[CURRENT_SOURCE].type});
-          if (result.TargetParameters[CURRENT_SOURCE].type === 'F_MultiplePoints') { // TODO Enum
+          this.sourceCoordinatesSystem = result.TargetParameters[this.persistenceService.currentTarget].sourceCoordinates.system;
+          this.fieldCentreCoordinatesForm.patchValue({targetType: result.TargetParameters[this.persistenceService.currentTarget].type});
+          if (result.TargetParameters[this.persistenceService.currentTarget].type === 'F_MultiplePoints') { // TODO Enum
             this.fieldCentreCoordinatesForm.patchValue({
-                                                         coordType:  result.TargetParameters[CURRENT_SOURCE].SinglePoint[0].centre.type,
+                                                         coordType:  result.TargetParameters[this.persistenceService.currentTarget].SinglePoint[0].centre.type,
                                                          individual: {
-                                                           offsetUnit: result.TargetParameters[CURRENT_SOURCE].SinglePoint[0].centre.latitude.unit
+                                                           offsetUnit: result.TargetParameters[this.persistenceService.currentTarget].SinglePoint[0].centre.latitude.unit
                                                          }
                                                        });
-            this.tableRows = result.TargetParameters[CURRENT_SOURCE].SinglePoint;
+            this.tableRows = result.TargetParameters[this.persistenceService.currentTarget].SinglePoint;
           } else {
-            const rect = result.TargetParameters[CURRENT_SOURCE].Rectangle;
+            const rect = result.TargetParameters[this.persistenceService.currentTarget].Rectangle;
             console.log(rect.spacing);
             this.fieldCentreCoordinatesForm.patchValue({
                                                          coordType:   rect.centre.type,

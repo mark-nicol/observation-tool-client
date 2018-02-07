@@ -3,7 +3,6 @@ import {Latitude} from '../../../../units/classes/latitude';
 import {Longitude} from '../../../../units/classes/longitude';
 import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
 import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
-import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {IAladinConfig} from '../../../shared/interfaces/aladin/aladin-config.interface';
 import {IAladinOverlay} from '../../../shared/interfaces/aladin/overlay.interface';
 import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
@@ -47,7 +46,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.persistenceService.getScienceGoal().subscribe(result => {
-      this.target = result.TargetParameters[CURRENT_SOURCE];
+      this.target = result.TargetParameters[this.persistenceService.currentTarget];
       this.aladin.gotoRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
       this.addPointings();
     });

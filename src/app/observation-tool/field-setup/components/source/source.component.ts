@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Speed} from '../../../../units/classes/speed';
-import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {SimbadService} from '../../../shared/services/simbad.service';
@@ -101,7 +100,7 @@ export class SourceComponent implements OnInit {
   ngOnInit() {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
-          const targetParams = result.TargetParameters[CURRENT_SOURCE];
+          const targetParams = result.TargetParameters[this.persistenceService.currentTarget];
           this.sourceForm.patchValue({
                                        sourceName:                    targetParams.sourceName,
                                        solarSystemObject:             targetParams.solarSystemObject !== 'Unspecified',

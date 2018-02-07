@@ -4,8 +4,8 @@ import {Speed} from '../../../../units/classes/speed';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {SimbadService} from '../../../shared/services/simbad.service';
 import {SystemService} from '../../../shared/services/system.service';
-import {SexagesimalPipe} from '../../../shared/pipes/sexagesimal.pipe';
 
 /**
  * Source Component in Field Setup
@@ -69,10 +69,12 @@ export class SourceComponent implements OnInit {
    * @param persistenceService Injected service
    * @param formBuilder
    * @param systemService
+   * @param simbadService
    */
   constructor(private persistenceService: PersistenceService,
               private formBuilder: FormBuilder,
-              protected systemService: SystemService) {
+              protected systemService: SystemService,
+              private simbadService: SimbadService) {
     this.sourceForm = this.formBuilder.group({
                                                sourceName:                    '',
                                                solarSystemObject:             false,
@@ -192,6 +194,13 @@ export class SourceComponent implements OnInit {
                                              this.sourceForm.value.radialVelocityValue),
                                    this.sourceForm.value.dopplerType)
                                });
+  }
+
+  resolveSource() {
+    this.simbadService.queryByIdentifier(this.sourceForm.value.sourceName).subscribe(result => {
+      const data = SimbadService.cleanResponse(result);
+      this.sourceForm.patchValue(data);
+    });
   }
 
 }

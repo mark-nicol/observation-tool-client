@@ -8,16 +8,23 @@ import * as eq from 'equatorial';
  */
 
 @Pipe({
-  name: 'sexagesimal'
-})
+        name: 'sexagesimal'
+      })
 export class SexagesimalPipe implements PipeTransform {
 
   /**
    * Transforms the content
    * @param value The content to transform
+   * @param type
    */
-  transform(value: any): any {
-    return eq.decDeg2Hms(value);
+  transform(value: any, type: string): any {
+    if (value) {
+      if (type === 'dec') {
+        return eq.decDeg2Hms(value);
+      } else if (type === 'ra') {
+        return eq.raDeg2Hms(value);
+      }
+    }
   }
 
 }

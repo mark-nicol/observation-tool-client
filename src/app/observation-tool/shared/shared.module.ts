@@ -11,6 +11,7 @@ import {DegreesPipe} from './pipes/degrees.pipe';
 import {SexagesimalPipe} from './pipes/sexagesimal.pipe';
 import {PersistenceService} from './services/persistence.service';
 import {SuiModule} from 'ng2-semantic-ui';
+import {SimbadService} from './services/simbad.service';
 import {SystemService} from './services/system.service';
 
 @NgModule({
@@ -31,7 +32,8 @@ import {SystemService} from './services/system.service';
   ],
   providers: [
     PersistenceService,
-    SystemService
+    SystemService,
+    SimbadService
   ],
   exports: [
     CommonModule,

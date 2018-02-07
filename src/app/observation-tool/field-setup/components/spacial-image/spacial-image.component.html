@@ -2,7 +2,9 @@
 <div class="ui center aligned grid"
      style="padding-bottom: 1em">
   <div class="row">
-    <app-aladin (coordinatesEmitter)="updateCoords($event)"></app-aladin>
+    <div class="column">
+      <app-aladin (coordinatesEmitter)="updateCoords($event)"></app-aladin>
+    </div>
   </div>
   <div class="row">
     <div class="ui blue icon buttons">

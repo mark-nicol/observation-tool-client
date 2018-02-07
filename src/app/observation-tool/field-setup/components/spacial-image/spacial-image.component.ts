@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AladinComponent} from '../aladin/aladin.component';
 
 /**
  * Spacial image component
@@ -8,21 +8,57 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
  */
 
 @Component({
-             selector: 'spacial-image',
+             selector:    'spacial-image',
              templateUrl: './spacial-image.component.html',
-             styleUrls: ['./spacial-image.component.css']
+             styleUrls:   ['./spacial-image.component.css']
            })
 export class SpacialImageComponent implements OnInit {
 
-  data: any;
+  @Input() set resolveCoordinates(value: number[]) {
+    if (value)
+      this.goToCoords(value[0], value[1]);
+  }
 
-  constructor(private persistenceService: PersistenceService) {
+  @ViewChild(AladinComponent) aladin: AladinComponent;
+
+  pixelCoords = [0, 0];
+  worldCoords = [0, 0];
+
+  constructor() {
 
   }
 
   ngOnInit() {
-    // this.persistenceService.getScienceGoalPageSection(CURRENT_GOAL, 'fieldSetup', 'spatialImage')
-    //   .subscribe(res => this.data = res);
+
+  }
+
+  zoomIn() {
+    this.aladin.zoomIn();
+  }
+
+  zoomOut() {
+    this.aladin.zoomOut();
+  }
+
+  normalZoom() {
+    this.aladin.normalZoom();
+  }
+
+  updateCoords(coords: any) {
+    this.pixelCoords = coords.pixel;
+    this.worldCoords = coords.world;
+  }
+
+  cutLayers() {
+    this.aladin.cutItems();
+  }
+
+  resetView() {
+    this.aladin.resetView();
+  }
+
+  goToCoords(lon: number, lat: number) {
+    this.aladin.goToCoords(lon, lat);
   }
 
 }

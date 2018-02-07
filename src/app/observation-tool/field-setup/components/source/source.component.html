@@ -57,28 +57,7 @@
         </sui-checkbox>
       </div>
 
-
-      <!-- Lat input -->
-      <div class="field"
-           suiPopup
-           popupText="The latitude of the source">
-        <label for="latInput">
-          {{
-          this.sourceForm.value.sexagesimalUnits ?
-          this.currentSystem?.sexagesimalLabels.latLabel :
-          this.currentSystem?.normalLabels.latLabel
-          }}
-        </label>
-        <input #latInput
-               id="latInput"
-               formControlName="latValue"
-               (keyup.enter)="setLatLon(latInput.value, latInput)"
-               (blur)="setLatLon(latInput.value, latInput)"
-               placeholder="0">
-      </div>
-
-
-      <!-- Long input -->
+      <!-- RA(lon) input -->
       <div class="field"
            suiPopup
            popupText="The longitude of the source">
@@ -94,6 +73,25 @@
                formControlName="lonValue"
                (keyup.enter)="setLatLon(lonInput.value, lonInput)"
                (blur)="setLatLon(lonInput.value, lonInput)"
+               placeholder="0">
+      </div>
+
+      <!-- Dec(lat) input -->
+      <div class="field"
+           suiPopup
+           popupText="The latitude of the source">
+        <label for="latInput">
+          {{
+          this.sourceForm.value.sexagesimalUnits ?
+          this.currentSystem?.sexagesimalLabels.latLabel :
+          this.currentSystem?.normalLabels.latLabel
+          }}
+        </label>
+        <input #latInput
+               id="latInput"
+               formControlName="latValue"
+               (keyup.enter)="setLatLon(latInput.value, latInput)"
+               (blur)="setLatLon(latInput.value, latInput)"
                placeholder="0">
       </div>
     </div>

@@ -2,28 +2,34 @@
 <div class="ui center aligned grid"
      style="padding-bottom: 1em">
   <div class="row">
-    <img src="../../../../../assets/img/field_placeholder.png">
+    <div class="column">
+      <app-aladin (coordinatesEmitter)="updateCoords($event)"></app-aladin>
+    </div>
   </div>
   <div class="row">
     <div class="ui blue icon buttons">
       <button class="ui button"
               suiPopup
-              popupText="Zoom in">
+              popupText="Zoom in"
+              (click)="zoomIn()">
         <i class="zoom icon"></i>
       </button>
       <button class="ui button"
               suiPopup
-              popupText="Zoom out">
+              popupText="Zoom out"
+              (click)="zoomOut()">
         <i class="zoom out icon"></i>
       </button>
       <button class="ui button"
               suiPopup
-              popupText="Zoom to fit the window">
+              popupText="Zoom to fit the window"
+              (click)="resetView()">
         <i class="window maximize icon"></i>
       </button>
       <button class="ui button"
               suiPopup
-              popupText="Normal zoom">
+              popupText="Normal zoom"
+              (click)="normalZoom()">
         <i class="window restore icon"></i>
       </button>
       <button class="ui button"
@@ -38,7 +44,8 @@
       </button>
       <button class="ui button"
               suiPopup
-              popupText="Cut selected FOVs">
+              popupText="Cut selected FOVs"
+              (click)="cutLayers()">
         <i class="cut icon"></i>
       </button>
       <button class="ui button"
@@ -70,25 +77,32 @@
   </div>
 </div>
 <div class="ui form">
-  <div class="three fields">
+  <div class="equal width fields">
+    <!--<div class="field"-->
+    <!--suiPopup-->
+    <!--popupText="Current magnification">-->
+    <!--<input placeholder="1x"-->
+    <!--style="text-align: center">-->
+    <!--</div>-->
     <div class="field"
          suiPopup
-         popupText="Current magnification">
-      <input placeholder="1x"
-             style="text-align: center">
-    </div>
-    <div class="field"
-         suiPopup
-         popupText="Image pixel coordinates at mouse position">
+         popupText="Image coordinates at mouse position">
       <input placeholder="432, 276"
-             style="text-align: center">
+             style="text-align: center"
+             [ngModel]="pixelCoords[0] + ', ' + pixelCoords[1]">
     </div>
     <div class="field"
          suiPopup
-         popupText="Image pixel value at mouse position">
-      <input placeholder="0.0"
-             style="text-align: center">
+         popupText="Sky coordinates at mouse position (J2000)">
+      <input style="text-align: center"
+             [ngModel]="worldCoords[0].toFixed(4) + ', ' + worldCoords[1].toFixed(4)">
     </div>
+    <!--<div class="field"-->
+    <!--suiPopup-->
+    <!--popupText="Image pixel value at mouse position">-->
+    <!--<input placeholder="0.0"-->
+    <!--style="text-align: center">-->
+    <!--</div>-->
   </div>
 
   <div class="field">

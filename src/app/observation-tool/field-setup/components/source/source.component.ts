@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Speed} from '../../../../units/classes/speed';
 import {CURRENT_SOURCE} from '../../../shared/data/current-source';
@@ -22,10 +22,12 @@ import {SystemService} from '../../../shared/services/system.service';
            })
 export class SourceComponent implements OnInit {
 
-  sourceForm: FormGroup;
 
+  @Output() resolveEmitter = new EventEmitter<number[]>();
+
+  sourceForm: FormGroup;
   /** Selectable solar system bodies for selection box */
-  solarBodies = [
+  solarBodies                 = [
     'Mercury',
     'Venus',
     'Moon',
@@ -47,9 +49,7 @@ export class SourceComponent implements OnInit {
     'Vesta',
     'Ephemeris'
   ];
-
   currentSystem: CoordSystemInterface;
-
   sexagesimalCheckboxDisabled = false;
 
   static getRedshift(centerVelocity: Speed, dopplerType: string): number {
@@ -200,6 +200,7 @@ export class SourceComponent implements OnInit {
     this.simbadService.queryByIdentifier(this.sourceForm.value.sourceName).subscribe(result => {
       const data = SimbadService.cleanResponse(result);
       this.sourceForm.patchValue(data);
+      this.resolveEmitter.emit([data.lonValue, data.latValue]);
     });
   }
 

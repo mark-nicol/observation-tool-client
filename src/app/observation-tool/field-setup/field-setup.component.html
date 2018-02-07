@@ -1,6 +1,6 @@
 <div class="ui internally celled two column grid">
   <div class="sixteen wide tablet six wide large screen seven wide widescreen column">
-    <spacial-image></spacial-image>
+    <spacial-image [resolveCoordinates]="resolveCoordinates"></spacial-image>
     <div class="ui grid">
       <div class="sixteen wide large screen eight wide widescreen column">
         <fov-parameters></fov-parameters>
@@ -11,8 +11,7 @@
     </div>
   </div>
   <div class="sixteen wide tablet ten wide large screen nine wide widescreen column">
-    <field-source (tableHeaderEmitter)="setHeaders($event)"
-                  (targetTypeEmitter)="setTargetType($event)"></field-source>
+    <field-source (resolveEmitter)="resolveCoordinates = $event"></field-source>
     <source-expected-properties></source-expected-properties>
     <field-center-coordinates></field-center-coordinates>
   </div>

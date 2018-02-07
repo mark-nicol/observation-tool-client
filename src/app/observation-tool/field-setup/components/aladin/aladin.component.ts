@@ -39,8 +39,8 @@ export class AladinComponent implements OnInit, AfterViewInit {
   private aladin;
   private overlay: IAladinOverlay;
   private catalogue;
-  zoomStep    = 1.5;
-  defaultFov  = 4;
+  zoomStep                     = 1.5;
+  defaultFov                   = 4;
 
   constructor(private persistenceService: PersistenceService) {
   }
@@ -58,7 +58,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   initAladin() {
-    this.aladin       = A.aladin('#aladin-lite-div', this.initialConfig);
+    this.aladin    = A.aladin('#aladin-lite-div', this.initialConfig);
     this.catalogue = A.catalog({
                                  name:       'Pointing Catalogue',
                                  shape:      'cross',
@@ -107,7 +107,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   cutItems() {
-    console.log('cut');
     this.catalogue.sources     = [];
     this.overlay.overlay_items = [];
   }
@@ -122,6 +121,10 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   normalZoom() {
     this.aladin.setFov(this.defaultFov);
+  }
+
+  goToCoords(lon: number, lat: number) {
+    this.aladin.gotoRaDec(lon, lat);
   }
 
 }

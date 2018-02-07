@@ -13,6 +13,14 @@ import {SuiPopupConfig} from 'ng2-semantic-ui';
 
 export class FieldSetupComponent {
 
+  get resolveCoordinates(): number[] {
+    return this._resolveCoordinates;
+  }
+
+  set resolveCoordinates(value: number[]) {
+    this._resolveCoordinates = value;
+  }
+
   /** Chosen target type from the source component */
   targetType: string;
 
@@ -21,6 +29,8 @@ export class FieldSetupComponent {
 
   /** Closed panel TODO Review use */
   panel: any;
+
+  private _resolveCoordinates: number[];
 
   /**
    * constructor

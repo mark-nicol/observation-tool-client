@@ -71,7 +71,6 @@ export class FccRectangularComponent implements OnInit, OnChanges {
    * @param system The newly selected system
    */
   systemChange(system: CoordSystemInterface) {
-    console.log(system);
     this.chosenSystem = system;
   }
 

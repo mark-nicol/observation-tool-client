@@ -13,6 +13,43 @@ export class SimbadService {
   };
   private queryUrl: string;
 
+  static parseName(raw: string) {
+    raw = raw.replace('Object', '');
+    return raw.substring(0, raw.indexOf('-')).trim();
+  }
+
+  static parseCoords(raw: string) {
+    raw          = raw.replace('Coordinates(ICRS,ep=J2000,eq=2000):', '');
+    raw          = raw.substring(0, raw.indexOf('(')).trim();
+    return raw.split('  ');
+  }
+
+  static parseProperMotion(raw: string) {
+    raw      = raw.replace('Proper motions: ', '');
+    raw      = raw.substring(0, raw.indexOf('[')).trim();
+    const pm = raw.split(' ');
+    return pm;
+  }
+
+  static parseParalaxRadialVelocity(raw: string) {
+    raw = raw.substring(raw.indexOf(':') + 1);
+    raw = raw.substring(0, raw.indexOf('[')).trim();
+    return raw;
+  }
+
+  static cleanResponse(raw: string) {
+    const lines = raw.split('\n');
+    lines.splice(0, 5);
+    lines.splice(1, 1);
+    lines.splice(2, 3);
+    lines.splice(5);
+    console.log(SimbadService.parseName(lines[0]));
+    console.log(SimbadService.parseCoords(lines[1]));
+    console.log(SimbadService.parseProperMotion(lines[2]));
+    console.log(SimbadService.parseParalaxRadialVelocity(lines[3]));
+    console.log(SimbadService.parseParalaxRadialVelocity(lines[4]));
+  }
+
   constructor(private httpClient: HttpClient) {
     // this.queryUrl = SimbadService.simbadUrl +
     //                 'script=output console=off script=off\n' +
@@ -29,49 +66,7 @@ export class SimbadService {
   }
 
   queryByIdentifier(objectIdentifier: string) {
-    this.httpClient.get(this.queryUrl + objectIdentifier, {responseType: 'text'}).subscribe(result => this.cleanResponse(result));
-  }
-
-  /**
-   * Extract Name(0), RA(1), Dec(1), PmRA(5), PmDec(5), Parallax(6), Radial Velocity(7)
-   */
-
-  cleanResponse(raw: string) {
-    const lines = raw.split('\n');
-    lines.splice(0, 5);
-    lines.splice(1, 1);
-    lines.splice(2, 3);
-    lines.splice(5);
-    // console.log(this.parseName(lines[0]));
-    // console.log(this.parseCoords(lines[1]));
-    // console.log(this.parseProperMotion(lines[2]));
-    console.log(this.parseParalaxRadialVelocity(lines[3]));
-    console.log(this.parseParalaxRadialVelocity(lines[4]));
-  }
-
-  parseName(raw: string) {
-    raw = raw.replace('Object', '');
-    return raw.substring(0, raw.indexOf('-')).trim();
-  }
-
-  parseCoords(raw: string) {
-    raw          = raw.replace('Coordinates(ICRS,ep=J2000,eq=2000):', '');
-    raw          = raw.substring(0, raw.indexOf('(')).trim();
-    const coords = raw.split('  ');
-    return coords;
-  }
-
-  parseProperMotion(raw: string) {
-    raw      = raw.replace('Proper motions: ', '');
-    raw      = raw.substring(0, raw.indexOf('[')).trim();
-    const pm = raw.split(' ');
-    return pm;
-  }
-
-  parseParalaxRadialVelocity(raw: string) {
-    raw = raw.substring(raw.indexOf(':') + 1);
-    raw = raw.substring(0, raw.indexOf('[')).trim();
-    return raw;
+    this.httpClient.get(this.queryUrl + objectIdentifier, {responseType: 'text'}).subscribe(result => SimbadService.cleanResponse(result));
   }
 
 }

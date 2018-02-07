@@ -9,10 +9,10 @@ import {PersistenceService} from '../shared/services/persistence.service';
  */
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
-})
+             selector:    'app-navbar',
+             templateUrl: './navbar.component.html',
+             styleUrls:   ['./navbar.component.css'],
+           })
 export class NavbarComponent implements OnInit {
 
   /** Controls collapsing of the navbar on smaller screen sizes */
@@ -25,19 +25,19 @@ export class NavbarComponent implements OnInit {
   items: NavItemInterface[] = [
     {
       title: 'Project',
-      path: 'project/pi-entry'
+      path:  'project/pi-entry'
     },
     {
       title: 'Proposal',
-      path: 'project/proposalForm'
+      path:  'project/proposal'
     },
     {
       title: 'Planned Observing',
-      path: 'project/planned-observing'
+      path:  'project/planned-observing'
     },
     {
       title: 'Science Goals',
-      path: 'project/science-goals'
+      path:  'science-goals'
     }
   ];
 
@@ -49,15 +49,15 @@ export class NavbarComponent implements OnInit {
   scienceGoals: NavItemInterface[] = [
     {
       title: 'Science Goal 1',
-      path: 'sciGoals'
+      path:  'sciGoals'
     },
     {
       title: 'Science Goal 2',
-      path: 'sciGoals'
+      path:  'sciGoals'
     },
     {
       title: 'Science Goal 3',
-      path: 'sciGoals'
+      path:  'sciGoals'
     }
   ];
 

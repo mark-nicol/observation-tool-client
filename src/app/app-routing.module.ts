@@ -3,19 +3,23 @@ import {RouterModule, Routes} from '@angular/router'
 
 const routes: Routes = [
   {
-    path: 'project',
+    path:         'project',
     loadChildren: './observation-tool/project/project.module#ProjectModule',
   },
   {
-    path: '',
-    redirectTo: 'project/',
-    pathMatch: 'full'
+    path:         'science-goals',
+    loadChildren: './observation-tool/science-goal/science-goal.module#ScienceGoalModule'
+  },
+  {
+    path:       '',
+    redirectTo: 'project',
+    pathMatch:  'full'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
+            imports: [RouterModule.forRoot(routes)],
+            exports: [RouterModule]
+          })
 export class AppRoutingModule {
 }

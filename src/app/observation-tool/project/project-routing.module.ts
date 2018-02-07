@@ -6,42 +6,37 @@ import {ProposalComponent} from './components/proposal/proposal.component';
 
 const routes: Routes = [
   {
-    path: 'project',
+    path:     'project',
     children: [
       {
-        path: 'pi-entry',
+        path:      'pi-entry',
         component: PiEntryComponent
       },
       {
-        path:      'proposalForm',
+        path:      'proposal',
         component: ProposalComponent,
       },
       {
-        path: 'planned-observing',
+        path:      'planned-observing',
         component: PlannedObservingComponent,
       },
       {
-        path: 'science-goals',
+        path:         'science-goals',
         loadChildren: '../science-goal/science-goal.module#ScienceGoalModule'
       },
       {
-        path: '',
+        path:       '',
         redirectTo: 'pi-entry',
-        pathMatch: 'full'
+        pathMatch:  'full'
       }
     ],
-  },
-  {
-    path: '',
-    redirectTo: 'project/pi-entry',
-    pathMatch: 'full'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
+            imports: [RouterModule.forChild(routes)],
+            exports: [RouterModule]
+          })
 
 export class ProjectRoutingModule {
 }

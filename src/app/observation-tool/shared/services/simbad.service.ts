@@ -1,72 +1,80 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import * as eq from 'equatorial';
+
+// export interface ISimbadResult {
+//   name: string,
+//   coords: ValueUnitPair[],
+//   properMotion: any,
+//   parallax: any,
+//   radialVelocity: any
+// }
 
 @Injectable()
 export class SimbadService {
 
-  result = {
-    name:         null,
-    ra:           null,
-    dec:          null,
-    properMotion: null,
-    parallax:     null
-  };
   private queryUrl: string;
 
-  static parseName(raw: string) {
+  private static parseName(raw: string) {
     raw = raw.replace('Object', '');
     return raw.substring(0, raw.indexOf('-')).trim();
   }
 
-  static parseCoords(raw: string) {
+  private static parseCoords(raw: string) {
     raw          = raw.replace('Coordinates(ICRS,ep=J2000,eq=2000):', '');
     raw          = raw.substring(0, raw.indexOf('(')).trim();
-    return raw.split('  ');
+    raw          = raw.replace(/\s/g, ':');
+    const coords = raw.split('::');
+    coords[0]    = eq.raHms2Deg(coords[0]);
+    coords[1]    = eq.decHms2Deg(coords[1]);
+    return coords;
   }
 
-  static parseProperMotion(raw: string) {
-    raw      = raw.replace('Proper motions: ', '');
-    raw      = raw.substring(0, raw.indexOf('[')).trim();
-    const pm = raw.split(' ');
-    return pm;
+  private static parseProperMotion(raw: string) {
+    raw = raw.replace('Proper motions: ', '');
+    raw = raw.substring(0, raw.indexOf('[')).trim();
+    return raw.split(' ');
   }
 
-  static parseParalaxRadialVelocity(raw: string) {
+  private static parseParalaxRadialVelocity(raw: string) {
     raw = raw.substring(raw.indexOf(':') + 1);
     raw = raw.substring(0, raw.indexOf('[')).trim();
     return raw;
   }
 
   static cleanResponse(raw: string) {
-    const lines = raw.split('\n');
+    const result = {
+      lonValue:                     null,
+      latValue:                     null,
+      properMotionCrossValue:       null,
+      properMotionDeclinationValue: null,
+      parallaxValue:                null,
+      radialVelocityValue:          null
+    };
+    const lines  = raw.split('\n');
     lines.splice(0, 5);
     lines.splice(1, 1);
     lines.splice(2, 3);
     lines.splice(5);
-    console.log(SimbadService.parseName(lines[0]));
-    console.log(SimbadService.parseCoords(lines[1]));
-    console.log(SimbadService.parseProperMotion(lines[2]));
-    console.log(SimbadService.parseParalaxRadialVelocity(lines[3]));
-    console.log(SimbadService.parseParalaxRadialVelocity(lines[4]));
+    const coords                        = SimbadService.parseCoords(lines[1]);
+    const properMotion                  = SimbadService.parseProperMotion(lines[2]);
+    const parallax                      = SimbadService.parseParalaxRadialVelocity(lines[3]);
+    const radialVelocity                = SimbadService.parseParalaxRadialVelocity(lines[4]);
+    result.lonValue                     = coords[0];
+    result.latValue                     = coords[1];
+    result.properMotionCrossValue       = properMotion[0] === '~' ? 0.0 : properMotion[0];
+    result.properMotionDeclinationValue = properMotion[1] === '~' ? 0.0 : properMotion[1];
+    result.parallaxValue                = parallax === '~' ? 0.0 : parallax;
+    result.radialVelocityValue          = radialVelocity === '~' ? 0.0 : radialVelocity;
+    return result;
   }
 
   constructor(private httpClient: HttpClient) {
-    // this.queryUrl = SimbadService.simbadUrl +
-    //                 'script=output console=off script=off\n' +
-    //                 'format object \"%IDLIST(1)|%COO(d;A|D;;;)|%PM(A|D)|%PLX(V)|%RV(V)\"\n' +
-    //                 'query id ';
-    // this.queryUrl = SimbadService.simbadUrl +
-    //                 'script=format object \"%IDLIST(1)|%COO(d;A|D;;;)|%PM(A|D)|%PLX(V)|%RV(V)\"\\';
-    // this.queryUrl = this.queryUrl
-    //                     .replace('\%', '%25')
-    //                     .split('\n').join('%0a')
-    //                     .split(' ').join('%20')
-    //                     .replace('\\\+', '%2b');
     this.queryUrl = 'http://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident='
   }
 
   queryByIdentifier(objectIdentifier: string) {
-    this.httpClient.get(this.queryUrl + objectIdentifier, {responseType: 'text'}).subscribe(result => SimbadService.cleanResponse(result));
+    return this.httpClient.get(this.queryUrl + objectIdentifier, {responseType: 'text'});
   }
 
 }

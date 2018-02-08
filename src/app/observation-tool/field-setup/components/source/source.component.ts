@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Speed} from '../../../../units/classes/speed';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
@@ -13,17 +14,19 @@ import {SystemService} from '../../../shared/services/system.service';
  */
 
 @Component({
-             selector:      'field-source',
-             host:          {'(document:click)': 'unfocus($event)'}, // TODO fix host binding
-             templateUrl:   './source.component.html',
-             styleUrls:     ['./source.component.css'],
-             encapsulation: ViewEncapsulation.None
-           })
+  selector: 'field-source',
+  host: {'(document:click)': 'unfocus($event)'}, // TODO fix host binding
+  templateUrl: './source.component.html',
+  styleUrls: ['./source.component.css'],
+  encapsulation: ViewEncapsulation.None
+})
 export class SourceComponent implements OnInit {
 
 
   @Output() resolveEmitter = new EventEmitter<number[]>();
 
+
+  currentTarget = 0;
   sourceForm: FormGroup;
   /** Selectable solar system bodies for selection box */
   solarBodies                 = [
@@ -69,61 +72,73 @@ export class SourceComponent implements OnInit {
    * @param formBuilder
    * @param systemService
    * @param simbadService
+   * @param activatedRoute
    */
   constructor(private persistenceService: PersistenceService,
               private formBuilder: FormBuilder,
               protected systemService: SystemService,
-              private simbadService: SimbadService) {
+              private simbadService: SimbadService,
+              private activatedRoute: ActivatedRoute) {
     this.sourceForm = this.formBuilder.group({
-                                               sourceName:                    '',
-                                               solarSystemObject:             false,
-                                               chosenSolarObject:             '',
-                                               chosenSystem:                  '',
-                                               sexagesimalUnits:              true,
-                                               latValue:                      0.0,
-                                               lonValue:                      0.0,
-                                               parallaxUnit:                  '',
-                                               parallaxValue:                 0.0,
-                                               properMotionCrossUnit:         '',
-                                               properMotionCrossValue:        0.0,
-                                               properMotionDeclinationUnit:   '',
-                                               properMotionDeclinationValue:  0.0,
-                                               radialVelocityUnit:            '',
-                                               radialVelocityValue:           0.0,
-                                               radialVelocityReferenceSystem: '',
-                                               dopplerType:                   '',
-                                               redshift:                      0,
-                                             });
+      sourceName: '',
+      solarSystemObject: false,
+      chosenSolarObject: '',
+      chosenSystem: '',
+      sexagesimalUnits: true,
+      latValue: 0.0,
+      lonValue: 0.0,
+      parallaxUnit: '',
+      parallaxValue: 0.0,
+      properMotionCrossUnit: '',
+      properMotionCrossValue: 0.0,
+      properMotionDeclinationUnit: '',
+      properMotionDeclinationValue: 0.0,
+      radialVelocityUnit: '',
+      radialVelocityValue: 0.0,
+      radialVelocityReferenceSystem: '',
+      dopplerType: '',
+      redshift: 0,
+    });
   }
 
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(params => {
+      this.currentTarget = params.index;
+      this.initComponent(this.currentTarget);
+    });
+    this.initComponent(this.currentTarget);
+  }
+
+
+  initComponent(index: number) {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
-          const targetParams = result.TargetParameters[this.persistenceService.currentTarget];
+          const targetParams = result.TargetParameters[index];
           this.sourceForm.patchValue({
-                                       sourceName:                    targetParams.sourceName,
-                                       solarSystemObject:             targetParams.solarSystemObject !== 'Unspecified',
-                                       // chosenSolarObject: result.chosenSolarObject,
-                                       radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
-                                       sexagesimalUnits:              targetParams.sourceCoordinates.type === 'ABSOLUTE',
-                                       chosenSystem:                  targetParams.sourceCoordinates.system,
-                                       latValue:                      targetParams.sourceCoordinates.latitude.content,
-                                       lonValue:                      targetParams.sourceCoordinates.longitude.content,
-                                       parallaxUnit:                  targetParams.parallax.unit,
-                                       parallaxValue:                 targetParams.parallax.content,
-                                       properMotionCrossUnit:         targetParams.pmRA.unit,
-                                       properMotionCrossValue:        targetParams.pmRA.content,
-                                       properMotionDeclinationUnit:   targetParams.pmDec.unit,
-                                       properMotionDeclinationValue:  targetParams.pmDec.content,
-                                       radialVelocityUnit:            targetParams.sourceVelocity.centerVelocity.unit,
-                                       radialVelocityValue:           targetParams.sourceVelocity.centerVelocity.content,
-                                       dopplerType:                   targetParams.sourceVelocity.dopplerCalcType,
-                                       redshift:                      SourceComponent.getRedshift(Object.assign(new Speed,
-                                                                                                                targetParams.sourceVelocity.centerVelocity),
-                                                                                                  targetParams.sourceVelocity.dopplerCalcType),
-                                     });
+            sourceName: targetParams.sourceName,
+            solarSystemObject: targetParams.solarSystemObject !== 'Unspecified',
+            // chosenSolarObject: result.chosenSolarObject,
+            radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
+            sexagesimalUnits: targetParams.sourceCoordinates.type === 'ABSOLUTE',
+            chosenSystem: targetParams.sourceCoordinates.system,
+            latValue: targetParams.sourceCoordinates.latitude.content,
+            lonValue: targetParams.sourceCoordinates.longitude.content,
+            parallaxUnit: targetParams.parallax.unit,
+            parallaxValue: targetParams.parallax.content,
+            properMotionCrossUnit: targetParams.pmRA.unit,
+            properMotionCrossValue: targetParams.pmRA.content,
+            properMotionDeclinationUnit: targetParams.pmDec.unit,
+            properMotionDeclinationValue: targetParams.pmDec.content,
+            radialVelocityUnit: targetParams.sourceVelocity.centerVelocity.unit,
+            radialVelocityValue: targetParams.sourceVelocity.centerVelocity.content,
+            dopplerType: targetParams.sourceVelocity.dopplerCalcType,
+            redshift: SourceComponent.getRedshift(Object.assign(new Speed,
+              targetParams.sourceVelocity.centerVelocity),
+              targetParams.sourceVelocity.dopplerCalcType),
+          });
           this.systemChange();
+          this.resolveEmitter.emit([this.sourceForm.value.lonValue, this.sourceForm.value.latValue]);
         });
   }
 
@@ -188,11 +203,11 @@ export class SourceComponent implements OnInit {
 
   setRedshift() {
     this.sourceForm.patchValue({
-                                 redshift: SourceComponent.getRedshift(
-                                   new Speed(this.sourceForm.value.radialVelocityUnit,
-                                             this.sourceForm.value.radialVelocityValue),
-                                   this.sourceForm.value.dopplerType)
-                               });
+      redshift: SourceComponent.getRedshift(
+        new Speed(this.sourceForm.value.radialVelocityUnit,
+          this.sourceForm.value.radialVelocityValue),
+        this.sourceForm.value.dopplerType)
+    });
   }
 
   resolveSource() {

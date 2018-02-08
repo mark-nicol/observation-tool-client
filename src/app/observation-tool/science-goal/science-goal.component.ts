@@ -64,6 +64,7 @@ export class ScienceGoalComponent implements OnInit {
   changeTarget(sourceName: string, index: number) {
     this.selectedTarget = sourceName;
     this.persistenceService.currentTarget = index;
+    console.log(this.router.navigate(['science-goals/field-setup', index + 1]));
   }
 
 }

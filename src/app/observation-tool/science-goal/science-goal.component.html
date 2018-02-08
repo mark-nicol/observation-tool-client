@@ -13,7 +13,12 @@
        [class.active]="router.url.indexOf('field-setup/'+(target.index + 1)) > -1">
       {{target.sourceName}}
     </a>
-    <div class="link item"><i class="add icon"></i></div>
+    <div class="link item"
+         (click)="addNewTarget()"><i class="blue add icon"></i>
+    </div>
+    <div class="link item"
+         (click)="removeTarget()">
+      <i class="red delete icon"></i></div>
   </div>
 </div>
 <p style="height: 1.95em"></p>

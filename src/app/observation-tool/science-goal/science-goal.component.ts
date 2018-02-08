@@ -61,10 +61,29 @@ export class ScienceGoalComponent implements OnInit {
     });
   }
 
-  changeTarget(sourceName: string, index: number) {
-    this.selectedTarget = sourceName;
-    this.persistenceService.currentTarget = index;
-    console.log(this.router.navigate(['science-goals/field-setup', index + 1]));
+  addNewTarget() {
+    this.targets.push({
+      type: '',
+      isMosaic: false,
+      sourceName: 'New Source',
+      sourceCoordinates: null,
+      pmRA: null,
+      pmDec: null,
+      parallax: null,
+      nonSiderealMotion: false,
+      solarSystemObject: null,
+      sourceEphemeris: '',
+      sourceVelocity: null,
+      ephemerisFileName: '',
+      index: this.targets.length - 1,
+      sdReferencePosition: null,
+      ExpectedProperties: null,
+      SinglePoint: null,
+    });
+  }
+
+  removeTarget() {
+    this.targets.pop();
   }
 
 }

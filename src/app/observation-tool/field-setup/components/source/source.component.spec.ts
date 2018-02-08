@@ -1,6 +1,8 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {RouterTestingModule} from '@angular/router/testing';
 import {SuiModule} from 'ng2-semantic-ui';
 import {DegreesPipe} from '../../../shared/pipes/degrees.pipe';
 import {SexagesimalPipe} from '../../../shared/pipes/sexagesimal.pipe';
@@ -24,12 +26,13 @@ describe('SourceComponent', () => {
                                      imports: [
                                        HttpClientTestingModule,
                                        ReactiveFormsModule,
-                                       SuiModule
+                                       SuiModule,
+                                       RouterTestingModule
                                      ],
                                      providers: [
                                        PersistenceService,
                                        SystemService,
-                                       SimbadService
+                                       SimbadService,
                                      ]
                                    })
            .compileComponents();

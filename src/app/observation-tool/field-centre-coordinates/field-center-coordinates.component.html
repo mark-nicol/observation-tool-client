@@ -1,7 +1,7 @@
 <h4 class="ui dividing header">Field Centre Coordinates</h4>
 <form class="ui form"
       [formGroup]="fieldCentreCoordinatesForm">
-  <div class="two fields">
+  <div class="three fields">
     <div class="field">
       <label>Coord Type</label>
       <sui-radio-button name="coordTypeRadios"
@@ -25,6 +25,32 @@
                         value="F_SingleRectangle"
                         formControlName="targetType">Rectangular Field
       </sui-radio-button>
+    </div>
+
+    <div class="field">
+      <div *ngIf="fieldCentreCoordinatesForm.value.targetType === 'F_MultiplePoints';
+                  then individualStatistic
+                  else rectangularStatistic"></div>
+      <ng-template #individualStatistic>
+        <div class="ui horizontal mini statistic">
+          <div class="value">{{tableRows.length}}</div>
+          <label class="label">
+            Pointings
+          </label>
+        </div>
+      </ng-template>
+      <ng-template #rectangularStatistic>
+        <div class="ui statistics">
+          <div class="statistic">
+            <div class="label">7m Array</div>
+            <div class="value">0</div>
+          </div>
+          <div class="statistic">
+            <div class="label">12m Array</div>
+            <div class="value">0</div>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </form>

@@ -88,7 +88,6 @@ export class FieldCenterCoordinatesComponent implements OnInit {
               this.individual.initComponent(this.tableRows);
           } else {
             const rect = result.TargetParameters[targetIndex].Rectangle;
-            console.log(rect.spacing);
             this.fieldCentreCoordinatesForm.patchValue({
               coordType: rect.centre.type,
               rectangular: {

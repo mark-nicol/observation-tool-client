@@ -8,9 +8,15 @@ import * as eq from 'equatorial';
  */
 
 @Pipe({
-        name: 'sexagesimal'
-      })
+  name: 'sexagesimal'
+})
 export class SexagesimalPipe implements PipeTransform {
+
+  static trimHms(value: string): string {
+    const hms = value.split(':');
+    hms[2]    = (+hms[2]).toFixed(6);
+    return hms.join(':');
+  }
 
   /**
    * Transforms the content
@@ -19,12 +25,14 @@ export class SexagesimalPipe implements PipeTransform {
    */
   transform(value: any, type: string): any {
     if (value) {
+      console.log(value, type);
       if (type === 'dec') {
-        return eq.decDeg2Hms(value);
+        return SexagesimalPipe.trimHms(eq.decDeg2Hms(value));
       } else if (type === 'ra') {
-        return eq.raDeg2Hms(value);
+        return SexagesimalPipe.trimHms(eq.raDeg2Hms(value));
       }
     }
   }
+
 
 }

@@ -73,7 +73,10 @@
                formControlName="lonValue"
                (keyup.enter)="setLatLon(lonInput.value, lonInput)"
                (blur)="setLatLon(lonInput.value, lonInput)"
-               placeholder="0">
+               placeholder="0"
+               [value]="sourceForm.value.sexagesimalUnits ?
+                        (sourceForm.value.lonValue | sexagesimal: 'ra') :
+                        sourceForm.value.lonValue">
       </div>
 
       <!-- Dec(lat) input -->
@@ -92,7 +95,10 @@
                formControlName="latValue"
                (keyup.enter)="setLatLon(latInput.value, latInput)"
                (blur)="setLatLon(latInput.value, latInput)"
-               placeholder="0">
+               placeholder="0"
+               [value]="sourceForm.value.sexagesimalUnits ?
+                        (sourceForm.value.latValue | sexagesimal: 'dec') :
+                        sourceForm.value.latValue">
       </div>
     </div>
 

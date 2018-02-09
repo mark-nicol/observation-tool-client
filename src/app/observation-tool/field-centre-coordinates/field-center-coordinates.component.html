@@ -32,7 +32,8 @@
                   then individualStatistic
                   else rectangularStatistic"></div>
       <ng-template #individualStatistic>
-        <div class="ui horizontal mini statistic">
+        <label></label>
+        <div class="ui mini horizontal statistic">
           <div class="value">{{tableRows.length}}</div>
           <label class="label">
             Pointings
@@ -40,16 +41,17 @@
         </div>
       </ng-template>
       <ng-template #rectangularStatistic>
-        <div class="ui statistics">
-          <div class="statistic">
+        <!--<div class="ui mini horizontal statistics">-->
+        <label># Pointings</label>
+          <div class="ui mini horizontal statistic">
+            <div class="value">0</div>
             <div class="label">7m Array</div>
-            <div class="value">0</div>
           </div>
-          <div class="statistic">
+          <div class="ui mini horizontal statistic">
+            <div class="value">0</div>
             <div class="label">12m Array</div>
-            <div class="value">0</div>
           </div>
-        </div>
+        <!--</div>-->
       </ng-template>
     </div>
   </div>

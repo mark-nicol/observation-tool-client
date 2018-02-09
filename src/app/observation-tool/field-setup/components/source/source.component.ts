@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, HostListener, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Speed} from '../../../../units/classes/speed';
@@ -15,16 +15,13 @@ import {SystemService} from '../../../shared/services/system.service';
 
 @Component({
   selector: 'field-source',
-  host: {'(document:click)': 'unfocus($event)'}, // TODO fix host binding
   templateUrl: './source.component.html',
   styleUrls: ['./source.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class SourceComponent implements OnInit {
 
-
   @Output() resolveEmitter = new EventEmitter<number[]>();
-
 
   currentTarget = 0;
   sourceForm: FormGroup;
@@ -146,14 +143,7 @@ export class SourceComponent implements OnInit {
   /**
    * Removes focus from the currently focused DOM element when clicked out
    */
-  unfocus(event: Event) {
-    const active = document.activeElement;
-    try {
-      if (active !== event.target)
-        (active as HTMLElement).blur();
-    } catch (TypeError) {
-    }
-  }
+
 
   /**
    * Changes use of a solar system object, hides most of the component from use

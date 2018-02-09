@@ -84,7 +84,8 @@ export class FieldCenterCoordinatesComponent implements OnInit {
               }
             });
             this.tableRows = result.TargetParameters[targetIndex].SinglePoint;
-            this.individual.initComponent(this.tableRows);
+            if (this.individual)
+              this.individual.initComponent(this.tableRows);
           } else {
             const rect = result.TargetParameters[targetIndex].Rectangle;
             console.log(rect.spacing);

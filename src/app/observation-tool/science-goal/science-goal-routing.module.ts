@@ -10,46 +10,50 @@ import {ScienceGoalComponent} from './science-goal.component';
 
 const routes: Routes = [
   {
-    path:      'science-goals',
+    path: 'science-goals',
     component: ScienceGoalComponent,
-    children:  [
+    children: [
       {
-        path:      'general',
+        path: 'general',
         component: GeneralComponent,
       },
       {
-        path:      'field-setup',
+        path: 'field-setup',
         component: FieldSetupComponent,
       },
       {
-        path:      'spectral-setup',
+        path: 'field-setup/:index',
+        component: FieldSetupComponent
+      },
+      {
+        path: 'spectral-setup',
         component: SpectralSetupComponent,
       },
       {
-        path:      'calibration-setup',
+        path: 'calibration-setup',
         component: CalibrationSetupComponent,
       },
       {
-        path:      'control-performance',
+        path: 'control-performance',
         component: ControlPerformanceComponent,
       },
       {
-        path:      'technical-justification',
+        path: 'technical-justification',
         component: TechnicalJustificationComponent,
       },
       {
-        path:       '',
+        path: '',
         redirectTo: 'general',
-        pathMatch:  'full'
+        pathMatch: 'full'
       }
     ]
   }
 ];
 
 @NgModule({
-            imports: [RouterModule.forChild(routes)],
-            exports: [RouterModule]
-          })
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
 
 export class ScienceGoalRoutingModule {
 }

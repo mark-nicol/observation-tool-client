@@ -16,7 +16,7 @@ export interface ITargetParameters {
   pmDec: AngularVelocity;
   parallax: Angle;
   nonSiderealMotion: boolean;
-  solarSystemObject: SolarSystemObjects;
+  solarSystemObject: any/*SolarSystemObjects*/; // TODO change
   sourceEphemeris: string;
   sourceVelocity: ISourceVelocity;
   ephemerisFileName: string;
@@ -39,7 +39,7 @@ export interface IRectangle extends IField {
   pALong: Angle;
   long: Angle;
   short: Angle;
-  spacing: Angle;
+  spacing: any; // TODO Userunit
   referenceFrequency: Frequency;
 }
 
@@ -60,7 +60,7 @@ export interface ISourceVelocity {
 export interface IExpectedProperties {
   expectedPeakFluxDensity: Flux;
   desiredPolarizationPercentage: number;
-  expectedLineWidth: Frequency;
+  expectedLineWidth: any; // TODO Userunit
   referenceFrequency: Frequency;
   expectedPeakLineFluxDensity: Flux;
   expectedSpectralDynamicRange: number;

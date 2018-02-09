@@ -1,11 +1,26 @@
 <div class="ui fixed sticky top attached tabular menu">
   <a class="item"
      *ngFor="let page of pageKeys(pages)"
-     [ngClass]="{'active': router.url.indexOf(pages[page].path) > -1}"
      [routerLink]="pages[page].path"
-     (click)="selectedPage = page">
+     [class.active]="router.url.indexOf(pages[page].path) > -1">
     {{pages[page].text}}
   </a>
+  <div class="right menu"
+       *ngIf="router.url.indexOf('field-setup') > -1 && targets !== undefined">
+    <a class="item"
+       *ngFor="let target of targets"
+       [routerLink]="['field-setup', target.index + 1]"
+       [class.active]="router.url.indexOf('field-setup/'+(target.index + 1)) > -1"
+       (click)="changeTarget(target.index + 1)">
+      {{target.sourceName}}
+    </a>
+    <div class="link item"
+         (click)="addNewTarget()"><i class="blue add icon"></i>
+    </div>
+    <div class="link item"
+         (click)="removeTarget()">
+      <i class="red delete icon"></i></div>
+  </div>
 </div>
 <p style="height: 1.95em"></p>
 <div class="ui bottom attached segment">

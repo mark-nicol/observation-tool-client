@@ -11,10 +11,10 @@ import {SystemService} from '../../../shared/services/system.service';
  */
 
 @Component({
-             selector: 'fcc-individual',
-             templateUrl: './fcc-individual.component.html',
-             styleUrls: ['./fcc-individual.component.scss']
-           })
+  selector: 'fcc-individual',
+  templateUrl: './fcc-individual.component.html',
+  styleUrls: ['./fcc-individual.component.scss']
+})
 export class FccIndividualComponent implements OnInit {
 
   /** The selected radio button content from FieldCentreCoordinatesComponent */
@@ -24,9 +24,9 @@ export class FccIndividualComponent implements OnInit {
 
   @Input('group')
   individualForm = new FormGroup({
-                                   offsetUnit: new FormControl(),
-                                   rows: new FormArray([])
-                                 });
+    offsetUnit: new FormControl(),
+    rows: new FormArray([])
+  });
 
   @Input()
   tableRows = [];
@@ -54,8 +54,12 @@ export class FccIndividualComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initComponent(this.tableRows);
+  }
+
+  initComponent(tableRows: any) {
     this.sourceCoordinatesSystem = this.systemService.getSystem(this.sourceCoordinatesSystemString);
-    this.setRows(this.tableRows);
+    this.setRows(tableRows);
   }
 
   setRows(rows: ISinglePoint[]) {
@@ -79,14 +83,6 @@ export class FccIndividualComponent implements OnInit {
    * Removes the last row from the page data
    */
   removeRow() {
-  }
-
-  /**
-   * Calls console log for use in HTML Template
-   * @param message The message to display in the log
-   */
-  log(message: string | number) {
-    console.log(message);
   }
 
 }

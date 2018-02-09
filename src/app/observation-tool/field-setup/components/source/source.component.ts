@@ -104,7 +104,7 @@ export class SourceComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      this.currentTarget = params.index;
+      this.currentTarget = params.index ? params.index : this.persistenceService.currentTarget;
       this.initComponent(this.currentTarget);
     });
     this.initComponent(this.currentTarget);

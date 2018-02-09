@@ -2,7 +2,7 @@
   <a class="item"
      *ngFor="let page of pageKeys(pages)"
      [routerLink]="pages[page].path"
-     [routerLinkActive]="['active']">
+     [class.active]="router.url.indexOf(pages[page].path) > -1">
     {{pages[page].text}}
   </a>
   <div class="right menu"
@@ -10,7 +10,8 @@
     <a class="item"
        *ngFor="let target of targets"
        [routerLink]="['field-setup', target.index + 1]"
-       [class.active]="router.url.indexOf('field-setup/'+(target.index + 1)) > -1">
+       [class.active]="router.url.indexOf('field-setup/'+(target.index + 1)) > -1"
+       (click)="changeTarget(target.index + 1)">
       {{target.sourceName}}
     </a>
     <div class="link item"

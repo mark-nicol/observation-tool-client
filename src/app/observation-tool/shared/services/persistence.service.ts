@@ -26,7 +26,7 @@ export class PersistenceService {
   }
 
   set currentTarget(value: number) {
-    this._currentTarget = value + 1;
+    this._currentTarget = value;
   }
 
   /**

@@ -22,7 +22,7 @@ export class ScienceGoalComponent implements OnInit {
     },
     'fieldSetup': {
       text: 'Field Setup',
-      path: 'field-setup'
+      path: 'field-setup/' + this.persistenceService.currentTarget
     },
     'spectralSetup': {
       text: 'Spectral Setup',
@@ -59,6 +59,11 @@ export class ScienceGoalComponent implements OnInit {
       this.targets        = result.TargetParameters;
       this.selectedTarget = this.targets[0].sourceName;
     });
+  }
+
+  changeTarget(index: number) {
+    this.persistenceService.currentTarget = index;
+    this.pages.fieldSetup.path            = 'field-setup/' + this.persistenceService.currentTarget;
   }
 
   addNewTarget() {

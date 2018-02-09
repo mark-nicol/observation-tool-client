@@ -114,7 +114,7 @@
     </div>
   </div>
 
-  <div class="fields">
+  <!--<div class="fields">-->
     <!-- Spacing input -->
     <div class="field">
       <label>
@@ -129,28 +129,21 @@
           <sui-select-option value="fraction of main beam">Fraction of antenna beamsize</sui-select-option>
           <sui-select-option value="arcsec">arcsec</sui-select-option>
         </sui-select>
-        <button class="ui blue button">Reset to Nyquist</button>
+      </div>
+      <div class="ui right floated tiny compact blue labeled icon buttons">
+        <button
+          class="ui button">
+          <i class="refresh icon"></i>Reset to Nyquist
+        </button>
+        <button class="ui button">
+          <i class="upload icon"></i> Export
+        </button>
       </div>
     </div>
 
-    <!-- Number of pointings -->
-    <div class="four wide field">
-      <label># Pointings</label>
-      <div class="ui statistics">
-        <div class="statistic">
-          <div class="label">7m Array</div>
-          <div class="value">0</div>
-        </div>
-        <div class="statistic">
-          <div class="label">12m Array</div>
-          <div class="value">0</div>
-        </div>
-      </div>
-    </div>
+    <!--<div class="two wide field">-->
 
-    <div class="two wide field">
-      <button class="ui blue button" type="button">Export</button>
-    </div>
-  </div>
+    <!--</div>-->
+  <!--</div>-->
 
 </form>

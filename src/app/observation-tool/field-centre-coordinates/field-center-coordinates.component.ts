@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ISinglePoint} from '../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
+import {FccIndividualComponent} from './components/fcc-individual/fcc-individual.component';
+import {FccRectangularComponent} from './components/fcc-rectangular/fcc-rectangular.component';
 
 /**
  * Handles the Field Centre Coordinates component in the Field Setup
@@ -19,6 +21,9 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   tableRows: ISinglePoint[];
   sourceCoordinatesSystem = 'ICRS';
   currentTarget           = 0;
+
+  @ViewChild(FccIndividualComponent) individual: FccIndividualComponent;
+  @ViewChild(FccRectangularComponent) rectangular: FccRectangularComponent;
 
   /** Field Setup Service to be used in HTML template */
   protected _persistenceService: PersistenceService;
@@ -79,6 +84,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
               }
             });
             this.tableRows = result.TargetParameters[targetIndex].SinglePoint;
+            this.individual.initComponent(this.tableRows);
           } else {
             const rect = result.TargetParameters[targetIndex].Rectangle;
             console.log(rect.spacing);

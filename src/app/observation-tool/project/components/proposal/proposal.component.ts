@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {ObsProposal} from '../../../shared/classes/obsproposal';
+import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
@@ -9,10 +10,10 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
  */
 
 @Component({
-             selector:    'app-proposal',
-             templateUrl: './proposal.component.html',
-             styleUrls:   ['./proposal.component.css']
-           })
+  selector: 'app-proposal',
+  templateUrl: './proposal.component.html',
+  styleUrls: ['./proposal.component.css']
+})
 
 export class ProposalComponent implements OnInit {
 
@@ -25,19 +26,19 @@ export class ProposalComponent implements OnInit {
   /** The available proposalForm types for looping over */
   typeRadios = [
     {
-      id:   'Regular',
+      id: 'Regular',
       text: 'Regular'
     },
     {
-      id:   'opportunity',
+      id: 'opportunity',
       text: 'Target of Opportunit'
     },
     {
-      id:   'vlbi',
+      id: 'vlbi',
       text: 'VLBI'
     },
     {
-      id:   'large',
+      id: 'large',
       text: 'Large Program'
     },
   ];
@@ -48,9 +49,9 @@ export class ProposalComponent implements OnInit {
   categoryKeys                          = Object.keys;
   /** The available categories with values and keywords */
   categoryRadios: { [id: string]: any } = {
-    'cosmology':  {
-      text:     'Cosmology and the High Redshift Universe',
-      value:    'cosmology',
+    'cosmology': {
+      text: 'Cosmology and the High Redshift Universe',
+      value: 'cosmology',
       keywords: [
         'Lyman Alpha Emitters/Blobs (LAE/LAB)',
         'Lyman Break Galaxies (LBG)',
@@ -65,9 +66,9 @@ export class ProposalComponent implements OnInit {
         'Galaxy Clusters'
       ]
     },
-    'galaxies':   {
-      text:     'Galaxies and the Galactic Nuclei',
-      value:    'galaxies',
+    'galaxies': {
+      text: 'Galaxies and the Galactic Nuclei',
+      value: 'galaxies',
       keywords: [
         'Starbursts, Star Formation',
         'Active Galactic Nuclei (AGN)/Quasars (QSO)',
@@ -84,9 +85,9 @@ export class ProposalComponent implements OnInit {
         'Giant Molecular Clouds (GMC) Properties'
       ]
     },
-    'ism':        {
-      text:     'ISM, star formation and astrochemisty',
-      value:    'ism',
+    'ism': {
+      text: 'ISM, star formation and astrochemisty',
+      value: 'ism',
       keywords: [
         'Outflows, Jets, and Ionized Winds',
         'High-mass Star Formation',
@@ -101,8 +102,8 @@ export class ProposalComponent implements OnInit {
       ]
     },
     'exoplanets': {
-      text:     'Circumstellar disks, exoplanets, and the solar system',
-      value:    'exoplanets',
+      text: 'Circumstellar disks, exoplanets, and the solar system',
+      value: 'exoplanets',
       keywords: [
         'Debris Disks',
         'Disks around Low-mass Stars',
@@ -115,9 +116,9 @@ export class ProposalComponent implements OnInit {
         'Solar system - Asteroids',
       ]
     },
-    'stars':      {
-      text:     'Stellar Evolution and the Sun',
-      value:    'stars',
+    'stars': {
+      text: 'Stellar Evolution and the Sun',
+      value: 'stars',
       keywords: [
         'The Sun',
         'Main sequence stars',
@@ -152,34 +153,46 @@ export class ProposalComponent implements OnInit {
 
   ngOnInit() {
     this.persistenceService.getProposal().subscribe(result => {
-      console.log(result);
+      console.log(result.PrincipalInvestigator);
       this.proposalForm.patchValue({
-                                     title:                 result.title,
-                                     cycle:                 result.cycle,
-                                     abs:                   result.abstract,
-                                     relatedProposals:      result.relatedProposals,
-                                     previousProposals:     result.recentPublications,
-                                     studentProject:        result.studentProject,
-                                     proposalType:          result.proposalTypeString,
-                                     scientificCategory:    result.scientificCategoryString,
-                                     duplicateObservations: result.duplicateObservationJustification,
-                                   });
+        title: result.title,
+        cycle: result.cycle,
+        abs: result.abstract,
+        relatedProposals: result.relatedProposals,
+        previousProposals: result.recentPublications,
+        studentProject: result.studentProject,
+        proposalType: result.proposalTypeString,
+        scientificCategory: result.scientificCategoryString,
+        duplicateObservations: result.duplicateObservationJustification,
+      });
     });
   }
 
   createForm() {
     this.proposalForm = this.formBuilder.group({
-                                                 title:                 '',
-                                                 cycle:                 '',
-                                                 abs:                   '',
-                                                 relatedProposals:      '',
-                                                 previousProposals:     '',
-                                                 studentProject:        false,
-                                                 proposalType:          '',
-                                                 scientificCategory:    '',
-                                                 duplicateObservations: '',
-                                                 keywords:              []
-                                               });
+      title: '',
+      cycle: '',
+      abs: '',
+      relatedProposals: '',
+      previousProposals: '',
+      studentProject: false,
+      proposalType: '',
+      scientificCategory: '',
+      investigators: this.formBuilder.array([]),
+      duplicateObservations: '',
+      keywords: []
+    });
+  }
+
+  addInvestigatorRow(investigator: IAlmaInvestigator) {
+    const control = <FormArray>this.proposalForm.controls['investigators'];
+    const newInvestigator = this.initInvestigator();
+    control.push(newInvestigator);
+
+  }
+
+  initInvestigator(): FormGroup {
+    return this.formBuilder.group({});
   }
 
   /**

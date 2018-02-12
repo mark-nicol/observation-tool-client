@@ -153,7 +153,6 @@ export class ProposalComponent implements OnInit {
 
   ngOnInit() {
     this.persistenceService.getProposal().subscribe(result => {
-      console.log(result.PrincipalInvestigator);
       this.proposalForm.patchValue({
         title: result.title,
         cycle: result.cycle,
@@ -165,6 +164,7 @@ export class ProposalComponent implements OnInit {
         scientificCategory: result.scientificCategoryString,
         duplicateObservations: result.duplicateObservationJustification,
       });
+      this.setRows([result.PrincipalInvestigator]);
     });
   }
 
@@ -184,15 +184,15 @@ export class ProposalComponent implements OnInit {
     });
   }
 
-  addInvestigatorRow(investigator: IAlmaInvestigator) {
-    const control = <FormArray>this.proposalForm.controls['investigators'];
-    const newInvestigator = this.initInvestigator();
-    control.push(newInvestigator);
-
+  setRows(rows: IAlmaInvestigator[]) {
+    const rowFormGroups = rows.map(tableRow => this.formBuilder.group(tableRow));
+    console.log(rowFormGroups);
+    const rowFormArray  = this.formBuilder.array(rowFormGroups);
+    this.proposalForm.setControl('investigators', rowFormArray);
   }
 
-  initInvestigator(): FormGroup {
-    return this.formBuilder.group({});
+  get investigators(): FormArray {
+    return this.proposalForm.get('investigators') as FormArray;
   }
 
   /**

@@ -36,10 +36,18 @@
     <tbody formArrayName="rows">
       <tr *ngFor="let row of rows.controls; let i=index" [formGroupName]="i">
         <td contenteditable>
-          {{row.value.centre.longitude.content}}
+          {{
+          radioValue === 'ABSOLUTE' ?
+          (row.value.centre.longitude.content | sexagesimal: 'ra') :
+          row.value.centre.longitude.content
+          }}
         </td>
         <td contenteditable>
-          {{row.value.centre.latitude.content}}
+          {{
+          radioValue === 'ABSOLUTE' ?
+          (row.value.centre.latitude.content | sexagesimal: 'dec') :
+          row.value.centre.latitude.content
+          }}
         </td>
       </tr>
     </tbody>

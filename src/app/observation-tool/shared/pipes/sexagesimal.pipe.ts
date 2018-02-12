@@ -24,8 +24,7 @@ export class SexagesimalPipe implements PipeTransform {
    * @param type
    */
   transform(value: any, type: string): any {
-    if (value) {
-      console.log(value, type);
+    if (value !== undefined || null) {
       if (type === 'dec') {
         return SexagesimalPipe.trimHms(eq.decDeg2Hms(value));
       } else if (type === 'ra') {

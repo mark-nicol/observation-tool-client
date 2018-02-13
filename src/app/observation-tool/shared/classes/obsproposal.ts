@@ -2,7 +2,6 @@ import {IAlmaInvestigator} from '../interfaces/alma-investigator.interface';
 import {IObsProposal} from '../interfaces/project/obsproposal.interface';
 import {IProposalFeedback} from '../interfaces/project/propsal-feedback.interface';
 import {IScienceGoal} from '../interfaces/project/science-goal/sciencegoal.interface';
-import {ScienceGoal} from './science-goal/science-goal';
 
 export class ObsProposal implements IObsProposal {
 
@@ -24,7 +23,7 @@ export class ObsProposal implements IObsProposal {
   resubmittedProjectCode: string;
   isResubmission: boolean;
   duplicateObservationJustification: string;
-  principalInvestigator: IAlmaInvestigator;
+  PrincipalInvestigator: IAlmaInvestigator;
   coPrincipalInvestigators: IAlmaInvestigator[];
   coInvestigators: IAlmaInvestigator[];
   // scienceGoals: IScienceGoal[];
@@ -73,7 +72,7 @@ export class ObsProposal implements IObsProposal {
     this.resubmittedProjectCode            = resubmittedProjectCode;
     this.isResubmission                    = isResubmission;
     this.duplicateObservationJustification = duplicateObservationJustification;
-    this.principalInvestigator             = principalInvestigator;
+    this.PrincipalInvestigator             = principalInvestigator;
     this.coPrincipalInvestigators          = coPrincipalInvestigators;
     this.coInvestigators                   = coInvestigators;
     this.scienceGoals                      = scienceGoals;

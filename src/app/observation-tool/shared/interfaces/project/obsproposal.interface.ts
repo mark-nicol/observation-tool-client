@@ -21,7 +21,7 @@ export interface IObsProposal {
   resubmittedProjectCode: string;
   isResubmission: boolean;
   duplicateObservationJustification: string;
-  principalInvestigator: IAlmaInvestigator;
+  PrincipalInvestigator: IAlmaInvestigator;
   coPrincipalInvestigators: IAlmaInvestigator[];
   coInvestigators: IAlmaInvestigator[];
   scienceGoals: IScienceGoal;

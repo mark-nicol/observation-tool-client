@@ -12,7 +12,7 @@ var SpectralDataService = /** @class */ (function () {
     function SpectralDataService() {
         console.log(wv01_1.WV_01);
     }
-    SpectralDataService.prototype.getData = function () {
+    SpectralDataService.prototype.getSpectrum = function () {
         return wv01_1.WV_01;
     };
     SpectralDataService = __decorate([

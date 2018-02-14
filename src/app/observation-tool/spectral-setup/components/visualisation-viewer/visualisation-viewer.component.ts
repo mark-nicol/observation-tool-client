@@ -119,7 +119,7 @@ export class VisualisationViewerComponent implements OnInit {
    * Creates the data and two charts
    */
   ngOnInit() {
-    this.spectralDataService.getData(1).subscribe(data => this.createVisualiser(data));
+    this.spectralDataService.getSpectrum(1).subscribe(data => this.createVisualiser(data));
   }
 
   /**
@@ -379,7 +379,7 @@ export class VisualisationViewerComponent implements OnInit {
    * Changes the type of line show to demonstrate D3 transition
    */
   changeLine(octile: number) {
-    this.spectralDataService.getData(octile).subscribe(data => this.redrawLines(data));
+    this.spectralDataService.getSpectrum(octile).subscribe(data => this.redrawLines(data));
   }
 
   /**

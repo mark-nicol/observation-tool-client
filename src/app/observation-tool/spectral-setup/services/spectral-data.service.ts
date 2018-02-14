@@ -20,8 +20,12 @@ export class SpectralDataService {
    * Returns the water column data for a given octile
    * @param option The octile to retrieve data for
    */
-  getData(option: number): any {
+  getSpectrum(option: number): any {
     return this.http.get(`http://localhost:8080/spectral-data/${option}`);
+  }
+
+  getSplatalogue(): any {
+    return this.http.get('http://localhost:8080/spectral-data/splatalogue');
   }
 
 }

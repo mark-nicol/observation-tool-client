@@ -1,6 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {SuiModule} from 'ng2-semantic-ui';
+import {SpectralDataService} from '../../services/spectral-data.service';
 
-import { LineSelectionComponent } from './line-selection.component';
+import {LineSelectionComponent} from './line-selection.component';
 
 describe('LineSelectionComponent', () => {
   let component: LineSelectionComponent;
@@ -8,13 +11,16 @@ describe('LineSelectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LineSelectionComponent ]
+      imports: [HttpClientTestingModule,
+                SuiModule],
+      declarations: [LineSelectionComponent],
+      providers: [SpectralDataService]
     })
-    .compileComponents();
+           .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LineSelectionComponent);
+    fixture   = TestBed.createComponent(LineSelectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

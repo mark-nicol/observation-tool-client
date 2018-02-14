@@ -46,11 +46,11 @@ interface Margin {
  */
 
 @Component({
-             selector:      'app-visualisation-viewer',
-             templateUrl:   './visualisation-viewer.component.html',
-             styleUrls:     ['./visualisation-viewer.component.scss'],
-             encapsulation: ViewEncapsulation.None
-           })
+  selector: 'app-visualisation-viewer',
+  templateUrl: './visualisation-viewer.component.html',
+  styleUrls: ['./visualisation-viewer.component.scss'],
+  encapsulation: ViewEncapsulation.None
+})
 export class VisualisationViewerComponent implements OnInit {
 
   /** Regions for receiver bands */
@@ -79,26 +79,26 @@ export class VisualisationViewerComponent implements OnInit {
 
   /** Object holding data for the focus chart */
   private focus: ChartInterface = {
-    margin:    {top: 20, right: 20, bottom: 110, left: 40},
+    margin: {top: 20, right: 20, bottom: 110, left: 40},
     chartArea: {},
-    width:     0,
-    height:    0,
-    xScale:    {},
-    yScale:    {},
-    xAxis:     {},
-    line:      {}
+    width: 0,
+    height: 0,
+    xScale: {},
+    yScale: {},
+    xAxis: {},
+    line: {}
   };
 
   /** Object holding data for the context chart */
   private context: ChartInterface = {
-    margin:    {top: 350, right: 20, bottom: 30, left: 40},
+    margin: {top: 350, right: 20, bottom: 30, left: 40},
     chartArea: {},
-    width:     0,
-    height:    0,
-    xScale:    {},
-    yScale:    {},
-    xAxis:     {},
-    line:      {}
+    width: 0,
+    height: 0,
+    xScale: {},
+    yScale: {},
+    xAxis: {},
+    line: {}
   };
 
   /** The brush on the context chart, used for zooming and panning */
@@ -253,7 +253,7 @@ export class VisualisationViewerComponent implements OnInit {
         .attr('x1', this.focus.xScale(350))
         .attr('y1', this.focus.yScale(0))
         .attr('x2', this.focus.xScale(350))
-        .attr('y2', this.focus.yScale(this.focus.height))
+        .attr('y2', this.focus.yScale(this.focus.height * 0.66))
         .style('stroke-width', 2)
         .style('stroke', 'red')
         .style('fill', 'none');
@@ -316,6 +316,14 @@ export class VisualisationViewerComponent implements OnInit {
         .attr('y', (d, i) => 0)
         .attr('width', (d, i) => this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
         .attr('height', this.focus.height);
+
+    // Redraw spectral line
+    this.focus.chartArea.selectAll('.spectral-line')
+        .attr('x1', this.focus.xScale(350))
+        .attr('y1', this.focus.yScale(this.focus.height * 0.33))
+        .attr('x2', this.focus.xScale(350))
+        .attr('y2', this.focus.yScale(this.focus.height));
+
 
     // Redraw the line on the focus chart
     this.focus.chartArea.select('.line').attr('d', this.focus.line);

@@ -13,7 +13,7 @@ export class SpectralSetupParameters implements ISpectralSetupParameters {
   userRepresentativeFrequency: boolean;
   singleContinuumFrequency: Frequency;
   AdvancedSpectralSetup: IAdvancedSpectralSetup;
-  ScienceSpectralWindow: IScienceSpectralWindow;
+  ScienceSpectralWindow: IScienceSpectralWindow[];
 
 
   constructor(polarisation?: string,
@@ -22,7 +22,7 @@ export class SpectralSetupParameters implements ISpectralSetupParameters {
               userRepresentativeFrequency?: boolean,
               singleContinuumFrequency?: Frequency,
               AdvancedSpectralSetup?: IAdvancedSpectralSetup,
-              ScienceSpectralWindow?: IScienceSpectralWindow) {
+              ScienceSpectralWindow?: IScienceSpectralWindow[]) {
     this.polarisation                = polarisation;
     this.type                        = type;
     this.representativeFrequency     = representativeFrequency;

@@ -249,7 +249,7 @@ export class VisualisationViewerComponent implements OnInit {
 
   drawLine() {
     this.focus.chartArea.append('line')
-        .attr('class', 'line')
+        .attr('class', 'spectral-line')
         .attr('x1', this.focus.xScale(350))
         .attr('y1', this.focus.yScale(0))
         .attr('x2', this.focus.xScale(350))

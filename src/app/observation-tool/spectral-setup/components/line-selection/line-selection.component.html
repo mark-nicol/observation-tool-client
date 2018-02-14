@@ -1,3 +1,18 @@
-<p>
-  line-selection works!
-</p>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Species</th>
+      <th>Frequency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of catalogue; let i = index">
+      <td>{{row.line_id}}</td>
+      <td>{{row.chemical_name}}</td>
+      <td>{{row.species_id}}</td>
+      <td>{{row.orderedfreq}}</td>
+    </tr>
+  </tbody>
+</table>

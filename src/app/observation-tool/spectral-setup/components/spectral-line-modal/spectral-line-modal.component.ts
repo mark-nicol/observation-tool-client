@@ -23,5 +23,6 @@ export class SpectralLineSearchModal extends ComponentModalConfig<ModalContext, 
               size = ModalSize.Large) {
     super(SpectralLineModalComponent, {name, title});
     this.size = size;
+    this.mustScroll = true;
   }
 }

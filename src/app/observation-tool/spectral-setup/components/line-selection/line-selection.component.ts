@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ISpectralLine} from '../../../shared/interfaces/spectral-line.interface';
 import {SpectralDataService} from '../../services/spectral-data.service';
 
 @Component({
@@ -8,11 +9,13 @@ import {SpectralDataService} from '../../services/spectral-data.service';
 })
 export class LineSelectionComponent implements OnInit {
 
+  catalogue: ISpectralLine[];
+
   constructor(private spectralDataService: SpectralDataService) {
-    this.spectralDataService.getSplatalogue().subscribe(result => console.log(result));
   }
 
   ngOnInit() {
+    this.catalogue = this.spectralDataService.getSplatalogue().slice(0, 10);
   }
 
 }

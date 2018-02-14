@@ -9,6 +9,7 @@ import {VisualisationViewerComponent} from './components/visualisation-viewer/vi
 import {SpectralDataService} from './services/spectral-data.service';
 import {SpectralSetupComponent} from './spectral-setup.component';
 import { SpectralLineModalComponent } from './components/spectral-line-modal/spectral-line-modal.component';
+import { LineSelectionComponent } from './components/line-selection/line-selection.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SpectralLineModalComponent } from './components/spectral-line-modal/spe
     VisualisationControlComponent,
     VisualisationViewerComponent,
     SpectralSetupComponent,
-    SpectralLineModalComponent
+    SpectralLineModalComponent,
+    LineSelectionComponent
   ],
   providers: [SpectralDataService],
   exports: [

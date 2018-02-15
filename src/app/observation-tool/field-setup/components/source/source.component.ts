@@ -1,7 +1,6 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import * as _ from 'lodash';
 import 'rxjs/add/operator/debounce';
 import {Observable} from 'rxjs/Rx';
 import {Speed} from '../../../../units/classes/speed';
@@ -160,7 +159,10 @@ export class SourceComponent implements OnInit {
             pmDec: targetParams.pmDec
           });
           this.systemChange();
-          this.resolveEmitter.emit([this.sourceForm.value.lonValue, this.sourceForm.value.latValue]);
+          this.resolveEmitter.emit([
+            this.sourceForm.value.sourceCoordinates.longitude.content,
+            this.sourceForm.value.sourceCoordinates.latitude.content
+          ]);
         });
   }
 

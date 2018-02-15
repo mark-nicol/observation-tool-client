@@ -21,14 +21,11 @@ export class ExpectedSourcePropertiesComponent implements OnInit {
               private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute) {
     this.expectedSourcePropertiesForm = this.formBuilder.group({
-      continuumFluxDensityUnit: '',
-      continuumFluxDensityValue: 0.0,
-      continuumPolarization: 0.0,
-      lineFluxDensityUnit: '',
-      lineFluxDensityValue: 0.0,
-      lineWidthUnit: '',
-      lineWidthValue: 0.0,
-      linePolarization: 0.0
+      expectedPeakFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
+      desiredCircularPolarizationPercentage: 0.0,
+      expectedPeakLineFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
+      expectedLineWidth: this.formBuilder.group({userUnit: '', content: 0.0}),
+      desiredLinePolarizationPercentage: 0.0
     })
   }
 
@@ -45,14 +42,11 @@ export class ExpectedSourcePropertiesComponent implements OnInit {
         .subscribe(result => {
           const esp = result.TargetParameters[targetIndex].ExpectedProperties;
           this.expectedSourcePropertiesForm.patchValue({
-            continuumFluxDensityUnit: esp.expectedPeakFluxDensity.unit,
-            continuumFluxDensityValue: esp.expectedPeakFluxDensity.content,
-            continuumPolarization: esp.desiredCircularPolarizationPercentage,
-            lineFluxDensityUnit: esp.expectedPeakLineFluxDensity.unit,
-            lineFluxDensityValue: esp.expectedPeakLineFluxDensity.content,
-            lineWidthUnit: esp.expectedLineWidth.userUnit,
-            lineWidthValue: esp.expectedLineWidth.content,
-            linePolarization: esp.desiredLinePolarizationPercentage
+            expectedPeakFluxDensity: esp.expectedPeakFluxDensity,
+            desiredCircularPolarizationPercentage: esp.desiredCircularPolarizationPercentage,
+            expectedPeakLineFluxDensity: esp.expectedPeakLineFluxDensity,
+            expectedLineWidth: esp.expectedLineWidth,
+            desiredLinePolarizationPercentage: esp.desiredLinePolarizationPercentage
           })
         });
   }

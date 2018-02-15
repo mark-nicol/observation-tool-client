@@ -240,10 +240,10 @@ export class SourceComponent implements OnInit {
   observeFormChanges() {
     const debounce = this.sourceForm.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
-      console.log(value);
+      // console.log(value);
       Object.assign(this.target, value);
       // this.target = _.merge(this.target, value);
-      console.log(this.target);
+      // console.log(this.target);
     });
   }
 

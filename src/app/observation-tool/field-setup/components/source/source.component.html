@@ -1,17 +1,17 @@
 <h4 class="ui dividing header">Source</h4>
-<form class="ui form" [formGroup]="sourceForm">
+<form class="ui form" [formGroup]="form">
 
   <!-- Source selector -->
-  <div class="field" [class.error]="sourceName.invalid">
+  <div class="field" [class.error]="sourceName.invalid  && sourceName.dirty">
     <label for="sourceNameInput">Source Name</label>
     <div class="ui icon input">
       <input id="sourceNameInput"
              type="text"
              formControlName="sourceName">
-      <i *ngIf="sourceName.invalid" class="red warning circle icon"></i>
+      <i *ngIf="sourceName.invalid && sourceName.dirty" class="red warning circle icon"></i>
     </div>
     <div class="ui pointing red basic label"
-         *ngIf="sourceName.invalid">
+         *ngIf="sourceName.invalid && sourceName.dirty">
       Source name cannot be blank
     </div>
     <button class="ui right floated tiny compact blue labeled icon button"
@@ -25,8 +25,7 @@
     <!-- Solar checkbox -->
     <div class="field">
       <label>Choose a Solar System Object?</label>
-      <sui-checkbox class="toggle"
-                    formControlName="solarSystemObject"></sui-checkbox>
+      <sui-checkbox class="toggle"></sui-checkbox>
     </div>
 
     <!-- Solar selector -->
@@ -34,8 +33,7 @@
       <label for="solarSystemSelector">Name of Object</label>
       <sui-select id="solarSystemSelector"
                   class="selection"
-                  formControlName="chosenSolarObject"
-                  [isDisabled]="!sourceForm.value.solarSystemObject">
+                  [isDisabled]="!form.value.solarSystemObject">
         <sui-select-option *ngFor="let body of solarBodies"
                            [value]="body">
           {{body}}
@@ -44,7 +42,7 @@
     </div>
   </div>
 
-  <div class="ui form" *ngIf="!sourceForm.value.solarSystemObject">
+  <div class="ui form" *ngIf="!form.value.solarSystemObject">
 
     <div class="four fields" formGroupName="sourceCoordinates">
       <div class="field">
@@ -75,18 +73,17 @@
            formGroupName="longitude">
         <label for="lonInput">
           {{
-          this.sourceForm.value.sourceCoordinates.type ?
+          this.form.value.sourceCoordinates.type ?
           this.currentSystem?.sexagesimalLabels.lonLabel :
           this.currentSystem?.normalLabels.lonLabel
           }}
         </label>
-        <input #lonInput
-               id="lonInput"
+        <input id="lonInput"
                formControlName="content"
                placeholder="0"
-               [value]="sourceForm.value.sourceCoordinates.type ?
-                        (sourceForm.value.sourceCoordinates.longitude.content | sexagesimal: 'ra') :
-                        sourceForm.value.sourceCoordinates.longitude.content">
+               [value]="form.value.sourceCoordinates.type ?
+                        (form.value.sourceCoordinates.longitude.content | sexagesimal: 'ra') :
+                        form.value.sourceCoordinates.longitude.content">
       </div>
 
       <!-- Dec(lat) input -->
@@ -96,18 +93,17 @@
            formGroupName="latitude">
         <label for="latInput">
           {{
-          this.sourceForm.value.sourceCoordinates.type ?
+          this.form.value.sourceCoordinates.type ?
           this.currentSystem?.sexagesimalLabels.latLabel :
           this.currentSystem?.normalLabels.latLabel
           }}
         </label>
-        <input #latInput
-               id="latInput"
+        <input id="latInput"
                formControlName="content"
                placeholder="0"
-               [value]="sourceForm.value.sourceCoordinates.type ?
-                        (sourceForm.value.sourceCoordinates.latitude.content | sexagesimal: 'dec') :
-                        sourceForm.value.sourceCoordinates.latitude.content">
+               [value]="form.value.sourceCoordinates.type ?
+                        (form.value.sourceCoordinates.latitude.content | sexagesimal: 'dec') :
+                        form.value.sourceCoordinates.latitude.content">
       </div>
     </div>
 

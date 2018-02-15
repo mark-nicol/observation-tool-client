@@ -4,6 +4,8 @@ import {ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/debounce';
 import {Observable} from 'rxjs/Rx';
 import {Speed} from '../../../../units/classes/speed';
+import {SpeedUnits} from '../../../../units/enums/speed-units.enum';
+import {AbstractForm} from '../../../shared/classes/abstract-form';
 import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
@@ -22,13 +24,13 @@ import {SystemService} from '../../../shared/services/system.service';
   styleUrls: ['./source.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class SourceComponent implements OnInit {
+export class SourceComponent extends AbstractForm implements OnInit {
 
   @Output() resolveEmitter = new EventEmitter<number[]>();
 
   currentTarget               = 0;
   target: TargetParameters;
-  sourceForm: FormGroup;
+  form: FormGroup;
   /** Selectable solar system bodies for selection box */
   solarBodies                 = [
     'Mercury',
@@ -56,7 +58,7 @@ export class SourceComponent implements OnInit {
   sexagesimalCheckboxDisabled = false;
 
   static getRedshift(centerVelocity: Speed, dopplerType: string): number {
-    const voc = centerVelocity.getValueInUnits('m/s') / Speed.C;
+    const voc = centerVelocity.getValueInUnits(SpeedUnits.M_S) / Speed.C;
     switch (dopplerType) {
       case 'RELATIVISTIC':
         return Math.sqrt((1.0 + voc) / (1.0 - voc)) - 1;
@@ -80,10 +82,10 @@ export class SourceComponent implements OnInit {
               protected systemService: SystemService,
               private simbadService: SimbadService,
               private activatedRoute: ActivatedRoute) {
-    this.sourceForm = this.formBuilder.group({
+    super();
+    this.form = this.formBuilder.group({
       sourceName: ['', Validators.required],
       solarSystemObject: false,
-      chosenSolarObject: 'Unspecified',
       sourceCoordinates: this.formBuilder.group({
         system: '',
         type: true,
@@ -118,7 +120,7 @@ export class SourceComponent implements OnInit {
         content: 0.0
       })
     });
-    this.observeFormChanges();
+    super.onFormChanges();
   }
 
 
@@ -135,8 +137,8 @@ export class SourceComponent implements OnInit {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
           const targetParams = result.TargetParameters[index];
-          this.target        = targetParams;
-          this.sourceForm.patchValue({
+          this.data        = targetParams;
+          this.form.patchValue({
             sourceName: targetParams.sourceName,
             solarSystemObject: targetParams.solarSystemObject !== 'Unspecified',
             radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
@@ -160,8 +162,8 @@ export class SourceComponent implements OnInit {
           });
           this.systemChange();
           this.resolveEmitter.emit([
-            this.sourceForm.value.sourceCoordinates.longitude.content,
-            this.sourceForm.value.sourceCoordinates.latitude.content
+            this.form.value.sourceCoordinates.longitude.content,
+            this.form.value.sourceCoordinates.latitude.content
           ]);
         });
   }
@@ -196,7 +198,7 @@ export class SourceComponent implements OnInit {
    * @param units True if checkbox is selected
    */
   sexagesimalChange() {
-    console.log(this.sourceForm.value);
+    console.log(this.form.value);
   }
 
   /**
@@ -204,30 +206,30 @@ export class SourceComponent implements OnInit {
    * @param system The new system type to be used
    */
   systemChange() {
-    this.currentSystem = this.systemService.getSystem(this.sourceForm.value.sourceCoordinates.system);
-    if (this.sourceForm.value.sourceCoordinates.system === 'ICRS' || this.sourceForm.value.sourceCoordinates.system === 'FK5 J2000') {
+    this.currentSystem = this.systemService.getSystem(this.form.value.sourceCoordinates.system);
+    if (this.form.value.sourceCoordinates.system === 'ICRS' || this.form.value.sourceCoordinates.system === 'FK5 J2000') {
       this.sexagesimalCheckboxDisabled = false;
     } else {
-      this.sourceForm.value.sourceCoordinates.type = false;
+      this.form.value.sourceCoordinates.type = false;
       this.sexagesimalCheckboxDisabled             = true;
     }
   }
 
   setRedshift() {
-    this.sourceForm.patchValue({
+    this.form.patchValue({
       sourceVelocity: {
         redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-          this.sourceForm.value.sourceVelocity.centerVelocity.content),
-          this.sourceForm.value.sourceVelocity.dopplerCalcType)
+          this.form.value.sourceVelocity.centerVelocity.content),
+          this.form.value.sourceVelocity.dopplerCalcType)
       }
     });
   }
 
   resolveSource() {
-    this.simbadService.queryByIdentifier(this.sourceForm.value.sourceName).subscribe(
+    this.simbadService.queryByIdentifier(this.form.value.sourceName).subscribe(
       result => {
         const data = SimbadService.cleanResponse(result);
-        this.sourceForm.patchValue(data);
+        this.form.patchValue(data);
         this.resolveEmitter.emit([
           data.sourceCoordinates.longitude.content,
           data.sourceCoordinates.latitude.content
@@ -238,17 +240,16 @@ export class SourceComponent implements OnInit {
   }
 
   observeFormChanges() {
-    const debounce = this.sourceForm.valueChanges.debounce(() => Observable.interval(1500));
-    debounce.subscribe(value => {
-      // console.log(value);
-      Object.assign(this.target, value);
-      // this.target = _.merge(this.target, value);
-      // console.log(this.target);
+    this.form.valueChanges.debounce(() => Observable.interval(1500)).subscribe(value => {
+      if (this.form.valid && this.form.dirty) {
+        console.log('Changes');
+        Object.assign(this.target, value);
+      }
     });
   }
 
   get sourceName() {
-    return this.sourceForm.get('sourceName')
+    return this.form.get('sourceName')
   }
 
 }

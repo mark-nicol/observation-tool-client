@@ -1,6 +1,8 @@
-import {Component, EventEmitter, HostListener, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
+import 'rxjs/add/operator/debounce';
+import {Observable} from 'rxjs/Rx';
 import {Speed} from '../../../../units/classes/speed';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
@@ -23,7 +25,7 @@ export class SourceComponent implements OnInit {
 
   @Output() resolveEmitter = new EventEmitter<number[]>();
 
-  currentTarget = 0;
+  currentTarget               = 0;
   sourceForm: FormGroup;
   /** Selectable solar system bodies for selection box */
   solarBodies                 = [
@@ -96,6 +98,7 @@ export class SourceComponent implements OnInit {
       dopplerType: '',
       redshift: 0,
     });
+    this.observeNameChanges();
   }
 
 
@@ -104,7 +107,7 @@ export class SourceComponent implements OnInit {
       this.currentTarget = params.index ? params.index : this.persistenceService.currentTarget;
       this.initComponent(this.currentTarget);
     });
-    this.initComponent(this.currentTarget);
+    // this.initComponent(this.currentTarget);
   }
 
 
@@ -206,6 +209,12 @@ export class SourceComponent implements OnInit {
       this.sourceForm.patchValue(data);
       this.resolveEmitter.emit([data.lonValue, data.latValue]);
     });
+  }
+
+  observeNameChanges() {
+    const sourceNameControl = this.sourceForm.get('sourceName');
+    const result = sourceNameControl.valueChanges.debounce(() => Observable.interval(1500));
+    result.forEach( value => console.log(value));
   }
 
 }

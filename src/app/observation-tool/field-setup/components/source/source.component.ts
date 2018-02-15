@@ -166,11 +166,6 @@ export class SourceComponent implements OnInit {
 
 
   /**
-   * Removes focus from the currently focused DOM element when clicked out
-   */
-
-
-  /**
    * Changes use of a solar system object, hides most of the component from use
    */
   solarCheckboxClicked() {
@@ -244,7 +239,8 @@ export class SourceComponent implements OnInit {
     const debounce = this.sourceForm.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       console.log(value);
-      this.target = _.merge(this.target, value);
+      Object.assign(this.target, value);
+      // this.target = _.merge(this.target, value);
       console.log(this.target);
     });
   }

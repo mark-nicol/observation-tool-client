@@ -46,13 +46,13 @@
 
   <div class="ui form" *ngIf="!sourceForm.value.solarSystemObject">
 
-    <div class="four fields">
+    <div class="four fields" formGroupName="sourceCoordinates">
       <div class="field">
         <!-- System Selector -->
         <label>System</label>
         <div class="field">
           <sui-select class="selection"
-                      formControlName="chosenSystem"
+                      formControlName="system"
                       (selectedOptionChange)="systemChange()">
             <sui-select-option *ngFor="let system of systemService.getSystems()"
                                value="{{system}}"></sui-select-option>
@@ -63,7 +63,7 @@
       <div class="three wide field">
         <label>Sexagesimal Units</label>
         <sui-checkbox class="toggle"
-                      formControlName="sexagesimalUnits"
+                      formControlName="type"
                       [isDisabled]="sexagesimalCheckboxDisabled">
         </sui-checkbox>
       </div>
@@ -71,45 +71,43 @@
       <!-- RA(lon) input -->
       <div class="field"
            suiPopup
-           popupText="The longitude of the source">
+           popupText="The longitude of the source"
+           formGroupName="longitude">
         <label for="lonInput">
           {{
-          this.sourceForm.value.sexagesimalUnits ?
+          this.sourceForm.value.sourceCoordinates.type ?
           this.currentSystem?.sexagesimalLabels.lonLabel :
           this.currentSystem?.normalLabels.lonLabel
           }}
         </label>
         <input #lonInput
                id="lonInput"
-               formControlName="lonValue"
-               (keyup.enter)="setLatLon(lonInput.value, lonInput)"
-               (blur)="setLatLon(lonInput.value, lonInput)"
+               formControlName="content"
                placeholder="0"
-               [value]="sourceForm.value.sexagesimalUnits ?
-                        (sourceForm.value.lonValue | sexagesimal: 'ra') :
-                        sourceForm.value.lonValue">
+               [value]="sourceForm.value.sourceCoordinates.type ?
+                        (sourceForm.value.sourceCoordinates.longitude.content | sexagesimal: 'ra') :
+                        sourceForm.value.sourceCoordinates.longitude.content">
       </div>
 
       <!-- Dec(lat) input -->
       <div class="field"
            suiPopup
-           popupText="The latitude of the source">
+           popupText="The latitude of the source"
+           formGroupName="latitude">
         <label for="latInput">
           {{
-          this.sourceForm.value.sexagesimalUnits ?
+          this.sourceForm.value.sourceCoordinates.type ?
           this.currentSystem?.sexagesimalLabels.latLabel :
           this.currentSystem?.normalLabels.latLabel
           }}
         </label>
         <input #latInput
                id="latInput"
-               formControlName="latValue"
-               (keyup.enter)="setLatLon(latInput.value, latInput)"
-               (blur)="setLatLon(latInput.value, latInput)"
+               formControlName="content"
                placeholder="0"
-               [value]="sourceForm.value.sexagesimalUnits ?
-                        (sourceForm.value.latValue | sexagesimal: 'dec') :
-                        sourceForm.value.latValue">
+               [value]="sourceForm.value.sourceCoordinates.type ?
+                        (sourceForm.value.sourceCoordinates.latitude.content | sexagesimal: 'dec') :
+                        sourceForm.value.sourceCoordinates.latitude.content">
       </div>
     </div>
 
@@ -117,17 +115,18 @@
       <!-- Parallax input -->
       <div class="field"
            suiPopup
-           popupText="The parallax angle of the source">
+           popupText="The parallax angle of the source"
+           formGroupName="parallax">
         <label for="parallaxInput">
           Parallax
         </label>
         <div class="ui action input">
           <input id="parallaxInput"
                  placeholder="0.00000"
-                 formControlName="parallaxValue">
+                 formControlName="content">
           <sui-select class="selection"
                       title="Parallax unit selector"
-                      formControlName="parallaxUnit">
+                      formControlName="unit">
             <sui-select-option value="mas">mas</sui-select-option>
             <sui-select-option value="arcsec">arcsec</sui-select-option>
           </sui-select>
@@ -137,17 +136,18 @@
       <!-- PM RA input -->
       <div class="field"
            suiPopup
-           popupText="Proper motion along cross-declination direction">
+           popupText="Proper motion along cross-declination direction"
+           formGroupName="pmRA">
         <label for="pmRaInput">
           PM RA
         </label>
         <div class="ui action input">
           <input id="pmRaInput"
                  placeholder="0.00000"
-                 formControlName="properMotionCrossValue">
+                 formControlName="content">
           <sui-select class="selection"
                       title="Proper motion ra unit selector"
-                      formControlName="properMotionCrossUnit">
+                      formControlName="unit">
             <sui-select-option value="mas/yr">mas/yr</sui-select-option>
             <sui-select-option value="arcsec/s">arcsec/s</sui-select-option>
             <sui-select-option value="arcmin/s">arcmin/s</sui-select-option>
@@ -159,17 +159,18 @@
       <!-- PM Dec input -->
       <div class="field"
            suiPopup
-           popupText="Proper motion along declination direction">
+           popupText="Proper motion along declination direction"
+           formGroupName="pmDec">
         <label for="plgecInput">
           PM DEC
         </label>
         <div class="ui action input">
           <input id="plgecInput"
                  placeholder="0.00000"
-                 formControlName="properMotionDeclinationValue">
+                 formControlName="content">
           <sui-select class="selection"
                       title="proper motion declination unit selector"
-                      formControlName="properMotionDeclinationUnit">
+                      formControlName="unit">
             <sui-select-option value="mas/yr">mas/yr</sui-select-option>
             <sui-select-option value="arcsec/s">arcsec/s</sui-select-option>
             <sui-select-option value="arcmin/s">arcmin/s</sui-select-option>
@@ -180,7 +181,8 @@
     </div>
 
 
-    <div class="three fields">
+    <div class="three fields"
+         formGroupName="sourceVelocity">
       <!-- Radial input -->
       <div class="field"
            suiPopup
@@ -188,25 +190,26 @@
         <label for="radialVelocityInput">
           Radial Velocity
         </label>
-        <div class="ui action input">
+        <div class="ui action input"
+             formGroupName="centreVelocity">
           <input id="radialVelocityInput"
                  placeholder="0.000"
-                 formControlName="radialVelocityValue">
+                 formControlName="content">
           <sui-select class="selection"
                       title="Radial velocity unit selector"
-                      formControlName="radialVelocityUnit">
+                      formControlName="unit">
             <sui-select-option value="m/s">m/s</sui-select-option>
             <sui-select-option value="km/s">km/s</sui-select-option>
           </sui-select>
-          <sui-select class="selection"
-                      title="Radial velocity reference frame selector"
-                      formControlName="radialVelocityReferenceSystem">
-            <sui-select-option value="bar">bar</sui-select-option>
-            <sui-select-option value="lsrk">lsrk</sui-select-option>
-            <sui-select-option value="topo">topo</sui-select-option>
-            <sui-select-option value="hel">hel</sui-select-option>
-          </sui-select>
         </div>
+        <sui-select class="selection"
+                    title="Radial velocity reference frame selector"
+                    formControlName="referenceSystem">
+          <sui-select-option value="bar">bar</sui-select-option>
+          <sui-select-option value="lsrk">lsrk</sui-select-option>
+          <sui-select-option value="topo">topo</sui-select-option>
+          <sui-select-option value="hel">hel</sui-select-option>
+        </sui-select>
       </div>
 
       <!-- Redshift input -->
@@ -230,7 +233,7 @@
         </label>
         <sui-select class="selection"
                     id="dopplerSelect"
-                    formControlName="dopplerType"
+                    formControlName="dopplerCalcType"
                     (selectedOptionChange)="setRedshift()">
           <sui-select-option value="RADIO">Radio</sui-select-option>
           <sui-select-option value="OPTICAL">Optical</sui-select-option>

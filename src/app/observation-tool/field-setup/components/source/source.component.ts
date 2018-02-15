@@ -9,6 +9,7 @@ import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.inte
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {SimbadService} from '../../../shared/services/simbad.service';
 import {SystemService} from '../../../shared/services/system.service';
+import * as _ from 'lodash';
 
 /**
  * Source Component in Field Setup
@@ -84,21 +85,39 @@ export class SourceComponent implements OnInit {
       sourceName: ['', Validators.required],
       solarSystemObject: false,
       chosenSolarObject: '',
-      chosenSystem: '',
-      sexagesimalUnits: true,
-      latValue: 0.0,
-      lonValue: 0.0,
-      parallaxUnit: '',
-      parallaxValue: 0.0,
-      properMotionCrossUnit: '',
-      properMotionCrossValue: 0.0,
-      properMotionDeclinationUnit: '',
-      properMotionDeclinationValue: 0.0,
-      radialVelocityUnit: '',
-      radialVelocityValue: 0.0,
-      radialVelocityReferenceSystem: '',
-      dopplerType: '',
-      redshift: 0,
+      sourceCoordinates: this.formBuilder.group({
+        system: '',
+        type: true,
+        longitude: this.formBuilder.group({
+          unit: '',
+          content: 0.0
+        }),
+        latitude: this.formBuilder.group({
+          unit: '',
+          content: 0.0
+        })
+      }),
+      parallax: this.formBuilder.group({
+        unit: '',
+        content: 0.0
+      }),
+      sourceVelocity: this.formBuilder.group({
+        centreVelocity: this.formBuilder.group({
+          unit: '',
+          content: 0.0
+        }),
+        dopplerCalcType: '',
+        referenceSystem: '',
+        redshift: 0
+      }),
+      pmRA: this.formBuilder.group({
+        unit: '',
+        content: 0.0
+      }),
+      pmDec: this.formBuilder.group({
+        unit: '',
+        content: 0.0
+      })
     });
     this.observeFormChanges();
   }
@@ -121,24 +140,24 @@ export class SourceComponent implements OnInit {
           this.sourceForm.patchValue({
             sourceName: targetParams.sourceName,
             solarSystemObject: targetParams.solarSystemObject !== 'Unspecified',
-            // chosenSolarObject: result.chosenSolarObject,
             radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
-            sexagesimalUnits: targetParams.sourceCoordinates.type === 'ABSOLUTE',
-            chosenSystem: targetParams.sourceCoordinates.system,
-            latValue: targetParams.sourceCoordinates.latitude.content,
-            lonValue: targetParams.sourceCoordinates.longitude.content,
-            parallaxUnit: targetParams.parallax.unit,
-            parallaxValue: targetParams.parallax.content,
-            properMotionCrossUnit: targetParams.pmRA.unit,
-            properMotionCrossValue: targetParams.pmRA.content,
-            properMotionDeclinationUnit: targetParams.pmDec.unit,
-            properMotionDeclinationValue: targetParams.pmDec.content,
-            radialVelocityUnit: targetParams.sourceVelocity.centerVelocity.unit,
-            radialVelocityValue: targetParams.sourceVelocity.centerVelocity.content,
-            dopplerType: targetParams.sourceVelocity.dopplerCalcType,
-            redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-              targetParams.sourceVelocity.centerVelocity),
-              targetParams.sourceVelocity.dopplerCalcType),
+            sourceCoordinates: {
+              system: targetParams.sourceCoordinates.system,
+              type: targetParams.sourceCoordinates.type === 'ABSOLUTE',
+              longitude: targetParams.sourceCoordinates.longitude,
+              latitude: targetParams.sourceCoordinates.latitude,
+            },
+            parallax: targetParams.parallax,
+            sourceVelocity: {
+              centreVelocity: targetParams.sourceVelocity.centerVelocity,
+              dopplerCalcType: targetParams.sourceVelocity.dopplerCalcType,
+              referenceSystem: targetParams.sourceVelocity.referenceSystem,
+              redshift: SourceComponent.getRedshift(Object.assign(new Speed,
+                targetParams.sourceVelocity.centerVelocity),
+                targetParams.sourceVelocity.dopplerCalcType)
+            },
+            pmRA: targetParams.pmRA,
+            pmDec: targetParams.pmDec
           });
           this.systemChange();
           this.resolveEmitter.emit([this.sourceForm.value.lonValue, this.sourceForm.value.latValue]);
@@ -188,12 +207,12 @@ export class SourceComponent implements OnInit {
    * @param system The new system type to be used
    */
   systemChange() {
-    this.currentSystem = this.systemService.getSystem(this.sourceForm.value.chosenSystem);
-    if (this.sourceForm.value.chosenSystem === 'ICRS' || this.sourceForm.value.chosenSystem === 'FK5 J2000') {
+    this.currentSystem = this.systemService.getSystem(this.sourceForm.value.sourceCoordinates.system);
+    if (this.sourceForm.value.sourceCoordinates.system === 'ICRS' || this.sourceForm.value.sourceCoordinates.system === 'FK5 J2000') {
       this.sexagesimalCheckboxDisabled = false;
     } else {
-      this.sourceForm.value.sexagesimalUnits = false;
-      this.sexagesimalCheckboxDisabled       = true;
+      this.sourceForm.value.sourceCoordinates.type = false;
+      this.sexagesimalCheckboxDisabled             = true;
     }
   }
 
@@ -221,9 +240,7 @@ export class SourceComponent implements OnInit {
     const debounce = this.sourceForm.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       console.log(value);
-      this.target.sourceName = value.sourceName;
-      this.target.sourceVelocity.referenceSystem = value.radialVelocityReferenceSystem;
-      console.log(this.target);
+      this.target = _.merge(this.target, value);
     });
   }
 

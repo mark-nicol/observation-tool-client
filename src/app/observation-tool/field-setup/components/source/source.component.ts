@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import * as _ from 'lodash';
 import 'rxjs/add/operator/debounce';
 import {Observable} from 'rxjs/Rx';
 import {Speed} from '../../../../units/classes/speed';
@@ -9,7 +10,6 @@ import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.inte
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {SimbadService} from '../../../shared/services/simbad.service';
 import {SystemService} from '../../../shared/services/system.service';
-import * as _ from 'lodash';
 
 /**
  * Source Component in Field Setup
@@ -136,7 +136,7 @@ export class SourceComponent implements OnInit {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
           const targetParams = result.TargetParameters[index];
-          this.target = targetParams;
+          this.target        = targetParams;
           this.sourceForm.patchValue({
             sourceName: targetParams.sourceName,
             solarSystemObject: targetParams.solarSystemObject !== 'Unspecified',
@@ -231,7 +231,10 @@ export class SourceComponent implements OnInit {
       result => {
         const data = SimbadService.cleanResponse(result);
         this.sourceForm.patchValue(data);
-        this.resolveEmitter.emit([data.lonValue, data.latValue]);
+        this.resolveEmitter.emit([
+          data.sourceCoordinates.longitude.content,
+          data.sourceCoordinates.latitude.content
+        ]);
       },
       error => console.log('error')
     );

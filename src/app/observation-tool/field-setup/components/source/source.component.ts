@@ -84,7 +84,7 @@ export class SourceComponent implements OnInit {
     this.sourceForm = this.formBuilder.group({
       sourceName: ['', Validators.required],
       solarSystemObject: false,
-      chosenSolarObject: '',
+      chosenSolarObject: 'Unspecified',
       sourceCoordinates: this.formBuilder.group({
         system: '',
         type: true,
@@ -102,7 +102,7 @@ export class SourceComponent implements OnInit {
         content: 0.0
       }),
       sourceVelocity: this.formBuilder.group({
-        centreVelocity: this.formBuilder.group({
+        centerVelocity: this.formBuilder.group({
           unit: '',
           content: 0.0
         }),
@@ -149,7 +149,7 @@ export class SourceComponent implements OnInit {
             },
             parallax: targetParams.parallax,
             sourceVelocity: {
-              centreVelocity: targetParams.sourceVelocity.centerVelocity,
+              centerVelocity: targetParams.sourceVelocity.centerVelocity,
               dopplerCalcType: targetParams.sourceVelocity.dopplerCalcType,
               referenceSystem: targetParams.sourceVelocity.referenceSystem,
               redshift: SourceComponent.getRedshift(Object.assign(new Speed,
@@ -218,10 +218,11 @@ export class SourceComponent implements OnInit {
 
   setRedshift() {
     this.sourceForm.patchValue({
-      redshift: SourceComponent.getRedshift(
-        new Speed(this.sourceForm.value.radialVelocityUnit,
-          this.sourceForm.value.radialVelocityValue),
-        this.sourceForm.value.dopplerType)
+      sourceVelocity: {
+        redshift: SourceComponent.getRedshift(Object.assign(new Speed,
+          this.sourceForm.value.sourceVelocity.centerVelocity.content),
+          this.sourceForm.value.sourceVelocity.dopplerCalcType)
+      }
     });
   }
 
@@ -241,6 +242,7 @@ export class SourceComponent implements OnInit {
     debounce.subscribe(value => {
       console.log(value);
       this.target = _.merge(this.target, value);
+      console.log(this.target);
     });
   }
 

@@ -1195,7 +1195,7 @@
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/project-info/project-info.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/project-info/project-info.component.ts:17</a></div>
                                 </td>
                             </tr>
     
@@ -1301,7 +1301,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/project-info/project-info.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/project-info/project-info.component.ts:17</a></div>
                                 </td>
                             </tr>
     
@@ -1314,10 +1314,9 @@
 
 
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import {Component, OnChanges, OnInit} from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
 import {Observable} from &#x27;rxjs/Observable&#x27;;
 import {ObsProject} from &#x27;../../../../shared/classes/obsproject&#x27;;
-import {IObsProject} from &#x27;../../../../shared/interfaces/project/obsproject.interface&#x27;;
 import {PersistenceService} from &#x27;../../../../shared/services/persistence.service&#x27;;
 
 /**
@@ -1325,18 +1324,19 @@ import {PersistenceService} from &#x27;../../../../shared/services/persistence.s
  */
 
 @Component({
-             selector: &#x27;app-project-info&#x27;,
-             templateUrl: &#x27;./project-info.component.html&#x27;,
-             styleUrls: [&#x27;./project-info.component.css&#x27;]
-           })
+  selector: &#x27;app-project-info&#x27;,
+  templateUrl: &#x27;./project-info.component.html&#x27;,
+  styleUrls: [&#x27;./project-info.component.css&#x27;]
+})
 export class ProjectInfoComponent implements OnInit {
 
   project: Observable&lt;ObsProject&gt;;
+
   constructor(private persistenceService: PersistenceService) {
   }
 
   ngOnInit(): void {
-    this.project &#x3D; this.persistenceService.getProject(&#x27;&#x27;);
+    this.project &#x3D; this.persistenceService.getProject();
   }
 
 }

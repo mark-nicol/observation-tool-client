@@ -1110,46 +1110,50 @@ import {ScienceGoalComponent} from &#x27;./science-goal.component&#x27;;
 
 const routes: Routes &#x3D; [
   {
-    path:      &#x27;science-goals&#x27;,
+    path: &#x27;science-goals&#x27;,
     component: ScienceGoalComponent,
-    children:  [
+    children: [
       {
-        path:      &#x27;general&#x27;,
+        path: &#x27;general&#x27;,
         component: GeneralComponent,
       },
       {
-        path:      &#x27;field-setup&#x27;,
+        path: &#x27;field-setup&#x27;,
         component: FieldSetupComponent,
       },
       {
-        path:      &#x27;spectral-setup&#x27;,
+        path: &#x27;field-setup/:index&#x27;,
+        component: FieldSetupComponent
+      },
+      {
+        path: &#x27;spectral-setup&#x27;,
         component: SpectralSetupComponent,
       },
       {
-        path:      &#x27;calibration-setup&#x27;,
+        path: &#x27;calibration-setup&#x27;,
         component: CalibrationSetupComponent,
       },
       {
-        path:      &#x27;control-performance&#x27;,
+        path: &#x27;control-performance&#x27;,
         component: ControlPerformanceComponent,
       },
       {
-        path:      &#x27;technical-justification&#x27;,
+        path: &#x27;technical-justification&#x27;,
         component: TechnicalJustificationComponent,
       },
       {
-        path:       &#x27;&#x27;,
+        path: &#x27;&#x27;,
         redirectTo: &#x27;general&#x27;,
-        pathMatch:  &#x27;full&#x27;
+        pathMatch: &#x27;full&#x27;
       }
     ]
   }
 ];
 
 @NgModule({
-            imports: [RouterModule.forChild(routes)],
-            exports: [RouterModule]
-          })
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
 
 export class ScienceGoalRoutingModule {
 }

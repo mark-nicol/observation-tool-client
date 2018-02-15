@@ -1199,12 +1199,12 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(suiModalService: SuiModalService, toastMgr: ToastsManager, viewContainerRef: ViewContainerRef)</code>
+                            <code>constructor(almaInvestigatorSearchService: <a href="../injectables/AlmaInvestigatorSearchService.html">AlmaInvestigatorSearchService</a>, persistenceService: <a href="../injectables/PersistenceService.html">PersistenceService</a>, suiModalService: SuiModalService, toastMgr: ToastsManager, viewContainerRef: ViewContainerRef)</code>
                         </td>
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:25</a></div>
                                 </td>
                             </tr>
     
@@ -1222,6 +1222,24 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                    <tr>
+                                                      <td>almaInvestigatorSearchService</td>
+                                                      <td>
+                                                                <code><a href="../injectables/AlmaInvestigatorSearchService.html" target="_self" >AlmaInvestigatorSearchService</a></code>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td>persistenceService</td>
+                                                      <td>
+                                                                <code><a href="../injectables/PersistenceService.html" target="_self" >PersistenceService</a></code>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
                                                     <tr>
                                                       <td>suiModalService</td>
                                                       <td>
@@ -1284,7 +1302,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:54</a></div>
                                 </td>
                             </tr>
     
@@ -1345,7 +1363,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:48</a></div>
                                 </td>
                             </tr>
     
@@ -1377,7 +1395,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:42</a></div>
                                 </td>
                             </tr>
     
@@ -1422,7 +1440,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:22</a></div>
                                 </td>
                             </tr>
     
@@ -1457,7 +1475,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:23</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/observation-tool/project/components/pi-entry/pi-search/pi-search.component.ts:25</a></div>
                                 </td>
                             </tr>
     
@@ -1480,17 +1498,19 @@
 import {SuiModalService} from &#x27;ng2-semantic-ui&#x27;;
 import {ToastsManager} from &#x27;ng2-toastr&#x27;;
 import {AlmaInvestigatorSearchModal} from &#x27;../../../../alma-investigator-search/components/modal/modal.component&#x27;;
+import {AlmaInvestigatorSearchService} from &#x27;../../../../alma-investigator-search/services/alma-investigator-search.service&#x27;;
 import {IAlmaInvestigator} from &#x27;../../../../shared/interfaces/alma-investigator.interface&#x27;;
+import {PersistenceService} from &#x27;../../../../shared/services/persistence.service&#x27;;
 
 /**
  * Initial PI search component
  */
 
 @Component({
-             selector: &#x27;app-pi-search&#x27;,
-             templateUrl: &#x27;./pi-search.component.html&#x27;,
-             styleUrls: [&#x27;./pi-search.component.css&#x27;]
-           })
+  selector: &#x27;app-pi-search&#x27;,
+  templateUrl: &#x27;./pi-search.component.html&#x27;,
+  styleUrls: [&#x27;./pi-search.component.css&#x27;]
+})
 
 export class PiSearchComponent implements OnInit {
 
@@ -1500,10 +1520,16 @@ export class PiSearchComponent implements OnInit {
   /** The chosen PI passed back from piSelect */
   passedPi: IAlmaInvestigator;
 
-  constructor(private suiModalService: SuiModalService,
+  constructor(private almaInvestigatorSearchService: AlmaInvestigatorSearchService,
+              private persistenceService: PersistenceService,
+              private suiModalService: SuiModalService,
               private toastMgr: ToastsManager,
               viewContainerRef: ViewContainerRef) {
     this.toastMgr.setRootViewContainerRef(viewContainerRef);
+    this.persistenceService.getProject().subscribe(result &#x3D;&gt; {
+      console.log(result.pI);
+      this.almaInvestigatorSearchService.search(&#x27;Uid&#x27;, result.pI).subscribe(res &#x3D;&gt; this.passedPi &#x3D; res[0]);
+    });
   }
 
   /**

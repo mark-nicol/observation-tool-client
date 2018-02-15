@@ -1542,7 +1542,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>solarSystemObject:     <code><a href="../miscellaneous/enumerations.html#SolarSystemObjects" target="_self" >SolarSystemObjects</a></code>
+                                        <code>solarSystemObject:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -1550,7 +1550,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../miscellaneous/enumerations.html#SolarSystemObjects" target="_self" >SolarSystemObjects</a></code>
+                                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                                         </td>
                                     </tr>
@@ -1753,7 +1753,7 @@ export interface ITargetParameters {
   pmDec: AngularVelocity;
   parallax: Angle;
   nonSiderealMotion: boolean;
-  solarSystemObject: SolarSystemObjects;
+  solarSystemObject: any/*SolarSystemObjects*/; // TODO change
   sourceEphemeris: string;
   sourceVelocity: ISourceVelocity;
   ephemerisFileName: string;
@@ -1776,7 +1776,7 @@ export interface IRectangle extends IField {
   pALong: Angle;
   long: Angle;
   short: Angle;
-  spacing: Angle;
+  spacing: any; // TODO Userunit
   referenceFrequency: Frequency;
 }
 
@@ -1797,7 +1797,7 @@ export interface ISourceVelocity {
 export interface IExpectedProperties {
   expectedPeakFluxDensity: Flux;
   desiredPolarizationPercentage: number;
-  expectedLineWidth: Frequency;
+  expectedLineWidth: any; // TODO Userunit
   referenceFrequency: Frequency;
   expectedPeakLineFluxDensity: Flux;
   expectedSpectralDynamicRange: number;

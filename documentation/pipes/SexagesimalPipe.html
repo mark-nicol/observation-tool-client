@@ -1117,9 +1117,15 @@ import * as eq from &#x27;equatorial&#x27;;
  */
 
 @Pipe({
-        name: &#x27;sexagesimal&#x27;
-      })
+  name: &#x27;sexagesimal&#x27;
+})
 export class SexagesimalPipe implements PipeTransform {
+
+  static trimHms(value: string): string {
+    const hms &#x3D; value.split(&#x27;:&#x27;);
+    hms[2]    &#x3D; (+hms[2]).toFixed(6);
+    return hms.join(&#x27;:&#x27;);
+  }
 
   /**
    * Transforms the content
@@ -1127,14 +1133,15 @@ export class SexagesimalPipe implements PipeTransform {
    * @param type
    */
   transform(value: any, type: string): any {
-    if (value) {
+    if (value !&#x3D;&#x3D; undefined || null) {
       if (type &#x3D;&#x3D;&#x3D; &#x27;dec&#x27;) {
-        return eq.decDeg2Hms(value);
+        return SexagesimalPipe.trimHms(eq.decDeg2Hms(value));
       } else if (type &#x3D;&#x3D;&#x3D; &#x27;ra&#x27;) {
-        return eq.raDeg2Hms(value);
+        return SexagesimalPipe.trimHms(eq.raDeg2Hms(value));
       }
     }
   }
+
 
 }
 </code></pre>

@@ -1112,7 +1112,10 @@
                             <td class="col-md-4">
                                 <ul class="index-list">
                                     <li>
-                                         <a href="#baseUrl">baseUrl</a>
+                                        <span class="modifier">Private</span> <a href="#_currentTarget">_currentTarget</a>
+                                    </li>
+                                    <li>
+                                        <span class="modifier">Private</span> <a href="#baseUrl">baseUrl</a>
                                     </li>
                                 </ul>
                             </td>
@@ -1134,8 +1137,19 @@
                                     <li>
                                          <a href="#getScienceGoal">getScienceGoal</a>
                                     </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <h6><b>Accessors</b></h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <ul class="index-list">
                                     <li>
-                                         <a href="#getSource">getSource</a>
+                                         <a href="#currentTarget">currentTarget</a>
                                     </li>
                                 </ul>
                             </td>
@@ -1155,7 +1169,7 @@
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:15</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:16</a></div>
                                         </td>
                                     </tr>
             
@@ -1208,14 +1222,14 @@
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>getProject(projectCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+            <code>getProject()</code>
                                 </td>
                             </tr>
             
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:26</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:35</a></div>
                                         </td>
                                     </tr>
             
@@ -1225,38 +1239,9 @@
             </div>
             
                                         <div class="io-description">
-                                                <b>Parameters :</b>
-                                                <table class="params">
-                                                    <thead>
-                                                        <tr>
-                                                            <td>Name</td>
-                                                            <td>Type</td>
-                                                            <td>Optional</td>
-                                                            <td>Description</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                            <tr>
-                                                              <td>projectCode</td>
-                                                              <td>
-                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                              </td>
-                                                              <td>
-                                                              </td>
-                                                              <td></td>
-                                                            </tr>
-                                                    </tbody>
-                                                </table>
-                                        </div>
-                                        <div>
-                                        </div>
-                                        <div class="io-description">
                                             <b>Returns : </b>    <code>Observable&lt;&gt;</code>
             
                                         </div>
-                                            <div class="io-description">
-                                                
-                                            </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -1278,7 +1263,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:36</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:42</a></div>
                                         </td>
                                     </tr>
             
@@ -1310,7 +1295,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:45</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:49</a></div>
                                         </td>
                                     </tr>
             
@@ -1321,85 +1306,6 @@
                                             <b>Returns : </b>    <code>Observable&lt;&gt;</code>
             
                                         </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">
-                                    <a name="getSource"></a>
-                                    <span class="name"><b> getSource</b><a href="#getSource"><span class="fa fa-link"></span></a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="col-md-4">
-            <code>getSource(projectCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, scienceGoalId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, sourceId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                                </td>
-                            </tr>
-            
-            
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:65</a></div>
-                                        </td>
-                                    </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-            
-                                        <div class="io-description">
-                                                <b>Parameters :</b>
-                                                <table class="params">
-                                                    <thead>
-                                                        <tr>
-                                                            <td>Name</td>
-                                                            <td>Type</td>
-                                                            <td>Optional</td>
-                                                            <td>Description</td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                            <tr>
-                                                              <td>projectCode</td>
-                                                              <td>
-                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                              </td>
-                                                              <td>
-                                                              </td>
-                                                              <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                              <td>scienceGoalId</td>
-                                                              <td>
-                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                              </td>
-                                                              <td>
-                                                              </td>
-                                                              <td></td>
-                                                            </tr>
-                                                            <tr>
-                                                              <td>sourceId</td>
-                                                              <td>
-                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                              </td>
-                                                              <td>
-                                                              </td>
-                                                              <td></td>
-                                                            </tr>
-                                                    </tbody>
-                                                </table>
-                                        </div>
-                                        <div>
-                                        </div>
-                                        <div class="io-description">
-                                            <b>Returns : </b>    <code>Observable&lt;any&gt;</code>
-            
-                                        </div>
-                                            <div class="io-description">
-                                                
-                                            </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -1415,13 +1321,41 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <a name="baseUrl"></a>
-                                    <span class="name"><b> baseUrl</b><a href="#baseUrl"><span class="fa fa-link"></span></a></span>
+                                    <a name="_currentTarget"></a>
+                                    <span class="name"><b><span class="modifier">Private</span> _currentTarget</b><a href="#_currentTarget"><span class="fa fa-link"></span></a></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <code>baseUrl:     <code></code>
+                                    <span class="modifier-icon fa fa-lock"></span><code>_currentTarget:     <code></code>
+            </code>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Default value : </i><code>0</code>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:16</a></div>
+                                        </td>
+                                    </tr>
+            
+            
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="baseUrl"></a>
+                                    <span class="name"><b><span class="modifier">Private</span> baseUrl</b><a href="#baseUrl"><span class="fa fa-link"></span></a></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="modifier-icon fa fa-lock"></span><code>baseUrl:     <code></code>
             </code>
                                 </td>
                             </tr>
@@ -1441,17 +1375,98 @@
                     </table>
             </section>
 
+            <section>
+                <h3 id="accessors">
+                    Accessors
+                </h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="currentTarget"></a>
+                                    <span class="name"><b>currentTarget</b><a href="#currentTarget"><span class="fa fa-link"></span></a></span>
+                                </td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="accessor"><b>get</b><code>currentTarget()</code></span>
+                                </td>
+                            </tr>
+                                        <tr>
+                                            <td class="col-md-4">
+                                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:24</a></div>
+                                            </td>
+                                        </tr>
+                                <tr>
+                                    <td class="col-md-4">
+            
+                                            <div class="io-description">
+                                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+            
+                                            </div>
+                                    </td>
+                                </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+                                    <span class="accessor"><b>set</b><code>currentTarget(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
+                                </td>
+                            </tr>
+                                        <tr>
+                                            <td class="col-md-4">
+                                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/observation-tool/shared/services/persistence.service.ts:28</a></div>
+                                            </td>
+                                        </tr>
+                                <tr>
+                                    <td class="col-md-4">
+            
+                                            <div class="io-description">
+                                                    <b>Parameters :</b>
+                                                    <table class="params">
+                                                        <thead>
+                                                            <tr>
+                                                                <td>Name</td>
+                                                                <td>Type</td>
+                                                                <td>Optional</td>
+                                                                <td>Description</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                                <tr>
+                                                                  <td>value</td>
+                                                                  <td>
+                                                                          <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                                  </td>
+                                                                  <td>
+                                                                  </td>
+                                                                  <td></td>
+                                                                </tr>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                            <div>
+                                            </div>
+                                            <div class="io-description">
+                                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+            
+                                            </div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+            </section>
     </div>
 
 
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import {HttpClient} from &#x27;@angular/common/http&#x27;;
 import {Injectable} from &#x27;@angular/core&#x27;;
+import * as _ from &#x27;lodash&#x27;;
 import {Observable} from &#x27;rxjs/Observable&#x27;;
 import {ObsProject} from &#x27;../classes/obsproject&#x27;;
 import {ObsProposal} from &#x27;../classes/obsproposal&#x27;;
 import {ScienceGoal} from &#x27;../classes/science-goal/science-goal&#x27;;
-import * as _ from &#x27;lodash&#x27;;
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -1459,7 +1474,8 @@ import * as _ from &#x27;lodash&#x27;;
 @Injectable()
 export class PersistenceService {
 
-  baseUrl &#x3D; &#x27;http://localhost:8080&#x27;;
+  private baseUrl        &#x3D; &#x27;http://localhost:8080&#x27;;
+  private _currentTarget &#x3D; 0;
 
   /**
    * Constructor, loads data and sets members
@@ -1467,16 +1483,21 @@ export class PersistenceService {
   constructor(private http: HttpClient) {
   }
 
+  get currentTarget(): number {
+    return this._currentTarget;
+  }
+
+  set currentTarget(value: number) {
+    this._currentTarget &#x3D; value;
+  }
+
   /**
    * GET /projects/{projectCode}
    */
-  getProject(projectCode: string): Observable&lt;ObsProject&gt; {
+  getProject(): Observable&lt;ObsProject&gt; {
     return this.http.get&lt;any&gt;(&#x60;${this.baseUrl}/projects/project&#x60;)
                .map(result &#x3D;&gt; {
                  return _.merge(new ObsProject, result);
-                 // return Object.assign(new ObsProject, result);
-                 // return Object.assign(new ObsProject, result);
-                 // return new ObsProject().initFromJson(result);
                });
   }
 
@@ -1484,8 +1505,6 @@ export class PersistenceService {
     return this.http.get&lt;any&gt;(&#x60;${this.baseUrl}/projects/proposal&#x60;)
                .map(result &#x3D;&gt; {
                  return _.merge(new ObsProposal, result);
-                 // return Object.assign(new ObsProposal, result);
-                 // return new ObsProposal().initFromJson(result);
                })
   }
 
@@ -1493,25 +1512,7 @@ export class PersistenceService {
     return this.http.get&lt;any&gt;(&#x60;${this.baseUrl}/projects/science-goals/goal&#x60;)
                .map(result &#x3D;&gt; {
                  return _.merge(new ScienceGoal(), result);
-                 // return Object.assign(new ScienceGoal, result);
-                 // return new ScienceGoal().initFromJson(result);
                })
-  }
-
-  // /**
-  //  * GET /projects/{projectCode}/science-goals/{goalId}
-  //  */
-  // getScienceGoal(projectCode: string, scienceGoalId: string): Observable&lt;any&gt; {
-  //   return this.http.get&lt;any&gt;(&#x60;${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}&#x60;);
-  // }
-
-
-  // /**
-  //  * GET /projects/{projectCode}/science-goals/{goalId}/sources/{sourceId}
-  //  */
-  getSource(projectCode: string, scienceGoalId: string, sourceId: string): Observable&lt;any&gt; {
-    return null;
-  //   return this.http.get&lt;any&gt;(&#x60;${this.baseUrl}/projects/${projectCode}/science-goals/${scienceGoalId}/sources/${sourceId}&#x60;);
   }
 
 }

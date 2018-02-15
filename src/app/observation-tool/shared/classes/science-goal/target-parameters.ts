@@ -2,7 +2,7 @@ import {Angle} from '../../../../units/classes/angle';
 import {AngularVelocity} from '../../../../units/classes/angular-velocity';
 import {
   IExpectedProperties,
-  IField,
+  IField, IRectangle, ISinglePoint,
   ISourceVelocity,
   ITargetParameters
 } from '../../interfaces/project/science-goal/target-parameters.interface';
@@ -16,14 +16,15 @@ export class TargetParameters implements ITargetParameters {
   pmDec: AngularVelocity;
   parallax: Angle;
   nonSiderealMotion: boolean;
-  solarSystemObject: any;
+  solarSystemObject: any; // TODO Change to real representation
   sourceEphemeris: string;
   sourceVelocity: ISourceVelocity;
   ephemerisFileName: string;
   index: number;
   sdReferencePosition: any;
   ExpectedProperties: IExpectedProperties;
-  fields: IField[];
+  SinglePoint?: ISinglePoint[];
+  Rectangle?: IRectangle;
 
 
   // constructor(type?: string,

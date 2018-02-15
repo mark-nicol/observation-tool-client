@@ -1,16 +1,24 @@
 <h4 class="ui dividing header">Source</h4>
 <form class="ui form" [formGroup]="sourceForm">
+
   <!-- Source selector -->
-  <div class="field">
+  <div class="field" [class.error]="sourceName.invalid">
     <label for="sourceNameInput">Source Name</label>
-    <input id="sourceNameInput"
-           type="text"
-           formControlName="sourceName">
+    <div class="ui icon input">
+      <input id="sourceNameInput"
+             type="text"
+             formControlName="sourceName">
+      <i *ngIf="sourceName.invalid" class="red warning circle icon"></i>
+    </div>
+    <div class="ui pointing red basic label"
+         *ngIf="sourceName.invalid">
+      Source name cannot be blank
+    </div>
     <button class="ui right floated tiny compact blue labeled icon button"
             (click)="resolveSource()">
       <i class="search icon"></i> Resolve
     </button>
-    <div style="height: 1.5em;"></div>
+    <div style="height: 1.5em;" *ngIf="sourceName.valid"></div>
   </div>
 
   <div class="two fields">
@@ -28,7 +36,10 @@
                   class="selection"
                   formControlName="chosenSolarObject"
                   [isDisabled]="!sourceForm.value.solarSystemObject">
-        <sui-select-option *ngFor="let body of solarBodies" [value]="body">{{body}}</sui-select-option>
+        <sui-select-option *ngFor="let body of solarBodies"
+                           [value]="body">
+          {{body}}
+        </sui-select-option>
       </sui-select>
     </div>
   </div>

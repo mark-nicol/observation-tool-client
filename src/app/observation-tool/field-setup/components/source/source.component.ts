@@ -1,9 +1,10 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/debounce';
 import {Observable} from 'rxjs/Rx';
 import {Speed} from '../../../../units/classes/speed';
+import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {SimbadService} from '../../../shared/services/simbad.service';
@@ -26,6 +27,7 @@ export class SourceComponent implements OnInit {
   @Output() resolveEmitter = new EventEmitter<number[]>();
 
   currentTarget               = 0;
+  target: TargetParameters;
   sourceForm: FormGroup;
   /** Selectable solar system bodies for selection box */
   solarBodies                 = [
@@ -79,7 +81,7 @@ export class SourceComponent implements OnInit {
               private simbadService: SimbadService,
               private activatedRoute: ActivatedRoute) {
     this.sourceForm = this.formBuilder.group({
-      sourceName: '',
+      sourceName: ['', Validators.required],
       solarSystemObject: false,
       chosenSolarObject: '',
       chosenSystem: '',
@@ -98,7 +100,7 @@ export class SourceComponent implements OnInit {
       dopplerType: '',
       redshift: 0,
     });
-    this.observeNameChanges();
+    this.observeFormChanges();
   }
 
 
@@ -115,6 +117,7 @@ export class SourceComponent implements OnInit {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
           const targetParams = result.TargetParameters[index];
+          this.target = targetParams;
           this.sourceForm.patchValue({
             sourceName: targetParams.sourceName,
             solarSystemObject: targetParams.solarSystemObject !== 'Unspecified',
@@ -204,17 +207,28 @@ export class SourceComponent implements OnInit {
   }
 
   resolveSource() {
-    this.simbadService.queryByIdentifier(this.sourceForm.value.sourceName).subscribe(result => {
-      const data = SimbadService.cleanResponse(result);
-      this.sourceForm.patchValue(data);
-      this.resolveEmitter.emit([data.lonValue, data.latValue]);
+    this.simbadService.queryByIdentifier(this.sourceForm.value.sourceName).subscribe(
+      result => {
+        const data = SimbadService.cleanResponse(result);
+        this.sourceForm.patchValue(data);
+        this.resolveEmitter.emit([data.lonValue, data.latValue]);
+      },
+      error => console.log('error')
+    );
+  }
+
+  observeFormChanges() {
+    const debounce = this.sourceForm.valueChanges.debounce(() => Observable.interval(1500));
+    debounce.subscribe(value => {
+      console.log(value);
+      this.target.sourceName = value.sourceName;
+      this.target.sourceVelocity.referenceSystem = value.radialVelocityReferenceSystem;
+      console.log(this.target);
     });
   }
 
-  observeNameChanges() {
-    const sourceNameControl = this.sourceForm.get('sourceName');
-    const result = sourceNameControl.valueChanges.debounce(() => Observable.interval(1500));
-    result.forEach( value => console.log(value));
+  get sourceName() {
+    return this.sourceForm.get('sourceName')
   }
 
 }

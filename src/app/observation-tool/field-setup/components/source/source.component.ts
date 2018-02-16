@@ -1,12 +1,9 @@
 import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import 'rxjs/add/operator/debounce';
-import {Observable} from 'rxjs/Rx';
 import {Speed} from '../../../../units/classes/speed';
 import {SpeedUnits} from '../../../../units/enums/speed-units.enum';
 import {AbstractForm} from '../../../shared/classes/abstract-form';
-import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {SimbadService} from '../../../shared/services/simbad.service';
@@ -29,8 +26,6 @@ export class SourceComponent extends AbstractForm implements OnInit {
   @Output() resolveEmitter = new EventEmitter<number[]>();
 
   currentTarget               = 0;
-  target: TargetParameters;
-  form: FormGroup;
   /** Selectable solar system bodies for selection box */
   solarBodies                 = [
     'Mercury',
@@ -137,7 +132,7 @@ export class SourceComponent extends AbstractForm implements OnInit {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
           const targetParams = result.TargetParameters[index];
-          this.data        = targetParams;
+          this.data          = targetParams;
           this.form.patchValue({
             sourceName: targetParams.sourceName,
             solarSystemObject: targetParams.solarSystemObject !== 'Unspecified',
@@ -168,24 +163,6 @@ export class SourceComponent extends AbstractForm implements OnInit {
         });
   }
 
-
-  /**
-   * Changes use of a solar system object, hides most of the component from use
-   */
-  solarCheckboxClicked() {
-  }
-
-  /**
-   * Sets the lat and lon page values from input boxes
-   * @param value   The content to set lat/lon to
-   * @param element The id of element initiating the change
-   */
-  setLatLon(value: number, element: Element) {
-    if (element.id === 'latInput') {
-    } else {
-    }
-  }
-
   /**
    * Controls a change of target type
    * @param targetType The new target type to be set
@@ -194,16 +171,7 @@ export class SourceComponent extends AbstractForm implements OnInit {
   }
 
   /**
-   * Handles a change of the sexagesimal checkbox in the system selector
-   * @param units True if checkbox is selected
-   */
-  sexagesimalChange() {
-    console.log(this.form.value);
-  }
-
-  /**
    * Handles a change of system in the system selector
-   * @param system The new system type to be used
    */
   systemChange() {
     this.currentSystem = this.systemService.getSystem(this.form.value.sourceCoordinates.system);
@@ -211,7 +179,7 @@ export class SourceComponent extends AbstractForm implements OnInit {
       this.sexagesimalCheckboxDisabled = false;
     } else {
       this.form.value.sourceCoordinates.type = false;
-      this.sexagesimalCheckboxDisabled             = true;
+      this.sexagesimalCheckboxDisabled       = true;
     }
   }
 
@@ -237,15 +205,6 @@ export class SourceComponent extends AbstractForm implements OnInit {
       },
       error => console.log('error')
     );
-  }
-
-  observeFormChanges() {
-    this.form.valueChanges.debounce(() => Observable.interval(1500)).subscribe(value => {
-      if (this.form.valid && this.form.dirty) {
-        console.log('Changes');
-        Object.assign(this.target, value);
-      }
-    });
   }
 
   get sourceName() {

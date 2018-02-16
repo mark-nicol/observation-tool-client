@@ -7,7 +7,7 @@ export abstract class AbstractForm {
   form: FormGroup;
   data: any;
 
-  constructor(/*protected formBuilder: FormBuilder*/) {
+  constructor() {
   }
 
   onFormChanges() {

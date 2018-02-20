@@ -23,6 +23,7 @@ export class SpacialImageComponent implements OnInit {
 
   pixelCoords = [0, 0];
   worldCoords = [0, 0];
+  addingFov = false;
 
   constructor() {
 
@@ -59,6 +60,11 @@ export class SpacialImageComponent implements OnInit {
 
   goToCoords(lon: number, lat: number) {
     this.aladin.goToCoords(lon, lat);
+  }
+
+  toggleAddingFov() {
+    this.addingFov = !this.addingFov;
+    this.aladin.addingFov = this.addingFov;
   }
 
 }

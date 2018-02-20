@@ -18,6 +18,7 @@ declare let A: any;
 export class AladinComponent implements OnInit, AfterViewInit {
 
   @Output() coordinatesEmitter = new EventEmitter();
+  @Output() fovAddedEmitter = new EventEmitter();
 
   target?: ITargetParameters;
   initialConfig: IAladinConfig = {
@@ -40,6 +41,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   private catalogue;
   zoomStep                     = 1.5;
   defaultFov                   = 4;
+  addingFov = false;
 
   constructor(private persistenceService: PersistenceService) {
   }
@@ -54,6 +56,9 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.initAladin();
+    this.aladin.on('objectClicked', object => {
+      console.log('Object clicked', object);
+    })
   }
 
   initAladin() {
@@ -124,6 +129,14 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   goToCoords(lon: number, lat: number) {
     this.aladin.gotoRaDec(lon, lat);
+  }
+
+  mouseUp(event: MouseEvent) {
+    if (this.addingFov) {
+      const coords = this.aladin.pix2world(event.layerX, event.layerY);
+      this.addPointing(coords[0], coords[1]);
+      this.fovAddedEmitter.emit();
+    }
   }
 
 }

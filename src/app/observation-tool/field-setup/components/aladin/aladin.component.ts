@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Latitude} from '../../../../units/classes/latitude';
 import {Longitude} from '../../../../units/classes/longitude';
 import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
@@ -43,7 +43,8 @@ export class AladinComponent implements OnInit, AfterViewInit {
   defaultFov                   = 4;
   addingFov = false;
 
-  constructor(private persistenceService: PersistenceService) {
+  constructor(private persistenceService: PersistenceService,
+              private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -57,8 +58,11 @@ export class AladinComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.initAladin();
     this.aladin.on('objectClicked', object => {
-      console.log('Object clicked', object);
-    })
+      if (object) {
+        console.log('Object clicked', object);
+        object.isSelected = !object.isSelected;
+      }
+    });
   }
 
   initAladin() {
@@ -111,8 +115,16 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   cutItems() {
-    this.catalogue.sources     = [];
-    this.overlay.overlay_items = [];
+    // For each object where isSelected === true
+    this.catalogue.sources.forEach((item, i) => {
+      if (item.isSelected) {
+        // Remove target
+        this.catalogue.sources.splice(i, 1);
+        // Remove circle
+        this.overlay.overlay_items.splice(i, 1);
+      }
+    });
+    console.log(this.catalogue.sources, this.overlay.overlay_items);
   }
 
   zoomIn() {

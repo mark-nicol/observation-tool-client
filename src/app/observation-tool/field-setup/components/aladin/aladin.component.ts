@@ -19,11 +19,11 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   @Output() coordinatesEmitter = new EventEmitter();
   @Output() fovAddedEmitter    = new EventEmitter();
-  @Output() rectAddedEmitter = new EventEmitter();
+  @Output() rectAddedEmitter   = new EventEmitter();
 
   target?: ITargetParameters;
   initialConfig: IAladinConfig = {
-    // target:            '',
+    // target:            'M1',
     cooFrame: 'ICRS',
     survey: 'P/DSS2/color',
     fov: 2,
@@ -116,6 +116,18 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.overlay.add(A.circle(lon, lat, 0.0018));
   }
 
+  addRectangle(lon: number, lat: number) {
+    console.log(this.overlay);
+    this.overlay.addFootprints(A.polygon([
+      [lon + 0.25, lat + 0.25], // bl
+      [lon + 0.25, lat - 0.25],        // tl
+      [lon - 0.25, lat - 0.25],        // tr
+      [lon - 0.25, lat + 0.25]
+    ]));
+    this.catalogue.addSources(A.source(lon, lat));
+    console.log(this.overlay);
+  }
+
   cutItems() {
     // For each object where isSelected === true
     this.catalogue.sources.forEach((item, i) => {
@@ -124,6 +136,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
         this.catalogue.sources.splice(i, 1);
         // Remove circle
         this.overlay.overlay_items.splice(i, 1);
+        this.overlay.overlays.splice(i, 1);
       }
     });
     console.log(this.catalogue.sources, this.overlay.overlay_items);
@@ -146,13 +159,14 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   mouseUp(event: MouseEvent) {
+    const coords = this.aladin.pix2world(event.layerX, event.layerY);
     if (this.addingFov) {
-      const coords = this.aladin.pix2world(event.layerX, event.layerY);
       this.addPointing(coords[0], coords[1]);
       this.fovAddedEmitter.emit();
     }
     if (this.addingRect) {
       console.log('addingRect');
+      this.addRectangle(coords[0], coords[1]);
       this.rectAddedEmitter.emit();
     }
 

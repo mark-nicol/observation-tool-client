@@ -8,10 +8,10 @@ import {AladinComponent} from '../aladin/aladin.component';
  */
 
 @Component({
-             selector:    'spacial-image',
-             templateUrl: './spacial-image.component.html',
-             styleUrls:   ['./spacial-image.component.css']
-           })
+  selector: 'spacial-image',
+  templateUrl: './spacial-image.component.html',
+  styleUrls: ['./spacial-image.component.css']
+})
 export class SpacialImageComponent implements OnInit {
 
   @Input() set resolveCoordinates(value: number[]) {
@@ -23,7 +23,8 @@ export class SpacialImageComponent implements OnInit {
 
   pixelCoords = [0, 0];
   worldCoords = [0, 0];
-  addingFov = false;
+  addingFov   = false;
+  addingRect  = false;
 
   constructor() {
 
@@ -63,8 +64,13 @@ export class SpacialImageComponent implements OnInit {
   }
 
   toggleAddingFov() {
-    this.addingFov = !this.addingFov;
+    this.addingFov        = !this.addingFov;
     this.aladin.addingFov = this.addingFov;
+  }
+
+  toggleAddingRect() {
+    this.addingRect        = !this.addingRect;
+    this.aladin.addingRect = this.addingRect;
   }
 
 }

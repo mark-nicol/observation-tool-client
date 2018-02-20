@@ -4,7 +4,8 @@
   <div class="row">
     <div class="column">
       <app-aladin (coordinatesEmitter)="updateCoords($event)"
-                  (fovAddedEmitter)="toggleAddingFov()"></app-aladin>
+                  (fovAddedEmitter)="toggleAddingFov()"
+                  (rectAddedEmitter)="toggleAddingRect()"></app-aladin>
     </div>
   </div>
   <div class="row">
@@ -52,7 +53,7 @@
       <button class="ui blue button"
               suiPopup
               popupText="Select FOVs in a rectangle region">
-        <i class="add square icon"></i>
+        <i class="object group outline icon"></i>
       </button>
       <button class="ui blue button"
               suiPopup
@@ -64,7 +65,14 @@
               suiPopup
               popupText="Add an FOV"
               (click)="toggleAddingFov()">
-        <i class="fa fa-times-circle-o"></i>
+        <i class="plus circle icon"></i>
+      </button>
+      <button class="ui blue button"
+              [class.green]="addingRect"
+              suiPopup
+              popupText="Draw a rectangular map"
+              (click)="toggleAddingRect()">
+        <i class="plus square icon"></i>
       </button>
       <button class="ui blue button"
               suiPopup

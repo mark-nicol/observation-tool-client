@@ -11,37 +11,39 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 declare let A: any;
 
 @Component({
-             selector:    'app-aladin',
-             templateUrl: './aladin.component.html',
-             styleUrls:   ['./aladin.component.scss']
-           })
+  selector: 'app-aladin',
+  templateUrl: './aladin.component.html',
+  styleUrls: ['./aladin.component.scss']
+})
 export class AladinComponent implements OnInit, AfterViewInit {
 
   @Output() coordinatesEmitter = new EventEmitter();
-  @Output() fovAddedEmitter = new EventEmitter();
+  @Output() fovAddedEmitter    = new EventEmitter();
+  @Output() rectAddedEmitter = new EventEmitter();
 
   target?: ITargetParameters;
   initialConfig: IAladinConfig = {
     // target:            '',
-    cooFrame:          'ICRS',
-    survey:            'P/DSS2/color',
-    fov:               2,
-    showReticle:       true,
-    showZoomControl:   false,
+    cooFrame: 'ICRS',
+    survey: 'P/DSS2/color',
+    fov: 2,
+    showReticle: true,
+    showZoomControl: false,
     showLayersControl: true,
-    showGotoControl:   false,
-    showShareControl:  false,
-    showFrame:         false,
-    fullScreen:        false,
-    reticleColor:      'rgb(178, 50, 178)',
-    reticleSize:       22,
+    showGotoControl: false,
+    showShareControl: false,
+    showFrame: false,
+    fullScreen: false,
+    reticleColor: 'rgb(178, 50, 178)',
+    reticleSize: 22,
   };
   private aladin;
   private overlay: IAladinOverlay;
   private catalogue;
   zoomStep                     = 1.5;
   defaultFov                   = 4;
-  addingFov = false;
+  addingFov                    = false;
+  addingRect                   = false;
 
   constructor(private persistenceService: PersistenceService,
               private changeDetector: ChangeDetectorRef) {
@@ -51,7 +53,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.persistenceService.getScienceGoal().subscribe(result => {
       this.target = result.TargetParameters[this.persistenceService.currentTarget];
       this.aladin.gotoRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
-      this.addPointings();
+      // this.addPointings();
     });
   }
 
@@ -68,10 +70,10 @@ export class AladinComponent implements OnInit, AfterViewInit {
   initAladin() {
     this.aladin    = A.aladin('#aladin-lite-div', this.initialConfig);
     this.catalogue = A.catalog({
-                                 name:       'Pointing Catalogue',
-                                 shape:      'cross',
-                                 sourceSize: 20
-                               });
+      name: 'Pointing Catalogue',
+      shape: 'cross',
+      sourceSize: 20
+    });
     this.aladin.addCatalog(this.catalogue);
     this.overlay = A.graphicOverlay({color: '#ee2345', lineWidth: 3});
     this.aladin.addOverlay(this.overlay);
@@ -79,17 +81,17 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   mouseMove(event: MouseEvent) {
     this.coordinatesEmitter.emit({
-                                   pixel: [event.layerX, event.layerY],
-                                   world: this.aladin.pix2world(event.layerX, event.layerY)
-                                 });
+      pixel: [event.layerX, event.layerY],
+      world: this.aladin.pix2world(event.layerX, event.layerY)
+    });
   }
 
   mouseLeave() {
     this.coordinatesEmitter.emit({
-                                   pixel: [document.getElementById('aladin-lite-div').offsetWidth / 2,
-                                           document.getElementById('aladin-lite-div').offsetHeight / 2],
-                                   world: this.aladin.getRaDec()
-                                 });
+      pixel: [document.getElementById('aladin-lite-div').offsetWidth / 2,
+              document.getElementById('aladin-lite-div').offsetHeight / 2],
+      world: this.aladin.getRaDec()
+    });
   }
 
   resetView() {
@@ -149,6 +151,11 @@ export class AladinComponent implements OnInit, AfterViewInit {
       this.addPointing(coords[0], coords[1]);
       this.fovAddedEmitter.emit();
     }
+    if (this.addingRect) {
+      console.log('addingRect');
+      this.rectAddedEmitter.emit();
+    }
+
   }
 
 }

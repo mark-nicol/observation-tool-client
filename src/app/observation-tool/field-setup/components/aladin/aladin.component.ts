@@ -61,12 +61,10 @@ export class AladinComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.initAladin();
     this.aladin.on('objectHovered', object => {
-      console.log('Object hovered');
       this.hoveredObject = object;
     });
     this.aladin.on('objectClicked', object => {
       if (object) {
-        console.log('Object clicked', object);
         object.isSelected = !object.isSelected;
       }
     });
@@ -83,21 +81,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.overlay = A.graphicOverlay({color: '#ee2345', lineWidth: 3});
     this.aladin.addOverlay(this.overlay);
     console.log(this.aladin);
-  }
-
-  mouseMove(event: MouseEvent) {
-    this.coordinatesEmitter.emit({
-      pixel: [event.layerX, event.layerY],
-      world: this.aladin.pix2world(event.layerX, event.layerY)
-    });
-  }
-
-  mouseLeave() {
-    this.coordinatesEmitter.emit({
-      pixel: [document.getElementById('aladin-lite-div').offsetWidth / 2,
-              document.getElementById('aladin-lite-div').offsetHeight / 2],
-      world: this.aladin.getRaDec()
-    });
   }
 
   resetView() {
@@ -166,26 +149,38 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   mouseUp(event: MouseEvent) {
-    console.log('mouseUp');
     const coords = this.aladin.pix2world(event.layerX, event.layerY);
     if (this.addingFov) {
       this.addPointing(coords[0], coords[1]);
       this.fovAddedEmitter.emit();
     }
     if (this.addingRect) {
-      console.log('addingRect');
       this.addRectangle(coords[0], coords[1]);
       this.rectAddedEmitter.emit();
     }
   }
 
-  drag(event: MouseEvent) {
-    console.log('mouseDown');
-    console.log(this.hoveredObject);
+  mouseDown(event: MouseEvent) {
+    const coords = this.aladin.pix2world(event.layerX, event.layerY);
+    if (this.hoveredObject) {
+      this.hoveredObject.ra  = coords[0];
+      this.hoveredObject.dec = coords[1];
+    }
   }
 
-  click() {
-    console.log('click');
+  mouseMove(event: MouseEvent) {
+    this.coordinatesEmitter.emit({
+      pixel: [event.layerX, event.layerY],
+      world: this.aladin.pix2world(event.layerX, event.layerY)
+    });
+  }
+
+  mouseLeave() {
+    this.coordinatesEmitter.emit({
+      pixel: [document.getElementById('aladin-lite-div').offsetWidth / 2,
+              document.getElementById('aladin-lite-div').offsetHeight / 2],
+      world: this.aladin.getRaDec()
+    });
   }
 
 }

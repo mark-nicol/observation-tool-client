@@ -44,6 +44,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   defaultFov                   = 4;
   addingFov                    = false;
   addingRect                   = false;
+  hoveredObject: any;
 
   constructor(private persistenceService: PersistenceService,
               private changeDetector: ChangeDetectorRef) {
@@ -59,6 +60,10 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.initAladin();
+    this.aladin.on('objectHovered', object => {
+      console.log('Object hovered');
+      this.hoveredObject = object;
+    });
     this.aladin.on('objectClicked', object => {
       if (object) {
         console.log('Object clicked', object);
@@ -77,6 +82,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.aladin.addCatalog(this.catalogue);
     this.overlay = A.graphicOverlay({color: '#ee2345', lineWidth: 3});
     this.aladin.addOverlay(this.overlay);
+    console.log(this.aladin);
   }
 
   mouseMove(event: MouseEvent) {
@@ -119,7 +125,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   addRectangle(lon: number, lat: number) {
     console.log(this.overlay);
     this.overlay.addFootprints(A.polygon([
-      [lon + 0.25, lat + 0.25], // bl
+      [lon + 0.25, lat + 0.25],        // bl
       [lon + 0.25, lat - 0.25],        // tl
       [lon - 0.25, lat - 0.25],        // tr
       [lon - 0.25, lat + 0.25]
@@ -139,6 +145,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
         this.overlay.overlays.splice(i, 1);
       }
     });
+    this.catalogue.reportChange();
     console.log(this.catalogue.sources, this.overlay.overlay_items);
   }
 
@@ -159,6 +166,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   mouseUp(event: MouseEvent) {
+    console.log('mouseUp');
     const coords = this.aladin.pix2world(event.layerX, event.layerY);
     if (this.addingFov) {
       this.addPointing(coords[0], coords[1]);
@@ -169,7 +177,15 @@ export class AladinComponent implements OnInit, AfterViewInit {
       this.addRectangle(coords[0], coords[1]);
       this.rectAddedEmitter.emit();
     }
+  }
 
+  drag(event: MouseEvent) {
+    console.log('mouseDown');
+    console.log(this.hoveredObject);
+  }
+
+  click() {
+    console.log('click');
   }
 
 }

@@ -7,25 +7,25 @@ import {Component, OnInit} from '@angular/core';
 })
 export class PointingCanvasComponent implements OnInit {
 
-  canvElement: HTMLCanvasElement;
-  canv: CanvasRenderingContext2D;
-  canvContainer: any;
+  canvasElement: HTMLCanvasElement;
+  canvas: CanvasRenderingContext2D;
+  canvasContainer: any;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.canvContainer      = document.getElementById('canvas-container');
-    this.canvElement        = document.createElement('canvas');
-    this.canv               = this.canvElement.getContext('2d');
-    this.canvElement.width  = this.canvContainer.clientWidth;
-    this.canvElement.height = this.canvContainer.clientHeight;
-    this.canvContainer.appendChild(this.canvElement);
-    this.canv.fillRect(100, 100, 50, 50);
+    this.canvasContainer      = document.getElementById('canvas-container');
+    this.canvasElement        = document.createElement('canvas');
+    this.canvas               = this.canvasElement.getContext('2d');
+    this.canvasElement.width  = this.canvasContainer.clientWidth;
+    this.canvasElement.height = this.canvasContainer.clientHeight;
+    this.canvasContainer.appendChild(this.canvasElement);
   }
 
   click(event: MouseEvent) {
-    console.log('click', event);
+    this.canvas.fillRect(event.layerX, event.layerY, 50, 50);
+    console.log(this.canvas);
   }
 
 }

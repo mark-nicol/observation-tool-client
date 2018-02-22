@@ -25,6 +25,7 @@ export class SpacialImageComponent implements OnInit {
   worldCoords = [0, 0];
   addingFov   = false;
   addingRect  = false;
+  editMode    = false;
 
   constructor() {
 

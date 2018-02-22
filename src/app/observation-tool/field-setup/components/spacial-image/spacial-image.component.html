@@ -3,6 +3,8 @@
      style="padding-bottom: 1em">
   <div class="row">
     <div class="column">
+      <div id="drawing-div"
+           [ngStyle]="{'display': editMode ? 'block' : 'none'}"></div>
       <app-aladin (coordinatesEmitter)="updateCoords($event)"
                   (fovAddedEmitter)="toggleAddingFov()"
                   (rectAddedEmitter)="toggleAddingRect()"></app-aladin>
@@ -45,23 +47,15 @@
         <i class="save icon"></i>
       </button>
       <button class="ui blue button"
+              [class.green]="editMode"
               suiPopup
-              popupText="Cut selected FOVs"
-              (click)="cutLayers()">
-        <i class="cut icon"></i>
-      </button>
-      <button class="ui blue button"
-              suiPopup
-              popupText="Select FOVs in a rectangle region">
-        <i class="object group outline icon"></i>
-      </button>
-      <button class="ui blue button"
-              suiPopup
-              popupText="Select target centre">
-        <i class="fa fa-times"></i>
+              popupText="Edit mode"
+              (click)="editMode = !editMode">
+        <i class="edit icon"></i>
       </button>
       <button class="ui blue button"
               [class.green]="addingFov"
+              [disabled]="!editMode"
               suiPopup
               popupText="Add an FOV"
               (click)="toggleAddingFov()">
@@ -69,21 +63,40 @@
       </button>
       <button class="ui blue button"
               [class.green]="addingRect"
+              [disabled]="!editMode"
               suiPopup
               popupText="Draw a rectangular map"
               (click)="toggleAddingRect()">
         <i class="plus square icon"></i>
       </button>
       <button class="ui blue button"
+              [disabled]="!editMode"
               suiPopup
-              popupText="Image cut levels">
-        <i class="fa fa-area-chart"></i>
+              popupText="Select FOVs in a rectangle region">
+        <i class="object group outline icon"></i>
       </button>
       <button class="ui blue button"
+              [disabled]="!editMode"
               suiPopup
-              popupText="Show/Hide grid">
-        <i class="grid layout icon"></i>
+              popupText="Cut selected FOVs"
+              (click)="cutLayers()">
+        <i class="cut icon"></i>
       </button>
+      <!--<button class="ui blue button"-->
+              <!--suiPopup-->
+              <!--popupText="Select target centre">-->
+        <!--<i class="fa fa-times"></i>-->
+      <!--</button>-->
+      <!--<button class="ui blue button"-->
+              <!--suiPopup-->
+              <!--popupText="Image cut levels">-->
+        <!--<i class="fa fa-area-chart"></i>-->
+      <!--</button>-->
+      <!--<button class="ui blue button"-->
+              <!--suiPopup-->
+              <!--popupText="Show/Hide grid">-->
+        <!--<i class="grid layout icon"></i>-->
+      <!--</button>-->
     </div>
   </div>
 </div>

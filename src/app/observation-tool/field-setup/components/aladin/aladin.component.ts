@@ -13,7 +13,7 @@ declare let A: any;
 @Component({
   selector: 'app-aladin',
   templateUrl: './aladin.component.html',
-  styleUrls: ['./aladin.component.scss']
+  styleUrls: ['./aladin.component.css']
 })
 export class AladinComponent implements OnInit, AfterViewInit {
 
@@ -46,8 +46,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   addingRect                   = false;
   hoveredObject: any;
 
-  constructor(private persistenceService: PersistenceService,
-              private changeDetector: ChangeDetectorRef) {
+  constructor(private persistenceService: PersistenceService) {
   }
 
   ngOnInit() {
@@ -157,14 +156,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
     if (this.addingRect) {
       this.addRectangle(coords[0], coords[1]);
       this.rectAddedEmitter.emit();
-    }
-  }
-
-  mouseDown(event: MouseEvent) {
-    const coords = this.aladin.pix2world(event.layerX, event.layerY);
-    if (this.hoveredObject) {
-      this.hoveredObject.ra  = coords[0];
-      this.hoveredObject.dec = coords[1];
     }
   }
 

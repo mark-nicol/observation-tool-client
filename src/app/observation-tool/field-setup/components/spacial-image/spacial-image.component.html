@@ -3,8 +3,7 @@
      style="padding-bottom: 1em">
   <div class="row">
     <div class="column">
-      <div id="drawing-div"
-           [ngStyle]="{'display': editMode ? 'block' : 'none'}"></div>
+      <app-pointing-canvas [ngStyle]="{'display': editMode ? 'block' : 'none'}"></app-pointing-canvas>
       <app-aladin (coordinatesEmitter)="updateCoords($event)"
                   (fovAddedEmitter)="toggleAddingFov()"
                   (rectAddedEmitter)="toggleAddingRect()"></app-aladin>

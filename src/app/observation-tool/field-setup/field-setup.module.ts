@@ -11,6 +11,7 @@ import {SourceComponent} from './components/source/source.component';
 import {SpacialImageComponent} from './components/spacial-image/spacial-image.component';
 import {FieldSetupComponent} from './field-setup.component';
 import { AladinComponent } from './components/aladin/aladin.component';
+import { PointingCanvasComponent } from './components/pointing-canvas/pointing-canvas.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { AladinComponent } from './components/aladin/aladin.component';
     ExpectedSourcePropertiesComponent,
     SourceComponent,
     SpacialImageComponent,
-    AladinComponent
+    AladinComponent,
+    PointingCanvasComponent
   ],
   providers: [],
   exports: [FieldSetupComponent]

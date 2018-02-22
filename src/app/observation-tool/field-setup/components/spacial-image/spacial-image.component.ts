@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {AladinComponent} from '../aladin/aladin.component';
+import {PointingCanvasComponent} from '../pointing-canvas/pointing-canvas.component';
 
 /**
  * Spacial image component
@@ -20,6 +21,7 @@ export class SpacialImageComponent implements OnInit {
   }
 
   @ViewChild(AladinComponent) aladin: AladinComponent;
+  @ViewChild(PointingCanvasComponent) pointingCanvas: PointingCanvasComponent;
 
   pixelCoords = [0, 0];
   worldCoords = [0, 0];
@@ -65,13 +67,15 @@ export class SpacialImageComponent implements OnInit {
   }
 
   toggleAddingFov() {
-    this.addingFov        = !this.addingFov;
-    this.aladin.addingFov = this.addingFov;
+    this.addingFov                = !this.addingFov;
+    this.aladin.addingFov         = this.addingFov;
+    this.pointingCanvas.addingFov = this.addingFov;
   }
 
   toggleAddingRect() {
-    this.addingRect        = !this.addingRect;
-    this.aladin.addingRect = this.addingRect;
+    this.addingRect               = !this.addingRect;
+    this.aladin.addingRect        = this.addingRect;
+    this.pointingCanvas.addingRec = this.addingRect;
   }
 
 }

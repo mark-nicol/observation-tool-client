@@ -3,7 +3,9 @@
      style="padding-bottom: 1em">
   <div class="row">
     <div class="column">
-      <app-pointing-canvas *ngIf="editMode"></app-pointing-canvas>
+      <app-pointing-canvas *ngIf="editMode"
+                           (fovAddedEmitter)="toggleAddingFov()"
+                           (rectAddedEmitter)="toggleAddingRect()"></app-pointing-canvas>
       <app-aladin (coordinatesEmitter)="updateCoords($event)"
                   (fovAddedEmitter)="toggleAddingFov()"
                   (rectAddedEmitter)="toggleAddingRect()"></app-aladin>
@@ -82,19 +84,19 @@
         <i class="cut icon"></i>
       </button>
       <!--<button class="ui blue button"-->
-              <!--suiPopup-->
-              <!--popupText="Select target centre">-->
-        <!--<i class="fa fa-times"></i>-->
+      <!--suiPopup-->
+      <!--popupText="Select target centre">-->
+      <!--<i class="fa fa-times"></i>-->
       <!--</button>-->
       <!--<button class="ui blue button"-->
-              <!--suiPopup-->
-              <!--popupText="Image cut levels">-->
-        <!--<i class="fa fa-area-chart"></i>-->
+      <!--suiPopup-->
+      <!--popupText="Image cut levels">-->
+      <!--<i class="fa fa-area-chart"></i>-->
       <!--</button>-->
       <!--<button class="ui blue button"-->
-              <!--suiPopup-->
-              <!--popupText="Show/Hide grid">-->
-        <!--<i class="grid layout icon"></i>-->
+      <!--suiPopup-->
+      <!--popupText="Show/Hide grid">-->
+      <!--<i class="grid layout icon"></i>-->
       <!--</button>-->
     </div>
   </div>

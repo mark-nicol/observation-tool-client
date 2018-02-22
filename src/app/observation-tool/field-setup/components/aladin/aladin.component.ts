@@ -147,15 +147,15 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   mouseUp(event: MouseEvent) {
-    const coords = this.aladin.pix2world(event.layerX, event.layerY);
-    if (this.addingFov) {
-      this.addPointing(coords[0], coords[1]);
-      this.fovAddedEmitter.emit();
-    }
-    if (this.addingRect) {
-      this.addRectangle(coords[0], coords[1]);
-      this.rectAddedEmitter.emit();
-    }
+    // const coords = this.aladin.pix2world(event.layerX, event.layerY);
+    // if (this.addingFov) {
+    //   this.addPointing(coords[0], coords[1]);
+    //   this.fovAddedEmitter.emit();
+    // }
+    // if (this.addingRect) {
+    //   this.addRectangle(coords[0], coords[1]);
+    //   this.rectAddedEmitter.emit();
+    // }
   }
 
   mouseMove(event: MouseEvent) {

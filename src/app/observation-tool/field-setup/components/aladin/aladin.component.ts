@@ -178,10 +178,16 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   redraw() {
-    console.log('redraw', this.canvasService.objects);
-    this.canvasService.objects.forEach(object => {
-      this.addRectangle(object.x, object.y, object.width, object.height);
-    });
+    // console.log('redraw', this.canvasService.objects);
+    // this.canvasService.objects.forEach(object => {
+    //   this.addRectangle(object.x, object.y, object.width, object.height);
+    // });
+  }
+
+  editMode() {
+    this.overlay.overlays = [];
+    // For each rect in footprints
+      //
   }
 
 }

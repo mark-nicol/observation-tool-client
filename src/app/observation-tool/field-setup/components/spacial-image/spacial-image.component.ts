@@ -82,6 +82,8 @@ export class SpacialImageComponent implements OnInit {
     this.editMode = !this.editMode;
     if (!this.editMode) {
       this.aladin.redraw();
+    } else {
+      this.aladin.editMode();
     }
   }
 

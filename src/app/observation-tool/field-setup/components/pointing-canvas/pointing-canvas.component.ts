@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {CanvasService} from '../../services/canvas.service';
+import {CanvasService, ISkyPolygon} from '../../services/canvas.service';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class PointingCanvasComponent implements OnInit {
     this.canvasElement.height = this.canvasContainer.clientHeight;
     this.canvasContainer.appendChild(this.canvasElement);
     this.canvas.strokeStyle = 'lime';
-    this.canvasService.objects.forEach(object => this.canvas.strokeRect(object.x, object.y, object.height, object.width));
+    this.canvasService.polygons.forEach(polygon => this.drawPolygon(polygon));
   }
 
   click(event: MouseEvent) {
@@ -44,8 +44,18 @@ export class PointingCanvasComponent implements OnInit {
 
   drawMosaic(centreX: number, centreY: number) {
     const lengthSize = 50;
-    this.canvasService.addObject({x: centreX - lengthSize / 2, y: centreY - lengthSize / 2, width: lengthSize, height: lengthSize});
+    // this.canvasService.addObject({x: centreX - lengthSize / 2, y: centreY - lengthSize / 2, width: lengthSize, height: lengthSize});
     this.canvas.strokeRect(centreX - lengthSize / 2, centreY - lengthSize / 2, lengthSize, lengthSize);
+  }
+
+  drawPolygon(polygon: ISkyPolygon) {
+    this.canvas.beginPath();
+    this.canvas.moveTo(polygon.topLeft.pxCoords.x, polygon.topLeft.pxCoords.y);
+    this.canvas.lineTo(polygon.topRight.pxCoords.x, polygon.topRight.pxCoords.y);
+    this.canvas.lineTo(polygon.bottomRight.pxCoords.x, polygon.bottomRight.pxCoords.y);
+    this.canvas.lineTo(polygon.bottomLeft.pxCoords.x, polygon.bottomLeft.pxCoords.y);
+    this.canvas.closePath();
+    this.canvas.stroke();
   }
 
   drawCircle(centreX: number, centreY: number, radius: number) {

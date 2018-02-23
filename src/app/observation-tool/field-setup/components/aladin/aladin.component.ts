@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Latitude} from '../../../../units/classes/latitude';
 import {Longitude} from '../../../../units/classes/longitude';
 import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
@@ -7,6 +7,7 @@ import {IAladinConfig} from '../../../shared/interfaces/aladin/aladin-config.int
 import {IAladinOverlay} from '../../../shared/interfaces/aladin/overlay.interface';
 import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {CanvasService} from '../../services/canvas.service';
 
 declare let A: any;
 
@@ -46,7 +47,8 @@ export class AladinComponent implements OnInit, AfterViewInit {
   addingRect                   = false;
   hoveredObject: any;
 
-  constructor(private persistenceService: PersistenceService) {
+  constructor(private persistenceService: PersistenceService,
+              private canvasService: CanvasService) {
   }
 
   ngOnInit() {
@@ -103,16 +105,18 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.overlay.add(A.circle(lon, lat, 0.0018));
   }
 
-  addRectangle(lon: number, lat: number) {
-    console.log(this.overlay);
+  addRectangle(x: number, y: number, width: number, height: number) {
+    console.log('addRectangle');
+    const topLeft  = this.aladin.pix2world(x, y);
+    const topRight = this.aladin.pix2world(x + width, y);
+    const bottomLeft = this.aladin.pix2world(x, y + height);
+    const bottomRight = this.aladin.pix2world(x + width, y + height);
     this.overlay.addFootprints(A.polygon([
-      [lon + 0.25, lat + 0.25],        // bl
-      [lon + 0.25, lat - 0.25],        // tl
-      [lon - 0.25, lat - 0.25],        // tr
-      [lon - 0.25, lat + 0.25]
+      topLeft,
+      topRight,
+      bottomRight,
+      bottomLeft
     ]));
-    this.catalogue.addSources(A.source(lon, lat));
-    console.log(this.overlay);
   }
 
   cutItems() {
@@ -170,6 +174,13 @@ export class AladinComponent implements OnInit, AfterViewInit {
       pixel: [document.getElementById('aladin-lite-div').offsetWidth / 2,
               document.getElementById('aladin-lite-div').offsetHeight / 2],
       world: this.aladin.getRaDec()
+    });
+  }
+
+  redraw() {
+    console.log('redraw', this.canvasService.objects);
+    this.canvasService.objects.forEach(object => {
+      this.addRectangle(object.x, object.y, object.width, object.height);
     });
   }
 

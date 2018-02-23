@@ -78,4 +78,11 @@ export class SpacialImageComponent implements OnInit {
     this.pointingCanvas.addingRec = this.addingRect;
   }
 
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+    if (!this.editMode) {
+      this.aladin.redraw();
+    }
+  }
+
 }

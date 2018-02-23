@@ -250,12 +250,26 @@ export class VisualisationViewerComponent implements OnInit {
     for (let i = 0; i < this.almaBands.length; i++) {
       this.focus.chartArea.append('rect')
           .attr('class', 'region')
-          .attr('x', this.focus.xScale(this.almaBands[i]['start']))
+          .attr('x', this.focus.xScale(this.almaBands[i].start))
           .attr('y', 0)
-          .attr('width', this.focus.xScale(this.almaBands[i]['end']) - this.focus.xScale(this.almaBands[i]['start']))
+          .attr('width', this.focus.xScale(this.almaBands[i].end) - this.focus.xScale(this.almaBands[i].start))
           .attr('height', this.focus.height)
           .style('fill', this.almaBands[i].color)
           .style('opacity', '0.3');
+      this.context.chartArea.append('rect')
+          .attr('class', 'region')
+          .attr('x', this.context.xScale(this.almaBands[i].start))
+          .attr('y', 0)
+          .attr('width', this.context.xScale(this.almaBands[i].end) - this.context.xScale(this.almaBands[i].start))
+          .attr('height', this.context.height)
+          .style('fill', this.almaBands[i].color)
+          .style('opacity', '0.3');
+      this.context.chartArea.append('text')
+          .attr('x', this.context.xScale(this.almaBands[i].start))
+          .attr('y', this.context.height)
+          .text(this.almaBands[i].text)
+          .attr('font-size', '2em')
+          .attr('fill', 'white')
     }
   }
 

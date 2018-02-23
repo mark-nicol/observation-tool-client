@@ -174,6 +174,11 @@ export class VisualisationViewerComponent implements OnInit {
                  .attr('width', element.offsetWidth)
                  .attr('height', element.offsetHeight);
 
+    // this.svg.append('rect')
+    //     .attr('width', '100%')
+    //     .attr('height', '100%')
+    //     .attr('fill', 'black');
+
     // Clip path in the focus chart, keeps the line from spilling into margins
     this.svg.append('defs').append('clipPath')
         .attr('id', 'clip')
@@ -269,7 +274,7 @@ export class VisualisationViewerComponent implements OnInit {
           .attr('x', this.focus.xScale(this.almaBands[i].start))
           .attr('y', this.focus.height)
           .text(this.almaBands[i].text)
-          .attr('font-size', '3em')
+          .attr('font-size', '4em')
           .attr('fill', 'white');
       // this.context.chartArea.append('text')
       //     .attr('x', this.context.xScale(this.almaBands[i].start))
@@ -340,11 +345,12 @@ export class VisualisationViewerComponent implements OnInit {
 
     this.focus.chartArea.selectAll('.alma-band-text')
         .attr('x', (d, i) => {
+          // if the start of the band is greater than the left most value on the scale
           if (this.almaBands[i].start > this.focus.xScale.domain()[0]) {
+            // Draw at the band start
             return this.focus.xScale(this.almaBands[i].start);
-          } else {
-            return this.focus.xScale(this.focus.xScale.domain()[0]);
           }
+          return;
         })
         .attr('y', this.focus.height);
 

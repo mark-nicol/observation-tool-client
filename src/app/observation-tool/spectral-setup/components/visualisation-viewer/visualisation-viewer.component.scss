@@ -3,6 +3,10 @@
   height: 30em;
 }
 
+.region {
+  clip-path: url(#clip);
+}
+
 .line {
   fill: none;
   stroke: crimson;

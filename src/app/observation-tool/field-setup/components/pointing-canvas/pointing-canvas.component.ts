@@ -30,11 +30,11 @@ export class PointingCanvasComponent implements OnInit {
 
   click(event: MouseEvent) {
     if (this.addingFov) {
-      this.drawCircle(event.layerX, event.layerY, 50);
+      this.drawCircle(event.offsetX, event.offsetY, 50);
       this.fovAddedEmitter.emit();
     }
     if (this.addingRec) {
-      this.drawMosaic(event.layerX, event.layerY);
+      this.drawMosaic(event.offsetX, event.offsetY);
       this.rectAddedEmitter.emit();
     }
   }

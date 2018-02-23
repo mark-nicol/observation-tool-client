@@ -1,5 +1,12 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
+export interface ICanvasRectangle {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 @Component({
   selector: 'app-pointing-canvas',
   templateUrl: './pointing-canvas.component.html',
@@ -7,13 +14,14 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class PointingCanvasComponent implements OnInit {
 
-  @Output() fovAddedEmitter  = new EventEmitter();
-  @Output() rectAddedEmitter = new EventEmitter();
-            addingRec        = false;
-            addingFov        = false;
+  @Output() fovAddedEmitter             = new EventEmitter();
+  @Output() rectAddedEmitter            = new EventEmitter();
+            addingRec                   = false;
+            addingFov                   = false;
             canvasElement: HTMLCanvasElement;
             canvas: CanvasRenderingContext2D;
             canvasContainer: any;
+            objects: ICanvasRectangle[] = [{x: 0, y: 0, width: 50, height: 50}];
 
   constructor() {
   }
@@ -26,6 +34,7 @@ export class PointingCanvasComponent implements OnInit {
     this.canvasElement.height = this.canvasContainer.clientHeight;
     this.canvasContainer.appendChild(this.canvasElement);
     this.canvas.strokeStyle = 'lime';
+    this.objects.forEach(object => this.canvas.strokeRect(object.x, object.y, object.width, object.height));
   }
 
   click(event: MouseEvent) {
@@ -41,6 +50,12 @@ export class PointingCanvasComponent implements OnInit {
 
   drawMosaic(centreX: number, centreY: number) {
     const lengthSize = 50;
+    this.objects.push({
+      x: centreX - lengthSize / 2,
+      y: centreY - lengthSize / 2,
+      width: lengthSize,
+      height: lengthSize
+    });
     this.canvas.strokeRect(centreX - lengthSize / 2, centreY - lengthSize / 2, lengthSize, lengthSize);
   }
 

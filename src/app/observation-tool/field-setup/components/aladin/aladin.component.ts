@@ -106,7 +106,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   addRectangle(x: number, y: number, width: number, height: number) {
-    console.log('addRectangle');
     const topLeft     = this.aladin.pix2world(x, y);
     const topRight    = this.aladin.pix2world(x + width, y);
     const bottomLeft  = this.aladin.pix2world(x, y + height);
@@ -178,7 +177,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   redraw() {
-    console.log('redraw');
     this.canvasService.polygons.forEach(polygon => {
       if (!polygon.topLeft.worldCoords) {
         this.canvasService.addSkyCoords(polygon, this.calculateWorldCoords(polygon));
@@ -210,8 +208,31 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   editMode() {
-    console.log('editMode');
-    this.overlay.overlays = [];
+    const newPolygons = [];
+    this.overlay.overlays.forEach(footprint => {
+      const newPolygon: ISkyPolygon = {
+        topLeft: {
+          pxCoords: this.aladin.world2pix(footprint.polygons[0][0], footprint.polygons[0][1]),
+          worldCoords: footprint.polygons[0]
+        },
+        topRight: {
+          pxCoords: this.aladin.world2pix(footprint.polygons[1][0], footprint.polygons[1][1]),
+          worldCoords: footprint.polygons[1]
+        },
+        bottomRight: {
+          pxCoords: this.aladin.world2pix(footprint.polygons[2][0], footprint.polygons[2][1]),
+          worldCoords: footprint.polygons[2]
+        },
+        bottomLeft: {
+          pxCoords: this.aladin.world2pix(footprint.polygons[3][0], footprint.polygons[3][1]),
+          worldCoords: footprint.polygons[3]
+        }
+      };
+      newPolygons.push(newPolygon);
+    });
+    this.canvasService.polygons = newPolygons;
+    this.overlay.overlays       = [];
+    this.catalogue.reportChange();
   }
 
 }

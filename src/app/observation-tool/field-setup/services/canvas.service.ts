@@ -25,8 +25,7 @@ export interface ISkyPolygon {
 @Injectable()
 export class CanvasService {
 
-  private _polygons: ISkyPolygon[] = [
-  ];
+  private _polygons: ISkyPolygon[] = [];
 
   constructor() {
   }
@@ -35,8 +34,11 @@ export class CanvasService {
     return this._polygons;
   }
 
+  set polygons(polygons: ISkyPolygon[]) {
+    this._polygons = polygons;
+  }
+
   addPolygon(polygon: ISkyPolygon) {
-    console.log('addPolygon', polygon);
     this._polygons.push(polygon);
   }
 
@@ -46,6 +48,10 @@ export class CanvasService {
 
   addSkyCoords(polygonPx: ISkyPolygon, polygonWorld: ISkyPolygon) {
     this._polygons[this._polygons.indexOf(polygonPx)] = _.merge(polygonPx, polygonWorld);
+  }
+
+  updatePolygon(polygonOriginal: ISkyPolygon, polygonNew: ISkyPolygon) {
+    this._polygons[this._polygons.indexOf(polygonOriginal)] = polygonNew;
   }
 
   getPolygonAtPoint(polygon: ISkyPolygon) {

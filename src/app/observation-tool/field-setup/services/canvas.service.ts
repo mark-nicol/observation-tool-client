@@ -21,25 +21,35 @@ export interface ISkyPolygon {
   }
 }
 
+export interface ISkyFov {
+  pxCoords?: number[]
+  worldCoords?: number[]
+  radius: number
+}
+
 
 @Injectable()
 export class CanvasService {
 
-  private _polygons: ISkyPolygon[] = [];
+  private _polygons: any[] = [];
 
   constructor() {
   }
 
-  get polygons(): ISkyPolygon[] {
+  get polygons(): any[] {
     return this._polygons;
   }
 
-  set polygons(polygons: ISkyPolygon[]) {
+  set polygons(polygons: any[]) {
     this._polygons = polygons;
   }
 
   addPolygon(polygon: ISkyPolygon) {
     this._polygons.push(polygon);
+  }
+
+  addFov(fov: ISkyFov) {
+    this._polygons.push(fov);
   }
 
   clearPolygons() {

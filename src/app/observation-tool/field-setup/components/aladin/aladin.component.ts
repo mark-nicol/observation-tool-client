@@ -178,6 +178,12 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   redraw() {
     this.canvasService.polygons.forEach(polygon => {
+      if (polygon.topRight) {
+
+      }
+      if (polygon.radius) {
+        console.log('circle');
+      }
       if (!polygon.topLeft.worldCoords) {
         this.canvasService.addSkyCoords(polygon, this.calculateWorldCoords(polygon));
       }

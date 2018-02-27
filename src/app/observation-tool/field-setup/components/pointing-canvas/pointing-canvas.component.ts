@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {CanvasService, ISkyPolygon} from '../../services/canvas.service';
+import {CanvasService, ISkyFov, ISkyPolygon} from '../../services/canvas.service';
 
 
 @Component({
@@ -32,7 +32,12 @@ export class PointingCanvasComponent implements OnInit {
 
   click(event: MouseEvent) {
     if (this.addingFov) {
+      const fov: ISkyFov = {
+        pxCoords: [event.offsetX, event.offsetY],
+        radius: 50
+      };
       this.drawCircle(event.offsetX, event.offsetY, 50);
+      this.canvasService.addFov(fov);
       this.fovAddedEmitter.emit();
     }
     if (this.addingRec) {

@@ -73,4 +73,15 @@ export class PointingCanvasComponent implements OnInit {
     this.canvas.stroke();
   }
 
+  editMode() {
+    this.clearCanvas();
+    this.canvasService.polygons.forEach(polygon => {
+      this.drawPolygon(polygon);
+    });
+  }
+
+  clearCanvas() {
+    this.canvas.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+  }
+
 }

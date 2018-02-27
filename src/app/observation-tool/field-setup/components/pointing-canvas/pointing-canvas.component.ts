@@ -28,7 +28,6 @@ export class PointingCanvasComponent implements OnInit {
     this.canvasElement.height = this.canvasContainer.clientHeight;
     this.canvasContainer.appendChild(this.canvasElement);
     this.canvas.strokeStyle = 'lime';
-    this.canvasService.polygons.forEach(polygon => this.drawPolygon(polygon));
   }
 
   click(event: MouseEvent) {
@@ -37,23 +36,33 @@ export class PointingCanvasComponent implements OnInit {
       this.fovAddedEmitter.emit();
     }
     if (this.addingRec) {
-      this.drawMosaic(event.offsetX, event.offsetY);
+      const dimension         = 50;
+      const poly: ISkyPolygon = {
+        topLeft: {
+          pxCoords: [event.offsetX - dimension / 2, event.offsetY - dimension / 2]
+        },
+        topRight: {
+          pxCoords: [event.offsetX + dimension / 2, event.offsetY - dimension / 2]
+        },
+        bottomLeft: {
+          pxCoords: [event.offsetX - dimension / 2, event.offsetY + dimension / 2]
+        },
+        bottomRight: {
+          pxCoords: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
+        }
+      };
+      this.drawPolygon(poly);
+      this.canvasService.addPolygon(poly);
       this.rectAddedEmitter.emit();
     }
   }
 
-  drawMosaic(centreX: number, centreY: number) {
-    const lengthSize = 50;
-    // this.canvasService.addObject({x: centreX - lengthSize / 2, y: centreY - lengthSize / 2, width: lengthSize, height: lengthSize});
-    this.canvas.strokeRect(centreX - lengthSize / 2, centreY - lengthSize / 2, lengthSize, lengthSize);
-  }
-
   drawPolygon(polygon: ISkyPolygon) {
     this.canvas.beginPath();
-    this.canvas.moveTo(polygon.topLeft.pxCoords.x, polygon.topLeft.pxCoords.y);
-    this.canvas.lineTo(polygon.topRight.pxCoords.x, polygon.topRight.pxCoords.y);
-    this.canvas.lineTo(polygon.bottomRight.pxCoords.x, polygon.bottomRight.pxCoords.y);
-    this.canvas.lineTo(polygon.bottomLeft.pxCoords.x, polygon.bottomLeft.pxCoords.y);
+    this.canvas.moveTo(polygon.topLeft.pxCoords[0], polygon.topLeft.pxCoords[1]);
+    this.canvas.lineTo(polygon.topRight.pxCoords[0], polygon.topRight.pxCoords[1]);
+    this.canvas.lineTo(polygon.bottomRight.pxCoords[0], polygon.bottomRight.pxCoords[1]);
+    this.canvas.lineTo(polygon.bottomLeft.pxCoords[0], polygon.bottomLeft.pxCoords[1]);
     this.canvas.closePath();
     this.canvas.stroke();
   }

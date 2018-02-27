@@ -7,7 +7,7 @@ import {IAladinConfig} from '../../../shared/interfaces/aladin/aladin-config.int
 import {IAladinOverlay} from '../../../shared/interfaces/aladin/overlay.interface';
 import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
-import {CanvasService} from '../../services/canvas.service';
+import {CanvasService, ISkyPolygon} from '../../services/canvas.service';
 
 declare let A: any;
 
@@ -107,9 +107,9 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   addRectangle(x: number, y: number, width: number, height: number) {
     console.log('addRectangle');
-    const topLeft  = this.aladin.pix2world(x, y);
-    const topRight = this.aladin.pix2world(x + width, y);
-    const bottomLeft = this.aladin.pix2world(x, y + height);
+    const topLeft     = this.aladin.pix2world(x, y);
+    const topRight    = this.aladin.pix2world(x + width, y);
+    const bottomLeft  = this.aladin.pix2world(x, y + height);
     const bottomRight = this.aladin.pix2world(x + width, y + height);
     this.overlay.addFootprints(A.polygon([
       topLeft,
@@ -178,16 +178,40 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   redraw() {
-    // console.log('redraw', this.canvasService.objects);
-    // this.canvasService.objects.forEach(object => {
-    //   this.addRectangle(object.x, object.y, object.width, object.height);
-    // });
+    console.log('redraw');
+    this.canvasService.polygons.forEach(polygon => {
+      if (!polygon.topLeft.worldCoords) {
+        this.canvasService.addSkyCoords(polygon, this.calculateWorldCoords(polygon));
+      }
+    });
+    this.canvasService.polygons.forEach(polygon => {
+      if (polygon.topLeft.worldCoords) {
+        this.overlay.addFootprints(A.polygon([
+          polygon.topLeft.worldCoords,
+          polygon.topRight.worldCoords,
+          polygon.bottomRight.worldCoords,
+          polygon.bottomLeft.worldCoords
+        ]));
+      }
+    });
+  }
+
+  calculateWorldCoords(polygon: ISkyPolygon): ISkyPolygon {
+    const topLeft     = this.aladin.pix2world(polygon.topLeft.pxCoords[0], polygon.topLeft.pxCoords[1]);
+    const topRight    = this.aladin.pix2world(polygon.topRight.pxCoords[0], polygon.topRight.pxCoords[1]);
+    const bottomLeft  = this.aladin.pix2world(polygon.bottomLeft.pxCoords[0], polygon.bottomLeft.pxCoords[1]);
+    const bottomRight = this.aladin.pix2world(polygon.bottomRight.pxCoords[0], polygon.bottomRight.pxCoords[1]);
+    return {
+      topLeft: {worldCoords: topLeft},
+      topRight: {worldCoords: topRight},
+      bottomLeft: {worldCoords: bottomLeft},
+      bottomRight: {worldCoords: bottomRight}
+    }
   }
 
   editMode() {
+    console.log('editMode');
     this.overlay.overlays = [];
-    // For each rect in footprints
-      //
   }
 
 }

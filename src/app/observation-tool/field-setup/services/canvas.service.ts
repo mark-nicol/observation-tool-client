@@ -1,22 +1,23 @@
 import {Injectable} from '@angular/core';
+import * as _ from 'lodash';
 
 
 export interface ISkyPolygon {
   topLeft: {
-    worldCoords?: { x: number, y: number },
-    pxCoords: { x: number, y: number }
+    worldCoords?: number[],
+    pxCoords?: number[]
   },
   topRight: {
-    worldCoords?: { x: number, y: number },
-    pxCoords: { x: number, y: number }
+    worldCoords?: number[],
+    pxCoords?: number[]
   },
   bottomRight: {
-    worldCoords?: { x: number, y: number },
-    pxCoords: { x: number, y: number }
+    worldCoords?: number[],
+    pxCoords?: number[]
   },
   bottomLeft: {
-    worldCoords?: { x: number, y: number },
-    pxCoords: { x: number, y: number }
+    worldCoords?: number[],
+    pxCoords?: number[]
   }
 }
 
@@ -25,20 +26,6 @@ export interface ISkyPolygon {
 export class CanvasService {
 
   private _polygons: ISkyPolygon[] = [
-    {
-      topLeft: {
-        pxCoords: {x: 50, y: 50}
-      },
-      topRight: {
-        pxCoords: {x: 100, y: 50}
-      },
-      bottomRight: {
-        pxCoords: {x: 100, y: 100}
-      },
-      bottomLeft: {
-        pxCoords: {x: 50, y: 100}
-      }
-    }
   ];
 
   constructor() {
@@ -49,11 +36,20 @@ export class CanvasService {
   }
 
   addPolygon(polygon: ISkyPolygon) {
+    console.log('addPolygon', polygon);
     this._polygons.push(polygon);
   }
 
   clearPolygons() {
     this._polygons = [];
+  }
+
+  addSkyCoords(polygonPx: ISkyPolygon, polygonWorld: ISkyPolygon) {
+    this._polygons[this._polygons.indexOf(polygonPx)] = _.merge(polygonPx, polygonWorld);
+  }
+
+  getPolygonAtPoint(polygon: ISkyPolygon) {
+
   }
 
 }

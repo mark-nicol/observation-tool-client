@@ -17,6 +17,18 @@ export class PointingCanvasComponent implements OnInit {
             canvas: CanvasRenderingContext2D;
             canvasContainer: any;
 
+  static isInsidePolygon(polygon: ISkyPolygon, x: number, y: number) {
+    const inXBounds = x <= polygon.topRight.pxCoords[0] &&
+                      x >= polygon.topLeft.pxCoords[0] &&
+                      x <= polygon.bottomRight.pxCoords[0] &&
+                      x >= polygon.bottomLeft.pxCoords[0];
+    const inYBounds = y >= polygon.topLeft.pxCoords[1] &&
+                      y >= polygon.topRight.pxCoords[1] &&
+                      y <= polygon.bottomLeft.pxCoords[1] &&
+                      y <= polygon.bottomRight.pxCoords[1];
+    return inXBounds && inYBounds;
+  }
+
   constructor(private canvasService: CanvasService) {
   }
 
@@ -39,8 +51,7 @@ export class PointingCanvasComponent implements OnInit {
       this.drawCircle(event.offsetX, event.offsetY, 50);
       this.canvasService.addFov(fov);
       this.fovAddedEmitter.emit();
-    }
-    if (this.addingRec) {
+    } else if (this.addingRec) {
       const dimension         = 50;
       const poly: ISkyPolygon = {
         topLeft: {
@@ -59,6 +70,12 @@ export class PointingCanvasComponent implements OnInit {
       this.drawPolygon(poly);
       this.canvasService.addPolygon(poly);
       this.rectAddedEmitter.emit();
+    } else if (this.canvasService.polygons.length > 0) {
+      this.canvasService.polygons.forEach(polygon => {
+        if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
+          console.log('click in polygon');
+        }
+      })
     }
   }
 

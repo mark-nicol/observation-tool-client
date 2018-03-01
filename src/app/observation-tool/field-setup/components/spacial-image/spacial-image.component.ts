@@ -55,7 +55,7 @@ export class SpacialImageComponent implements OnInit {
   }
 
   cutLayers() {
-    this.aladin.cutItems();
+    this.pointingCanvas.cutPolygons();
   }
 
   resetView() {

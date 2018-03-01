@@ -64,8 +64,7 @@ export class PointingCanvasComponent implements OnInit {
         },
         bottomRight: {
           pxCoords: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
-        },
-        color: 'lime'
+        }
       };
       this.drawPolygon(poly);
       this.canvasService.addPolygon(poly);
@@ -73,14 +72,22 @@ export class PointingCanvasComponent implements OnInit {
     } else if (this.canvasService.polygons.length > 0) {
       this.canvasService.polygons.forEach(polygon => {
         if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
-          console.log('click in polygon');
+          polygon.isSelected = !polygon.isSelected;
         }
-      })
+      });
+      this.redraw();
     }
   }
 
+  redraw() {
+    this.clearCanvas();
+    this.canvasService.polygons.forEach(polygon => {
+      this.drawPolygon(polygon);
+    });
+  }
+
   drawPolygon(polygon: ISkyPolygon) {
-    this.canvas.strokeStyle = polygon.color;
+    this.canvas.strokeStyle = polygon.isSelected ? 'red' : 'lime';
     this.canvas.beginPath();
     this.canvas.moveTo(polygon.topLeft.pxCoords[0], polygon.topLeft.pxCoords[1]);
     this.canvas.lineTo(polygon.topRight.pxCoords[0], polygon.topRight.pxCoords[1]);
@@ -105,6 +112,11 @@ export class PointingCanvasComponent implements OnInit {
 
   clearCanvas() {
     this.canvas.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+  }
+
+  cutPolygons() {
+    this.canvasService.cutPolygons();
+    this.redraw();
   }
 
 }

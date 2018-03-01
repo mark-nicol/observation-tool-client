@@ -19,7 +19,7 @@ export interface ISkyPolygon {
     worldCoords?: number[],
     pxCoords?: number[]
   },
-  color: string
+  isSelected?: false
 }
 
 export interface ISkyFov {
@@ -67,6 +67,14 @@ export class CanvasService {
 
   getPolygonAtPoint(polygon: ISkyPolygon) {
 
+  }
+
+  cutPolygons() {
+    this._polygons.forEach(polygon => {
+      if (polygon.isSelected) {
+        this._polygons.splice(this._polygons.indexOf(polygon), 1);
+      }
+    })
   }
 
 }

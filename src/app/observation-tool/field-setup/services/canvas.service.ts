@@ -18,7 +18,8 @@ export interface ISkyPolygon {
   bottomLeft: {
     worldCoords?: number[],
     pxCoords?: number[]
-  }
+  },
+  color: string
 }
 
 export interface ISkyFov {

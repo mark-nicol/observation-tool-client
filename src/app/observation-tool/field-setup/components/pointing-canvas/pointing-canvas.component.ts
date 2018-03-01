@@ -39,7 +39,6 @@ export class PointingCanvasComponent implements OnInit {
     this.canvasElement.width  = this.canvasContainer.clientWidth;
     this.canvasElement.height = this.canvasContainer.clientHeight;
     this.canvasContainer.appendChild(this.canvasElement);
-    this.canvas.strokeStyle = 'lime';
   }
 
   click(event: MouseEvent) {
@@ -65,7 +64,8 @@ export class PointingCanvasComponent implements OnInit {
         },
         bottomRight: {
           pxCoords: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
-        }
+        },
+        color: 'lime'
       };
       this.drawPolygon(poly);
       this.canvasService.addPolygon(poly);
@@ -80,6 +80,7 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   drawPolygon(polygon: ISkyPolygon) {
+    this.canvas.strokeStyle = polygon.color;
     this.canvas.beginPath();
     this.canvas.moveTo(polygon.topLeft.pxCoords[0], polygon.topLeft.pxCoords[1]);
     this.canvas.lineTo(polygon.topRight.pxCoords[0], polygon.topRight.pxCoords[1]);

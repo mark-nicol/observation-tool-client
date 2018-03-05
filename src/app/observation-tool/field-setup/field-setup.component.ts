@@ -130,7 +130,7 @@ export class FieldSetupComponent implements OnInit {
             },
             pmRA: targetParams.pmRA,
             pmDec: targetParams.pmDec,
-            ExpectedSourceProperties: {
+            ExpectedProperties: {
               expectedPeakFluxDensity: targetParams.ExpectedProperties.expectedPeakFluxDensity,
               desiredCircularPolarizationPercentage: targetParams.ExpectedProperties.desiredCircularPolarizationPercentage,
               expectedPeakLineFluxDensity: targetParams.ExpectedProperties.expectedPeakLineFluxDensity,
@@ -138,11 +138,6 @@ export class FieldSetupComponent implements OnInit {
               desiredLinePolarizationPercentage: targetParams.ExpectedProperties.desiredLinePolarizationPercentage
             }
           });
-          // this.systemChange();
-          // this.resolveEmitter.emit([
-          //   this.form.value.sourceCoordinates.longitude.content,
-          //   this.form.value.sourceCoordinates.latitude.content
-          // ]);
         });
   }
 

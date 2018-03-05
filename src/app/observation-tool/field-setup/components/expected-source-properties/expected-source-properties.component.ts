@@ -10,8 +10,15 @@ import {FormGroup} from '@angular/forms';
   templateUrl: './expected-source-properties.component.html',
   styleUrls: ['./expected-source-properties.component.css']
 })
-export class ExpectedSourcePropertiesComponent {
+export class ExpectedSourcePropertiesComponent implements OnInit{
 
   @Input() form: FormGroup;
+
+  constructor() {
+  }
+
+  ngOnInit() {
+    console.log(this.form);
+  }
 
 }

@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {Observable} from 'rxjs/Rx';
 import {Speed} from '../../units/classes/speed';
+import {SinglePoint} from '../shared/classes/science-goal/single-point';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {SourceComponent} from './components/source/source.component';
 
@@ -109,6 +110,13 @@ export class FieldSetupComponent implements OnInit {
         .subscribe(result => {
           const targetParams = result.TargetParameters[index];
           this.form.patchValue({
+            ExpectedProperties: {
+              expectedPeakFluxDensity: targetParams.ExpectedProperties.expectedPeakFluxDensity,
+              desiredCircularPolarizationPercentage: targetParams.ExpectedProperties.desiredCircularPolarizationPercentage,
+              expectedPeakLineFluxDensity: targetParams.ExpectedProperties.expectedPeakLineFluxDensity,
+              expectedLineWidth: targetParams.ExpectedProperties.expectedLineWidth,
+              desiredLinePolarizationPercentage: targetParams.ExpectedProperties.desiredLinePolarizationPercentage
+            },
             type: targetParams.type,
             sourceName: targetParams.sourceName,
             solarSystemObject: targetParams.solarSystemObject,
@@ -130,14 +138,8 @@ export class FieldSetupComponent implements OnInit {
             },
             pmRA: targetParams.pmRA,
             pmDec: targetParams.pmDec,
-            ExpectedProperties: {
-              expectedPeakFluxDensity: targetParams.ExpectedProperties.expectedPeakFluxDensity,
-              desiredCircularPolarizationPercentage: targetParams.ExpectedProperties.desiredCircularPolarizationPercentage,
-              expectedPeakLineFluxDensity: targetParams.ExpectedProperties.expectedPeakLineFluxDensity,
-              expectedLineWidth: targetParams.ExpectedProperties.expectedLineWidth,
-              desiredLinePolarizationPercentage: targetParams.ExpectedProperties.desiredLinePolarizationPercentage
-            }
           });
+          this.setSinglePoint(targetParams.SinglePoint);
         });
   }
 
@@ -146,6 +148,33 @@ export class FieldSetupComponent implements OnInit {
     debounce.subscribe(value => {
       console.log(value);
     });
+  }
+
+  setSinglePoint(points: SinglePoint[]) {
+    const formGroups           = points.map(point => {
+      console.log(point);
+      this.formBuilder.group({
+        name: '',
+        centre: this.formBuilder.group({
+          latitude: this.formBuilder.group({unit: '', content: 0.0}),
+          longitude: this.formBuilder.group({unit: '', content: 0.0}),
+          fieldName: ''
+        })
+      })
+    });
+    const singlePointFormArray = this.formBuilder.array(formGroups);
+    this.form.setControl('SinglePoint', singlePointFormArray);
+  }
+
+  createSinglePoint() {
+    return this.formBuilder.group({
+      name: '',
+      centre: this.formBuilder.group({
+        latitude: this.formBuilder.group({unit: '', content: 0.0}),
+        longitude: this.formBuilder.group({unit: '', content: 0.0}),
+        fieldName: ''
+      })
+    })
   }
 
 }

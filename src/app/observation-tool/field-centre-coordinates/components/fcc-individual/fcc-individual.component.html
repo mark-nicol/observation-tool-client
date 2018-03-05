@@ -1,6 +1,5 @@
 <form class="ui form"
-      [formGroup]="individualForm">
-
+      [formGroup]="form">
   <div class="field"
        suiPopup
        popupText="Unit of offset pointings">
@@ -9,8 +8,7 @@
     </label>
     <sui-select id="offsetSelector"
                 class="selection"
-                [isDisabled]="radioValue === 'ABSOLUTE'"
-                formControlName="offsetUnit">
+                [isDisabled]="radioValue === 'ABSOLUTE'">
       <sui-select-option *ngFor="let unit of offsetUnits"
                          value="{{unit}}">
         {{unit}}
@@ -24,30 +22,21 @@
     <thead>
       <tr>
         <th>
-          {{sourceCoordinatesSystem?.lonHeader}}{{radioValue === 'RELATIVE' ? ' ['+individualForm.value.offsetUnit+']'
+          {{sourceCoordinatesSystem?.lonHeader}}{{radioValue === 'RELATIVE' ? form.value.SinglePoint.centre.latitude.unit
           : null}}
         </th>
         <th>
-          {{sourceCoordinatesSystem?.latHeader}}{{radioValue === 'RELATIVE' ? ' ['+individualForm.value.offsetUnit+']'
+          {{sourceCoordinatesSystem?.latHeader}}{{radioValue === 'RELATIVE' ? form.value.SinglePoint.centre.latitude.unit
           : null}}
         </th>
       </tr>
     </thead>
-    <tbody formArrayName="rows">
-      <tr *ngFor="let row of rows.controls; let i=index" [formGroupName]="i">
-        <td contenteditable>
-          {{
-          radioValue === 'ABSOLUTE' ?
-          (row.value.centre.longitude.content | sexagesimal: 'ra') :
-          row.value.centre.longitude.content
-          }}
+    <tbody formArrayName="SinglePoint">
+      <tr *ngFor="let pointing of SinglePoint.controls; let i = index" [formGroupName]="i">
+        <td>
+          <input formControlName="centre.longitude.content">
         </td>
         <td contenteditable>
-          {{
-          radioValue === 'ABSOLUTE' ?
-          (row.value.centre.latitude.content | sexagesimal: 'dec') :
-          row.value.centre.latitude.content
-          }}
         </td>
       </tr>
     </tbody>
@@ -56,13 +45,11 @@
         <th colspan="2">
           <div class="ui right floated tiny compact labeled icon buttons">
             <button class="ui blue button"
-                    (click)="addRow()"
                     suiPopup
                     popupText="Add a pointing">
               <i class="plus icon"></i>Add
             </button>
             <button class="ui red button"
-                    (click)="removeRow()"
                     suiPopup
                     popupText="Remove a pointing">
               <i class="minus icon"></i>Delete

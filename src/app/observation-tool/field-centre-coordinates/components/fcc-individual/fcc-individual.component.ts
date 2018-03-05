@@ -22,11 +22,7 @@ export class FccIndividualComponent implements OnInit {
   @Input() sourceCoordinatesSystemString;
   sourceCoordinatesSystem: CoordSystemInterface;
 
-  @Input('group')
-  individualForm = new FormGroup({
-    offsetUnit: new FormControl(),
-    rows: new FormArray([])
-  });
+  @Input() form: FormGroup;
 
   @Input()
   tableRows = [];
@@ -48,41 +44,45 @@ export class FccIndividualComponent implements OnInit {
    * @param formBuilder
    * @param systemService
    */
-  constructor(private persistenceService: PersistenceService,
-              private formBuilder: FormBuilder,
-              private systemService: SystemService) {
+  constructor(private systemService: SystemService) {
+
   }
 
   ngOnInit() {
-    this.initComponent(this.tableRows);
+    // this.initComponent(this.tableRows);
+    console.log(this.form);
   }
 
-  initComponent(tableRows: any) {
-    this.sourceCoordinatesSystem = this.systemService.getSystem(this.sourceCoordinatesSystemString);
-    this.setRows(tableRows);
-  }
+  // initComponent(tableRows: any) {
+  //   this.sourceCoordinatesSystem = this.systemService.getSystem(this.sourceCoordinatesSystemString);
+  //   this.setRows(tableRows);
+  // }
+  //
+  // setRows(rows: ISinglePoint[]) {
+  //   const rowFormGroups = rows.map(tableRow => this.formBuilder.group(tableRow));
+  //   const rowFormArray  = this.formBuilder.array(rowFormGroups);
+  //   this.individualForm.setControl('rows', rowFormArray);
+  // }
+  //
+  // get rows(): FormArray {
+  //   return this.individualForm.get('rows') as FormArray;
+  // }
 
-  setRows(rows: ISinglePoint[]) {
-    const rowFormGroups = rows.map(tableRow => this.formBuilder.group(tableRow));
-    const rowFormArray  = this.formBuilder.array(rowFormGroups);
-    this.individualForm.setControl('rows', rowFormArray);
-  }
-
-  get rows(): FormArray {
-    return this.individualForm.get('rows') as FormArray;
-  }
-
-  /**
-   * Adds a new row to the page data
-   */
-  addRow() {
-    this.rows.push(this.formBuilder.group(new SinglePoint()));
-  }
+  // /**
+  //  * Adds a new row to the page data
+  //  */
+  // addRow() {
+  //   this.rows.push(this.formBuilder.group(new SinglePoint()));
+  // }
 
   /**
    * Removes the last row from the page data
    */
   removeRow() {
+  }
+
+  get SinglePoint(): FormArray {
+    return this.form.get('SinglePoint') as FormArray;
   }
 
 }

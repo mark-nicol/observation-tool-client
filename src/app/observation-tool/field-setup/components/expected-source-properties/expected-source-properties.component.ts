@@ -18,7 +18,6 @@ export class ExpectedSourcePropertiesComponent implements OnInit{
   }
 
   ngOnInit() {
-    console.log(this.form);
   }
 
 }

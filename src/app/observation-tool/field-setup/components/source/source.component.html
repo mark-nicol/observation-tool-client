@@ -1,5 +1,5 @@
 <h4 class="ui dividing header">Source</h4>
-<form class="ui form" [formGroup]="sourceForm">
+<form class="ui form" [formGroup]="form">
 
   <!-- Source selector -->
   <div class="field" [class.error]="sourceName.invalid">
@@ -26,7 +26,8 @@
     <div class="field">
       <label>Choose a Solar System Object?</label>
       <sui-checkbox class="toggle"
-                    formControlName="solarSystemObject"></sui-checkbox>
+                    [ngModel]="form.value.solarSystemObject !== 'Unspecified'"
+                    [ngModelOptions]="{standalone: true}"></sui-checkbox>
     </div>
 
     <!-- Solar selector -->
@@ -34,8 +35,8 @@
       <label for="solarSystemSelector">Name of Object</label>
       <sui-select id="solarSystemSelector"
                   class="selection"
-                  formControlName="chosenSolarObject"
-                  [isDisabled]="!sourceForm.value.solarSystemObject">
+                  formControlName="solarSystemObject"
+                  [isDisabled]="!form.value.solarSystemObject">
         <sui-select-option *ngFor="let body of solarBodies"
                            [value]="body">
           {{body}}
@@ -44,7 +45,7 @@
     </div>
   </div>
 
-  <div class="ui form" *ngIf="!sourceForm.value.solarSystemObject">
+  <div class="ui form" *ngIf="form.value.solarSystemObject === 'Unspecified'">
 
     <div class="four fields" formGroupName="sourceCoordinates">
       <div class="field">
@@ -63,7 +64,8 @@
       <div class="three wide field">
         <label>Sexagesimal Units</label>
         <sui-checkbox class="toggle"
-                      formControlName="type"
+                      [ngModel]="form.value.sourceCoordinates.type === 'ABSOLUTE'"
+                      [ngModelOptions]="{standalone: true}"
                       [isDisabled]="sexagesimalCheckboxDisabled">
         </sui-checkbox>
       </div>
@@ -75,18 +77,18 @@
            formGroupName="longitude">
         <label for="lonInput">
           {{
-          this.sourceForm.value.sourceCoordinates.type ?
-          this.currentSystem?.sexagesimalLabels.lonLabel :
-          this.currentSystem?.normalLabels.lonLabel
+          form.value.sourceCoordinates.type === 'ABSOLUTE' ?
+          currentSystem?.sexagesimalLabels.lonLabel :
+          currentSystem?.normalLabels.lonLabel
           }}
         </label>
         <input #lonInput
                id="lonInput"
                formControlName="content"
                placeholder="0"
-               [value]="sourceForm.value.sourceCoordinates.type ?
-                        (sourceForm.value.sourceCoordinates.longitude.content | sexagesimal: 'ra') :
-                        sourceForm.value.sourceCoordinates.longitude.content">
+               [value]="form.value.sourceCoordinates.type ?
+                        (form.value.sourceCoordinates.longitude.content | sexagesimal: 'ra') :
+                        form.value.sourceCoordinates.longitude.content">
       </div>
 
       <!-- Dec(lat) input -->
@@ -96,18 +98,18 @@
            formGroupName="latitude">
         <label for="latInput">
           {{
-          this.sourceForm.value.sourceCoordinates.type ?
-          this.currentSystem?.sexagesimalLabels.latLabel :
-          this.currentSystem?.normalLabels.latLabel
+          form.value.sourceCoordinates.type === 'ABSOLUTE' ?
+          currentSystem?.sexagesimalLabels.latLabel :
+          currentSystem?.normalLabels.latLabel
           }}
         </label>
         <input #latInput
                id="latInput"
                formControlName="content"
                placeholder="0"
-               [value]="sourceForm.value.sourceCoordinates.type ?
-                        (sourceForm.value.sourceCoordinates.latitude.content | sexagesimal: 'dec') :
-                        sourceForm.value.sourceCoordinates.latitude.content">
+               [value]="form.value.sourceCoordinates.type ?
+                        (form.value.sourceCoordinates.latitude.content | sexagesimal: 'dec') :
+                        form.value.sourceCoordinates.latitude.content">
       </div>
     </div>
 

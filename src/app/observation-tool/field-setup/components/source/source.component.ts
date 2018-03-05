@@ -75,7 +75,7 @@ export class SourceComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.form);
+    this.systemChange();
   }
 
   /**
@@ -84,11 +84,11 @@ export class SourceComponent implements OnInit {
    */
   systemChange() {
     this.currentSystem = this.systemService.getSystem(this.form.value.sourceCoordinates.system);
-    if (this.form.value.sourceCoordinates.system === 'ICRS' || this.form.value.sourceCoordinates.system === 'FK5' +
-                                                                                                            ' J2000') {
+    if (this.form.value.sourceCoordinates.system === 'ICRS' ||
+        this.form.value.sourceCoordinates.system === 'FK5 J2000') {
       this.sexagesimalCheckboxDisabled = false;
     } else {
-      this.form.value.sourceCoordinates.type = false;
+      this.form.value.sourceCoordinates.type = 'RELATIVE';
       this.sexagesimalCheckboxDisabled       = true;
     }
   }

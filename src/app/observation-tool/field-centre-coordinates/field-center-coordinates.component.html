@@ -1,16 +1,14 @@
 <h4 class="ui dividing header">Field Centre Coordinates</h4>
 <form class="ui form"
-      [formGroup]="fieldCentreCoordinatesForm">
+      [formGroup]="form">
   <div class="three fields">
     <div class="field">
       <label>Coord Type</label>
       <sui-radio-button name="coordTypeRadios"
-                        value="RELATIVE"
-                        formControlName="coordType">Relative
+                        value="RELATIVE">Relative
       </sui-radio-button>
       <sui-radio-button name="coordTypeRadios"
-                        value="ABSOLUTE"
-                        formControlName="coordType">Absolute
+                        value="ABSOLUTE">Absolute
       </sui-radio-button>
     </div>
 
@@ -18,23 +16,21 @@
     <div class="field">
       <label>Target Type</label>
       <sui-radio-button name="targetTypeRadios"
-                        value="F_MultiplePoints"
-                        formControlName="targetType">Individual Pointing(s)
+                        value="F_MultiplePoints">Individual Pointing(s)
       </sui-radio-button>
       <sui-radio-button name="targetTypeRadios"
-                        value="F_SingleRectangle"
-                        formControlName="targetType">Rectangular Field
+                        value="F_SingleRectangle">Rectangular Field
       </sui-radio-button>
     </div>
 
     <div class="field">
-      <div *ngIf="fieldCentreCoordinatesForm.value.targetType === 'F_MultiplePoints';
+      <div *ngIf="form.value.targetType === 'F_MultiplePoints';
                   then individualStatistic
                   else rectangularStatistic"></div>
       <ng-template #individualStatistic>
         <label></label>
         <div class="ui mini horizontal statistic">
-          <div class="value">{{tableRows.length}}</div>
+          <div class="value">{{'fix'}}</div>
           <label class="label">
             Pointings
           </label>
@@ -57,12 +53,12 @@
   </div>
 </form>
 
-<div *ngIf="fieldCentreCoordinatesForm.value.targetType === 'F_MultiplePoints';
+<div *ngIf="form.value.targetType === 'F_MultiplePoints';
   then individualComponent
   else rectangularComponent"></div>
 <ng-template #individualComponent>
-  <fcc-individual [radioValue]="fieldCentreCoordinatesForm.value.coordType"
-                  [group]="fieldCentreCoordinatesForm.controls.individual"
+  <fcc-individual [radioValue]="form.value.coordType"
+                  [group]="form.controls.individual"
                   [tableRows]="tableRows"
                   [sourceCoordinatesSystemString]="sourceCoordinatesSystem"></fcc-individual>
 </ng-template>

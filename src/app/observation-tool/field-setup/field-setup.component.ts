@@ -108,14 +108,14 @@ export class FieldSetupComponent implements OnInit {
     this.persistenceService.getScienceGoal()
         .subscribe(result => {
           const targetParams = result.TargetParameters[index];
-          console.log(targetParams);
           this.form.patchValue({
+            type: targetParams.type,
             sourceName: targetParams.sourceName,
             solarSystemObject: targetParams.solarSystemObject,
             radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
             sourceCoordinates: {
               system: targetParams.sourceCoordinates.system,
-              type: targetParams.sourceCoordinates.type === 'ABSOLUTE',
+              type: targetParams.sourceCoordinates.type,
               longitude: targetParams.sourceCoordinates.longitude,
               latitude: targetParams.sourceCoordinates.latitude,
             },

@@ -151,17 +151,14 @@ export class FieldSetupComponent implements OnInit {
   }
 
   setSinglePoint(points: SinglePoint[]) {
-    const formGroups           = points.map(point => {
-      console.log(point);
-      this.formBuilder.group({
-        name: '',
-        centre: this.formBuilder.group({
-          latitude: this.formBuilder.group({unit: '', content: 0.0}),
-          longitude: this.formBuilder.group({unit: '', content: 0.0}),
-          fieldName: ''
-        })
+    const formGroups           = points.map(point => this.formBuilder.group({
+      name: point.name,
+      centre: this.formBuilder.group({
+        longitude: this.formBuilder.group({unit: point.centre.longitude.unit, content: point.centre.longitude.content}),
+        latitude: this.formBuilder.group({unit: point.centre.latitude.unit, content: point.centre.latitude.content})
       })
-    });
+    }));
+    console.log(formGroups);
     const singlePointFormArray = this.formBuilder.array(formGroups);
     this.form.setControl('SinglePoint', singlePointFormArray);
   }

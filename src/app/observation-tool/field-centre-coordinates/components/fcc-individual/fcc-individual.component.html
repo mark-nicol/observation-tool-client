@@ -8,7 +8,7 @@
     </label>
     <sui-select id="offsetSelector"
                 class="selection"
-                [isDisabled]="radioValue === 'ABSOLUTE'">
+                formControlName="offsetUnit">
       <sui-select-option *ngFor="let unit of offsetUnits"
                          value="{{unit}}">
         {{unit}}
@@ -22,21 +22,20 @@
     <thead>
       <tr>
         <th>
-          {{sourceCoordinatesSystem?.lonHeader}}{{radioValue === 'RELATIVE' ? form.value.SinglePoint.centre.latitude.unit
-          : null}}
+          Lon
         </th>
         <th>
-          {{sourceCoordinatesSystem?.latHeader}}{{radioValue === 'RELATIVE' ? form.value.SinglePoint.centre.latitude.unit
-          : null}}
+          Lat
         </th>
       </tr>
     </thead>
     <tbody formArrayName="SinglePoint">
       <tr *ngFor="let pointing of SinglePoint.controls; let i = index" [formGroupName]="i">
-        <td>
-          <input formControlName="centre.longitude.content">
-        </td>
         <td contenteditable>
+          {{pointing.value.centre.longitude.content}}
+        </td>
+        <td>
+          {{pointing.value.centre.latitude.content}}
         </td>
       </tr>
     </tbody>

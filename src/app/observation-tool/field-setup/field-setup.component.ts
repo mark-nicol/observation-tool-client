@@ -20,6 +20,20 @@ import {SourceComponent} from './components/source/source.component';
 
 export class FieldSetupComponent implements OnInit {
 
+  fieldCentreCoordinatesForm = this.formBuilder.group({
+    coordType: 'ABSOLUTE',
+    targetType: 'F_MultiplePoints',
+    pointings: this.formBuilder.group({
+      name: '',
+      centre: this.formBuilder.group({}),
+      pALong: this.formBuilder.group({unit: '', content: 0.0}),
+      long: this.formBuilder.group({unit: '', content: 0.0}),
+      short: this.formBuilder.group({unit: '', content: 0.0}),
+      spacing: this.formBuilder.group({unit: '', userUnit: '', content: 0.0}),
+      referenceFrequency: this.formBuilder.group({unit: '', content: 0.0})
+    }) || this.formBuilder.array([])
+  });
+
   form = this.formBuilder.group({
     ExpectedProperties: this.formBuilder.group({
       expectedPeakFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
@@ -143,35 +157,24 @@ export class FieldSetupComponent implements OnInit {
         });
   }
 
+  setSinglePoint(points: SinglePoint[]) {
+    const formGroups = points.map(point => this.formBuilder.group({
+      name: point.name,
+      centre: this.formBuilder.group({
+        longitude: this.formBuilder.group({unit: point.centre.longitude.unit, content: point.centre.longitude.content}),
+        latitude: this.formBuilder.group({unit: point.centre.latitude.unit, content: point.centre.latitude.content}),
+        fieldName: point.centre.fieldName
+      })
+    }));
+    const singlePointFormArray = this.formBuilder.array(formGroups);
+    this.fieldCentreCoordinatesForm.setControl('pointings', singlePointFormArray);
+  }
+
   observeFormChanges() {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       console.log(value);
     });
-  }
-
-  setSinglePoint(points: SinglePoint[]) {
-    const formGroups           = points.map(point => this.formBuilder.group({
-      name: point.name,
-      centre: this.formBuilder.group({
-        longitude: this.formBuilder.group({unit: point.centre.longitude.unit, content: point.centre.longitude.content}),
-        latitude: this.formBuilder.group({unit: point.centre.latitude.unit, content: point.centre.latitude.content})
-      })
-    }));
-    console.log(formGroups);
-    const singlePointFormArray = this.formBuilder.array(formGroups);
-    this.form.setControl('SinglePoint', singlePointFormArray);
-  }
-
-  createSinglePoint() {
-    return this.formBuilder.group({
-      name: '',
-      centre: this.formBuilder.group({
-        latitude: this.formBuilder.group({unit: '', content: 0.0}),
-        longitude: this.formBuilder.group({unit: '', content: 0.0}),
-        fieldName: ''
-      })
-    })
   }
 
 }

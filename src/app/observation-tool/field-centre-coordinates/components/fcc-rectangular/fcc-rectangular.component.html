@@ -1,16 +1,15 @@
-<form class="ui form" [formGroup]="rectangularForm">
+<form class="ui form">
   <div class="three fields">
     <div class="field">
       <!-- System Selector -->
       <label>System</label>
       <div class="inline field">
         <sui-select class="selection"
-                    (selectedOptionChange)="systemChange()"
-                    formControlName="chosenSystem">
+                    (selectedOptionChange)="systemChange()">
           <sui-select-option *ngFor="let system of systemService.getSystems()"
                              value="{{system}}"></sui-select-option>
         </sui-select>
-        <sui-checkbox formControlName="sexagesimalUnits">Sexagesimal Units
+        <sui-checkbox>Sexagesimal Units
         </sui-checkbox>
       </div>
     </div>
@@ -30,9 +29,8 @@
           </label>
         </ng-template>
         <div class="ui action input">
-          <input formControlName="lonOffsetValue">
+          <input>
           <sui-select class="selection"
-                      formControlName="lonOffsetUnit"
                       *ngIf="radioValue === 'RELATIVE'">
             <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
           </sui-select>
@@ -54,10 +52,9 @@
         </label>
       </ng-template>
       <div class="ui action input">
-        <input formControlName="latOffsetValue">
+        <input>
         <sui-select class="selection"
-                    *ngIf="radioValue === 'RELATIVE'"
-                    formControlName="latOffsetUnit">
+                    *ngIf="radioValue === 'RELATIVE'">
           <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
         </sui-select>
       </div>
@@ -72,10 +69,8 @@
       </label>
       <div class="ui action input">
         <input placeholder="0.00000"
-               type="number"
-               formControlName="pLengthValue">
-        <sui-select class="selection"
-                    formControlName="pLengthUnit">
+               type="number">
+        <sui-select class="selection">
           <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
         </sui-select>
       </div>
@@ -88,10 +83,8 @@
       </label>
       <div class="ui action input">
         <input placeholder="0.00000"
-               type="number"
-               formControlName="qLengthValue">
-        <sui-select class="selection"
-                    formControlName="qLengthUnit">
+               type="number">
+        <sui-select class="selection">
           <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
         </sui-select>
       </div>
@@ -104,10 +97,8 @@
       </label>
       <div class="ui action input">
         <input placeholder="0.00000"
-               type="number"
-               formControlName="positionAngleValue">
-        <sui-select class="selection"
-                    formControlName="positionAngleUnit">
+               type="number">
+        <sui-select class="selection">
           <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
         </sui-select>
       </div>
@@ -122,10 +113,8 @@
       </label>
       <div class="ui right action input">
         <input placeholder="0.51093"
-               type="number"
-               formControlName="spacingValue">
-        <sui-select class="selection"
-                    formControlName="spacingUnits">
+               type="number">
+        <sui-select class="selection">
           <sui-select-option value="fraction of main beam">Fraction of antenna beamsize</sui-select-option>
           <sui-select-option value="arcsec">arcsec</sui-select-option>
         </sui-select>

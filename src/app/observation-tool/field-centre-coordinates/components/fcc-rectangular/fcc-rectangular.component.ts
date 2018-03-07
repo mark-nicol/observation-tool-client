@@ -19,22 +19,7 @@ export class FccRectangularComponent implements OnInit, OnChanges {
   /** The selected radio content from FieldCentreCoordinates component */
   @Input() radioValue = 'relative';
 
-  @Input('group') rectangularForm = new FormGroup({
-                                                    chosenSystem: new FormControl(),
-                                                    sexagesimalUnits: new FormControl(),
-                                                    lonOffsetUnit: new FormControl(),
-                                                    lonOffsetValue: new FormControl(),
-                                                    latOffsetUnit: new FormControl(),
-                                                    latOffsetValue: new FormControl(),
-                                                    pLengthUnit: new FormControl(),
-                                                    pLengthValue: new FormControl(),
-                                                    qLengthUnit: new FormControl(),
-                                                    qLengthValue: new FormControl(),
-                                                    positionAngleUnit: new FormControl(),
-                                                    positionAngleValue: new FormControl(),
-                                                    spacingValue: new FormControl(),
-                                                    spacingUnits: new FormControl(),
-                                                  });
+  @Input() form: FormGroup;
 
   /** Controls if the sexagesimal checkbox is shown in the system selector */
   sexagesimalHidden = (this.radioValue === 'relative');
@@ -56,7 +41,7 @@ export class FccRectangularComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.chosenSystem = this.systemService.getSystem(this.rectangularForm.value.chosenSystem);
+    this.chosenSystem = this.systemService.getSystem(this.form.value.chosenSystem);
   }
 
   /**

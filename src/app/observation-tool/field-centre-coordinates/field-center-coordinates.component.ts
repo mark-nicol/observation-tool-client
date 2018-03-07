@@ -1,7 +1,7 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
-import {FccIndividualComponent} from './components/fcc-individual/fcc-individual.component';
-import {FccRectangularComponent} from './components/fcc-rectangular/fcc-rectangular.component';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {CoordSystemInterface} from '../shared/interfaces/coord-system.interface';
+import {SystemService} from '../shared/services/system.service';
 
 /**
  * Handles the Field Centre Coordinates component in the Field Setup
@@ -15,14 +15,40 @@ import {FccRectangularComponent} from './components/fcc-rectangular/fcc-rectangu
 export class FieldCenterCoordinatesComponent implements OnInit {
 
   @Input() form: FormGroup;
-  @ViewChild(FccIndividualComponent) individual: FccIndividualComponent;
-  @ViewChild(FccRectangularComponent) rectangular: FccRectangularComponent;
 
-  constructor() {
+  /** The selected radio content from FieldCentreCoordinates component */
+  @Input() radioValue = 'relative';
+
+  /** Controls if the sexagesimal checkbox is shown in the system selector */
+  sexagesimalHidden = (this.radioValue === 'relative');
+  /** The chosen coordinates system from the selector */
+  chosenSystem: CoordSystemInterface;
+  /** True if the sexagesimal checkbox is selected */
+  sexagesimalUnits: boolean;
+
+  /** Units for the offset selection box */
+  offsetUnits = [
+    'mas',
+    'arcsec',
+    'arcmin',
+    'deg',
+    'rad'
+  ];
+
+  constructor(protected systemService: SystemService) {
   }
 
   ngOnInit() {
     console.log(this.form);
+    this.chosenSystem = this.systemService.getSystem(this.form.value.chosenSystem);
+  }
+
+  /**
+   * Called when the chosen system changes in the system selector.
+   * @param system The newly selected system
+   */
+  systemChange(system: CoordSystemInterface) {
+    this.chosenSystem = system;
   }
 
 }

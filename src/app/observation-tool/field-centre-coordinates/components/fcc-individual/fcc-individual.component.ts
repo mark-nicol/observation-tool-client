@@ -15,14 +15,7 @@ export class FccIndividualComponent implements OnInit {
 
   @Input() form: FormGroup;
 
-  /** Units for the offset selection box */
-  offsetUnits = [
-    'mas',
-    'arcsec',
-    'arcmin',
-    'deg',
-    'rad'
-  ];
+
 
   /**
    * Constructor

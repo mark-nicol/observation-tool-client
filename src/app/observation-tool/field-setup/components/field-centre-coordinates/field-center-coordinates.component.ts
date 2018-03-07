@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {SystemService} from '../../../shared/services/system.service';
 
@@ -49,6 +49,10 @@ export class FieldCenterCoordinatesComponent implements OnInit {
    */
   systemChange(system: CoordSystemInterface) {
     this.chosenSystem = system;
+  }
+
+  get singlePoint(): FormArray {
+    return this.form.get('SinglePoint') as FormArray;
   }
 
 }

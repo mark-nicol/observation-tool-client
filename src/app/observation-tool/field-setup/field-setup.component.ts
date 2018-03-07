@@ -20,12 +20,6 @@ import {SourceComponent} from './components/source/source.component';
 
 export class FieldSetupComponent implements OnInit {
 
-  fieldCentreCoordinatesForm = this.formBuilder.group({
-    coordType: 'ABSOLUTE',
-    targetType: 'F_MultiplePoints',
-    pointings: undefined
-  });
-
   form = this.formBuilder.group({
     ExpectedProperties: this.formBuilder.group({
       expectedPeakFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
@@ -145,19 +139,7 @@ export class FieldSetupComponent implements OnInit {
             pmRA: targetParams.pmRA,
             pmDec: targetParams.pmDec,
           });
-          if (targetParams.type === 'F_MultiplePoints') {
-            this.setSinglePoint(targetParams.SinglePoint);
-          } else {
-            this.fieldCentreCoordinatesForm.setControl('pointings', this.formBuilder.group({
-              name: '',
-              centre: this.formBuilder.group({}),
-              pALong: this.formBuilder.group({unit: '', content: 0.0}),
-              long: this.formBuilder.group({unit: '', content: 0.0}),
-              short: this.formBuilder.group({unit: '', content: 0.0}),
-              spacing: this.formBuilder.group({unit: '', userUnit: '', content: 0.0}),
-              referenceFrequency: this.formBuilder.group({unit: '', content: 0.0})
-            }))
-          }
+          this.setSinglePoint(targetParams.SinglePoint);
         });
   }
 
@@ -171,7 +153,7 @@ export class FieldSetupComponent implements OnInit {
       })
     }));
     const singlePointFormArray = this.formBuilder.array(formGroups);
-    this.fieldCentreCoordinatesForm.setControl('pointings', singlePointFormArray);
+    this.form.setControl('SinglePoint', singlePointFormArray);
   }
 
   observeFormChanges() {

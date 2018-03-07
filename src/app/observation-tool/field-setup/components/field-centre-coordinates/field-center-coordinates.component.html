@@ -5,12 +5,10 @@
     <div class="field">
       <label>Coord Type</label>
       <sui-radio-button name="coordTypeRadios"
-                        value="RELATIVE"
-                        formControlName="coordType">Relative
+                        value="RELATIVE">Relative
       </sui-radio-button>
       <sui-radio-button name="coordTypeRadios"
-                        value="ABSOLUTE"
-                        formControlName="coordType">Absolute
+                        value="ABSOLUTE">Absolute
       </sui-radio-button>
     </div>
 
@@ -19,11 +17,11 @@
       <label>Target Type</label>
       <sui-radio-button name="targetTypeRadios"
                         value="F_MultiplePoints"
-                        formControlName="targetType">Individual Pointing(s)
+                        formControlName="type">Individual Pointing(s)
       </sui-radio-button>
       <sui-radio-button name="targetTypeRadios"
                         value="F_SingleRectangle"
-                        formControlName="targetType">Rectangular Field
+                        formControlName="type">Rectangular Field
       </sui-radio-button>
     </div>
 
@@ -55,7 +53,7 @@
   </div>
 
 
-  <div *ngIf="form.value.targetType === 'F_MultiplePoints';
+  <div *ngIf="form.value.type === 'F_MultiplePoints';
   then individualComponent
   else rectangularComponent"></div>
 
@@ -77,59 +75,18 @@
       </sui-select>
     </div>
 
-    <table class="ui compact celled table"
-           suiPopup
-           popupText="Coordinate offsets for each pointing">
-      <thead>
-        <tr>
-          <th>
-            Lon
-          </th>
-          <th>
-            Lat
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <!--<tr *ngFor="let pointing of SinglePoint.controls; let i = index" [formGroupName]="i">-->
-        <tr>
-          <td contenteditable>
-
-          </td>
-          <td>
-
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <th colspan="2">
-            <div class="ui right floated tiny compact labeled icon buttons">
-              <button class="ui blue button"
-                      suiPopup
-                      popupText="Add a pointing">
-                <i class="plus icon"></i>Add
-              </button>
-              <button class="ui red button"
-                      suiPopup
-                      popupText="Remove a pointing">
-                <i class="minus icon"></i>Delete
-              </button>
-              <button class="ui basic blue button"
-                      suiPopup
-                      popupText="Import pointings">
-                <i class="download icon"></i>Import
-              </button>
-              <button class="ui basic blue button"
-                      suiPopup
-                      popupText="Export current pointings">
-                <i class="upload icon"></i>Export
-              </button>
-            </div>
-          </th>
-        </tr>
-      </tfoot>
-    </table>
+    <div formArrayName="SinglePoint">
+      <div *ngFor="let pointing of singlePoint.controls; let i = index" [formGroupName]="i">
+        <div class="two fields" formGroupName="centre">
+          <div class="field" formGroupName="longitude">
+            <input formControlName="content">
+          </div>
+          <div class="field" formGroupName="latitude">
+            <input formControlName="content">
+          </div>
+        </div>
+      </div>
+    </div>
   </ng-template>
 
 

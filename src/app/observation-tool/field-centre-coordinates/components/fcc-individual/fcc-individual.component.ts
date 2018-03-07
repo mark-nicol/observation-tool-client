@@ -1,9 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {SinglePoint} from '../../../shared/classes/science-goal/single-point';
-import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
-import {ISinglePoint} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {FormArray, FormGroup} from '@angular/forms';
 import {SystemService} from '../../../shared/services/system.service';
 
 /**
@@ -43,7 +39,7 @@ export class FccIndividualComponent implements OnInit {
   }
 
   get SinglePoint(): FormArray {
-    return this.form.get('SinglePoint') as FormArray;
+    return this.form.get('pointings') as FormArray;
   }
 
 }

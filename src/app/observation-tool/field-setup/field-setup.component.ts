@@ -23,15 +23,7 @@ export class FieldSetupComponent implements OnInit {
   fieldCentreCoordinatesForm = this.formBuilder.group({
     coordType: 'ABSOLUTE',
     targetType: 'F_MultiplePoints',
-    pointings: this.formBuilder.group({
-      name: '',
-      centre: this.formBuilder.group({}),
-      pALong: this.formBuilder.group({unit: '', content: 0.0}),
-      long: this.formBuilder.group({unit: '', content: 0.0}),
-      short: this.formBuilder.group({unit: '', content: 0.0}),
-      spacing: this.formBuilder.group({unit: '', userUnit: '', content: 0.0}),
-      referenceFrequency: this.formBuilder.group({unit: '', content: 0.0})
-    }) || this.formBuilder.array([])
+    pointings: undefined
   });
 
   form = this.formBuilder.group({
@@ -153,12 +145,24 @@ export class FieldSetupComponent implements OnInit {
             pmRA: targetParams.pmRA,
             pmDec: targetParams.pmDec,
           });
-          this.setSinglePoint(targetParams.SinglePoint);
+          if (targetParams.type === 'F_MultiplePoints') {
+            this.setSinglePoint(targetParams.SinglePoint);
+          } else {
+            this.fieldCentreCoordinatesForm.setControl('pointings', this.formBuilder.group({
+              name: '',
+              centre: this.formBuilder.group({}),
+              pALong: this.formBuilder.group({unit: '', content: 0.0}),
+              long: this.formBuilder.group({unit: '', content: 0.0}),
+              short: this.formBuilder.group({unit: '', content: 0.0}),
+              spacing: this.formBuilder.group({unit: '', userUnit: '', content: 0.0}),
+              referenceFrequency: this.formBuilder.group({unit: '', content: 0.0})
+            }))
+          }
         });
   }
 
   setSinglePoint(points: SinglePoint[]) {
-    const formGroups = points.map(point => this.formBuilder.group({
+    const formGroups           = points.map(point => this.formBuilder.group({
       name: point.name,
       centre: this.formBuilder.group({
         longitude: this.formBuilder.group({unit: point.centre.longitude.unit, content: point.centre.longitude.content}),

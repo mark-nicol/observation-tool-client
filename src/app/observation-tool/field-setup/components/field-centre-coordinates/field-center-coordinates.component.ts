@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {CoordSystemInterface} from '../shared/interfaces/coord-system.interface';
-import {SystemService} from '../shared/services/system.service';
+import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
+import {SystemService} from '../../../shared/services/system.service';
 
 /**
  * Handles the Field Centre Coordinates component in the Field Setup

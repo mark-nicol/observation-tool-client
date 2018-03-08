@@ -119,4 +119,31 @@ export class PointingCanvasComponent implements OnInit {
     this.redraw();
   }
 
+  mousedown(event: MouseEvent) {
+    this.canvasService.polygons.forEach(polygon => {
+      if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
+        polygon.isDragging = true;
+      }
+    });
+    console.log(this.canvasService.polygons);
+  }
+
+  mouseup(event: MouseEvent) {
+    this.canvasService.polygons.forEach(polygon => {
+      if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
+        polygon.isDragging = false;
+      }
+    });
+    console.log(this.canvasService.polygons);
+  }
+
+  mousemove(event: MouseEvent) {
+    this.canvasService.polygons.forEach(polygon => {
+      if (polygon.isDragging) {
+        console.log('dragging');
+        
+      }
+    });
+  }
+
 }

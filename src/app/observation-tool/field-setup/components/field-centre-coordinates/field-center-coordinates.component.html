@@ -35,7 +35,7 @@
                   else rectangularStatistic"></div>
       <ng-template #individualStatistic>
         <label></label>
-        <div class="ui mini horizontal statistic">
+        <div class="ui small horizontal statistic">
           <div class="value">{{form.value.SinglePoint.length}}</div>
           <label class="label">
             Pointings
@@ -85,14 +85,31 @@
       <div *ngFor="let pointing of singlePoint.controls; let i = index" [formGroupName]="i">
         <div class="two fields" formGroupName="centre">
           <div class="field" formGroupName="longitude">
-            <input formControlName="content">
+            <label *ngIf="i === 0">Lon</label>
+            <div class="ui small input">
+              <input formControlName="content">
+            </div>
           </div>
           <div class="field" formGroupName="latitude">
-            <input formControlName="content">
+            <label *ngIf="i === 0">Lat</label>
+            <div class="ui small input">
+              <input formControlName="content">
+            </div>
           </div>
+          <button class="ui tiny compact red icon button"
+                  type="button"
+                  [ngStyle]="{'margin-top': i === 0 ? '2em' : null}"
+                  (click)="removePointing(i)">
+            <i class="remove icon"></i>
+          </button>
         </div>
       </div>
     </div>
+    <button class="ui right floated tiny compact blue labeled icon button"
+            type="button"
+            (click)="addPointing()">
+      <i class="plus icon"></i>Add pointing
+    </button>
   </ng-template>
 
 

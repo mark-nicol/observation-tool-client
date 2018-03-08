@@ -86,22 +86,22 @@
         <div class="two fields" formGroupName="centre">
           <div class="field" formGroupName="longitude">
             <label *ngIf="i === 0">Lon</label>
-            <div class="ui small input">
+            <div class="ui small labeled input">
+              <div class="ui blue label">{{i + 1}}</div>
               <input formControlName="content">
             </div>
           </div>
           <div class="field" formGroupName="latitude">
             <label *ngIf="i === 0">Lat</label>
-            <div class="ui small input">
+            <div class="ui small action input">
               <input formControlName="content">
+              <button class="ui tiny compact red icon button"
+                      type="button"
+                      (click)="removePointing(i)">
+                <i class="remove icon"></i>
+              </button>
             </div>
           </div>
-          <button class="ui tiny compact red icon button"
-                  type="button"
-                  [ngStyle]="{'margin-top': i === 0 ? '2em' : null}"
-                  (click)="removePointing(i)">
-            <i class="remove icon"></i>
-          </button>
         </div>
       </div>
     </div>

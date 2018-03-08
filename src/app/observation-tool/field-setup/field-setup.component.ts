@@ -1,12 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {Component} from '@angular/core';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
-import {Observable} from 'rxjs/Rx';
-import {Speed} from '../../units/classes/speed';
-import {SinglePoint} from '../shared/classes/science-goal/single-point';
-import {PersistenceService} from '../shared/services/persistence.service';
-import {SourceComponent} from './components/source/source.component';
 
 /**
  * Handles the field setup page of a science goal
@@ -18,65 +11,7 @@ import {SourceComponent} from './components/source/source.component';
   styleUrls: ['./field-setup.component.css']
 })
 
-export class FieldSetupComponent implements OnInit {
-
-  fieldCentreCoordinatesForm = this.formBuilder.group({
-    coordType: 'ABSOLUTE',
-    targetType: 'F_MultiplePoints',
-    pointings: undefined
-  });
-
-  form = this.formBuilder.group({
-    ExpectedProperties: this.formBuilder.group({
-      expectedPeakFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
-      desiredCircularPolarizationPercentage: 0.0,
-      expectedPeakLineFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
-      expectedLineWidth: this.formBuilder.group({userUnit: '', content: 0.0}),
-      desiredLinePolarizationPercentage: 0.0
-    }),
-    SinglePoint: this.formBuilder.array([]),
-    index: -1,
-    isMosaic: true,
-    nonSiderealMotion: false,
-    parallax: this.formBuilder.group({
-      unit: '',
-      content: 0.0
-    }),
-    pmDec: this.formBuilder.group({
-      unit: '',
-      content: 0.0
-    }),
-    pmRA: this.formBuilder.group({
-      unit: '',
-      content: 0.0
-    }),
-    solarSystemObject: 'Unspecified',
-    sourceCoordinates: this.formBuilder.group({
-      fieldName: 'None',
-      latitude: this.formBuilder.group({
-        unit: '',
-        content: 0.0
-      }),
-      longitude: this.formBuilder.group({
-        unit: '',
-        content: 0.0
-      }),
-      system: 'ICRS',
-      type: 'ABSOLUTE',
-    }),
-    sourceEphemeris: '',
-    sourceName: ['', Validators.required],
-    sourceVelocity: this.formBuilder.group({
-      centerVelocity: this.formBuilder.group({
-        unit: '',
-        content: 0.0
-      }),
-      dopplerCalcType: '',
-      redshift: 0,
-      referenceSystem: '',
-    }),
-    type: '',
-  });
+export class FieldSetupComponent {
 
   get resolveCoordinates(): number[] {
     return this._resolveCoordinates;

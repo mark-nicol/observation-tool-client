@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormGroup} from '@angular/forms';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {SystemService} from '../../../shared/services/system.service';
 
@@ -19,6 +19,8 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   /** The selected radio content from FieldCentreCoordinates component */
   @Input() radioValue = 'relative';
 
+  coordType = 'ABSOLUTE';
+
   /** Controls if the sexagesimal checkbox is shown in the system selector */
   sexagesimalHidden = (this.radioValue === 'relative');
   /** The chosen coordinates system from the selector */
@@ -34,6 +36,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
     'deg',
     'rad'
   ];
+  offsetUnit  = this.offsetUnits[1];
 
   constructor(protected systemService: SystemService) {
   }
@@ -53,6 +56,10 @@ export class FieldCenterCoordinatesComponent implements OnInit {
 
   get singlePoint(): FormArray {
     return this.form.get('SinglePoint') as FormArray;
+  }
+
+  change() {
+    console.log('change');
   }
 
 }

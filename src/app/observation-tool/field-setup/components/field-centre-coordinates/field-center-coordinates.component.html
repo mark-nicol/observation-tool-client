@@ -5,10 +5,14 @@
     <div class="field">
       <label>Coord Type</label>
       <sui-radio-button name="coordTypeRadios"
-                        value="RELATIVE">Relative
+                        value="RELATIVE"
+                        [(ngModel)]="coordType"
+                        [ngModelOptions]="{standalone: true}">Relative
       </sui-radio-button>
       <sui-radio-button name="coordTypeRadios"
-                        value="ABSOLUTE">Absolute
+                        value="ABSOLUTE"
+                        [(ngModel)]="coordType"
+                        [ngModelOptions]="{standalone: true}">Absolute
       </sui-radio-button>
     </div>
 
@@ -26,13 +30,13 @@
     </div>
 
     <div class="field">
-      <div *ngIf="form.value.targetType === 'F_MultiplePoints';
+      <div *ngIf="form.value.type === 'F_MultiplePoints';
                   then individualStatistic
                   else rectangularStatistic"></div>
       <ng-template #individualStatistic>
         <label></label>
         <div class="ui mini horizontal statistic">
-          <div class="value">{{form.value.pointings?.length}}</div>
+          <div class="value">{{form.value.SinglePoint.length}}</div>
           <label class="label">
             Pointings
           </label>
@@ -67,7 +71,9 @@
         Offset Unit
       </label>
       <sui-select id="offsetSelector"
-                  class="selection">
+                  class="selection"
+                  [(ngModel)]="offsetUnit"
+                  [ngModelOptions]="{standalone: true}">
         <sui-select-option *ngFor="let unit of offsetUnits"
                            value="{{unit}}">
           {{unit}}

@@ -19,7 +19,16 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   /** The selected radio content from FieldCentreCoordinates component */
   @Input() radioValue = 'relative';
 
-  coordType = 'ABSOLUTE';
+  _coordType = 'ABSOLUTE';
+
+  get coordType() {
+    return this._coordType;
+  }
+
+  set coordType(value: string) {
+    this._coordType = value;
+    console.log(this._coordType);
+  }
 
   /** Controls if the sexagesimal checkbox is shown in the system selector */
   sexagesimalHidden = (this.radioValue === 'relative');
@@ -36,13 +45,22 @@ export class FieldCenterCoordinatesComponent implements OnInit {
     'deg',
     'rad'
   ];
-  offsetUnit  = this.offsetUnits[1];
+
+  _offsetUnit = this.offsetUnits[1];
+
+  get offsetUnit() {
+    return this._offsetUnit;
+  }
+
+  set offsetUnit(value: string) {
+    this._offsetUnit = value;
+    console.log(this._offsetUnit);
+  }
 
   constructor(protected systemService: SystemService) {
   }
 
   ngOnInit() {
-    console.log(this.form);
     this.chosenSystem = this.systemService.getSystem(this.form.value.chosenSystem);
   }
 

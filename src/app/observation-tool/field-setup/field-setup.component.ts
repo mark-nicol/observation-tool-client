@@ -1,5 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
+import {Observable} from 'rxjs/Rx';
+import {Speed} from '../../units/classes/speed';
+import {SinglePoint} from '../shared/classes/science-goal/single-point';
+import {PersistenceService} from '../shared/services/persistence.service';
+import {SourceComponent} from './components/source/source.component';
 
 /**
  * Handles the field setup page of a science goal
@@ -11,7 +18,59 @@ import {SuiPopupConfig} from 'ng2-semantic-ui';
   styleUrls: ['./field-setup.component.css']
 })
 
-export class FieldSetupComponent {
+export class FieldSetupComponent implements OnInit {
+
+  form = this.formBuilder.group({
+    ExpectedProperties: this.formBuilder.group({
+      expectedPeakFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
+      desiredCircularPolarizationPercentage: 0.0,
+      expectedPeakLineFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
+      expectedLineWidth: this.formBuilder.group({userUnit: '', content: 0.0}),
+      desiredLinePolarizationPercentage: 0.0
+    }),
+    SinglePoint: this.formBuilder.array([]),
+    index: -1,
+    isMosaic: true,
+    nonSiderealMotion: false,
+    parallax: this.formBuilder.group({
+      unit: '',
+      content: 0.0
+    }),
+    pmDec: this.formBuilder.group({
+      unit: '',
+      content: 0.0
+    }),
+    pmRA: this.formBuilder.group({
+      unit: '',
+      content: 0.0
+    }),
+    solarSystemObject: 'Unspecified',
+    sourceCoordinates: this.formBuilder.group({
+      fieldName: 'None',
+      latitude: this.formBuilder.group({
+        unit: '',
+        content: 0.0
+      }),
+      longitude: this.formBuilder.group({
+        unit: '',
+        content: 0.0
+      }),
+      system: 'ICRS',
+      type: 'ABSOLUTE',
+    }),
+    sourceEphemeris: '',
+    sourceName: ['', Validators.required],
+    sourceVelocity: this.formBuilder.group({
+      centerVelocity: this.formBuilder.group({
+        unit: '',
+        content: 0.0
+      }),
+      dopplerCalcType: '',
+      redshift: 0,
+      referenceSystem: '',
+    }),
+    type: '',
+  });
 
   get resolveCoordinates(): number[] {
     return this._resolveCoordinates;
@@ -80,19 +139,7 @@ export class FieldSetupComponent {
             pmRA: targetParams.pmRA,
             pmDec: targetParams.pmDec,
           });
-          if (targetParams.type === 'F_MultiplePoints') {
-            this.setSinglePoint(targetParams.SinglePoint);
-          } else {
-            this.fieldCentreCoordinatesForm.setControl('pointings', this.formBuilder.group({
-              name: '',
-              centre: this.formBuilder.group({}),
-              pALong: this.formBuilder.group({unit: '', content: 0.0}),
-              long: this.formBuilder.group({unit: '', content: 0.0}),
-              short: this.formBuilder.group({unit: '', content: 0.0}),
-              spacing: this.formBuilder.group({unit: '', userUnit: '', content: 0.0}),
-              referenceFrequency: this.formBuilder.group({unit: '', content: 0.0})
-            }))
-          }
+          this.setSinglePoint(targetParams.SinglePoint);
         });
   }
 
@@ -106,7 +153,7 @@ export class FieldSetupComponent {
       })
     }));
     const singlePointFormArray = this.formBuilder.array(formGroups);
-    this.fieldCentreCoordinatesForm.setControl('pointings', singlePointFormArray);
+    this.form.setControl('SinglePoint', singlePointFormArray);
   }
 
   observeFormChanges() {

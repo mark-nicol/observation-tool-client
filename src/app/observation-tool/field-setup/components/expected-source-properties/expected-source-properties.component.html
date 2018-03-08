@@ -1,10 +1,12 @@
 <h4 class="ui dividing header">Expected Source Properties</h4>
-<form class="ui form" [formGroup]="expectedSourcePropertiesForm">
+<form class="ui form" [formGroup]="form">
   <div class="two fields">
+
     <!-- Peak flux input -->
     <div class="field"
          suiPopup
-         [popupTemplate]="peakFluxPopupTemplate">
+         [popupTemplate]="peakFluxPopupTemplate"
+         formGroupName="expectedPeakFluxDensity">
       <ng-template #peakFluxPopupTemplate>
         Expected peak flux density of source continuum for the <b>weakest</b> source component that you wish to detect
       </ng-template>
@@ -14,9 +16,9 @@
       <div class="ui action input">
         <input id="peakContInput"
                placeholder="0.00000"
-               formControlName="continuumFluxDensityValue">
+               formControlName="content">
         <sui-select class="selection"
-                    formControlName="continuumFluxDensityUnit">
+                    formControlName="unit">
           <sui-select-option value="mJy">mJy</sui-select-option>
           <sui-select-option value="Jy">Jy</sui-select-option>
         </sui-select>
@@ -26,7 +28,8 @@
     <!-- Peak line flux input -->
     <div class="field"
          suiPopup
-         [popupTemplate]="peakLinePopupTemplate">
+         [popupTemplate]="peakLinePopupTemplate"
+         formGroupName="expectedPeakLineFluxDensity">
       <ng-template #peakLinePopupTemplate>
         Expected peak flux density of line emission relative to the continuum for the <b>weakest</b> source component
         that
@@ -38,9 +41,9 @@
       <div class="ui action input">
         <input id="peakFluxPerInput"
                placeholder="0.00000"
-               formControlName="lineFluxDensityValue">
+               formControlName="content">
         <sui-select class="selection"
-                    formControlName="lineFluxDensityUnit">
+                    formControlName="unit">
           <sui-select-option value="mJy">mJy</sui-select-option>
           <sui-select-option value="Jy">Jy</sui-select-option>
         </sui-select>
@@ -49,19 +52,21 @@
   </div>
 
   <div class="three fields">
+
     <!-- Line width input -->
     <div class="field"
          suiPopup
-         popupText="Expected width of the lines to be observed (FWHM)">
+         popupText="Expected width of the lines to be observed (FWHM)"
+         formGroupName="expectedLineWidth">
       <label for="lineWidthInput">
         Line Width
       </label>
       <div class="ui action input">
         <input id="lineWidthInput"
                placeholder="0.00000"
-               formControlName="lineWidthValue">
+               formControlName="content">
         <sui-select class="selection"
-                    formControlName="lineWidthUnit">
+                    formControlName="userUnit">
           <sui-select-option value="m/s">m/s</sui-select-option>
           <sui-select-option value="km/s">km/s</sui-select-option>
         </sui-select>
@@ -79,7 +84,7 @@
         <input id="linePolInput"
                type="number"
                placeholder="0.0"
-               formControlName="linePolarization">
+               formControlName="desiredLinePolarizationPercentage">
         <div class="ui label">%</div>
       </div>
     </div>
@@ -95,7 +100,7 @@
         <input id="contPolInput"
                type="number"
                placeholder="0.0"
-               formControlName="continuumPolarization">
+               formControlName="desiredCircularPolarizationPercentage">
         <div class="ui label">%</div>
       </div>
     </div>

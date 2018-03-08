@@ -1,6 +1,5 @@
 import {IObsProgram} from '../interfaces/project/obsprogram.interface';
 import {IObsProject} from '../interfaces/project/obsproject.interface';
-import {ObsProgram} from './obsprogram';
 
 export class ObsProject implements IObsProject {
 

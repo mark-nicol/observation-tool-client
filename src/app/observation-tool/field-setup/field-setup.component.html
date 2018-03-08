@@ -11,8 +11,8 @@
     </div>
   </div>
   <div class="sixteen wide tablet ten wide large screen nine wide widescreen column">
-    <field-source (resolveEmitter)="resolveCoordinates = $event"></field-source>
-    <source-expected-properties></source-expected-properties>
-    <field-center-coordinates></field-center-coordinates>
+    <field-source [form]="form" (resolveEmitter)="resolveCoordinates = $event"></field-source>
+    <source-expected-properties [form]="form.get('ExpectedProperties')"></source-expected-properties>
+    <field-center-coordinates [form]="form"></field-center-coordinates>
   </div>
 </div>

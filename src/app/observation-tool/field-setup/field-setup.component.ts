@@ -103,6 +103,7 @@ export class FieldSetupComponent implements OnInit {
       this.currentTarget = params.index ? params.index : this.persistenceService.currentTarget;
       this.initForm(this.currentTarget);
     });
+    this.observeFormChanges();
   }
 
   initForm(index: number) {
@@ -147,6 +148,8 @@ export class FieldSetupComponent implements OnInit {
     const formGroups           = points.map(point => this.formBuilder.group({
       name: point.name,
       centre: this.formBuilder.group({
+        system: point.centre.system,
+        type: point.centre.type,
         longitude: this.formBuilder.group({unit: point.centre.longitude.unit, content: point.centre.longitude.content}),
         latitude: this.formBuilder.group({unit: point.centre.latitude.unit, content: point.centre.latitude.content}),
         fieldName: point.centre.fieldName

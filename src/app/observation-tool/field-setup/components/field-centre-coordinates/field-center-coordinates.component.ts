@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {SinglePoint} from '../../../shared/classes/science-goal/single-point';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {SystemService} from '../../../shared/services/system.service';
 
@@ -22,12 +23,23 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   _coordType = 'ABSOLUTE';
 
   get coordType() {
+    if (this.form.value.SinglePoint[0]) {
+      return this.form.value.SinglePoint[0].centre.type;
+    }
     return this._coordType;
   }
 
   set coordType(value: string) {
+    const newValueArray = [];
+    for (let i = 0; i < this.singlePoint.length; i++) {
+      newValueArray.push({
+        centre: {
+          type: value
+        }
+      });
+    }
+    this.form.get('SinglePoint').patchValue(newValueArray);
     this._coordType = value;
-    console.log(this._coordType);
   }
 
   /** Controls if the sexagesimal checkbox is shown in the system selector */
@@ -53,6 +65,20 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   set offsetUnit(value: string) {
+    const newValueArray = [];
+    for (let i = 0; i < this.singlePoint.length; i++) {
+      newValueArray.push({
+        centre: {
+          longitude: {
+            unit: value
+          },
+          latitude: {
+            unit: value
+          }
+        }
+      });
+    }
+    this.form.get('SinglePoint').patchValue(newValueArray);
     this._offsetUnit = value;
   }
 
@@ -82,11 +108,11 @@ export class FieldCenterCoordinatesComponent implements OnInit {
 
   addPointing() {
     this.singlePoint.push(this.formBuilder.group({
-      name: `field-${this.singlePoint.length - 1}`,
+      name: '',
       centre: this.formBuilder.group({
         longitude: this.formBuilder.group({unit: this._offsetUnit, content: 0.0}),
         latitude: this.formBuilder.group({unit: this._offsetUnit, content: 0.0}),
-        fieldName: ''
+        fieldName: `Field-${this.singlePoint.length + 1}`
       })
     }))
   }

@@ -6,4 +6,5 @@ export interface IAladinOverlay {
   overlay_items: any[];
   overlays: any[];
   add: any
+  addFootprints: any;
 }

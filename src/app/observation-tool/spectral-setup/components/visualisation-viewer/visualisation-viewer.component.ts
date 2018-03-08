@@ -62,14 +62,14 @@ export class VisualisationViewerComponent implements OnInit {
 
   /** Regions for receiver bands */
   private almaBands: AlmaBand[] = [
-    {start: 84, end: 116, color: '#FF0000', text: '3'},
-    {start: 120, end: 163, color: '#FFAA00', text: '4'},
-    {start: 163, end: 211, color: '#FFFF00', text: '5'},
-    {start: 211, end: 275, color: '#00FF00', text: '6'},
-    {start: 275, end: 372, color: '#00FFAA', text: '7'},
-    {start: 385, end: 500, color: '#00FFFF', text: '8'},
-    {start: 602, end: 720, color: '#0000FF', text: '9'},
-    {start: 787, end: 950, color: '#AA00FF', text: '10'}
+    {start: 84,  end: 116, color: '#FF0000', text: '3'},
+    {start: 120, end: 163, color: '#00FF00', text: '4'},
+    {start: 163, end: 211, color: '#0000FF', text: '5'},
+    {start: 211, end: 275, color: '#FF0000', text: '6'},
+    {start: 275, end: 372, color: '#00FF00', text: '7'},
+    {start: 385, end: 500, color: '#0000FF', text: '8'},
+    {start: 602, end: 720, color: '#FF0000', text: '9'},
+    {start: 787, end: 950, color: '#00FF00', text: '10'}
   ];
 
   // private almaBands = [

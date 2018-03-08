@@ -7,9 +7,11 @@ import {ExpectedSourcePropertiesComponent} from './components/expected-source-pr
 import {FieldCenterCoordinatesComponent} from './components/field-centre-coordinates/field-center-coordinates.component';
 import {FovParametersComponent} from './components/fov-parameters/fov-parameters.component';
 import {ImageQueryComponent} from './components/image-query/image-query.component';
+import {PointingCanvasComponent} from './components/pointing-canvas/pointing-canvas.component';
 import {SourceComponent} from './components/source/source.component';
 import {SpacialImageComponent} from './components/spacial-image/spacial-image.component';
 import {FieldSetupComponent} from './field-setup.component';
+import {CanvasService} from './services/canvas.service';
 
 @NgModule({
   imports: [
@@ -25,9 +27,10 @@ import {FieldSetupComponent} from './field-setup.component';
     ExpectedSourcePropertiesComponent,
     SourceComponent,
     SpacialImageComponent,
-    AladinComponent
+    AladinComponent,
+    PointingCanvasComponent
   ],
-  providers: [],
+  providers: [CanvasService],
   exports: [FieldSetupComponent]
 })
 

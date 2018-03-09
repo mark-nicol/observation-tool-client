@@ -30,6 +30,13 @@ export class PointingCanvasComponent implements OnInit {
     return inXBounds && inYBounds;
   }
 
+  static mouseHasMoved(oldEvent: MouseEvent, newEvent: MouseEvent): boolean {
+    if (oldEvent) {
+      return oldEvent.offsetX !== newEvent.offsetX || oldEvent.offsetY !== newEvent.offsetY;
+    }
+    return false;
+  }
+
   constructor(private canvasService: CanvasService) {
   }
 
@@ -130,26 +137,21 @@ export class PointingCanvasComponent implements OnInit {
         polygon.isSelected = !polygon.isSelected;
       }
     });
-    this.redraw();
     this.oldMouseEvent = event;
   }
 
   mouseup(event: MouseEvent) {
-    let isInsideAPoly = false;
     this.canvasService.polygons.forEach(polygon => {
       if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
         polygon.isDragging = false;
-        isInsideAPoly = true;
       }
     });
     this.redraw();
-    // this.oldMouseEvent = event;
   }
 
   mousemove(event: MouseEvent) {
     this.canvasService.polygons.forEach((polygon: ISkyPolygon) => {
       if (polygon.isDragging) {
-        // Add difference to all polygon points
         polygon.topLeft.pxCoords[0] += event.movementX;
         polygon.topLeft.pxCoords[1] += event.movementY;
         polygon.topRight.pxCoords[0] += event.movementX;
@@ -161,26 +163,9 @@ export class PointingCanvasComponent implements OnInit {
         polygon.isSelected = true;
       }
     });
-    // Redraw
     this.redraw();
-    if (this.mouseHasMoved(this.oldMouseEvent, event)) {
+    if (PointingCanvasComponent.mouseHasMoved(this.oldMouseEvent, event)) {
       this.oldMouseEvent = event;
     }
   }
-
-  dragOccurred(): boolean {
-    if (this.oldMouseEvent) {
-      return this.oldMouseEvent.movementX > 0 ||
-             this.oldMouseEvent.movementX < 0 ||
-             this.oldMouseEvent.movementY > 0 ||
-             this.oldMouseEvent.movementY < 0
-    } else {
-      return false;
-    }
-  }
-
-  mouseHasMoved(oldEvent: MouseEvent, newEvent: MouseEvent): boolean {
-    return oldEvent.offsetX !== newEvent.offsetX || oldEvent.offsetY !== newEvent.offsetY;
-  }
-
 }

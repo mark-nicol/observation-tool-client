@@ -3,11 +3,12 @@ import {Latitude} from '../../../../units/classes/latitude';
 import {Longitude} from '../../../../units/classes/longitude';
 import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
 import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
+import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import {IAladinConfig} from '../../../shared/interfaces/aladin/aladin-config.interface';
 import {IAladinOverlay} from '../../../shared/interfaces/aladin/overlay.interface';
 import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
-import {CanvasService, ISkyPolygon} from '../../services/canvas.service';
+import {CanvasService} from '../../services/canvas.service';
 
 declare let A: any;
 
@@ -171,52 +172,69 @@ export class AladinComponent implements OnInit, AfterViewInit {
       }
       this.canvasService.updateSkyCoords(polygon, this.calculateWorldCoords(polygon));
     });
-    this.canvasService.polygons.forEach(polygon => {
-      if (polygon.topLeft.worldCoords) {
+    this.canvasService.polygons.forEach((polygon: Rectangle) => {
+      if (polygon.coordsWorld) {
         this.overlay.addFootprints(A.polygon([
-          polygon.topLeft.worldCoords,
-          polygon.topRight.worldCoords,
-          polygon.bottomRight.worldCoords,
-          polygon.bottomLeft.worldCoords
+          polygon.coordsWorld.topLeft,
+          polygon.coordsWorld.topRight,
+          polygon.coordsWorld.bottomRight,
+          polygon.coordsWorld.bottomLeft
         ]));
       }
     });
   }
 
-  calculateWorldCoords(polygon: ISkyPolygon): ISkyPolygon {
-    const topLeft     = this.aladin.pix2world(polygon.topLeft.pxCoords[0], polygon.topLeft.pxCoords[1]);
-    const topRight    = this.aladin.pix2world(polygon.topRight.pxCoords[0], polygon.topRight.pxCoords[1]);
-    const bottomLeft  = this.aladin.pix2world(polygon.bottomLeft.pxCoords[0], polygon.bottomLeft.pxCoords[1]);
-    const bottomRight = this.aladin.pix2world(polygon.bottomRight.pxCoords[0], polygon.bottomRight.pxCoords[1]);
-    return {
-      topLeft: {worldCoords: topLeft},
-      topRight: {worldCoords: topRight},
-      bottomLeft: {worldCoords: bottomLeft},
-      bottomRight: {worldCoords: bottomRight}
-    }
+  calculateWorldCoords(polygon: Rectangle): Rectangle {
+    const topLeft         = this.aladin.pix2world(polygon.coordsPixel.topLeft[0], polygon.coordsPixel.topLeft[1]);
+    const topRight        = this.aladin.pix2world(polygon.coordsPixel.topRight[0], polygon.coordsPixel.topRight[1]);
+    const bottomLeft      = this.aladin.pix2world(polygon.coordsPixel.bottomLeft[0], polygon.coordsPixel.bottomLeft[1]);
+    const bottomRight     = this.aladin.pix2world(polygon.coordsPixel.bottomRight[0], polygon.coordsPixel.bottomRight[1]);
+    const rectangle       = new Rectangle();
+    rectangle.coordsWorld = {
+      topLeft: topLeft,
+      topRight: topRight,
+      bottomLeft: bottomLeft,
+      bottomRight: bottomRight
+    };
+    return rectangle;
   }
 
   editMode() {
     const newPolygons = [];
     this.overlay.overlays.forEach(footprint => {
-      const newPolygon: ISkyPolygon = {
-        topLeft: {
-          pxCoords: this.aladin.world2pix(footprint.polygons[0][0], footprint.polygons[0][1]),
-          worldCoords: footprint.polygons[0]
-        },
-        topRight: {
-          pxCoords: this.aladin.world2pix(footprint.polygons[1][0], footprint.polygons[1][1]),
-          worldCoords: footprint.polygons[1]
-        },
-        bottomRight: {
-          pxCoords: this.aladin.world2pix(footprint.polygons[2][0], footprint.polygons[2][1]),
-          worldCoords: footprint.polygons[2]
-        },
-        bottomLeft: {
-          pxCoords: this.aladin.world2pix(footprint.polygons[3][0], footprint.polygons[3][1]),
-          worldCoords: footprint.polygons[3]
-        }
+      const newPolygon       = new Rectangle();
+      newPolygon.coordsPixel = {
+        topLeft: this.aladin.world2pix(footprint.polygons[0][0], footprint.polygons[0][1]),
+        topRight: this.aladin.world2pix(footprint.polygons[1][0], footprint.polygons[1][1]),
+        bottomLeft: this.aladin.world2pix(footprint.polygons[3][0], footprint.polygons[3][1]),
+        bottomRight: this.aladin.world2pix(footprint.polygons[2][0], footprint.polygons[2][1])
       };
+      newPolygon.coordsWorld = {
+        topLeft: footprint.polygons[0],
+        topRight: footprint.polygons[1],
+        bottomLeft: footprint.polygons[3],
+        bottomRight: footprint.polygons[2]
+      };
+
+
+      //         {
+      //   topLeft: {
+      //     pxCoords: this.aladin.world2pix(footprint.polygons[0][0], footprint.polygons[0][1]),
+      //     worldCoords: footprint.polygons[0]
+      //   },
+      //   topRight: {
+      //     pxCoords: this.aladin.world2pix(footprint.polygons[1][0], footprint.polygons[1][1]),
+      //     worldCoords: footprint.polygons[1]
+      //   },
+      //   bottomRight: {
+      //     pxCoords: this.aladin.world2pix(footprint.polygons[2][0], footprint.polygons[2][1]),
+      //     worldCoords: footprint.polygons[2]
+      //   },
+      //   bottomLeft: {
+      //     pxCoords: this.aladin.world2pix(footprint.polygons[3][0], footprint.polygons[3][1]),
+      //     worldCoords: footprint.polygons[3]
+      //   }
+      // };
       newPolygons.push(newPolygon);
     });
     this.canvasService.polygons = newPolygons;

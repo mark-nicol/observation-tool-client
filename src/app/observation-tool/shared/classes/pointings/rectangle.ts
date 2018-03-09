@@ -9,8 +9,8 @@ interface IRectangleCoords {
 
 export class Rectangle extends Pointing {
 
-  _coordsWorld: IRectangleCoords;
-  _coordsPixel: IRectangleCoords;
+  _coordsWorld?: IRectangleCoords;
+  _coordsPixel?: IRectangleCoords;
 
   get coordsWorld(): IRectangleCoords {
     return this._coordsWorld;

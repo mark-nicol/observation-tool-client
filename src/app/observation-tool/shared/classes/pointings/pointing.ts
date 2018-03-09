@@ -2,8 +2,8 @@ export abstract class Pointing {
 
   private _isSelected: boolean;
   private _isDragging: boolean;
-  protected abstract _coordsWorld: any;
-  protected abstract _coordsPixel: any;
+  protected abstract _coordsWorld?: any;
+  protected abstract _coordsPixel?: any;
 
   get isDragging(): boolean {
     return this._isDragging;

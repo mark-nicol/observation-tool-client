@@ -2,10 +2,10 @@ import {Pointing} from './pointing';
 
 export class Fov extends Pointing {
 
-  _coordsPixel: number[];
-  _coordsWorld: number[];
-  _radiusPixel: number;
-  _radiusWorld: number;
+  _coordsPixel?: number[];
+  _coordsWorld?: number[];
+  _radiusPixel?: number;
+  _radiusWorld?: number;
 
   get coordsPixel(): number[] {
     return this._coordsPixel;
@@ -19,7 +19,7 @@ export class Fov extends Pointing {
     return this._coordsWorld;
   }
 
-  set coordsWorld(value) {
+  set coordsWorld(value: number[]) {
     this._coordsWorld = value;
   }
 
@@ -39,7 +39,6 @@ export class Fov extends Pointing {
     this._radiusWorld = value;
   }
 
-  constructor();
   constructor(isSelected?: boolean,
               isDragging?: boolean,
               coordsWorld?: number[],

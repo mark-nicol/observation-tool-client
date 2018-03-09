@@ -1,39 +1,13 @@
 import {Injectable} from '@angular/core';
 import * as _ from 'lodash';
-
-
-export interface ISkyPolygon {
-  topLeft: {
-    worldCoords?: number[],
-    pxCoords?: number[]
-  },
-  topRight: {
-    worldCoords?: number[],
-    pxCoords?: number[]
-  },
-  bottomRight: {
-    worldCoords?: number[],
-    pxCoords?: number[]
-  },
-  bottomLeft: {
-    worldCoords?: number[],
-    pxCoords?: number[]
-  },
-  isSelected?: boolean,
-  isDragging?: boolean
-}
-
-export interface ISkyFov {
-  pxCoords?: number[]
-  worldCoords?: number[]
-  radius: number
-}
-
+import {Fov} from '../../shared/classes/pointings/fov';
+import {Pointing} from '../../shared/classes/pointings/pointing';
+import {Rectangle} from '../../shared/classes/pointings/rectangle';
 
 @Injectable()
 export class CanvasService {
 
-  private _polygons: any[] = [];
+  private _polygons: Pointing[] = [];
 
   constructor() {
   }
@@ -46,11 +20,11 @@ export class CanvasService {
     this._polygons = polygons;
   }
 
-  addPolygon(polygon: ISkyPolygon) {
+  addPolygon(polygon: Rectangle) {
     this._polygons.push(polygon);
   }
 
-  addFov(fov: ISkyFov) {
+  addFov(fov: Fov) {
     this._polygons.push(fov);
   }
 
@@ -58,18 +32,18 @@ export class CanvasService {
     this._polygons = [];
   }
 
-  updateSkyCoords(polygonPx: ISkyPolygon, polygonWorld: ISkyPolygon) {
-    if (this._polygons[this._polygons.indexOf(polygonPx)].topLeft.worldCoords) {
-      this._polygons[this._polygons.indexOf(polygonPx)].topLeft.worldCoords = polygonWorld.topLeft.worldCoords;
-      this._polygons[this._polygons.indexOf(polygonPx)].topRight.worldCoords = polygonWorld.topRight.worldCoords;
-      this._polygons[this._polygons.indexOf(polygonPx)].bottomLeft.worldCoords = polygonWorld.bottomLeft.worldCoords;
-      this._polygons[this._polygons.indexOf(polygonPx)].bottomRight.worldCoords = polygonWorld.bottomRight.worldCoords;
+  updateSkyCoords(polygonPx: Rectangle, polygonWorld: Rectangle) {
+    if (this._polygons[this._polygons.indexOf(polygonPx)].coordsWorld.topLeft) {
+      this._polygons[this._polygons.indexOf(polygonPx)].coordsWorld.topLeft     = polygonWorld.coordsWorld.topLeft;
+      this._polygons[this._polygons.indexOf(polygonPx)].coordsWorld.topRight    = polygonWorld.coordsWorld.topRight;
+      this._polygons[this._polygons.indexOf(polygonPx)].coordsWorld.bottomLeft  = polygonWorld.coordsWorld.bottomLeft;
+      this._polygons[this._polygons.indexOf(polygonPx)].coordsWorld.bottomRight = polygonWorld.coordsWorld.bottomRight;
     } else {
       this._polygons[this._polygons.indexOf(polygonPx)] = _.merge(polygonPx, polygonWorld);
     }
   }
 
-  updatePolygon(polygonOriginal: ISkyPolygon, polygonNew: ISkyPolygon) {
+  updatePolygon(polygonOriginal: Rectangle, polygonNew: Rectangle) {
     console.log('update');
     this._polygons[this._polygons.indexOf(polygonOriginal)] = polygonNew;
   }

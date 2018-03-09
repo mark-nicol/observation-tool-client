@@ -19,7 +19,8 @@ export interface ISkyPolygon {
     worldCoords?: number[],
     pxCoords?: number[]
   },
-  isSelected?: false
+  isSelected?: boolean,
+  isDragging?: boolean
 }
 
 export interface ISkyFov {

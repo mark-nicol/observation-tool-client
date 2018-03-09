@@ -16,6 +16,7 @@ export class PointingCanvasComponent implements OnInit {
             canvasElement: HTMLCanvasElement;
             canvas: CanvasRenderingContext2D;
             canvasContainer: any;
+            oldMouseEvent: MouseEvent;
 
   static isInsidePolygon(polygon: ISkyPolygon, x: number, y: number) {
     const inXBounds = x <= polygon.topRight.pxCoords[0] &&
@@ -64,19 +65,22 @@ export class PointingCanvasComponent implements OnInit {
         },
         bottomRight: {
           pxCoords: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
-        }
+        },
+        isSelected: false,
+        isDragging: false
       };
       this.drawPolygon(poly);
       this.canvasService.addPolygon(poly);
       this.rectAddedEmitter.emit();
-    } else if (this.canvasService.polygons.length > 0) {
-      this.canvasService.polygons.forEach(polygon => {
-        if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
-          polygon.isSelected = !polygon.isSelected;
-        }
-      });
-      this.redraw();
     }
+    /*else if (this.canvasService.polygons.length > 0) {
+         this.canvasService.polygons.forEach(polygon => {
+           if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
+             polygon.isSelected = !polygon.isSelected;
+           }
+         });
+         this.redraw();
+       }*/
   }
 
   redraw() {
@@ -123,27 +127,60 @@ export class PointingCanvasComponent implements OnInit {
     this.canvasService.polygons.forEach(polygon => {
       if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
         polygon.isDragging = true;
+        polygon.isSelected = !polygon.isSelected;
       }
     });
-    console.log(this.canvasService.polygons);
+    this.redraw();
+    this.oldMouseEvent = event;
   }
 
   mouseup(event: MouseEvent) {
+    let isInsideAPoly = false;
     this.canvasService.polygons.forEach(polygon => {
       if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
         polygon.isDragging = false;
+        isInsideAPoly = true;
       }
     });
-    console.log(this.canvasService.polygons);
+    this.redraw();
+    // this.oldMouseEvent = event;
   }
 
   mousemove(event: MouseEvent) {
-    this.canvasService.polygons.forEach(polygon => {
+    this.canvasService.polygons.forEach((polygon: ISkyPolygon) => {
       if (polygon.isDragging) {
-        console.log('dragging');
-        
+        // Add difference to all polygon points
+        polygon.topLeft.pxCoords[0] += event.movementX;
+        polygon.topLeft.pxCoords[1] += event.movementY;
+        polygon.topRight.pxCoords[0] += event.movementX;
+        polygon.topRight.pxCoords[1] += event.movementY;
+        polygon.bottomLeft.pxCoords[0] += event.movementX;
+        polygon.bottomLeft.pxCoords[1] += event.movementY;
+        polygon.bottomRight.pxCoords[0] += event.movementX;
+        polygon.bottomRight.pxCoords[1] += event.movementY;
+        polygon.isSelected = true;
       }
     });
+    // Redraw
+    this.redraw();
+    if (this.mouseHasMoved(this.oldMouseEvent, event)) {
+      this.oldMouseEvent = event;
+    }
+  }
+
+  dragOccurred(): boolean {
+    if (this.oldMouseEvent) {
+      return this.oldMouseEvent.movementX > 0 ||
+             this.oldMouseEvent.movementX < 0 ||
+             this.oldMouseEvent.movementY > 0 ||
+             this.oldMouseEvent.movementY < 0
+    } else {
+      return false;
+    }
+  }
+
+  mouseHasMoved(oldEvent: MouseEvent, newEvent: MouseEvent): boolean {
+    return oldEvent.offsetX !== newEvent.offsetX || oldEvent.offsetY !== newEvent.offsetY;
   }
 
 }

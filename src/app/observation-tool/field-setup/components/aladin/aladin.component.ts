@@ -149,18 +149,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.aladin.gotoRaDec(lon, lat);
   }
 
-  mouseUp(event: MouseEvent) {
-    // const coords = this.aladin.pix2world(event.layerX, event.layerY);
-    // if (this.addingFov) {
-    //   this.addPointing(coords[0], coords[1]);
-    //   this.fovAddedEmitter.emit();
-    // }
-    // if (this.addingRect) {
-    //   this.addRectangle(coords[0], coords[1]);
-    //   this.rectAddedEmitter.emit();
-    // }
-  }
-
   mouseMove(event: MouseEvent) {
     this.coordinatesEmitter.emit({
       pixel: [event.layerX, event.layerY],
@@ -178,15 +166,10 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   redraw() {
     this.canvasService.polygons.forEach(polygon => {
-      if (polygon.topRight) {
-
-      }
       if (polygon.radius) {
         console.log('circle');
       }
-      if (!polygon.topLeft.worldCoords) {
-        this.canvasService.addSkyCoords(polygon, this.calculateWorldCoords(polygon));
-      }
+      this.canvasService.updateSkyCoords(polygon, this.calculateWorldCoords(polygon));
     });
     this.canvasService.polygons.forEach(polygon => {
       if (polygon.topLeft.worldCoords) {

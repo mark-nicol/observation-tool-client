@@ -143,7 +143,9 @@ export class PointingCanvasComponent implements OnInit {
   mouseup(event: MouseEvent) {
     this.canvasService.polygons.forEach(polygon => {
       if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
+        const oldPolygon = polygon;
         polygon.isDragging = false;
+        this.canvasService.updatePolygon(oldPolygon, polygon);
       }
     });
     this.redraw();

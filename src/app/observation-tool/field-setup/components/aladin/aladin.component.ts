@@ -79,7 +79,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
       sourceSize: 20
     });
     this.aladin.addCatalog(this.catalogue);
-    this.overlay = A.graphicOverlay({color: '#ee2345', lineWidth: 3});
+    this.overlay = A.graphicOverlay({color: '#FFAA00', lineWidth: 3});
     this.aladin.addOverlay(this.overlay);
   }
 

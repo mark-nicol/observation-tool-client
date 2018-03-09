@@ -58,16 +58,20 @@ export class CanvasService {
     this._polygons = [];
   }
 
-  addSkyCoords(polygonPx: ISkyPolygon, polygonWorld: ISkyPolygon) {
-    this._polygons[this._polygons.indexOf(polygonPx)] = _.merge(polygonPx, polygonWorld);
+  updateSkyCoords(polygonPx: ISkyPolygon, polygonWorld: ISkyPolygon) {
+    if (this._polygons[this._polygons.indexOf(polygonPx)].topLeft.worldCoords) {
+      this._polygons[this._polygons.indexOf(polygonPx)].topLeft.worldCoords = polygonWorld.topLeft.worldCoords;
+      this._polygons[this._polygons.indexOf(polygonPx)].topRight.worldCoords = polygonWorld.topRight.worldCoords;
+      this._polygons[this._polygons.indexOf(polygonPx)].bottomLeft.worldCoords = polygonWorld.bottomLeft.worldCoords;
+      this._polygons[this._polygons.indexOf(polygonPx)].bottomRight.worldCoords = polygonWorld.bottomRight.worldCoords;
+    } else {
+      this._polygons[this._polygons.indexOf(polygonPx)] = _.merge(polygonPx, polygonWorld);
+    }
   }
 
   updatePolygon(polygonOriginal: ISkyPolygon, polygonNew: ISkyPolygon) {
+    console.log('update');
     this._polygons[this._polygons.indexOf(polygonOriginal)] = polygonNew;
-  }
-
-  getPolygonAtPoint(polygon: ISkyPolygon) {
-
   }
 
   cutPolygons() {

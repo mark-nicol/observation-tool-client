@@ -44,7 +44,6 @@ export class CanvasService {
   }
 
   updatePolygon(polygonOriginal: Rectangle, polygonNew: Rectangle) {
-    console.log('update');
     this._polygons[this._polygons.indexOf(polygonOriginal)] = polygonNew;
   }
 

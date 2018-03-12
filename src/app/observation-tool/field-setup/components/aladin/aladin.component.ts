@@ -209,25 +209,34 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   editMode() {
-    const newPolygons = [];
+    const newPointings = [];
     this.overlay.overlays.forEach(footprint => {
       const newPolygon       = new Rectangle();
       newPolygon.coordsPixel = {
-        topLeft: this.aladin.world2pix(footprint.pointings[0][0], footprint.pointings[0][1]),
-        topRight: this.aladin.world2pix(footprint.pointings[1][0], footprint.pointings[1][1]),
-        bottomLeft: this.aladin.world2pix(footprint.pointings[3][0], footprint.pointings[3][1]),
-        bottomRight: this.aladin.world2pix(footprint.pointings[2][0], footprint.pointings[2][1])
+        topLeft: this.aladin.world2pix(footprint.polygons[0][0], footprint.polygons[0][1]),
+        topRight: this.aladin.world2pix(footprint.polygons[1][0], footprint.polygons[1][1]),
+        bottomLeft: this.aladin.world2pix(footprint.polygons[3][0], footprint.polygons[3][1]),
+        bottomRight: this.aladin.world2pix(footprint.polygons[2][0], footprint.polygons[2][1])
       };
       newPolygon.coordsWorld = {
-        topLeft: footprint.pointings[0],
-        topRight: footprint.pointings[1],
-        bottomLeft: footprint.pointings[3],
-        bottomRight: footprint.pointings[2]
+        topLeft: footprint.polygons[0],
+        topRight: footprint.polygons[1],
+        bottomLeft: footprint.polygons[3],
+        bottomRight: footprint.polygons[2]
       };
-      newPolygons.push(newPolygon);
+      newPointings.push(newPolygon);
     });
-    this.canvasService.pointings = newPolygons;
+    this.overlay.overlay_items.forEach(circle => {
+      console.log(circle);
+      const newFov       = new Fov();
+      newFov.coordsPixel = this.aladin.world2pix(circle.centerRaDec[0], circle.centerRaDec[1]);
+      newFov.coordsWorld = circle.centerRaDec;
+      newFov.radiusWorld = circle.radiusDegrees;
+      newPointings.push(newFov);
+    });
+    this.canvasService.pointings = newPointings;
     this.overlay.overlays        = [];
+    this.overlay.overlay_items   = [];
     this.catalogue.reportChange();
   }
 

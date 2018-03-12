@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {CanvasService, ISkyFov, ISkyPolygon} from '../../services/canvas.service';
+import {Fov} from '../../../shared/classes/pointings/fov';
+import {Rectangle} from '../../../shared/classes/pointings/rectangle';
+import {CanvasService} from '../../services/canvas.service';
 
 
 @Component({
@@ -18,15 +20,15 @@ export class PointingCanvasComponent implements OnInit {
             canvasContainer: any;
             oldMouseEvent: MouseEvent;
 
-  static isInsidePolygon(polygon: ISkyPolygon, x: number, y: number) {
-    const inXBounds = x <= polygon.topRight.pxCoords[0] &&
-                      x >= polygon.topLeft.pxCoords[0] &&
-                      x <= polygon.bottomRight.pxCoords[0] &&
-                      x >= polygon.bottomLeft.pxCoords[0];
-    const inYBounds = y >= polygon.topLeft.pxCoords[1] &&
-                      y >= polygon.topRight.pxCoords[1] &&
-                      y <= polygon.bottomLeft.pxCoords[1] &&
-                      y <= polygon.bottomRight.pxCoords[1];
+  static isInsidePolygon(polygon: Rectangle, x: number, y: number) {
+    const inXBounds = x <= polygon.coordsPixel.topRight[0] &&
+                      x >= polygon.coordsPixel.topLeft[0] &&
+                      x <= polygon.coordsPixel.bottomRight[0] &&
+                      x >= polygon.coordsPixel.bottomLeft[0];
+    const inYBounds = y >= polygon.coordsPixel.topLeft[1] &&
+                      y >= polygon.coordsPixel.topRight[1] &&
+                      y <= polygon.coordsPixel.bottomLeft[1] &&
+                      y <= polygon.coordsPixel.bottomRight[1];
     return inXBounds && inYBounds;
   }
 
@@ -51,33 +53,38 @@ export class PointingCanvasComponent implements OnInit {
 
   click(event: MouseEvent) {
     if (this.addingFov) {
-      const fov: ISkyFov = {
-        pxCoords: [event.offsetX, event.offsetY],
-        radius: 50
-      };
+      const fov = new Fov();
+      fov.coordsPixel = [event.offsetX, event.offsetY];
+      fov.radiusPixel = 50;
       this.drawCircle(event.offsetX, event.offsetY, 50);
       this.canvasService.addFov(fov);
       this.fovAddedEmitter.emit();
     } else if (this.addingRec) {
       const dimension         = 50;
-      const poly: ISkyPolygon = {
-        topLeft: {
-          pxCoords: [event.offsetX - dimension / 2, event.offsetY - dimension / 2]
-        },
-        topRight: {
-          pxCoords: [event.offsetX + dimension / 2, event.offsetY - dimension / 2]
-        },
-        bottomLeft: {
-          pxCoords: [event.offsetX - dimension / 2, event.offsetY + dimension / 2]
-        },
-        bottomRight: {
-          pxCoords: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
-        },
-        isSelected: false,
-        isDragging: false
-      };
-      this.drawPolygon(poly);
-      this.canvasService.addPolygon(poly);
+      const rect = new Rectangle(false, false, null, {
+        topLeft: [event.offsetX - dimension / 2, event.offsetY - dimension / 2],
+        topRight: [event.offsetX + dimension / 2, event.offsetY - dimension / 2],
+        bottomLeft: [event.offsetX - dimension / 2, event.offsetY + dimension / 2],
+        bottomRight: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
+      });
+      // const poly: Rectangle = {
+      //   topLeft: {
+      //     pxCoords: [event.offsetX - dimension / 2, event.offsetY - dimension / 2]
+      //   },
+      //   topRight: {
+      //     pxCoords: [event.offsetX + dimension / 2, event.offsetY - dimension / 2]
+      //   },
+      //   bottomLeft: {
+      //     pxCoords: [event.offsetX - dimension / 2, event.offsetY + dimension / 2]
+      //   },
+      //   bottomRight: {
+      //     pxCoords: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
+      //   },
+      //   isSelected: false,
+      //   isDragging: false
+      // };
+      this.drawPolygon(rect);
+      this.canvasService.addPolygon(rect);
       this.rectAddedEmitter.emit();
     }
     /*else if (this.canvasService.polygons.length > 0) {
@@ -97,13 +104,13 @@ export class PointingCanvasComponent implements OnInit {
     });
   }
 
-  drawPolygon(polygon: ISkyPolygon) {
+  drawPolygon(polygon: Rectangle) {
     this.canvas.strokeStyle = polygon.isSelected ? 'red' : 'lime';
     this.canvas.beginPath();
-    this.canvas.moveTo(polygon.topLeft.pxCoords[0], polygon.topLeft.pxCoords[1]);
-    this.canvas.lineTo(polygon.topRight.pxCoords[0], polygon.topRight.pxCoords[1]);
-    this.canvas.lineTo(polygon.bottomRight.pxCoords[0], polygon.bottomRight.pxCoords[1]);
-    this.canvas.lineTo(polygon.bottomLeft.pxCoords[0], polygon.bottomLeft.pxCoords[1]);
+    this.canvas.moveTo(polygon.coordsPixel.topLeft[0], polygon.coordsPixel.topLeft[1]);
+    this.canvas.lineTo(polygon.coordsPixel.topRight[0], polygon.coordsPixel.topRight[1]);
+    this.canvas.lineTo(polygon.coordsPixel.bottomRight[0], polygon.coordsPixel.bottomRight[1]);
+    this.canvas.lineTo(polygon.coordsPixel.bottomLeft[0], polygon.coordsPixel.bottomLeft[1]);
     this.canvas.closePath();
     this.canvas.stroke();
   }
@@ -143,7 +150,7 @@ export class PointingCanvasComponent implements OnInit {
   mouseup(event: MouseEvent) {
     this.canvasService.polygons.forEach(polygon => {
       if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
-        const oldPolygon = polygon;
+        const oldPolygon   = polygon;
         polygon.isDragging = false;
         this.canvasService.updatePolygon(oldPolygon, polygon);
       }
@@ -152,16 +159,16 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   mousemove(event: MouseEvent) {
-    this.canvasService.polygons.forEach((polygon: ISkyPolygon) => {
+    this.canvasService.polygons.forEach((polygon: Rectangle) => {
       if (polygon.isDragging) {
-        polygon.topLeft.pxCoords[0] += event.movementX;
-        polygon.topLeft.pxCoords[1] += event.movementY;
-        polygon.topRight.pxCoords[0] += event.movementX;
-        polygon.topRight.pxCoords[1] += event.movementY;
-        polygon.bottomLeft.pxCoords[0] += event.movementX;
-        polygon.bottomLeft.pxCoords[1] += event.movementY;
-        polygon.bottomRight.pxCoords[0] += event.movementX;
-        polygon.bottomRight.pxCoords[1] += event.movementY;
+        polygon.coordsPixel.topLeft[0] += event.movementX;
+        polygon.coordsPixel.topLeft[1] += event.movementY;
+        polygon.coordsPixel.topRight[0] += event.movementX;
+        polygon.coordsPixel.topRight[1] += event.movementY;
+        polygon.coordsPixel.bottomLeft[0] += event.movementX;
+        polygon.coordsPixel.bottomLeft[1] += event.movementY;
+        polygon.coordsPixel.bottomRight[0] += event.movementX;
+        polygon.coordsPixel.bottomRight[1] += event.movementY;
         polygon.isSelected = true;
       }
     });

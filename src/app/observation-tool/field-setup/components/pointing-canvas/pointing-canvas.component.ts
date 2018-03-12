@@ -164,6 +164,9 @@ export class PointingCanvasComponent implements OnInit {
           polygon.coordsPixel.bottomLeft[1] += event.movementY;
           polygon.coordsPixel.bottomRight[0] += event.movementX;
           polygon.coordsPixel.bottomRight[1] += event.movementY;
+        } else if (polygon instanceof Fov) {
+          polygon.coordsPixel[0] += event.movementX;
+          polygon.coordsPixel[1] += event.movementY;
         }
         this.redraw();
       }

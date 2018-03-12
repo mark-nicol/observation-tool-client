@@ -23,15 +23,8 @@ export class CanvasService {
     this._pointings.push(pointing);
   }
 
-  updateSkyCoords(polygonPx: Pointing, polygonWorld: Pointing) {
-    if (this._pointings[this._pointings.indexOf(polygonPx)].coordsWorld.topLeft) {
-      this._pointings[this._pointings.indexOf(polygonPx)].coordsWorld.topLeft     = polygonWorld.coordsWorld.topLeft;
-      this._pointings[this._pointings.indexOf(polygonPx)].coordsWorld.topRight    = polygonWorld.coordsWorld.topRight;
-      this._pointings[this._pointings.indexOf(polygonPx)].coordsWorld.bottomLeft  = polygonWorld.coordsWorld.bottomLeft;
-      this._pointings[this._pointings.indexOf(polygonPx)].coordsWorld.bottomRight = polygonWorld.coordsWorld.bottomRight;
-    } else {
-      this._pointings[this._pointings.indexOf(polygonPx)] = _.merge(polygonPx, polygonWorld);
-    }
+  updateSkyCoords(pointingPx: Pointing, pointingWorld: Pointing) {
+    this._pointings[this._pointings.indexOf(pointingPx)].coordsWorld = pointingWorld.coordsWorld;
   }
 
   updatePointing(pointingOriginal: Pointing, pointingNew: Pointing) {

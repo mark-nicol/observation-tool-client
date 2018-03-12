@@ -169,36 +169,43 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   redraw() {
     this.canvasService.pointings.forEach((pointing: Pointing) => {
-      if (pointing instanceof Fov) {
-        console.log('circle');
-      }
       this.canvasService.updateSkyCoords(pointing, this.calculateWorldCoords(pointing));
     });
-    this.canvasService.pointings.forEach((polygon: Rectangle) => {
-      if (polygon.coordsWorld) {
-        this.overlay.addFootprints(A.polygon([
-          polygon.coordsWorld.topLeft,
-          polygon.coordsWorld.topRight,
-          polygon.coordsWorld.bottomRight,
-          polygon.coordsWorld.bottomLeft
-        ]));
+    this.canvasService.pointings.forEach((pointing: Pointing) => {
+      if (pointing.coordsWorld) {
+        if (pointing instanceof Rectangle) {
+          this.overlay.addFootprints(A.polygon([
+            pointing.coordsWorld.topLeft,
+            pointing.coordsWorld.topRight,
+            pointing.coordsWorld.bottomRight,
+            pointing.coordsWorld.bottomLeft
+          ]));
+        } else if (pointing instanceof Fov) {
+          this.overlay.add(A.circle(pointing.coordsWorld[0], pointing.coordsWorld[1], 0.05, {color: '#FFAA00'}));
+        }
       }
     });
   }
 
-  calculateWorldCoords(polygon: Pointing): Pointing {
-    const topLeft         = this.aladin.pix2world(polygon.coordsPixel.topLeft[0], polygon.coordsPixel.topLeft[1]);
-    const topRight        = this.aladin.pix2world(polygon.coordsPixel.topRight[0], polygon.coordsPixel.topRight[1]);
-    const bottomLeft      = this.aladin.pix2world(polygon.coordsPixel.bottomLeft[0], polygon.coordsPixel.bottomLeft[1]);
-    const bottomRight     = this.aladin.pix2world(polygon.coordsPixel.bottomRight[0], polygon.coordsPixel.bottomRight[1]);
-    const rectangle       = new Rectangle();
-    rectangle.coordsWorld = {
-      topLeft: topLeft,
-      topRight: topRight,
-      bottomLeft: bottomLeft,
-      bottomRight: bottomRight
-    };
-    return rectangle;
+  calculateWorldCoords(pointing: Pointing): Pointing {
+    if (pointing instanceof Rectangle) {
+      const topLeft         = this.aladin.pix2world(pointing.coordsPixel.topLeft[0], pointing.coordsPixel.topLeft[1]);
+      const topRight        = this.aladin.pix2world(pointing.coordsPixel.topRight[0], pointing.coordsPixel.topRight[1]);
+      const bottomLeft      = this.aladin.pix2world(pointing.coordsPixel.bottomLeft[0], pointing.coordsPixel.bottomLeft[1]);
+      const bottomRight     = this.aladin.pix2world(pointing.coordsPixel.bottomRight[0], pointing.coordsPixel.bottomRight[1]);
+      const rectangle       = new Rectangle();
+      rectangle.coordsWorld = {
+        topLeft: topLeft,
+        topRight: topRight,
+        bottomLeft: bottomLeft,
+        bottomRight: bottomRight
+      };
+      return rectangle;
+    } else if (pointing instanceof Fov) {
+      const fov       = new Fov();
+      fov.coordsWorld = this.aladin.pix2world(pointing.coordsPixel[0], pointing.coordsPixel[1]);
+      return fov;
+    }
   }
 
   editMode() {

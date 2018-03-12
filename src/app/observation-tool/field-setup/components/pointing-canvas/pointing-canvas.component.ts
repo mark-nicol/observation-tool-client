@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Fov} from '../../../shared/classes/pointings/fov';
+import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import {CanvasService} from '../../services/canvas.service';
 
@@ -20,15 +21,15 @@ export class PointingCanvasComponent implements OnInit {
             canvasContainer: any;
             oldMouseEvent: MouseEvent;
 
-  static isInsidePolygon(polygon: Rectangle, x: number, y: number) {
-    const inXBounds = x <= polygon.coordsPixel.topRight[0] &&
-                      x >= polygon.coordsPixel.topLeft[0] &&
-                      x <= polygon.coordsPixel.bottomRight[0] &&
-                      x >= polygon.coordsPixel.bottomLeft[0];
-    const inYBounds = y >= polygon.coordsPixel.topLeft[1] &&
-                      y >= polygon.coordsPixel.topRight[1] &&
-                      y <= polygon.coordsPixel.bottomLeft[1] &&
-                      y <= polygon.coordsPixel.bottomRight[1];
+  static isInsidePolygon(pointing: Pointing, x: number, y: number) {
+    const inXBounds = x <= pointing.coordsPixel.topRight[0] &&
+                      x >= pointing.coordsPixel.topLeft[0] &&
+                      x <= pointing.coordsPixel.bottomRight[0] &&
+                      x >= pointing.coordsPixel.bottomLeft[0];
+    const inYBounds = y >= pointing.coordsPixel.topLeft[1] &&
+                      y >= pointing.coordsPixel.topRight[1] &&
+                      y <= pointing.coordsPixel.bottomLeft[1] &&
+                      y <= pointing.coordsPixel.bottomRight[1];
     return inXBounds && inYBounds;
   }
 
@@ -53,30 +54,34 @@ export class PointingCanvasComponent implements OnInit {
 
   click(event: MouseEvent) {
     if (this.addingFov) {
-      const fov = new Fov();
+      const fov       = new Fov();
       fov.coordsPixel = [event.offsetX, event.offsetY];
-      fov.radiusPixel = 50;
-      this.drawCircle(event.offsetX, event.offsetY, 50);
-      this.canvasService.addFov(fov);
+      fov.radiusPixel = 25;
+      this.drawCircle(fov);
+      this.canvasService.addPointing(fov);
       this.fovAddedEmitter.emit();
     } else if (this.addingRec) {
-      const dimension         = 50;
-      const rect = new Rectangle(false, false, null, {
-        topLeft: [event.offsetX - dimension / 2, event.offsetY - dimension / 2],
-        topRight: [event.offsetX + dimension / 2, event.offsetY - dimension / 2],
-        bottomLeft: [event.offsetX - dimension / 2, event.offsetY + dimension / 2],
-        bottomRight: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
+      const dimension = 25;
+      const rect      = new Rectangle(false, false, null, {
+        topLeft: [event.offsetX - dimension, event.offsetY - dimension],
+        topRight: [event.offsetX + dimension, event.offsetY - dimension],
+        bottomLeft: [event.offsetX - dimension, event.offsetY + dimension],
+        bottomRight: [event.offsetX + dimension, event.offsetY + dimension]
       });
       this.drawPolygon(rect);
-      this.canvasService.addPolygon(rect);
+      this.canvasService.addPointing(rect);
       this.rectAddedEmitter.emit();
     }
   }
 
   redraw() {
     this.clearCanvas();
-    this.canvasService.polygons.forEach(polygon => {
-      this.drawPolygon(polygon);
+    this.canvasService.pointings.forEach((pointing: Pointing) => {
+      if (pointing instanceof Rectangle) {
+        this.drawPolygon(pointing);
+      } else if (pointing instanceof Fov) {
+        this.drawCircle(pointing);
+      }
     });
   }
 
@@ -91,16 +96,21 @@ export class PointingCanvasComponent implements OnInit {
     this.canvas.stroke();
   }
 
-  drawCircle(centreX: number, centreY: number, radius: number) {
+  drawCircle(fov: Fov) {
+    this.canvas.strokeStyle = fov.isSelected ? 'red' : 'lime';
     this.canvas.beginPath();
-    this.canvas.arc(centreX, centreY, radius, 0, 2 * Math.PI, false);
+    this.canvas.arc(fov.coordsPixel[0], fov.coordsPixel[1], fov.radiusPixel, 0, 2 * Math.PI, false);
+    this.canvas.closePath();
     this.canvas.stroke();
   }
 
   editMode() {
     this.clearCanvas();
-    this.canvasService.polygons.forEach(polygon => {
-      this.drawPolygon(polygon);
+    this.canvasService.pointings.forEach((pointing: Pointing) => {
+      if (pointing instanceof Rectangle) {
+        this.drawPolygon(pointing);
+      }
+
     });
   }
 
@@ -114,7 +124,7 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   mousedown(event: MouseEvent) {
-    this.canvasService.polygons.forEach(polygon => {
+    this.canvasService.pointings.forEach(polygon => {
       if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
         polygon.isDragging = true;
         polygon.isSelected = !polygon.isSelected;
@@ -124,31 +134,33 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   mouseup(event: MouseEvent) {
-    this.canvasService.polygons.forEach(polygon => {
+    this.canvasService.pointings.forEach(polygon => {
       if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
         const oldPolygon   = polygon;
         polygon.isDragging = false;
-        this.canvasService.updatePolygon(oldPolygon, polygon);
+        this.canvasService.updatePointing(oldPolygon, polygon);
       }
     });
     this.redraw();
   }
 
   mousemove(event: MouseEvent) {
-    this.canvasService.polygons.forEach((polygon: Rectangle) => {
+    this.canvasService.pointings.forEach((polygon: Pointing) => {
       if (polygon.isDragging) {
-        polygon.coordsPixel.topLeft[0] += event.movementX;
-        polygon.coordsPixel.topLeft[1] += event.movementY;
-        polygon.coordsPixel.topRight[0] += event.movementX;
-        polygon.coordsPixel.topRight[1] += event.movementY;
-        polygon.coordsPixel.bottomLeft[0] += event.movementX;
-        polygon.coordsPixel.bottomLeft[1] += event.movementY;
-        polygon.coordsPixel.bottomRight[0] += event.movementX;
-        polygon.coordsPixel.bottomRight[1] += event.movementY;
         polygon.isSelected = true;
+        if (polygon instanceof Rectangle) {
+          polygon.coordsPixel.topLeft[0] += event.movementX;
+          polygon.coordsPixel.topLeft[1] += event.movementY;
+          polygon.coordsPixel.topRight[0] += event.movementX;
+          polygon.coordsPixel.topRight[1] += event.movementY;
+          polygon.coordsPixel.bottomLeft[0] += event.movementX;
+          polygon.coordsPixel.bottomLeft[1] += event.movementY;
+          polygon.coordsPixel.bottomRight[0] += event.movementX;
+          polygon.coordsPixel.bottomRight[1] += event.movementY;
+        }
+        this.redraw();
       }
     });
-    this.redraw();
     if (PointingCanvasComponent.mouseHasMoved(this.oldMouseEvent, event)) {
       this.oldMouseEvent = event;
     }

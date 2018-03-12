@@ -3,6 +3,8 @@ import {Latitude} from '../../../../units/classes/latitude';
 import {Longitude} from '../../../../units/classes/longitude';
 import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
 import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
+import {Fov} from '../../../shared/classes/pointings/fov';
+import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import {IAladinConfig} from '../../../shared/interfaces/aladin/aladin-config.interface';
 import {IAladinOverlay} from '../../../shared/interfaces/aladin/overlay.interface';
@@ -166,13 +168,13 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   redraw() {
-    this.canvasService.polygons.forEach(polygon => {
-      if (polygon.radius) {
+    this.canvasService.pointings.forEach((pointing: Pointing) => {
+      if (pointing instanceof Fov) {
         console.log('circle');
       }
-      this.canvasService.updateSkyCoords(polygon, this.calculateWorldCoords(polygon));
+      this.canvasService.updateSkyCoords(pointing, this.calculateWorldCoords(pointing));
     });
-    this.canvasService.polygons.forEach((polygon: Rectangle) => {
+    this.canvasService.pointings.forEach((polygon: Rectangle) => {
       if (polygon.coordsWorld) {
         this.overlay.addFootprints(A.polygon([
           polygon.coordsWorld.topLeft,
@@ -184,7 +186,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
     });
   }
 
-  calculateWorldCoords(polygon: Rectangle): Rectangle {
+  calculateWorldCoords(polygon: Pointing): Pointing {
     const topLeft         = this.aladin.pix2world(polygon.coordsPixel.topLeft[0], polygon.coordsPixel.topLeft[1]);
     const topRight        = this.aladin.pix2world(polygon.coordsPixel.topRight[0], polygon.coordsPixel.topRight[1]);
     const bottomLeft      = this.aladin.pix2world(polygon.coordsPixel.bottomLeft[0], polygon.coordsPixel.bottomLeft[1]);
@@ -204,21 +206,21 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.overlay.overlays.forEach(footprint => {
       const newPolygon       = new Rectangle();
       newPolygon.coordsPixel = {
-        topLeft: this.aladin.world2pix(footprint.polygons[0][0], footprint.polygons[0][1]),
-        topRight: this.aladin.world2pix(footprint.polygons[1][0], footprint.polygons[1][1]),
-        bottomLeft: this.aladin.world2pix(footprint.polygons[3][0], footprint.polygons[3][1]),
-        bottomRight: this.aladin.world2pix(footprint.polygons[2][0], footprint.polygons[2][1])
+        topLeft: this.aladin.world2pix(footprint.pointings[0][0], footprint.pointings[0][1]),
+        topRight: this.aladin.world2pix(footprint.pointings[1][0], footprint.pointings[1][1]),
+        bottomLeft: this.aladin.world2pix(footprint.pointings[3][0], footprint.pointings[3][1]),
+        bottomRight: this.aladin.world2pix(footprint.pointings[2][0], footprint.pointings[2][1])
       };
       newPolygon.coordsWorld = {
-        topLeft: footprint.polygons[0],
-        topRight: footprint.polygons[1],
-        bottomLeft: footprint.polygons[3],
-        bottomRight: footprint.polygons[2]
+        topLeft: footprint.pointings[0],
+        topRight: footprint.pointings[1],
+        bottomLeft: footprint.pointings[3],
+        bottomRight: footprint.pointings[2]
       };
       newPolygons.push(newPolygon);
     });
-    this.canvasService.polygons = newPolygons;
-    this.overlay.overlays       = [];
+    this.canvasService.pointings = newPolygons;
+    this.overlay.overlays        = [];
     this.catalogue.reportChange();
   }
 

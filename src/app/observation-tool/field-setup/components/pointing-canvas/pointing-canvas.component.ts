@@ -67,34 +67,10 @@ export class PointingCanvasComponent implements OnInit {
         bottomLeft: [event.offsetX - dimension / 2, event.offsetY + dimension / 2],
         bottomRight: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
       });
-      // const poly: Rectangle = {
-      //   topLeft: {
-      //     pxCoords: [event.offsetX - dimension / 2, event.offsetY - dimension / 2]
-      //   },
-      //   topRight: {
-      //     pxCoords: [event.offsetX + dimension / 2, event.offsetY - dimension / 2]
-      //   },
-      //   bottomLeft: {
-      //     pxCoords: [event.offsetX - dimension / 2, event.offsetY + dimension / 2]
-      //   },
-      //   bottomRight: {
-      //     pxCoords: [event.offsetX + dimension / 2, event.offsetY + dimension / 2]
-      //   },
-      //   isSelected: false,
-      //   isDragging: false
-      // };
       this.drawPolygon(rect);
       this.canvasService.addPolygon(rect);
       this.rectAddedEmitter.emit();
     }
-    /*else if (this.canvasService.polygons.length > 0) {
-         this.canvasService.polygons.forEach(polygon => {
-           if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
-             polygon.isSelected = !polygon.isSelected;
-           }
-         });
-         this.redraw();
-       }*/
   }
 
   redraw() {

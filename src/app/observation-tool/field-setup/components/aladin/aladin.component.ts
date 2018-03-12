@@ -215,26 +215,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
         bottomLeft: footprint.polygons[3],
         bottomRight: footprint.polygons[2]
       };
-
-
-      //         {
-      //   topLeft: {
-      //     pxCoords: this.aladin.world2pix(footprint.polygons[0][0], footprint.polygons[0][1]),
-      //     worldCoords: footprint.polygons[0]
-      //   },
-      //   topRight: {
-      //     pxCoords: this.aladin.world2pix(footprint.polygons[1][0], footprint.polygons[1][1]),
-      //     worldCoords: footprint.polygons[1]
-      //   },
-      //   bottomRight: {
-      //     pxCoords: this.aladin.world2pix(footprint.polygons[2][0], footprint.polygons[2][1]),
-      //     worldCoords: footprint.polygons[2]
-      //   },
-      //   bottomLeft: {
-      //     pxCoords: this.aladin.world2pix(footprint.polygons[3][0], footprint.polygons[3][1]),
-      //     worldCoords: footprint.polygons[3]
-      //   }
-      // };
       newPolygons.push(newPolygon);
     });
     this.canvasService.polygons = newPolygons;

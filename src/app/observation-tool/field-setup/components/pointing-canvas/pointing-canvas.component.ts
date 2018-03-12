@@ -106,7 +106,7 @@ export class PointingCanvasComponent implements OnInit {
   drawCircle(fov: Fov) {
     this.canvas.strokeStyle = fov.isSelected ? 'red' : 'lime';
     this.canvas.beginPath();
-    this.canvas.arc(fov.coordsPixel[0], fov.coordsPixel[1], fov.radiusPixel, 0, 2 * Math.PI, false);
+    this.canvas.arc(fov.coordsPixel[0], fov.coordsPixel[1], 50, 0, 2 * Math.PI, false);
     this.canvas.closePath();
     this.canvas.stroke();
   }
@@ -116,8 +116,9 @@ export class PointingCanvasComponent implements OnInit {
     this.canvasService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
         this.drawPolygon(pointing);
+      } else if (pointing instanceof Fov) {
+        this.drawCircle(pointing);
       }
-
     });
   }
 

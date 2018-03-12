@@ -227,7 +227,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
       newPointings.push(newPolygon);
     });
     this.overlay.overlay_items.forEach(circle => {
-      console.log(circle);
       const newFov       = new Fov();
       newFov.coordsPixel = this.aladin.world2pix(circle.centerRaDec[0], circle.centerRaDec[1]);
       newFov.coordsWorld = circle.centerRaDec;

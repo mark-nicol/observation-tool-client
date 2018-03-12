@@ -22,15 +22,22 @@ export class PointingCanvasComponent implements OnInit {
             oldMouseEvent: MouseEvent;
 
   static isInsidePolygon(pointing: Pointing, x: number, y: number) {
-    const inXBounds = x <= pointing.coordsPixel.topRight[0] &&
-                      x >= pointing.coordsPixel.topLeft[0] &&
-                      x <= pointing.coordsPixel.bottomRight[0] &&
-                      x >= pointing.coordsPixel.bottomLeft[0];
-    const inYBounds = y >= pointing.coordsPixel.topLeft[1] &&
-                      y >= pointing.coordsPixel.topRight[1] &&
-                      y <= pointing.coordsPixel.bottomLeft[1] &&
-                      y <= pointing.coordsPixel.bottomRight[1];
-    return inXBounds && inYBounds;
+    if (pointing instanceof Rectangle) {
+      const inXBounds = x <= pointing.coordsPixel.topRight[0] &&
+                        x >= pointing.coordsPixel.topLeft[0] &&
+                        x <= pointing.coordsPixel.bottomRight[0] &&
+                        x >= pointing.coordsPixel.bottomLeft[0];
+      const inYBounds = y >= pointing.coordsPixel.topLeft[1] &&
+                        y >= pointing.coordsPixel.topRight[1] &&
+                        y <= pointing.coordsPixel.bottomLeft[1] &&
+                        y <= pointing.coordsPixel.bottomRight[1];
+      return inXBounds && inYBounds;
+    } else if (pointing instanceof Fov) {
+      return Math.sqrt((x - pointing.coordsPixel[0]) * (x - pointing.coordsPixel[0]) +
+                       (y - pointing.coordsPixel[1]) * (y - pointing.coordsPixel[1]))
+             < pointing.radiusPixel;
+    }
+
   }
 
   static mouseHasMoved(oldEvent: MouseEvent, newEvent: MouseEvent): boolean {

@@ -10,6 +10,7 @@ import {IAladinConfig} from '../../../shared/interfaces/aladin/aladin-config.int
 import {IAladinOverlay} from '../../../shared/interfaces/aladin/overlay.interface';
 import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
+import {AladinService} from '../../services/aladin.service';
 import {CanvasService} from '../../services/canvas.service';
 
 declare let A: any;
@@ -51,27 +52,20 @@ export class AladinComponent implements OnInit, AfterViewInit {
   hoveredObject: any;
 
   constructor(private persistenceService: PersistenceService,
-              private canvasService: CanvasService) {
+              private canvasService: CanvasService,
+              private aladinService: AladinService) {
   }
 
   ngOnInit() {
     this.persistenceService.getScienceGoal().subscribe(result => {
       this.target = result.TargetParameters[this.persistenceService.currentTarget];
-      this.aladin.gotoRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
+      this.aladinService.goToRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
       // this.addPointings();
     });
   }
 
   ngAfterViewInit() {
-    this.initAladin();
-    this.aladin.on('objectHovered', object => {
-      this.hoveredObject = object;
-    });
-    this.aladin.on('objectClicked', object => {
-      if (object) {
-        object.isSelected = !object.isSelected;
-      }
-    });
+    this.aladinService.initAladin();
   }
 
   initAladin() {
@@ -155,7 +149,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   mouseMove(event: MouseEvent) {
     this.coordinatesEmitter.emit({
       pixel: [event.layerX, event.layerY],
-      world: this.aladin.pix2world(event.layerX, event.layerY)
+      world: this.aladinService.coordsPixToWorld(event.layerX, event.layerY)
     });
   }
 
@@ -163,7 +157,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.coordinatesEmitter.emit({
       pixel: [document.getElementById('aladin-lite-div').offsetWidth / 2,
               document.getElementById('aladin-lite-div').offsetHeight / 2],
-      world: this.aladin.getRaDec()
+      world: this.aladinService.RaDec
     });
   }
 

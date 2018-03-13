@@ -21,7 +21,7 @@ export class PointingCanvasComponent implements OnInit {
             canvasContainer: any;
             oldMouseEvent: MouseEvent;
 
-  static isInsidePolygon(pointing: Pointing, x: number, y: number) {
+  static isInsidePointing(pointing: Pointing, x: number, y: number) {
     if (pointing instanceof Rectangle) {
       const inXBounds = x <= pointing.coordsPixel.topRight[0] &&
                         x >= pointing.coordsPixel.topLeft[0] &&
@@ -37,7 +37,6 @@ export class PointingCanvasComponent implements OnInit {
                        (y - pointing.coordsPixel[1]) * (y - pointing.coordsPixel[1]))
              < pointing.radiusPixel;
     }
-
   }
 
   static mouseHasMoved(oldEvent: MouseEvent, newEvent: MouseEvent): boolean {
@@ -106,7 +105,7 @@ export class PointingCanvasComponent implements OnInit {
   drawCircle(fov: Fov) {
     this.canvas.strokeStyle = fov.isSelected ? 'red' : 'lime';
     this.canvas.beginPath();
-    this.canvas.arc(fov.coordsPixel[0], fov.coordsPixel[1], 50, 0, 2 * Math.PI, false);
+    this.canvas.arc(fov.coordsPixel[0], fov.coordsPixel[1], 25, 0, 2 * Math.PI, false);
     this.canvas.closePath();
     this.canvas.stroke();
   }
@@ -133,7 +132,7 @@ export class PointingCanvasComponent implements OnInit {
 
   mousedown(event: MouseEvent) {
     this.canvasService.pointings.forEach(polygon => {
-      if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
+      if (PointingCanvasComponent.isInsidePointing(polygon, event.offsetX, event.offsetY)) {
         polygon.isDragging = true;
         polygon.isSelected = !polygon.isSelected;
       }
@@ -143,7 +142,7 @@ export class PointingCanvasComponent implements OnInit {
 
   mouseup(event: MouseEvent) {
     this.canvasService.pointings.forEach(polygon => {
-      if (PointingCanvasComponent.isInsidePolygon(polygon, event.offsetX, event.offsetY)) {
+      if (PointingCanvasComponent.isInsidePointing(polygon, event.offsetX, event.offsetY)) {
         const oldPolygon   = polygon;
         polygon.isDragging = false;
         this.canvasService.updatePointing(oldPolygon, polygon);

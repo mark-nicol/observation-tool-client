@@ -1,13 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Latitude} from '../../../../units/classes/latitude';
-import {Longitude} from '../../../../units/classes/longitude';
-import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
-import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
 import {Fov} from '../../../shared/classes/pointings/fov';
 import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
-import {IAladinConfig} from '../../../shared/interfaces/aladin/aladin-config.interface';
-import {IAladinOverlay} from '../../../shared/interfaces/aladin/overlay.interface';
 import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {AladinService} from '../../services/aladin.service';
@@ -27,29 +21,8 @@ export class AladinComponent implements OnInit, AfterViewInit {
   @Output() rectAddedEmitter   = new EventEmitter();
 
   target?: ITargetParameters;
-  initialConfig: IAladinConfig = {
-    // target:            'M1',
-    cooFrame: 'ICRS',
-    survey: 'P/DSS2/color',
-    fov: 2,
-    showReticle: true,
-    showZoomControl: false,
-    showLayersControl: true,
-    showGotoControl: false,
-    showShareControl: false,
-    showFrame: false,
-    fullScreen: false,
-    reticleColor: 'rgb(178, 50, 178)',
-    reticleSize: 22,
-  };
-  private aladin;
-  private overlay: IAladinOverlay;
-  private catalogue;
-  zoomStep                     = 1.5;
-  defaultFov                   = 4;
-  addingFov                    = false;
-  addingRect                   = false;
-  hoveredObject: any;
+  addingRect = false;
+  addingFov  = false;
 
   constructor(private persistenceService: PersistenceService,
               private canvasService: CanvasService,
@@ -60,7 +33,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.persistenceService.getScienceGoal().subscribe(result => {
       this.target = result.TargetParameters[this.persistenceService.currentTarget];
       this.aladinService.goToRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
-      // this.addPointings();
     });
   }
 
@@ -68,88 +40,30 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.aladinService.initAladin();
   }
 
-  initAladin() {
-    this.aladin    = A.aladin('#aladin-lite-div', this.initialConfig);
-    this.catalogue = A.catalog({
-      name: 'Pointing Catalogue',
-      shape: 'cross',
-      sourceSize: 20
-    });
-    this.aladin.addCatalog(this.catalogue);
-    this.overlay = A.graphicOverlay({color: '#FFAA00', lineWidth: 3});
-    this.aladin.addOverlay(this.overlay);
-  }
-
   resetView() {
-    this.aladin.gotoRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
-    this.aladin.adjustFovForObject(this.target.sourceName);
-  }
-
-  addPointings() {
-    if (this.target.SinglePoint) {
-      this.target.SinglePoint.forEach(point => {
-        const lat = new Latitude(<LatitudeUnits> point.centre.latitude.unit, point.centre.latitude.content);
-        const lon = new Longitude(<LongitudeUnits> point.centre.longitude.unit, point.centre.longitude.content);
-        this.addPointing(
-          this.target.sourceCoordinates.longitude.content + lon.getValueInUnits(LatitudeUnits.DEG),
-          this.target.sourceCoordinates.latitude.content + lat.getValueInUnits(LatitudeUnits.DEG));
-      });
-    }
-  }
-
-  addPointing(lon: number, lat: number) {
-    this.catalogue.addSources(A.source(lon, lat));
-    this.overlay.add(A.circle(lon, lat, 0.0018));
-  }
-
-  addRectangle(x: number, y: number, width: number, height: number) {
-    const topLeft     = this.aladin.pix2world(x, y);
-    const topRight    = this.aladin.pix2world(x + width, y);
-    const bottomLeft  = this.aladin.pix2world(x, y + height);
-    const bottomRight = this.aladin.pix2world(x + width, y + height);
-    this.overlay.addFootprints(A.polygon([
-      topLeft,
-      topRight,
-      bottomRight,
-      bottomLeft
-    ]));
-  }
-
-  cutItems() {
-    // For each object where isSelected === true
-    this.catalogue.sources.forEach((item, i) => {
-      if (item.isSelected) {
-        // Remove target
-        this.catalogue.sources.splice(i, 1);
-        // Remove circle
-        this.overlay.overlay_items.splice(i, 1);
-        this.overlay.overlays.splice(i, 1);
-      }
-    });
-    this.catalogue.reportChange();
-    console.log(this.catalogue.sources, this.overlay.overlay_items);
+    this.aladinService.goToObject(this.target.sourceName, this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
   }
 
   zoomIn() {
-    this.aladin.setFov(this.aladin.getFov()[0] / this.zoomStep);
+    this.aladinService.zoomIn()
   }
 
   zoomOut() {
-    this.aladin.setFov(this.aladin.getFov()[0] * this.zoomStep);
+    this.aladinService.zoomOut();
   }
 
   normalZoom() {
-    this.aladin.setFov(this.defaultFov);
+    this.aladinService.resetZoom();
   }
 
   goToCoords(lon: number, lat: number) {
-    this.aladin.gotoRaDec(lon, lat);
+    this.aladinService.goToRaDec(lon, lat);
   }
 
   mouseMove(event: MouseEvent) {
     this.coordinatesEmitter.emit({
       pixel: [event.layerX, event.layerY],
-      world: this.aladinService.coordsPixToWorld(event.layerX, event.layerY)
+      world: this.aladinService.coordsPixToWorld([event.layerX, event.layerY])
     });
   }
 
@@ -166,27 +80,16 @@ export class AladinComponent implements OnInit, AfterViewInit {
       this.canvasService.updateSkyCoords(pointing, this.calculateWorldCoords(pointing));
     });
     this.canvasService.pointings.forEach((pointing: Pointing) => {
-      if (pointing.coordsWorld) {
-        if (pointing instanceof Rectangle) {
-          this.overlay.addFootprints(A.polygon([
-            pointing.coordsWorld.topLeft,
-            pointing.coordsWorld.topRight,
-            pointing.coordsWorld.bottomRight,
-            pointing.coordsWorld.bottomLeft
-          ]));
-        } else if (pointing instanceof Fov) {
-          this.overlay.add(A.circle(pointing.coordsWorld[0], pointing.coordsWorld[1], 0.05, {color: '#FFAA00'}));
-        }
-      }
+      this.aladinService.addPointing(pointing);
     });
   }
 
   calculateWorldCoords(pointing: Pointing): Pointing {
     if (pointing instanceof Rectangle) {
-      const topLeft         = this.aladin.pix2world(pointing.coordsPixel.topLeft[0], pointing.coordsPixel.topLeft[1]);
-      const topRight        = this.aladin.pix2world(pointing.coordsPixel.topRight[0], pointing.coordsPixel.topRight[1]);
-      const bottomLeft      = this.aladin.pix2world(pointing.coordsPixel.bottomLeft[0], pointing.coordsPixel.bottomLeft[1]);
-      const bottomRight     = this.aladin.pix2world(pointing.coordsPixel.bottomRight[0], pointing.coordsPixel.bottomRight[1]);
+      const topLeft         = this.aladinService.coordsPixToWorld(pointing.coordsPixel.topLeft);
+      const topRight        = this.aladinService.coordsPixToWorld(pointing.coordsPixel.topRight);
+      const bottomLeft      = this.aladinService.coordsPixToWorld(pointing.coordsPixel.bottomLeft);
+      const bottomRight     = this.aladinService.coordsPixToWorld(pointing.coordsPixel.bottomRight);
       const rectangle       = new Rectangle();
       rectangle.coordsWorld = {
         topLeft: topLeft,
@@ -197,20 +100,21 @@ export class AladinComponent implements OnInit, AfterViewInit {
       return rectangle;
     } else if (pointing instanceof Fov) {
       const fov       = new Fov();
-      fov.coordsWorld = this.aladin.pix2world(pointing.coordsPixel[0], pointing.coordsPixel[1]);
+      fov.coordsWorld = this.aladinService.coordsPixToWorld(pointing.coordsPixel);
       return fov;
     }
   }
 
   editMode() {
     const newPointings = [];
-    this.overlay.overlays.forEach(footprint => {
+    this.aladinService.footprints.forEach(footprint => {
+      console.log(typeof footprint);
       const newPolygon       = new Rectangle();
       newPolygon.coordsPixel = {
-        topLeft: this.aladin.world2pix(footprint.polygons[0][0], footprint.polygons[0][1]),
-        topRight: this.aladin.world2pix(footprint.polygons[1][0], footprint.polygons[1][1]),
-        bottomLeft: this.aladin.world2pix(footprint.polygons[3][0], footprint.polygons[3][1]),
-        bottomRight: this.aladin.world2pix(footprint.polygons[2][0], footprint.polygons[2][1])
+        topLeft: this.aladinService.coordsWorldToPix(footprint.polygons[0]),
+        topRight: this.aladinService.coordsWorldToPix(footprint.polygons[1]),
+        bottomLeft: this.aladinService.coordsWorldToPix(footprint.polygons[3]),
+        bottomRight: this.aladinService.coordsWorldToPix(footprint.polygons[2])
       };
       newPolygon.coordsWorld = {
         topLeft: footprint.polygons[0],
@@ -220,17 +124,15 @@ export class AladinComponent implements OnInit, AfterViewInit {
       };
       newPointings.push(newPolygon);
     });
-    this.overlay.overlay_items.forEach(circle => {
+    this.aladinService.circles.forEach(circle => {
       const newFov       = new Fov();
-      newFov.coordsPixel = this.aladin.world2pix(circle.centerRaDec[0], circle.centerRaDec[1]);
+      newFov.coordsPixel = this.aladinService.coordsWorldToPix(circle.centerRaDec);
       newFov.coordsWorld = circle.centerRaDec;
       newFov.radiusWorld = circle.radiusDegrees;
       newPointings.push(newFov);
     });
     this.canvasService.pointings = newPointings;
-    this.overlay.overlays        = [];
-    this.overlay.overlay_items   = [];
-    this.catalogue.reportChange();
+    this.aladinService.clearPointings();
   }
 
 }

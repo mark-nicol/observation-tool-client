@@ -6,6 +6,7 @@ import {IAladinConfig} from '../../shared/interfaces/aladin/aladin-config.interf
 import {IAladinOverlay} from '../../shared/interfaces/aladin/overlay.interface';
 
 declare let A: any;
+declare let Coo: any;
 
 @Injectable()
 export class AladinService {
@@ -31,6 +32,7 @@ export class AladinService {
   private defaultFov                    = 4;
 
   constructor() {
+    console.log();
   }
 
   initAladin() {
@@ -85,9 +87,8 @@ export class AladinService {
   }
 
   private addFov(fov: Fov) {
-    // TODO sort radius
     if (fov.coordsWorld) {
-      this._overlay.add(A.circle(fov.coordsWorld[0], fov.coordsWorld[1], 0.05, {color: '#FFAA00'}));
+      this._overlay.add(A.circle(fov.coordsWorld[0], fov.coordsWorld[1], fov.radiusWorld, {color: '#FFAA00'}));
     }
   }
 
@@ -120,5 +121,9 @@ export class AladinService {
 
   get circles(): any[] {
     return this._overlay.overlay_items;
+  }
+
+  calculateDistanceBetweenPoints(pointA: number[], pointB: number[]): number {
+    return new Coo(pointA[0], pointA[1], 8).distance(new Coo(pointB[0], pointB[1], 8));
   }
 }

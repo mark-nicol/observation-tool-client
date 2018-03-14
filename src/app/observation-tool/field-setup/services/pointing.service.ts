@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
-import * as _ from 'lodash';
 import {Pointing} from '../../shared/classes/pointings/pointing';
-import {Rectangle} from '../../shared/classes/pointings/rectangle';
 
 @Injectable()
 export class PointingService {
@@ -20,6 +18,7 @@ export class PointingService {
   }
 
   addPointing(pointing: Pointing) {
+    console.log('pushing', pointing);
     this._pointings.push(pointing);
   }
 

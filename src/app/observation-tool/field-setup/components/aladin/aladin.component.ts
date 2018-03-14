@@ -7,8 +7,6 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 import {AladinService} from '../../services/aladin.service';
 import {CanvasService} from '../../services/canvas.service';
 
-declare let A: any;
-
 @Component({
   selector: 'app-aladin',
   templateUrl: './aladin.component.html',
@@ -108,7 +106,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
   editMode() {
     const newPointings = [];
     this.aladinService.footprints.forEach(footprint => {
-      console.log(typeof footprint);
       const newPolygon       = new Rectangle();
       newPolygon.coordsPixel = {
         topLeft: this.aladinService.coordsWorldToPix(footprint.polygons[0]),

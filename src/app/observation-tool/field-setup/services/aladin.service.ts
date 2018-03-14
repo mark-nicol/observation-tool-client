@@ -13,24 +13,22 @@ export class AladinService {
   private _aladin;
   private _overlay: IAladinOverlay;
   private _catalogue;
-          _initialConfig: IAladinConfig = {
-            cooFrame: 'ICRS',
-            survey: 'P/DSS2/color',
-            fov: 2,
-            showReticle: true,
-            showZoomControl: false,
-            showLayersControl: true,
-            showGotoControl: false,
-            showShareControl: false,
-            showFrame: false,
-            fullScreen: false,
-            reticleColor: 'rgb(178, 50, 178)',
-            reticleSize: 22,
-          };
-          zoomStep                      = 1.5;
-          defaultFov                    = 4;
-          addingFov                     = false;
-          addingRect                    = false;
+  private _initialConfig: IAladinConfig = {
+    cooFrame: 'ICRS',
+    survey: 'P/DSS2/color',
+    fov: 2,
+    showReticle: true,
+    showZoomControl: false,
+    showLayersControl: true,
+    showGotoControl: false,
+    showShareControl: false,
+    showFrame: false,
+    fullScreen: false,
+    reticleColor: 'rgb(178, 50, 178)',
+    reticleSize: 22,
+  };
+  private zoomStep                      = 1.5;
+  private defaultFov                    = 4;
 
   constructor() {
   }

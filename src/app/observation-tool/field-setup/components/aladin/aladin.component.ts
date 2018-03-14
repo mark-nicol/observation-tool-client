@@ -75,7 +75,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
     });
   }
 
-  redraw() {
+  viewMode() {
     this.canvasService.pointings.forEach((pointing: Pointing) => {
       this.canvasService.updateSkyCoords(pointing, this.calculateWorldCoords(pointing));
     });

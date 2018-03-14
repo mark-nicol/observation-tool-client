@@ -80,7 +80,7 @@ export class PointingCanvasComponent implements OnInit {
     }
   }
 
-  redraw() {
+  viewMode() {
     this.clearCanvas();
     this.canvasService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
@@ -127,7 +127,7 @@ export class PointingCanvasComponent implements OnInit {
 
   cutPolygons() {
     this.canvasService.cutPolygons();
-    this.redraw();
+    this.viewMode();
   }
 
   mousedown(event: MouseEvent) {
@@ -148,7 +148,7 @@ export class PointingCanvasComponent implements OnInit {
         this.canvasService.updatePointing(oldPolygon, polygon);
       }
     });
-    this.redraw();
+    this.viewMode();
   }
 
   mousemove(event: MouseEvent) {
@@ -168,7 +168,7 @@ export class PointingCanvasComponent implements OnInit {
           polygon.coordsPixel[0] += event.movementX;
           polygon.coordsPixel[1] += event.movementY;
         }
-        this.redraw();
+        this.viewMode();
       }
     });
     if (PointingCanvasComponent.mouseHasMoved(this.oldMouseEvent, event)) {

@@ -126,4 +126,15 @@ export class AladinService {
   calculateDistanceBetweenPoints(pointA: number[], pointB: number[]): number {
     return new Coo(pointA[0], pointA[1], 8).distance(new Coo(pointB[0], pointB[1], 8));
   }
+
+  calculateRadiusPixel(fov: Fov): number {
+    const sidePointPixel = this.coordsWorldToPix([fov.coordsWorld[0] + fov.radiusWorld, fov.coordsWorld[1]]);
+    return fov.coordsPixel[0] - sidePointPixel[0];
+  }
+
+  calculateRadiusWorld(fov: Fov): number {
+    console.log('calculateRadiusWorld', fov);
+    const sidePointWorld = this.coordsPixToWorld([fov.coordsPixel[0] + fov.radiusPixel, fov.coordsPixel[1]]);
+    return fov.coordsWorld[0] - sidePointWorld[0];
+  }
 }

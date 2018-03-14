@@ -75,9 +75,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   viewMode() {
     this.pointingService.pointings.forEach((pointing: Pointing) => {
-      this.pointingService.updateSkyCoords(pointing, this.calculateWorldCoords(pointing));
-    });
-    this.pointingService.pointings.forEach((pointing: Pointing) => {
       this.aladinService.addPointing(pointing);
     });
   }
@@ -97,20 +94,9 @@ export class AladinComponent implements OnInit, AfterViewInit {
       fov.coordsPixel = pointing.coordsPixel;
       fov.radiusPixel = pointing.radiusPixel;
       fov.coordsWorld = this.aladinService.coordsPixToWorld(pointing.coordsPixel);
-      fov.radiusWorld = this.calculateRadiusWorld(fov);
+      fov.radiusWorld = this.aladinService.calculateRadiusWorld(fov);
       return fov;
     }
-  }
-
-  calculateRadiusPixel(fov: Fov): number {
-    const sidePointPixel = this.aladinService.coordsWorldToPix([fov.coordsWorld[0] + fov.radiusWorld, fov.coordsWorld[1]]);
-    return fov.coordsPixel[0] - sidePointPixel[0];
-  }
-
-  calculateRadiusWorld(fov: Fov): number {
-    console.log('calculateRadiusWorld', fov);
-    const sidePointWorld = this.aladinService.coordsPixToWorld([fov.coordsPixel[0] + fov.radiusPixel, fov.coordsPixel[1]]);
-    return fov.coordsWorld[0] - sidePointWorld[0];
   }
 
   editMode() {
@@ -136,7 +122,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
       newFov.coordsPixel = this.aladinService.coordsWorldToPix(circle.centerRaDec);
       newFov.coordsWorld = circle.centerRaDec;
       newFov.radiusWorld = circle.radiusDegrees;
-      newFov.radiusPixel = this.calculateRadiusPixel(newFov);
+      newFov.radiusPixel = this.aladinService.calculateRadiusPixel(newFov);
       newPointings.push(newFov);
     });
     this.pointingService.pointings = newPointings;

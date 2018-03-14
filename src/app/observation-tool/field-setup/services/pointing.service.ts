@@ -1,12 +1,17 @@
 import {Injectable} from '@angular/core';
+import {Fov} from '../../shared/classes/pointings/fov';
 import {Pointing} from '../../shared/classes/pointings/pointing';
+import {Rectangle} from '../../shared/classes/pointings/rectangle';
+import {AladinService} from './aladin.service';
 
 @Injectable()
 export class PointingService {
 
   private _pointings: Pointing[] = [];
 
-  constructor() {
+  private _corners = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
+
+  constructor(private aladinService: AladinService) {
   }
 
   get pointings(): Pointing[] {
@@ -18,8 +23,43 @@ export class PointingService {
   }
 
   addPointing(pointing: Pointing) {
-    console.log('pushing', pointing);
+    if (pointing instanceof Rectangle) {
+      pointing = this.checkRec(pointing);
+    } else if (pointing instanceof Fov) {
+      this.checkFov(pointing);
+    }
     this._pointings.push(pointing);
+  }
+
+  private checkRec(rectangle: Rectangle): Rectangle {
+    if (!rectangle.coordsPixel) {
+      rectangle.coordsPixel = {topLeft: null, topRight: null, bottomLeft: null, bottomRight: null};
+      this._corners.forEach(corner => {
+        rectangle.coordsPixel[corner] = this.aladinService.coordsWorldToPix(rectangle.coordsWorld[corner]);
+      });
+    }
+    if (!rectangle.coordsWorld) {
+      rectangle.coordsWorld = {topLeft: null, topRight: null, bottomLeft: null, bottomRight: null};
+      this._corners.forEach(corner => {
+        rectangle.coordsWorld[corner] = this.aladinService.coordsPixToWorld(rectangle.coordsPixel[corner]);
+      });
+    }
+    return rectangle;
+  }
+
+  private checkFov(fov: Fov) {
+    if (!fov.coordsPixel) {
+      console.log('no pixel coords');
+    }
+    if (!fov.coordsWorld) {
+      console.log('no world coords');
+    }
+    if (!fov.radiusPixel) {
+      console.log('no pixel radius');
+    }
+    if (!fov.radiusWorld) {
+      console.log('no world radius');
+    }
   }
 
   updateSkyCoords(pointingPx: Pointing, pointingWorld: Pointing) {

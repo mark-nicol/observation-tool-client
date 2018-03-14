@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Fov} from '../../../shared/classes/pointings/fov';
 import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
-import {CanvasService} from '../../services/canvas.service';
+import {PointingService} from '../../services/pointing.service';
 
 
 @Component({
@@ -46,7 +46,7 @@ export class PointingCanvasComponent implements OnInit {
     return false;
   }
 
-  constructor(private canvasService: CanvasService) {
+  constructor(private pointingService: PointingService) {
   }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class PointingCanvasComponent implements OnInit {
       fov.coordsPixel = [event.offsetX, event.offsetY];
       fov.radiusPixel = 25;
       this.drawCircle(fov);
-      this.canvasService.addPointing(fov);
+      this.pointingService.addPointing(fov);
       this.fovAddedEmitter.emit();
     } else if (this.addingRec) {
       const dimension = 25;
@@ -75,14 +75,14 @@ export class PointingCanvasComponent implements OnInit {
         bottomRight: [event.offsetX + dimension, event.offsetY + dimension]
       });
       this.drawPolygon(rect);
-      this.canvasService.addPointing(rect);
+      this.pointingService.addPointing(rect);
       this.rectAddedEmitter.emit();
     }
   }
 
   redraw() {
     this.clearCanvas();
-    this.canvasService.pointings.forEach((pointing: Pointing) => {
+    this.pointingService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
         this.drawPolygon(pointing);
       } else if (pointing instanceof Fov) {
@@ -112,7 +112,7 @@ export class PointingCanvasComponent implements OnInit {
 
   editMode() {
     this.clearCanvas();
-    this.canvasService.pointings.forEach((pointing: Pointing) => {
+    this.pointingService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
         this.drawPolygon(pointing);
       } else if (pointing instanceof Fov) {
@@ -126,12 +126,12 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   cutPolygons() {
-    this.canvasService.cutPolygons();
+    this.pointingService.cutPolygons();
     this.redraw();
   }
 
   mousedown(event: MouseEvent) {
-    this.canvasService.pointings.forEach(polygon => {
+    this.pointingService.pointings.forEach(polygon => {
       if (PointingCanvasComponent.isInsidePointing(polygon, event.offsetX, event.offsetY)) {
         polygon.isDragging = true;
         polygon.isSelected = !polygon.isSelected;
@@ -141,18 +141,18 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   mouseup(event: MouseEvent) {
-    this.canvasService.pointings.forEach(polygon => {
+    this.pointingService.pointings.forEach(polygon => {
       if (PointingCanvasComponent.isInsidePointing(polygon, event.offsetX, event.offsetY)) {
         const oldPolygon   = polygon;
         polygon.isDragging = false;
-        this.canvasService.updatePointing(oldPolygon, polygon);
+        this.pointingService.updatePointing(oldPolygon, polygon);
       }
     });
     this.redraw();
   }
 
   mousemove(event: MouseEvent) {
-    this.canvasService.pointings.forEach((polygon: Pointing) => {
+    this.pointingService.pointings.forEach((polygon: Pointing) => {
       if (polygon.isDragging) {
         polygon.isSelected = true;
         if (polygon instanceof Rectangle) {

@@ -4,7 +4,7 @@ import {Pointing} from '../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../shared/classes/pointings/rectangle';
 
 @Injectable()
-export class CanvasService {
+export class PointingService {
 
   private _pointings: Pointing[] = [];
 

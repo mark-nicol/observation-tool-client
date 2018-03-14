@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {CanvasService} from '../../services/canvas.service';
+import {PointingService} from '../../services/pointing.service';
 
 import { PointingCanvasComponent } from './pointing-canvas.component';
 
@@ -10,7 +10,7 @@ describe('PointingCanvasComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PointingCanvasComponent ],
-      providers: [CanvasService]
+      providers: [PointingService]
     })
     .compileComponents();
   }));

@@ -5,7 +5,7 @@ import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {AladinService} from '../../services/aladin.service';
-import {CanvasService} from '../../services/canvas.service';
+import {PointingService} from '../../services/pointing.service';
 
 @Component({
   selector: 'app-aladin',
@@ -23,7 +23,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   addingFov  = false;
 
   constructor(private persistenceService: PersistenceService,
-              private canvasService: CanvasService,
+              private pointingService: PointingService,
               private aladinService: AladinService) {
   }
 
@@ -74,27 +74,23 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   viewMode() {
-    this.canvasService.pointings.forEach((pointing: Pointing) => {
-      this.canvasService.updateSkyCoords(pointing, this.calculateWorldCoords(pointing));
+    this.pointingService.pointings.forEach((pointing: Pointing) => {
+      this.pointingService.updateSkyCoords(pointing, this.calculateWorldCoords(pointing));
     });
-    this.canvasService.pointings.forEach((pointing: Pointing) => {
+    this.pointingService.pointings.forEach((pointing: Pointing) => {
       this.aladinService.addPointing(pointing);
     });
   }
 
   calculateWorldCoords(pointing: Pointing): Pointing {
     if (pointing instanceof Rectangle) {
-      const topLeft         = this.aladinService.coordsPixToWorld(pointing.coordsPixel.topLeft);
-      const topRight        = this.aladinService.coordsPixToWorld(pointing.coordsPixel.topRight);
-      const bottomLeft      = this.aladinService.coordsPixToWorld(pointing.coordsPixel.bottomLeft);
-      const bottomRight     = this.aladinService.coordsPixToWorld(pointing.coordsPixel.bottomRight);
-      const rectangle       = new Rectangle();
-      rectangle.coordsWorld = {
-        topLeft: topLeft,
-        topRight: topRight,
-        bottomLeft: bottomLeft,
-        bottomRight: bottomRight
-      };
+      const rectangle = new Rectangle();
+      const corners   = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
+      let tmpValue;
+      for (const corner of corners) {
+        tmpValue                      = this.aladinService.coordsPixToWorld(pointing.coordsPixel[corner]);
+        rectangle.coordsWorld[corner] = tmpValue;
+      }
       return rectangle;
     } else if (pointing instanceof Fov) {
       const fov       = new Fov();
@@ -128,7 +124,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
       newFov.radiusWorld = circle.radiusDegrees;
       newPointings.push(newFov);
     });
-    this.canvasService.pointings = newPointings;
+    this.pointingService.pointings = newPointings;
     this.aladinService.clearPointings();
   }
 

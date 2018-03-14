@@ -47,26 +47,33 @@ export class PointingService {
     return rectangle;
   }
 
-  private checkFov(fov: Fov) {
+  private checkFov(fov: Fov): Fov {
     if (!fov.coordsPixel) {
-      console.log('no pixel coords');
+      fov.coordsPixel = this.aladinService.coordsPixToWorld(fov.coordsWorld);
     }
     if (!fov.coordsWorld) {
-      console.log('no world coords');
+      fov.coordsWorld = this.aladinService.coordsPixToWorld(fov.coordsPixel);
     }
     if (!fov.radiusPixel) {
       console.log('no pixel radius');
+      fov.radiusPixel = 25;
     }
     if (!fov.radiusWorld) {
       console.log('no world radius');
+      fov.radiusWorld = 0.05;
     }
-  }
-
-  updateSkyCoords(pointingPx: Pointing, pointingWorld: Pointing) {
-    this._pointings[this._pointings.indexOf(pointingPx)].coordsWorld = pointingWorld.coordsWorld;
+    return fov;
   }
 
   updatePointing(pointingOriginal: Pointing, pointingNew: Pointing) {
+    if (pointingNew instanceof Rectangle) {
+      pointingNew.coordsWorld.topLeft = this.aladinService.coordsPixToWorld(pointingNew.coordsPixel.topLeft);
+      pointingNew.coordsWorld.topRight = this.aladinService.coordsPixToWorld(pointingNew.coordsPixel.topRight);
+      pointingNew.coordsWorld.bottomLeft = this.aladinService.coordsPixToWorld(pointingNew.coordsPixel.bottomLeft);
+      pointingNew.coordsWorld.bottomRight = this.aladinService.coordsPixToWorld(pointingNew.coordsPixel.bottomRight);
+    } else if (pointingNew instanceof Fov) {
+      pointingNew.coordsWorld = this.aladinService.coordsPixToWorld(pointingNew.coordsPixel);
+    }
     this._pointings[this._pointings.indexOf(pointingOriginal)] = pointingNew;
   }
 

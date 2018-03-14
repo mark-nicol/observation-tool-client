@@ -156,13 +156,18 @@ export class PointingCanvasComponent implements OnInit {
       if (polygon.isDragging) {
         polygon.isSelected = true;
         if (polygon instanceof Rectangle) {
-          const corners   = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
-          const movements = ['movementX', 'movementY'];
-          for (const corner of corners) {
-            movements.forEach((movement, index) => {
-              polygon.coordsPixel[corner][index] += event[movement];
-            });
-          }
+          const corners     = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
+          const movements   = ['movementX', 'movementY'];
+          const newPointing = polygon;
+          newPointing.coordsPixel.topLeft[1] += event.movementY;
+          newPointing.coordsPixel.topLeft[0] += event.movementX;
+          newPointing.coordsPixel.topRight[0] += event.movementX;
+          newPointing.coordsPixel.topRight[1] += event.movementY;
+          newPointing.coordsPixel.bottomLeft[0] += event.movementX;
+          newPointing.coordsPixel.bottomLeft[1] += event.movementY;
+          newPointing.coordsPixel.bottomRight[0] += event.movementX;
+          newPointing.coordsPixel.bottomRight[1] += event.movementY;
+          this.pointingService.updatePointing(polygon, newPointing);
         } else if (polygon instanceof Fov) {
           polygon.coordsPixel[0] += event.movementX;
           polygon.coordsPixel[1] += event.movementY;

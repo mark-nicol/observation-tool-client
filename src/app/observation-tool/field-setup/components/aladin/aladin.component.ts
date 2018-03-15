@@ -101,6 +101,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
       const newFov       = new Fov();
       newFov.coordsPixel = this.aladinService.coordsWorldToPix(circle.centerRaDec);
       newFov.coordsWorld = circle.centerRaDec;
+      // newFov.radiusWorld = this.aladinService.calculateRadiusWorld(newFov);
       newFov.radiusWorld = circle.radiusDegrees;
       newFov.radiusPixel = this.aladinService.calculateRadiusPixel(newFov);
       newPointings.push(newFov);

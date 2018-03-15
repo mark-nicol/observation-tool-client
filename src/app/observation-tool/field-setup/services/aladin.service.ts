@@ -31,6 +31,10 @@ export class AladinService {
   private zoomStep                      = 1.5;
   private defaultFov                    = 4;
 
+  static calculateDistanceBetweenPoints(pointA: number[], pointB: number[]): number {
+    return new Coo(pointA[0], pointA[1], 8).distance(new Coo(pointB[0], pointB[1], 8));
+  }
+
   constructor() {
   }
 
@@ -122,17 +126,14 @@ export class AladinService {
     return this._overlay.overlay_items;
   }
 
-  calculateDistanceBetweenPoints(pointA: number[], pointB: number[]): number {
-    return new Coo(pointA[0], pointA[1], 8).distance(new Coo(pointB[0], pointB[1], 8));
-  }
-
   calculateRadiusPixel(fov: Fov): number {
-    const sidePointPixel = this.coordsWorldToPix([fov.coordsWorld[0] + fov.radiusWorld, fov.coordsWorld[1]]);
+    const sidePointPixel = this.coordsWorldToPix([fov.coordsWorld[0] + (fov.radiusWorld * 3.6 /*Hack job*/),
+                                                  fov.coordsWorld[1]]);
     return fov.coordsPixel[0] - sidePointPixel[0];
   }
 
   calculateRadiusWorld(fov: Fov): number {
     const sidePointWorld = this.coordsPixToWorld([fov.coordsPixel[0] + fov.radiusPixel, fov.coordsPixel[1]]);
-    return this.calculateDistanceBetweenPoints(fov.coordsWorld, sidePointWorld);
+    return AladinService.calculateDistanceBetweenPoints(fov.coordsWorld, sidePointWorld);
   }
 }

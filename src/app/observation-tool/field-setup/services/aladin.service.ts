@@ -133,6 +133,6 @@ export class AladinService {
 
   calculateRadiusWorld(fov: Fov): number {
     const sidePointWorld = this.coordsPixToWorld([fov.coordsPixel[0] + fov.radiusPixel, fov.coordsPixel[1]]);
-    return fov.coordsWorld[0] - sidePointWorld[0];
+    return this.calculateDistanceBetweenPoints(fov.coordsWorld, sidePointWorld);
   }
 }

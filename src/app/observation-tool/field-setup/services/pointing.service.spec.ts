@@ -1,11 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
+import {AladinService} from './aladin.service';
 
 import { PointingService } from './pointing.service';
 
 describe('PointingService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PointingService]
+      providers: [PointingService, AladinService]
     });
   });
 

@@ -30,18 +30,8 @@ export class Rectangle extends Pointing {
 
   constructor(isSelected?: boolean, isDragging?: boolean, coordsWorld?: IRectangleCoords, coordsPixel?: IRectangleCoords) {
     super(isSelected, isDragging);
-    this.coordsWorld = coordsWorld || {
-      topLeft: [],
-      topRight: [],
-      bottomLeft: [],
-      bottomRight: []
-    };
-    this.coordsPixel = coordsPixel || {
-      topLeft: [],
-      topRight: [],
-      bottomLeft: [],
-      bottomRight: []
-    }
+    this.coordsWorld = coordsWorld || null;
+    this.coordsPixel = coordsPixel || null;
   }
 
 }

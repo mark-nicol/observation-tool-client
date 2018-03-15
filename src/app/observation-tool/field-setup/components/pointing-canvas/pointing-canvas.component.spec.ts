@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {AladinService} from '../../services/aladin.service';
 import {PointingService} from '../../services/pointing.service';
 
 import { PointingCanvasComponent } from './pointing-canvas.component';
@@ -10,7 +11,7 @@ describe('PointingCanvasComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PointingCanvasComponent ],
-      providers: [PointingService]
+      providers: [PointingService, AladinService]
     })
     .compileComponents();
   }));

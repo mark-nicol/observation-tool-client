@@ -105,7 +105,7 @@ export class PointingCanvasComponent implements OnInit {
   drawCircle(fov: Fov) {
     this.canvas.strokeStyle = fov.isSelected ? 'red' : 'lime';
     this.canvas.beginPath();
-    this.canvas.arc(fov.coordsPixel[0], fov.coordsPixel[1], 25, 0, 2 * Math.PI, false);
+    this.canvas.arc(fov.coordsPixel[0], fov.coordsPixel[1], fov.radiusPixel, 0, 2 * Math.PI, false);
     this.canvas.closePath();
     this.canvas.stroke();
   }
@@ -156,14 +156,18 @@ export class PointingCanvasComponent implements OnInit {
       if (polygon.isDragging) {
         polygon.isSelected = true;
         if (polygon instanceof Rectangle) {
-          polygon.coordsPixel.topLeft[0] += event.movementX;
-          polygon.coordsPixel.topLeft[1] += event.movementY;
-          polygon.coordsPixel.topRight[0] += event.movementX;
-          polygon.coordsPixel.topRight[1] += event.movementY;
-          polygon.coordsPixel.bottomLeft[0] += event.movementX;
-          polygon.coordsPixel.bottomLeft[1] += event.movementY;
-          polygon.coordsPixel.bottomRight[0] += event.movementX;
-          polygon.coordsPixel.bottomRight[1] += event.movementY;
+          const corners     = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
+          const movements   = ['movementX', 'movementY'];
+          const newPointing = polygon;
+          newPointing.coordsPixel.topLeft[1] += event.movementY;
+          newPointing.coordsPixel.topLeft[0] += event.movementX;
+          newPointing.coordsPixel.topRight[0] += event.movementX;
+          newPointing.coordsPixel.topRight[1] += event.movementY;
+          newPointing.coordsPixel.bottomLeft[0] += event.movementX;
+          newPointing.coordsPixel.bottomLeft[1] += event.movementY;
+          newPointing.coordsPixel.bottomRight[0] += event.movementX;
+          newPointing.coordsPixel.bottomRight[1] += event.movementY;
+          this.pointingService.updatePointing(polygon, newPointing);
         } else if (polygon instanceof Fov) {
           polygon.coordsPixel[0] += event.movementX;
           polygon.coordsPixel[1] += event.movementY;

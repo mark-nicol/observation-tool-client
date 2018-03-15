@@ -79,26 +79,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
     });
   }
 
-  calculateWorldCoords(pointing: Pointing): Pointing {
-    if (pointing instanceof Rectangle) {
-      const rectangle = new Rectangle();
-      const corners   = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
-      let tmpValue;
-      for (const corner of corners) {
-        tmpValue                      = this.aladinService.coordsPixToWorld(pointing.coordsPixel[corner]);
-        rectangle.coordsWorld[corner] = tmpValue;
-      }
-      return rectangle;
-    } else if (pointing instanceof Fov) {
-      const fov       = new Fov();
-      fov.coordsPixel = pointing.coordsPixel;
-      fov.radiusPixel = pointing.radiusPixel;
-      fov.coordsWorld = this.aladinService.coordsPixToWorld(pointing.coordsPixel);
-      fov.radiusWorld = this.aladinService.calculateRadiusWorld(fov);
-      return fov;
-    }
-  }
-
   editMode() {
     const newPointings = [];
     this.aladinService.footprints.forEach(footprint => {

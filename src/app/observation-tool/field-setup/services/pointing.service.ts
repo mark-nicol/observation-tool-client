@@ -26,7 +26,7 @@ export class PointingService {
     if (pointing instanceof Rectangle) {
       pointing = this.checkRec(pointing);
     } else if (pointing instanceof Fov) {
-      this.checkFov(pointing);
+      pointing = this.checkFov(pointing);
     }
     this._pointings.push(pointing);
   }
@@ -55,12 +55,10 @@ export class PointingService {
       fov.coordsWorld = this.aladinService.coordsPixToWorld(fov.coordsPixel);
     }
     if (!fov.radiusPixel) {
-      console.log('no pixel radius');
-      fov.radiusPixel = 25;
+      fov.radiusPixel = this.aladinService.calculateRadiusPixel(fov);
     }
     if (!fov.radiusWorld) {
-      console.log('no world radius');
-      fov.radiusWorld = 0.05;
+      fov.radiusWorld = this.aladinService.calculateRadiusWorld(fov);
     }
     return fov;
   }

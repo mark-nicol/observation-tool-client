@@ -46,9 +46,9 @@ export class Fov extends Pointing {
               radiusWorld?: number,
               radiusPixel?: number) {
     super(isSelected, isDragging);
-    this.coordsWorld = coordsWorld || [];
-    this.coordsPixel = coordsPixel || [];
-    this.radiusWorld = radiusWorld || 0;
-    this.radiusPixel = radiusPixel || 0;
+    this.coordsWorld = coordsWorld || null;
+    this.coordsPixel = coordsPixel || null;
+    this.radiusWorld = radiusWorld || null;
+    this.radiusPixel = radiusPixel || null;
   }
 }

@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {SuiModalService} from 'ng2-semantic-ui';
-import {SpectralLineSearchModal} from '../spectral-line-modal/spectral-line-modal.component';
 
 /**
  * Component to send control changes to the spectral visualisation
@@ -46,7 +45,7 @@ export class VisualisationControlComponent {
     '5.186mm (7th Octile)',
   ];
 
-  constructor(private suiModalService: SuiModalService) {
+  constructor() {
   }
 
   /**
@@ -87,10 +86,6 @@ export class VisualisationControlComponent {
    */
   resetClick() {
     this.resetEmitter.emit();
-  }
-
-  makeModal() {
-    this.suiModalService.open(new SpectralLineSearchModal());
   }
 
   lineSelectClick() {

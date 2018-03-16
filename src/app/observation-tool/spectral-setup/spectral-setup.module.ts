@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 import {SuiModule} from 'ng2-semantic-ui';
 import {SharedModule} from '../shared/shared.module';
 import {LineSelectionComponent} from './components/line-selection/line-selection.component';
-import {SpectralLineModalComponent} from './components/spectral-line-modal/spectral-line-modal.component';
 import {TypeComponent} from './components/type/type.component';
 import {VisualisationControlComponent} from './components/visualisation-control/visualisation-control.component';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
@@ -22,14 +21,13 @@ import {SpectralSetupComponent} from './spectral-setup.component';
     VisualisationControlComponent,
     VisualisationViewerComponent,
     SpectralSetupComponent,
-    SpectralLineModalComponent,
     LineSelectionComponent
   ],
   providers: [SpectralDataService],
   exports: [
     SpectralSetupComponent
   ],
-  entryComponents: [SpectralLineModalComponent]
+  entryComponents: []
 })
 
 export class SpectralSetupModule {

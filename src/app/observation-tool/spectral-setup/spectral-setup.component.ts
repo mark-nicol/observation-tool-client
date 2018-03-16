@@ -46,7 +46,7 @@ export class SpectralSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spectralDataService.getSplatalogue().subscribe(result => console.log(result));
+
   }
 
   /**

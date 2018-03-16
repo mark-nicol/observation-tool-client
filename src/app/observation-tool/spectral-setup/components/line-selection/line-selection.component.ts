@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
+import {ISpectralLine} from '../../../shared/interfaces/spectral-line.interface';
+import {SpectralDataService} from '../../services/spectral-data.service';
 
 @Component({
   selector: 'app-line-selection',
@@ -9,25 +11,33 @@ import {FormArray, FormGroup} from '@angular/forms';
 export class LineSelectionComponent implements OnInit {
 
   @Input() parentForm: FormGroup;
+  @Output() linesSelected = new EventEmitter();
+  _splatalogue: ISpectralLine[];
+  _selectedLines = [];
+  _selectedLineId = null;
 
-  selectedLineId = null;
-
-  constructor() {
+  constructor(private spectralDataService: SpectralDataService) {
   }
 
   ngOnInit() {
-  }
-
-  get availableLines(): FormArray {
-    return this.parentForm.get('availableLines') as FormArray;
-  }
-
-  get selectedLines(): FormArray {
-    return this.parentForm.get('selectedLines') as FormArray;
+    this.spectralDataService.getSplatalogue().subscribe(result => this._splatalogue = result.splice(0, 10));
   }
 
   addLine() {
+    const selectedLine = this._splatalogue.find(x => x.line_id === this._selectedLineId);
+    console.log(selectedLine);
+    if (selectedLine) {
+      this._selectedLines.push(selectedLine);
+      this._splatalogue.splice(this._splatalogue.indexOf(selectedLine), 1);
+    }
+  }
 
+  removeLine() {
+    const selectedLine = this._selectedLines.find(x => x.line_id === this._selectedLineId);
+    if (selectedLine) {
+      this._splatalogue.push(selectedLine);
+      this._selectedLines.splice(this._selectedLines.indexOf(selectedLine), 1);
+    }
   }
 
 }

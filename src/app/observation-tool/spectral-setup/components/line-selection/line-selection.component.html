@@ -2,7 +2,7 @@
       [formGroup]="parentForm">
   <div class="row">
     <!-- Available lines table -->
-    <div class="column">
+    <div class=" seven wide column">
       <table class="ui basic selectable compact table">
         <thead>
           <tr>
@@ -16,13 +16,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let line of _splatalogue"
+              [class.positive]="line.line_id === _selectedLineId"
+              (click)="_selectedLineId = line.line_id">
+            <td>{{line.s_name_noparens}}</td>
+            <td>{{line.chemical_name}}</td>
+            <td>{{line.orderedfreq / 1000}}</td>
+            <td>{{line.orderedfreq / 500}}</td>
+            <td>{{line.E_up_K}}</td>
+            <td>{{line.lovas_int}}</td>
+            <td>{{line.sijmu2}}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <!-- Buttons -->
-    <div class="column">
+    <div class="two wide column">
       <div class="ui vertical tiny compact labeled icon buttons">
         <button class="ui blue button"
                 (click)="addLine()">
@@ -33,7 +42,8 @@
           <i class="angle right double icon"></i>
           Add all
         </button>
-        <button class="ui red button">
+        <button class="ui red button"
+                (click)="removeLine()">
           <i class="angle left icon"></i>
           Remove
         </button>
@@ -44,7 +54,7 @@
       </div>
     </div>
     <!-- Selected lines table -->
-    <div class="column">
+    <div class="seven wide column">
       <table class="ui basic compact table">
         <thead>
           <tr>
@@ -58,10 +68,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let line of _selectedLines"
+              [class.positive]="line.line_id === _selectedLineId"
+              (click)="_selectedLineId = line.line_id">
+            <td>{{line.s_name_noparens}}</td>
+            <td>{{line.chemical_name}}</td>
+            <td>{{line.orderedfreq / 1000}}</td>
+            <td>{{line.orderedfreq / 500}}</td>
+            <td>{{line.E_up_K}}</td>
+            <td>{{line.lovas_int}}</td>
+            <td>{{line.sijmu2}}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 </form>
+<button class="ui right floated tiny compact blue labeled icon button"
+        (click)="linesSelected.emit()">
+  <i class="plus icon"></i>
+  Add lines
+</button>

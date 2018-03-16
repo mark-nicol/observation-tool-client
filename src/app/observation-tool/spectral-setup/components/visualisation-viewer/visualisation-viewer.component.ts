@@ -39,6 +39,13 @@ interface Margin {
   left: number
 }
 
+interface AlmaBand {
+  start: number
+  end: number
+  color: string
+  text: string
+}
+
 /**
  * Creates and controls the visualisation on the spectral setup science goal page
  *
@@ -54,16 +61,18 @@ interface Margin {
 export class VisualisationViewerComponent implements OnInit {
 
   /** Regions for receiver bands */
-  private regions = [
-    [84, 116],
-    [120, 163],
-    [163, 211],
-    [211, 275],
-    [275, 372],
-    [385, 500],
-    [602, 720],
-    [787, 950]
+  private almaBands: AlmaBand[] = [
+    {start: 84, end: 116, color: '#FF0000', text: '3'},
+    {start: 120, end: 163, color: '#FFAA00', text: '4'},
+    {start: 163, end: 211, color: '#FFFF00', text: '5'},
+    {start: 211, end: 275, color: '#AAFF00', text: '6'},
+    {start: 275, end: 372, color: '#00FF00', text: '7'},
+    {start: 385, end: 500, color: '#00FFAA', text: '8'},
+    {start: 602, end: 720, color: '#00FFFF', text: '9'},
+    {start: 787, end: 950, color: '#00AAFF', text: '10'}
   ];
+
+  _spectralLines = [];
 
   /** Colors for receiver band regions */
   private regionColors: any;
@@ -104,9 +113,6 @@ export class VisualisationViewerComponent implements OnInit {
   /** The brush on the context chart, used for zooming and panning */
   private brush: any;
 
-  /** The zoom on the focus chart, used for zooming and panning */
-  private zoom: any;
-
   /**
    * constructor
    *
@@ -119,7 +125,10 @@ export class VisualisationViewerComponent implements OnInit {
    * Creates the data and two charts
    */
   ngOnInit() {
-    this.spectralDataService.getData(1).subscribe(data => this.createVisualiser(data));
+    this.spectralDataService.getSpectrum(1).subscribe(data => {
+      this.createVisualiser(data)
+    });
+
   }
 
   /**
@@ -135,7 +144,13 @@ export class VisualisationViewerComponent implements OnInit {
     this.drawRegions();
     this.drawContextChart();
     this.drawFocusChart();
-    this.drawLine();
+    this.spectralDataService.selectedLines.subscribe(result => {
+      result.forEach(line => {
+        const lineData = [[line.orderedfreq / 1000, this.focus.height], [line.orderedfreq / 1000, this.focus.height * 0.33]];
+        this._spectralLines.push(lineData);
+      });
+      this.drawSpectralLines();
+    });
     this.resetView();
   }
 
@@ -157,12 +172,29 @@ export class VisualisationViewerComponent implements OnInit {
                  .attr('width', element.offsetWidth)
                  .attr('height', element.offsetHeight);
 
+    // this.svg.append('rect')
+    //     .attr('width', '100%')
+    //     .attr('height', '100%')
+    //     .attr('fill', 'black');
+
     // Clip path in the focus chart, keeps the line from spilling into margins
     this.svg.append('defs').append('clipPath')
         .attr('id', 'clip')
         .append('rect')
         .attr('width', this.focus.width)
         .attr('height', this.focus.height);
+  }
+
+  drawSpectralLines() {
+    this._spectralLines.forEach(lineData => {
+      this.focus.chartArea.append('line')
+          .attr('class', 'spectral-line')
+          .style('stroke', 'red')
+          .attr('x1', this.focus.xScale(lineData[0][0]))
+          .attr('y1', this.focus.yScale(lineData[0][1]))
+          .attr('x2', this.focus.xScale(lineData[1][0]))
+          .attr('y2', this.focus.yScale(lineData[1][1]));
+    });
   }
 
   /**
@@ -216,13 +248,6 @@ export class VisualisationViewerComponent implements OnInit {
     this.brush = d3.brushX()
                    .extent([[0, 0], [this.context.width, this.context.height]])
                    .on('brush end', this.brushed.bind(this));
-
-    // Create the zoom area controlled by the brush
-    this.zoom = d3.zoom()
-                  .scaleExtent([1, Infinity])
-                  .translateExtent([[0, 0], [this.focus.width, this.focus.height]])
-                  .extent([[0, 0], [this.focus.width, this.focus.height]])
-                  .on('zoom', this.zoomed.bind(this));
   }
 
   /**
@@ -230,33 +255,23 @@ export class VisualisationViewerComponent implements OnInit {
    */
   drawRegions() {
     // Set the colors for the regions
-    this.regionColors = d3.scaleLinear().domain([0, this.regions.length]).range(<any[]>[
-      'limegreen',
-      'steelblue'
-    ]);
-
-    for (let i = 0; i < this.regions.length; i++) {
+    for (let i = 0; i < this.almaBands.length; i++) {
       this.focus.chartArea.append('rect')
           .attr('class', 'region')
-          .attr('x', d => this.focus.xScale(this.regions[i][0]))
-          .attr('y', d => 0)
-          .attr('width', this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
+          .attr('x', this.focus.xScale(this.almaBands[i].start))
+          .attr('y', 0)
+          .attr('width', this.focus.xScale(this.almaBands[i].end) - this.focus.xScale(this.almaBands[i].start))
           .attr('height', this.focus.height)
-          .style('fill', d => this.regionColors(i))
-          .style('opacity', '0.3')
+          .style('fill', this.almaBands[i].color)
+          .style('opacity', '0.3');
+      this.focus.chartArea.append('text')
+          .attr('class', 'alma-band-text')
+          .attr('x', this.focus.xScale(this.almaBands[i].start))
+          .attr('y', this.focus.height)
+          .text(this.almaBands[i].text)
+          .attr('font-size', '4em')
+          .attr('fill', 'white');
     }
-  }
-
-  drawLine() {
-    this.focus.chartArea.append('line')
-        .attr('class', 'spectral-line')
-        .attr('x1', this.focus.xScale(350))
-        .attr('y1', this.focus.yScale(0))
-        .attr('x2', this.focus.xScale(350))
-        .attr('y2', this.focus.yScale(this.focus.height * 0.66))
-        .style('stroke-width', 2)
-        .style('stroke', 'red')
-        .style('fill', 'none');
   }
 
   /**
@@ -312,41 +327,33 @@ export class VisualisationViewerComponent implements OnInit {
 
     // Select all the band regions and re-adjust
     this.focus.chartArea.selectAll('.region')
-        .attr('x', (d, i) => this.focus.xScale(this.regions[i][0]))
-        .attr('y', (d, i) => 0)
-        .attr('width', (d, i) => this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
+        .attr('x', (d, i) => this.focus.xScale(this.almaBands[i].start))
+        .attr('y', 0)
+        .attr('width', (d, i) => this.focus.xScale(this.almaBands[i].end) - this.focus.xScale(this.almaBands[i].start))
         .attr('height', this.focus.height);
 
-    // Redraw spectral line
-    this.focus.chartArea.selectAll('.spectral-line')
-        .attr('x1', this.focus.xScale(350))
-        .attr('y1', this.focus.yScale(this.focus.height * 0.33))
-        .attr('x2', this.focus.xScale(350))
-        .attr('y2', this.focus.yScale(this.focus.height));
+    this.focus.chartArea.selectAll('.alma-band-text')
+        .attr('x', (d, i) => {
+          // if the start of the band is greater than the left most value on the scale
+          if (this.almaBands[i].start > this.focus.xScale.domain()[0]) {
+            // Draw at the band start
+            return this.focus.xScale(this.almaBands[i].start);
+          }
+          return;
+        })
+        .attr('y', this.focus.height);
 
+    this.focus.chartArea.selectAll('.spectral-line')
+        .attr('x1', (d, i) => this.focus.xScale(this._spectralLines[i][0][0]))
+        .attr('y1', (d, i) => this.focus.yScale(this._spectralLines[i][0][1]))
+        .attr('x2', (d, i) => this.focus.xScale(this._spectralLines[i][1][0]))
+        .attr('y2', (d, i) => this.focus.yScale(this._spectralLines[i][1][1]));
 
     // Redraw the line on the focus chart
     this.focus.chartArea.select('.line').attr('d', this.focus.line);
 
     // Redraw the x axis on the focus chart
     this.focus.chartArea.select('.axis-x').call(this.focus.xAxis);
-
-    // Move the zoom region on the focus chart
-    this.svg.select('.zoom').call(this.zoom.transform, d3.zoomIdentity
-                                                         .scale(this.focus.width / (s[1] - s[0]))
-                                                         .translate(-s[0], 0));
-  }
-
-  /**
-   * Called when the focus is zoomed
-   */
-  zoomed() {
-    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'brush') return;
-    const t = d3.event.transform;
-    this.focus.xScale.domain(t.rescaleX(this.focus.xScale).domain());
-    this.focus.chartArea.select('.line').attr('d', this.focus.line);
-    this.focus.chartArea.select('.axis-x').call(this.focus.xAxis);
-    this.context.chartArea.select('.brush').call(this.brush.move, this.focus.xScale.range().map(t.invertX, t));
   }
 
   /**
@@ -375,11 +382,21 @@ export class VisualisationViewerComponent implements OnInit {
     }
   }
 
+  hideShowSpectralLine(show?: boolean) {
+    if (show) {
+      this.focus.chartArea.selectAll('.spectral-line').transition().delay((d, i) => i * 50)
+          .style('opacity', '1.0');
+    } else {
+      this.focus.chartArea.selectAll('.spectral-line').transition().delay((d, i) => i * 50)
+          .style('opacity', '0.0');
+    }
+  }
+
   /**
    * Changes the type of line show to demonstrate D3 transition
    */
   changeLine(octile: number) {
-    this.spectralDataService.getData(octile).subscribe(data => this.redrawLines(data));
+    this.spectralDataService.getSpectrum(octile).subscribe(data => this.redrawLines(data));
   }
 
   /**

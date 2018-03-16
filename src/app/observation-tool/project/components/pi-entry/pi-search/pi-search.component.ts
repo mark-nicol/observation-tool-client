@@ -2,17 +2,19 @@ import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ToastsManager} from 'ng2-toastr';
 import {AlmaInvestigatorSearchModal} from '../../../../alma-investigator-search/components/modal/modal.component';
+import {AlmaInvestigatorSearchService} from '../../../../alma-investigator-search/services/alma-investigator-search.service';
 import {IAlmaInvestigator} from '../../../../shared/interfaces/alma-investigator.interface';
+import {PersistenceService} from '../../../../shared/services/persistence.service';
 
 /**
  * Initial PI search component
  */
 
 @Component({
-             selector: 'app-pi-search',
-             templateUrl: './pi-search.component.html',
-             styleUrls: ['./pi-search.component.css']
-           })
+  selector: 'app-pi-search',
+  templateUrl: './pi-search.component.html',
+  styleUrls: ['./pi-search.component.css']
+})
 
 export class PiSearchComponent implements OnInit {
 
@@ -22,10 +24,16 @@ export class PiSearchComponent implements OnInit {
   /** The chosen PI passed back from piSelect */
   passedPi: IAlmaInvestigator;
 
-  constructor(private suiModalService: SuiModalService,
+  constructor(private almaInvestigatorSearchService: AlmaInvestigatorSearchService,
+              private persistenceService: PersistenceService,
+              private suiModalService: SuiModalService,
               private toastMgr: ToastsManager,
               viewContainerRef: ViewContainerRef) {
     this.toastMgr.setRootViewContainerRef(viewContainerRef);
+    this.persistenceService.getProject().subscribe(result => {
+      console.log(result.pI);
+      this.almaInvestigatorSearchService.search('Uid', result.pI).subscribe(res => this.passedPi = res[0]);
+    });
   }
 
   /**

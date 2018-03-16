@@ -3,6 +3,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {SuiModule} from 'ng2-semantic-ui';
 import {ToastModule, ToastOptions, ToastsManager} from 'ng2-toastr';
+import {AlmaInvestigatorSearchService} from '../../../alma-investigator-search/services/alma-investigator-search.service';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 
 import {PiEntryComponent} from './pi-entry.component';
@@ -27,6 +28,7 @@ describe('PiEntryComponent', () => {
         ProjectInfoComponent
       ],
       providers: [
+        AlmaInvestigatorSearchService,
         PersistenceService
       ]
     })

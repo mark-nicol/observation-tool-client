@@ -10,7 +10,7 @@ import {ScienceGoalComponent} from './science-goal.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'science-goals',
     component: ScienceGoalComponent,
     children: [
       {
@@ -20,6 +20,10 @@ const routes: Routes = [
       {
         path: 'field-setup',
         component: FieldSetupComponent,
+      },
+      {
+        path: 'field-setup/:index',
+        component: FieldSetupComponent
       },
       {
         path: 'spectral-setup',

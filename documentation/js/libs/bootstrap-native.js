@@ -97,7 +97,7 @@
           mbp = /px/.test(s.marginBottom) ? Math.round(s.marginBottom.replace('px', '')) : 0,
           mte = /em/.test(s.marginTop) ? Math.round(s.marginTop.replace('em', '') * parseInt(s.fontSize)) : 0,
           mbe = /em/.test(s.marginBottom) ? Math.round(s.marginBottom.replace('em', '') * parseInt(s.fontSize)) : 0;
-      return el.clientHeight + parseInt(btp) + parseInt(mtp) + parseInt(mbp) + parseInt(mte) + parseInt(mbe); //we need an accurate margin content
+      return el.clientHeight + parseInt(btp) + parseInt(mtp) + parseInt(mbp) + parseInt(mte) + parseInt(mbe); //we need an accurate margin value
     };
 
     this.toggle = function(e) {

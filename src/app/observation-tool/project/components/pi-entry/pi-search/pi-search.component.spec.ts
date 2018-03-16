@@ -1,7 +1,10 @@
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {SuiModule} from 'ng2-semantic-ui';
 import {ToastModule} from 'ng2-toastr';
+import {AlmaInvestigatorSearchService} from '../../../../alma-investigator-search/services/alma-investigator-search.service';
+import {PersistenceService} from '../../../../shared/services/persistence.service';
 
 import {PiSearchComponent} from './pi-search.component';
 
@@ -12,6 +15,7 @@ describe('PiSearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
+        HttpClientTestingModule,
         RouterTestingModule,
         SuiModule,
         ToastModule.forRoot()
@@ -20,7 +24,8 @@ describe('PiSearchComponent', () => {
         PiSearchComponent
       ],
       providers: [
-
+        AlmaInvestigatorSearchService,
+        PersistenceService
       ]
     })
       .compileComponents();

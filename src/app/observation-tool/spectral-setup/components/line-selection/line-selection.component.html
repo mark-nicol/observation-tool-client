@@ -1,18 +1,59 @@
-<table class="ui celled table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Species</th>
-      <th>Frequency</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of catalogue; let i = index">
-      <td>{{row.line_id}}</td>
-      <td>{{row.chemical_name}}</td>
-      <td>{{row.species_id}}</td>
-      <td>{{row.orderedfreq}}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="ui three column center aligned grid">
+  <div class="row">
+    <!-- Available lines table -->
+    <div class="column">
+      <table class="ui basic compact table">
+        <thead>
+          <tr>
+            <th>Transition</th>
+            <th>Description</th>
+            <th>Rest Frequency</th>
+            <th>Sky Frequency</th>
+            <th>Upper-state Energy</th>
+            <th>Lovas Intensity</th>
+            <th>Sij</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <!-- Buttons -->
+    <div class="column">
+      <div class="ui vertical tiny compact labeled icon buttons">
+        <button class="ui blue button">
+          <i class="angle right icon"></i>
+          Add
+        </button>
+        <button class="ui blue button">
+          <i class="angle right double icon"></i>
+          Add all
+        </button>
+        <button class="ui red button">
+          <i class="angle left icon"></i>
+          Remove
+        </button>
+        <button class="ui red button">
+          <i class="angle left double icon"></i>
+          Remove all
+        </button>
+      </div>
+    </div>
+    <!-- Selected lines table -->
+    <div class="column">
+      <table class="ui basic compact table">
+        <thead>
+          <tr>
+            <th>Transition</th>
+            <th>Description</th>
+            <th>Rest Frequency</th>
+            <th>Sky Frequency</th>
+            <th>Upper-state Energy</th>
+            <th>Lovas Intensity</th>
+            <th>Sij</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>

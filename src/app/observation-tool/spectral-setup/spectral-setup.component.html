@@ -1,4 +1,12 @@
-<div class="ui internally celled two column grid">
+<div *ngIf="lineSelecting">
+  <app-line-selection></app-line-selection>
+  <button class="ui right floated tiny compact blue labeled icon button"
+          (click)="lineSelecting = false">
+    <i class="plus icon"></i>
+    Add lines
+  </button>
+</div>
+<div *ngIf="!lineSelecting" class="ui internally celled two column grid">
   <div class="sixteen wide tablet ten wide large screen ten wide widescreen centered column">
     <h4 class="ui dividing header">Visualisation</h4>
     <app-visualisation-viewer></app-visualisation-viewer>
@@ -7,6 +15,7 @@
                                (spectralLineCheckedEmitter)="spectralLineCheckedChange($event)"
                                (densitySelectorEmitter)="densitySelectorChange($event)"
                                (densityRadioEmitter)="densityRadioChange($event)"
+                               (lineSelectEmitter)="lineSelecting = true"
                                (resetEmitter)="resetClick()"></app-visualisation-control>
   </div>
   <div class="sixteen wide tablet six wide large screen six wide widescreen column">

@@ -31,6 +31,7 @@ export class VisualisationControlComponent {
   @Output() densitySelectorEmitter     = new EventEmitter<number>();
   /** Emitter for the reset view button */
   @Output() resetEmitter               = new EventEmitter();
+  @Output() lineSelectEmitter = new EventEmitter();
   /** Current density radio choice */
   densityRadioChoice                   = 'automatic';
   /** Strings for the density selector, content is index from the ngFor */
@@ -90,6 +91,10 @@ export class VisualisationControlComponent {
 
   makeModal() {
     this.suiModalService.open(new SpectralLineSearchModal());
+  }
+
+  lineSelectClick() {
+    this.lineSelectEmitter.emit();
   }
 
 }

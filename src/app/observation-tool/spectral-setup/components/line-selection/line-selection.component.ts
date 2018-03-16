@@ -15,7 +15,9 @@ export class LineSelectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.catalogue = this.spectralDataService.getSplatalogue().slice(0, 10);
+    if (this.spectralDataService.getSplatalogue()) {
+      this.catalogue = this.spectralDataService.getSplatalogue().slice(0, 10);
+    }
   }
 
 }

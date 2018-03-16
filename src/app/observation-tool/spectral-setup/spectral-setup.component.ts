@@ -18,6 +18,8 @@ export class SpectralSetupComponent {
   /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
+  lineSelecting = false;
+
   /**
    * Constructor
    * @param persistenceService Injected service sent to super class

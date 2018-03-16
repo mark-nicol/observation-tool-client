@@ -1,10 +1,12 @@
 <div *ngIf="lineSelecting">
+  <h4 class="ui dividing header">Spectral Line Selection</h4>
   <app-line-selection></app-line-selection>
   <button class="ui right floated tiny compact blue labeled icon button"
           (click)="lineSelecting = false">
     <i class="plus icon"></i>
     Add lines
   </button>
+  <div style="height: 2em"></div>
 </div>
 <div *ngIf="!lineSelecting" class="ui internally celled two column grid">
   <div class="sixteen wide tablet ten wide large screen ten wide widescreen centered column">

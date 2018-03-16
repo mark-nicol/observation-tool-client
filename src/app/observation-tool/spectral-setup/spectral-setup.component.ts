@@ -18,7 +18,7 @@ export class SpectralSetupComponent {
   /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
-  lineSelecting = false;
+  lineSelecting = true;
 
   /**
    * Constructor

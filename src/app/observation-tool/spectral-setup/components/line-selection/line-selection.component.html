@@ -14,7 +14,13 @@
             <th>Sij</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <tr *ngFor="let line of (catalogue | async)">
+            <td>
+              {{line.species_id}}
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <!-- Buttons -->
@@ -52,7 +58,11 @@
             <th>Sij</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <tr *ngFor="let line of selectedLines">
+
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>

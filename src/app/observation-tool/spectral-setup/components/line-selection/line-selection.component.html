@@ -15,31 +15,8 @@
             <th>Sij</th>
           </tr>
         </thead>
-        <tbody formArrayName="availableLines">
-          <tr *ngFor="let line of availableLines.controls; let i=index"
-              [class.positive]="selectedLineId === line.value['line_id']"
-              (click)="selectedLineId = line.value['line_id']">
-            <td *ngIf="i < 10">
-              {{line.value.s_name_noparens}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.chemical_name}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.orderedfreq / 1000}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.orderedfreq / 500}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.E_up_K}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.lovas_int}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.sijmu2}}
-            </td>
+        <tbody>
+          <tr>
           </tr>
         </tbody>
       </table>
@@ -81,28 +58,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let line of selectedLines.controls; let i=index">
-            <td *ngIf="i < 10">
-              {{line.value.s_name_noparens}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.chemical_name}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.orderedfreq / 1000}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.orderedfreq / 500}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.E_up_K}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.lovas_int}}
-            </td>
-            <td *ngIf="i < 10">
-              {{line.value.sijmu2}}
-            </td>
+          <tr>
           </tr>
         </tbody>
       </table>

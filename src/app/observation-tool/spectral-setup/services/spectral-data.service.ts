@@ -1,6 +1,7 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
 import {ISpectralLine} from '../../shared/interfaces/spectral-line.interface';
 
 /**
@@ -10,7 +11,8 @@ import {ISpectralLine} from '../../shared/interfaces/spectral-line.interface';
 @Injectable()
 export class SpectralDataService {
 
-  splatalogue: any;
+  private _splatalogue: ISpectralLine[];
+  private _observable: Observable<any>;
 
   /**
    * Constructor
@@ -18,6 +20,7 @@ export class SpectralDataService {
    * @param http Injected HttpClient service
    */
   constructor(private http: HttpClient) {
+
   }
 
   /**
@@ -28,7 +31,18 @@ export class SpectralDataService {
     return this.http.get(`http://localhost:8080/spectral-data/${option}`);
   }
 
-  getSplatalogue(): Observable<ISpectralLine[]> {
-    return this.http.get<ISpectralLine[]>('http://localhost:8080/spectral-data/splatalogue');
+  getSplatalogue(): any {
+    if (this._splatalogue) {
+      return Observable.of(this._splatalogue);
+    } else if (this._observable) {
+      return this._observable;
+    } else {
+      this._observable = this.http.get('http://localhost:8080/spectral-data/splatalogue').map((response: ISpectralLine[]) => {
+        this._observable = null;
+        this._splatalogue = response;
+        return this._splatalogue;
+      }).share();
+      return this._observable;
+    }
   }
 }

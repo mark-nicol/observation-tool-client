@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {ISpectralLine} from '../shared/interfaces/spectral-line.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
 import {SpectralDataService} from './services/spectral-data.service';
@@ -16,7 +15,7 @@ import {SpectralDataService} from './services/spectral-data.service';
   templateUrl: './spectral-setup.component.html',
   styleUrls: ['./spectral-setup.component.scss']
 })
-export class SpectralSetupComponent implements OnInit{
+export class SpectralSetupComponent implements OnInit {
 
   /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
@@ -31,9 +30,7 @@ export class SpectralSetupComponent implements OnInit{
     maxSkyFrequency: 1000,
     hideUnobservableLines: false,
     maximumUpperStateEnergy: null,
-    environmentFilter: 'all',
-    availableLines: this.formBuilder.array([]),
-    selectedLines: this.formBuilder.array([])
+    environmentFilter: 'all'
   });
 
   /**
@@ -49,15 +46,7 @@ export class SpectralSetupComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.spectralDataService.getSplatalogue().subscribe(result => {
-      this.setAvailableLines(result);
-    });
-  }
-
-  setAvailableLines(lines: ISpectralLine[]) {
-    const lineFormGroups = lines.map(line => this.formBuilder.group(line));
-    const lineFormArray = this.formBuilder.array(lineFormGroups);
-    this.form.setControl('availableLines', lineFormArray);
+    this.spectralDataService.getSplatalogue().subscribe(result => console.log(result));
   }
 
   /**

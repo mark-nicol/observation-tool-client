@@ -16,7 +16,6 @@ export class LineSelectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.parentForm);
   }
 
   get availableLines(): FormArray {

@@ -18,7 +18,8 @@ export class SpectralDataService {
   constructor(private http: HttpClient) {
     this.http.get('http://localhost:8080/spectral-data/splatalogue').subscribe(result => {
       console.log('Retrieving Splatalogue');
-      this.splatalogue = result
+      this.splatalogue = result;
+      console.log(this.splatalogue);
     });
   }
 

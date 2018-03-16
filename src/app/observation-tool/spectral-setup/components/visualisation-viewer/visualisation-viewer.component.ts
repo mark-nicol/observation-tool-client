@@ -39,6 +39,13 @@ interface Margin {
   left: number
 }
 
+interface AlmaBand {
+  start: number
+  end: number
+  color: string
+  text: string
+}
+
 /**
  * Creates and controls the visualisation on the spectral setup science goal page
  *
@@ -54,15 +61,15 @@ interface Margin {
 export class VisualisationViewerComponent implements OnInit {
 
   /** Regions for receiver bands */
-  private regions = [
-    [84, 116],
-    [120, 163],
-    [163, 211],
-    [211, 275],
-    [275, 372],
-    [385, 500],
-    [602, 720],
-    [787, 950]
+  private almaBands: AlmaBand[] = [
+    {start: 84,  end: 116, color: '#FF0000', text: '3'},
+    {start: 120, end: 163, color: '#00FF00', text: '4'},
+    {start: 163, end: 211, color: '#0000FF', text: '5'},
+    {start: 211, end: 275, color: '#FF0000', text: '6'},
+    {start: 275, end: 372, color: '#00FF00', text: '7'},
+    {start: 385, end: 500, color: '#0000FF', text: '8'},
+    {start: 602, end: 720, color: '#FF0000', text: '9'},
+    {start: 787, end: 950, color: '#00FF00', text: '10'}
   ];
 
   /** Colors for receiver band regions */
@@ -157,6 +164,11 @@ export class VisualisationViewerComponent implements OnInit {
                  .attr('width', element.offsetWidth)
                  .attr('height', element.offsetHeight);
 
+    // this.svg.append('rect')
+    //     .attr('width', '100%')
+    //     .attr('height', '100%')
+    //     .attr('fill', 'black');
+
     // Clip path in the focus chart, keeps the line from spilling into margins
     this.svg.append('defs').append('clipPath')
         .attr('id', 'clip')
@@ -217,12 +229,12 @@ export class VisualisationViewerComponent implements OnInit {
                    .extent([[0, 0], [this.context.width, this.context.height]])
                    .on('brush end', this.brushed.bind(this));
 
-    // Create the zoom area controlled by the brush
-    this.zoom = d3.zoom()
-                  .scaleExtent([1, Infinity])
-                  .translateExtent([[0, 0], [this.focus.width, this.focus.height]])
-                  .extent([[0, 0], [this.focus.width, this.focus.height]])
-                  .on('zoom', this.zoomed.bind(this));
+    // //Create the zoom area controlled by the brush
+    // this.zoom = d3.zoom()
+    //  .scaleExtent([1, Infinity])
+    //  .translateExtent([[0, 0], [this.focus.width, this.focus.height]])
+    //  .extent([[0, 0], [this.focus.width, this.focus.height]])
+    //  .on('zoom', this.zoomed.bind(this));
   }
 
   /**
@@ -230,20 +242,36 @@ export class VisualisationViewerComponent implements OnInit {
    */
   drawRegions() {
     // Set the colors for the regions
-    this.regionColors = d3.scaleLinear().domain([0, this.regions.length]).range(<any[]>[
-      'limegreen',
-      'steelblue'
-    ]);
-
-    for (let i = 0; i < this.regions.length; i++) {
+    for (let i = 0; i < this.almaBands.length; i++) {
       this.focus.chartArea.append('rect')
-          .attr('class', 'region')
-          .attr('x', d => this.focus.xScale(this.regions[i][0]))
-          .attr('y', d => 0)
-          .attr('width', this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
+        .attr('class', 'region')
+        .attr('x',  this.focus.xScale(this.almaBands[i].start))
+        .attr('y',  0)
+        .attr('width', this.focus.xScale(this.almaBands[i].end) - this.focus.xScale(this.almaBands[i].start))
           .attr('height', this.focus.height)
-          .style('fill', d => this.regionColors(i))
-          .style('opacity', '0.3')
+          .style('fill', this.almaBands[i].color)
+          .style('opacity', '0.3');
+      // this.context.chartArea.append('rect')
+      //     .attr('class', 'region')
+      //     .attr('x', this.context.xScale(this.almaBands[i].start))
+      //     .attr('y', 0)
+      //     .attr('width', this.context.xScale(this.almaBands[i].end) - this.context.xScale(this.almaBands[i].start))
+      //  .attr('height', this.context.height)
+      //  .style('fill',  this.almaBands[i].color)
+      //  .style('opacity', '0.3');
+      this.focus.chartArea.append('text')
+          .attr('class', 'alma-band-text')
+          .attr('x', this.focus.xScale(this.almaBands[i].start))
+          .attr('y', this.focus.height)
+          .text(this.almaBands[i].text)
+          .attr('font-size', '4em')
+          .attr('fill', 'white');
+      // this.context.chartArea.append('text')
+      //     .attr('x', this.context.xScale(this.almaBands[i].start))
+      //     .attr('y', this.context.height)
+      //     .text(this.almaBands[i].text)
+      //     .attr('font-size', '2em')
+      //     .attr('fill', 'white');
     }
   }
 
@@ -312,42 +340,33 @@ export class VisualisationViewerComponent implements OnInit {
 
     // Select all the band regions and re-adjust
     this.focus.chartArea.selectAll('.region')
-        .attr('x', (d, i) => this.focus.xScale(this.regions[i][0]))
-        .attr('y', (d, i) => 0)
-        .attr('width', (d, i) => this.focus.xScale(this.regions[i][1]) - this.focus.xScale(this.regions[i][0]))
+        .attr('x', (d, i) => this.focus.xScale(this.almaBands[i].start))
+        .attr('y', 0)
+        .attr('width', (d, i) => this.focus.xScale(this.almaBands[i].end) - this.focus.xScale(this.almaBands[i].start))
         .attr('height', this.focus.height);
-
-    // Redraw spectral line
-    this.focus.chartArea.selectAll('.spectral-line')
-        .attr('x1', this.focus.xScale(350))
-        .attr('y1', this.focus.yScale(this.focus.height * 0.33))
-        .attr('x2', this.focus.xScale(350))
-        .attr('y2', this.focus.yScale(this.focus.height));
-
 
     // Redraw the line on the focus chart
     this.focus.chartArea.select('.line').attr('d', this.focus.line);
 
     // Redraw the x axis on the focus chart
     this.focus.chartArea.select('.axis-x').call(this.focus.xAxis);
-
     // Move the zoom region on the focus chart
-    this.svg.select('.zoom').call(this.zoom.transform, d3.zoomIdentity
-                                                         .scale(this.focus.width / (s[1] - s[0]))
-                                                         .translate(-s[0], 0));
+    // this.svg.select('.zoom').call(this.zoom.transform, d3.zoomIdentity
+    //  .scale(this.focus.width / (s[1] - s[0]))
+    //  .translate(-s[0], 0));//
   }
 
-  /**
-   * Called when the focus is zoomed
-   */
-  zoomed() {
-    if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'brush') return;
-    const t = d3.event.transform;
-    this.focus.xScale.domain(t.rescaleX(this.focus.xScale).domain());
-    this.focus.chartArea.select('.line').attr('d', this.focus.line);
-    this.focus.chartArea.select('.axis-x').call(this.focus.xAxis);
-    this.context.chartArea.select('.brush').call(this.brush.move, this.focus.xScale.range().map(t.invertX, t));
-  }
+  // /**
+  //  * Called when the focus is zoomed
+  //  */
+  // zoomed() {
+  //   if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'brush') return;
+  //   const t = d3.event.transform;
+  //   this.focus.xScale.domain(t.rescaleX(this.focus.xScale).domain());
+  //   this.focus.chartArea.select('.line').attr('d', this.focus.line);
+  //   this.focus.chartArea.select('.axis-x').call(this.focus.xAxis);
+  //   this.context.chartArea.select('.brush').call(this.brush.move, this.focus.xScale.range().map(t.invertX, t));
+  // }
 
   /**
    * Hides or shows the receiver bands on the focus chart depending on the checkbox

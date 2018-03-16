@@ -27,7 +27,7 @@ export class ScienceGoal implements IScienceGoal {
   CalibrationSetupParameters: ICalibrationSetupParameters;
   PerformanceParameters: IPerformanceParameters;
   SpectralSetupParameters: ISpectralSetupParameters;
-  TargetParameters: ITargetParameters[];
+  TargetParameters: TargetParameters[];
   TechnicalJustifications: ITechnicalJustification[];
 
 
@@ -48,7 +48,7 @@ export class ScienceGoal implements IScienceGoal {
               calibrationSetupParameters?: ICalibrationSetupParameters,
               performanceParameters?: IPerformanceParameters,
               spectralSetupParameters?: ISpectralSetupParameters,
-              targetParameters?: ITargetParameters[],
+              targetParameters?: TargetParameters[],
               TechnicalJustifications?: ITechnicalJustification[]) {
     this.name                       = name;
     this.note                       = note;

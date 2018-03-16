@@ -97,14 +97,14 @@
           <th>Executive</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
+      <tbody formArrayName="investigators">
+        <tr *ngFor="let row of investigators.controls; let i = index" [formGroupName]="i">
           <td>PI</td>
-          <td>Not Set</td>
-          <td>Not Set</td>
-          <td>Not Set</td>
-          <td>Not Set</td>
-          <td>Non-AMLA</td>
+          <td>{{row.value.fullName}}</td>
+          <td>{{row.value.eMail}}</td>
+          <td>{{row.value.organisation}}</td>
+          <td>{{row.value.userId}}</td>
+          <td>{{row.value.associatedExec}}</td>
         </tr>
       </tbody>
       <tfoot>

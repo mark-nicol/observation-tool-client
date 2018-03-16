@@ -12,7 +12,6 @@ import {SharedModule} from './observation-tool/shared/shared.module';
     BrowserModule,
     NavbarModule,
     ProjectModule,
-    NgbModule.forRoot(),
     SharedModule,
     AppRoutingModule,
   ],

@@ -1,0 +1,91 @@
+<form class="ui three column center aligned grid">
+  <div class="row">
+    <!-- Available lines table -->
+    <div class=" seven wide column">
+      <table class="ui basic selectable compact table">
+        <thead>
+          <tr>
+            <th>Transition</th>
+            <th>Description</th>
+            <th>Rest Frequency</th>
+            <th>Sky Frequency</th>
+            <th>Upper-state Energy</th>
+            <th>Lovas Intensity</th>
+            <th>Sij</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let line of _splatalogue"
+              [class.positive]="line === _selectedLine"
+              [class.disabled]="(_selectedLines | async).indexOf(line) > -1"
+              (click)="_selectedLine = line">
+            <td>{{line.s_name_noparens}}</td>
+            <td>{{line.chemical_name}}</td>
+            <td>{{(line.orderedfreq / 1000).toFixed(7)}}</td>
+            <td>{{(line.orderedfreq / 500).toFixed(7)}}</td>
+            <td>{{line.E_up_K}}</td>
+            <td>{{line.lovas_int}}</td>
+            <td>{{line.sijmu2}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Buttons -->
+    <div class="two wide column">
+      <div class="ui vertical tiny compact labeled icon buttons">
+        <button class="ui blue button"
+                (click)="addLine(); _selectedLine = null">
+          <i class="angle right icon"></i>
+          Add
+        </button>
+        <button class="ui blue button">
+          <i class="angle right double icon"></i>
+          Add all
+        </button>
+        <button class="ui red button"
+                (click)="removeLine(); _selectedLine = null">
+          <i class="angle left icon"></i>
+          Remove
+        </button>
+        <button class="ui red button">
+          <i class="angle left double icon"></i>
+          Remove all
+        </button>
+      </div>
+    </div>
+    <!-- Selected lines table -->
+    <div class="seven wide column">
+      <table class="ui basic compact table">
+        <thead>
+          <tr>
+            <th>Transition</th>
+            <th>Description</th>
+            <th>Rest Frequency</th>
+            <th>Sky Frequency</th>
+            <th>Upper-state Energy</th>
+            <th>Lovas Intensity</th>
+            <th>Sij</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let line of (_selectedLines | async)"
+              [class.positive]="line === _selectedLine"
+              (click)="_selectedLine = line">
+            <td>{{line.s_name_noparens}}</td>
+            <td>{{line.chemical_name}}</td>
+            <td>{{line.orderedfreq / 1000}}</td>
+            <td>{{line.orderedfreq / 500}}</td>
+            <td>{{line.E_up_K}}</td>
+            <td>{{line.lovas_int}}</td>
+            <td>{{line.sijmu2}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</form>
+<button class="ui right floated tiny compact blue labeled icon button"
+        (click)="linesSelected.emit()">
+  <i class="plus icon"></i>
+  Add lines
+</button>

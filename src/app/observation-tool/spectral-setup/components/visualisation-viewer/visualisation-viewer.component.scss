@@ -9,8 +9,16 @@
 
 .line {
   fill: none;
-  stroke: crimson;
+  stroke: cornflowerblue;
   stroke-width: 1.5px;
+  clip-path: url(#clip);
+}
+
+.spectral-line {
+  clip-path: url(#clip);
+}
+
+.region {
   clip-path: url(#clip);
 }
 

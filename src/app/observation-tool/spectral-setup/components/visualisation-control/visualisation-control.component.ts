@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {SuiModalService} from 'ng2-semantic-ui';
 
 /**
  * Component to send control changes to the spectral visualisation
@@ -17,16 +18,19 @@ export class VisualisationControlComponent {
   bandsChecked                         = true;
   /** Bool for the transmission line checkbox */
   transmissionChecked                  = true;
+  spectralLineChecked                  = true;
   /** Emitter for the receiver bands checkbox */
   @Output() bandsCheckedEmitter        = new EventEmitter<boolean>();
   /** Emitter for the transmission line checkbox */
   @Output() transmissionCheckedEmitter = new EventEmitter<boolean>();
+  @Output() spectralLineCheckedEmitter = new EventEmitter<boolean>();
   /** Emitter for the column density choice radios */
   @Output() densityRadioEmitter        = new EventEmitter<string>();
   /** Emitter for the manual column density selection */
   @Output() densitySelectorEmitter     = new EventEmitter<number>();
   /** Emitter for the reset view button */
   @Output() resetEmitter               = new EventEmitter();
+  @Output() lineSelectEmitter = new EventEmitter();
   /** Current density radio choice */
   densityRadioChoice                   = 'automatic';
   /** Strings for the density selector, content is index from the ngFor */
@@ -41,6 +45,9 @@ export class VisualisationControlComponent {
     '5.186mm (7th Octile)',
   ];
 
+  constructor() {
+  }
+
   /**
    * Flips the bool of the bands checkbox and emits
    */
@@ -53,6 +60,10 @@ export class VisualisationControlComponent {
    */
   transmissionCheckedChange() {
     this.transmissionCheckedEmitter.emit(this.transmissionChecked);
+  }
+
+  spectralLineCheckedChange() {
+    this.spectralLineCheckedEmitter.emit(this.spectralLineChecked);
   }
 
   /**
@@ -75,6 +86,10 @@ export class VisualisationControlComponent {
    */
   resetClick() {
     this.resetEmitter.emit();
+  }
+
+  lineSelectClick() {
+    this.lineSelectEmitter.emit();
   }
 
 }

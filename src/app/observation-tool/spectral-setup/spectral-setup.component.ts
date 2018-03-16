@@ -1,6 +1,8 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
+import {SpectralDataService} from './services/spectral-data.service';
 
 /**
  * Host component for the spectral setup
@@ -13,16 +15,37 @@ import {VisualisationViewerComponent} from './components/visualisation-viewer/vi
   templateUrl: './spectral-setup.component.html',
   styleUrls: ['./spectral-setup.component.scss']
 })
-export class SpectralSetupComponent {
+export class SpectralSetupComponent implements OnInit {
 
   /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
+  lineSelecting = false;
+
+  form = this.formBuilder.group({
+    transitionFilter: '',
+    lowerAlmaBand: 1,
+    upperAlmaBand: 10,
+    minSkyFrequency: 10,
+    maxSkyFrequency: 1000,
+    hideUnobservableLines: false,
+    maximumUpperStateEnergy: null,
+    environmentFilter: 'all'
+  });
+
   /**
    * Constructor
    * @param persistenceService Injected service sent to super class
+   * @param spectralDataService
+   * @param formBuilder
    */
-  constructor(private persistenceService: PersistenceService) {
+  constructor(private persistenceService: PersistenceService,
+              private spectralDataService: SpectralDataService,
+              private formBuilder: FormBuilder) {
+
+  }
+
+  ngOnInit() {
 
   }
 
@@ -40,6 +63,10 @@ export class SpectralSetupComponent {
    */
   transmissionCheckedChange(show: boolean) {
     this.visualisationViewerComponent.hideShowTransmission(show);
+  }
+
+  spectralLineCheckedChange(show: boolean) {
+    this.visualisationViewerComponent.hideShowSpectralLine(show);
   }
 
   /**

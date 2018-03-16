@@ -1,6 +1,6 @@
 <div *ngIf="lineSelecting">
   <h4 class="ui dividing header">Spectral Line Selection</h4>
-  <app-line-selection [parentForm]="form" (linesSelected)="lineSelecting = false"></app-line-selection>
+  <app-line-selection (linesSelected)="lineSelecting = false"></app-line-selection>
   <div style="height: 2em"></div>
 </div>
 <div *ngIf="!lineSelecting" class="ui internally celled two column grid">

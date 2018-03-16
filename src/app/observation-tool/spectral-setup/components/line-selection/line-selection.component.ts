@@ -11,7 +11,7 @@ import {SpectralDataService} from '../../services/spectral-data.service';
 })
 export class LineSelectionComponent implements OnInit {
 
-  @Input() parentForm: FormGroup;
+  // @Input() parentForm: FormGroup;
   @Output() linesSelected = new EventEmitter();
   _splatalogue: ISpectralLine[];
   _selectedLines: Observable<ISpectralLine[]>;

@@ -12,7 +12,7 @@ describe('LineSelectionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule,
-                SuiModule],
+                SuiModule,],
       declarations: [LineSelectionComponent],
       providers: [SpectralDataService]
     })

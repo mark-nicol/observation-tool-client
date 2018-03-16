@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-line-selection',
@@ -6,6 +7,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./line-selection.component.scss']
 })
 export class LineSelectionComponent implements OnInit {
+
+  @Input() parentForm: FormGroup;
 
   constructor() {
   }

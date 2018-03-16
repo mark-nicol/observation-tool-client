@@ -1,6 +1,6 @@
 <div *ngIf="lineSelecting">
   <h4 class="ui dividing header">Spectral Line Selection</h4>
-  <app-line-selection></app-line-selection>
+  <app-line-selection [parentForm]="form"></app-line-selection>
   <button class="ui right floated tiny compact blue labeled icon button"
           (click)="lineSelecting = false">
     <i class="plus icon"></i>

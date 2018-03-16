@@ -16,5 +16,4 @@ export interface ISpectralLine {
   ism_darkcloud;
   extragalactic;
   agb_ppn_pn;
-
 }

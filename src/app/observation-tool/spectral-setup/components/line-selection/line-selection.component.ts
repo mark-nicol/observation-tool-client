@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-line-selection',
@@ -10,10 +10,25 @@ export class LineSelectionComponent implements OnInit {
 
   @Input() parentForm: FormGroup;
 
+  selectedLineId = null;
+
   constructor() {
   }
 
   ngOnInit() {
+    console.log(this.parentForm);
+  }
+
+  get availableLines(): FormArray {
+    return this.parentForm.get('availableLines') as FormArray;
+  }
+
+  get selectedLines(): FormArray {
+    return this.parentForm.get('selectedLines') as FormArray;
+  }
+
+  addLine() {
+
   }
 
 }

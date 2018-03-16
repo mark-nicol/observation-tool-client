@@ -20,7 +20,7 @@ export class SpectralSetupComponent implements OnInit {
   /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
-  lineSelecting = true;
+  lineSelecting = false;
 
   form = this.formBuilder.group({
     transitionFilter: '',

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
 import {ISpectralLine} from '../../../shared/interfaces/spectral-line.interface';
 import {SpectralDataService} from '../../services/spectral-data.service';
 
@@ -13,31 +14,23 @@ export class LineSelectionComponent implements OnInit {
   @Input() parentForm: FormGroup;
   @Output() linesSelected = new EventEmitter();
   _splatalogue: ISpectralLine[];
-  _selectedLines = [];
-  _selectedLineId = null;
+  _selectedLines: Observable<ISpectralLine[]>;
+  _selectedLine: ISpectralLine = null;
 
   constructor(private spectralDataService: SpectralDataService) {
   }
 
   ngOnInit() {
-    this.spectralDataService.getSplatalogue().subscribe(result => this._splatalogue = result.splice(0, 10));
+    this.spectralDataService.getSplatalogue().subscribe(result => this._splatalogue = result.filter((x: ISpectralLine, i) => i < 20));
+    this._selectedLines = this.spectralDataService.selectedLines;
   }
 
   addLine() {
-    const selectedLine = this._splatalogue.find(x => x.line_id === this._selectedLineId);
-    console.log(selectedLine);
-    if (selectedLine) {
-      this._selectedLines.push(selectedLine);
-      this._splatalogue.splice(this._splatalogue.indexOf(selectedLine), 1);
-    }
+    this.spectralDataService.selectLine(this._selectedLine);
   }
 
   removeLine() {
-    const selectedLine = this._selectedLines.find(x => x.line_id === this._selectedLineId);
-    if (selectedLine) {
-      this._splatalogue.push(selectedLine);
-      this._selectedLines.splice(this._selectedLines.indexOf(selectedLine), 1);
-    }
+    this.spectralDataService.removeLine(this._selectedLine);
   }
 
 }

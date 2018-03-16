@@ -1,7 +1,6 @@
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
 import {ISpectralLine} from '../../shared/interfaces/spectral-line.interface';
 
 /**
@@ -13,6 +12,7 @@ export class SpectralDataService {
 
   private _splatalogue: ISpectralLine[];
   private _observable: Observable<any>;
+          _selectedLines: ISpectralLine[] = [];
 
   /**
    * Constructor
@@ -38,11 +38,23 @@ export class SpectralDataService {
       return this._observable;
     } else {
       this._observable = this.http.get('http://localhost:8080/spectral-data/splatalogue').map((response: ISpectralLine[]) => {
-        this._observable = null;
+        this._observable  = null;
         this._splatalogue = response;
         return this._splatalogue;
       }).share();
       return this._observable;
     }
+  }
+
+  get selectedLines(): Observable<ISpectralLine[]> {
+    return Observable.of(this._selectedLines);
+  }
+
+  selectLine(line: ISpectralLine) {
+    this._selectedLines.push(line);
+  }
+
+  removeLine(line: ISpectralLine) {
+    this._selectedLines.splice(this._selectedLines.indexOf(line), 1);
   }
 }

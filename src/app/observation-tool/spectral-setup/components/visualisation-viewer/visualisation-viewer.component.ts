@@ -72,6 +72,8 @@ export class VisualisationViewerComponent implements OnInit {
     {start: 787, end: 950, color: '#00AAFF', text: '10'}
   ];
 
+  _spectralLines = [];
+
   /** Colors for receiver band regions */
   private regionColors: any;
 
@@ -123,7 +125,10 @@ export class VisualisationViewerComponent implements OnInit {
    * Creates the data and two charts
    */
   ngOnInit() {
-    this.spectralDataService.getSpectrum(1).subscribe(data => this.createVisualiser(data));
+    this.spectralDataService.getSpectrum(1).subscribe(data => {
+      this.createVisualiser(data)
+    });
+
   }
 
   /**
@@ -139,7 +144,13 @@ export class VisualisationViewerComponent implements OnInit {
     this.drawRegions();
     this.drawContextChart();
     this.drawFocusChart();
-    this.drawLine();
+    this.spectralDataService.selectedLines.subscribe(result => {
+      result.forEach(line => {
+        const lineData = [[line.orderedfreq / 1000, this.focus.height], [line.orderedfreq / 1000, this.focus.height * 0.33]];
+        this._spectralLines.push(lineData);
+      });
+      this.drawSpectralLines();
+    });
     this.resetView();
   }
 
@@ -172,6 +183,18 @@ export class VisualisationViewerComponent implements OnInit {
         .append('rect')
         .attr('width', this.focus.width)
         .attr('height', this.focus.height);
+  }
+
+  drawSpectralLines() {
+    this._spectralLines.forEach(lineData => {
+      this.focus.chartArea.append('line')
+          .attr('class', 'spectral-line')
+          .style('stroke', 'red')
+          .attr('x1', this.focus.xScale(lineData[0][0]))
+          .attr('y1', this.focus.yScale(lineData[0][1]))
+          .attr('x2', this.focus.xScale(lineData[1][0]))
+          .attr('y2', this.focus.yScale(lineData[1][1]));
+    });
   }
 
   /**
@@ -251,18 +274,6 @@ export class VisualisationViewerComponent implements OnInit {
     }
   }
 
-  drawLine() {
-    this.focus.chartArea.append('line')
-        .attr('class', 'spectral-line')
-        .attr('x1', this.focus.xScale(350))
-        .attr('y1', this.focus.yScale(this.focus.height))
-        .attr('x2', this.focus.xScale(350))
-        .attr('y2', this.focus.yScale(this.focus.height * 0.33))
-        .style('stroke-width', 2)
-        .style('stroke', 'red')
-        .style('fill', 'none');
-  }
-
   /**
    * Draws the context chart axis, line, and adds the brush
    */
@@ -333,10 +344,10 @@ export class VisualisationViewerComponent implements OnInit {
         .attr('y', this.focus.height);
 
     this.focus.chartArea.selectAll('.spectral-line')
-        .attr('x1', this.focus.xScale(350))
-        .attr('y1', this.focus.yScale(this.focus.height))
-        .attr('x2', this.focus.xScale(350))
-        .attr('y2', this.focus.yScale(this.focus.height * 0.33));
+        .attr('x1', (d, i) => this.focus.xScale(this._spectralLines[i][0][0]))
+        .attr('y1', (d, i) => this.focus.yScale(this._spectralLines[i][0][1]))
+        .attr('x2', (d, i) => this.focus.xScale(this._spectralLines[i][1][0]))
+        .attr('y2', (d, i) => this.focus.yScale(this._spectralLines[i][1][1]));
 
     // Redraw the line on the focus chart
     this.focus.chartArea.select('.line').attr('d', this.focus.line);
@@ -374,7 +385,7 @@ export class VisualisationViewerComponent implements OnInit {
   hideShowSpectralLine(show?: boolean) {
     if (show) {
       this.focus.chartArea.selectAll('.spectral-line').transition().delay((d, i) => i * 50)
-        .style('opacity', '1.0');
+          .style('opacity', '1.0');
     } else {
       this.focus.chartArea.selectAll('.spectral-line').transition().delay((d, i) => i * 50)
           .style('opacity', '0.0');

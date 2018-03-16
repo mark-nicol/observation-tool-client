@@ -111,9 +111,6 @@ export class VisualisationViewerComponent implements OnInit {
   /** The brush on the context chart, used for zooming and panning */
   private brush: any;
 
-  /** The zoom on the focus chart, used for zooming and panning */
-  private zoom: any;
-
   /**
    * constructor
    *
@@ -258,9 +255,9 @@ export class VisualisationViewerComponent implements OnInit {
     this.focus.chartArea.append('line')
         .attr('class', 'spectral-line')
         .attr('x1', this.focus.xScale(350))
-        .attr('y1', this.focus.yScale(0))
+        .attr('y1', this.focus.yScale(this.focus.height))
         .attr('x2', this.focus.xScale(350))
-        .attr('y2', this.focus.yScale(this.focus.height * 0.66))
+        .attr('y2', this.focus.yScale(this.focus.height * 0.33))
         .style('stroke-width', 2)
         .style('stroke', 'red')
         .style('fill', 'none');
@@ -335,6 +332,11 @@ export class VisualisationViewerComponent implements OnInit {
         })
         .attr('y', this.focus.height);
 
+    this.focus.chartArea.selectAll('.spectral-line')
+        .attr('x1', this.focus.xScale(350))
+        .attr('y1', this.focus.yScale(this.focus.height))
+        .attr('x2', this.focus.xScale(350))
+        .attr('y2', this.focus.yScale(this.focus.height * 0.33));
 
     // Redraw the line on the focus chart
     this.focus.chartArea.select('.line').attr('d', this.focus.line);

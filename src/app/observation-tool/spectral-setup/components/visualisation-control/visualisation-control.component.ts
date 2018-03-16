@@ -19,10 +19,12 @@ export class VisualisationControlComponent {
   bandsChecked                         = true;
   /** Bool for the transmission line checkbox */
   transmissionChecked                  = true;
+  spectralLineChecked                  = true;
   /** Emitter for the receiver bands checkbox */
   @Output() bandsCheckedEmitter        = new EventEmitter<boolean>();
   /** Emitter for the transmission line checkbox */
   @Output() transmissionCheckedEmitter = new EventEmitter<boolean>();
+  @Output() spectralLineCheckedEmitter = new EventEmitter<boolean>();
   /** Emitter for the column density choice radios */
   @Output() densityRadioEmitter        = new EventEmitter<string>();
   /** Emitter for the manual column density selection */
@@ -43,7 +45,8 @@ export class VisualisationControlComponent {
     '5.186mm (7th Octile)',
   ];
 
-  constructor(private suiModalService: SuiModalService) {}
+  constructor(private suiModalService: SuiModalService) {
+  }
 
   /**
    * Flips the bool of the bands checkbox and emits
@@ -57,6 +60,10 @@ export class VisualisationControlComponent {
    */
   transmissionCheckedChange() {
     this.transmissionCheckedEmitter.emit(this.transmissionChecked);
+  }
+
+  spectralLineCheckedChange() {
+    this.spectralLineCheckedEmitter.emit(this.spectralLineChecked);
   }
 
   /**

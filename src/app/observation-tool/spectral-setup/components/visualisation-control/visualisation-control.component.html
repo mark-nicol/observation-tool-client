@@ -12,13 +12,16 @@
   <div class="field">
     <label>Overlays</label>
     <sui-checkbox (checkChange)="bandsCheckedChange()" [(ngModel)]="bandsChecked">Receiver Bands</sui-checkbox>
-    <sui-checkbox (checkChange)="transmissionCheckedChange()" [(ngModel)]="transmissionChecked">Transmission
+    <sui-checkbox (checkChange)="transmissionCheckedChange()" [(ngModel)]="transmissionChecked">
+      Transmission
     </sui-checkbox>
     <sui-checkbox>DSB Image</sui-checkbox>
-    <sui-checkbox>Spectral Lines</sui-checkbox>
+    <sui-checkbox (checkChange)="spectralLineCheckedChange()" [(ngModel)]="spectralLineChecked">
+      Spectral Lines
+    </sui-checkbox>
     <button class="ui tiny compact blue labeled icon button"
             (click)="makeModal()"><i class="signal icon"></i> Select Lines to
-      Overlay
+                                                              Overlay
     </button>
   </div>
 

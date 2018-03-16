@@ -62,14 +62,14 @@ export class VisualisationViewerComponent implements OnInit {
 
   /** Regions for receiver bands */
   private almaBands: AlmaBand[] = [
-    {start: 84,  end: 116, color: '#FF0000', text: '3'},
-    {start: 120, end: 163, color: '#00FF00', text: '4'},
-    {start: 163, end: 211, color: '#0000FF', text: '5'},
-    {start: 211, end: 275, color: '#FF0000', text: '6'},
+    {start: 84, end: 116, color: '#FF0000', text: '3'},
+    {start: 120, end: 163, color: '#FFAA00', text: '4'},
+    {start: 163, end: 211, color: '#FFFF00', text: '5'},
+    {start: 211, end: 275, color: '#AAFF00', text: '6'},
     {start: 275, end: 372, color: '#00FF00', text: '7'},
-    {start: 385, end: 500, color: '#0000FF', text: '8'},
-    {start: 602, end: 720, color: '#FF0000', text: '9'},
-    {start: 787, end: 950, color: '#00FF00', text: '10'}
+    {start: 385, end: 500, color: '#00FFAA', text: '8'},
+    {start: 602, end: 720, color: '#00FFFF', text: '9'},
+    {start: 787, end: 950, color: '#00AAFF', text: '10'}
   ];
 
   /** Colors for receiver band regions */
@@ -234,10 +234,10 @@ export class VisualisationViewerComponent implements OnInit {
     // Set the colors for the regions
     for (let i = 0; i < this.almaBands.length; i++) {
       this.focus.chartArea.append('rect')
-        .attr('class', 'region')
-        .attr('x',  this.focus.xScale(this.almaBands[i].start))
-        .attr('y',  0)
-        .attr('width', this.focus.xScale(this.almaBands[i].end) - this.focus.xScale(this.almaBands[i].start))
+          .attr('class', 'region')
+          .attr('x', this.focus.xScale(this.almaBands[i].start))
+          .attr('y', 0)
+          .attr('width', this.focus.xScale(this.almaBands[i].end) - this.focus.xScale(this.almaBands[i].start))
           .attr('height', this.focus.height)
           .style('fill', this.almaBands[i].color)
           .style('opacity', '0.3');
@@ -367,6 +367,16 @@ export class VisualisationViewerComponent implements OnInit {
           .style('opacity', '1.0');
     } else {
       this.focus.chartArea.selectAll('.line').transition()
+          .style('opacity', '0.0');
+    }
+  }
+
+  hideShowSpectralLine(show?: boolean) {
+    if (show) {
+      this.focus.chartArea.selectAll('.spectral-line').transition().delay((d, i) => i * 50)
+        .style('opacity', '1.0');
+    } else {
+      this.focus.chartArea.selectAll('.spectral-line').transition().delay((d, i) => i * 50)
           .style('opacity', '0.0');
     }
   }

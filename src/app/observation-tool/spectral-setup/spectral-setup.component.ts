@@ -42,6 +42,10 @@ export class SpectralSetupComponent {
     this.visualisationViewerComponent.hideShowTransmission(show);
   }
 
+  spectralLineCheckedChange(show: boolean) {
+    this.visualisationViewerComponent.hideShowSpectralLine(show);
+  }
+
   /**
    * Sends a signal to the visualiser when the density radio is changed, if automatic reverts to 1st octile
    * @param option The chosen radio option

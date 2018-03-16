@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ISpectralLine} from '../../../shared/interfaces/spectral-line.interface';
-import {SpectralDataService} from '../../services/spectral-data.service';
 
 @Component({
   selector: 'app-line-selection',
@@ -9,14 +7,10 @@ import {SpectralDataService} from '../../services/spectral-data.service';
 })
 export class LineSelectionComponent implements OnInit {
 
-  catalogue: ISpectralLine[];
-  selectedLines: ISpectralLine[];
-
-  constructor(private spectralDataService: SpectralDataService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.catalogue = this.spectralDataService.getSplatalogue().slice(0, 10);
   }
 
 }

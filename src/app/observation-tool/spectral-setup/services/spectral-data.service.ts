@@ -1,5 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {ISpectralLine} from '../../shared/interfaces/spectral-line.interface';
 
 /**
  * Service to supply the spectral visualiser with data
@@ -16,11 +18,6 @@ export class SpectralDataService {
    * @param http Injected HttpClient service
    */
   constructor(private http: HttpClient) {
-    this.http.get('http://localhost:8080/spectral-data/splatalogue').subscribe(result => {
-      console.log('Retrieving Splatalogue');
-      this.splatalogue = result;
-      console.log(this.splatalogue);
-    });
   }
 
   /**
@@ -31,15 +28,7 @@ export class SpectralDataService {
     return this.http.get(`http://localhost:8080/spectral-data/${option}`);
   }
 
-  getSplatalogue(): any {
-    if (this.splatalogue) {
-      console.log('Exists');
-      return this.splatalogue;
-    }else
-      this.http.get('http://localhost:8080/spectral-data/splatalogue').subscribe(result => {
-        this.splatalogue = result;
-        return this.splatalogue;
-      });
+  getSplatalogue(): Observable<ISpectralLine[]> {
+    return this.http.get<ISpectralLine[]>('http://localhost:8080/spectral-data/splatalogue');
   }
-
 }

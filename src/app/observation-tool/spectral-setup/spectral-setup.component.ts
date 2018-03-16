@@ -1,6 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {ISpectralLine} from '../shared/interfaces/spectral-line.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
+import {SpectralDataService} from './services/spectral-data.service';
 
 /**
  * Host component for the spectral setup
@@ -13,19 +16,48 @@ import {VisualisationViewerComponent} from './components/visualisation-viewer/vi
   templateUrl: './spectral-setup.component.html',
   styleUrls: ['./spectral-setup.component.scss']
 })
-export class SpectralSetupComponent {
+export class SpectralSetupComponent implements OnInit{
 
   /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
   lineSelecting = true;
 
+  form = this.formBuilder.group({
+    transitionFilter: '',
+    lowerAlmaBand: 1,
+    upperAlmaBand: 10,
+    minSkyFrequency: 10,
+    maxSkyFrequency: 1000,
+    hideUnobservableLines: false,
+    maximumUpperStateEnergy: null,
+    environmentFilter: 'all',
+    availableLines: this.formBuilder.array([]),
+    selectedLines: this.formBuilder.array([])
+  });
+
   /**
    * Constructor
    * @param persistenceService Injected service sent to super class
+   * @param spectralDataService
+   * @param formBuilder
    */
-  constructor(private persistenceService: PersistenceService) {
+  constructor(private persistenceService: PersistenceService,
+              private spectralDataService: SpectralDataService,
+              private formBuilder: FormBuilder) {
 
+  }
+
+  ngOnInit() {
+    this.spectralDataService.getSplatalogue().subscribe(result => {
+      this.setAvailableLines(result);
+    });
+  }
+
+  setAvailableLines(lines: ISpectralLine[]) {
+    const lineFormGroups = lines.map(line => this.formBuilder.group(line));
+    const lineFormArray = this.formBuilder.array(lineFormGroups);
+    this.form.setControl('availableLines', lineFormArray);
   }
 
   /**

@@ -146,7 +146,7 @@ export class VisualisationViewerComponent implements OnInit {
     this.drawFocusChart();
     this.spectralDataService.selectedLines.subscribe(result => {
       result.forEach(line => {
-        const lineData = [[line.orderedfreq / 1000, this.focus.height], [line.orderedfreq / 1000, this.focus.height * 0.33]];
+        const lineData = [[line.orderedfreq / 1000, this.focus.height], [line.orderedfreq / 1000, this.focus.height * 0.33], line.s_name_noparens];
         this._spectralLines.push(lineData);
       });
       this.drawSpectralLines();
@@ -194,6 +194,12 @@ export class VisualisationViewerComponent implements OnInit {
           .attr('y1', this.focus.yScale(lineData[0][1]))
           .attr('x2', this.focus.xScale(lineData[1][0]))
           .attr('y2', this.focus.yScale(lineData[1][1]));
+      this.focus.chartArea.append('text')
+          .attr('class', 'spectral-text')
+          .attr('x', this.focus.xScale(lineData[1][0]))
+          .attr('y', this.focus.yScale(lineData[1][1]))
+          .text(lineData[2])
+          .attr('fill', 'red');
     });
   }
 
@@ -348,6 +354,10 @@ export class VisualisationViewerComponent implements OnInit {
         .attr('y1', (d, i) => this.focus.yScale(this._spectralLines[i][0][1]))
         .attr('x2', (d, i) => this.focus.xScale(this._spectralLines[i][1][0]))
         .attr('y2', (d, i) => this.focus.yScale(this._spectralLines[i][1][1]));
+
+    this.focus.chartArea.selectAll('.spectral-text')
+        .attr('x', (d, i) => this.focus.xScale(this._spectralLines[i][1][0]))
+        .attr('y', (d, i) => this.focus.yScale(this._spectralLines[i][1][1]));
 
     // Redraw the line on the focus chart
     this.focus.chartArea.select('.line').attr('d', this.focus.line);

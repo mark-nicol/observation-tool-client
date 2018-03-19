@@ -1,5 +1,6 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ReactiveFormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 import {SpectralDataService} from '../../services/spectral-data.service';
 
@@ -12,7 +13,8 @@ describe('LineSelectionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule,
-                SuiModule,],
+                SuiModule,
+                ReactiveFormsModule],
       declarations: [LineSelectionComponent],
       providers: [SpectralDataService]
     })

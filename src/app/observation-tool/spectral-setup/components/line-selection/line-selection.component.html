@@ -1,4 +1,32 @@
-<form class="ui three column center aligned grid">
+<form class="ui form" [formGroup]="filterForm">
+  <div class="two fields">
+    <div class="field">
+      <label>Filter</label>
+      <input type="text" formControlName="description">
+    </div>
+    <div class="field">
+      <label>Sky Frequency</label>
+      <div class="two fields">
+        <div class="field">
+          <div class="ui labeled input">
+            <div class="ui label">Min</div>
+            <input type="number" formControlName="freqMin" min="10" max="999.9999">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui labeled input">
+            <div class="ui label">Max</div>
+            <input type="number" formControlName="freqMax" min="0.0001" max="1000">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="ui divider"></div>
+
+<div class="ui three column center aligned grid">
   <div class="row">
     <!-- Available lines table -->
     <div class=" seven wide column">
@@ -83,7 +111,7 @@
       </table>
     </div>
   </div>
-</form>
+</div>
 <button class="ui right floated tiny compact blue labeled icon button"
         (click)="linesSelected.emit()">
   <i class="plus icon"></i>

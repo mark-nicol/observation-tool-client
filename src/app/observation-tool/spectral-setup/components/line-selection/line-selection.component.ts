@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {ISpectralLine} from '../../../shared/interfaces/spectral-line.interface';
 import {SpectralDataService} from '../../services/spectral-data.service';
@@ -11,18 +11,25 @@ import {SpectralDataService} from '../../services/spectral-data.service';
 })
 export class LineSelectionComponent implements OnInit {
 
-  // @Input() parentForm: FormGroup;
   @Output() linesSelected = new EventEmitter();
   _splatalogue: ISpectralLine[];
   _selectedLines: Observable<ISpectralLine[]>;
   _selectedLine: ISpectralLine = null;
 
-  constructor(private spectralDataService: SpectralDataService) {
+  filterForm = this.formBuilder.group({
+    description: '',
+    freqMin: 500,
+    freqMax: 1000
+  });
+
+  constructor(private spectralDataService: SpectralDataService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     this.spectralDataService.getSplatalogue().subscribe(result => this._splatalogue = result.filter((x: ISpectralLine, i) => i < 20));
     this._selectedLines = this.spectralDataService.selectedLines;
+    this.observeFormChanges();
   }
 
   addLine() {
@@ -32,5 +39,14 @@ export class LineSelectionComponent implements OnInit {
   removeLine() {
     this.spectralDataService.removeLine(this._selectedLine);
   }
+
+  observeFormChanges() {
+    const debounce = this.filterForm.valueChanges.debounce(() => Observable.interval(1500));
+    debounce.subscribe(value => {
+      console.log(value);
+      this.spectralDataService.getSplatalogue(value).subscribe(result => this._splatalogue = result);
+    });
+  }
+
 
 }

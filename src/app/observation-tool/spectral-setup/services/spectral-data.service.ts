@@ -14,6 +14,14 @@ export class SpectralDataService {
   private _observable: Observable<any>;
           _selectedLines: ISpectralLine[] = [];
 
+  static filterSplatalogue(item: ISpectralLine, filters: any) {
+    const frequencyInLowerBound = (item.orderedfreq / 500) >= filters.freqMin;
+    const frequencyInUpperBound = (item.orderedfreq / 500) <= filters.freqMax;
+    const foundWords            = item.s_name_noparens.toLowerCase().indexOf(filters.description.toLocaleLowerCase()) > -1 ||
+                                  item.chemical_name.toLowerCase().indexOf(filters.description.toLowerCase()) > -1;
+    return frequencyInLowerBound && frequencyInUpperBound && foundWords;
+  }
+
   /**
    * Constructor
    *
@@ -31,9 +39,10 @@ export class SpectralDataService {
     return this.http.get(`http://localhost:8080/spectral-data/${option}`);
   }
 
-  getSplatalogue(): any {
+  getSplatalogue(filters?: any): any {
+    console.log('getSplatalogue');
     if (this._splatalogue) {
-      return Observable.of(this._splatalogue);
+        return Observable.of(this._splatalogue.filter(x => SpectralDataService.filterSplatalogue(x, filters)));
     } else if (this._observable) {
       return this._observable;
     } else {

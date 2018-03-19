@@ -10,13 +10,13 @@
         <div class="field">
           <div class="ui labeled input">
             <div class="ui label">Min</div>
-            <input type="number" formControlName="freqMin">
+            <input type="number" formControlName="freqMin" min="10" max="999.9999">
           </div>
         </div>
         <div class="field">
           <div class="ui labeled input">
             <div class="ui label">Max</div>
-            <input type="number" formControlName="freqMax">
+            <input type="number" formControlName="freqMax" min="0.0001" max="1000">
           </div>
         </div>
       </div>

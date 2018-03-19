@@ -18,7 +18,7 @@ export class LineSelectionComponent implements OnInit {
 
   filterForm = this.formBuilder.group({
     description: '',
-    freqMin: 0,
+    freqMin: 500,
     freqMax: 1000
   });
 
@@ -29,6 +29,7 @@ export class LineSelectionComponent implements OnInit {
   ngOnInit() {
     this.spectralDataService.getSplatalogue().subscribe(result => this._splatalogue = result.filter((x: ISpectralLine, i) => i < 20));
     this._selectedLines = this.spectralDataService.selectedLines;
+    this.observeFormChanges();
   }
 
   addLine() {
@@ -38,5 +39,14 @@ export class LineSelectionComponent implements OnInit {
   removeLine() {
     this.spectralDataService.removeLine(this._selectedLine);
   }
+
+  observeFormChanges() {
+    const debounce = this.filterForm.valueChanges.debounce(() => Observable.interval(1500));
+    debounce.subscribe(value => {
+      console.log(value);
+      this.spectralDataService.getSplatalogue(value).subscribe(result => console.log(result));
+    });
+  }
+
 
 }

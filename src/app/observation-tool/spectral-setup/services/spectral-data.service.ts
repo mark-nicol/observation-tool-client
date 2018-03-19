@@ -40,7 +40,6 @@ export class SpectralDataService {
   }
 
   getSplatalogue(filters?: any): any {
-    console.log('getSplatalogue');
     if (this._splatalogue) {
         return Observable.of(this._splatalogue.filter(x => SpectralDataService.filterSplatalogue(x, filters)));
     } else if (this._observable) {

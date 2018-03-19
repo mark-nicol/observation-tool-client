@@ -44,7 +44,7 @@ export class LineSelectionComponent implements OnInit {
     const debounce = this.filterForm.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       console.log(value);
-      this.spectralDataService.getSplatalogue(value).subscribe(result => console.log(result));
+      this.spectralDataService.getSplatalogue(value).subscribe(result => this._splatalogue = result);
     });
   }
 

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {ISpectralLine} from '../../../shared/interfaces/spectral-line.interface';
 import {SpectralDataService} from '../../services/spectral-data.service';
@@ -11,13 +11,19 @@ import {SpectralDataService} from '../../services/spectral-data.service';
 })
 export class LineSelectionComponent implements OnInit {
 
-  // @Input() parentForm: FormGroup;
   @Output() linesSelected = new EventEmitter();
   _splatalogue: ISpectralLine[];
   _selectedLines: Observable<ISpectralLine[]>;
   _selectedLine: ISpectralLine = null;
 
-  constructor(private spectralDataService: SpectralDataService) {
+  filterForm = this.formBuilder.group({
+    description: '',
+    freqMin: 0,
+    freqMax: 1000
+  });
+
+  constructor(private spectralDataService: SpectralDataService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {

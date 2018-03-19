@@ -20,18 +20,7 @@ export class SpectralSetupComponent implements OnInit {
   /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
-  lineSelecting = false;
-
-  form = this.formBuilder.group({
-    transitionFilter: '',
-    lowerAlmaBand: 1,
-    upperAlmaBand: 10,
-    minSkyFrequency: 10,
-    maxSkyFrequency: 1000,
-    hideUnobservableLines: false,
-    maximumUpperStateEnergy: null,
-    environmentFilter: 'all'
-  });
+  lineSelecting = true;
 
   /**
    * Constructor
@@ -40,8 +29,7 @@ export class SpectralSetupComponent implements OnInit {
    * @param formBuilder
    */
   constructor(private persistenceService: PersistenceService,
-              private spectralDataService: SpectralDataService,
-              private formBuilder: FormBuilder) {
+              private spectralDataService: SpectralDataService) {
 
   }
 

@@ -37,9 +37,6 @@
             <th>Description</th>
             <th>Rest Frequency</th>
             <th>Sky Frequency</th>
-            <th>Upper-state Energy</th>
-            <th>Lovas Intensity</th>
-            <th>Sij</th>
           </tr>
         </thead>
         <tbody>
@@ -51,19 +48,19 @@
             <td>{{line.chemical_name}}</td>
             <td>{{(line.orderedfreq / 1000).toFixed(7)}}</td>
             <td>{{(line.orderedfreq / 500).toFixed(7)}}</td>
-            <td>{{line.E_up_K}}</td>
-            <td>{{line.lovas_int}}</td>
-            <td>{{line.sijmu2}}</td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <th colspan="7">
+            <th colspan="4">
               <pagination-template #p="paginationApi"
-                                   (pageChange)="pageChange.emit($event)">
+                                   (pageChange)="_activePage = $event">
                 <sui-pagination class="right floated"
-                                [collectionSize]="_splatalogue.length"
-                                [pageSize]="p.maxSize"
+                                [collectionSize]="_splatalogue?.length"
+                                [maxSize]="5"
+                                [pageSize]="10"
+                                [hasEllipses]="true"
+                                [page]="_activePage"
                                 (pageChange)="p.setCurrent($event)"></sui-pagination>
               </pagination-template>
             </th>

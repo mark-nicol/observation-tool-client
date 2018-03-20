@@ -49,5 +49,8 @@ export class LineSelectionComponent implements OnInit {
     });
   }
 
+  log(message: any) {
+    console.log(message);
+  }
 
 }

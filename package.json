@@ -38,6 +38,7 @@
     "lodash.merge": "^4.6.0",
     "ng2-semantic-ui": "^0.9.6",
     "ng2-toastr": "^4.1.2",
+    "ngx-pagination": "^3.1.0",
     "ngx-papaparse": "^1.2.5",
     "rxjs": "^5.4.2",
     "semantic-ui": "^2.2.13",

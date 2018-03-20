@@ -43,7 +43,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let line of _splatalogue"
+          <tr *ngFor="let line of _splatalogue | paginate: {itemsPerPage: 10, currentPage: _activePage}"
               [class.positive]="line === _selectedLine"
               [class.disabled]="(_selectedLines | async).indexOf(line) > -1"
               (click)="_selectedLine = line">

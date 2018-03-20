@@ -59,23 +59,13 @@
         <tfoot>
           <tr>
             <th colspan="7">
-              <div class="ui right floated pagination menu">
-                <div class="icon link item"
-                     [class.disabled]="_activePage  <= 0"
-                     (click)="_activePage!==0 ? _activePage=_activePage-1: null">
-                  <i class="left chevron icon"></i>
-                </div>
-                <div class="link item"
-                     *ngFor="let page of [1,2,3,4]; let i = index"
-                     [class.active]="_activePage===i"
-                     (click)="_activePage=i">{{i + 1}}
-                </div>
-                <div class="icon link item"
-                     [class.disabled]="_activePage >= 3"
-                     (click)="_activePage !== 3 ? _activePage=_activePage+1 : null">
-                  <i class="right chevron icon"></i>
-                </div>
-              </div>
+              <pagination-template #p="paginationApi"
+                                   (pageChange)="pageChange.emit($event)">
+                <sui-pagination class="right floated"
+                                [collectionSize]="_splatalogue.length"
+                                [pageSize]="p.maxSize"
+                                (pageChange)="p.setCurrent($event)"></sui-pagination>
+              </pagination-template>
             </th>
           </tr>
         </tfoot>

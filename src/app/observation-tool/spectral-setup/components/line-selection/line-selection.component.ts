@@ -15,6 +15,7 @@ export class LineSelectionComponent implements OnInit {
   _splatalogue: ISpectralLine[];
   _selectedLines: Observable<ISpectralLine[]>;
   _selectedLine: ISpectralLine = null;
+  _activePage = 0;
 
   filterForm = this.formBuilder.group({
     description: '',

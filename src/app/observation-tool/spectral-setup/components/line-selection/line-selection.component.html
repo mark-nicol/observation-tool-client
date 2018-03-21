@@ -93,16 +93,13 @@
     </div>
     <!-- Selected lines table -->
     <div class="seven wide column">
-      <table class="ui selectable compact table">
+      <table class="ui selectable compact table" >
         <thead>
           <tr>
             <th>Transition</th>
             <th>Description</th>
             <th>Rest Frequency</th>
             <th>Sky Frequency</th>
-            <th>Upper-state Energy</th>
-            <th>Lovas Intensity</th>
-            <th>Sij</th>
           </tr>
         </thead>
         <tbody>
@@ -113,17 +110,20 @@
             <td>{{line.chemical_name}}</td>
             <td>{{line.orderedfreq / 1000}}</td>
             <td>{{line.orderedfreq / 500}}</td>
-            <td>{{line.E_up_K}}</td>
-            <td>{{line.lovas_int}}</td>
-            <td>{{line.sijmu2}}</td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="4">
+              <button class="ui right floated tiny compact blue labeled icon button"
+                      (click)="linesSelected.emit()">
+                <i class="plus icon"></i>
+                Add lines
+              </button>
+            </th>
+          </tr>
+        </tfoot>
       </table>
     </div>
   </div>
 </div>
-<button class="ui right floated tiny compact blue labeled icon button"
-        (click)="linesSelected.emit()">
-  <i class="plus icon"></i>
-  Add lines
-</button>

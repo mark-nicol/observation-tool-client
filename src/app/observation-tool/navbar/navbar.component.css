@@ -2,24 +2,29 @@
   cursor: pointer;
 }
 
-.ui.inverted.blue.menu .active.item {
-  background-color: white;
-  color: #2185D0;
-}
+/*.ui.inverted.blue.menu .active.item {*/
+  /*background-color: white;*/
+  /*color: #2185D0;*/
+/*}*/
 
-.titleField {
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 5px;
-}
+/*.titleField {*/
+  /*padding-top: 0;*/
+  /*padding-bottom: 0;*/
+  /*padding-left: 5px;*/
+/*}*/
 
-.esoLogo {
+.logo {
   border: 1px solid white;
-  height: 2em;
-  width: auto;
+  height: 36px;
+  /*width: auto;*/
 }
 
-.esoVersion {
+.version {
   font-size: 0.7em;
   font-weight: normal;
+}
+
+.ui.inverted.blue.menu .active.item {
+  background-color: white !important;
+  color: #2185D0 !important
 }

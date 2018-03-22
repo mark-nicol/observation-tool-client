@@ -1,5 +1,4 @@
 import {Directive, HostListener, Input} from '@angular/core';
-import {NgbTooltip} from '@ng-bootstrap/ng-bootstrap';
 import {SuiPopup} from 'ng2-semantic-ui/dist';
 
 /**

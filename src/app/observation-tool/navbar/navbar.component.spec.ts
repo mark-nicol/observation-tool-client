@@ -1,7 +1,6 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {ContextMenuModule} from 'ngx-contextmenu';
 import {PersistenceService} from '../shared/services/persistence.service';
 
 import {NavbarComponent} from './navbar.component';
@@ -12,16 +11,15 @@ describe('NavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-                                     declarations: [NavbarComponent],
-                                     imports: [
-                                       ContextMenuModule,
-                                       HttpClientTestingModule,
-                                       RouterTestingModule,
-                                     ],
-                                     providers: [
-                                       PersistenceService
-                                     ]
-                                   })
+      declarations: [NavbarComponent],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ],
+      providers: [
+        PersistenceService
+      ]
+    })
            .compileComponents();
   }));
 

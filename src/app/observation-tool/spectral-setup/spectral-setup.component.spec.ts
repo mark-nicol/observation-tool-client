@@ -1,9 +1,8 @@
 import {HttpClientModule} from '@angular/common/http';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {SuiModule} from 'ng2-semantic-ui';
-import {ModularPanelComponent} from '../shared/components/modular-panel/modular-panel.component';
+import {SuiModule, SuiPaginationModule} from 'ng2-semantic-ui';
+import {NgxPaginationModule} from 'ngx-pagination';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {LineSelectionComponent} from './components/line-selection/line-selection.component';
 import {TypeComponent} from './components/type/type.component';
@@ -26,10 +25,16 @@ describe('SpectralSetupComponent', () => {
         TypeComponent,
         LineSelectionComponent
       ],
-      imports: [FormsModule, ReactiveFormsModule, HttpClientModule, SuiModule],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        SuiModule,
+        NgxPaginationModule
+      ],
       providers: [PersistenceService, SpectralDataService]
     })
-      .compileComponents();
+           .compileComponents();
   }));
 
   beforeEach(() => {

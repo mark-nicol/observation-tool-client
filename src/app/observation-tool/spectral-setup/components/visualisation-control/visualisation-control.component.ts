@@ -10,7 +10,7 @@ import {SuiModalService} from 'ng2-semantic-ui';
 @Component({
   selector: 'app-visualisation-control',
   templateUrl: './visualisation-control.component.html',
-  styleUrls: ['./visualisation-control.component.scss']
+  styleUrls: ['./visualisation-control.component.css']
 })
 export class VisualisationControlComponent {
 

@@ -7,7 +7,7 @@ import {SpectralDataService} from '../../services/spectral-data.service';
 @Component({
   selector: 'app-line-selection',
   templateUrl: './line-selection.component.html',
-  styleUrls: ['./line-selection.component.scss']
+  styleUrls: ['./line-selection.component.css']
 })
 export class LineSelectionComponent implements OnInit {
 

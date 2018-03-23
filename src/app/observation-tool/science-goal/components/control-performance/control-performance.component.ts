@@ -9,7 +9,7 @@ import {Component} from '@angular/core';
 @Component({
              selector: 'app-control-performance',
              templateUrl: './control-performance.component.html',
-             styleUrls: ['./control-performance.component.scss']
+             styleUrls: ['./control-performance.component.css']
            })
 export class ControlPerformanceComponent {
   chosenRadio         = 'single';

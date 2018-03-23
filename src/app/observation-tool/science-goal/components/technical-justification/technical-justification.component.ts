@@ -9,7 +9,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'app-technical-justification',
   templateUrl: './technical-justification.component.html',
-  styleUrls: ['./technical-justification.component.scss']
+  styleUrls: ['./technical-justification.component.css']
 })
 export class TechnicalJustificationComponent {
 

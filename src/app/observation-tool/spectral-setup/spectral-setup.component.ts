@@ -20,13 +20,12 @@ export class SpectralSetupComponent implements OnInit {
   /** The visualisation viewer component */
   @ViewChild(VisualisationViewerComponent) private visualisationViewerComponent: VisualisationViewerComponent;
 
-  lineSelecting = true;
+  lineSelecting = false;
 
   /**
    * Constructor
    * @param persistenceService Injected service sent to super class
    * @param spectralDataService
-   * @param formBuilder
    */
   constructor(private persistenceService: PersistenceService,
               private spectralDataService: SpectralDataService) {

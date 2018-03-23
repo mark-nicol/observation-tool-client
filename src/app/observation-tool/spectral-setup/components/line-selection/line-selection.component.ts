@@ -28,7 +28,7 @@ export class LineSelectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spectralDataService.getSplatalogue().subscribe(result => this._splatalogue = result.filter((x: ISpectralLine, i) => i < 20));
+    this.spectralDataService.getSplatalogue(this.filterForm.value).subscribe(result => this._splatalogue = result/*.filter((x: ISpectralLine, i) => i < 20)*/);
     this._selectedLines = this.spectralDataService.selectedLines;
     this.observeFormChanges();
   }

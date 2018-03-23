@@ -10,12 +10,12 @@ describe('RefinePanelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-                                     declarations: [RefinePanelComponent],
-                                     imports: [
-                                       SuiModule,
-                                       FormsModule
-                                     ]
-                                   })
+      declarations: [RefinePanelComponent],
+      imports: [
+        SuiModule,
+        FormsModule
+      ]
+    })
            .compileComponents();
   }));
 

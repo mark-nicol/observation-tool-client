@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import * as _ from 'lodash';
 import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 
@@ -9,10 +8,10 @@ import {PersistenceService} from '../shared/services/persistence.service';
  */
 
 @Component({
-             selector:    'app-navbar',
-             templateUrl: './navbar.component.html',
-             styleUrls:   ['./navbar.component.css'],
-           })
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css'],
+})
 export class NavbarComponent implements OnInit {
 
   /** Controls collapsing of the navbar on smaller screen sizes */
@@ -25,39 +24,23 @@ export class NavbarComponent implements OnInit {
   items: NavItemInterface[] = [
     {
       title: 'Project',
-      path:  'project/pi-entry'
+      path: 'project/pi-entry',
+      icon: 'sitemap icon'
     },
     {
       title: 'Proposal',
-      path:  'project/proposal'
+      path: 'project/proposal',
+      icon: 'file alternate icon'
     },
     {
       title: 'Planned Observing',
-      path:  'project/planned-observing'
+      path: 'project/planned-observing',
+      icon: 'calendar alternate icon'
     },
     {
       title: 'Science Goals',
-      path:  'science-goals'
-    }
-  ];
-
-  /**
-   * Selectable science goals
-   *
-   * Currently unused
-   * */
-  scienceGoals: NavItemInterface[] = [
-    {
-      title: 'Science Goal 1',
-      path:  'sciGoals'
-    },
-    {
-      title: 'Science Goal 2',
-      path:  'sciGoals'
-    },
-    {
-      title: 'Science Goal 3',
-      path:  'sciGoals'
+      path: 'science-goals',
+      icon: 'bullseye icon'
     }
   ];
 
@@ -69,7 +52,6 @@ export class NavbarComponent implements OnInit {
    * Sets the currently selected goal to the first in the list
    */
   ngOnInit() {
-    this.selectedGoal = this.scienceGoals[0];
   }
 
   /**
@@ -86,7 +68,6 @@ export class NavbarComponent implements OnInit {
    * @return false
    */
   addGoal() {
-    this.scienceGoals.push({title: 'New Goal', path: 'sciGoals'});
     return false;
   }
 
@@ -95,10 +76,6 @@ export class NavbarComponent implements OnInit {
    * @param toRemove The goal to remove from the list
    */
   removeGoal(toRemove: string) {
-    _.remove(this.scienceGoals, toRemove);
-    if (this.selectedGoal === toRemove) {
-      this.selectedGoal = this.scienceGoals[0];
-    }
   }
 
   exportClick() {

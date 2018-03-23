@@ -6,4 +6,5 @@ export interface NavItemInterface {
   title: string;
   /** The routing path of the item */
   path: string;
+  icon: string;
 }

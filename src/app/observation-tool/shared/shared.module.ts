@@ -19,7 +19,6 @@ import {SystemService} from './services/system.service';
     UnitsModule,
   ],
   declarations: [
-    DelayTooltipDirective,
     DegreesPipe,
     SexagesimalPipe,
   ],

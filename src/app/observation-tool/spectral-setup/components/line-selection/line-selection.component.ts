@@ -7,7 +7,7 @@ import {SpectralDataService} from '../../services/spectral-data.service';
 @Component({
   selector: 'app-line-selection',
   templateUrl: './line-selection.component.html',
-  styleUrls: ['./line-selection.component.scss']
+  styleUrls: ['./line-selection.component.css']
 })
 export class LineSelectionComponent implements OnInit {
 
@@ -15,6 +15,7 @@ export class LineSelectionComponent implements OnInit {
   _splatalogue: ISpectralLine[];
   _selectedLines: Observable<ISpectralLine[]>;
   _selectedLine: ISpectralLine = null;
+  _activePage = 0;
 
   filterForm = this.formBuilder.group({
     description: '',
@@ -48,5 +49,8 @@ export class LineSelectionComponent implements OnInit {
     });
   }
 
+  log(message: any) {
+    console.log(message);
+  }
 
 }

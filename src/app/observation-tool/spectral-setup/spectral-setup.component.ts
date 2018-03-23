@@ -13,7 +13,7 @@ import {SpectralDataService} from './services/spectral-data.service';
 @Component({
   selector: 'app-spectral-setup',
   templateUrl: './spectral-setup.component.html',
-  styleUrls: ['./spectral-setup.component.scss']
+  styleUrls: ['./spectral-setup.component.css']
 })
 export class SpectralSetupComponent implements OnInit {
 

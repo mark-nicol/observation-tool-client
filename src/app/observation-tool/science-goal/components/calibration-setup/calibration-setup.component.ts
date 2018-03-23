@@ -9,7 +9,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'app-calibration-setup',
   templateUrl: './calibration-setup.component.html',
-  styleUrls: ['./calibration-setup.component.scss']
+  styleUrls: ['./calibration-setup.component.css']
 })
 export class CalibrationSetupComponent {
 

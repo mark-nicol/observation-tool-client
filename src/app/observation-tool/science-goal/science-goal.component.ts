@@ -10,7 +10,7 @@ import {PersistenceService} from '../shared/services/persistence.service';
 @Component({
   selector: 'app-science-goal',
   templateUrl: './science-goal.component.html',
-  styleUrls: ['./science-goal.component.scss']
+  styleUrls: ['./science-goal.component.css']
 })
 export class ScienceGoalComponent implements OnInit {
 

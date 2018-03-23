@@ -55,7 +55,7 @@ interface AlmaBand {
 @Component({
   selector: 'app-visualisation-viewer',
   templateUrl: './visualisation-viewer.component.html',
-  styleUrls: ['./visualisation-viewer.component.scss'],
+  styleUrls: ['./visualisation-viewer.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class VisualisationViewerComponent implements OnInit {

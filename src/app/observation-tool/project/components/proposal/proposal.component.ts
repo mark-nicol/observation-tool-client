@@ -202,7 +202,9 @@ export class ProposalComponent implements OnInit {
   observeFormChanges() {
     const debounce = this.proposalForm.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
-      this.persistenceService.updateProposal(value).subscribe();
+      if (this.proposalForm.valid && this.proposalForm.dirty) {
+        this.persistenceService.updateProposal(value).subscribe();
+      }
     });
   }
 

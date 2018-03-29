@@ -181,10 +181,6 @@ export class ProposalComponent implements OnInit {
     this.observeFormChanges();
   }
 
-  // createForm() {
-  //   this.proposalForm
-  // }
-
   setRows(rows: IAlmaInvestigator[]) {
     const rowFormGroups = rows.map(tableRow => this.formBuilder.group(tableRow));
     const rowFormArray = this.formBuilder.array(rowFormGroups);
@@ -206,7 +202,7 @@ export class ProposalComponent implements OnInit {
   observeFormChanges() {
     const debounce = this.proposalForm.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
-      this.persistenceService.updateProposal(value).subscribe(() => console.log('Updated'));
+      this.persistenceService.updateProposal(value).subscribe();
     });
   }
 

@@ -69,8 +69,6 @@ export class PersistenceService {
   }
 
   updateProposal(proposal: ObsProposal): Observable<ObsProposal> {
-    console.log('updateProposal');
-    console.log(proposal);
     return this.http.put<ObsProposal>(`${this.baseUrl}/projects/proposal`, proposal);
   }
 

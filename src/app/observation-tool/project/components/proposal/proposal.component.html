@@ -77,7 +77,7 @@
                         [isSearchable]="true"
                         (maxSelected)="2"
                         [options]="categoryRadios[chosenCategory].keywords"
-                        formcontrolname="keywords">
+                        formControlName="keywords">
         <sui-select-option *ngFor="let option of keywordSelector.filteredOptions"
                            [value]="option">
         </sui-select-option>
@@ -97,14 +97,15 @@
           <th>Executive</th>
         </tr>
       </thead>
-      <tbody formArrayName="investigators">
-        <tr *ngFor="let row of investigators.controls; let i = index" [formGroupName]="i">
+      <tbody>
+        <tr>
+        <!--<tr *ngFor="let row of investigators.controls; let i = index" [formGroupName]="i">-->
           <td>PI</td>
-          <td>{{row.value.fullName}}</td>
-          <td>{{row.value.eMail}}</td>
-          <td>{{row.value.organisation}}</td>
-          <td>{{row.value.userId}}</td>
-          <td>{{row.value.associatedExec}}</td>
+          <!--<td>{{row.value.fullName}}</td>-->
+          <!--<td>{{row.value.eMail}}</td>-->
+          <!--<td>{{row.value.organisation}}</td>-->
+          <!--<td>{{row.value.userId}}</td>-->
+          <!--<td>{{row.value.associatedExec}}</td>-->
         </tr>
       </tbody>
       <tfoot>

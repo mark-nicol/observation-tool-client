@@ -16,9 +16,6 @@ export class PointingCanvasComponent implements OnInit {
   @Output() rectAddedEmitter = new EventEmitter();
             addingRec        = false;
             addingFov        = false;
-            canvasElement: HTMLCanvasElement;
-            canvas: CanvasRenderingContext2D;
-            canvasContainer: any;
             oldMouseEvent: MouseEvent;
 
   static isInsidePointing(pointing: Pointing, x: number, y: number) {
@@ -50,12 +47,7 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.canvasContainer      = document.getElementById('canvas-container');
-    this.canvasElement        = document.createElement('canvas');
-    this.canvas               = this.canvasElement.getContext('2d');
-    this.canvasElement.width  = this.canvasContainer.clientWidth;
-    this.canvasElement.height = this.canvasContainer.clientHeight;
-    this.canvasContainer.appendChild(this.canvasElement);
+    // TODO Init d3
   }
 
   click(event: MouseEvent) {
@@ -92,22 +84,11 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   drawPolygon(polygon: Rectangle) {
-    this.canvas.strokeStyle = polygon.isSelected ? 'red' : 'lime';
-    this.canvas.beginPath();
-    this.canvas.moveTo(polygon.coordsPixel.topLeft[0], polygon.coordsPixel.topLeft[1]);
-    this.canvas.lineTo(polygon.coordsPixel.topRight[0], polygon.coordsPixel.topRight[1]);
-    this.canvas.lineTo(polygon.coordsPixel.bottomRight[0], polygon.coordsPixel.bottomRight[1]);
-    this.canvas.lineTo(polygon.coordsPixel.bottomLeft[0], polygon.coordsPixel.bottomLeft[1]);
-    this.canvas.closePath();
-    this.canvas.stroke();
+    // TODO Draw a rect
   }
 
   drawCircle(fov: Fov) {
-    this.canvas.strokeStyle = fov.isSelected ? 'red' : 'lime';
-    this.canvas.beginPath();
-    this.canvas.arc(fov.coordsPixel[0], fov.coordsPixel[1], fov.radiusPixel, 0, 2 * Math.PI, false);
-    this.canvas.closePath();
-    this.canvas.stroke();
+    // TODO Draw a circle using fov
   }
 
   editMode() {
@@ -122,7 +103,7 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   clearCanvas() {
-    this.canvas.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    // TODO Remove everything from canvas
   }
 
   cutPolygons() {

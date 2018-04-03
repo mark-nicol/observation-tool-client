@@ -23,8 +23,6 @@ export class PointingCanvasComponent implements OnInit {
   private svg: any;
   private width: number;
   private height: number;
-  private fovs: any;
-  private rects: any;
 
   static isInsidePointing(pointing: Pointing, x: number, y: number) {
     if (pointing instanceof Rectangle) {
@@ -61,6 +59,11 @@ export class PointingCanvasComponent implements OnInit {
   ngOnInit() {
     // TODO Init d3
     this.setupSvg();
+    function dragged(d) {
+      d3.select(this)
+        .attr('cx', d.x = d3.event.x)
+        .attr('cy', d.y = d3.event.y)
+    }
   }
 
   setupSvg() {
@@ -89,7 +92,7 @@ export class PointingCanvasComponent implements OnInit {
         bottomLeft: [event.offsetX - dimension, event.offsetY + dimension],
         bottomRight: [event.offsetX + dimension, event.offsetY + dimension]
       });
-      this.drawPolygon(rect);
+      this.drawRectangle(rect);
       this.pointingService.addPointing(rect);
       this.rectAddedEmitter.emit();
     }
@@ -99,15 +102,14 @@ export class PointingCanvasComponent implements OnInit {
     PointingCanvasComponent.clearCanvas();
     this.pointingService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
-        this.drawPolygon(pointing);
+        this.drawRectangle(pointing);
       } else if (pointing instanceof Fov) {
         this.drawCircle(pointing);
       }
     });
   }
 
-  drawPolygon(rectangle: Rectangle) {
-    // TODO Draw a rect
+  drawRectangle(rectangle: Rectangle) {
     this.svg.append('polygon')
       .attr('points', () => {
         return [
@@ -119,7 +121,7 @@ export class PointingCanvasComponent implements OnInit {
       })
       .attr('fill', 'none')
       .attr('stroke-width', '2px')
-      .attr('stroke', rectangle.isSelected ? 'orange' : 'green');
+      .attr('stroke', rectangle.isSelected ? 'red' : 'green');
   }
 
   drawCircle(fov: Fov) {
@@ -128,15 +130,15 @@ export class PointingCanvasComponent implements OnInit {
       .attr('cy', fov.coordsPixel[1])
       .attr('r', fov.radiusPixel)
       .attr('fill', 'none')
-      .attr('stroke-width', '2px')
-      .attr('stroke', fov.isSelected ? 'orange' : 'green');
+      .style('stroke-width', '2px')
+      .style('stroke', fov.isSelected ? 'red' : 'green');
   }
 
   editMode() {
     PointingCanvasComponent.clearCanvas();
     this.pointingService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
-        this.drawPolygon(pointing);
+        this.drawRectangle(pointing);
       } else if (pointing instanceof Fov) {
         this.drawCircle(pointing);
       }

@@ -23,6 +23,8 @@ export class PointingCanvasComponent implements OnInit {
   private svg: any;
   private width: number;
   private height: number;
+  private fovs: any;
+  private rects: any;
 
   static isInsidePointing(pointing: Pointing, x: number, y: number) {
     if (pointing instanceof Rectangle) {
@@ -106,6 +108,13 @@ export class PointingCanvasComponent implements OnInit {
 
   drawCircle(fov: Fov) {
     // TODO Draw a circle using fov
+    this.svg.append('circle')
+      .attr('cx', fov.coordsPixel[0])
+      .attr('cy', fov.coordsPixel[1])
+      .attr('r', fov.radiusPixel)
+      .attr('fill', 'none')
+      .attr('stroke-width', '2px')
+      .attr('stroke', fov.isSelected ? 'orange' : 'green');
   }
 
   editMode() {

@@ -106,8 +106,20 @@ export class PointingCanvasComponent implements OnInit {
     });
   }
 
-  drawPolygon(polygon: Rectangle) {
+  drawPolygon(rectangle: Rectangle) {
     // TODO Draw a rect
+    this.svg.append('polygon')
+      .attr('points', () => {
+        return [
+          rectangle.coordsPixel.topLeft.join(','),
+          rectangle.coordsPixel.topRight.join(','),
+          rectangle.coordsPixel.bottomRight.join(','),
+          rectangle.coordsPixel.bottomLeft.join(','),
+        ].join(' ');
+      })
+      .attr('fill', 'none')
+      .attr('stroke-width', '2px')
+      .attr('stroke', rectangle.isSelected ? 'orange' : 'green');
   }
 
   drawCircle(fov: Fov) {

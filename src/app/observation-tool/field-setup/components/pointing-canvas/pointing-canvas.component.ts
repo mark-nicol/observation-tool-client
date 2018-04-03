@@ -1,8 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Fov} from '../../../shared/classes/pointings/fov';
 import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import {PointingService} from '../../services/pointing.service';
+import * as d3 from 'd3';
 
 
 @Component({
@@ -16,10 +17,12 @@ export class PointingCanvasComponent implements OnInit {
   @Output() rectAddedEmitter = new EventEmitter();
             addingRec        = false;
             addingFov        = false;
-            canvasElement: HTMLCanvasElement;
-            canvas: CanvasRenderingContext2D;
-            canvasContainer: any;
             oldMouseEvent: MouseEvent;
+
+  @ViewChild('canvasContainer') private canvasContainer: ElementRef;
+  private svg: any;
+  private width: number;
+  private height: number;
 
   static isInsidePointing(pointing: Pointing, x: number, y: number) {
     if (pointing instanceof Rectangle) {
@@ -39,6 +42,10 @@ export class PointingCanvasComponent implements OnInit {
     }
   }
 
+  static clearCanvas() {
+    d3.selectAll('svg > *').remove();
+  }
+
   static mouseHasMoved(oldEvent: MouseEvent, newEvent: MouseEvent): boolean {
     if (oldEvent) {
       return oldEvent.offsetX !== newEvent.offsetX || oldEvent.offsetY !== newEvent.offsetY;
@@ -50,12 +57,23 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.canvasContainer      = document.getElementById('canvas-container');
-    this.canvasElement        = document.createElement('canvas');
-    this.canvas               = this.canvasElement.getContext('2d');
-    this.canvasElement.width  = this.canvasContainer.clientWidth;
-    this.canvasElement.height = this.canvasContainer.clientHeight;
-    this.canvasContainer.appendChild(this.canvasElement);
+    // TODO Init d3
+    this.setupSvg();
+    function dragged(d) {
+      d3.select(this)
+        .attr('cx', d.x = d3.event.x)
+        .attr('cy', d.y = d3.event.y)
+    }
+  }
+
+  setupSvg() {
+    const element       = this.canvasContainer.nativeElement;
+    // Set the width and height of the context chart
+    this.width  = element.offsetWidth;
+    this.height = element.offsetHeight;
+    this.svg = d3.select(element).append('svg')
+      .attr('width', element.offsetWidth)
+      .attr('height', element.offsetHeight);
   }
 
   click(event: MouseEvent) {
@@ -74,55 +92,57 @@ export class PointingCanvasComponent implements OnInit {
         bottomLeft: [event.offsetX - dimension, event.offsetY + dimension],
         bottomRight: [event.offsetX + dimension, event.offsetY + dimension]
       });
-      this.drawPolygon(rect);
+      this.drawRectangle(rect);
       this.pointingService.addPointing(rect);
       this.rectAddedEmitter.emit();
     }
   }
 
   redraw() {
-    this.clearCanvas();
+    PointingCanvasComponent.clearCanvas();
     this.pointingService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
-        this.drawPolygon(pointing);
+        this.drawRectangle(pointing);
       } else if (pointing instanceof Fov) {
         this.drawCircle(pointing);
       }
     });
   }
 
-  drawPolygon(polygon: Rectangle) {
-    this.canvas.strokeStyle = polygon.isSelected ? 'red' : 'lime';
-    this.canvas.beginPath();
-    this.canvas.moveTo(polygon.coordsPixel.topLeft[0], polygon.coordsPixel.topLeft[1]);
-    this.canvas.lineTo(polygon.coordsPixel.topRight[0], polygon.coordsPixel.topRight[1]);
-    this.canvas.lineTo(polygon.coordsPixel.bottomRight[0], polygon.coordsPixel.bottomRight[1]);
-    this.canvas.lineTo(polygon.coordsPixel.bottomLeft[0], polygon.coordsPixel.bottomLeft[1]);
-    this.canvas.closePath();
-    this.canvas.stroke();
+  drawRectangle(rectangle: Rectangle) {
+    this.svg.append('polygon')
+      .attr('points', () => {
+        return [
+          rectangle.coordsPixel.topLeft.join(','),
+          rectangle.coordsPixel.topRight.join(','),
+          rectangle.coordsPixel.bottomRight.join(','),
+          rectangle.coordsPixel.bottomLeft.join(','),
+        ].join(' ');
+      })
+      .attr('fill', 'none')
+      .attr('stroke-width', '2px')
+      .attr('stroke', rectangle.isSelected ? 'red' : 'green');
   }
 
   drawCircle(fov: Fov) {
-    this.canvas.strokeStyle = fov.isSelected ? 'red' : 'lime';
-    this.canvas.beginPath();
-    this.canvas.arc(fov.coordsPixel[0], fov.coordsPixel[1], fov.radiusPixel, 0, 2 * Math.PI, false);
-    this.canvas.closePath();
-    this.canvas.stroke();
+    this.svg.append('circle')
+      .attr('cx', fov.coordsPixel[0])
+      .attr('cy', fov.coordsPixel[1])
+      .attr('r', fov.radiusPixel)
+      .attr('fill', 'none')
+      .style('stroke-width', '2px')
+      .style('stroke', fov.isSelected ? 'red' : 'green');
   }
 
   editMode() {
-    this.clearCanvas();
+    PointingCanvasComponent.clearCanvas();
     this.pointingService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
-        this.drawPolygon(pointing);
+        this.drawRectangle(pointing);
       } else if (pointing instanceof Fov) {
         this.drawCircle(pointing);
       }
     });
-  }
-
-  clearCanvas() {
-    this.canvas.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
   }
 
   cutPolygons() {

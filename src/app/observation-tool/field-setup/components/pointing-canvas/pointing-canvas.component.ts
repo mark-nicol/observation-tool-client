@@ -1,8 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Fov} from '../../../shared/classes/pointings/fov';
 import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import {PointingService} from '../../services/pointing.service';
+import * as d3 from 'd3';
 
 
 @Component({
@@ -17,6 +18,11 @@ export class PointingCanvasComponent implements OnInit {
             addingRec        = false;
             addingFov        = false;
             oldMouseEvent: MouseEvent;
+
+  @ViewChild('canvasContainer') private canvasContainer: ElementRef;
+  private svg: any;
+  private width: number;
+  private height: number;
 
   static isInsidePointing(pointing: Pointing, x: number, y: number) {
     if (pointing instanceof Rectangle) {
@@ -48,6 +54,17 @@ export class PointingCanvasComponent implements OnInit {
 
   ngOnInit() {
     // TODO Init d3
+    this.setupSvg();
+  }
+
+  setupSvg() {
+    const element       = this.canvasContainer.nativeElement;
+    // Set the width and height of the context chart
+    this.width  = element.offsetWidth;
+    this.height = element.offsetHeight;
+    this.svg = d3.select(element).append('svg')
+      .attr('width', element.offsetWidth)
+      .attr('height', element.offsetHeight);
   }
 
   click(event: MouseEvent) {

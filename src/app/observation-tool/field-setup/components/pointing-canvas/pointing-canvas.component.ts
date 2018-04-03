@@ -44,6 +44,10 @@ export class PointingCanvasComponent implements OnInit {
     }
   }
 
+  static clearCanvas() {
+    d3.selectAll('svg > *').remove();
+  }
+
   static mouseHasMoved(oldEvent: MouseEvent, newEvent: MouseEvent): boolean {
     if (oldEvent) {
       return oldEvent.offsetX !== newEvent.offsetX || oldEvent.offsetY !== newEvent.offsetY;
@@ -92,7 +96,7 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   redraw() {
-    this.clearCanvas();
+    PointingCanvasComponent.clearCanvas();
     this.pointingService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
         this.drawPolygon(pointing);
@@ -107,7 +111,6 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   drawCircle(fov: Fov) {
-    // TODO Draw a circle using fov
     this.svg.append('circle')
       .attr('cx', fov.coordsPixel[0])
       .attr('cy', fov.coordsPixel[1])
@@ -118,7 +121,7 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   editMode() {
-    this.clearCanvas();
+    PointingCanvasComponent.clearCanvas();
     this.pointingService.pointings.forEach((pointing: Pointing) => {
       if (pointing instanceof Rectangle) {
         this.drawPolygon(pointing);
@@ -126,10 +129,6 @@ export class PointingCanvasComponent implements OnInit {
         this.drawCircle(pointing);
       }
     });
-  }
-
-  clearCanvas() {
-    // TODO Remove everything from canvas
   }
 
   cutPolygons() {

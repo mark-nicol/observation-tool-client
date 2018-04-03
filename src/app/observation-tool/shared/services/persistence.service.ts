@@ -57,7 +57,7 @@ export class PersistenceService {
   }
 
   getScienceGoal(): Observable<ScienceGoal> {
-    return this.http.get<any>(`${this.baseUrl}/projects/science-goals/goal`)
+    return this.http.get<any>(`${this.baseUrl}/projects/goal`)
                .map(result => {
                  return _.merge(new ScienceGoal(), result);
                })

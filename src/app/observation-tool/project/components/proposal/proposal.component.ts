@@ -17,7 +17,19 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 
 export class ProposalComponent implements OnInit {
 
-  proposalForm: FormGroup;
+  proposalForm: FormGroup = this.formBuilder.group({
+    title: '',
+    cycle: '',
+    abstractString: '',
+    relatedProposals: '',
+    previousProposals: '',
+    studentProject: false,
+    proposalTypeString: '',
+    scientificCategoryString: '',
+    // investigators: this.formBuilder.array([]),
+    duplicateObservations: '',
+    keywords: []
+  });
   proposal: Observable<ObsProposal>;
 
   /** The currently selected proposalForm type */
@@ -44,9 +56,9 @@ export class ProposalComponent implements OnInit {
   ];
 
   /** The currently chosen scientific category radio */
-  chosenCategory                        = 'cosmology';
+  chosenCategory = 'cosmology';
   /** Keys to loop the radios object */
-  categoryKeys                          = Object.keys;
+  categoryKeys = Object.keys;
   /** The available categories with values and keywords */
   categoryRadios: { [id: string]: any } = {
     'cosmology': {
@@ -148,7 +160,7 @@ export class ProposalComponent implements OnInit {
   }
 
   constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
-    this.createForm();
+    // this.createForm();
   }
 
   ngOnInit() {
@@ -156,38 +168,22 @@ export class ProposalComponent implements OnInit {
       this.proposalForm.patchValue({
         title: result.title,
         cycle: result.cycle,
-        abs: result.abstract,
+        abstractString: result.abstract,
         relatedProposals: result.relatedProposals,
         previousProposals: result.recentPublications,
         studentProject: result.studentProject,
-        proposalType: result.proposalTypeString,
-        scientificCategory: result.scientificCategoryString,
+        proposalTypeString: result.proposalTypeString,
+        scientificCategoryString: result.scientificCategoryString,
         duplicateObservations: result.duplicateObservationJustification,
       });
-      this.setRows([result.PrincipalInvestigator]);
+      // this.setRows([result.PrincipalInvestigator]);
     });
-  }
-
-  createForm() {
-    this.proposalForm = this.formBuilder.group({
-      title: '',
-      cycle: '',
-      abs: '',
-      relatedProposals: '',
-      previousProposals: '',
-      studentProject: false,
-      proposalType: '',
-      scientificCategory: '',
-      investigators: this.formBuilder.array([]),
-      duplicateObservations: '',
-      keywords: []
-    });
+    this.observeFormChanges();
   }
 
   setRows(rows: IAlmaInvestigator[]) {
     const rowFormGroups = rows.map(tableRow => this.formBuilder.group(tableRow));
-    console.log(rowFormGroups);
-    const rowFormArray  = this.formBuilder.array(rowFormGroups);
+    const rowFormArray = this.formBuilder.array(rowFormGroups);
     this.proposalForm.setControl('investigators', rowFormArray);
   }
 
@@ -201,6 +197,15 @@ export class ProposalComponent implements OnInit {
   categoryRadioChange(newCategory: string) {
     this.chosenCategory = newCategory;
     // this.project.proposalForm.keywords = null;
+  }
+
+  observeFormChanges() {
+    const debounce = this.proposalForm.valueChanges.debounce(() => Observable.interval(1500));
+    debounce.subscribe(value => {
+      if (this.proposalForm.valid && this.proposalForm.dirty) {
+        this.persistenceService.updateProposal(value).subscribe();
+      }
+    });
   }
 
 }

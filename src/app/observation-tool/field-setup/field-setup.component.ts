@@ -162,7 +162,7 @@ export class FieldSetupComponent implements OnInit {
   observeFormChanges() {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
-      // console.log(value);
+      this.persistenceService.updateTargetParams(value).subscribe(() => console.log('Updated'));
     });
   }
 

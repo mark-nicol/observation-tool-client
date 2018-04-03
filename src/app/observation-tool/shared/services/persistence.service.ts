@@ -1,10 +1,20 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import * as _ from 'lodash';
 import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../classes/obsproject';
 import {ObsProposal} from '../classes/obsproposal';
 import {ScienceGoal} from '../classes/science-goal/science-goal';
+import {TargetParameters} from '../classes/science-goal/target-parameters';
+import {catchError} from 'rxjs/operators';
+import {RequestOptions} from '@angular/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type':  'application/json'
+  })
+};
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -47,10 +57,20 @@ export class PersistenceService {
   }
 
   getScienceGoal(): Observable<ScienceGoal> {
-    return this.http.get<any>(`${this.baseUrl}/projects/science-goals/goal`)
+    return this.http.get<any>(`${this.baseUrl}/projects/goal`)
                .map(result => {
                  return _.merge(new ScienceGoal(), result);
                })
+  }
+
+  updateTargetParams(proposal: TargetParameters): Observable<TargetParameters> {
+    console.log(proposal);
+    return this.http.post<TargetParameters>(`${this.baseUrl}/projects`, proposal, httpOptions);
+  }
+
+  updateProposal(proposal: ObsProposal): Observable<ObsProposal> {
+    console.log('Update proposal');
+    return this.http.put<ObsProposal>(`${this.baseUrl}/projects/proposal`, proposal);
   }
 
 }

@@ -1,5 +1,8 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
+import {
+  ISinglePoint,
+  ITargetParameters
+} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {AladinService} from '../../services/aladin.service';
 import {FormGroup} from '@angular/forms';
@@ -95,9 +98,16 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   observeFormChanges() {
-    this.form.valueChanges.subscribe(value => {
+    this.form.valueChanges.subscribe((value: ITargetParameters) => {
       this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
-      console.log('changes')
+      this.aladinService.clearPointings();
+      value.SinglePoint.forEach((point: ISinglePoint) => {
+        console.log('Adding point at', (+value.sourceCoordinates.longitude.content + point.centre.longitude.content), (+value.sourceCoordinates.latitude.content + point.centre.latitude.content));
+        this.aladinService.addPointing(
+          +(value.sourceCoordinates.longitude.content) + point.centre.longitude.content,
+          +(value.sourceCoordinates.latitude.content) + point.centre.latitude.content
+        );
+      });
     });
   }
 

@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Fov} from '../../shared/classes/pointings/fov';
-import {Pointing} from '../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../shared/classes/pointings/rectangle';
 import {IAladinConfig} from '../../shared/interfaces/aladin/aladin-config.interface';
 import {IAladinOverlay} from '../../shared/interfaces/aladin/overlay.interface';
@@ -28,8 +27,8 @@ export class AladinService {
     reticleColor: 'rgb(178, 50, 178)',
     reticleSize: 22,
   };
-  private zoomStep                      = 1.5;
-  private defaultFov                    = 4;
+  private zoomStep = 1.5;
+  private defaultFov = 4;
 
   static calculateDistanceBetweenPoints(pointA: number[], pointB: number[]): number {
     return new Coo(pointA[0], pointA[1], 8).distance(new Coo(pointB[0], pointB[1], 8));
@@ -39,7 +38,7 @@ export class AladinService {
   }
 
   initAladin() {
-    this._aladin    = A.aladin('#aladin-lite-div', this._initialConfig);
+    this._aladin = A.aladin('#aladin-lite-div', this._initialConfig);
     this._catalogue = A.catalog({
       name: 'Pointing Catalogue',
       shape: 'cross',
@@ -70,12 +69,16 @@ export class AladinService {
     return this._aladin.getRaDec();
   }
 
-  addPointing(pointing: Pointing) {
-    if (pointing instanceof Rectangle) {
-      this.addPolygon(pointing);
-    } else if (pointing instanceof Fov) {
-      this.addFov(pointing);
-    }
+  // addPointing(pointing: Pointing) {
+  //   if (pointing instanceof Rectangle) {
+  //     this.addPolygon(pointing);
+  //   } else if (pointing instanceof Fov) {
+  //     this.addFov(pointing);
+  //   }
+  // }
+
+  addPointing(ra: number, dec: number) {
+    this._overlay.add(A.circle(ra, dec, 0.05, {color: '#FFAA00'}));
   }
 
   private addPolygon(rectangle: Rectangle) {
@@ -113,7 +116,7 @@ export class AladinService {
   }
 
   clearPointings() {
-    this._overlay.overlays      = [];
+    this._overlay.overlays = [];
     this._overlay.overlay_items = [];
     this._catalogue.reportChange();
   }
@@ -128,7 +131,7 @@ export class AladinService {
 
   calculateRadiusPixel(fov: Fov): number {
     const sidePointPixel = this.coordsWorldToPix([fov.coordsWorld[0] + (fov.radiusWorld * 3.6 /*Hack job*/),
-                                                  fov.coordsWorld[1]]);
+      fov.coordsWorld[1]]);
     return fov.coordsPixel[0] - sidePointPixel[0];
   }
 

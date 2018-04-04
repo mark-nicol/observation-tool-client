@@ -1,8 +1,9 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Fov} from '../../../shared/classes/pointings/fov';
 import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import * as d3 from 'd3';
+import {FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -12,11 +13,12 @@ import * as d3 from 'd3';
 })
 export class PointingCanvasComponent implements OnInit {
 
-  @Output() fovAddedEmitter  = new EventEmitter();
+  @Input() form: FormGroup;
+  @Output() fovAddedEmitter = new EventEmitter();
   @Output() rectAddedEmitter = new EventEmitter();
-            addingRec        = false;
-            addingFov        = false;
-            oldMouseEvent: MouseEvent;
+  addingRec = false;
+  addingFov = false;
+  oldMouseEvent: MouseEvent;
 
   @ViewChild('canvasContainer') private canvasContainer: ElementRef;
   private svg: any;
@@ -26,18 +28,18 @@ export class PointingCanvasComponent implements OnInit {
   static isInsidePointing(pointing: Pointing, x: number, y: number) {
     if (pointing instanceof Rectangle) {
       const inXBounds = x <= pointing.coordsPixel.topRight[0] &&
-                        x >= pointing.coordsPixel.topLeft[0] &&
-                        x <= pointing.coordsPixel.bottomRight[0] &&
-                        x >= pointing.coordsPixel.bottomLeft[0];
+        x >= pointing.coordsPixel.topLeft[0] &&
+        x <= pointing.coordsPixel.bottomRight[0] &&
+        x >= pointing.coordsPixel.bottomLeft[0];
       const inYBounds = y >= pointing.coordsPixel.topLeft[1] &&
-                        y >= pointing.coordsPixel.topRight[1] &&
-                        y <= pointing.coordsPixel.bottomLeft[1] &&
-                        y <= pointing.coordsPixel.bottomRight[1];
+        y >= pointing.coordsPixel.topRight[1] &&
+        y <= pointing.coordsPixel.bottomLeft[1] &&
+        y <= pointing.coordsPixel.bottomRight[1];
       return inXBounds && inYBounds;
     } else if (pointing instanceof Fov) {
       return Math.sqrt((x - pointing.coordsPixel[0]) * (x - pointing.coordsPixel[0]) +
-                       (y - pointing.coordsPixel[1]) * (y - pointing.coordsPixel[1]))
-             < pointing.radiusPixel;
+        (y - pointing.coordsPixel[1]) * (y - pointing.coordsPixel[1]))
+        < pointing.radiusPixel;
     }
   }
 
@@ -52,12 +54,13 @@ export class PointingCanvasComponent implements OnInit {
     return false;
   }
 
-  constructor(  ) {
+  constructor() {
   }
 
   ngOnInit() {
     // TODO Init d3
     this.setupSvg();
+
     function dragged(d) {
       d3.select(this)
         .attr('cx', d.x = d3.event.x)
@@ -66,9 +69,9 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   setupSvg() {
-    const element       = this.canvasContainer.nativeElement;
+    const element = this.canvasContainer.nativeElement;
     // Set the width and height of the context chart
-    this.width  = element.offsetWidth;
+    this.width = element.offsetWidth;
     this.height = element.offsetHeight;
     this.svg = d3.select(element).append('svg')
       .attr('width', element.offsetWidth)
@@ -77,14 +80,14 @@ export class PointingCanvasComponent implements OnInit {
 
   click(event: MouseEvent) {
     if (this.addingFov) {
-      const fov       = new Fov();
+      const fov = new Fov();
       fov.coordsPixel = [event.offsetX, event.offsetY];
       fov.radiusPixel = 25;
       this.drawCircle(fov);
       this.fovAddedEmitter.emit();
     } else if (this.addingRec) {
       const dimension = 25;
-      const rect      = new Rectangle(false, false, null, {
+      const rect = new Rectangle(false, false, null, {
         topLeft: [event.offsetX - dimension, event.offsetY - dimension],
         topRight: [event.offsetX + dimension, event.offsetY - dimension],
         bottomLeft: [event.offsetX - dimension, event.offsetY + dimension],

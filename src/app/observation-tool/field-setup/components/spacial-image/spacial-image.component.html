@@ -8,7 +8,8 @@
                            (rectAddedEmitter)="toggleAddingRect()"></app-pointing-canvas>
       <app-aladin (coordinatesEmitter)="updateCoords($event)"
                   (fovAddedEmitter)="toggleAddingFov()"
-                  (rectAddedEmitter)="toggleAddingRect()"></app-aladin>
+                  (rectAddedEmitter)="toggleAddingRect()"
+                  [form]="form"></app-aladin>
     </div>
   </div>
   <div class="row">

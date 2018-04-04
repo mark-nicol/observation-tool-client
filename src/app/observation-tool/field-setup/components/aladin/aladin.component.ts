@@ -1,14 +1,8 @@
-import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Fov} from '../../../shared/classes/pointings/fov';
-import {
-  ISinglePoint,
-  ITargetParameters
-} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {AladinService} from '../../services/aladin.service';
-import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
-import {Longitude} from '../../../../units/classes/longitude';
-import {Latitude} from '../../../../units/classes/latitude';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-aladin',
@@ -21,6 +15,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   @Output() fovAddedEmitter = new EventEmitter();
   @Output() rectAddedEmitter = new EventEmitter();
 
+  @Input() form: FormGroup;
   target?: ITargetParameters;
   addingRect = false;
   addingFov = false;
@@ -30,25 +25,26 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getScienceGoal().subscribe(result => {
-      this.target = result.TargetParameters[this.persistenceService.currentTarget];
-      this.aladinService.goToRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
-      if (this.target.SinglePoint) {
-        this.target.SinglePoint.forEach((point: ISinglePoint) => {
-          this.aladinService.addPointing(new Fov(
-            false,
-            false,
-            [
-              this.target.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
-              this.target.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG)
-            ],
-            null,
-            0.05,
-            25
-          ))
-        })
-      }
-    });
+    this.observeFormChanges();
+    // this.persistenceService.getScienceGoal().subscribe(result => {
+    //   this.target = result.TargetParameters[this.persistenceService.currentTarget];
+    //   this.aladinService.goToRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
+    //   if (this.target.SinglePoint) {
+    //     this.target.SinglePoint.forEach((point: ISinglePoint) => {
+    //       this.aladinService.addPointing(new Fov(
+    //         false,
+    //         false,
+    //         [
+    //           this.target.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+    //           this.target.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG)
+    //         ],
+    //         null,
+    //         0.05,
+    //         25
+    //       ))
+    //     })
+    //   }
+    // });
   }
 
   ngAfterViewInit() {
@@ -96,6 +92,13 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   editMode() {
     // TODO Work out what happens here
+  }
+
+  observeFormChanges() {
+    this.form.valueChanges.subscribe(value => {
+      this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
+      console.log('changes')
+    });
   }
 
 }

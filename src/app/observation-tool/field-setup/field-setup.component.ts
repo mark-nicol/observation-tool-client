@@ -7,7 +7,6 @@ import {Speed} from '../../units/classes/speed';
 import {SinglePoint} from '../shared/classes/science-goal/single-point';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {SourceComponent} from './components/source/source.component';
-import {PointingService} from './services/pointing.service';
 
 /**
  * Handles the field setup page of a science goal
@@ -91,13 +90,11 @@ export class FieldSetupComponent implements OnInit {
    * @param formBuilder
    * @param persistenceService
    * @param activatedRoute
-   * @param pointingService
    */
   constructor(private config: SuiPopupConfig,
               private formBuilder: FormBuilder,
               private persistenceService: PersistenceService,
-              private activatedRoute: ActivatedRoute,
-              private pointingService: PointingService) {
+              private activatedRoute: ActivatedRoute) {
     this.config.delay = 1000;
   }
 
@@ -144,7 +141,6 @@ export class FieldSetupComponent implements OnInit {
           pmDec: targetParams.pmDec,
         });
         this.setSinglePoint(targetParams.SinglePoint);
-        this.pointingService.setPointingsFromSinglePoint(targetParams.SinglePoint);
       });
 
   }
@@ -168,7 +164,8 @@ export class FieldSetupComponent implements OnInit {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.form.dirty && this.form.valid) {
-        this.persistenceService.updateTargetParams(value).subscribe(() => {});
+        this.persistenceService.updateTargetParams(value).subscribe(() => {
+        });
       }
     });
   }

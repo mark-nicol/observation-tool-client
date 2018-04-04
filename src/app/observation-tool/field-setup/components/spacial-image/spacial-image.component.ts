@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {AladinComponent} from '../aladin/aladin.component';
 import {PointingCanvasComponent} from '../pointing-canvas/pointing-canvas.component';
+import {FormGroup} from '@angular/forms';
 
 /**
  * Spacial image component
@@ -19,6 +20,8 @@ export class SpacialImageComponent implements OnInit {
     if (value)
       this.goToCoords(value[0], value[1]);
   }
+
+  @Input() form: FormGroup;
 
   @ViewChild(AladinComponent) aladin: AladinComponent;
   @ViewChild(PointingCanvasComponent) pointingCanvas: PointingCanvasComponent;

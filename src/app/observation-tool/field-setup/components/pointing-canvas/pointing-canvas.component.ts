@@ -2,7 +2,6 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
 import {Fov} from '../../../shared/classes/pointings/fov';
 import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
-import {PointingService} from '../../services/pointing.service';
 import * as d3 from 'd3';
 
 
@@ -53,7 +52,7 @@ export class PointingCanvasComponent implements OnInit {
     return false;
   }
 
-  constructor(private pointingService: PointingService) {
+  constructor(  ) {
   }
 
   ngOnInit() {
@@ -82,7 +81,6 @@ export class PointingCanvasComponent implements OnInit {
       fov.coordsPixel = [event.offsetX, event.offsetY];
       fov.radiusPixel = 25;
       this.drawCircle(fov);
-      this.pointingService.addPointing(fov);
       this.fovAddedEmitter.emit();
     } else if (this.addingRec) {
       const dimension = 25;
@@ -93,20 +91,11 @@ export class PointingCanvasComponent implements OnInit {
         bottomRight: [event.offsetX + dimension, event.offsetY + dimension]
       });
       this.drawRectangle(rect);
-      this.pointingService.addPointing(rect);
       this.rectAddedEmitter.emit();
     }
   }
 
   redraw() {
-    PointingCanvasComponent.clearCanvas();
-    this.pointingService.pointings.forEach((pointing: Pointing) => {
-      if (pointing instanceof Rectangle) {
-        this.drawRectangle(pointing);
-      } else if (pointing instanceof Fov) {
-        this.drawCircle(pointing);
-      }
-    });
   }
 
   drawRectangle(rectangle: Rectangle) {
@@ -136,65 +125,20 @@ export class PointingCanvasComponent implements OnInit {
 
   editMode() {
     PointingCanvasComponent.clearCanvas();
-    this.pointingService.pointings.forEach((pointing: Pointing) => {
-      if (pointing instanceof Rectangle) {
-        this.drawRectangle(pointing);
-      } else if (pointing instanceof Fov) {
-        this.drawCircle(pointing);
-      }
-    });
   }
 
   cutPolygons() {
-    this.pointingService.cutPolygons();
-    this.redraw();
   }
 
   mousedown(event: MouseEvent) {
-    this.pointingService.pointings.forEach(polygon => {
-      if (PointingCanvasComponent.isInsidePointing(polygon, event.offsetX, event.offsetY)) {
-        polygon.isDragging = true;
-        polygon.isSelected = !polygon.isSelected;
-      }
-    });
     this.oldMouseEvent = event;
   }
 
   mouseup(event: MouseEvent) {
-    this.pointingService.pointings.forEach(polygon => {
-      if (PointingCanvasComponent.isInsidePointing(polygon, event.offsetX, event.offsetY)) {
-        const oldPolygon   = polygon;
-        polygon.isDragging = false;
-        this.pointingService.updatePointing(oldPolygon, polygon);
-      }
-    });
     this.redraw();
   }
 
   mousemove(event: MouseEvent) {
-    this.pointingService.pointings.forEach((polygon: Pointing) => {
-      if (polygon.isDragging) {
-        polygon.isSelected = true;
-        if (polygon instanceof Rectangle) {
-          const corners     = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
-          const movements   = ['movementX', 'movementY'];
-          const newPointing = polygon;
-          newPointing.coordsPixel.topLeft[1] += event.movementY;
-          newPointing.coordsPixel.topLeft[0] += event.movementX;
-          newPointing.coordsPixel.topRight[0] += event.movementX;
-          newPointing.coordsPixel.topRight[1] += event.movementY;
-          newPointing.coordsPixel.bottomLeft[0] += event.movementX;
-          newPointing.coordsPixel.bottomLeft[1] += event.movementY;
-          newPointing.coordsPixel.bottomRight[0] += event.movementX;
-          newPointing.coordsPixel.bottomRight[1] += event.movementY;
-          this.pointingService.updatePointing(polygon, newPointing);
-        } else if (polygon instanceof Fov) {
-          polygon.coordsPixel[0] += event.movementX;
-          polygon.coordsPixel[1] += event.movementY;
-        }
-        this.redraw();
-      }
-    });
     if (PointingCanvasComponent.mouseHasMoved(this.oldMouseEvent, event)) {
       this.oldMouseEvent = event;
     }

@@ -73,33 +73,8 @@ export class AladinService {
     return this._aladin.getRaDec();
   }
 
-  // addPointing(pointing: Pointing) {
-  //   if (pointing instanceof Rectangle) {
-  //     this.addPolygon(pointing);
-  //   } else if (pointing instanceof Fov) {
-  //     this.addFov(pointing);
-  //   }
-  // }
-
   addPointing(ra: number, dec: number) {
     this._overlay.add(A.circle(ra, dec, 0.00583333, {color: '#FFAA00'}));
-  }
-
-  private addPolygon(rectangle: Rectangle) {
-    if (rectangle.coordsWorld) {
-      this._overlay.addFootprints(A.polygon([
-        rectangle.coordsWorld.topLeft,
-        rectangle.coordsWorld.topRight,
-        rectangle.coordsWorld.bottomRight,
-        rectangle.coordsWorld.bottomLeft
-      ]));
-    }
-  }
-
-  private addFov(fov: Fov) {
-    if (fov.coordsWorld) {
-      this._overlay.add(A.circle(fov.coordsWorld[0], fov.coordsWorld[1], fov.radiusWorld, {color: '#FFAA00'}));
-    }
   }
 
   goToObject(objectName: string, ra: number, dec: number) {

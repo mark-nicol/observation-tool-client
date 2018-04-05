@@ -103,7 +103,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   removePointing(index: number) {
-    this.singlePoint.controls.splice(index, 1);
+    this.singlePoint.removeAt(index);
   }
 
   addPointing() {

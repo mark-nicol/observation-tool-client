@@ -94,10 +94,12 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   viewMode() {
+    console.log('viewMode');
     // TODO Work out what happens here
   }
 
   editMode() {
+    console.log('editMode');
     // TODO Work out what happens here
   }
 
@@ -106,7 +108,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
       if (this.aladinService.getRaDec() !== [this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content]) {
         this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
       }
-
       this.aladinService.clearPointings();
       value.SinglePoint.forEach((point: ISinglePoint) => {
         this.aladinService.addPointing(

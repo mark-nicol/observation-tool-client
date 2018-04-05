@@ -82,7 +82,7 @@ export class AladinService {
   // }
 
   addPointing(ra: number, dec: number) {
-    this._overlay.add(A.circle(ra, dec, 0.025, {color: '#FFAA00'}));
+    this._overlay.add(A.circle(ra, dec, 0.00583333, {color: '#FFAA00'}));
   }
 
   private addPolygon(rectangle: Rectangle) {

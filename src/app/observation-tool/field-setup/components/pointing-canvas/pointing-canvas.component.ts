@@ -13,7 +13,6 @@ import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
 import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
 import {Longitude} from '../../../../units/classes/longitude';
 import {AladinService} from '../../services/aladin.service';
-import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 
 
 @Component({
@@ -92,11 +91,14 @@ export class PointingCanvasComponent implements OnInit {
   click(event: MouseEvent) {
     if (this.addingFov) {
       const worldClick = this.aladinService.coordsPixToWorld([event.offsetX, event.offsetY]);
-      const coordsDiff = [
-        worldClick[0] - Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG),
+      const lonDiff = new Longitude(
+        LongitudeUnits.DEG,
+        worldClick[0] - Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG));
+      const latDiff = new Latitude(
+        LatitudeUnits.DEG,
         worldClick[1] - Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG)
-      ];
-      this.addPointing(coordsDiff[0], coordsDiff[1]);
+      );
+      this.addPointing(lonDiff, latDiff);
       this.fovAddedEmitter.emit();
     } else if (this.addingRec) {
 
@@ -155,28 +157,17 @@ export class PointingCanvasComponent implements OnInit {
     this.singlePoint.removeAt(index);
   }
 
-  addPointing(ra?: number, dec?: number) {
-    let raConverted: Longitude;
-    let decConverted: Latitude;
-    if (ra && dec) {
-      raConverted = new Longitude(LongitudeUnits.DEG, ra);
-      decConverted = new Longitude(LongitudeUnits.DEG, dec);
-    }
-    console.log(
-      this.form.value.SinglePoint[0].centre.longitude.unit,
-      raConverted.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit),
-      decConverted.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit)
-    );
+  addPointing(ra?: Longitude, dec?: Latitude) {
     this.singlePoint.push(this.formBuilder.group({
       name: '',
       centre: this.formBuilder.group({
         longitude: this.formBuilder.group({
           unit: this.form.value.SinglePoint[0].centre.longitude.unit,
-          content: ra ? raConverted.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit) : 0.0
+          content: ra ? ra.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit) : 0.0
         }),
         latitude: this.formBuilder.group({
           unit: this.form.value.SinglePoint[0].centre.longitude.unit,
-          content: dec ? decConverted.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit) : 0.0
+          content: dec ? dec.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit) : 0.0
         }),
         fieldName: `Field-${this.singlePoint.length + 1}`
       })

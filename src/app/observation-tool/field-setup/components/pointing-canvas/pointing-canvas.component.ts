@@ -114,7 +114,7 @@ export class PointingCanvasComponent implements OnInit {
     this.svg.append('circle')
       .attr('cx', worldCoords[0])
       .attr('cy', worldCoords[1])
-      .attr('r', 20)
+      .attr('r', this.aladinService.getCanvasRadius())
       .attr('fill', 'none')
       .style('stroke-width', '2px')
       .style('stroke', 'lime');

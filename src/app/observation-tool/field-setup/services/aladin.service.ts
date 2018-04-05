@@ -28,6 +28,7 @@ export class AladinService {
   };
   private zoomStep = 1.5;
   private defaultFov = 4;
+  private _radius = 0.00583333;
 
   static calculateDistanceBetweenPoints(pointA: number[], pointB: number[]): number {
     return new Coo(pointA[0], pointA[1], 8).distance(new Coo(pointB[0], pointB[1], 8));
@@ -73,7 +74,7 @@ export class AladinService {
   }
 
   addPointing(ra: number, dec: number) {
-    this._overlay.add(A.circle(ra, dec, 0.00583333, {color: '#FFAA00'}));
+    this._overlay.add(A.circle(ra, dec, this._radius, {color: '#FFAA00'}));
   }
 
   goToObject(objectName: string, ra: number, dec: number) {
@@ -126,5 +127,17 @@ export class AladinService {
   calculateRadiusWorld(fov: Fov): number {
     const sidePointWorld = this.coordsPixToWorld([fov.coordsPixel[0] + fov.radiusPixel, fov.coordsPixel[1]]);
     return AladinService.calculateDistanceBetweenPoints(fov.coordsWorld, sidePointWorld);
+  }
+
+  getCanvasRadius(): number {
+    // Get centre
+    const centre = this.getRaDec();
+    // Get point +sky radius right of centre
+    const right = [centre[0] + (this._radius * 1.35), centre[1]];
+    // convert points to px
+    const pxCentre = this.coordsWorldToPix(centre);
+    const pxRight = this.coordsWorldToPix(right);
+    // return difference
+    return pxCentre[0] - pxRight[0];
   }
 }

@@ -6,6 +6,10 @@ import {
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {AladinService} from '../../services/aladin.service';
 import {FormGroup} from '@angular/forms';
+import {Longitude} from '../../../../units/classes/longitude';
+import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
+import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
+import {Latitude} from '../../../../units/classes/latitude';
 
 @Component({
   selector: 'app-aladin',
@@ -99,13 +103,15 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   observeFormChanges() {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
-      this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
+      if (this.aladinService.getRaDec() !== [this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content]) {
+        this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
+      }
+
       this.aladinService.clearPointings();
       value.SinglePoint.forEach((point: ISinglePoint) => {
-        console.log('Adding point at', (+value.sourceCoordinates.longitude.content + point.centre.longitude.content), (+value.sourceCoordinates.latitude.content + point.centre.latitude.content));
         this.aladinService.addPointing(
-          +(value.sourceCoordinates.longitude.content) + point.centre.longitude.content,
-          +(value.sourceCoordinates.latitude.content) + point.centre.latitude.content
+          value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+          value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
         );
       });
     });

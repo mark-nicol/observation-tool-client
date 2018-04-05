@@ -53,6 +53,10 @@ export class AladinService {
     this._aladin.gotoRaDec(ra, dec);
   }
 
+  getRaDec(): number[] {
+    return this._aladin.getRaDec();
+  }
+
   adjustFovForObject(objectName: string) {
     this._aladin.adjustFovForObject(objectName);
   }
@@ -78,7 +82,7 @@ export class AladinService {
   // }
 
   addPointing(ra: number, dec: number) {
-    this._overlay.add(A.circle(ra, dec, 0.05, {color: '#FFAA00'}));
+    this._overlay.add(A.circle(ra, dec, 0.025, {color: '#FFAA00'}));
   }
 
   private addPolygon(rectangle: Rectangle) {

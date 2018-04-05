@@ -133,7 +133,7 @@ export class AladinService {
     // Get centre
     const centre = this.getRaDec();
     // Get point +sky radius right of centre
-    const right = [centre[0] + (this._radius * 1.35), centre[1]];
+    const right = [centre[0] + (this._radius * 3.6), centre[1]];
     // convert points to px
     const pxCentre = this.coordsWorldToPix(centre);
     const pxRight = this.coordsWorldToPix(right);

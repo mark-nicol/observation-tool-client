@@ -1,7 +1,4 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Fov} from '../../../shared/classes/pointings/fov';
-import {Pointing} from '../../../shared/classes/pointings/pointing';
-import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import * as d3 from 'd3';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {
@@ -34,22 +31,16 @@ export class PointingCanvasComponent implements OnInit {
   private width: number;
   private height: number;
 
-  static isInsidePointing(pointing: Pointing, x: number, y: number) {
-    if (pointing instanceof Rectangle) {
-      const inXBounds = x <= pointing.coordsPixel.topRight[0] &&
-        x >= pointing.coordsPixel.topLeft[0] &&
-        x <= pointing.coordsPixel.bottomRight[0] &&
-        x >= pointing.coordsPixel.bottomLeft[0];
-      const inYBounds = y >= pointing.coordsPixel.topLeft[1] &&
-        y >= pointing.coordsPixel.topRight[1] &&
-        y <= pointing.coordsPixel.bottomLeft[1] &&
-        y <= pointing.coordsPixel.bottomRight[1];
-      return inXBounds && inYBounds;
-    } else if (pointing instanceof Fov) {
-      return Math.sqrt((x - pointing.coordsPixel[0]) * (x - pointing.coordsPixel[0]) +
-        (y - pointing.coordsPixel[1]) * (y - pointing.coordsPixel[1]))
-        < pointing.radiusPixel;
-    }
+  isInsidePointing(pointing: ISinglePoint, x: number, y: number) {
+    const centrePx = this.aladinService.coordsWorldToPix([
+      Object.assign(new Longitude, pointing.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+      Object.assign(new Latitude, pointing.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+    ]);
+    console.log(centrePx);
+    return Math.sqrt((x - centrePx[0]) * (x - centrePx[0]) +
+      (y - centrePx[1]) * (y - centrePx[1]))
+      < this.aladinService.getCanvasRadius();
+
   }
 
   static clearCanvas() {
@@ -124,6 +115,7 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   mousedown(event: MouseEvent) {
+    this.singlePoint.controls.forEach(control => console.log(this.isInsidePointing(control.value, event.offsetX, event.offsetY)));
     this.oldMouseEvent = event;
   }
 
@@ -139,13 +131,15 @@ export class PointingCanvasComponent implements OnInit {
 
   observeFormChanges() {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
-      PointingCanvasComponent.clearCanvas();
-      value.SinglePoint.forEach((point: ISinglePoint) => {
-        this.drawPointing(
-          value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
-          value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
-        );
-      });
+      if (this.form.valid) {
+        PointingCanvasComponent.clearCanvas();
+        value.SinglePoint.forEach((point: ISinglePoint) => {
+          this.drawPointing(
+            value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+            value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+          );
+        });
+      }
     });
   }
 

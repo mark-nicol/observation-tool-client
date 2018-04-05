@@ -3,7 +3,7 @@ import {Fov} from '../../../shared/classes/pointings/fov';
 import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import * as d3 from 'd3';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {
   ISinglePoint,
   ITargetParameters
@@ -13,6 +13,7 @@ import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
 import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
 import {Longitude} from '../../../../units/classes/longitude';
 import {AladinService} from '../../services/aladin.service';
+import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 
 
 @Component({
@@ -63,7 +64,7 @@ export class PointingCanvasComponent implements OnInit {
     return false;
   }
 
-  constructor(private aladinService: AladinService) {
+  constructor(private aladinService: AladinService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
@@ -81,7 +82,6 @@ export class PointingCanvasComponent implements OnInit {
 
   setupSvg() {
     const element = this.canvasContainer.nativeElement;
-    // Set the width and height of the context chart
     this.width = element.offsetWidth;
     this.height = element.offsetHeight;
     this.svg = d3.select(element).append('svg')
@@ -91,50 +91,20 @@ export class PointingCanvasComponent implements OnInit {
 
   click(event: MouseEvent) {
     if (this.addingFov) {
-      const fov = new Fov();
-      fov.coordsPixel = [event.offsetX, event.offsetY];
-      fov.radiusPixel = 25;
-      this.drawCircle(fov);
+      const worldClick = this.aladinService.coordsPixToWorld([event.offsetX, event.offsetY]);
+      const coordsDiff = [
+        worldClick[0] - Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG),
+        worldClick[1] - Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG)
+      ];
+      this.addPointing(coordsDiff[0], coordsDiff[1]);
       this.fovAddedEmitter.emit();
     } else if (this.addingRec) {
-      const dimension = 25;
-      const rect = new Rectangle(false, false, null, {
-        topLeft: [event.offsetX - dimension, event.offsetY - dimension],
-        topRight: [event.offsetX + dimension, event.offsetY - dimension],
-        bottomLeft: [event.offsetX - dimension, event.offsetY + dimension],
-        bottomRight: [event.offsetX + dimension, event.offsetY + dimension]
-      });
-      this.drawRectangle(rect);
+
       this.rectAddedEmitter.emit();
     }
   }
 
   redraw() {
-  }
-
-  drawRectangle(rectangle: Rectangle) {
-    this.svg.append('polygon')
-      .attr('points', () => {
-        return [
-          rectangle.coordsPixel.topLeft.join(','),
-          rectangle.coordsPixel.topRight.join(','),
-          rectangle.coordsPixel.bottomRight.join(','),
-          rectangle.coordsPixel.bottomLeft.join(','),
-        ].join(' ');
-      })
-      .attr('fill', 'none')
-      .attr('stroke-width', '2px')
-      .attr('stroke', rectangle.isSelected ? 'red' : 'green');
-  }
-
-  drawCircle(fov: Fov) {
-    this.svg.append('circle')
-      .attr('cx', fov.coordsPixel[0])
-      .attr('cy', fov.coordsPixel[1])
-      .attr('r', fov.radiusPixel)
-      .attr('fill', 'none')
-      .style('stroke-width', '2px')
-      .style('stroke', fov.isSelected ? 'red' : 'green');
   }
 
   drawPointing(ra: number, dec: number) {
@@ -147,10 +117,6 @@ export class PointingCanvasComponent implements OnInit {
       .style('stroke-width', '2px')
       .style('stroke', 'lime');
   }
-
-  // editMode() {
-  //   PointingCanvasComponent.clearCanvas();
-  // }
 
   cutPolygons() {
   }
@@ -179,5 +145,41 @@ export class PointingCanvasComponent implements OnInit {
         );
       });
     });
+  }
+
+  get singlePoint(): FormArray {
+    return this.form.get('SinglePoint') as FormArray;
+  }
+
+  removePointing(index: number) {
+    this.singlePoint.removeAt(index);
+  }
+
+  addPointing(ra?: number, dec?: number) {
+    let raConverted: Longitude;
+    let decConverted: Latitude;
+    if (ra && dec) {
+      raConverted = new Longitude(LongitudeUnits.DEG, ra);
+      decConverted = new Longitude(LongitudeUnits.DEG, dec);
+    }
+    console.log(
+      this.form.value.SinglePoint[0].centre.longitude.unit,
+      raConverted.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit),
+      decConverted.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit)
+    );
+    this.singlePoint.push(this.formBuilder.group({
+      name: '',
+      centre: this.formBuilder.group({
+        longitude: this.formBuilder.group({
+          unit: this.form.value.SinglePoint[0].centre.longitude.unit,
+          content: ra ? raConverted.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit) : 0.0
+        }),
+        latitude: this.formBuilder.group({
+          unit: this.form.value.SinglePoint[0].centre.longitude.unit,
+          content: dec ? decConverted.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit) : 0.0
+        }),
+        fieldName: `Field-${this.singlePoint.length + 1}`
+      })
+    }));
   }
 }

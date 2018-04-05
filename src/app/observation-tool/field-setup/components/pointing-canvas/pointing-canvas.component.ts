@@ -3,7 +3,7 @@ import {Fov} from '../../../shared/classes/pointings/fov';
 import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import * as d3 from 'd3';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {
   ISinglePoint,
   ITargetParameters
@@ -163,11 +163,15 @@ export class PointingCanvasComponent implements OnInit {
       centre: this.formBuilder.group({
         longitude: this.formBuilder.group({
           unit: this.form.value.SinglePoint[0].centre.longitude.unit,
-          content: ra ? ra.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit) : 0.0
+          content: ra ?
+            [ra.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit), Validators.required] :
+            [0.0, Validators.required]
         }),
         latitude: this.formBuilder.group({
           unit: this.form.value.SinglePoint[0].centre.longitude.unit,
-          content: dec ? dec.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit) : 0.0
+          content: dec ?
+            [dec.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit), Validators.required] :
+            [0.0, Validators.required]
         }),
         fieldName: `Field-${this.singlePoint.length + 1}`
       })

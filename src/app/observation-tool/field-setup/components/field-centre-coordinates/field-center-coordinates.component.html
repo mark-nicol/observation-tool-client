@@ -86,15 +86,17 @@
         <div class="two fields" formGroupName="centre">
           <div class="field" formGroupName="longitude">
             <label *ngIf="i === 0">Lon</label>
-            <div class="ui small labeled input">
-              <div class="ui blue label">{{i + 1}}</div>
-              <input formControlName="content">
+            <div class="ui small labeled icon input">
+              <div class="ui label" [ngClass]="pointing.invalid ? 'red' : 'blue'">{{pointing.invalid ? '!' : i + 1}}</div>
+              <input formControlName="content"
+                     type="number">
             </div>
           </div>
           <div class="field" formGroupName="latitude">
             <label *ngIf="i === 0">Lat</label>
             <div class="ui small action input">
-              <input formControlName="content">
+              <input formControlName="content"
+                     type="number">
               <button class="ui tiny compact red icon button"
                       type="button"
                       (click)="removePointing(i)">

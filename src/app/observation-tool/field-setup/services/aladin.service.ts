@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Fov} from '../../shared/classes/pointings/fov';
-import {Rectangle} from '../../shared/classes/pointings/rectangle';
 import {IAladinConfig} from '../../shared/interfaces/aladin/aladin-config.interface';
 import {IAladinOverlay} from '../../shared/interfaces/aladin/overlay.interface';
 

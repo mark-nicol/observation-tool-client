@@ -151,8 +151,14 @@ export class FieldSetupComponent implements OnInit {
       centre: this.formBuilder.group({
         system: point.centre.system,
         type: point.centre.type,
-        longitude: this.formBuilder.group({unit: point.centre.longitude.unit, content: point.centre.longitude.content}),
-        latitude: this.formBuilder.group({unit: point.centre.latitude.unit, content: point.centre.latitude.content}),
+        longitude: this.formBuilder.group({
+          unit: point.centre.longitude.unit,
+          content: [point.centre.longitude.content, Validators.required]
+        }),
+        latitude: this.formBuilder.group({
+          unit: point.centre.latitude.unit,
+          content: [point.centre.latitude.content, Validators.required]
+        }),
         fieldName: point.centre.fieldName
       })
     }));

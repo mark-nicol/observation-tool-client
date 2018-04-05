@@ -4,6 +4,15 @@ import {Pointing} from '../../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../../shared/classes/pointings/rectangle';
 import * as d3 from 'd3';
 import {FormGroup} from '@angular/forms';
+import {
+  ISinglePoint,
+  ITargetParameters
+} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
+import {Latitude} from '../../../../units/classes/latitude';
+import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
+import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
+import {Longitude} from '../../../../units/classes/longitude';
+import {AladinService} from '../../services/aladin.service';
 
 
 @Component({
@@ -54,18 +63,20 @@ export class PointingCanvasComponent implements OnInit {
     return false;
   }
 
-  constructor() {
+  constructor(private aladinService: AladinService) {
   }
 
   ngOnInit() {
-    // TODO Init d3
     this.setupSvg();
-
-    function dragged(d) {
-      d3.select(this)
-        .attr('cx', d.x = d3.event.x)
-        .attr('cy', d.y = d3.event.y)
-    }
+    this.form.value.SinglePoint.forEach((point: ISinglePoint) => {
+      this.drawPointing(
+        this.form.value.sourceCoordinates.longitude.content + Object.assign(
+        new Longitude,
+        point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+        this.form.value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+      );
+    });
+    this.observeFormChanges();
   }
 
   setupSvg() {
@@ -126,9 +137,20 @@ export class PointingCanvasComponent implements OnInit {
       .style('stroke', fov.isSelected ? 'red' : 'green');
   }
 
-  editMode() {
-    PointingCanvasComponent.clearCanvas();
+  drawPointing(ra: number, dec: number) {
+    const worldCoords = this.aladinService.coordsWorldToPix([ra, dec]);
+    this.svg.append('circle')
+      .attr('cx', worldCoords[0])
+      .attr('cy', worldCoords[1])
+      .attr('r', 20)
+      .attr('fill', 'none')
+      .style('stroke-width', '2px')
+      .style('stroke', 'lime');
   }
+
+  // editMode() {
+  //   PointingCanvasComponent.clearCanvas();
+  // }
 
   cutPolygons() {
   }
@@ -145,5 +167,17 @@ export class PointingCanvasComponent implements OnInit {
     if (PointingCanvasComponent.mouseHasMoved(this.oldMouseEvent, event)) {
       this.oldMouseEvent = event;
     }
+  }
+
+  observeFormChanges() {
+    this.form.valueChanges.subscribe((value: ITargetParameters) => {
+      PointingCanvasComponent.clearCanvas();
+      value.SinglePoint.forEach((point: ISinglePoint) => {
+        this.drawPointing(
+          value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+          value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+        );
+      });
+    });
   }
 }

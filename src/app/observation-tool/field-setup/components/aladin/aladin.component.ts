@@ -32,7 +32,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.observeFormChanges();
     // this.persistenceService.getScienceGoal().subscribe(result => {
     //   this.target = result.TargetParameters[this.persistenceService.currentTarget];
     //   this.aladinService.goToRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
@@ -56,6 +55,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.aladinService.initAladin();
+    this.observeFormChanges();
   }
 
   resetView() {
@@ -94,20 +94,20 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   viewMode() {
-    console.log('viewMode');
     // TODO Work out what happens here
+    this.aladinService.showPointings();
   }
 
   editMode() {
-    console.log('editMode');
     // TODO Work out what happens here
+    // Stop form subscriptions
+    // hide overlays
+    this.aladinService.hidePointings();
   }
 
   observeFormChanges() {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
-      if (this.aladinService.getRaDec() !== [this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content]) {
-        this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
-      }
+      this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
       this.aladinService.clearPointings();
       value.SinglePoint.forEach((point: ISinglePoint) => {
         this.aladinService.addPointing(

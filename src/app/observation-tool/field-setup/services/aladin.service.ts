@@ -16,7 +16,7 @@ export class AladinService {
   private _initialConfig: IAladinConfig = {
     cooFrame: 'ICRS',
     survey: 'P/DSS2/color',
-    fov: 2,
+    fov: 0.95,
     showReticle: true,
     showZoomControl: false,
     showLayersControl: true,
@@ -117,6 +117,16 @@ export class AladinService {
 
   resetZoom() {
     this._aladin.setFov(this.defaultFov);
+  }
+
+  showPointings() {
+    this._overlay.isShowing = true;
+    this._catalogue.reportChange();
+  }
+
+  hidePointings() {
+    this._overlay.isShowing = false;
+    this._catalogue.reportChange();
   }
 
   clearPointings() {

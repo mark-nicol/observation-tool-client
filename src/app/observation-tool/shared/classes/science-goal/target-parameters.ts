@@ -26,5 +26,4 @@ export class TargetParameters implements ITargetParameters {
   ExpectedProperties: IExpectedProperties;
   SinglePoint?: ISinglePoint[];
   Rectangle?: IRectangle;
-
 }

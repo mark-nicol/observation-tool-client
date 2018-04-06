@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SinglePoint} from '../../../shared/classes/science-goal/single-point';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {SystemService} from '../../../shared/services/system.service';
@@ -103,15 +103,21 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   removePointing(index: number) {
-    this.singlePoint.controls.splice(index, 1);
+    this.singlePoint.removeAt(index);
   }
 
   addPointing() {
     this.singlePoint.push(this.formBuilder.group({
       name: '',
       centre: this.formBuilder.group({
-        longitude: this.formBuilder.group({unit: this._offsetUnit, content: 0.0}),
-        latitude: this.formBuilder.group({unit: this._offsetUnit, content: 0.0}),
+        longitude: this.formBuilder.group({
+          unit: this._offsetUnit,
+          content: [0.0, Validators.required]
+        }),
+        latitude: this.formBuilder.group({
+          unit: this._offsetUnit,
+          content: [0.0, Validators.required]
+        }),
         fieldName: `Field-${this.singlePoint.length + 1}`
       })
     }))

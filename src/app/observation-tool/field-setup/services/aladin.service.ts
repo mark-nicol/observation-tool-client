@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Fov} from '../../shared/classes/pointings/fov';
-import {Pointing} from '../../shared/classes/pointings/pointing';
-import {Rectangle} from '../../shared/classes/pointings/rectangle';
 import {IAladinConfig} from '../../shared/interfaces/aladin/aladin-config.interface';
 import {IAladinOverlay} from '../../shared/interfaces/aladin/overlay.interface';
 
@@ -17,7 +15,7 @@ export class AladinService {
   private _initialConfig: IAladinConfig = {
     cooFrame: 'ICRS',
     survey: 'P/DSS2/color',
-    fov: 2,
+    fov: 0.95,
     showReticle: true,
     showZoomControl: false,
     showLayersControl: true,
@@ -28,8 +26,9 @@ export class AladinService {
     reticleColor: 'rgb(178, 50, 178)',
     reticleSize: 22,
   };
-  private zoomStep                      = 1.5;
-  private defaultFov                    = 4;
+  private zoomStep = 1.5;
+  private defaultFov = 4;
+  private _radius = 0.00583333;
 
   static calculateDistanceBetweenPoints(pointA: number[], pointB: number[]): number {
     return new Coo(pointA[0], pointA[1], 8).distance(new Coo(pointB[0], pointB[1], 8));
@@ -39,7 +38,7 @@ export class AladinService {
   }
 
   initAladin() {
-    this._aladin    = A.aladin('#aladin-lite-div', this._initialConfig);
+    this._aladin = A.aladin('#aladin-lite-div', this._initialConfig);
     this._catalogue = A.catalog({
       name: 'Pointing Catalogue',
       shape: 'cross',
@@ -52,6 +51,10 @@ export class AladinService {
 
   goToRaDec(ra: number, dec: number) {
     this._aladin.gotoRaDec(ra, dec);
+  }
+
+  getRaDec(): number[] {
+    return this._aladin.getRaDec();
   }
 
   adjustFovForObject(objectName: string) {
@@ -70,29 +73,8 @@ export class AladinService {
     return this._aladin.getRaDec();
   }
 
-  addPointing(pointing: Pointing) {
-    if (pointing instanceof Rectangle) {
-      this.addPolygon(pointing);
-    } else if (pointing instanceof Fov) {
-      this.addFov(pointing);
-    }
-  }
-
-  private addPolygon(rectangle: Rectangle) {
-    if (rectangle.coordsWorld) {
-      this._overlay.addFootprints(A.polygon([
-        rectangle.coordsWorld.topLeft,
-        rectangle.coordsWorld.topRight,
-        rectangle.coordsWorld.bottomRight,
-        rectangle.coordsWorld.bottomLeft
-      ]));
-    }
-  }
-
-  private addFov(fov: Fov) {
-    if (fov.coordsWorld) {
-      this._overlay.add(A.circle(fov.coordsWorld[0], fov.coordsWorld[1], fov.radiusWorld, {color: '#FFAA00'}));
-    }
+  addPointing(ra: number, dec: number) {
+    this._overlay.add(A.circle(ra, dec, this._radius, {color: '#FFAA00'}));
   }
 
   goToObject(objectName: string, ra: number, dec: number) {
@@ -112,8 +94,18 @@ export class AladinService {
     this._aladin.setFov(this.defaultFov);
   }
 
+  showPointings() {
+    this._overlay.isShowing = true;
+    this._catalogue.reportChange();
+  }
+
+  hidePointings() {
+    this._overlay.isShowing = false;
+    this._catalogue.reportChange();
+  }
+
   clearPointings() {
-    this._overlay.overlays      = [];
+    this._overlay.overlays = [];
     this._overlay.overlay_items = [];
     this._catalogue.reportChange();
   }
@@ -128,12 +120,24 @@ export class AladinService {
 
   calculateRadiusPixel(fov: Fov): number {
     const sidePointPixel = this.coordsWorldToPix([fov.coordsWorld[0] + (fov.radiusWorld * 3.6 /*Hack job*/),
-                                                  fov.coordsWorld[1]]);
+      fov.coordsWorld[1]]);
     return fov.coordsPixel[0] - sidePointPixel[0];
   }
 
   calculateRadiusWorld(fov: Fov): number {
     const sidePointWorld = this.coordsPixToWorld([fov.coordsPixel[0] + fov.radiusPixel, fov.coordsPixel[1]]);
     return AladinService.calculateDistanceBetweenPoints(fov.coordsWorld, sidePointWorld);
+  }
+
+  getCanvasRadius(): number {
+    // Get centre
+    const centre = this.getRaDec();
+    // Get point +sky radius right of centre
+    const right = [centre[0] + (this._radius * 3.6), centre[1]];
+    // convert points to px
+    const pxCentre = this.coordsWorldToPix(centre);
+    const pxRight = this.coordsWorldToPix(right);
+    // return difference
+    return pxCentre[0] - pxRight[0];
   }
 }

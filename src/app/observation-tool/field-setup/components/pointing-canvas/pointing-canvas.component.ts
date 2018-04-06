@@ -1,9 +1,15 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {Fov} from '../../../shared/classes/pointings/fov';
-import {Pointing} from '../../../shared/classes/pointings/pointing';
-import {Rectangle} from '../../../shared/classes/pointings/rectangle';
-import {PointingService} from '../../services/pointing.service';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import * as d3 from 'd3';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {
+  ISinglePoint,
+  ITargetParameters
+} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
+import {Latitude} from '../../../../units/classes/latitude';
+import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
+import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
+import {Longitude} from '../../../../units/classes/longitude';
+import {AladinService} from '../../services/aladin.service';
 
 
 @Component({
@@ -13,33 +19,28 @@ import * as d3 from 'd3';
 })
 export class PointingCanvasComponent implements OnInit {
 
-  @Output() fovAddedEmitter  = new EventEmitter();
+  @Input() form: FormGroup;
+  @Output() fovAddedEmitter = new EventEmitter();
   @Output() rectAddedEmitter = new EventEmitter();
-            addingRec        = false;
-            addingFov        = false;
-            oldMouseEvent: MouseEvent;
+  addingRec = false;
+  addingFov = false;
+  oldMouseEvent: MouseEvent;
 
   @ViewChild('canvasContainer') private canvasContainer: ElementRef;
   private svg: any;
   private width: number;
   private height: number;
 
-  static isInsidePointing(pointing: Pointing, x: number, y: number) {
-    if (pointing instanceof Rectangle) {
-      const inXBounds = x <= pointing.coordsPixel.topRight[0] &&
-                        x >= pointing.coordsPixel.topLeft[0] &&
-                        x <= pointing.coordsPixel.bottomRight[0] &&
-                        x >= pointing.coordsPixel.bottomLeft[0];
-      const inYBounds = y >= pointing.coordsPixel.topLeft[1] &&
-                        y >= pointing.coordsPixel.topRight[1] &&
-                        y <= pointing.coordsPixel.bottomLeft[1] &&
-                        y <= pointing.coordsPixel.bottomRight[1];
-      return inXBounds && inYBounds;
-    } else if (pointing instanceof Fov) {
-      return Math.sqrt((x - pointing.coordsPixel[0]) * (x - pointing.coordsPixel[0]) +
-                       (y - pointing.coordsPixel[1]) * (y - pointing.coordsPixel[1]))
-             < pointing.radiusPixel;
-    }
+  isInsidePointing(pointing: ISinglePoint, x: number, y: number) {
+    const centrePx = this.aladinService.coordsWorldToPix([
+      Object.assign(new Longitude, pointing.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+      Object.assign(new Latitude, pointing.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+    ]);
+    console.log(centrePx);
+    return Math.sqrt((x - centrePx[0]) * (x - centrePx[0]) +
+      (y - centrePx[1]) * (y - centrePx[1]))
+      < this.aladinService.getCanvasRadius();
+
   }
 
   static clearCanvas() {
@@ -53,23 +54,25 @@ export class PointingCanvasComponent implements OnInit {
     return false;
   }
 
-  constructor(private pointingService: PointingService) {
+  constructor(private aladinService: AladinService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
-    // TODO Init d3
     this.setupSvg();
-    function dragged(d) {
-      d3.select(this)
-        .attr('cx', d.x = d3.event.x)
-        .attr('cy', d.y = d3.event.y)
-    }
+    this.form.value.SinglePoint.forEach((point: ISinglePoint) => {
+      this.drawPointing(
+        this.form.value.sourceCoordinates.longitude.content + Object.assign(
+        new Longitude,
+        point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+        this.form.value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+      );
+    });
+    this.observeFormChanges();
   }
 
   setupSvg() {
-    const element       = this.canvasContainer.nativeElement;
-    // Set the width and height of the context chart
-    this.width  = element.offsetWidth;
+    const element = this.canvasContainer.nativeElement;
+    this.width = element.offsetWidth;
     this.height = element.offsetHeight;
     this.svg = d3.select(element).append('svg')
       .attr('width', element.offsetWidth)
@@ -78,125 +81,94 @@ export class PointingCanvasComponent implements OnInit {
 
   click(event: MouseEvent) {
     if (this.addingFov) {
-      const fov       = new Fov();
-      fov.coordsPixel = [event.offsetX, event.offsetY];
-      fov.radiusPixel = 25;
-      this.drawCircle(fov);
-      this.pointingService.addPointing(fov);
+      const worldClick = this.aladinService.coordsPixToWorld([event.offsetX, event.offsetY]);
+      const lonDiff = new Longitude(
+        LongitudeUnits.DEG,
+        worldClick[0] - Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG));
+      const latDiff = new Latitude(
+        LatitudeUnits.DEG,
+        worldClick[1] - Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG)
+      );
+      this.addPointing(lonDiff, latDiff);
       this.fovAddedEmitter.emit();
     } else if (this.addingRec) {
-      const dimension = 25;
-      const rect      = new Rectangle(false, false, null, {
-        topLeft: [event.offsetX - dimension, event.offsetY - dimension],
-        topRight: [event.offsetX + dimension, event.offsetY - dimension],
-        bottomLeft: [event.offsetX - dimension, event.offsetY + dimension],
-        bottomRight: [event.offsetX + dimension, event.offsetY + dimension]
-      });
-      this.drawRectangle(rect);
-      this.pointingService.addPointing(rect);
+
       this.rectAddedEmitter.emit();
     }
   }
 
   redraw() {
-    PointingCanvasComponent.clearCanvas();
-    this.pointingService.pointings.forEach((pointing: Pointing) => {
-      if (pointing instanceof Rectangle) {
-        this.drawRectangle(pointing);
-      } else if (pointing instanceof Fov) {
-        this.drawCircle(pointing);
-      }
-    });
   }
 
-  drawRectangle(rectangle: Rectangle) {
-    this.svg.append('polygon')
-      .attr('points', () => {
-        return [
-          rectangle.coordsPixel.topLeft.join(','),
-          rectangle.coordsPixel.topRight.join(','),
-          rectangle.coordsPixel.bottomRight.join(','),
-          rectangle.coordsPixel.bottomLeft.join(','),
-        ].join(' ');
-      })
-      .attr('fill', 'none')
-      .attr('stroke-width', '2px')
-      .attr('stroke', rectangle.isSelected ? 'red' : 'green');
-  }
-
-  drawCircle(fov: Fov) {
+  drawPointing(ra: number, dec: number) {
+    const worldCoords = this.aladinService.coordsWorldToPix([ra, dec]);
     this.svg.append('circle')
-      .attr('cx', fov.coordsPixel[0])
-      .attr('cy', fov.coordsPixel[1])
-      .attr('r', fov.radiusPixel)
+      .attr('cx', worldCoords[0])
+      .attr('cy', worldCoords[1])
+      .attr('r', this.aladinService.getCanvasRadius())
       .attr('fill', 'none')
       .style('stroke-width', '2px')
-      .style('stroke', fov.isSelected ? 'red' : 'green');
-  }
-
-  editMode() {
-    PointingCanvasComponent.clearCanvas();
-    this.pointingService.pointings.forEach((pointing: Pointing) => {
-      if (pointing instanceof Rectangle) {
-        this.drawRectangle(pointing);
-      } else if (pointing instanceof Fov) {
-        this.drawCircle(pointing);
-      }
-    });
+      .style('stroke', 'lime');
   }
 
   cutPolygons() {
-    this.pointingService.cutPolygons();
-    this.redraw();
   }
 
   mousedown(event: MouseEvent) {
-    this.pointingService.pointings.forEach(polygon => {
-      if (PointingCanvasComponent.isInsidePointing(polygon, event.offsetX, event.offsetY)) {
-        polygon.isDragging = true;
-        polygon.isSelected = !polygon.isSelected;
-      }
-    });
+    this.singlePoint.controls.forEach(control => console.log(this.isInsidePointing(control.value, event.offsetX, event.offsetY)));
     this.oldMouseEvent = event;
   }
 
   mouseup(event: MouseEvent) {
-    this.pointingService.pointings.forEach(polygon => {
-      if (PointingCanvasComponent.isInsidePointing(polygon, event.offsetX, event.offsetY)) {
-        const oldPolygon   = polygon;
-        polygon.isDragging = false;
-        this.pointingService.updatePointing(oldPolygon, polygon);
-      }
-    });
     this.redraw();
   }
 
   mousemove(event: MouseEvent) {
-    this.pointingService.pointings.forEach((polygon: Pointing) => {
-      if (polygon.isDragging) {
-        polygon.isSelected = true;
-        if (polygon instanceof Rectangle) {
-          const corners     = ['topLeft', 'topRight', 'bottomLeft', 'bottomRight'];
-          const movements   = ['movementX', 'movementY'];
-          const newPointing = polygon;
-          newPointing.coordsPixel.topLeft[1] += event.movementY;
-          newPointing.coordsPixel.topLeft[0] += event.movementX;
-          newPointing.coordsPixel.topRight[0] += event.movementX;
-          newPointing.coordsPixel.topRight[1] += event.movementY;
-          newPointing.coordsPixel.bottomLeft[0] += event.movementX;
-          newPointing.coordsPixel.bottomLeft[1] += event.movementY;
-          newPointing.coordsPixel.bottomRight[0] += event.movementX;
-          newPointing.coordsPixel.bottomRight[1] += event.movementY;
-          this.pointingService.updatePointing(polygon, newPointing);
-        } else if (polygon instanceof Fov) {
-          polygon.coordsPixel[0] += event.movementX;
-          polygon.coordsPixel[1] += event.movementY;
-        }
-        this.redraw();
-      }
-    });
     if (PointingCanvasComponent.mouseHasMoved(this.oldMouseEvent, event)) {
       this.oldMouseEvent = event;
     }
+  }
+
+  observeFormChanges() {
+    this.form.valueChanges.subscribe((value: ITargetParameters) => {
+      if (this.form.valid) {
+        PointingCanvasComponent.clearCanvas();
+        value.SinglePoint.forEach((point: ISinglePoint) => {
+          this.drawPointing(
+            value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+            value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+          );
+        });
+      }
+    });
+  }
+
+  get singlePoint(): FormArray {
+    return this.form.get('SinglePoint') as FormArray;
+  }
+
+  removePointing(index: number) {
+    this.singlePoint.removeAt(index);
+  }
+
+  addPointing(ra?: Longitude, dec?: Latitude) {
+    this.singlePoint.push(this.formBuilder.group({
+      name: '',
+      centre: this.formBuilder.group({
+        longitude: this.formBuilder.group({
+          unit: this.form.value.SinglePoint[0].centre.longitude.unit,
+          content: ra ?
+            [ra.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit), Validators.required] :
+            [0.0, Validators.required]
+        }),
+        latitude: this.formBuilder.group({
+          unit: this.form.value.SinglePoint[0].centre.longitude.unit,
+          content: dec ?
+            [dec.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit), Validators.required] :
+            [0.0, Validators.required]
+        }),
+        fieldName: `Field-${this.singlePoint.length + 1}`
+      })
+    }));
   }
 }

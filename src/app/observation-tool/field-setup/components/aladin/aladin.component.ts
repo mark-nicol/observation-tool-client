@@ -1,11 +1,15 @@
-import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Fov} from '../../../shared/classes/pointings/fov';
-import {Pointing} from '../../../shared/classes/pointings/pointing';
-import {Rectangle} from '../../../shared/classes/pointings/rectangle';
-import {ITargetParameters} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  ISinglePoint,
+  ITargetParameters
+} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../../../shared/services/persistence.service';
 import {AladinService} from '../../services/aladin.service';
-import {PointingService} from '../../services/pointing.service';
+import {FormGroup} from '@angular/forms';
+import {Longitude} from '../../../../units/classes/longitude';
+import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
+import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
+import {Latitude} from '../../../../units/classes/latitude';
 
 @Component({
   selector: 'app-aladin',
@@ -15,27 +19,43 @@ import {PointingService} from '../../services/pointing.service';
 export class AladinComponent implements OnInit, AfterViewInit {
 
   @Output() coordinatesEmitter = new EventEmitter();
-  @Output() fovAddedEmitter    = new EventEmitter();
-  @Output() rectAddedEmitter   = new EventEmitter();
+  @Output() fovAddedEmitter = new EventEmitter();
+  @Output() rectAddedEmitter = new EventEmitter();
 
+  @Input() form: FormGroup;
   target?: ITargetParameters;
   addingRect = false;
-  addingFov  = false;
+  addingFov = false;
 
   constructor(private persistenceService: PersistenceService,
-              private pointingService: PointingService,
               private aladinService: AladinService) {
   }
 
   ngOnInit() {
-    this.persistenceService.getScienceGoal().subscribe(result => {
-      this.target = result.TargetParameters[this.persistenceService.currentTarget];
-      this.aladinService.goToRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
-    });
+    // this.persistenceService.getScienceGoal().subscribe(result => {
+    //   this.target = result.TargetParameters[this.persistenceService.currentTarget];
+    //   this.aladinService.goToRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
+    //   if (this.target.SinglePoint) {
+    //     this.target.SinglePoint.forEach((point: ISinglePoint) => {
+    //       this.aladinService.addPointing(new Fov(
+    //         false,
+    //         false,
+    //         [
+    //           this.target.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+    //           this.target.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG)
+    //         ],
+    //         null,
+    //         0.05,
+    //         25
+    //       ))
+    //     })
+    //   }
+    // });
   }
 
   ngAfterViewInit() {
     this.aladinService.initAladin();
+    this.observeFormChanges();
   }
 
   resetView() {
@@ -68,46 +88,34 @@ export class AladinComponent implements OnInit, AfterViewInit {
   mouseLeave() {
     this.coordinatesEmitter.emit({
       pixel: [document.getElementById('aladin-lite-div').offsetWidth / 2,
-              document.getElementById('aladin-lite-div').offsetHeight / 2],
+        document.getElementById('aladin-lite-div').offsetHeight / 2],
       world: this.aladinService.RaDec
     });
   }
 
   viewMode() {
-    this.pointingService.pointings.forEach((pointing: Pointing) => {
-      this.aladinService.addPointing(pointing);
-    });
+    // TODO Work out what happens here
+    this.aladinService.showPointings();
   }
 
   editMode() {
-    const newPointings = [];
-    this.aladinService.footprints.forEach(footprint => {
-      const newPolygon       = new Rectangle();
-      newPolygon.coordsPixel = {
-        topLeft: this.aladinService.coordsWorldToPix(footprint.polygons[0]),
-        topRight: this.aladinService.coordsWorldToPix(footprint.polygons[1]),
-        bottomLeft: this.aladinService.coordsWorldToPix(footprint.polygons[3]),
-        bottomRight: this.aladinService.coordsWorldToPix(footprint.polygons[2])
-      };
-      newPolygon.coordsWorld = {
-        topLeft: footprint.polygons[0],
-        topRight: footprint.polygons[1],
-        bottomLeft: footprint.polygons[3],
-        bottomRight: footprint.polygons[2]
-      };
-      newPointings.push(newPolygon);
+    // TODO Work out what happens here
+    // Stop form subscriptions
+    // hide overlays
+    this.aladinService.hidePointings();
+  }
+
+  observeFormChanges() {
+    this.form.valueChanges.subscribe((value: ITargetParameters) => {
+      this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
+      this.aladinService.clearPointings();
+      value.SinglePoint.forEach((point: ISinglePoint) => {
+        this.aladinService.addPointing(
+          value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+          value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+        );
+      });
     });
-    this.aladinService.circles.forEach(circle => {
-      const newFov       = new Fov();
-      newFov.coordsPixel = this.aladinService.coordsWorldToPix(circle.centerRaDec);
-      newFov.coordsWorld = circle.centerRaDec;
-      // newFov.radiusWorld = this.aladinService.calculateRadiusWorld(newFov);
-      newFov.radiusWorld = circle.radiusDegrees;
-      newFov.radiusPixel = this.aladinService.calculateRadiusPixel(newFov);
-      newPointings.push(newFov);
-    });
-    this.pointingService.pointings = newPointings;
-    this.aladinService.clearPointings();
   }
 
 }

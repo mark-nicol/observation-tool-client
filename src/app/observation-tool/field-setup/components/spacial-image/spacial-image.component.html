@@ -3,12 +3,14 @@
      style="padding-bottom: 1em">
   <div class="row">
     <div class="column">
-      <app-pointing-canvas [hidden]="!editMode"
+      <app-pointing-canvas *ngIf="editMode"
+                           [form]="form"
                            (fovAddedEmitter)="toggleAddingFov()"
                            (rectAddedEmitter)="toggleAddingRect()"></app-pointing-canvas>
       <app-aladin (coordinatesEmitter)="updateCoords($event)"
                   (fovAddedEmitter)="toggleAddingFov()"
-                  (rectAddedEmitter)="toggleAddingRect()"></app-aladin>
+                  (rectAddedEmitter)="toggleAddingRect()"
+                  [form]="form"></app-aladin>
     </div>
   </div>
   <div class="row">

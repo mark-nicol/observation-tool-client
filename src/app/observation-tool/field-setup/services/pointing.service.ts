@@ -3,6 +3,7 @@ import {Fov} from '../../shared/classes/pointings/fov';
 import {Pointing} from '../../shared/classes/pointings/pointing';
 import {Rectangle} from '../../shared/classes/pointings/rectangle';
 import {AladinService} from './aladin.service';
+import {ISinglePoint} from '../../shared/interfaces/project/science-goal/target-parameters.interface';
 
 @Injectable()
 export class PointingService {
@@ -20,6 +21,21 @@ export class PointingService {
 
   set pointings(pointings: Pointing[]) {
     this._pointings = pointings;
+  }
+
+  setPointingsFromSinglePoint(pointings: ISinglePoint[]) {
+    this.pointings = pointings.map((pointing: ISinglePoint) => {
+      return new Fov(
+        false,
+        false,
+        [
+          pointing.centre.longitude.content,
+          pointing.centre.latitude.content
+        ],
+        null,
+        25)
+    });
+    console.log(this._pointings);
   }
 
   addPointing(pointing: Pointing) {

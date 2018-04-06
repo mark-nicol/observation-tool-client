@@ -108,50 +108,57 @@ export class FieldSetupComponent implements OnInit {
 
   initForm(index: number) {
     this.persistenceService.getScienceGoal()
-        .subscribe(result => {
-          const targetParams = result.TargetParameters[index];
-          this.form.patchValue({
-            ExpectedProperties: {
-              expectedPeakFluxDensity: targetParams.ExpectedProperties.expectedPeakFluxDensity,
-              desiredCircularPolarizationPercentage: targetParams.ExpectedProperties.desiredCircularPolarizationPercentage,
-              expectedPeakLineFluxDensity: targetParams.ExpectedProperties.expectedPeakLineFluxDensity,
-              expectedLineWidth: targetParams.ExpectedProperties.expectedLineWidth,
-              desiredLinePolarizationPercentage: targetParams.ExpectedProperties.desiredLinePolarizationPercentage
-            },
-            type: targetParams.type,
-            sourceName: targetParams.sourceName,
-            solarSystemObject: targetParams.solarSystemObject,
-            radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
-            sourceCoordinates: {
-              system: targetParams.sourceCoordinates.system,
-              type: targetParams.sourceCoordinates.type,
-              longitude: targetParams.sourceCoordinates.longitude,
-              latitude: targetParams.sourceCoordinates.latitude,
-            },
-            parallax: targetParams.parallax,
-            sourceVelocity: {
-              centerVelocity: targetParams.sourceVelocity.centerVelocity,
-              dopplerCalcType: targetParams.sourceVelocity.dopplerCalcType,
-              referenceSystem: targetParams.sourceVelocity.referenceSystem,
-              redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-                targetParams.sourceVelocity.centerVelocity),
-                targetParams.sourceVelocity.dopplerCalcType)
-            },
-            pmRA: targetParams.pmRA,
-            pmDec: targetParams.pmDec,
-          });
-          this.setSinglePoint(targetParams.SinglePoint);
+      .subscribe(result => {
+        const targetParams = result.TargetParameters[index];
+        this.form.patchValue({
+          ExpectedProperties: {
+            expectedPeakFluxDensity: targetParams.ExpectedProperties.expectedPeakFluxDensity,
+            desiredCircularPolarizationPercentage: targetParams.ExpectedProperties.desiredCircularPolarizationPercentage,
+            expectedPeakLineFluxDensity: targetParams.ExpectedProperties.expectedPeakLineFluxDensity,
+            expectedLineWidth: targetParams.ExpectedProperties.expectedLineWidth,
+            desiredLinePolarizationPercentage: targetParams.ExpectedProperties.desiredLinePolarizationPercentage
+          },
+          type: targetParams.type,
+          sourceName: targetParams.sourceName,
+          solarSystemObject: targetParams.solarSystemObject,
+          radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
+          sourceCoordinates: {
+            system: targetParams.sourceCoordinates.system,
+            type: targetParams.sourceCoordinates.type,
+            longitude: targetParams.sourceCoordinates.longitude,
+            latitude: targetParams.sourceCoordinates.latitude,
+          },
+          parallax: targetParams.parallax,
+          sourceVelocity: {
+            centerVelocity: targetParams.sourceVelocity.centerVelocity,
+            dopplerCalcType: targetParams.sourceVelocity.dopplerCalcType,
+            referenceSystem: targetParams.sourceVelocity.referenceSystem,
+            redshift: SourceComponent.getRedshift(Object.assign(new Speed,
+              targetParams.sourceVelocity.centerVelocity),
+              targetParams.sourceVelocity.dopplerCalcType)
+          },
+          pmRA: targetParams.pmRA,
+          pmDec: targetParams.pmDec,
         });
+        this.setSinglePoint(targetParams.SinglePoint);
+      });
+
   }
 
   setSinglePoint(points: SinglePoint[]) {
-    const formGroups           = points.map(point => this.formBuilder.group({
+    const formGroups = points.map(point => this.formBuilder.group({
       name: point.name,
       centre: this.formBuilder.group({
         system: point.centre.system,
         type: point.centre.type,
-        longitude: this.formBuilder.group({unit: point.centre.longitude.unit, content: point.centre.longitude.content}),
-        latitude: this.formBuilder.group({unit: point.centre.latitude.unit, content: point.centre.latitude.content}),
+        longitude: this.formBuilder.group({
+          unit: point.centre.longitude.unit,
+          content: [point.centre.longitude.content, Validators.required]
+        }),
+        latitude: this.formBuilder.group({
+          unit: point.centre.latitude.unit,
+          content: [point.centre.latitude.content, Validators.required]
+        }),
         fieldName: point.centre.fieldName
       })
     }));
@@ -162,7 +169,10 @@ export class FieldSetupComponent implements OnInit {
   observeFormChanges() {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
-      this.persistenceService.updateTargetParams(value).subscribe(() => console.log('Updated'));
+      if (this.form.dirty && this.form.valid) {
+        this.persistenceService.updateTargetParams(value).subscribe(() => {
+        });
+      }
     });
   }
 

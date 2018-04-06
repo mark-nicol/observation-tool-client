@@ -1,3 +1,33 @@
-<p>
-  project-import works!
-</p>
+<h4 class="ui dividing header">Project Import</h4>
+<form class="ui form">
+  <!-- Search field -->
+  <div class="field">
+    <label>Search</label>
+    <div class="ui fluid action input">
+      <!-- Input -->
+      <input>
+      <!-- Selector -->
+      <sui-select class="selection">
+        <sui-select-option value="PI ID">PI ID</sui-select-option>
+        <sui-select-option value="Project Code">Project Code</sui-select-option>
+        <sui-select-option value="Project Name">Project Name</sui-select-option>
+      </sui-select>
+    </div>
+  </div>
+</form>
+<!-- Table -->
+<table class="ui table">
+  <thead>
+  <tr>
+    <th>Project Name</th>
+    <th>Project Code</th>
+    <th>PI ALMA ID</th>
+    <th>Creation Time</th>
+    <th>Submission Time</th>
+    <th>Project ID</th>
+    <th>Role</th>
+  </tr>
+  </thead>
+  <tbody></tbody>
+  <tfoot></tfoot>
+</table>

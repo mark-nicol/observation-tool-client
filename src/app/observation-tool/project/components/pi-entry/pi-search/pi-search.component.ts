@@ -24,6 +24,8 @@ export class PiSearchComponent implements OnInit {
   /** The chosen PI passed back from piSelect */
   passedPi: IAlmaInvestigator;
 
+  isLoading = true;
+
   constructor(private almaInvestigatorSearchService: AlmaInvestigatorSearchService,
               private persistenceService: PersistenceService,
               private suiModalService: SuiModalService,
@@ -31,7 +33,11 @@ export class PiSearchComponent implements OnInit {
               viewContainerRef: ViewContainerRef) {
     this.toastMgr.setRootViewContainerRef(viewContainerRef);
     this.persistenceService.getProject().subscribe(result => {
-      this.almaInvestigatorSearchService.search('Uid', result.pI).subscribe(res => this.passedPi = res[0]);
+      this.almaInvestigatorSearchService.search('Uid', result.pI).subscribe(
+        res => this.passedPi = res[0],
+        error => {
+        },
+        complete => this.isLoading = false);
     });
   }
 
@@ -52,13 +58,13 @@ export class PiSearchComponent implements OnInit {
 
   makeModal(piName: string) {
     this.suiModalService
-        .open(new AlmaInvestigatorSearchModal(piName))
-        .onApprove(result => console.log(result)/*this.newPi()*/)
-        .onDeny(result => {
-          if (sessionStorage.getItem('modalError') === 'unknown error') {
-            this.toastMgr.error('Could not contact user lookup server', 'Error');
-            sessionStorage.removeItem('modalError');
-          }
-        });
+      .open(new AlmaInvestigatorSearchModal(piName))
+      .onApprove(result => console.log(result)/*this.newPi()*/)
+      .onDeny(result => {
+        if (sessionStorage.getItem('modalError') === 'unknown error') {
+          this.toastMgr.error('Could not contact user lookup server', 'Error');
+          sessionStorage.removeItem('modalError');
+        }
+      });
   }
 }

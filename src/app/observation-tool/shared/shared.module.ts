@@ -40,7 +40,8 @@ import { ProjectImportModalComponent } from './components/project-import-modal/p
     ProjectImportComponent,
     SexagesimalPipe,
     SuiModule,
-  ]
+  ],
+  entryComponents: [ProjectImportModalComponent]
 })
 
 export class SharedModule {

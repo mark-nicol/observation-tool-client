@@ -26,7 +26,7 @@ export class ProjectImportModal extends ComponentModalConfig<ModalContext, void,
     super(ProjectImportModalComponent, {name, title});
     this.transitionDuration = 200;
     this.size = size;
-    this.mustScroll = true;
+    this.mustScroll = false;
     this.isClosable = true;
   }
 

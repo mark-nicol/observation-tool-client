@@ -1,6 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {UnitsModule} from '../../units/units.module';
 import {DegreesPipe} from './pipes/degrees.pipe';
@@ -9,6 +9,7 @@ import {PersistenceService} from './services/persistence.service';
 import {SuiModule} from 'ng2-semantic-ui';
 import {SimbadService} from './services/simbad.service';
 import {SystemService} from './services/system.service';
+import {ProjectImportComponent} from './components/project-import/project-import.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {SystemService} from './services/system.service';
   declarations: [
     DegreesPipe,
     SexagesimalPipe,
+    ProjectImportComponent,
   ],
   providers: [
     PersistenceService,
@@ -33,6 +35,7 @@ import {SystemService} from './services/system.service';
     FormsModule,
     UnitsModule,
     DegreesPipe,
+    ProjectImportComponent,
     SexagesimalPipe,
     SuiModule,
   ]

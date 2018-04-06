@@ -10,6 +10,7 @@ import {SuiModule} from 'ng2-semantic-ui';
 import {SimbadService} from './services/simbad.service';
 import {SystemService} from './services/system.service';
 import {ProjectImportComponent} from './components/project-import/project-import.component';
+import { ProjectImportModalComponent } from './components/project-import-modal/project-import-modal.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import {ProjectImportComponent} from './components/project-import/project-import
     DegreesPipe,
     SexagesimalPipe,
     ProjectImportComponent,
+    ProjectImportModalComponent,
   ],
   providers: [
     PersistenceService,

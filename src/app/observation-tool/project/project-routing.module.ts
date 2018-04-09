@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path:      'planned-observing',
-        component: ProjectImportComponent,
+        component: PlannedObservingComponent,
       },
       {
         path:       '',

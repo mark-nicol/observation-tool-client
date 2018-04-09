@@ -86,10 +86,10 @@ export class NavbarComponent implements OnInit {
   }
 
   makeProjectImportModal() {
-    console.log('Make modal');
     this.suiModalService
       .open(new ProjectImportModal())
       .onApprove(result => {
+        console.log(result);
       })
       .onDeny(result => {
       });

@@ -39,6 +39,10 @@ export class PersistenceService {
     this._currentTarget = value;
   }
 
+  getAllProjects(): Observable<ObsProject[]> {
+    return this.http.get<ObsProject[]>(`${this.baseUrl}/projects`);
+  }
+
   /**
    * GET /projects/{projectCode}
    */

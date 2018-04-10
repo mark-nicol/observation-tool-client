@@ -10,13 +10,14 @@ import {ObsProject} from '../../classes/obsproject';
 })
 export class ProjectImportComponent implements OnInit {
 
-  projects: Observable<ObsProject[]>;
+  projects: Observable<any[]>;
   _selectedProject: ObsProject;
   @Output() selectedProjectEmitter = new EventEmitter();
 
   constructor(private persistenceService: PersistenceService) { }
 
   ngOnInit() {
+    this.persistenceService.getAllProjects().subscribe(result => console.log(result));
     this.projects = this.persistenceService.getAllProjects();
   }
 

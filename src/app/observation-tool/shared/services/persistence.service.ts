@@ -40,8 +40,8 @@ export class PersistenceService {
     this._currentTarget = value;
   }
 
-  getAllProjects(): Observable<ObsProject[]> {
-    return this.http.get<ObsProject[]>(`${this.baseUrl}/projects`);
+  getAllProjects(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/projects`);
   }
 
   /**

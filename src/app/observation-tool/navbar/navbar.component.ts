@@ -90,7 +90,7 @@ export class NavbarComponent implements OnInit {
     this.suiModalService
       .open(new ProjectImportModal())
       .onApprove((result: ObsProject) => {
-        this.persistenceService.loadedProject = result;
+        this.persistenceService.selectProject(result);
       })
       .onDeny(result => {
       });

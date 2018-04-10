@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../../../../shared/classes/obsproject';
 import {PersistenceService} from '../../../../shared/services/persistence.service';

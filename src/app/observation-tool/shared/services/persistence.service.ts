@@ -6,6 +6,7 @@ import {ObsProject} from '../classes/obsproject';
 import {ObsProposal} from '../classes/obsproposal';
 import {ScienceGoal} from '../classes/science-goal/science-goal';
 import {TargetParameters} from '../classes/science-goal/target-parameters';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,8 +23,8 @@ export class PersistenceService {
 
   private baseUrl = 'http://localhost:8080';
   private _currentTarget = 0;
-  private _loadedProject;
-  private _observable: Observable<ObsProject>;
+  private _loadedProject = new BehaviorSubject<ObsProject>(null);
+  loadedProject = this._loadedProject.asObservable();
 
   /**
    * Constructor, loads data and sets members
@@ -47,17 +48,11 @@ export class PersistenceService {
    * GET /projects/{projectCode}
    */
   getProject(): Observable<ObsProject> {
-    if (this._loadedProject) {
-      return Observable.of(this._loadedProject);
-    } else if (this._observable) {
-      return this._observable;
-    } else {
-      this._observable = this.http.get<any>(`${this.baseUrl}/projects/project`)
-        .map(result => {
-          return _.merge(new ObsProject, result);
-        }).share();
-      return this._observable;
-    }
+    return this.loadedProject;
+  }
+
+  selectProject(project: ObsProject) {
+    this._loadedProject.next(project);
   }
 
   getProposal(): Observable<ObsProposal> {

@@ -55,11 +55,8 @@ export class PersistenceService {
     this._loadedProject.next(project);
   }
 
-  getProposal(): Observable<ObsProposal> {
-    return this.http.get<any>(`${this.baseUrl}/projects/proposal`)
-      .map(result => {
-        return _.merge(new ObsProposal, result);
-      })
+  getProposal(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/projects/proposal`);
   }
 
   getScienceGoal(): Observable<ScienceGoal> {

@@ -18,17 +18,16 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
 export class ProposalComponent implements OnInit {
 
   proposalForm: FormGroup = this.formBuilder.group({
-    title: '',
-    cycle: '',
-    abstractString: '',
-    relatedProposals: '',
-    previousProposals: '',
-    studentProject: false,
-    proposalTypeString: '',
-    scientificCategoryString: '',
-    // investigators: this.formBuilder.array([]),
-    duplicateObservations: '',
-    keywords: []
+    prp_title: '',
+    prp_cycle: '',
+    prp_abstract: '',
+    prp_relatedProposals: '',
+    prp_previousProposals: '',
+    prp_studentProject: false,
+    prp_proposalTypeString: '',
+    prp_scientificCategoryString: '',
+    prp_duplicateObservations: '',
+    prp_keywords: []
   });
   proposal: Observable<ObsProposal>;
 
@@ -165,18 +164,8 @@ export class ProposalComponent implements OnInit {
 
   ngOnInit() {
     this.persistenceService.getProposal().subscribe(result => {
-      this.proposalForm.patchValue({
-        title: result.title,
-        cycle: result.cycle,
-        abstractString: result.abstract,
-        relatedProposals: result.relatedProposals,
-        previousProposals: result.recentPublications,
-        studentProject: result.studentProject,
-        proposalTypeString: result.proposalTypeString,
-        scientificCategoryString: result.scientificCategoryString,
-        duplicateObservations: result.duplicateObservationJustification,
-      });
-      // this.setRows([result.PrincipalInvestigator]);
+      console.log(result);
+      this.proposalForm.patchValue(result);
     });
     this.observeFormChanges();
   }

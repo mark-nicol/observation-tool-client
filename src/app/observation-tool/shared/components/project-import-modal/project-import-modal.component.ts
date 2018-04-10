@@ -15,7 +15,7 @@ interface ModalContext {
 
 export class ProjectImportModalComponent {
 
-  selectedProjectCode: string;
+  selectedProject: ObsProject;
 
   constructor(public modal: SuiModal<ModalContext>) { }
 

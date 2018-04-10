@@ -22,6 +22,8 @@ export class PersistenceService {
 
   private baseUrl = 'http://localhost:8080';
   private _currentTarget = 0;
+  private _loadedProject;
+  private _observable: Observable<ObsProject>;
 
   /**
    * Constructor, loads data and sets members
@@ -45,24 +47,31 @@ export class PersistenceService {
    * GET /projects/{projectCode}
    */
   getProject(): Observable<ObsProject> {
-    return this.http.get<any>(`${this.baseUrl}/projects/project`)
-               .map(result => {
-                 return _.merge(new ObsProject, result);
-               });
+    if (this._loadedProject) {
+      return Observable.of(this._loadedProject);
+    } else if (this._observable) {
+      return this._observable;
+    } else {
+      this._observable = this.http.get<any>(`${this.baseUrl}/projects/project`)
+        .map(result => {
+          return _.merge(new ObsProject, result);
+        }).share();
+      return this._observable;
+    }
   }
 
   getProposal(): Observable<ObsProposal> {
     return this.http.get<any>(`${this.baseUrl}/projects/proposal`)
-               .map(result => {
-                 return _.merge(new ObsProposal, result);
-               })
+      .map(result => {
+        return _.merge(new ObsProposal, result);
+      })
   }
 
   getScienceGoal(): Observable<ScienceGoal> {
     return this.http.get<any>(`${this.baseUrl}/projects/goal`)
-               .map(result => {
-                 return _.merge(new ScienceGoal(), result);
-               })
+      .map(result => {
+        return _.merge(new ScienceGoal(), result);
+      })
   }
 
   updateTargetParams(proposal: TargetParameters): Observable<TargetParameters> {

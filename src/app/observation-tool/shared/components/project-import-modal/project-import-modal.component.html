@@ -1,10 +1,10 @@
 <div class="header">{{modal.context.title}}</div>
-<div class="content">
-  <app-project-import (selectedProjectEmitter)="selectedProjectCode = $event"></app-project-import>
+<div class="scrolling content">
+  <app-project-import (selectedProjectEmitter)="selectedProject = $event"></app-project-import>
 </div>
 <div class="actions">
   <button class="ui tiny compact blue labeled icon button"
-          (click)="modal.approve(selectedProjectCode)">
+          (click)="modal.approve(selectedProject)">
     <i class="open folder icon"></i>Open Project
   </button>
   <button class="ui tiny compact red  labeled icon button"

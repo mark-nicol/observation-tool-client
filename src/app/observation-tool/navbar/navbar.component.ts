@@ -4,6 +4,7 @@ import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectImportModal} from '../shared/components/project-import-modal/project-import-modal.component';
+import {ObsProject} from '../shared/classes/obsproject';
 
 /**
  * The navbar component at the top of the application
@@ -88,8 +89,8 @@ export class NavbarComponent implements OnInit {
   makeProjectImportModal() {
     this.suiModalService
       .open(new ProjectImportModal())
-      .onApprove(result => {
-        console.log(result);
+      .onApprove((result: ObsProject) => {
+        this.persistenceService.loadedProject = result;
       })
       .onDeny(result => {
       });

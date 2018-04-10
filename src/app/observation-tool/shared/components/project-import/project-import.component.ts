@@ -22,7 +22,7 @@ export class ProjectImportComponent implements OnInit {
 
   rowClicked(event: ObsProject) {
     this._selectedProject = event;
-    this.selectedProjectEmitter.emit(event.code);
+    this.selectedProjectEmitter.emit(event);
   }
 
 }

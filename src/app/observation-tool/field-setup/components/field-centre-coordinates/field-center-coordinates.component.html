@@ -81,10 +81,10 @@
       </sui-select>
     </div>
 
-    <div formArrayName="SinglePoint">
+    <div formArrayName="prj_SinglePoint">
       <div *ngFor="let pointing of singlePoint.controls; let i = index" [formGroupName]="i">
-        <div class="two fields" formGroupName="centre">
-          <div class="field" formGroupName="longitude">
+        <div class="two fields" formGroupName="val_centre">
+          <div class="field" formGroupName="val_longitude">
             <label *ngIf="i === 0">Lon</label>
             <div class="ui small labeled icon input">
               <div class="ui label" [ngClass]="pointing.invalid ? 'red' : 'blue'">{{pointing.invalid ? '!' : i + 1}}</div>
@@ -92,7 +92,7 @@
                      type="number">
             </div>
           </div>
-          <div class="field" formGroupName="latitude">
+          <div class="field" formGroupName="val_latitude">
             <label *ngIf="i === 0">Lat</label>
             <div class="ui small action input">
               <input formControlName="content"

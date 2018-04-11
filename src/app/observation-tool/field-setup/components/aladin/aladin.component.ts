@@ -59,7 +59,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   resetView() {
-    this.aladinService.goToObject(this.target.sourceName, this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
+    this.aladinService.goToObject(this.target.prj_sourceName, this.target.prj_sourceCoordinates.val_longitude.content, this.target.prj_sourceCoordinates.val_latitude.content);
   }
 
   zoomIn() {
@@ -107,12 +107,12 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   observeFormChanges() {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
-      this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
+      this.aladinService.goToRaDec(this.form.value.prj_sourceCoordinates.val_longitude.content, this.form.value.prj_sourceCoordinates.val_latitude.content);
       this.aladinService.clearPointings();
-      value.SinglePoint.forEach((point: ISinglePoint) => {
+      value.prj_SinglePoint.forEach((point: ISinglePoint) => {
         this.aladinService.addPointing(
-          value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
-          value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+          value.prj_sourceCoordinates.val_longitude.content + Object.assign(new Longitude, point.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
+          value.prj_sourceCoordinates.val_latitude.content + Object.assign(new Latitude, point.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
         );
       });
     });

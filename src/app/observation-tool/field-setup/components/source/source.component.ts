@@ -83,12 +83,12 @@ export class SourceComponent implements OnInit {
    * @param system The new system type to be used
    */
   systemChange() {
-    this.currentSystem = this.systemService.getSystem(this.form.value.sourceCoordinates.system);
-    if (this.form.value.sourceCoordinates.system === 'ICRS' ||
-        this.form.value.sourceCoordinates.system === 'FK5 J2000') {
+    this.currentSystem = this.systemService.getSystem(this.form.value.prj_sourceCoordinates.system);
+    if (this.form.value.prj_sourceCoordinates.system === 'ICRS' ||
+        this.form.value.prj_sourceCoordinates.system === 'FK5 J2000') {
       this.sexagesimalCheckboxDisabled = false;
     } else {
-      this.form.value.sourceCoordinates.type = 'RELATIVE';
+      this.form.value.prj_sourceCoordinates.type = 'RELATIVE';
       this.sexagesimalCheckboxDisabled       = true;
     }
   }
@@ -119,7 +119,7 @@ export class SourceComponent implements OnInit {
 
 
   get sourceName() {
-    return this.form.get('sourceName')
+    return this.form.get('prj_sourceName')
   }
 
 }

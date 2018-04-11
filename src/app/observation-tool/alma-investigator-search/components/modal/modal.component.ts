@@ -1,7 +1,6 @@
 import {HttpErrorResponse} from '@angular/common/http';
-import {Component, ViewContainerRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {ComponentModalConfig, ModalSize, SuiModal} from 'ng2-semantic-ui';
-import {ToastsManager} from 'ng2-toastr';
 import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.interface';
 import {AlmaInvestigatorSearchService} from '../../services/alma-investigator-search.service';
 
@@ -52,7 +51,6 @@ export class AlmaInvestigatorSearchModal extends ComponentModalConfig<ModalConte
               title = 'Investigator Search',
               size  = ModalSize.Large) {
     super(AlmaInvestigatorSearchModalComponent, {name, title});
-    this.isClosable         = false;
     this.transitionDuration = 200;
     this.size               = size;
     this.mustScroll         = true;

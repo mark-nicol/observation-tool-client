@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
+import {SuiModalService} from 'ng2-semantic-ui';
+import {ProjectImportModal} from '../shared/components/project-import-modal/project-import-modal.component';
+import {ObsProject} from '../shared/classes/obsproject';
 
 /**
  * The navbar component at the top of the application
@@ -44,7 +47,9 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router, private persistenceService: PersistenceService) {
+  constructor(private router: Router,
+              private persistenceService: PersistenceService,
+              private suiModalService: SuiModalService) {
 
   }
 
@@ -79,6 +84,16 @@ export class NavbarComponent implements OnInit {
   }
 
   exportClick() {
+  }
+
+  makeProjectImportModal() {
+    this.suiModalService
+      .open(new ProjectImportModal())
+      .onApprove((result: ObsProject) => {
+        this.persistenceService.selectProject(result);
+      })
+      .onDeny(result => {
+      });
   }
 
 }

@@ -8,28 +8,25 @@ import {Speed} from '../../../../../units/classes/speed';
 import {SolarSystemObjects} from '../../../enums/solar-system-objects.enum';
 
 export interface ITargetParameters {
+  prj_sourceEphemeris: string;
+  prj_pmDec: AngularVelocity;
   type: string;
-  isMosaic: boolean;
-  sourceName: string;
-  sourceCoordinates: ISkyCoordinates;
-  pmRA: AngularVelocity;
-  pmDec: AngularVelocity;
-  parallax: Angle;
-  nonSiderealMotion: boolean;
+  prj_sourceCoordinates: ISkyCoordinates;
+  prj_sourceVelocity: ISourceVelocity;
+  prj_nonSiderealMotion: boolean;
+  prj_sourceName: string;
+  prj_isMosaic: boolean;
+  prj_pmRA: AngularVelocity;
+  prj_index: number;
+  prj_SinglePoint?: ISinglePoint[];
   solarSystemObject: any/*SolarSystemObjects*/; // TODO change
-  sourceEphemeris: string;
-  sourceVelocity: ISourceVelocity;
-  ephemerisFileName: string;
-  index: number;
-  sdReferencePosition: ISkyCoordinates;
-  ExpectedProperties: IExpectedProperties;
-  SinglePoint?: ISinglePoint[]
-  Rectangle?: IRectangle;
+  prj_ExpectedProperties: IExpectedProperties;
+  prj_parallax: Angle;
 }
 
 export interface IField {
-  name: string;
-  centre: ISkyCoordinates;
+  prj_name: string;
+  prj_centre: ISkyCoordinates;
 }
 
 export interface ISinglePoint extends IField {
@@ -46,27 +43,27 @@ export interface IRectangle extends IField {
 export interface ISkyCoordinates {
   system: string;
   type: string;
-  latitude: Latitude;
-  longitude: Longitude;
-  fieldName: string;
+  val_latitude: Latitude;
+  val_longitude: Longitude;
+  val_fieldName: string;
 }
 
 export interface ISourceVelocity {
   referenceSystem: string; // TODO Make enums
   dopplerCalcType: string;
-  centerVelocity: Speed;
+  val_centerVelocity: Speed;
 }
 
 export interface IExpectedProperties {
-  expectedPeakFluxDensity: Flux;
-  desiredPolarizationPercentage: number;
-  expectedLineWidth: any; // TODO Userunit
-  referenceFrequency: Frequency;
-  expectedPeakLineFluxDensity: Flux;
-  expectedSpectralDynamicRange: number;
-  expectedImageDynamicRange: number;
-  desiredLinePolarizationPercentage: number;
-  desiredLineCircularPolarizationPercentage: number;
-  desiredCircularPolarizationPercentage: number;
+  prj_expectedLineWidth: any; // TODO Userunit
+  prj_desiredPolarizationPercentage: number;
+  prj_desiredLineCircularPolarizationPercentage: number;
+  prj_referenceFrequency: Frequency;
+  prj_expectedPeakFluxDensity: Flux;
+  prj_expectedImageDynamicRange: number;
+  prj_desiredLinePolarizationPercentage: number;
+  prj_desiredCircularPolarizationPercentage: number;
+  prj_expectedPeakLineFluxDensity: Flux;
   solarActivityLevel: string;
+  prj_expectedSpectralDynamicRange: number;
 }

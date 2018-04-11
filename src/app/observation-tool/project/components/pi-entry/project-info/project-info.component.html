@@ -1,5 +1,7 @@
 <h4 class="ui dividing header">Main Project Information</h4>
+<h5>Project Name</h5>
+<p>{{(project | async)?.prj_projectName}}</p>
 <h5>Project Priority</h5>
-<p>{{(project | async)?.ObsProgram?.ObsPlan?.ObsUnitControl?.userPriority}}</p>
+<p>{{(project | async)?.prj_ObsProgram?.ObsPlan?.ObsUnitControl?.userPriority}}</p>
 <h5>Assigned Project Code</h5>
-<p>{{(project | async)?.code}}</p>
+<p>{{(project | async)?.prj_code}}</p>

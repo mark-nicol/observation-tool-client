@@ -6,13 +6,12 @@ import {ObsProject} from '../classes/obsproject';
 import {ObsProposal} from '../classes/obsproposal';
 import {ScienceGoal} from '../classes/science-goal/science-goal';
 import {TargetParameters} from '../classes/science-goal/target-parameters';
-import {catchError} from 'rxjs/operators';
-import {RequestOptions} from '@angular/http';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Access-Control-Allow-Origin': '*',
-    'Content-Type':  'application/json'
+    'Content-Type': 'application/json'
   })
 };
 
@@ -22,8 +21,10 @@ const httpOptions = {
 @Injectable()
 export class PersistenceService {
 
-  private baseUrl        = 'http://localhost:8080';
+  private baseUrl = 'http://localhost:8080';
   private _currentTarget = 0;
+  private _loadedProject = new BehaviorSubject<ObsProject>(null);
+  loadedProject = this._loadedProject.asObservable();
 
   /**
    * Constructor, loads data and sets members
@@ -39,37 +40,37 @@ export class PersistenceService {
     this._currentTarget = value;
   }
 
+  getAllProjects(): Observable<ObsProject[]> {
+    return this.http.get<ObsProject[]>(`${this.baseUrl}/projects`);
+  }
+
   /**
    * GET /projects/{projectCode}
    */
   getProject(): Observable<ObsProject> {
-    return this.http.get<any>(`${this.baseUrl}/projects/project`)
-               .map(result => {
-                 return _.merge(new ObsProject, result);
-               });
+    return this.loadedProject;
+  }
+
+  selectProject(project: ObsProject) {
+    this._loadedProject.next(project);
   }
 
   getProposal(): Observable<ObsProposal> {
-    return this.http.get<any>(`${this.baseUrl}/projects/proposal`)
-               .map(result => {
-                 return _.merge(new ObsProposal, result);
-               })
+    return this.http.get<ObsProposal>(`${this.baseUrl}/projects/proposal`);
   }
 
   getScienceGoal(): Observable<ScienceGoal> {
     return this.http.get<any>(`${this.baseUrl}/projects/goal`)
-               .map(result => {
-                 return _.merge(new ScienceGoal(), result);
-               })
+      .map(result => {
+        return _.merge(new ScienceGoal(), result);
+      })
   }
 
   updateTargetParams(proposal: TargetParameters): Observable<TargetParameters> {
-    console.log(proposal);
     return this.http.post<TargetParameters>(`${this.baseUrl}/projects`, proposal, httpOptions);
   }
 
   updateProposal(proposal: ObsProposal): Observable<ObsProposal> {
-    console.log('Update proposal');
     return this.http.put<ObsProposal>(`${this.baseUrl}/projects/proposal`, proposal);
   }
 

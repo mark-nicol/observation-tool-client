@@ -4,72 +4,25 @@ import {Sensitivity} from '../../../../units/classes/sensitivity';
 import {IPerformanceParameters} from '../../interfaces/project/science-goal/performance-parameters.interface';
 
 export class PerformanceParameters implements IPerformanceParameters {
-
-  desiredAngularResolution: Angle;
-  desiredLargestScale: Angle;
-  desiredSensitivity: Sensitivity;
-  desiredDynamicRange: number;
-  representativeFrequency: Frequency;
-  useACA: boolean;
-  isTimeConstrained: boolean;
-  useTP: boolean;
-  desiredSDSensitivity: Sensitivity;
-  isPointSource: boolean;
-  desiredSensitivityReferenceFrequencyWidth: Frequency;
   desiredSensitivityFrequencyMeasure: string;
-  needsMoreTime: boolean;
-  desiredACASensitivity: Sensitivity;
-  desiredTPSensitivity: Sensitivity;
-  isScheduleConstrained: boolean;
-  desiredTime: string;
-  timingConstraintsType: string;
-  acceptableAngularResolution: Angle;
+  prj_acceptableAngularResolution: Angle;
+  prj_desiredACASensitivity: Sensitivity;
+  prj_desiredAngularResolution: Angle;
+  prj_desiredDynamicRange: number;
+  prj_desiredLargestScale: Angle;
+  prj_desiredSDSensitivity: Sensitivity;
+  prj_desiredSensitivity: Sensitivity;
+  prj_desiredSensitivityReferenceFrequencyWidth: Frequency;
+  prj_desiredTPSensitivity: Sensitivity;
+  prj_desiredTime: string;
+  prj_isPointSource: boolean;
+  prj_isScheduleConstrained: boolean;
+  prj_isSimultaneous12and7: boolean;
+  prj_isTimeConstrained: boolean;
+  prj_needsMoreTime: boolean;
+  prj_representativeFrequency: Frequency;
+  prj_useACA: boolean;
+  prj_useTP: boolean;
   resolutionOption: string;
-  isSimultaneous12and7: boolean;
-
-
-  constructor(desiredAngularResolution?: Angle,
-              desiredLargestScale?: Angle,
-              desiredSensitivity?: Sensitivity,
-              desiredDynamicRange?: number,
-              representativeFrequency?: Frequency,
-              useACA?: boolean,
-              isTimeConstrained?: boolean,
-              useTP?: boolean,
-              desiredSDSensitivity?: Sensitivity,
-              isPointSource?: boolean,
-              desiredSensitivityReferenceFrequencyWidth?: Frequency,
-              desiredSensitivityFrequencyMeasure?: string,
-              needsMoreTime?: boolean,
-              desiredACASensitivity?: Sensitivity,
-              desiredTPSensitivity?: Sensitivity,
-              isScheduleConstrained?: boolean,
-              desiredTime?: string,
-              timingConstraintsType?: string,
-              acceptableAngularResolution?: Angle,
-              resolutionOption?: string,
-              isSimultaneous12and7?: boolean) {
-    this.desiredAngularResolution                  = desiredAngularResolution;
-    this.desiredLargestScale                       = desiredLargestScale;
-    this.desiredSensitivity                        = desiredSensitivity;
-    this.desiredDynamicRange                       = desiredDynamicRange;
-    this.representativeFrequency                   = representativeFrequency;
-    this.useACA                                    = useACA;
-    this.isTimeConstrained                         = isTimeConstrained;
-    this.useTP                                     = useTP;
-    this.desiredSDSensitivity                      = desiredSDSensitivity;
-    this.isPointSource                             = isPointSource;
-    this.desiredSensitivityReferenceFrequencyWidth = desiredSensitivityReferenceFrequencyWidth;
-    this.desiredSensitivityFrequencyMeasure        = desiredSensitivityFrequencyMeasure;
-    this.needsMoreTime                             = needsMoreTime;
-    this.desiredACASensitivity                     = desiredACASensitivity;
-    this.desiredTPSensitivity                      = desiredTPSensitivity;
-    this.isScheduleConstrained                     = isScheduleConstrained;
-    this.desiredTime                               = desiredTime;
-    this.timingConstraintsType                     = timingConstraintsType;
-    this.acceptableAngularResolution               = acceptableAngularResolution;
-    this.resolutionOption                          = resolutionOption;
-    this.isSimultaneous12and7                      = isSimultaneous12and7;
-  }
-
+  timingConstraintsType: string;
 }

@@ -21,47 +21,47 @@ import {SourceComponent} from './components/source/source.component';
 export class FieldSetupComponent implements OnInit {
 
   form = this.formBuilder.group({
-    ExpectedProperties: this.formBuilder.group({
-      expectedPeakFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
-      desiredCircularPolarizationPercentage: 0.0,
-      expectedPeakLineFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
-      expectedLineWidth: this.formBuilder.group({userUnit: '', content: 0.0}),
-      desiredLinePolarizationPercentage: 0.0
+    prj_ExpectedProperties: this.formBuilder.group({
+      prj_expectedPeakFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
+      prj_desiredCircularPolarizationPercentage: 0.0,
+      prj_expectedPeakLineFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
+      prj_expectedLineWidth: this.formBuilder.group({userUnit: '', content: 0.0}),
+      prj_desiredLinePolarizationPercentage: 0.0
     }),
-    SinglePoint: this.formBuilder.array([]),
+    prj_SinglePoint: this.formBuilder.array([]),
     index: -1,
-    isMosaic: true,
-    nonSiderealMotion: false,
-    parallax: this.formBuilder.group({
+    prj_isMosaic: true,
+    prj_nonSiderealMotion: false,
+    prj_parallax: this.formBuilder.group({
       unit: '',
       content: 0.0
     }),
-    pmDec: this.formBuilder.group({
+    prj_pmDec: this.formBuilder.group({
       unit: '',
       content: 0.0
     }),
-    pmRA: this.formBuilder.group({
+    prj_pmRA: this.formBuilder.group({
       unit: '',
       content: 0.0
     }),
     solarSystemObject: 'Unspecified',
-    sourceCoordinates: this.formBuilder.group({
-      fieldName: 'None',
-      latitude: this.formBuilder.group({
+    prj_sourceCoordinates: this.formBuilder.group({
+      val_fieldName: 'None',
+      val_latitude: this.formBuilder.group({
         unit: '',
         content: 0.0
       }),
-      longitude: this.formBuilder.group({
+      val_longitude: this.formBuilder.group({
         unit: '',
         content: 0.0
       }),
       system: 'ICRS',
       type: 'ABSOLUTE',
     }),
-    sourceEphemeris: '',
-    sourceName: ['', Validators.required],
-    sourceVelocity: this.formBuilder.group({
-      centerVelocity: this.formBuilder.group({
+    prj_sourceEphemeris: '',
+    prj_sourceName: ['', Validators.required],
+    prj_sourceVelocity: this.formBuilder.group({
+      val_centerVelocity: this.formBuilder.group({
         unit: '',
         content: 0.0
       }),
@@ -109,61 +109,61 @@ export class FieldSetupComponent implements OnInit {
   initForm(index: number) {
     this.persistenceService.getScienceGoal()
       .subscribe(result => {
-        const targetParams = result.TargetParameters[index];
+        const targetParams = result.prj_TargetParameters[index];
         this.form.patchValue({
-          ExpectedProperties: {
-            expectedPeakFluxDensity: targetParams.ExpectedProperties.expectedPeakFluxDensity,
-            desiredCircularPolarizationPercentage: targetParams.ExpectedProperties.desiredCircularPolarizationPercentage,
-            expectedPeakLineFluxDensity: targetParams.ExpectedProperties.expectedPeakLineFluxDensity,
-            expectedLineWidth: targetParams.ExpectedProperties.expectedLineWidth,
-            desiredLinePolarizationPercentage: targetParams.ExpectedProperties.desiredLinePolarizationPercentage
+          prj_ExpectedProperties: {
+            prj_expectedPeakFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakFluxDensity,
+            prj_desiredCircularPolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredCircularPolarizationPercentage,
+            prj_expectedPeakLineFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakLineFluxDensity,
+            prj_expectedLineWidth: targetParams.prj_ExpectedProperties.prj_expectedLineWidth,
+            prj_desiredLinePolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredLinePolarizationPercentage
           },
           type: targetParams.type,
-          sourceName: targetParams.sourceName,
+          prj_sourceName: targetParams.prj_sourceName,
           solarSystemObject: targetParams.solarSystemObject,
-          radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
-          sourceCoordinates: {
-            system: targetParams.sourceCoordinates.system,
-            type: targetParams.sourceCoordinates.type,
-            longitude: targetParams.sourceCoordinates.longitude,
-            latitude: targetParams.sourceCoordinates.latitude,
+          prj_radialVelocityReferenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
+          prj_sourceCoordinates: {
+            system: targetParams.prj_sourceCoordinates.system,
+            type: targetParams.prj_sourceCoordinates.type,
+            val_longitude: targetParams.prj_sourceCoordinates.val_longitude,
+            val_latitude: targetParams.prj_sourceCoordinates.val_latitude,
           },
-          parallax: targetParams.parallax,
-          sourceVelocity: {
-            centerVelocity: targetParams.sourceVelocity.centerVelocity,
-            dopplerCalcType: targetParams.sourceVelocity.dopplerCalcType,
-            referenceSystem: targetParams.sourceVelocity.referenceSystem,
+          prj_parallax: targetParams.prj_parallax,
+          prj_sourceVelocity: {
+            val_centerVelocity: targetParams.prj_sourceVelocity.val_centerVelocity,
+            dopplerCalcType: targetParams.prj_sourceVelocity.dopplerCalcType,
+            referenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
             redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-              targetParams.sourceVelocity.centerVelocity),
-              targetParams.sourceVelocity.dopplerCalcType)
+              targetParams.prj_sourceVelocity.val_centerVelocity),
+              targetParams.prj_sourceVelocity.dopplerCalcType)
           },
-          pmRA: targetParams.pmRA,
-          pmDec: targetParams.pmDec,
+          prj_pmRA: targetParams.prj_pmRA,
+          prj_pmDec: targetParams.prj_pmDec,
         });
-        this.setSinglePoint(targetParams.SinglePoint);
+        this.setSinglePoint(targetParams.prj_SinglePoint);
       });
 
   }
 
   setSinglePoint(points: SinglePoint[]) {
     const formGroups = points.map(point => this.formBuilder.group({
-      name: point.name,
-      centre: this.formBuilder.group({
-        system: point.centre.system,
-        type: point.centre.type,
-        longitude: this.formBuilder.group({
-          unit: point.centre.longitude.unit,
-          content: [point.centre.longitude.content, Validators.required]
+      prj_name: point.prj_name,
+      prj_centre: this.formBuilder.group({
+        system: point.prj_centre.system,
+        type: point.prj_centre.type,
+        val_longitude: this.formBuilder.group({
+          unit: point.prj_centre.val_longitude.unit,
+          content: [point.prj_centre.val_longitude.content, Validators.required]
         }),
-        latitude: this.formBuilder.group({
-          unit: point.centre.latitude.unit,
-          content: [point.centre.latitude.content, Validators.required]
+        val_latitude: this.formBuilder.group({
+          unit: point.prj_centre.val_latitude.unit,
+          content: [point.prj_centre.val_latitude.content, Validators.required]
         }),
-        fieldName: point.centre.fieldName
+        val_fieldName: point.prj_centre.val_fieldName
       })
     }));
     const singlePointFormArray = this.formBuilder.array(formGroups);
-    this.form.setControl('SinglePoint', singlePointFormArray);
+    this.form.setControl('prj_SinglePoint', singlePointFormArray);
   }
 
   observeFormChanges() {

@@ -10,7 +10,7 @@ import {ObsProject} from '../../classes/obsproject';
 })
 export class ProjectImportComponent implements OnInit {
 
-  projects: Observable<ObsProject[]>;
+  projects: Observable<any[]>;
   _selectedProject: ObsProject;
   @Output() selectedProjectEmitter = new EventEmitter();
 

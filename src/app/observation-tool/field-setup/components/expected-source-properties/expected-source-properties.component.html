@@ -6,7 +6,7 @@
     <div class="field"
          suiPopup
          [popupTemplate]="peakFluxPopupTemplate"
-         formGroupName="expectedPeakFluxDensity">
+         formGroupName="prj_expectedPeakFluxDensity">
       <ng-template #peakFluxPopupTemplate>
         Expected peak flux density of source continuum for the <b>weakest</b> source component that you wish to detect
       </ng-template>
@@ -29,7 +29,7 @@
     <div class="field"
          suiPopup
          [popupTemplate]="peakLinePopupTemplate"
-         formGroupName="expectedPeakLineFluxDensity">
+         formGroupName="prj_expectedPeakLineFluxDensity">
       <ng-template #peakLinePopupTemplate>
         Expected peak flux density of line emission relative to the continuum for the <b>weakest</b> source component
         that
@@ -57,7 +57,7 @@
     <div class="field"
          suiPopup
          popupText="Expected width of the lines to be observed (FWHM)"
-         formGroupName="expectedLineWidth">
+         formGroupName="prj_expectedLineWidth">
       <label for="lineWidthInput">
         Line Width
       </label>
@@ -84,7 +84,7 @@
         <input id="linePolInput"
                type="number"
                placeholder="0.0"
-               formControlName="desiredLinePolarizationPercentage">
+               formControlName="prj_desiredLinePolarizationPercentage">
         <div class="ui label">%</div>
       </div>
     </div>
@@ -100,7 +100,7 @@
         <input id="contPolInput"
                type="number"
                placeholder="0.0"
-               formControlName="desiredCircularPolarizationPercentage">
+               formControlName="prj_desiredCircularPolarizationPercentage">
         <div class="ui label">%</div>
       </div>
     </div>

@@ -9,10 +9,10 @@
        *ngIf="router.url.indexOf('field-setup') > -1 && targets !== undefined">
     <a class="item"
        *ngFor="let target of targets"
-       [routerLink]="['field-setup', target.index + 1]"
-       [class.active]="router.url.indexOf('field-setup/'+(target.index + 1)) > -1"
-       (click)="changeTarget(target.index + 1)">
-      {{target.sourceName}}
+       [routerLink]="['field-setup', target.prj_index + 1]"
+       [class.active]="router.url.indexOf('field-setup/'+(target.prj_index + 1)) > -1"
+       (click)="changeTarget(target.prj_index + 1)">
+      {{target.prj_sourceName}}
     </a>
     <div class="link item"
          (click)="addNewTarget()"><i class="blue add icon"></i>

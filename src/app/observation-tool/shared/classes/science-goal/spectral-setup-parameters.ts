@@ -1,35 +1,11 @@
-import {Frequency} from '../../../../units/classes/frequency';
-import {
-  IAdvancedSpectralSetup,
-  IScienceSpectralWindow,
-  ISpectralSetupParameters
-} from '../../interfaces/project/science-goal/spectral-setup-parameters-interface';
+import {ISpectralSetupParameters} from '../../interfaces/project/science-goal/spectral-setup-parameters-interface';
 
 export class SpectralSetupParameters implements ISpectralSetupParameters {
-
   polarisation: string;
+  prj_AdvancedSpectralSetup: IAdvancedSpectralSetup;
+  prj_ScienceSpectralWindow: IScienceSpectralWindow[];
+  prj_representativeFrequency: Frequency;
+  prj_singleContinuumFrequency: Frequency;
+  prj_userRepresentativeFrequency: boolean;
   type: string;
-  representativeFrequency: Frequency;
-  userRepresentativeFrequency: boolean;
-  singleContinuumFrequency: Frequency;
-  AdvancedSpectralSetup: IAdvancedSpectralSetup;
-  ScienceSpectralWindow: IScienceSpectralWindow[];
-
-
-  constructor(polarisation?: string,
-              type?: string,
-              representativeFrequency?: Frequency,
-              userRepresentativeFrequency?: boolean,
-              singleContinuumFrequency?: Frequency,
-              AdvancedSpectralSetup?: IAdvancedSpectralSetup,
-              ScienceSpectralWindow?: IScienceSpectralWindow[]) {
-    this.polarisation                = polarisation;
-    this.type                        = type;
-    this.representativeFrequency     = representativeFrequency;
-    this.userRepresentativeFrequency = userRepresentativeFrequency;
-    this.singleContinuumFrequency    = singleContinuumFrequency;
-    this.AdvancedSpectralSetup       = AdvancedSpectralSetup;
-    this.ScienceSpectralWindow       = ScienceSpectralWindow;
-  }
-
 }

@@ -5,37 +5,37 @@
       <label for="titleInput">Proposal Title</label>
       <input id="titleInput"
              type="text"
-             formControlName="title">
+             formControlName="prp_title">
     </div>
     <div class="field">
       <label for="cycleInput">Proposal Cycle</label>
       <input id="cycleInput"
              type="text"
-             formControlName="cycle">
+             formControlName="prp_cycle">
     </div>
     <div class="field">
       <label for="abstractTextArea">Abstract</label>
       <textarea #abstractTextArea
                 id="abstractTextArea"
                 rows="5"
-                formControlName="abstractString"></textarea>
+                formControlName="prp_abstract"></textarea>
       <p>Characters remaining: {{1200-abstractTextArea.value.length}}</p>
     </div>
     <div class="field">
       <label for="relatedProposalsTextArea">Related Proposals</label>
       <textarea id="relatedProposalsTextArea"
                 rows="5"
-                formControlName="relatedProposals"></textarea>
+                formControlName="prp_relatedProposals"></textarea>
     </div>
     <div class="field">
       <label for="previousProposalsTextArea">Previous Proposals</label>
       <textarea id="previousProposalsTextArea"
                 rows="5"
-                formControlName="previousProposals"></textarea>
+                formControlName="prp_previousProposals"></textarea>
     </div>
     <div class="field">
       <label>Student Project</label>
-      <sui-checkbox formControlName="studentProject"></sui-checkbox>
+      <sui-checkbox formControlName="prp_studentProject"></sui-checkbox>
     </div>
   </div>
   <div class="ui segment">
@@ -46,7 +46,7 @@
           <sui-radio-button id="{{typeRadio.id}}"
                             name="typeRadios"
                             value="{{typeRadio.id}}"
-                            formControlName="proposalTypeString">
+                            formControlName="prp_proposalTypeString">
             {{typeRadio.text}}
           </sui-radio-button>
         </div>
@@ -61,7 +61,7 @@
                           name="categoryRadios"
                           value="{{categoryRadios[categoryRadio].text}}"
                           (currentValueChange)="categoryRadioChange($event)"
-                          formControlName="scientificCategoryString">
+                          formControlName="prp_scientificCategoryString">
           {{categoryRadios[categoryRadio].text}}
         </sui-radio-button>
       </div>
@@ -77,7 +77,7 @@
                         [isSearchable]="true"
                         (maxSelected)="2"
                         [options]="categoryRadios[chosenCategory].keywords"
-                        formControlName="keywords">
+                        formControlName="prp_keywords">
         <sui-select-option *ngFor="let option of keywordSelector.filteredOptions"
                            [value]="option">
         </sui-select-option>
@@ -141,6 +141,6 @@
     <h4 class="ui dividing header">Duplicate Observations</h4>
     <textarea title="Duplicate observations input"
               rows="5"
-              formControlName="duplicateObservations"></textarea>
+              formControlName="prp_duplicateObservations"></textarea>
   </div>
 </form>

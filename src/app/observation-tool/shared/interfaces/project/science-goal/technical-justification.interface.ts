@@ -1,4 +1,4 @@
 export interface ITechnicalJustification {
-  justificationText: string;
-  justificationKey: string;
+  prj_justificationText: string;
+  prj_justificationKey: string;
 }

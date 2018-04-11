@@ -1,29 +1,26 @@
-import {Angle} from '../../../../units/classes/angle';
-import {AngularVelocity} from '../../../../units/classes/angular-velocity';
 import {
   IExpectedProperties,
-  IRectangle,
   ISinglePoint,
+  ISkyCoordinates,
   ISourceVelocity,
   ITargetParameters
 } from '../../interfaces/project/science-goal/target-parameters.interface';
+import {AngularVelocity} from '../../../../units/classes/angular-velocity';
+import {Angle} from '../../../../units/classes/angle';
 
 export class TargetParameters implements ITargetParameters {
-  type: string; // TODO Enum
-  isMosaic: boolean;
-  sourceName: string;
-  sourceCoordinates: any;
-  pmRA: AngularVelocity;
-  pmDec: AngularVelocity;
-  parallax: Angle;
-  nonSiderealMotion: boolean;
-  solarSystemObject: any; // TODO Change to real representation
-  sourceEphemeris: string;
-  sourceVelocity: ISourceVelocity;
-  ephemerisFileName: string;
-  index: number;
-  sdReferencePosition: any;
-  ExpectedProperties: IExpectedProperties;
-  SinglePoint?: ISinglePoint[];
-  Rectangle?: IRectangle;
+  prj_ExpectedProperties: IExpectedProperties;
+  prj_SinglePoint: ISinglePoint[];
+  prj_index: number;
+  prj_isMosaic: boolean;
+  prj_nonSiderealMotion: boolean;
+  prj_parallax: Angle;
+  prj_pmDec: AngularVelocity;
+  prj_pmRA: AngularVelocity;
+  prj_sourceCoordinates: ISkyCoordinates;
+  prj_sourceEphemeris: string;
+  prj_sourceName: string;
+  prj_sourceVelocity: ISourceVelocity;
+  solarSystemObject: any;
+  type: string;
 }

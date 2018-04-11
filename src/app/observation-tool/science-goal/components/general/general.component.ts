@@ -31,8 +31,8 @@ export class GeneralComponent implements OnInit {
 
   createForm() {
     this.generalForm = this.formBuilder.group({
-                                                name: '',
-                                                note: ''
+                                                prj_name: '',
+                                                prj_note: ''
                                               });
   }
 

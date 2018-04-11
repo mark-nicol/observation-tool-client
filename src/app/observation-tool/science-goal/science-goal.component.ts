@@ -56,7 +56,8 @@ export class ScienceGoalComponent implements OnInit {
 
   ngOnInit() {
     this.persistenceService.getScienceGoal().subscribe(result => {
-      this.targets        = result.TargetParameters;
+      console.log(result);
+      this.targets        = result.prj_TargetParameters;
       this.selectedTarget = this.targets[0].sourceName;
     });
   }

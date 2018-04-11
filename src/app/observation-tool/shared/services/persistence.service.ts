@@ -40,8 +40,8 @@ export class PersistenceService {
     this._currentTarget = value;
   }
 
-  getAllProjects(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/projects`);
+  getAllProjects(): Observable<ObsProject[]> {
+    return this.http.get<ObsProject[]>(`${this.baseUrl}/projects`);
   }
 
   /**
@@ -55,8 +55,8 @@ export class PersistenceService {
     this._loadedProject.next(project);
   }
 
-  getProposal(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/projects/proposal`);
+  getProposal(): Observable<ObsProposal> {
+    return this.http.get<ObsProposal>(`${this.baseUrl}/projects/proposal`);
   }
 
   getScienceGoal(): Observable<ScienceGoal> {

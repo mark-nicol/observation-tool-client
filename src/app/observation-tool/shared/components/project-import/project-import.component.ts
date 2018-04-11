@@ -17,7 +17,6 @@ export class ProjectImportComponent implements OnInit {
   constructor(private persistenceService: PersistenceService) { }
 
   ngOnInit() {
-    this.persistenceService.getAllProjects().subscribe(result => console.log(result));
     this.projects = this.persistenceService.getAllProjects();
   }
 

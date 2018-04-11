@@ -1,82 +1,29 @@
-import {IAlmaInvestigator} from '../interfaces/alma-investigator.interface';
 import {IObsProposal} from '../interfaces/project/obsproposal.interface';
-import {IProposalFeedback} from '../interfaces/project/propsal-feedback.interface';
 import {IScienceGoal} from '../interfaces/project/science-goal/sciencegoal.interface';
+import {IAlmaInvestigator} from '../interfaces/alma-investigator.interface';
+import {IProposalFeedback} from '../interfaces/project/propsal-feedback.interface';
 
 export class ObsProposal implements IObsProposal {
-
-  title: string;
-  code: string;
-  abstract: string;
-  relatedProposals: string;
-  dateReceived: Date;
-  cycle: string;
-  studentProject: boolean;
-  continuation: boolean;
-  recentPublications: string;
-  scientificCategoryCode: string;
-  proposalTypeCode: string;
-  scientificCategoryString: string;
-  proposalTypeString: string;
-  keywords: string[];
-  keywordCode: string[];
-  resubmittedProjectCode: string;
-  isResubmission: boolean;
-  duplicateObservationJustification: string;
-  PrincipalInvestigator: IAlmaInvestigator;
-  coPrincipalInvestigators: IAlmaInvestigator[];
-  coInvestigators: IAlmaInvestigator[];
-  // scienceGoals: IScienceGoal[];
-  scienceGoals: IScienceGoal;
-  proposalFeedback: IProposalFeedback;
-
-
-  constructor(title?: string,
-              code?: string,
-              abstract?: string,
-              relatedProposals?: string,
-              dateReceived?: Date,
-              cycle?: string,
-              studentProject?: boolean,
-              continuation?: boolean,
-              recentPublications?: string,
-              scientificCategoryCode?: string,
-              proposalTypeCode?: string,
-              scientificCategoryString?: string,
-              proposalTypeString?: string,
-              keywords?: string[],
-              keywordCode?: string[],
-              resubmittedProjectCode?: string,
-              isResubmission?: boolean,
-              duplicateObservationJustification?: string,
-              principalInvestigator?: IAlmaInvestigator,
-              coPrincipalInvestigators?: IAlmaInvestigator[],
-              coInvestigators?: IAlmaInvestigator[],
-              scienceGoals?: IScienceGoal,
-              proposalFeedback?: IProposalFeedback) {
-    this.title                             = title;
-    this.code                              = code;
-    this.abstract                          = abstract;
-    this.relatedProposals                  = relatedProposals;
-    this.dateReceived                      = dateReceived;
-    this.cycle                             = cycle;
-    this.studentProject                    = studentProject;
-    this.continuation                      = continuation;
-    this.recentPublications                = recentPublications;
-    this.scientificCategoryCode            = scientificCategoryCode;
-    this.proposalTypeCode                  = proposalTypeCode;
-    this.scientificCategoryString          = scientificCategoryString;
-    this.proposalTypeString                = proposalTypeString;
-    this.keywords                          = keywords;
-    this.keywordCode                       = keywordCode;
-    this.resubmittedProjectCode            = resubmittedProjectCode;
-    this.isResubmission                    = isResubmission;
-    this.duplicateObservationJustification = duplicateObservationJustification;
-    this.PrincipalInvestigator             = principalInvestigator;
-    this.coPrincipalInvestigators          = coPrincipalInvestigators;
-    this.coInvestigators                   = coInvestigators;
-    this.scienceGoals                      = scienceGoals;
-    this.proposalFeedback                  = proposalFeedback;
-  }
-
+  prj_ScienceGoal: IScienceGoal;
+  prp_PrincipalInvestigator: IAlmaInvestigator;
+  prp_abstract: string;
+  prp_coInvestigators: IAlmaInvestigator[];
+  prp_coPrincipalInvestigators: IAlmaInvestigator[];
+  prp_continuation: boolean;
+  prp_cycle: string;
+  prp_dateReceived: Date;
+  prp_duplicateObservationJustification: string;
+  prp_isResubmission: boolean;
+  prp_keyword: string[];
+  prp_keywordCode: string[];
+  prp_proposalFeedback: IProposalFeedback;
+  prp_proposalTypeCode: string;
+  prp_proposalTypeString: string;
+  prp_recentPublications: string;
+  prp_relatedProposals: string;
+  prp_resubmittedProjectCode: string;
+  prp_scientificCategoryCode: string;
+  prp_scientificCategoryString: string;
+  prp_studentProject: boolean;
+  prp_title: string;
 }

@@ -2,61 +2,24 @@ import {IObsProgram} from '../interfaces/project/obsprogram.interface';
 import {IObsProject} from '../interfaces/project/obsproject.interface';
 
 export class ObsProject implements IObsProject {
-
-  ObsProgram: IObsProgram;
-  status: string;
-  revision: number;
-  projectName: string;
-  pI: string;
-  version: string;
-  code: string;
-  timeOfCreation: string;
-  manualMode: boolean;
-  simulationMode: boolean;
-  isCommissioning: boolean;
-  isCalibration: boolean;
-  letterGrade: string;
-  staffProjectNote: string;
-  taPhase2Comments: string;
-  taMainComments: string;
-  consensusReport: string;
-  p2gAttention: boolean;
-  p2gAttentionReasons: string;
-
-  constructor(projectName?: string,
-              pI?: string,
-              version?: string,
-              code?: string,
-              timeOfCreation?: string,
-              manualMode?: boolean,
-              simulationMode?: boolean,
-              isCommissioning?: boolean,
-              isCalibration?: boolean,
-              letterGrade?: string,
-              staffProjectNote?: string,
-              taPhase2Comments?: string,
-              taMainComments?: string,
-              consensusReport?: string,
-              p2gAttention?: boolean,
-              p2gAttentionReasons?: string,
-              revision?: number) {
-    this.projectName         = projectName;
-    this.pI                  = pI;
-    this.version             = version;
-    this.code                = code;
-    this.timeOfCreation      = timeOfCreation;
-    this.manualMode          = manualMode;
-    this.simulationMode      = simulationMode;
-    this.isCommissioning     = isCommissioning;
-    this.isCalibration       = isCalibration;
-    this.letterGrade         = letterGrade;
-    this.staffProjectNote    = staffProjectNote;
-    this.taPhase2Comments    = taPhase2Comments;
-    this.taMainComments      = taMainComments;
-    this.consensusReport     = consensusReport;
-    this.p2gAttention        = p2gAttention;
-    this.p2gAttentionReasons = p2gAttentionReasons;
-    this.revision            = revision;
-  }
+  prj_ObsProgram: IObsProgram;
+  prj_code: string;
+  prj_consensusReport: string;
+  prj_isCalibration: boolean;
+  prj_isCommissioning: boolean;
+  prj_letterGrade: string;
+  prj_manualMode: boolean;
+  prj_p2gAttention: boolean;
+  prj_p2gAttentionReasons: string;
+  prj_pI: string;
+  prj_projectName: string;
+  prj_revision: number;
+  prj_simulationMode: boolean;
+  prj_staffProjectNote: string;
+  prj_status: string;
+  prj_taMainComments: string;
+  prj_taPhase2Comments: string;
+  prj_timeOfCreation: string;
+  prj_version: string;
 
 }

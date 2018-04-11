@@ -33,11 +33,15 @@ export class PiSearchComponent implements OnInit {
               viewContainerRef: ViewContainerRef) {
     this.toastMgr.setRootViewContainerRef(viewContainerRef);
     this.persistenceService.getProject().subscribe(result => {
-      // this.almaInvestigatorSearchService.search('Uid', result.pI).subscribe(
-      //   res => this.passedPi = res[0],
-      //   error => {
-      //   },
-      //   complete => this.isLoading = false);
+      if (result) {
+        this.isLoading = true;
+        this.passedPi = null;
+        this.almaInvestigatorSearchService.search('Uid', result.prj_pI).subscribe(
+          res => this.passedPi = res[0],
+          error => {
+          },
+          complete => this.isLoading = false);
+      }
     });
   }
 

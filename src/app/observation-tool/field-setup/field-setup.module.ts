@@ -12,7 +12,6 @@ import {SourceComponent} from './components/source/source.component';
 import {SpacialImageComponent} from './components/spacial-image/spacial-image.component';
 import {FieldSetupComponent} from './field-setup.component';
 import {AladinService} from './services/aladin.service';
-import {PointingService} from './services/pointing.service';
 
 @NgModule({
   imports: [
@@ -32,8 +31,7 @@ import {PointingService} from './services/pointing.service';
     PointingCanvasComponent
   ],
   providers: [
-    AladinService,
-    PointingService
+    AladinService
   ],
   exports: [FieldSetupComponent]
 })

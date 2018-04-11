@@ -1,4 +1,8 @@
-import {ISpectralSetupParameters} from '../../interfaces/project/science-goal/spectral-setup-parameters-interface';
+import {
+  IAdvancedSpectralSetup, IScienceSpectralWindow,
+  ISpectralSetupParameters
+} from '../../interfaces/project/science-goal/spectral-setup-parameters-interface';
+import {Frequency} from '../../../../units/classes/frequency';
 
 export class SpectralSetupParameters implements ISpectralSetupParameters {
   polarisation: string;

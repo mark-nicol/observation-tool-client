@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {AladinService} from '../../services/aladin.service';
-import {PointingService} from '../../services/pointing.service';
 
 import { PointingCanvasComponent } from './pointing-canvas.component';
 

@@ -58,7 +58,7 @@ export class ScienceGoalComponent implements OnInit {
     this.persistenceService.getScienceGoal().subscribe(result => {
       console.log(result);
       this.targets        = result.prj_TargetParameters;
-      this.selectedTarget = this.targets[0].sourceName;
+      this.selectedTarget = this.targets[0].prj_sourceName;
     });
   }
 
@@ -70,21 +70,19 @@ export class ScienceGoalComponent implements OnInit {
   addNewTarget() {
     this.targets.push({
       type: '',
-      isMosaic: false,
-      sourceName: 'New Source',
-      sourceCoordinates: null,
-      pmRA: null,
-      pmDec: null,
-      parallax: null,
-      nonSiderealMotion: false,
+      prj_isMosaic: false,
+      prj_sourceName: 'New Source',
+      prj_sourceCoordinates: null,
+      prj_pmRA: null,
+      prj_pmDec: null,
+      prj_parallax: null,
+      prj_nonSiderealMotion: false,
       solarSystemObject: null,
-      sourceEphemeris: '',
-      sourceVelocity: null,
-      ephemerisFileName: '',
-      index: this.targets.length - 1,
-      sdReferencePosition: null,
-      ExpectedProperties: null,
-      SinglePoint: null,
+      prj_sourceEphemeris: '',
+      prj_sourceVelocity: null,
+      prj_index: this.targets.length - 1,
+      prj_ExpectedProperties: null,
+      prj_SinglePoint: null,
     });
   }
 

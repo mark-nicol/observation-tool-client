@@ -83,7 +83,7 @@
 
     <div formArrayName="prj_SinglePoint">
       <div *ngFor="let pointing of singlePoint.controls; let i = index" [formGroupName]="i">
-        <div class="two fields" formGroupName="val_centre">
+        <div class="two fields" formGroupName="prj_centre">
           <div class="field" formGroupName="val_longitude">
             <label *ngIf="i === 0">Lon</label>
             <div class="ui small labeled icon input">

@@ -95,10 +95,10 @@ export class SourceComponent implements OnInit {
 
   setRedshift() {
     this.form.patchValue({
-      sourceVelocity: {
+      prj_sourceVelocity: {
         redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-          this.form.value.sourceVelocity.centerVelocity.content),
-          this.form.value.sourceVelocity.dopplerCalcType)
+          this.form.value.prj_sourceVelocity.val_centerVelocity.content),
+          this.form.value.prj_sourceVelocity.dopplerCalcType)
       }
     });
   }

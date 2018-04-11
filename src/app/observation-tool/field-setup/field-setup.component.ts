@@ -163,7 +163,7 @@ export class FieldSetupComponent implements OnInit {
       })
     }));
     const singlePointFormArray = this.formBuilder.array(formGroups);
-    this.form.setControl('SinglePoint', singlePointFormArray);
+    this.form.setControl('prj_SinglePoint', singlePointFormArray);
   }
 
   observeFormChanges() {

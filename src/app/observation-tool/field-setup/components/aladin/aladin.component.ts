@@ -32,25 +32,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    // this.persistenceService.getScienceGoal().subscribe(result => {
-    //   this.target = result.TargetParameters[this.persistenceService.currentTarget];
-    //   this.aladinService.goToRaDec(this.target.sourceCoordinates.longitude.content, this.target.sourceCoordinates.latitude.content);
-    //   if (this.target.SinglePoint) {
-    //     this.target.SinglePoint.forEach((point: ISinglePoint) => {
-    //       this.aladinService.addPointing(new Fov(
-    //         false,
-    //         false,
-    //         [
-    //           this.target.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
-    //           this.target.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG)
-    //         ],
-    //         null,
-    //         0.05,
-    //         25
-    //       ))
-    //     })
-    //   }
-    // });
   }
 
   ngAfterViewInit() {
@@ -59,7 +40,11 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   resetView() {
-    this.aladinService.goToObject(this.target.prj_sourceName, this.target.prj_sourceCoordinates.val_longitude.content, this.target.prj_sourceCoordinates.val_latitude.content);
+    this.aladinService.goToObject(
+      this.target.prj_sourceName,
+      this.target.prj_sourceCoordinates.val_longitude.content,
+      this.target.prj_sourceCoordinates.val_latitude.content
+    );
   }
 
   zoomIn() {

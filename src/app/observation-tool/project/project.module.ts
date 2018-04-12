@@ -14,7 +14,6 @@ import {PlannedObservingComponent} from './components/planned-observing/planned-
 import {ProposalComponent} from './components/proposal/proposal.component';
 import {ProjectRoutingModule} from './project-routing.module';
 import {ProjectComponent} from './project.component';
-import { StartComponent } from './components/start/start.component';
 
 @NgModule({
   imports: [
@@ -33,8 +32,7 @@ import { StartComponent } from './components/start/start.component';
     ProposalComponent,
     PiEntryComponent,
     PiSearchComponent,
-    ProjectInfoComponent,
-    StartComponent
+    ProjectInfoComponent
   ],
   providers: [
     AlmaInvestigatorSearchService,

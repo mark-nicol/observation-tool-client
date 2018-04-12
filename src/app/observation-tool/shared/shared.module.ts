@@ -11,6 +11,7 @@ import {SimbadService} from './services/simbad.service';
 import {SystemService} from './services/system.service';
 import {ProjectImportComponent} from './components/project-import/project-import.component';
 import { ProjectImportModalComponent } from './components/project-import-modal/project-import-modal.component';
+import {StartComponent} from './components/start/start.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ProjectImportModalComponent } from './components/project-import-modal/p
     SexagesimalPipe,
     ProjectImportComponent,
     ProjectImportModalComponent,
+    StartComponent
   ],
   providers: [
     PersistenceService,
@@ -36,6 +38,7 @@ import { ProjectImportModalComponent } from './components/project-import-modal/p
     RouterModule,
     FormsModule,
     UnitsModule,
+    StartComponent,
     DegreesPipe,
     ProjectImportComponent,
     SexagesimalPipe,

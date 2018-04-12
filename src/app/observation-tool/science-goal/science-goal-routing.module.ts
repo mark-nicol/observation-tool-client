@@ -7,10 +7,12 @@ import {ControlPerformanceComponent} from './components/control-performance/cont
 import {GeneralComponent} from './components/general/general.component';
 import {TechnicalJustificationComponent} from './components/technical-justification/technical-justification.component';
 import {ScienceGoalComponent} from './science-goal.component';
+import {PersistenceService} from '../shared/services/persistence.service';
 
 const routes: Routes = [
   {
     path: 'science-goals',
+    canActivate: [PersistenceService],
     component: ScienceGoalComponent,
     children: [
       {

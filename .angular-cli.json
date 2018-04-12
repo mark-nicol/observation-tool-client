@@ -20,8 +20,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "styles.css",
         "../semantic/dist/semantic.min.css",
-        "styles.css"
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
       ],
       "scripts": [
         "../semantic/dist/semantic.min.js"

@@ -7,6 +7,7 @@ import {ObsProposal} from '../classes/obsproposal';
 import {ScienceGoal} from '../classes/science-goal/science-goal';
 import {TargetParameters} from '../classes/science-goal/target-parameters';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,7 +20,7 @@ const httpOptions = {
  * Service to supply data to pages and sections from stored objects
  */
 @Injectable()
-export class PersistenceService {
+export class PersistenceService implements CanActivate {
 
   private baseUrl = 'http://localhost:8080';
   private _currentTarget = 0;
@@ -29,7 +30,7 @@ export class PersistenceService {
   /**
    * Constructor, loads data and sets members
    */
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   get currentTarget(): number {
@@ -72,6 +73,18 @@ export class PersistenceService {
 
   updateProposal(proposal: ObsProposal): Observable<ObsProposal> {
     return this.http.put<ObsProposal>(`${this.baseUrl}/projects/proposal`, proposal);
+  }
+
+  hasProjectLoaded(): boolean {
+    return this._loadedProject.getValue() !== null;
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.hasProjectLoaded()) {
+      return true
+    }
+    this.router.navigate(['/new-start']).then();
+    return false;
   }
 
 }

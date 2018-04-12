@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
   ];
 
   constructor(private router: Router,
-              private persistenceService: PersistenceService,
+              protected persistenceService: PersistenceService,
               private suiModalService: SuiModalService) {
 
   }
@@ -91,6 +91,7 @@ export class NavbarComponent implements OnInit {
       .open(new ProjectImportModal())
       .onApprove((result: ObsProject) => {
         this.persistenceService.selectProject(result);
+        this.router.navigate(['/project'])
       })
       .onDeny(result => {
       });

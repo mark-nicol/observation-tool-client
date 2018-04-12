@@ -23,6 +23,6 @@ export interface IObsProposal {
   prp_PrincipalInvestigator: IAlmaInvestigator;
   prp_coPrincipalInvestigators: IAlmaInvestigator[];
   prp_coInvestigators: IAlmaInvestigator[];
-  prj_ScienceGoal: IScienceGoal;
+  prj_ScienceGoal: IScienceGoal | IScienceGoal[];
   prp_proposalFeedback: IProposalFeedback;
 }

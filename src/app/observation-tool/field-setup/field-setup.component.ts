@@ -107,9 +107,12 @@ export class FieldSetupComponent implements OnInit {
   }
 
   initForm(index: number) {
-    this.persistenceService.getScienceGoal()
+    this.persistenceService.getProposal()
       .subscribe(result => {
-        const targetParams = result.prj_TargetParameters[index];
+        console.log(result);
+        const targetParams = result.prj_ScienceGoal[0].prj_TargetParameters.length > 1 ?
+          result.prj_ScienceGoal[0].prj_TargetParameters[index] :
+          result.prj_ScienceGoal[0].prj_TargetParameters;
         this.form.patchValue({
           prj_ExpectedProperties: {
             prj_expectedPeakFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakFluxDensity,

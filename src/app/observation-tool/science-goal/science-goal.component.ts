@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ITargetParameters} from '../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
+import {ScienceGoal} from '../shared/classes/science-goal/science-goal';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -55,10 +56,13 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getScienceGoal().subscribe(result => {
-      console.log(result);
-      this.targets        = result.prj_TargetParameters;
-      this.selectedTarget = this.targets[0].prj_sourceName;
+    this.persistenceService.getProposal().subscribe(result => {
+      // if (result.prj_ScienceGoal > 1) {
+      //   this.targets = result.prj_ScienceGoal[0].prj_TargetParameters;
+      // } else {
+      //   this.targets = result.prj_ScienceGoal.prj_TargetParameters;
+      //   this.selectedTarget = this.targets[0].prj_sourceName;
+      // }
     });
   }
 

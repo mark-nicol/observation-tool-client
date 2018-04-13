@@ -21,12 +21,11 @@
       "prefix": "app",
       "styles": [
         "../semantic/dist/semantic.min.css",
-        "ng2-toastr/bundles/ng2-toastr.min.css",
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
         "styles.css"
       ],
       "scripts": [
-        "../semantic/dist/semantic.min.js",
-        "ng2-toastr/bundles/ng2-toastr.min.js"
+        "../semantic/dist/semantic.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

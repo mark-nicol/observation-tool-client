@@ -8,10 +8,10 @@ import {PersistenceService} from '../../../shared/services/persistence.service';
  */
 
 @Component({
-             selector:    'app-general',
-             templateUrl: './general.component.html',
-             styleUrls:   ['./general.component.css']
-           })
+  selector: 'app-general',
+  templateUrl: './general.component.html',
+  styleUrls: ['./general.component.css']
+})
 
 export class GeneralComponent implements OnInit {
 
@@ -24,16 +24,16 @@ export class GeneralComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getProposal().subscribe(result => {
+    this.persistenceService.loadedProposal.subscribe(result => {
       this.generalForm.patchValue(result.prj_ScienceGoal[0]);
     })
   }
 
   createForm() {
     this.generalForm = this.formBuilder.group({
-                                                prj_name: '',
-                                                prj_note: ''
-                                              });
+      prj_name: '',
+      prj_note: ''
+    });
   }
 
 }

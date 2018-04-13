@@ -32,7 +32,7 @@ export class PiSearchComponent implements OnInit {
               private toastMgr: ToastsManager,
               viewContainerRef: ViewContainerRef) {
     this.toastMgr.setRootViewContainerRef(viewContainerRef);
-    this.persistenceService.getProject().subscribe(result => {
+    this.persistenceService.loadedProject.subscribe(result => {
       if (result) {
         this.isLoading = true;
         this.passedPi = null;

@@ -23,6 +23,7 @@ export class PersistenceService implements CanActivate {
   private baseUrl = 'http://localhost:8080';
   private _currentTarget = 0;
   private _loadedProject = new BehaviorSubject<ObsProject>(null);
+  private _loadedProposal = new BehaviorSubject<ObsProposal>(null);
 
   /**
    * Constructor, loads data and sets members
@@ -42,24 +43,23 @@ export class PersistenceService implements CanActivate {
     return this.http.get<ObsProject[]>(`${this.baseUrl}/projects`);
   }
 
-  /**
-   * GET /projects/{projectCode}
-   */
-  getProject(): Observable<ObsProject> {
-    return this.loadedProject;
-  }
-
   get loadedProject(): BehaviorSubject<ObsProject> {
     return this._loadedProject
   }
 
-  selectProject(project: ObsProject) {
-    this._loadedProject.next(project);
+  get loadedProposal(): BehaviorSubject<ObsProposal> {
+    return this._loadedProposal;
   }
 
-  getProposal(): Observable<ObsProposal> {
+  selectProject(project: ObsProject) {
+    this._loadedProject.next(project);
+    this.loadProposal();
+  }
+
+  loadProposal() {
     const options = {params: new HttpParams().set('ref', this._loadedProject.value['prj_ObsProposalRef']['entityId'])};
-    return this.http.get<ObsProposal>(`${this.baseUrl}/projects/proposal`, options);
+    this.http.get<ObsProposal>(`${this.baseUrl}/projects/proposal`, options).subscribe(result =>
+      this._loadedProposal.next(result));
   }
 
   updateTargetParams(proposal: TargetParameters): Observable<TargetParameters> {

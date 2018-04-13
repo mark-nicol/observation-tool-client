@@ -91,7 +91,7 @@ export class NavbarComponent implements OnInit {
       .open(new ProjectImportModal())
       .onApprove((result: ObsProject) => {
         this.persistenceService.selectProject(result);
-        // this.router.navigate(['/project'])
+        this.router.navigate(['/project']).then();
       })
       .onDeny(result => {
       });

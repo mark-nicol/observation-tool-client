@@ -1,10 +1,8 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import * as _ from 'lodash';
 import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../classes/obsproject';
 import {ObsProposal} from '../classes/obsproposal';
-import {ScienceGoal} from '../classes/science-goal/science-goal';
 import {TargetParameters} from '../classes/science-goal/target-parameters';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
@@ -25,7 +23,6 @@ export class PersistenceService implements CanActivate {
   private baseUrl = 'http://localhost:8080';
   private _currentTarget = 0;
   private _loadedProject = new BehaviorSubject<ObsProject>(null);
-  loadedProject = this._loadedProject.asObservable();
 
   /**
    * Constructor, loads data and sets members
@@ -50,6 +47,10 @@ export class PersistenceService implements CanActivate {
    */
   getProject(): Observable<ObsProject> {
     return this.loadedProject;
+  }
+
+  get loadedProject(): BehaviorSubject<ObsProject> {
+    return this._loadedProject
   }
 
   selectProject(project: ObsProject) {

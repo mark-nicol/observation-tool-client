@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import * as _ from 'lodash';
 import {Observable} from 'rxjs/Observable';
@@ -57,14 +57,8 @@ export class PersistenceService implements CanActivate {
   }
 
   getProposal(): Observable<ObsProposal> {
-    return this.http.get<ObsProposal>(`${this.baseUrl}/projects/proposal`);
-  }
-
-  getScienceGoal(): Observable<ScienceGoal> {
-    return this.http.get<any>(`${this.baseUrl}/projects/goal`)
-      .map(result => {
-        return _.merge(new ScienceGoal(), result);
-      })
+    const options = {params: new HttpParams().set('ref', this._loadedProject.value['prj_ObsProposalRef']['entityId'])};
+    return this.http.get<ObsProposal>(`${this.baseUrl}/projects/proposal`, options);
   }
 
   updateTargetParams(proposal: TargetParameters): Observable<TargetParameters> {

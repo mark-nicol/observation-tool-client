@@ -10,7 +10,7 @@ export class ScienceGoal implements IScienceGoal {
   prj_CalibrationSetupParameters: ICalibrationSetupParameters;
   prj_PerformanceParameters: IPerformanceParameters;
   prj_SpectralSetupParameters: ISpectralSetupParameters;
-  prj_TargetParameters: ITargetParameters[];
+  prj_TargetParameters: ITargetParameters[] | ITargetParameters;
   prj_TechnicalJustifications: ITechnicalJustification[];
   prj_estimated12mTime: number;
   prj_estimated7mTime: number;

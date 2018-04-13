@@ -4,13 +4,15 @@
     &nbsp;&nbsp;&nbsp;&nbsp;<b class="title">Observation Tool</b>
     <span class="version">&nbsp;&nbsp;2.0.0alpha3</span>
   </div>
-  <a class="item"
-     *ngFor="let item of items"
-     [routerLink]="item.path"
-     [routerLinkActive]="['active']">
-    <i [class]="item.icon"></i>
-    {{item.title}}
-  </a>
+  <ng-container *ngIf="persistenceService.hasProjectLoaded()">
+    <a class="item"
+       *ngFor="let item of items"
+       [routerLink]="item.path"
+       [routerLinkActive]="['active']">
+      <i [class]="item.icon"></i>
+      {{item.title}}
+    </a>
+  </ng-container>
   <div class="ui right dropdown item" suiDropdown>
     <i class="user icon"></i>
     User

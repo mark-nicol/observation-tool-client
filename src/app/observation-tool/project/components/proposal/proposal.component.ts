@@ -163,7 +163,7 @@ export class ProposalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.getProposal().subscribe(result => {
+    this.persistenceService.loadedProposal.subscribe(result => {
       this.proposalForm.patchValue(result);
     });
     this.observeFormChanges();

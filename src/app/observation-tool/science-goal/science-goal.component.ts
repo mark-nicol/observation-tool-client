@@ -57,6 +57,7 @@ export class ScienceGoalComponent implements OnInit {
 
   ngOnInit() {
     this.persistenceService.getProposal().subscribe(result => {
+      console.log(result);
       // if (result.prj_ScienceGoal > 1) {
       //   this.targets = result.prj_ScienceGoal[0].prj_TargetParameters;
       // } else {

@@ -43,7 +43,7 @@ export class ScienceGoalComponent implements OnInit {
     }
   };
 
-  targets: ITargetParameters[];
+  targets: ITargetParameters[] | ITargetParameters;
   selectedTarget: string;
 
   /** Iterator for pages */

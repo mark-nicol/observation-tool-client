@@ -6,11 +6,29 @@
   </div>
   <ng-container *ngIf="persistenceService.hasProjectLoaded()">
     <a class="item"
-       *ngFor="let item of items"
-       [routerLink]="item.path"
+       [routerLink]="items[0].path"
        [routerLinkActive]="['active']">
-      <i [class]="item.icon"></i>
-      {{item.title}}
+      <i [class]="items[0].icon"></i>
+      {{items[0].title}}
+    </a>
+    <a class="item"
+       [routerLink]="items[1].path"
+       [routerLinkActive]="['active']">
+      <i [class]="items[1].icon"></i>
+      {{items[1].title}}
+    </a>
+    <a class="item"
+       [routerLink]="items[2].path"
+       [routerLinkActive]="['active']">
+      <i [class]="items[2].icon"></i>
+      {{items[2].title}}
+    </a>
+    <a class="item"
+       *ngIf="persistenceService.hasScienceGoals()"
+       [routerLink]="items[3].path"
+       [routerLinkActive]="['active']">
+      <i [class]="items[3].icon"></i>
+      {{items[3].title}}
     </a>
   </ng-container>
   <div class="ui right dropdown item" suiDropdown>

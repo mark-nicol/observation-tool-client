@@ -57,6 +57,7 @@ export class NavbarComponent implements OnInit {
    * Sets the currently selected goal to the first in the list
    */
   ngOnInit() {
+
   }
 
   /**

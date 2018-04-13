@@ -25,7 +25,11 @@ export class GeneralComponent implements OnInit {
 
   ngOnInit() {
     this.persistenceService.loadedProposal.subscribe(result => {
-      this.generalForm.patchValue(result.prj_ScienceGoal[0]);
+      if (result.prj_ScienceGoal[0]) {
+        this.generalForm.patchValue(result.prj_ScienceGoal[this.persistenceService.currentGoal]);
+      } else {
+        this.generalForm.patchValue(result.prj_ScienceGoal);
+      }
     })
   }
 

@@ -22,6 +22,6 @@ export interface IScienceGoal {
   prj_CalibrationSetupParameters: ICalibrationSetupParameters;
   prj_PerformanceParameters: IPerformanceParameters;
   prj_SpectralSetupParameters: ISpectralSetupParameters;
-  prj_TargetParameters: ITargetParameters[] | ITargetParameters;
+  prj_TargetParameters: ITargetParameters[];
   prj_TechnicalJustifications: ITechnicalJustification[];
 }

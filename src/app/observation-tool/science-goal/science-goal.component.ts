@@ -43,7 +43,7 @@ export class ScienceGoalComponent implements OnInit {
     }
   };
 
-  targets: ITargetParameters[] | ITargetParameters;
+  targets: ITargetParameters[];
   selectedTarget: string;
 
   /** Iterator for pages */
@@ -57,13 +57,8 @@ export class ScienceGoalComponent implements OnInit {
 
   ngOnInit() {
     this.persistenceService.loadedProposal.subscribe(result => {
-      console.log(result);
-      // if (result.prj_ScienceGoal > 1) {
-      //   this.targets = result.prj_ScienceGoal[0].prj_TargetParameters;
-      // } else {
-      //   this.targets = result.prj_ScienceGoal.prj_TargetParameters;
-      //   this.selectedTarget = this.targets[0].prj_sourceName;
-      // }
+        this.targets = result.prj_ScienceGoal[this.persistenceService.currentGoal].prj_TargetParameters;
+        this.selectedTarget = this.targets[0].prj_sourceName;
     });
   }
 

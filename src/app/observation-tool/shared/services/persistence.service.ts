@@ -73,7 +73,7 @@ export class PersistenceService implements CanActivate {
         result.prj_ScienceGoal = [result.prj_ScienceGoal];
       }
       for (const goal of result.prj_ScienceGoal) {
-        if (!(goal.prj_TargetParameters instanceof Array)) {
+        if (goal.prj_TargetParameters && !(goal.prj_TargetParameters instanceof Array)) {
           goal.prj_TargetParameters = [goal.prj_TargetParameters];
         }
       }

@@ -5,6 +5,7 @@ import {PersistenceService} from '../shared/services/persistence.service';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectImportModal} from '../shared/components/project-import-modal/project-import-modal.component';
 import {ObsProject} from '../shared/classes/obsproject';
+import {ScienceGoal} from '../shared/classes/science-goal/science-goal';
 
 /**
  * The navbar component at the top of the application
@@ -22,6 +23,8 @@ export class NavbarComponent implements OnInit {
 
   /** Keeps track of the currently selected science goal */
   selectedGoal: any;
+
+  sciGoalDropdownOpen = false;
 
   /** All items to show on the navbar menu and their routing paths */
   items: NavItemInterface[] = [
@@ -85,6 +88,14 @@ export class NavbarComponent implements OnInit {
   }
 
   exportClick() {
+  }
+
+  get scienceGoals(): ScienceGoal[] {
+    return this.persistenceService.loadedProposal.value.prj_ScienceGoal;
+  }
+
+  setCurrentGoal(event: number) {
+    this.persistenceService.currentGoal = event;
   }
 
   makeProjectImportModal() {

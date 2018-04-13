@@ -110,40 +110,40 @@ export class FieldSetupComponent implements OnInit {
     this.persistenceService.loadedProposal
       .subscribe(result => {
         console.log(result);
-        const targetParams = result.prj_ScienceGoal[0].prj_TargetParameters.length > 1 ?
-          result.prj_ScienceGoal[0].prj_TargetParameters[index] :
-          result.prj_ScienceGoal[0].prj_TargetParameters;
-        this.form.patchValue({
-          prj_ExpectedProperties: {
-            prj_expectedPeakFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakFluxDensity,
-            prj_desiredCircularPolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredCircularPolarizationPercentage,
-            prj_expectedPeakLineFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakLineFluxDensity,
-            prj_expectedLineWidth: targetParams.prj_ExpectedProperties.prj_expectedLineWidth,
-            prj_desiredLinePolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredLinePolarizationPercentage
-          },
-          type: targetParams.type,
-          prj_sourceName: targetParams.prj_sourceName,
-          solarSystemObject: targetParams.solarSystemObject,
-          prj_radialVelocityReferenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
-          prj_sourceCoordinates: {
-            system: targetParams.prj_sourceCoordinates.system,
-            type: targetParams.prj_sourceCoordinates.type,
-            val_longitude: targetParams.prj_sourceCoordinates.val_longitude,
-            val_latitude: targetParams.prj_sourceCoordinates.val_latitude,
-          },
-          prj_parallax: targetParams.prj_parallax,
-          prj_sourceVelocity: {
-            val_centerVelocity: targetParams.prj_sourceVelocity.val_centerVelocity,
-            dopplerCalcType: targetParams.prj_sourceVelocity.dopplerCalcType,
-            referenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
-            redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-              targetParams.prj_sourceVelocity.val_centerVelocity),
-              targetParams.prj_sourceVelocity.dopplerCalcType)
-          },
-          prj_pmRA: targetParams.prj_pmRA,
-          prj_pmDec: targetParams.prj_pmDec,
-        });
-        this.setSinglePoint(targetParams.prj_SinglePoint);
+        // const targetParams = result.prj_ScienceGoal[0].prj_TargetParameters.length > 1 ?
+        //   result.prj_ScienceGoal[0].prj_TargetParameters[index] :
+        //   result.prj_ScienceGoal[0].prj_TargetParameters;
+        // this.form.patchValue({
+        //   prj_ExpectedProperties: {
+        //     prj_expectedPeakFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakFluxDensity,
+        //     prj_desiredCircularPolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredCircularPolarizationPercentage,
+        //     prj_expectedPeakLineFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakLineFluxDensity,
+        //     prj_expectedLineWidth: targetParams.prj_ExpectedProperties.prj_expectedLineWidth,
+        //     prj_desiredLinePolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredLinePolarizationPercentage
+        //   },
+        //   type: targetParams.type,
+        //   prj_sourceName: targetParams.prj_sourceName,
+        //   solarSystemObject: targetParams.solarSystemObject,
+        //   prj_radialVelocityReferenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
+        //   prj_sourceCoordinates: {
+        //     system: targetParams.prj_sourceCoordinates.system,
+        //     type: targetParams.prj_sourceCoordinates.type,
+        //     val_longitude: targetParams.prj_sourceCoordinates.val_longitude,
+        //     val_latitude: targetParams.prj_sourceCoordinates.val_latitude,
+        //   },
+        //   prj_parallax: targetParams.prj_parallax,
+        //   prj_sourceVelocity: {
+        //     val_centerVelocity: targetParams.prj_sourceVelocity.val_centerVelocity,
+        //     dopplerCalcType: targetParams.prj_sourceVelocity.dopplerCalcType,
+        //     referenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
+        //     redshift: SourceComponent.getRedshift(Object.assign(new Speed,
+        //       targetParams.prj_sourceVelocity.val_centerVelocity),
+        //       targetParams.prj_sourceVelocity.dopplerCalcType)
+        //   },
+        //   prj_pmRA: targetParams.prj_pmRA,
+        //   prj_pmDec: targetParams.prj_pmDec,
+        // });
+        // this.setSinglePoint(targetParams.prj_SinglePoint);
       });
 
   }

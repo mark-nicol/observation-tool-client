@@ -1,4 +1,4 @@
-<div class="ui fixed sticky tabular menu">
+<div class="ui fixed sticky tabular menu" style="z-index: 1">
   <a class="item"
      *ngFor="let page of pageKeys(pages)"
      [routerLink]="pages[page].path"
@@ -23,6 +23,6 @@
   </div>
 </div>
 <p style="height: 1.95em"></p>
-<div class="ui bottom attached segment">
+<div class="ui bottom attached segment" style="z-index: 0">
   <router-outlet></router-outlet>
 </div>

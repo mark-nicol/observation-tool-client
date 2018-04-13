@@ -6,6 +6,7 @@ import {ObsProposal} from '../classes/obsproposal';
 import {TargetParameters} from '../classes/science-goal/target-parameters';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {ScienceGoal} from '../classes/science-goal/science-goal';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,6 +26,7 @@ export class PersistenceService implements CanActivate {
   private _currentTarget = 0;
   private _loadedProject = new BehaviorSubject<ObsProject>(null);
   private _loadedProposal = new BehaviorSubject<ObsProposal>(null);
+  private _loadedGoal = new BehaviorSubject<ScienceGoal>(null);
   private _currentGoal = 0;
 
   /**
@@ -46,6 +48,7 @@ export class PersistenceService implements CanActivate {
   }
 
   set currentGoal(value: number) {
+    console.log(value);
     this._currentGoal = value;
   }
 
@@ -61,9 +64,17 @@ export class PersistenceService implements CanActivate {
     return this._loadedProposal;
   }
 
+  get loadedGoal(): BehaviorSubject<ScienceGoal> {
+    return this._loadedGoal;
+  }
+
   selectProject(project: ObsProject) {
     this._loadedProject.next(project);
     this.loadProposal();
+  }
+
+  loadScienceGoal(index) {
+    this.loadedGoal.next(this._loadedProposal.value.prj_ScienceGoal[index]);
   }
 
   loadProposal() {

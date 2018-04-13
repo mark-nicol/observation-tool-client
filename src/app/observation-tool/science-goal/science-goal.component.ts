@@ -56,6 +56,7 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.persistenceService.loadScienceGoal(this.persistenceService.currentGoal);
     this.persistenceService.loadedProposal.subscribe(result => {
         this.targets = result.prj_ScienceGoal[this.persistenceService.currentGoal].prj_TargetParameters;
         this.selectedTarget = this.targets[0].prj_sourceName;

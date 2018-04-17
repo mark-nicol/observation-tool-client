@@ -79,14 +79,18 @@ export class PersistenceService implements CanActivate {
   loadProposal() {
     const options = {params: new HttpParams().set('ref', this._loadedProject.value['prj_ObsProposalRef']['entityId'])};
     this.http.get<any>(`${this.baseUrl}/projects/proposal`, options).subscribe(result => {
-      if (!(result.prj_ScienceGoal instanceof Array)) {
+      if (!(result.prj_ScienceGoal instanceof Array) && result.prj_ScienceGoal !== undefined) {
         result.prj_ScienceGoal = [result.prj_ScienceGoal];
       }
-      for (const goal of result.prj_ScienceGoal) {
-        if (goal.prj_TargetParameters && !(goal.prj_TargetParameters instanceof Array)) {
-          goal.prj_TargetParameters = [goal.prj_TargetParameters];
+      if (result.prj_ScienceGoal) {
+        for (const goal of result.prj_ScienceGoal) {
+          if (goal.prj_TargetParameters && !(goal.prj_TargetParameters instanceof Array)) {
+            goal.prj_TargetParameters = [goal.prj_TargetParameters];
+          }
         }
       }
+
+
       this._loadedProposal.next(result);
     });
   }

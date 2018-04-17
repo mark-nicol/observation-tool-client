@@ -11,7 +11,7 @@ import {PersistenceService} from '../shared/services/persistence.service';
 
 const routes: Routes = [
   {
-    path: 'science-goals',
+    path: 'science-goals/:index',
     canActivate: [PersistenceService],
     component: ScienceGoalComponent,
     children: [

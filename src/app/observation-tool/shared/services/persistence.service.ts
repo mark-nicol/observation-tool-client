@@ -48,7 +48,6 @@ export class PersistenceService implements CanActivate {
   }
 
   set currentGoal(value: number) {
-    console.log(value);
     this._currentGoal = value;
   }
 

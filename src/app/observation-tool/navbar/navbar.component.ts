@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router,
+  constructor(protected router: Router,
               protected persistenceService: PersistenceService,
               private suiModalService: SuiModalService) {
 
@@ -95,7 +95,11 @@ export class NavbarComponent implements OnInit {
   }
 
   setCurrentGoal(event: number) {
+    this.persistenceService.loadScienceGoal(event);
     this.persistenceService.currentGoal = event;
+    if (this.router.url.indexOf('science-goals') < 0) {
+      this.router.navigate(['science-goals/' + event]).then();
+    }
   }
 
   makeProjectImportModal() {

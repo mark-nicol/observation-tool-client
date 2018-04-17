@@ -25,15 +25,14 @@
     </a>
     <div class="ui link dropdown item"
          *ngIf="persistenceService.hasScienceGoals()"
-         [routerLink]="items[3].path"
-         [routerLinkActive]="['active']"
          suiDropdown>
       <i [class]="items[3].icon"></i>
       {{items[3].title}}
       <i class="dropdown icon"></i>
       <div class="menu" suiDropdownMenu>
         <div *ngFor="let goal of scienceGoals; let i = index"
-             class="item"
+             class="link item"
+             [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
              (click)="setCurrentGoal(i)">
           {{goal.prj_name}}
         </div>

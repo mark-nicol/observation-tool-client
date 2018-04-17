@@ -7,13 +7,27 @@
   </a>
   <div class="right menu"
        *ngIf="router.url.indexOf('field-setup') > -1 && targets !== undefined">
-    <a class="item"
-       *ngFor="let target of targets"
-       [routerLink]="['field-setup', target.prj_index + 1]"
-       [class.active]="router.url.indexOf('field-setup/'+(target.prj_index + 1)) > -1"
-       (click)="changeTarget(target.prj_index + 1)">
-      {{target.prj_sourceName}}
-    </a>
+    <div class="link item"
+         *ngIf="targets.length > 5"
+         [class.disabled]="lowerBound === 0"
+         (click)="scrollTargetsDown()">
+      <i class="chevron left icon"></i>
+    </div>
+    <ng-container *ngFor="let target of targets; let i = index">
+      <div class="link item"
+           *ngIf="i >= lowerBound && i <= upperBound"
+           [routerLink]="['field-setup', i]"
+           [class.active]="router.url.indexOf('field-setup/'+ i) > -1"
+           (click)="changeTarget(i)">
+        {{target.prj_sourceName}}
+      </div>
+    </ng-container>
+    <div class="link item"
+         *ngIf="targets.length > 5"
+         [class.disabled]="upperBound === targets.length - 1"
+         (click)="scrollTargetsUp()">
+      <i class="chevron right icon">
+      </i></div>
     <div class="link item"
          (click)="addNewTarget()"><i class="blue add icon"></i>
     </div>

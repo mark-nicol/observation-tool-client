@@ -109,7 +109,6 @@ export class FieldSetupComponent implements OnInit {
   initForm(index: number) {
     this.persistenceService.loadedProposal
       .subscribe(result => {
-        console.log(result);
         // const targetParams = result.prj_ScienceGoal[0].prj_TargetParameters.length > 1 ?
         //   result.prj_ScienceGoal[0].prj_TargetParameters[index] :
         //   result.prj_ScienceGoal[0].prj_TargetParameters;

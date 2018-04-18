@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectImportModal} from '../shared/components/project-import-modal/project-import-modal.component';
 import {ObsProject} from '../shared/classes/obsproject';
+import {ScienceGoal} from '../shared/classes/science-goal/science-goal';
 
 /**
  * The navbar component at the top of the application
@@ -22,6 +24,8 @@ export class NavbarComponent implements OnInit {
 
   /** Keeps track of the currently selected science goal */
   selectedGoal: any;
+
+  sciGoalDropdownOpen = false;
 
   /** All items to show on the navbar menu and their routing paths */
   items: NavItemInterface[] = [
@@ -47,9 +51,10 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router,
+  constructor(protected router: Router,
               protected persistenceService: PersistenceService,
-              private suiModalService: SuiModalService) {
+              private suiModalService: SuiModalService,
+              private location: Location) {
 
   }
 
@@ -57,6 +62,7 @@ export class NavbarComponent implements OnInit {
    * Sets the currently selected goal to the first in the list
    */
   ngOnInit() {
+
   }
 
   /**
@@ -86,14 +92,25 @@ export class NavbarComponent implements OnInit {
   exportClick() {
   }
 
+  get scienceGoals(): ScienceGoal[] {
+    return this.persistenceService.loadedProposal.value.prj_ScienceGoal;
+  }
+
+  setCurrentGoal(event: number) {
+    this.persistenceService.setCurrentTarget(0);
+    this.persistenceService.loadScienceGoal(event);
+    this.persistenceService.currentGoal = event;
+    if (this.router.url.indexOf('science-goals') < 0) {
+      this.router.navigate(['science-goals']).then();
+    }
+  }
+
   makeProjectImportModal() {
     this.suiModalService
       .open(new ProjectImportModal())
       .onApprove((result: ObsProject) => {
         this.persistenceService.selectProject(result);
-        if (this.router.url.indexOf('new-start') > -1) {
-          this.router.navigate(['/project']).then();
-        }
+        this.router.navigate(['/project']).then();
       })
       .onDeny(result => {
       });

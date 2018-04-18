@@ -3,10 +3,10 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {Observable} from 'rxjs/Rx';
-import {Speed} from '../../units/classes/speed';
 import {SinglePoint} from '../shared/classes/science-goal/single-point';
 import {PersistenceService} from '../shared/services/persistence.service';
 import {SourceComponent} from './components/source/source.component';
+import {Speed} from '../../units/classes/speed';
 
 /**
  * Handles the field setup page of a science goal
@@ -99,51 +99,50 @@ export class FieldSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.currentTarget = params.index ? params.index : this.persistenceService.currentTarget;
-      this.initForm(this.currentTarget);
+    this.persistenceService.currentTarget.subscribe(result => {
+      this.currentTarget = result;
+      this.initForm(result)
     });
     this.observeFormChanges();
   }
 
   initForm(index: number) {
-    this.persistenceService.getProposal()
+    this.persistenceService.loadedGoal
       .subscribe(result => {
-        console.log(result);
-        const targetParams = result.prj_ScienceGoal[0].prj_TargetParameters.length > 1 ?
-          result.prj_ScienceGoal[0].prj_TargetParameters[index] :
-          result.prj_ScienceGoal[0].prj_TargetParameters;
-        this.form.patchValue({
-          prj_ExpectedProperties: {
-            prj_expectedPeakFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakFluxDensity,
-            prj_desiredCircularPolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredCircularPolarizationPercentage,
-            prj_expectedPeakLineFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakLineFluxDensity,
-            prj_expectedLineWidth: targetParams.prj_ExpectedProperties.prj_expectedLineWidth,
-            prj_desiredLinePolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredLinePolarizationPercentage
-          },
-          type: targetParams.type,
-          prj_sourceName: targetParams.prj_sourceName,
-          solarSystemObject: targetParams.solarSystemObject,
-          prj_radialVelocityReferenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
-          prj_sourceCoordinates: {
-            system: targetParams.prj_sourceCoordinates.system,
-            type: targetParams.prj_sourceCoordinates.type,
-            val_longitude: targetParams.prj_sourceCoordinates.val_longitude,
-            val_latitude: targetParams.prj_sourceCoordinates.val_latitude,
-          },
-          prj_parallax: targetParams.prj_parallax,
-          prj_sourceVelocity: {
-            val_centerVelocity: targetParams.prj_sourceVelocity.val_centerVelocity,
-            dopplerCalcType: targetParams.prj_sourceVelocity.dopplerCalcType,
-            referenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
-            redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-              targetParams.prj_sourceVelocity.val_centerVelocity),
-              targetParams.prj_sourceVelocity.dopplerCalcType)
-          },
-          prj_pmRA: targetParams.prj_pmRA,
-          prj_pmDec: targetParams.prj_pmDec,
-        });
-        this.setSinglePoint(targetParams.prj_SinglePoint);
+        if (result.prj_TargetParameters[index]) {
+          const targetParams = result.prj_TargetParameters[index];
+          this.form.patchValue({
+            prj_ExpectedProperties: {
+              prj_expectedPeakFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakFluxDensity,
+              prj_desiredCircularPolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredCircularPolarizationPercentage,
+              prj_expectedPeakLineFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakLineFluxDensity,
+              prj_expectedLineWidth: targetParams.prj_ExpectedProperties.prj_expectedLineWidth,
+              prj_desiredLinePolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredLinePolarizationPercentage
+            },
+            type: targetParams.type,
+            prj_sourceName: targetParams.prj_sourceName,
+            solarSystemObject: targetParams.solarSystemObject,
+            prj_radialVelocityReferenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
+            prj_sourceCoordinates: {
+              system: targetParams.prj_sourceCoordinates.system,
+              type: targetParams.prj_sourceCoordinates.type,
+              val_longitude: targetParams.prj_sourceCoordinates.val_longitude,
+              val_latitude: targetParams.prj_sourceCoordinates.val_latitude,
+            },
+            prj_parallax: targetParams.prj_parallax,
+            prj_sourceVelocity: {
+              val_centerVelocity: targetParams.prj_sourceVelocity.val_centerVelocity,
+              dopplerCalcType: targetParams.prj_sourceVelocity.dopplerCalcType,
+              referenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
+              redshift: SourceComponent.getRedshift(Object.assign(new Speed,
+                targetParams.prj_sourceVelocity.val_centerVelocity),
+                targetParams.prj_sourceVelocity.dopplerCalcType)
+            },
+            prj_pmRA: targetParams.prj_pmRA,
+            prj_pmDec: targetParams.prj_pmDec,
+          });
+          // this.setSinglePoint(targetParams.prj_SinglePoint);
+        }
       });
 
   }

@@ -6,12 +6,45 @@
   </div>
   <ng-container *ngIf="persistenceService.hasProjectLoaded()">
     <a class="item"
-       *ngFor="let item of items"
-       [routerLink]="item.path"
+       [routerLink]="items[0].path"
        [routerLinkActive]="['active']">
-      <i [class]="item.icon"></i>
-      {{item.title}}
+      <i [class]="items[0].icon"></i>
+      {{items[0].title}}
     </a>
+    <a class="item"
+       [routerLink]="items[1].path"
+       [routerLinkActive]="['active']">
+      <i [class]="items[1].icon"></i>
+      {{items[1].title}}
+    </a>
+    <a class="item"
+       [routerLink]="items[2].path"
+       [routerLinkActive]="['active']">
+      <i [class]="items[2].icon"></i>
+      {{items[2].title}}
+    </a>
+    <div class="ui link dropdown item"
+         *ngIf="persistenceService.hasScienceGoals()"
+         suiDropdown>
+      <i [class]="items[3].icon"></i>
+      {{items[3].title}}
+      <i class="dropdown icon"></i>
+      <div class="menu" suiDropdownMenu>
+        <div *ngFor="let goal of scienceGoals; let i = index"
+             class="link item"
+             [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
+             (click)="setCurrentGoal(i)">
+          {{goal.prj_name}}
+        </div>
+        <div class="divider"></div>
+        <div class="header">
+          <div class="ui tiny compact labeled icon buttons">
+            <button class="ui blue button"><i class="add icon"></i>Add Goal</button>
+            <button class="ui red button"><i class="minus icon"></i>Remove Goal</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </ng-container>
   <div class="ui right dropdown item" suiDropdown>
     <i class="user icon"></i>

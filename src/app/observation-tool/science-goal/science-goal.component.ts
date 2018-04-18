@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ITargetParameters} from '../shared/interfaces/project/science-goal/target-parameters.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
-import {ScienceGoal} from '../shared/classes/science-goal/science-goal';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -23,7 +22,7 @@ export class ScienceGoalComponent implements OnInit {
     },
     'fieldSetup': {
       text: 'Field Setup',
-      path: 'field-setup/' + this.persistenceService.currentTarget
+      path: 'field-setup'
     },
     'spectralSetup': {
       text: 'Spectral Setup',
@@ -43,11 +42,14 @@ export class ScienceGoalComponent implements OnInit {
     }
   };
 
+  currentTarget: number;
   targets: ITargetParameters[];
-  selectedTarget: string;
 
   /** Iterator for pages */
   pageKeys: (o) => string[] = Object.keys;
+
+  lowerBound = 0;
+  upperBound = 4;
 
   /**
    * Constructor
@@ -56,20 +58,17 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.persistenceService.loadedProposal.subscribe(result => {
-      console.log(result);
-      // if (result.prj_ScienceGoal > 1) {
-      //   this.targets = result.prj_ScienceGoal[0].prj_TargetParameters;
-      // } else {
-      //   this.targets = result.prj_ScienceGoal.prj_TargetParameters;
-      //   this.selectedTarget = this.targets[0].prj_sourceName;
-      // }
+    this.persistenceService.loadScienceGoal(this.persistenceService.currentGoal);
+    this.persistenceService.loadedGoal.subscribe(result => {
+      this.targets = result.prj_TargetParameters;
+    });
+    this.persistenceService.currentTarget.subscribe(result => {
+      this.currentTarget = result;
     });
   }
 
   changeTarget(index: number) {
-    this.persistenceService.currentTarget = index;
-    this.pages.fieldSetup.path            = 'field-setup/' + this.persistenceService.currentTarget;
+    this.persistenceService.setCurrentTarget(index);
   }
 
   addNewTarget() {
@@ -93,6 +92,20 @@ export class ScienceGoalComponent implements OnInit {
 
   removeTarget() {
     this.targets.pop();
+  }
+
+  scrollTargetsDown() {
+    if (this.lowerBound > 0) {
+      this.lowerBound--;
+      this.upperBound--;
+    }
+  }
+
+  scrollTargetsUp() {
+    if (this.upperBound < this.targets.length - 1) {
+      this.lowerBound++;
+      this.upperBound++;
+    }
   }
 
 }

@@ -11,7 +11,7 @@ import {PersistenceService} from '../shared/services/persistence.service';
 
 const routes: Routes = [
   {
-    path: 'science-goals/:index',
+    path: 'science-goals',
     canActivate: [PersistenceService],
     component: ScienceGoalComponent,
     children: [
@@ -22,10 +22,6 @@ const routes: Routes = [
       {
         path: 'field-setup',
         component: FieldSetupComponent,
-      },
-      {
-        path: 'field-setup/:index',
-        component: FieldSetupComponent
       },
       {
         path: 'spectral-setup',

@@ -3,7 +3,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {SuiModule} from 'ng2-semantic-ui';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 
 import {ExpectedSourcePropertiesComponent} from './expected-source-properties.component';
 
@@ -25,7 +25,7 @@ describe('ExpectedSourcePropertiesComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        PersistenceService
+        ProjectService
       ]
     })
            .compileComponents();

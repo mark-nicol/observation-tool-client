@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {PersistenceService} from '../../services/persistence.service';
+import {ProjectService} from '../../services/project.service';
 import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../../classes/obsproject';
 
@@ -14,7 +14,7 @@ export class ProjectImportComponent implements OnInit {
   _selectedProject: ObsProject;
   @Output() selectedProjectEmitter = new EventEmitter();
 
-  constructor(private persistenceService: PersistenceService) { }
+  constructor(private persistenceService: ProjectService) { }
 
   ngOnInit() {
     this.projects = this.persistenceService.getAllProjects();

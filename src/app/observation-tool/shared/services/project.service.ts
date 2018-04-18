@@ -19,7 +19,7 @@ const httpOptions = {
  * Service to supply data to pages and sections from stored objects
  */
 @Injectable()
-export class PersistenceService implements CanActivate {
+export class ProjectService implements CanActivate {
 
 
   private baseUrl = 'http://localhost:8080';

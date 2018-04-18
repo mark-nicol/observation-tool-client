@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 
 /**
  * FOV Parameters component
@@ -16,7 +16,7 @@ export class FovParametersComponent implements OnInit {
 
   data: any;
 
-  constructor(private persistenceService: PersistenceService) {
+  constructor(private persistenceService: ProjectService) {
 
   }
 

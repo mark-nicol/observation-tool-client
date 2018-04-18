@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ITargetParameters} from '../shared/interfaces/project/science-goal/target-parameters.interface';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {ProjectService} from '../shared/services/project.service';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -54,7 +54,7 @@ export class ScienceGoalComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(protected router: Router, private persistenceService: PersistenceService) {
+  constructor(protected router: Router, private persistenceService: ProjectService) {
   }
 
   ngOnInit() {

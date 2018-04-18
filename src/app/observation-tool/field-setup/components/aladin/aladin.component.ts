@@ -3,7 +3,7 @@ import {
   ISinglePoint,
   ITargetParameters
 } from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 import {AladinService} from '../../services/aladin.service';
 import {FormGroup} from '@angular/forms';
 import {Longitude} from '../../../../units/classes/longitude';
@@ -27,7 +27,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   addingRect = false;
   addingFov = false;
 
-  constructor(private persistenceService: PersistenceService,
+  constructor(private persistenceService: ProjectService,
               private aladinService: AladinService) {
   }
 

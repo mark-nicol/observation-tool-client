@@ -3,7 +3,7 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {ObsProposal} from '../../../shared/classes/obsproposal';
 import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.interface';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 
 /**
  * The proposalForm component
@@ -158,7 +158,7 @@ export class ProposalComponent implements OnInit {
     console.log(event);
   }
 
-  constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
+  constructor(private persistenceService: ProjectService, private formBuilder: FormBuilder) {
     // this.createForm();
   }
 

@@ -23,7 +23,7 @@ export class PersistenceService implements CanActivate {
 
 
   private baseUrl = 'http://localhost:8080';
-  private _currentTarget = 0;
+  private _currentTarget = new BehaviorSubject<number>(0);
   private _loadedProject = new BehaviorSubject<ObsProject>(null);
   private _loadedProposal = new BehaviorSubject<ObsProposal>(null);
   private _loadedGoal = new BehaviorSubject<ScienceGoal>(null);
@@ -35,12 +35,12 @@ export class PersistenceService implements CanActivate {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  get currentTarget(): number {
+  get currentTarget(): BehaviorSubject<number> {
     return this._currentTarget;
   }
 
-  set currentTarget(value: number) {
-    this._currentTarget = value;
+  setCurrentTarget(value: number) {
+    this._currentTarget.next(value);
   }
 
   get currentGoal(): number {

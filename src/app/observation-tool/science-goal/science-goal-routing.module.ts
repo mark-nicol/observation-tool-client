@@ -24,10 +24,6 @@ const routes: Routes = [
         component: FieldSetupComponent,
       },
       {
-        path: 'field-setup/:index',
-        component: FieldSetupComponent
-      },
-      {
         path: 'spectral-setup',
         component: SpectralSetupComponent,
       },

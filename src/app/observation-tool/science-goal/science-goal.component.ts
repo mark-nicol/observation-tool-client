@@ -22,7 +22,7 @@ export class ScienceGoalComponent implements OnInit {
     },
     'fieldSetup': {
       text: 'Field Setup',
-      path: 'field-setup/' + this.persistenceService.currentTarget
+      path: 'field-setup'
     },
     'spectralSetup': {
       text: 'Spectral Setup',
@@ -59,15 +59,14 @@ export class ScienceGoalComponent implements OnInit {
 
   ngOnInit() {
     this.persistenceService.loadScienceGoal(this.persistenceService.currentGoal);
-    this.persistenceService.loadedProposal.subscribe(result => {
-      this.targets = result.prj_ScienceGoal[this.persistenceService.currentGoal].prj_TargetParameters;
+    this.persistenceService.loadedGoal.subscribe(result => {
+      this.targets = result.prj_TargetParameters;
       this.selectedTarget = this.targets[0].prj_sourceName;
     });
   }
 
   changeTarget(index: number) {
-    this.persistenceService.currentTarget = index;
-    this.pages.fieldSetup.path = 'field-setup/' + this.persistenceService.currentTarget;
+    this.persistenceService.setCurrentTarget(index);
   }
 
   addNewTarget() {

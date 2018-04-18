@@ -99,17 +99,19 @@ export class FieldSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.currentTarget = params.index ? params.index : this.persistenceService.currentTarget;
-      this.initForm(this.currentTarget);
-    });
-    this.observeFormChanges();
+    this.persistenceService.currentTarget.subscribe(result => console.log(result));
+    // this.activatedRoute.params.subscribe(params => {
+    //   this.currentTarget = this.persistenceService.currentTarget;
+    //   this.initForm(this.currentTarget);
+    // });
+    // this.observeFormChanges();
   }
 
   initForm(index: number) {
     this.persistenceService.loadedGoal
       .subscribe(result => {
         const targetParams = result.prj_TargetParameters[index];
+        console.log(targetParams);
         this.form.patchValue({
           prj_ExpectedProperties: {
             prj_expectedPeakFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakFluxDensity,

@@ -42,8 +42,8 @@ export class ScienceGoalComponent implements OnInit {
     }
   };
 
+  currentTarget: number;
   targets: ITargetParameters[];
-  selectedTarget: string;
 
   /** Iterator for pages */
   pageKeys: (o) => string[] = Object.keys;
@@ -61,7 +61,9 @@ export class ScienceGoalComponent implements OnInit {
     this.persistenceService.loadScienceGoal(this.persistenceService.currentGoal);
     this.persistenceService.loadedGoal.subscribe(result => {
       this.targets = result.prj_TargetParameters;
-      this.selectedTarget = this.targets[0].prj_sourceName;
+    });
+    this.persistenceService.currentTarget.subscribe(result => {
+      this.currentTarget = result;
     });
   }
 

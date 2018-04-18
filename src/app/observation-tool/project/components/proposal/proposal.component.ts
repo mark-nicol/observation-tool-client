@@ -164,6 +164,11 @@ export class ProposalComponent implements OnInit {
 
   ngOnInit() {
     this.persistenceService.loadedProposal.subscribe(result => {
+      if (result.prp_title === undefined) {
+        this.persistenceService.loadedProject.subscribe(res => {
+          this.proposalForm.patchValue({prp_title: res.prj_projectName});
+        });
+      }
       this.proposalForm.patchValue(result);
     });
     this.observeFormChanges();

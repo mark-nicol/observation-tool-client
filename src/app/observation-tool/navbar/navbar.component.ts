@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
 import {PersistenceService} from '../shared/services/persistence.service';
@@ -52,7 +53,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(protected router: Router,
               protected persistenceService: PersistenceService,
-              private suiModalService: SuiModalService) {
+              private suiModalService: SuiModalService,
+              private location: Location) {
 
   }
 
@@ -97,8 +99,11 @@ export class NavbarComponent implements OnInit {
   setCurrentGoal(event: number) {
     this.persistenceService.loadScienceGoal(event);
     this.persistenceService.currentGoal = event;
+    const url = this.router.createUrlTree(['science-goals/', event]).toString();
     if (this.router.url.indexOf('science-goals') < 0) {
       this.router.navigate(['science-goals/' + event]).then();
+    } else {
+      this.location.go(url);
     }
   }
 

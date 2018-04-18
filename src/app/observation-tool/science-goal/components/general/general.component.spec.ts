@@ -1,7 +1,7 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 
 import {GeneralComponent} from './general.component';
 
@@ -15,7 +15,7 @@ describe('GeneralComponent', () => {
                                        GeneralComponent
                                      ],
                                      providers:    [
-                                       PersistenceService
+                                       ProjectService
                                      ],
                                      imports:      [
                                        ReactiveFormsModule,

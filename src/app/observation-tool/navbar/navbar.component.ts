@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {ProjectService} from '../shared/services/project.service';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectImportModal} from '../shared/components/project-import-modal/project-import-modal.component';
 import {ObsProject} from '../shared/classes/obsproject';
@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit {
   ];
 
   constructor(protected router: Router,
-              protected persistenceService: PersistenceService,
+              protected persistenceService: ProjectService,
               private suiModalService: SuiModalService,
               private location: Location) {
 

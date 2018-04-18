@@ -1,6 +1,6 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 
 import {AladinComponent} from './aladin.component';
 
@@ -12,7 +12,7 @@ describe('AladinComponent', () => {
     TestBed.configureTestingModule({
                                      imports:      [HttpClientTestingModule],
                                      declarations: [AladinComponent],
-                                     providers:    [PersistenceService]
+                                     providers:    [ProjectService]
                                    })
            .compileComponents();
   }));

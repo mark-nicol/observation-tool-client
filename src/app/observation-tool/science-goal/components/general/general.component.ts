@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ScienceGoal} from '../../../shared/classes/science-goal/science-goal';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 
 /**
  * General science goal page component
@@ -18,7 +18,7 @@ export class GeneralComponent implements OnInit {
   generalForm: FormGroup;
   scienceGoal: ScienceGoal;
 
-  constructor(private persistenceService: PersistenceService,
+  constructor(private persistenceService: ProjectService,
               private formBuilder: FormBuilder) {
     this.createForm();
   }

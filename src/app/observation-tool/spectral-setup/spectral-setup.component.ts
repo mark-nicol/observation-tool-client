@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {ProjectService} from '../shared/services/project.service';
 import {VisualisationViewerComponent} from './components/visualisation-viewer/visualisation-viewer.component';
 import {SpectralDataService} from './services/spectral-data.service';
 
@@ -27,7 +27,7 @@ export class SpectralSetupComponent implements OnInit {
    * @param persistenceService Injected service sent to super class
    * @param spectralDataService
    */
-  constructor(private persistenceService: PersistenceService,
+  constructor(private persistenceService: ProjectService,
               private spectralDataService: SpectralDataService) {
 
   }

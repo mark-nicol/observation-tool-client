@@ -1,21 +1,21 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {inject, TestBed} from '@angular/core/testing';
 
-import {PersistenceService} from './persistence.service';
+import {ProjectService} from './project.service';
 
-describe('PersistenceService', () => {
+describe('ProjectService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule
       ],
       providers: [
-        PersistenceService
+        ProjectService
       ]
     });
   });
 
-  it('should be created', inject([PersistenceService], (service: PersistenceService) => {
+  it('should be created', inject([ProjectService], (service: ProjectService) => {
     expect(service).toBeTruthy();
   }));
 });

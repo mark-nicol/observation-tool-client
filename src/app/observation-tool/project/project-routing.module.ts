@@ -3,12 +3,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {PiEntryComponent} from './components/pi-entry/pi-entry.component';
 import {PlannedObservingComponent} from './components/planned-observing/planned-observing.component';
 import {ProposalComponent} from './components/proposal/proposal.component';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {ProjectService} from '../shared/services/project.service';
 
 const routes: Routes = [
   {
     path: 'project',
-    canActivate: [PersistenceService],
+    canActivate: [ProjectService],
     children: [
       {
         path: 'pi-entry',

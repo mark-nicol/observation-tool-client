@@ -178,13 +178,13 @@
 <path fill="none" stroke="#000000" d="M579.4097,-122.2396C579.4097,-137.5706 579.4097,-157 579.4097,-157 579.4097,-157 664.6446,-157 664.6446,-157"/>
 <polygon fill="#000000" stroke="#000000" points="664.6447,-160.5001 674.6446,-157 664.6446,-153.5001 664.6447,-160.5001"/>
 </g>
-<!-- PersistenceService -->
+<!-- ProjectService -->
 <g id="node13" class="node">
 <title>PersistenceService</title>
 <ellipse fill="#fdb462" stroke="#000000" cx="419" cy="-104" rx="83.3577" ry="18"/>
 <text text-anchor="middle" x="419" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">PersistenceService</text>
 </g>
-<!-- PersistenceService&#45;&gt;SharedModule -->
+<!-- ProjectService&#45;&gt;SharedModule -->
 <g id="edge12" class="edge">
 <title>PersistenceService&#45;&gt;SharedModule</title>
 <path fill="none" stroke="#000000" d="M455.9281,-120.1562C455.9281,-137.318 455.9281,-162 455.9281,-162 455.9281,-162 664.5191,-162 664.5191,-162"/>

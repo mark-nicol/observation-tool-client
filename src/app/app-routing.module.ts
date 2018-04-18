@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core'
 import {RouterModule, Routes} from '@angular/router'
 import {StartComponent} from './observation-tool/shared/components/start/start.component';
-import {PersistenceService} from './observation-tool/shared/services/persistence.service';
+import {ProjectService} from './observation-tool/shared/services/project.service';
 
 const routes: Routes = [
   {

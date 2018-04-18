@@ -5,7 +5,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {SuiModule} from 'ng2-semantic-ui';
 import {DegreesPipe} from '../../../shared/pipes/degrees.pipe';
 import {SexagesimalPipe} from '../../../shared/pipes/sexagesimal.pipe';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 import {SimbadService} from '../../../shared/services/simbad.service';
 import {SystemService} from '../../../shared/services/system.service';
 
@@ -30,7 +30,7 @@ describe('SourceComponent', () => {
         RouterTestingModule
       ],
       providers: [
-        PersistenceService,
+        ProjectService,
         SystemService,
         SimbadService,
       ]

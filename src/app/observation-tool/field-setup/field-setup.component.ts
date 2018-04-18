@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {Observable} from 'rxjs/Rx';
 import {SinglePoint} from '../shared/classes/science-goal/single-point';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {ProjectService} from '../shared/services/project.service';
 import {SourceComponent} from './components/source/source.component';
 import {Speed} from '../../units/classes/speed';
 
@@ -93,7 +93,7 @@ export class FieldSetupComponent implements OnInit {
    */
   constructor(private config: SuiPopupConfig,
               private formBuilder: FormBuilder,
-              private persistenceService: PersistenceService,
+              private persistenceService: ProjectService,
               private activatedRoute: ActivatedRoute) {
     this.config.delay = 1000;
   }

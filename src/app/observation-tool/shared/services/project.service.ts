@@ -97,6 +97,11 @@ export class ProjectService implements CanActivate {
           if (goal.prj_TargetParameters && !(goal.prj_TargetParameters instanceof Array)) {
             goal.prj_TargetParameters = [goal.prj_TargetParameters];
           }
+          for (const target of goal.prj_TargetParameters) {
+            if (target.prj_SinglePoint && !(target.prj_SinglePoint instanceof Array)) {
+              target.prj_SinglePoint = [target.prj_SinglePoint];
+            }
+          }
         }
       }
 

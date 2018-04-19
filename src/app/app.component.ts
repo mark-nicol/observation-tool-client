@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, ViewContainerRef} from '@angular/core';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
+import {ToastsManager} from 'ng2-toastr';
 
 /**
  * The main app component
@@ -16,7 +17,8 @@ export class AppComponent {
   /** The title of the app */
   title = 'app';
 
-  constructor(config: SuiPopupConfig) {
+  constructor(config: SuiPopupConfig, toastr: ToastsManager, vRef: ViewContainerRef) {
     config.delay = 1000;
+    toastr.setRootViewContainerRef(vRef);
   }
 }

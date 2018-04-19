@@ -87,7 +87,6 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.form);
     this.chosenSystem = this.systemService.getSystem(this.form.value.chosenSystem);
   }
 

@@ -29,6 +29,21 @@ export class FieldSetupComponent implements OnInit {
       prj_desiredLinePolarizationPercentage: 0.0
     }),
     prj_SinglePoint: this.formBuilder.array([]),
+    prj_Rectangle: this.formBuilder.group({
+      prj_centre: this.formBuilder.group({
+        system: '',
+        type: '',
+        val_fieldName: '',
+        val_latitude: this.formBuilder.group({unit: '', content: 0.0}),
+        val_longitude: this.formBuilder.group({unit: '', content: 0.0})
+      }),
+      prj_long: this.formBuilder.group({unit: '', content: 0.0}),
+      prj_name: '',
+      prj_pALong: this.formBuilder.group({unit: '', content: 0.0}),
+      prj_referenceFrequency: this.formBuilder.group({unit: '', content: 0.0}),
+      prj_short: this.formBuilder.group({unit: '', content: 0.0}),
+      prj_spacing: this.formBuilder.group({userUnit: '', unit: '', content: 0.0})
+    }),
     index: -1,
     prj_isMosaic: true,
     prj_nonSiderealMotion: false,
@@ -141,7 +156,11 @@ export class FieldSetupComponent implements OnInit {
             prj_pmRA: targetParams.prj_pmRA,
             prj_pmDec: targetParams.prj_pmDec,
           });
-          // this.setSinglePoint(targetParams.prj_SinglePoint);
+          if (targetParams.prj_Rectangle) {
+            this.form.patchValue({prj_Rectangle: targetParams.prj_Rectangle});
+          } else if (targetParams.prj_SinglePoint) {
+            this.setSinglePoint(targetParams.prj_SinglePoint);
+          }
         }
       });
 

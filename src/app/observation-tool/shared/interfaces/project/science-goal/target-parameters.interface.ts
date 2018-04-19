@@ -19,6 +19,7 @@ export interface ITargetParameters {
   prj_pmRA: AngularVelocity;
   prj_index: number;
   prj_SinglePoint?: ISinglePoint[];
+  prj_Rectangle?: IRectangle;
   solarSystemObject: any/*SolarSystemObjects*/; // TODO change
   prj_ExpectedProperties: IExpectedProperties;
   prj_parallax: Angle;

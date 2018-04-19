@@ -139,6 +139,10 @@ export class ProjectService implements CanActivate {
     console.log(error);
     if (error.status === 0) { // No server found or CORS
       this.toastr.error('Could not connect to server', 'Error');
+    } else if (error.status === 404) {
+      this.toastr.error('Not found', 'Error');
+    } else if (error.status === 500) {
+      this.toastr.error('Server error', 'Error');
     } else {
       this.toastr.error('Other error')
     }

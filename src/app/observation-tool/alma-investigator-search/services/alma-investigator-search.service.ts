@@ -1,6 +1,5 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {URLSearchParams} from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -14,9 +13,6 @@ export class AlmaInvestigatorSearchService {
   /** URL of the ALMA user lookup */
   private piUrl = 'https://cycle-5.asa.alma.cl/ObsprepSubmissionService/UserLookup?action=MatchStrings';
 
-  /** Parameters for the search */
-  private searchParams: URLSearchParams;
-
   /**
    * Sets search params to new
    *
@@ -24,7 +20,6 @@ export class AlmaInvestigatorSearchService {
    * @param http Injected Http service
    */
   constructor(private http: HttpClient) {
-    this.searchParams = new URLSearchParams();
   }
 
   /**

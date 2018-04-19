@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.interface';
 
@@ -14,7 +14,7 @@ import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.in
              styleUrls: ['./results-table.component.css']
            })
 
-export class ResultsTableComponent {
+export class ResultsTableComponent implements OnInit {
 
   /** Search results from PI search */
   @Input() searchResults: Observable<IAlmaInvestigator[]>;
@@ -23,6 +23,9 @@ export class ResultsTableComponent {
   selectedPi: IAlmaInvestigator;
 
   constructor() {
+  }
+
+  ngOnInit() {
   }
 
   /**

@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../classes/obsproject';
@@ -7,6 +7,9 @@ import {TargetParameters} from '../classes/science-goal/target-parameters';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {ScienceGoal} from '../classes/science-goal/science-goal';
+import {catchError, tap} from 'rxjs/operators';
+import {ToastsManager} from 'ng2-toastr';
+import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -32,7 +35,9 @@ export class ProjectService implements CanActivate {
   /**
    * Constructor, loads data and sets members
    */
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient,
+              private router: Router,
+              private toastr: ToastsManager) {
   }
 
   get currentTarget(): BehaviorSubject<number> {
@@ -52,7 +57,12 @@ export class ProjectService implements CanActivate {
   }
 
   getAllProjects(): Observable<ObsProject[]> {
-    return this.http.get<ObsProject[]>(`${this.baseUrl}/projects`);
+    return this.http.get<ObsProject[]>(`${this.baseUrl}/projects`).pipe(
+      tap(
+        data => {},
+        error => this.handleError(error)
+      )
+    );
   }
 
   get loadedProject(): BehaviorSubject<ObsProject> {
@@ -123,6 +133,16 @@ export class ProjectService implements CanActivate {
     }
     this.router.navigate(['/new-start']).then();
     return false;
+  }
+
+  handleError(error: HttpErrorResponse) {
+    console.log(error);
+    if (error.status === 0) { // No server found or CORS
+      this.toastr.error('Could not connect to server', 'Error');
+    } else {
+      this.toastr.error('Other error')
+    }
+    return new ErrorObservable('Broke');
   }
 
 }

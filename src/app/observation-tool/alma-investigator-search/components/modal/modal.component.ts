@@ -10,16 +10,17 @@ interface ModalContext {
 }
 
 @Component({
-             selector: 'app-modal',
-             templateUrl: './modal.component.html',
-             styleUrls: ['./modal.component.css'],
-             providers: [AlmaInvestigatorSearchService]
-           })
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.css'],
+  providers: [AlmaInvestigatorSearchService]
+})
 
 export class AlmaInvestigatorSearchModalComponent {
 
   searchResults: IAlmaInvestigator[];
   isSearching = false;
+  resultsFound = false;
 
   constructor(public modal: SuiModal<ModalContext>,
               private almaInvestigatorSearchService: AlmaInvestigatorSearchService) {
@@ -31,16 +32,26 @@ export class AlmaInvestigatorSearchModalComponent {
       searchType = 'Uid';
     }
     this.isSearching = true;
+    this.resultsFound = false;
     this.almaInvestigatorSearchService.search(searchType, searchString)
-        .subscribe(
-          results => this.searchResults = results,
-          (error: HttpErrorResponse) => {
-            this.isSearching = false;
-            console.log(error);
-            sessionStorage.setItem('modalError', 'unknown error');
-            this.modal.deny(undefined);
-          },
-          () => this.isSearching = false);
+      .subscribe(
+        (results: IAlmaInvestigator[]) => {
+          if (results.length > 0) {
+            this.resultsFound = true;
+          }
+          this.searchResults = results;
+        },
+        (error: HttpErrorResponse) => {
+          this.isSearching = false;
+          this.resultsFound = false;
+          console.log(error);
+          sessionStorage.setItem('modalError', 'unknown error');
+          this.modal.deny(undefined);
+        },
+        () => {
+          this.isSearching = false;
+        }
+      );
   }
 
 }
@@ -49,11 +60,11 @@ export class AlmaInvestigatorSearchModal extends ComponentModalConfig<ModalConte
 
   constructor(name?,
               title = 'Investigator Search',
-              size  = ModalSize.Large) {
+              size = ModalSize.Large) {
     super(AlmaInvestigatorSearchModalComponent, {name, title});
     this.transitionDuration = 200;
-    this.size               = size;
-    this.mustScroll         = true;
-    this.isClosable         = true;
+    this.size = size;
+    this.mustScroll = true;
+    this.isClosable = true;
   }
 }

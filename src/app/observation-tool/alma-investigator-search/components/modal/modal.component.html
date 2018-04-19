@@ -6,7 +6,7 @@
 <div class="content">
   <app-refine-panel [name]="this.modal.context.name"
                     (refineSearch)="search($event[0], $event[1])"></app-refine-panel>
-  <div *ngIf="searchResults; else noResults">
+  <div *ngIf="resultsFound; else noResults">
     <app-results-table [searchResults]="searchResults"></app-results-table>
   </div>
   <ng-template #noResults><h4>No Results</h4></ng-template>

@@ -95,10 +95,19 @@ export class AladinComponent implements OnInit, AfterViewInit {
       this.aladinService.goToRaDec(this.form.value.prj_sourceCoordinates.val_longitude.content, this.form.value.prj_sourceCoordinates.val_latitude.content);
       this.aladinService.clearPointings();
       value.prj_SinglePoint.forEach((point: ISinglePoint) => {
-        this.aladinService.addPointing(
-          value.prj_sourceCoordinates.val_longitude.content + Object.assign(new Longitude, point.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
-          value.prj_sourceCoordinates.val_latitude.content + Object.assign(new Latitude, point.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
-        );
+        if (point.prj_centre.type === 'RELATIVE') {
+          this.aladinService.addPointing(
+            Object.assign(new Longitude, value.prj_sourceCoordinates.val_longitude).getValueInUnits(LongitudeUnits.DEG) +
+            Object.assign(new Longitude, point.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
+            Object.assign(new Latitude, value.prj_sourceCoordinates.val_latitude).getValueInUnits(LatitudeUnits.DEG) +
+            Object.assign(new Latitude, point.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
+          );
+        } else if (point.prj_centre.type === 'ABSOLUTE') {
+         this.aladinService.addPointing(
+           Object.assign(new Longitude, point.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
+           Object.assign(new Latitude, point.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
+         );
+        }
       });
     });
   }

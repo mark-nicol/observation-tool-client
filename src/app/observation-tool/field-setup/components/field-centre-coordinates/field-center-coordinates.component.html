@@ -72,7 +72,7 @@
       </label>
       <sui-select id="offsetSelector"
                   class="selection"
-                  [(ngModel)]="offsetUnit"
+                  [ngModel]="offsetUnit"
                   [ngModelOptions]="{standalone: true}">
         <sui-select-option *ngFor="let unit of offsetUnits"
                            value="{{unit}}">

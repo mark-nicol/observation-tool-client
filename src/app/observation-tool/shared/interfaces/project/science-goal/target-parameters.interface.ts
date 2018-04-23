@@ -34,11 +34,11 @@ export interface ISinglePoint extends IField {
 }
 
 export interface IRectangle extends IField {
-  pALong: Angle;
-  long: Angle;
-  short: Angle;
-  spacing: any; // TODO Userunit
-  referenceFrequency: Frequency;
+  prj_pALong: Angle;
+  prj_long: Angle;
+  prj_short: Angle;
+  prj_spacing: any; // TODO Userunit
+  prj_referenceFrequency: Frequency;
 }
 
 export interface ISkyCoordinates {

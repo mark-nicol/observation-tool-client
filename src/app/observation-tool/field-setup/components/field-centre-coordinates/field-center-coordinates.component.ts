@@ -58,10 +58,8 @@ export class FieldCenterCoordinatesComponent implements OnInit {
     'rad'
   ];
 
-  _offsetUnit = this.offsetUnits[1];
-
   get offsetUnit() {
-    return this._offsetUnit;
+    return this.form.value.prj_SinglePoint[0].prj_centre.val_longitude.unit;
   }
 
   set offsetUnit(value: string) {
@@ -79,7 +77,6 @@ export class FieldCenterCoordinatesComponent implements OnInit {
       });
     }
     this.form.get('prj_SinglePoint').patchValue(newValueArray);
-    this._offsetUnit = value;
   }
 
   constructor(protected systemService: SystemService,
@@ -111,11 +108,11 @@ export class FieldCenterCoordinatesComponent implements OnInit {
       prj_name: '',
       prj_centre: this.formBuilder.group({
         val_longitude: this.formBuilder.group({
-          unit: this._offsetUnit,
+          unit: this.offsetUnit,
           content: [0.0, Validators.required]
         }),
         val_latitude: this.formBuilder.group({
-          unit: this._offsetUnit,
+          unit: this.offsetUnit,
           content: [0.0, Validators.required]
         }),
         val_fieldName: `Field-${this.singlePoint.length + 1}`

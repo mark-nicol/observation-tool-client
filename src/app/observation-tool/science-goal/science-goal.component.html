@@ -1,41 +1,83 @@
-<div class="ui sticky tabular menu" style="z-index: 1;">
-  <a class="item"
-     *ngFor="let page of pageKeys(pages)"
-     [routerLink]="pages[page].path"
-     [class.active]="router.url.indexOf(pages[page].path) > -1">
-    {{pages[page].text}}
-  </a>
-  <div class="right menu"
-       *ngIf="router.url.indexOf('field-setup') > -1 && targets !== undefined">
-    <div class="link item"
-         *ngIf="targets.length > 5"
-         [class.disabled]="lowerBound === 0"
-         (click)="scrollTargetsDown()">
-      <i class="chevron left icon"></i>
-    </div>
-    <ng-container *ngFor="let target of targets; let i = index">
+<!--<div class="ui sticky tabular menu" style="z-index: 1;">-->
+<!--<div class="link item"-->
+<!--*ngFor="let page of pageKeys(pages)"-->
+<!--[routerLink]="pages[page].path"-->
+<!--[class.active]="router.url.indexOf(pages[page].path) > -1">-->
+<!--{{pages[page].text}}-->
+<!--</div>-->
+<!--<div class="right menu"-->
+<!--*ngIf="router.url.indexOf('field-setup') > -1 && targets !== undefined">-->
+<!--<div class="link item"-->
+<!--*ngIf="targets.length > 5"-->
+<!--[class.disabled]="lowerBound === 0"-->
+<!--(click)="scrollTargetsDown()">-->
+<!--<i class="chevron left icon"></i>-->
+<!--</div>-->
+<!--<ng-container *ngFor="let target of targets; let i = index">-->
+<!--<div class="link item"-->
+<!--[class.active]="i === currentTarget"-->
+<!--*ngIf="i >= lowerBound && i <= upperBound"-->
+<!--(click)="changeTarget(i)">-->
+<!--{{target.prj_sourceName}}-->
+<!--</div>-->
+<!--</ng-container>-->
+<!--<div class="link item"-->
+<!--*ngIf="targets.length > 5"-->
+<!--[class.disabled]="upperBound === targets.length - 1"-->
+<!--(click)="scrollTargetsUp()">-->
+<!--<i class="chevron right icon">-->
+<!--</i></div>-->
+<!--<div class="link item"-->
+<!--(click)="addNewTarget()"><i class="blue add icon"></i>-->
+<!--</div>-->
+<!--<div class="link item"-->
+<!--(click)="removeTarget()">-->
+<!--<i class="red delete icon"></i></div>-->
+<!--</div>-->
+<!--</div>-->
+<div class="ui grid">
+  <div class="two wide column">
+    <div class="ui left attached fluid vertical menu">
       <div class="link item"
-           [class.active]="i === currentTarget"
-           *ngIf="i >= lowerBound && i <= upperBound"
-           (click)="changeTarget(i)">
-        {{target.prj_sourceName}}
+           [routerLink]="'general'"
+           [routerLinkActive]="['active']">
+        General
       </div>
-    </ng-container>
-    <div class="link item"
-         *ngIf="targets.length > 5"
-         [class.disabled]="upperBound === targets.length - 1"
-         (click)="scrollTargetsUp()">
-      <i class="chevron right icon">
-      </i></div>
-    <div class="link item"
-         (click)="addNewTarget()"><i class="blue add icon"></i>
+      <div class="header item">
+        Field Setup
+        <div class="menu">
+          <div *ngFor="let target of targets; let i = index"
+               class="link item"
+               [routerLink]="'field-setup'"
+               [class.active]="router.url.indexOf('field-setup') > -1 && i === currentTarget"
+               (click)="changeTarget(i)">
+            {{target.prj_sourceName}}
+          </div>
+        </div>
+      </div>
+      <div class="link item"
+           [routerLink]="'spectral-setup'"
+           [routerLinkActive]="['active']">
+        Spectral Setup
+      </div>
+      <div class="link item"
+           [routerLink]="'calibration-setup'"
+           [routerLinkActive]="['active']">
+        Calibration Setup
+      </div>
+      <div class="link item"
+           [routerLink]="'control-performance'"
+           [routerLinkActive]="['active']">
+        Control and Performance
+      </div>
+      <div class="link item"
+           [routerLink]="'technical-justification'"
+           [routerLinkActive]="['active']">
+        Technical Justification
+      </div>
     </div>
-    <div class="link item"
-         (click)="removeTarget()">
-      <i class="red delete icon"></i></div>
   </div>
-</div>
-<!--<p style="height: 1.95em"></p>-->
-<div class="ui bottom attached segment" style="z-index: 0; background: snow">
-  <router-outlet></router-outlet>
+  <div class="fourteen wide column">
+    <router-outlet></router-outlet>
+  </div>
 </div>

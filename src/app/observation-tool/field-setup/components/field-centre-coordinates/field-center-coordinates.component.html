@@ -1,5 +1,4 @@
-<h4 class="ui dividing header">Field Centre Coordinates</h4>
-<form class="ui form"
+<form class="ui tiny form"
       [formGroup]="form">
   <div class="three fields">
     <div class="field">
@@ -165,7 +164,8 @@
 
         <!-- Lat offset input -->
         <div class="field" formGroupName="val_latitude">
-          <div *ngIf="form.value.prj_Rectangle.prj_centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
+          <div
+            *ngIf="form.value.prj_Rectangle.prj_centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
           <ng-template #absoluteLatLabel>
             <label>
               {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
@@ -251,16 +251,17 @@
             <sui-select-option value="arcsec">arcsec</sui-select-option>
           </sui-select>
         </div>
-        <div class="ui right floated tiny compact blue labeled icon buttons">
-          <button
-            class="ui button">
-            <i class="refresh icon"></i>Reset to Nyquist
-          </button>
-          <button class="ui button">
-            <i class="upload icon"></i> Export
-          </button>
-        </div>
       </div>
+      <div class="ui right floated tiny compact blue labeled icon buttons">
+        <button
+          class="ui button">
+          <i class="refresh icon"></i>Reset to Nyquist
+        </button>
+        <button class="ui button">
+          <i class="upload icon"></i> Export
+        </button>
+      </div>
+
     </div>
   </ng-template>
 </form>

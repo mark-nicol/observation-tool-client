@@ -1,19 +1,43 @@
-<div class="ui internally celled two column grid">
-  <div class="sixteen wide tablet six wide large screen seven wide widescreen column">
-    <spacial-image [resolveCoordinates]="resolveCoordinates"
-                   [form]="form"></spacial-image>
-    <div class="ui grid">
-      <div class="sixteen wide large screen eight wide widescreen column">
-        <fov-parameters></fov-parameters>
+<div class="ui two column grid">
+  <div class="seven wide column">
+    <div class="ui equal width grid">
+      <div class="row">
+        <div class="column">
+          <h4 class="ui top attached blue header">Spatial Image</h4>
+          <div class="ui bottom attached compact raised segment">
+            <spacial-image [resolveCoordinates]="resolveCoordinates"
+                           [form]="form"></spacial-image>
+          </div>
+        </div>
       </div>
-      <div class="sixteen wide large screen eight wide widescreen column">
-        <image-query></image-query>
+      <div class="two column row">
+        <div class="column">
+          <h4 class="ui top attached blue header">FOV Parameters</h4>
+          <div #fovParamSeg class="ui bottom attached compact raised segment">
+            <fov-parameters></fov-parameters>
+          </div>
+        </div>
+        <div class="column">
+          <h4 class="ui top attached blue header">Image Query</h4>
+          <div class="ui bottom attached compact raised segment" [ngStyle]="{'height': fovParamSeg.offsetHeight}">
+            <image-query></image-query>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="sixteen wide tablet ten wide large screen nine wide widescreen column">
-    <field-source [form]="form" (resolveEmitter)="resolveCoordinates = $event"></field-source>
-    <source-expected-properties [form]="form.get('prj_ExpectedProperties')"></source-expected-properties>
-    <field-center-coordinates [form]="form"></field-center-coordinates>
+  <div class="nine wide column">
+    <h4 class="ui top attached blue header">Source</h4>
+    <div class="ui bottom attached compact raised segment">
+      <field-source [form]="form" (resolveEmitter)="resolveCoordinates = $event"></field-source>
+    </div>
+    <h4 class="ui top attached blue header">Expected Source Properties</h4>
+    <div class="ui bottom attached compact raised segment">
+      <source-expected-properties [form]="form.get('prj_ExpectedProperties')"></source-expected-properties>
+    </div>
+    <h4 class="ui top attached blue header">Field Centre Coordinates</h4>
+    <div class="ui bottom attached compact raised segment">
+      <field-center-coordinates [form]="form"></field-center-coordinates>
+    </div>
   </div>
 </div>

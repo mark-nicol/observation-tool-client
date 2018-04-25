@@ -1,8 +1,9 @@
 <div class="ui fluid container">
   <div *ngIf="lineSelecting">
-    <h4 class="ui dividing header">Spectral Line Selection</h4>
-    <app-line-selection (linesSelected)="lineSelecting = false"></app-line-selection>
-    <div style="height: 2em"></div>
+    <h3 class="ui top attached blue header">Spectral Line Selection</h3>
+    <div class="ui bottom attached segment">
+      <app-line-selection (linesSelected)="lineSelecting = false"></app-line-selection>
+    </div>
   </div>
   <div *ngIf="!lineSelecting" class="ui two column grid">
     <div class="sixteen wide tablet ten wide large screen ten wide widescreen centered column">

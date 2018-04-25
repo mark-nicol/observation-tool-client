@@ -39,7 +39,7 @@
   <div class="column"
        [ngClass]="menuOpen ? 'two wide' : 'one wide'">
     <button *ngIf="!menuOpen"
-            class="ui large primary right attached fixed button"
+            class="ui large right attached primary button"
             (click)="menuOpen = !menuOpen"><i class="sidebar icon"></i></button>
     <div *ngIf="menuOpen"
          class="ui fluid borderless vertical menu">
@@ -53,7 +53,8 @@
         General
       </div>
       <div class="item"
-           [class.header]="router.url.indexOf('field-setup') > -1">
+           [class.header]="router.url.indexOf('field-setup') > -1"
+           [class.active]="router.url.indexOf('field-setup') > -1">
         Field Setup
         <div class="menu">
           <div *ngFor="let target of targets; let i = index"
@@ -62,6 +63,16 @@
                [class.active]="router.url.indexOf('field-setup') > -1 && i === currentTarget"
                (click)="changeTarget(i)">
             {{target.prj_sourceName}}
+          </div>
+          <div class="item">
+            <div class="ui tiny compact labeled icon buttons">
+              <button class="ui primary button"
+                      (click)="addNewTarget()"><i class="add icon"></i>Add
+              </button>
+              <button class="ui red button"
+                      (click)="removeTarget()"><i class="trash icon"></i>Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>

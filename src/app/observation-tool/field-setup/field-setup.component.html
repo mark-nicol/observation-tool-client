@@ -3,41 +3,54 @@
     <div class="ui equal width grid">
       <div class="row">
         <div class="column">
-          <h4 class="ui top attached blue header">Spatial Image</h4>
-          <div class="ui bottom attached compact raised segment">
+          <app-field-setup-segment [title]="'Spatial Image'">
             <spacial-image [resolveCoordinates]="resolveCoordinates"
                            [form]="form"></spacial-image>
-          </div>
+          </app-field-setup-segment>
+
         </div>
       </div>
       <div class="two column row">
         <div class="column">
-          <h4 class="ui top attached blue header">FOV Parameters</h4>
-          <div #fovParamSeg class="ui bottom attached compact raised segment">
+          <app-field-setup-segment [title]="'FOV Parameters'">
             <fov-parameters></fov-parameters>
-          </div>
+          </app-field-setup-segment>
         </div>
         <div class="column">
-          <h4 class="ui top attached blue header">Image Query</h4>
-          <div class="ui bottom attached compact raised segment" [ngStyle]="{'height': fovParamSeg.offsetHeight}">
+          <app-field-setup-segment [title]="'Image Query'">
             <image-query></image-query>
-          </div>
+          </app-field-setup-segment>
         </div>
       </div>
     </div>
   </div>
   <div class="nine wide column">
-    <h4 class="ui top attached blue header">Source</h4>
-    <div class="ui bottom attached compact raised segment">
-      <field-source [form]="form" (resolveEmitter)="resolveCoordinates = $event"></field-source>
+    <div class="ui equal width grid">
+      <div class="row">
+        <div class="column">
+          <app-field-setup-segment [title]="'Source'">
+            <field-source [form]="form"
+                          (resolveEmitter)="resolveCoordinates = $event"></field-source>
+          </app-field-setup-segment>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <app-field-setup-segment [title]="'Expected Source Properties'">
+            <source-expected-properties [form]="form.get('prj_ExpectedProperties')"></source-expected-properties>
+          </app-field-setup-segment>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <app-field-setup-segment [title]="'Field Centre Coordinates'">
+            <field-center-coordinates [form]="form"></field-center-coordinates>
+          </app-field-setup-segment>
+        </div>
+      </div>
     </div>
-    <h4 class="ui top attached blue header">Expected Source Properties</h4>
-    <div class="ui bottom attached compact raised segment">
-      <source-expected-properties [form]="form.get('prj_ExpectedProperties')"></source-expected-properties>
-    </div>
-    <h4 class="ui top attached blue header">Field Centre Coordinates</h4>
-    <div class="ui bottom attached compact raised segment">
-      <field-center-coordinates [form]="form"></field-center-coordinates>
-    </div>
+
   </div>
 </div>

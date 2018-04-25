@@ -1,4 +1,4 @@
-<form class="ui tiny form" [formGroup]="form">
+<form class="ui form" [formGroup]="form">
 
   <!-- Source selector -->
   <div class="field" [class.error]="sourceName.invalid">
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-  <div class="ui tiny form" *ngIf="form.value.solarSystemObject === 'Unspecified'">
+  <div class="ui form" *ngIf="form.value.solarSystemObject === 'Unspecified'">
 
     <div class="four fields" formGroupName="prj_sourceCoordinates">
       <div class="field">

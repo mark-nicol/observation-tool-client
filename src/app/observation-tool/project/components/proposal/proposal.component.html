@@ -1,6 +1,6 @@
 <form class="ui form container" [formGroup]="proposalForm">
-  <div class="ui segment">
-    <h4 class="ui dividing header">Proposal Information</h4>
+  <h3 class="ui top attached blue header">Proposal Information</h3>
+  <div class="ui bottom attached segment">
     <div class="field">
       <label for="titleInput">Proposal Title</label>
       <input id="titleInput"
@@ -38,9 +38,9 @@
       <sui-checkbox formControlName="prp_studentProject"></sui-checkbox>
     </div>
   </div>
-  <div class="ui segment">
+  <h3 class="ui top attached blue header">Proposal Type</h3>
+  <div class="ui bottom attached segment">
     <div class="field">
-      <h4 class="ui dividing header">Proposal Type</h4>
       <div class="inline fields">
         <div class="field" *ngFor="let typeRadio of typeRadios">
           <sui-radio-button id="{{typeRadio.id}}"
@@ -53,8 +53,8 @@
       </div>
     </div>
   </div>
-  <div class="ui segment">
-    <h4 class="ui dividing header">Scientific Category</h4>
+  <h3 class="ui top attached blue header">Scientific Category</h3>
+  <div class="ui bottom attached segment">
     <div class="inline fields">
       <div class="field" *ngFor="let categoryRadio of categoryKeys(categoryRadios)">
         <sui-radio-button id="{{categoryRadios[categoryRadio].value}}"
@@ -84,8 +84,8 @@
       </sui-multi-select>
     </div>
   </div>
-  <div class="ui segment">
-    <h4 class="ui dividing header">Investigators</h4>
+  <h3 class="ui top attached blue header">Investigators</h3>
+  <div class="ui bottom attached segment">
     <table class="ui celled table">
       <thead>
         <tr>
@@ -123,8 +123,8 @@
       </tfoot>
     </table>
   </div>
-  <div class="ui segment">
-    <h4 class="ui dividing header">Science Case (Mandatory, PDF, 4 pages max.)</h4>
+  <h3 class="ui top attached blue header">Science Case (Mandatory, PDF, 4 pages max.)</h3>
+  <div class="ui bottom attached segment">
     <div class="field">
       <input title="science case input" type="text">
     </div>
@@ -137,8 +137,8 @@
     </div>
     <div style="height: 2em"></div>
   </div>
-  <div class="ui segment">
-    <h4 class="ui dividing header">Duplicate Observations</h4>
+  <h3 class="ui top attached blue header">Duplicate Observations</h3>
+  <div class="ui bottom attached segment">
     <textarea title="Duplicate observations input"
               rows="5"
               formControlName="prp_duplicateObservations"></textarea>

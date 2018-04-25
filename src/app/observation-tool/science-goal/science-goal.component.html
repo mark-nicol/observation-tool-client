@@ -36,14 +36,24 @@
 <!--</div>-->
 <!--</div>-->
 <div class="ui grid">
-  <div class="two wide column">
-    <div class="ui fluid vertical menu">
+  <div class="column"
+       [ngClass]="menuOpen ? 'two wide' : 'one wide'">
+    <button *ngIf="!menuOpen"
+            class="ui large primary right attached fixed button"
+            (click)="menuOpen = !menuOpen"><i class="sidebar icon"></i></button>
+    <div *ngIf="menuOpen"
+         class="ui fluid borderless vertical menu">
+      <div class="inverted primary header link item"
+           (click)="menuOpen = !menuOpen"><i class="arrow left icon"></i>
+        {{goalName}}
+      </div>
       <div class="link item"
            [routerLink]="'general'"
            [routerLinkActive]="['active']">
         General
       </div>
-      <div class="header item">
+      <div class="item"
+           [class.header]="router.url.indexOf('field-setup') > -1">
         Field Setup
         <div class="menu">
           <div *ngFor="let target of targets; let i = index"
@@ -77,8 +87,9 @@
       </div>
     </div>
   </div>
-  <div class="thirteen wide column">
-      <router-outlet></router-outlet>
+  <div class="column"
+       [ngClass]="menuOpen ? 'thirteen wide' : 'fourteen wide' ">
+    <router-outlet></router-outlet>
   </div>
   <div class="one wide column"></div>
 </div>

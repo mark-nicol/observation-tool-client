@@ -1,22 +1,28 @@
-<div *ngIf="lineSelecting">
-  <h4 class="ui dividing header">Spectral Line Selection</h4>
-  <app-line-selection (linesSelected)="lineSelecting = false"></app-line-selection>
-  <div style="height: 2em"></div>
-</div>
-<div *ngIf="!lineSelecting" class="ui internally celled two column grid">
-  <div class="sixteen wide tablet ten wide large screen ten wide widescreen centered column">
-    <h4 class="ui dividing header">Visualisation</h4>
-    <app-visualisation-viewer></app-visualisation-viewer>
-    <app-visualisation-control (bandsCheckedEmitter)="bandsCheckedChange($event)"
-                               (transmissionCheckedEmitter)="transmissionCheckedChange($event)"
-                               (spectralLineCheckedEmitter)="spectralLineCheckedChange($event)"
-                               (densitySelectorEmitter)="densitySelectorChange($event)"
-                               (densityRadioEmitter)="densityRadioChange($event)"
-                               (lineSelectEmitter)="lineSelecting = true"
-                               (resetEmitter)="resetClick()"></app-visualisation-control>
+<div class="ui fluid container">
+  <div *ngIf="lineSelecting">
+    <h4 class="ui dividing header">Spectral Line Selection</h4>
+    <app-line-selection (linesSelected)="lineSelecting = false"></app-line-selection>
+    <div style="height: 2em"></div>
   </div>
-  <div class="sixteen wide tablet six wide large screen six wide widescreen column">
-    <h4 class="ui dividing header">Spectral Type</h4>
-    <app-type></app-type>
+  <div *ngIf="!lineSelecting" class="ui two column grid">
+    <div class="sixteen wide tablet ten wide large screen ten wide widescreen centered column">
+      <h3 class="ui top attached blue header">Visualisation</h3>
+      <div class="ui bottom attached segment">
+        <app-visualisation-viewer></app-visualisation-viewer>
+        <app-visualisation-control (bandsCheckedEmitter)="bandsCheckedChange($event)"
+                                   (transmissionCheckedEmitter)="transmissionCheckedChange($event)"
+                                   (spectralLineCheckedEmitter)="spectralLineCheckedChange($event)"
+                                   (densitySelectorEmitter)="densitySelectorChange($event)"
+                                   (densityRadioEmitter)="densityRadioChange($event)"
+                                   (lineSelectEmitter)="lineSelecting = true"
+                                   (resetEmitter)="resetClick()"></app-visualisation-control>
+      </div>
+    </div>
+    <div class="sixteen wide tablet six wide large screen six wide widescreen column">
+      <h3 class="ui top attached blue header">Spectral Type</h3>
+      <div class="ui bottom attached segment">
+        <app-type></app-type>
+      </div>
+    </div>
   </div>
 </div>

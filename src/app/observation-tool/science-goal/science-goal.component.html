@@ -37,7 +37,7 @@
 <!--</div>-->
 <div class="ui grid">
   <div class="two wide column">
-    <div class="ui left attached fluid vertical menu">
+    <div class="ui fluid vertical menu">
       <div class="link item"
            [routerLink]="'general'"
            [routerLinkActive]="['active']">
@@ -77,7 +77,8 @@
       </div>
     </div>
   </div>
-  <div class="fourteen wide column">
-    <router-outlet></router-outlet>
+  <div class="thirteen wide column">
+      <router-outlet></router-outlet>
   </div>
+  <div class="one wide column"></div>
 </div>

@@ -1,77 +1,147 @@
-<div class="ui fixed blue inverted tablet or lower hidden menu">
-  <div class="item" style="width: 12%; padding-top:0;padding-bottom:0;padding-left:5px">
-    <img class="ui image logo" src="assets/img/alma-logo.jpg">
-    &nbsp;&nbsp;&nbsp;&nbsp;<b class="title">Observation Tool</b>
-    <span class="version">&nbsp;&nbsp;2.0.0alpha3</span>
-  </div>
-  <ng-container *ngIf="persistenceService.hasProjectLoaded()">
-    <a class="item"
-       [routerLink]="items[0].path"
-       [routerLinkActive]="['active']">
-      <i [class]="items[0].icon"></i>
-      {{items[0].title}}
-    </a>
-    <a class="item"
-       [routerLink]="items[1].path"
-       [routerLinkActive]="['active']">
-      <i [class]="items[1].icon"></i>
-      {{items[1].title}}
-    </a>
-    <a class="item"
-       [routerLink]="items[2].path"
-       [routerLinkActive]="['active']">
-      <i [class]="items[2].icon"></i>
-      {{items[2].title}}
-    </a>
-    <div class="ui link dropdown item"
-         [class.myDropdown]="router.url.indexOf('science-goals') > -1"
-         *ngIf="persistenceService.hasScienceGoals()"
-         suiDropdown>
-      <i [class]="items[3].icon"></i>
-      {{items[3].title}}
-      <i class="dropdown icon"></i>
-      <div class="menu" suiDropdownMenu>
-        <div *ngFor="let goal of scienceGoals; let i = index"
-             class="link item"
-             [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
-             (click)="setCurrentGoal(i)">
-          {{goal.prj_name}}
-        </div>
-        <div class="divider"></div>
-        <div class="header">
-          <div class="ui tiny compact labeled icon buttons">
-            <button class="ui blue button"><i class="add icon"></i>Add Goal</button>
-            <button class="ui red button"><i class="minus icon"></i>Remove Goal</button>
+<div class="tablet or lower hidden">
+  <div class="ui fixed blue inverted menu">
+    <div class="item" style="width: 12%; padding-top:0;padding-bottom:0;padding-left:5px">
+      <img class="ui image logo" src="assets/img/alma-logo.jpg">
+      &nbsp;&nbsp;&nbsp;&nbsp;<b class="title">Observation Tool</b>
+      <span class="version">&nbsp;&nbsp;2.0.0alpha3</span>
+    </div>
+    <ng-container *ngIf="persistenceService.hasProjectLoaded()">
+      <a class="item"
+         [routerLink]="items[0].path"
+         [routerLinkActive]="['active']">
+        <i [class]="items[0].icon"></i>
+        {{items[0].title}}
+      </a>
+      <a class="item"
+         [routerLink]="items[1].path"
+         [routerLinkActive]="['active']">
+        <i [class]="items[1].icon"></i>
+        {{items[1].title}}
+      </a>
+      <a class="item"
+         [routerLink]="items[2].path"
+         [routerLinkActive]="['active']">
+        <i [class]="items[2].icon"></i>
+        {{items[2].title}}
+      </a>
+      <div class="ui link dropdown item"
+           [class.myDropdown]="router.url.indexOf('science-goals') > -1"
+           *ngIf="persistenceService.hasScienceGoals()"
+           suiDropdown>
+        <i [class]="items[3].icon"></i>
+        {{items[3].title}}
+        <i class="dropdown icon"></i>
+        <div class="menu" suiDropdownMenu>
+          <div *ngFor="let goal of scienceGoals; let i = index"
+               class="link item"
+               [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
+               (click)="setCurrentGoal(i)">
+            {{goal.prj_name}}
+          </div>
+          <div class="divider"></div>
+          <div class="header">
+            <div class="ui tiny compact labeled icon buttons">
+              <button class="ui blue button"><i class="add icon"></i>Add Goal</button>
+              <button class="ui red button"><i class="minus icon"></i>Remove Goal</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </ng-container>
-  <div class="ui right dropdown item" suiDropdown>
-    <i class="user icon"></i>
-    User
-    <i class="dropdown icon"></i>
-    <div class="menu" suiDropdownMenu>
-      <div class="item" (click)="makeProjectImportModal()">
-        <i class="open folder icon"></i>Open Project
+    </ng-container>
+    <div class="ui right dropdown item" suiDropdown>
+      <i class="user icon"></i>
+      User
+      <i class="dropdown icon"></i>
+      <div class="menu" suiDropdownMenu>
+        <div class="item" (click)="makeProjectImportModal()">
+          <i class="open folder icon"></i>Open Project
+        </div>
+        <div class="item">
+          <i class="sign out icon"></i>Logout
+        </div>
+        <a class="item" href="http://www.eso.org/UserPortal">
+          <i class="setting icon"></i>User Portal
+        </a>
       </div>
-      <div class="item">
-        <i class="sign out icon"></i>Logout
-      </div>
-      <a class="item" href="http://www.eso.org/UserPortal">
-        <i class="setting icon"></i>User Portal
-      </a>
     </div>
   </div>
+  <h1 class="ui header">&nbsp;</h1>
 </div>
 
-<div class="ui fixed blue inverted tablet mobile only menu">
-  <div class="item" style="width: 12%; padding-top:0;padding-bottom:0;padding-left:5px">
-    <img class="ui image logo" src="assets/img/alma-logo.jpg">
-    &nbsp;&nbsp;&nbsp;&nbsp;<b class="title">Observation Tool</b>
-    <span class="version">&nbsp;&nbsp;2.0.0alpha3</span>
+<div class="tablet mobile only">
+  <div class="ui sticky blue inverted menu" [ngStyle]="{'margin-bottom': !mobileMenuOpen ? '0' : '14px'}">
+    <div class="item" style="width: 12%; padding-top:0;padding-bottom:0;padding-left:5px">
+      <img class="ui image logo" src="assets/img/alma-logo.jpg">
+      &nbsp;&nbsp;&nbsp;&nbsp;<b class="title">Observation Tool</b>
+      <span class="version">&nbsp;&nbsp;2.0.0alpha3</span>
+    </div>
+    <div class="right menu">
+      <div class="item">
+        <button class="ui tiny compact blue icon button"
+                (click)="mobileMenuOpen = !mobileMenuOpen"><i class="sidebar icon"></i></button>
+      </div>
+    </div>
   </div>
-  <div class="right menu">
-    <div class="item"><button class="ui tiny compact blue icon button"><i class="sidebar icon"></i></button></div>
+  <div [suiCollapse]="mobileMenuOpen">
+    <div class="ui bottom attached fluid vertical menu" style="margin-bottom: 14px">
+      <ng-container *ngIf="persistenceService.hasProjectLoaded()">
+        <a class="item"
+           [routerLink]="items[0].path"
+           [routerLinkActive]="['active']">
+          <i [class]="items[0].icon"></i>
+          {{items[0].title}}
+        </a>
+        <a class="item"
+           [routerLink]="items[1].path"
+           [routerLinkActive]="['active']">
+          <i [class]="items[1].icon"></i>
+          {{items[1].title}}
+        </a>
+        <a class="item"
+           [routerLink]="items[2].path"
+           [routerLinkActive]="['active']">
+          <i [class]="items[2].icon"></i>
+          {{items[2].title}}
+        </a>
+        <div class="ui link dropdown item"
+             [class.myDropdown]="router.url.indexOf('science-goals') > -1"
+             *ngIf="persistenceService.hasScienceGoals()"
+             suiDropdown>
+          <i [class]="items[3].icon"></i>
+          {{items[3].title}}
+          <i class="dropdown icon"></i>
+          <div class="menu" suiDropdownMenu>
+            <div *ngFor="let goal of scienceGoals; let i = index"
+                 class="link item"
+                 [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
+                 (click)="setCurrentGoal(i)">
+              {{goal.prj_name}}
+            </div>
+            <div class="divider"></div>
+            <div class="header">
+              <div class="ui tiny compact labeled icon buttons">
+                <button class="ui blue button"><i class="add icon"></i>Add Goal</button>
+                <button class="ui red button"><i class="minus icon"></i>Remove Goal</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="ui right dropdown item" suiDropdown>
+        <i class="user icon"></i>
+        User
+        <i class="dropdown icon"></i>
+        <div class="menu" suiDropdownMenu>
+          <div class="item" (click)="makeProjectImportModal()">
+            <i class="open folder icon"></i>Open Project
+          </div>
+          <div class="item">
+            <i class="sign out icon"></i>Logout
+          </div>
+          <a class="item" href="http://www.eso.org/UserPortal">
+            <i class="setting icon"></i>User Portal
+          </a>
+        </div>
+    </div>
   </div>
 </div>

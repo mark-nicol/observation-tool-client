@@ -14,12 +14,14 @@
            [routerLink]="'general'"
            [routerLinkActive]="['active']">
         General
+        <i class="info circle icon"></i>
       </div>
       <div class="item"
            [class.header]="router.url.indexOf('field-setup') > -1"
            [class.active]="router.url.indexOf('field-setup') > -1">
         Field Setup
-        <div class="menu">
+        <i class="map icon"></i>
+        <div class="secondary menu">
           <div *ngFor="let target of targets; let i = index"
                class="link item"
                [routerLink]="'field-setup'"
@@ -43,21 +45,25 @@
            [routerLink]="'spectral-setup'"
            [routerLinkActive]="['active']">
         Spectral Setup
+        <i class="chart line icon"></i>
       </div>
       <div class="link item"
            [routerLink]="'calibration-setup'"
            [routerLinkActive]="['active']">
         Calibration Setup
+        <i class="crosshairs icon"></i>
       </div>
       <div class="link item"
            [routerLink]="'control-performance'"
            [routerLinkActive]="['active']">
         Control and Performance
+        <i class="stopwatch icon"></i>
       </div>
       <div class="link item"
            [routerLink]="'technical-justification'"
            [routerLinkActive]="['active']">
         Technical Justification
+        <i class="balance scale icon"></i>
       </div>
     </div>
   </div>

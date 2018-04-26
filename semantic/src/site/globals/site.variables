@@ -1,3 +1,7 @@
 /*******************************
      User Global Variables
 *******************************/
+
+
+@mobileBreakpoint: 769px;
+@tabletBreakpoint: 769px;

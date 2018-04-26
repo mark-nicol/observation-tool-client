@@ -184,13 +184,13 @@
 
 
 /* Modal Width */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .ui.modal {
     width: 95%;
     margin: 0em 0em 0em 0em;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   .ui.modal {
     width: 88%;
     margin: 0em 0em 0em 0em;
@@ -228,7 +228,7 @@
 }
 
 /* Mobile */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .ui.modal > .header {
     padding: 0.75rem 1rem !important;
     padding-right: 2.25rem !important;
@@ -437,13 +437,13 @@
 }
 
 /* Mini Modal Width */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .ui.mini.modal {
     width: 95%;
     margin: 0em 0em 0em 0em;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   .ui.mini.modal {
     width: 35.2%;
     margin: 0em 0em 0em 0em;
@@ -474,13 +474,13 @@
 }
 
 /* Tiny Modal Width */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .ui.tiny.modal {
     width: 95%;
     margin: 0em 0em 0em 0em;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   .ui.tiny.modal {
     width: 52.8%;
     margin: 0em 0em 0em 0em;
@@ -511,13 +511,13 @@
 }
 
 /* Small Modal Width */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .ui.small.modal {
     width: 95%;
     margin: 0em 0em 0em 0em;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   .ui.small.modal {
     width: 70.4%;
     margin: 0em 0em 0em 0em;
@@ -546,13 +546,13 @@
 .ui.large.modal > .header {
   font-size: 1.6em;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   .ui.large.modal {
     width: 95%;
     margin: 0em 0em 0em 0em;
   }
 }
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 769px) {
   .ui.large.modal {
     width: 88%;
     margin: 0em 0em 0em 0em;

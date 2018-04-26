@@ -1,11 +1,10 @@
-<h4 class="ui dividing header">Principal Investigator</h4>
 <div class="ui fluid action input" [ngClass]="{'left icon loading': isLoading}">
   <input #piSearchInput
          id="pi-search-txt-box"
          type="text"
          (keyup)="0"
          placeholder="{{this.INPUT_PLACEHOLDER}}"
-         value="{{this.passedPi ? this.passedPi.fullName : null}}">
+         value="{{this.passedPi ? this.passedPi.prp_fullName : null}}">
   <i class="icon" *ngIf="isLoading"></i>
   <button class="ui blue labeled icon button"
           (click)="makeModal(piSearchInput.value)"

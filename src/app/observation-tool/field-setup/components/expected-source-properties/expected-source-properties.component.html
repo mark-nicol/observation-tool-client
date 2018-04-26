@@ -1,4 +1,3 @@
-<h4 class="ui dividing header">Expected Source Properties</h4>
 <form class="ui form" [formGroup]="form">
   <div class="two fields">
 
@@ -53,8 +52,40 @@
 
   <div class="three fields">
 
+    <!-- Cont polarization input -->
+    <div class="six wide field"
+         suiPopup
+         popupText="Expected polarization of the source in percent">
+      <label for="contPolInput">
+        Continuum Polarization Percentage
+      </label>
+      <div class="ui right labeled input">
+        <input id="contPolInput"
+               type="number"
+               placeholder="0.0"
+               formControlName="prj_desiredCircularPolarizationPercentage">
+        <div class="ui label">%</div>
+      </div>
+    </div>
+
+    <!-- Line polarization input -->
+    <div class="five wide field"
+         suiPopup
+         popupText="Expected polarization of the line in percent">
+      <label for="linePolInput">
+        Line Polarization Percentage
+      </label>
+      <div class="ui right labeled input">
+        <input id="linePolInput"
+               type="number"
+               placeholder="0.0"
+               formControlName="prj_desiredLinePolarizationPercentage">
+        <div class="ui label">%</div>
+      </div>
+    </div>
+
     <!-- Line width input -->
-    <div class="field"
+    <div class="five wide field"
          suiPopup
          popupText="Expected width of the lines to be observed (FWHM)"
          formGroupName="prj_expectedLineWidth">
@@ -70,38 +101,6 @@
           <sui-select-option value="m/s">m/s</sui-select-option>
           <sui-select-option value="km/s">km/s</sui-select-option>
         </sui-select>
-      </div>
-    </div>
-
-    <!-- Line polarization input -->
-    <div class="field"
-         suiPopup
-         popupText="Expected polarization of the line in percent">
-      <label for="linePolInput">
-        Line Polarization Percentage
-      </label>
-      <div class="ui right labeled input">
-        <input id="linePolInput"
-               type="number"
-               placeholder="0.0"
-               formControlName="prj_desiredLinePolarizationPercentage">
-        <div class="ui label">%</div>
-      </div>
-    </div>
-
-    <!-- Cont polarization input -->
-    <div class="field"
-         suiPopup
-         popupText="Expected polarization of the source in percent">
-      <label for="contPolInput">
-        Continuum Polarization Percentage
-      </label>
-      <div class="ui right labeled input">
-        <input id="contPolInput"
-               type="number"
-               placeholder="0.0"
-               formControlName="prj_desiredCircularPolarizationPercentage">
-        <div class="ui label">%</div>
       </div>
     </div>
   </div>

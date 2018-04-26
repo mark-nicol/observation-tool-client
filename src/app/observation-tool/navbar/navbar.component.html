@@ -24,6 +24,7 @@
       {{items[2].title}}
     </a>
     <div class="ui link dropdown item"
+         [class.myDropdown]="router.url.indexOf('science-goals') > -1"
          *ngIf="persistenceService.hasScienceGoals()"
          suiDropdown>
       <i [class]="items[3].icon"></i>

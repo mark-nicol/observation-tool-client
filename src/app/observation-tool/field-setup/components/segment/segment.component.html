@@ -1,0 +1,17 @@
+<div class="ui top attached compact segment" style="padding: 0.5em 1em 0.5em 1em">
+    <div class="ui two column grid">
+        <div class="column">
+          <h4 style="color: #0E6EB8">{{title}}</h4>
+        </div>
+        <div class="column">
+          <button class="ui tiny compact right floated basic blue icon button"
+                  (click)="collapsed = !collapsed"><i class="window icon"
+                                                      [ngClass]="collapsed ? 'maximize' : 'minimize'"></i> </button>
+        </div>
+    </div>
+</div>
+<div [suiCollapse]="collapsed">
+  <div class="ui bottom attached compact segment">
+    <ng-content></ng-content>
+  </div>
+</div>

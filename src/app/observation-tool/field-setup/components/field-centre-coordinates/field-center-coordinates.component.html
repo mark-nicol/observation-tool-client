@@ -1,8 +1,7 @@
-<h4 class="ui dividing header">Field Centre Coordinates</h4>
 <form class="ui form"
       [formGroup]="form">
   <div class="three fields">
-    <div class="field">
+    <div class="four wide field">
       <label>Coord Type</label>
       <sui-radio-button name="coordTypeRadios"
                         value="RELATIVE"
@@ -165,7 +164,8 @@
 
         <!-- Lat offset input -->
         <div class="field" formGroupName="val_latitude">
-          <div *ngIf="form.value.prj_Rectangle.prj_centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
+          <div
+            *ngIf="form.value.prj_Rectangle.prj_centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
           <ng-template #absoluteLatLabel>
             <label>
               {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
@@ -237,30 +237,40 @@
         </div>
       </div>
 
-      <!-- Spacing input -->
-      <div class="field" formGroupName="prj_spacing">
-        <label>
-          Spacing
-        </label>
-        <div class="ui right action input">
-          <input placeholder="0.51093"
-                 type="number"
-                 formControlName="content">
-          <sui-select class="selection" formControlName="userUnit">
-            <sui-select-option value="fraction of main beam">Fraction of antenna beamsize</sui-select-option>
-            <sui-select-option value="arcsec">arcsec</sui-select-option>
-          </sui-select>
+      <div class="two fields">
+        <!-- Spacing input -->
+        <div class="field" formGroupName="prj_spacing">
+          <label>
+            Spacing
+          </label>
+          <div class="ui right action input">
+            <input placeholder="0.51093"
+                   type="number"
+                   formControlName="content">
+            <sui-select class="selection" formControlName="userUnit">
+              <sui-select-option value="fraction of main beam">Fraction of antenna beamsize</sui-select-option>
+              <sui-select-option value="arcsec">arcsec</sui-select-option>
+            </sui-select>
+          </div>
         </div>
-        <div class="ui right floated tiny compact blue labeled icon buttons">
-          <button
-            class="ui button">
-            <i class="refresh icon"></i>Reset to Nyquist
-          </button>
-          <button class="ui button">
-            <i class="upload icon"></i> Export
-          </button>
+        <div class="field">
+          <div class="ui centered grid">
+            <div class="row"></div>
+            <div class="row">
+              <div class="ui tiny compact blue labeled icon buttons">
+                <button
+                  class="ui button">
+                  <i class="refresh icon"></i>Reset to Nyquist
+                </button>
+                <button class="ui button">
+                  <i class="upload icon"></i> Export
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </ng-template>
 </form>

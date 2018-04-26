@@ -1,24 +1,24 @@
-<h4 class="ui dividing header">Source</h4>
 <form class="ui form" [formGroup]="form">
 
   <!-- Source selector -->
   <div class="field" [class.error]="sourceName.invalid">
     <label for="sourceNameInput">Source Name</label>
-    <div class="ui icon input">
+    <div class="ui action icon input">
       <input id="sourceNameInput"
              type="text"
              formControlName="prj_sourceName">
       <i *ngIf="sourceName.invalid" class="red warning circle icon"></i>
+      <button class="ui right floated tiny compact blue labeled icon button"
+              (click)="resolveSource()">
+        <i class="search icon"></i> Resolve
+      </button>
     </div>
     <div class="ui pointing red basic label"
          *ngIf="sourceName.invalid">
       Source name cannot be blank
     </div>
-    <button class="ui right floated tiny compact blue labeled icon button"
-            (click)="resolveSource()">
-      <i class="search icon"></i> Resolve
-    </button>
-    <div style="height: 1.5em;" *ngIf="sourceName.valid"></div>
+
+    <div *ngIf="sourceName.valid"></div>
   </div>
 
   <div class="two fields">

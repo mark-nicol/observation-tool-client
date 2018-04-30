@@ -132,6 +132,15 @@ export class ProjectService implements CanActivate {
     }
   }
 
+  startNewProject() {
+    this.http.get('assets/new_project/ObsProject.json').subscribe(result => {
+      this._loadedProject.next(Object.assign(new ObsProject, result));
+    });
+    this.http.get('assets/new_project/ObsProposal.json').subscribe(result => {
+      this._loadedProposal.next(Object.assign(new ObsProposal, result));
+    });
+  }
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.hasProjectLoaded()) {
       return true

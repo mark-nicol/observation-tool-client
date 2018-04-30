@@ -51,6 +51,10 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
+  mobileMenuOpen = true;
+  userMenuOpen = true;
+  scienceGoalMenuOpen = true;
+
   constructor(protected router: Router,
               protected persistenceService: ProjectService,
               private suiModalService: SuiModalService,

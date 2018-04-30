@@ -7,7 +7,15 @@
       <div class="ui label">GHz</div>
     </div>
   </div>
-  <div class="three fields">
+  <div class="field">
+    <label for="beamInput">Antenna Beamsize (HPBW)</label>
+    <div class="ui right labeled input">
+      <input id="beamInput"
+             placeholder="0.000 arcsec">
+      <div class="ui label">arcsec</div>
+    </div>
+  </div>
+  <div class="two fields">
     <div class="field">
       <label>Antenna Diameter</label>
       <sui-radio-button name="antennaSizeRadios"
@@ -16,15 +24,8 @@
       </sui-radio-button>
     </div>
     <div class="field">
-      <label for="beamInput">Antenna Beamsize (HPBW)</label>
-      <div class="ui right labeled input">
-        <input id="beamInput"
-               placeholder="0.000 arcsec">
-        <div class="ui label">arcsec</div>
-      </div>
-    </div>
-    <div class="field">
-      <sui-checkbox>Show Antenna Beamsize</sui-checkbox>
+      <label>Show Antenna Beamsize</label>
+      <sui-checkbox></sui-checkbox>
     </div>
   </div>
 </div>

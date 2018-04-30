@@ -1,28 +1,32 @@
-<div class="ui two column grid">
+<div class="ui two column stackable grid">
   <div class="seven wide column">
-    <div class="ui equal width grid">
-      <div class="row">
-        <div class="column">
-          <app-field-setup-segment [title]="'Spatial Image'">
+    <app-field-setup-segment [title]="'Spatial Image'">
+      <div class="ui equal width grid">
+        <div class="row">
+          <div class="column">
+
             <spacial-image [resolveCoordinates]="resolveCoordinates"
                            [form]="form"></spacial-image>
-          </app-field-setup-segment>
 
+
+          </div>
+        </div>
+        <div class="two column row">
+          <div class="column">
+            <h5 class="ui top attached blue header">FOV Parameters</h5>
+            <div class="ui bottom attached segment">
+              <fov-parameters></fov-parameters>
+            </div>
+          </div>
+          <div class="column">
+            <h5 class="ui top attached blue header">Image Query</h5>
+            <div class="ui bottom attached segment">
+              <image-query></image-query>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="two column row">
-        <div class="column">
-          <app-field-setup-segment [title]="'FOV Parameters'">
-            <fov-parameters></fov-parameters>
-          </app-field-setup-segment>
-        </div>
-        <div class="column">
-          <app-field-setup-segment [title]="'Image Query'">
-            <image-query></image-query>
-          </app-field-setup-segment>
-        </div>
-      </div>
-    </div>
+    </app-field-setup-segment>
   </div>
   <div class="nine wide column">
     <div class="ui equal width grid">

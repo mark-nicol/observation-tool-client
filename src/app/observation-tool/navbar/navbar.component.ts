@@ -97,7 +97,9 @@ export class NavbarComponent implements OnInit {
   }
 
   get scienceGoals(): ScienceGoal[] {
-    return this.persistenceService.loadedProposal.value.prj_ScienceGoal;
+    if (this.persistenceService.hasScienceGoals()) {
+      return this.persistenceService.loadedProposal.value.prj_ScienceGoal;
+    }
   }
 
   setCurrentGoal(event: number) {

@@ -1,6 +1,7 @@
 <div class="ui container">
   <div class="ui center aligned segment">
-    <button class="ui blue labeled icon button">
+    <button class="ui blue labeled icon button"
+            (click)="loadNewProject()">
       <i class="add icon"></i>Start a new project
     </button>
     <div class="ui horizontal divider">Or</div>
@@ -17,7 +18,9 @@
           </sui-select>
           <!-- Input -->
           <input>
-          <button class="ui blue labeled icon button"><i class="search icon"></i>Search</button>
+          <button class="ui blue labeled icon button"
+                  (click)="makeProjectImportModal()"><i class="search icon"></i>Search
+          </button>
         </div>
       </div>
     </form>

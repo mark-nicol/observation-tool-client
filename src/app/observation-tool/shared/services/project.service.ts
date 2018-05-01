@@ -163,4 +163,12 @@ export class ProjectService implements CanActivate {
     return new ErrorObservable('Broke');
   }
 
+  addScienceGoal() {
+    if (this.hasScienceGoals()) {
+      this._loadedProposal.getValue().prj_ScienceGoal.push(new ScienceGoal());
+    } else {
+      this._loadedProposal.getValue().prj_ScienceGoal = [new ScienceGoal()];
+    }
+  }
+
 }

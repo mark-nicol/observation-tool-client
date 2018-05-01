@@ -25,4 +25,8 @@ export class ScienceGoal implements IScienceGoal {
   prj_resubmissionOfName: string;
   prj_resubmissionOfOusStatusUid: string;
   prj_userPriority: number;
+
+  constructor() {
+    this.prj_name = 'New Goal';
+  }
 }

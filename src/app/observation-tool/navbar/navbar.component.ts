@@ -102,6 +102,10 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  addScienceGoal() {
+    this.persistenceService.addScienceGoal();
+  }
+
   setCurrentGoal(event: number) {
     this.persistenceService.setCurrentTarget(0);
     this.persistenceService.loadScienceGoal(event);

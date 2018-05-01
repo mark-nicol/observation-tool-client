@@ -24,6 +24,11 @@
         <i [class]="items[2].icon"></i>
         {{items[2].title}}
       </a>
+      <div class="ui link item"
+           *ngIf="!persistenceService.hasScienceGoals()"
+           (click)="addScienceGoal()">
+        <i class="add icon"></i> Add Science Goal
+      </div>
       <div class="ui link dropdown item"
            [class.myDropdown]="router.url.indexOf('science-goals') > -1"
            *ngIf="persistenceService.hasScienceGoals()"
@@ -41,7 +46,9 @@
           <div class="divider"></div>
           <div class="header">
             <div class="ui tiny compact labeled icon buttons">
-              <button class="ui blue button"><i class="add icon"></i>Add Goal</button>
+              <button class="ui blue button"
+                      (click)="addScienceGoal()"><i class="add icon"></i>Add Goal
+              </button>
               <button class="ui red button"><i class="minus icon"></i>Remove Goal</button>
             </div>
           </div>

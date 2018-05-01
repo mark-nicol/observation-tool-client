@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ScienceGoal} from '../../../shared/classes/science-goal/science-goal';
 import {ProjectService} from '../../../shared/services/project.service';
+import {Observable} from '../../../../../../node_modules/rxjs';
 
 /**
  * General science goal page component
@@ -15,24 +16,34 @@ import {ProjectService} from '../../../shared/services/project.service';
 
 export class GeneralComponent implements OnInit {
 
-  generalForm: FormGroup;
+  form: FormGroup;
   scienceGoal: ScienceGoal;
 
-  constructor(private persistenceService: ProjectService,
+  constructor(private projectService: ProjectService,
               private formBuilder: FormBuilder) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.persistenceService.loadedGoal.subscribe(result => {
-      this.generalForm.patchValue(result);
-    })
+    this.projectService.loadedGoal.subscribe(result => {
+      this.form.patchValue(result);
+    });
+    this.observeFormChanges();
   }
 
   createForm() {
-    this.generalForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       prj_name: '',
       prj_note: ''
+    });
+  }
+
+  observeFormChanges() {
+    const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
+    debounce.subscribe(value => {
+      if (this.form.dirty && this.form.valid) {
+        this.projectService.updateScienceGoal(value);
+      }
     });
   }
 

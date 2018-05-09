@@ -25,7 +25,7 @@ const httpOptions = {
 export class ProjectService implements CanActivate {
 
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'http://localhost:8080/api/project';
   private _currentTarget = new BehaviorSubject<number>(0);
   private _loadedProject = new BehaviorSubject<ObsProject>(null);
   private _loadedProposal = new BehaviorSubject<ObsProposal>(null);

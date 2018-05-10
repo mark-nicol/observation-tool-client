@@ -15,7 +15,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "compodoc": "./node_modules/.bin/compodoc -p ./tsconfig.json --theme Readthedocs"
+    "compodoc": "./node_modules/.bin/compodoc -p ./tsconfig.json -d ../almaobservationtoolstudy.bitbucket.io/ --theme Readthedocs"
   },
   "private": true,
   "dependencies": {

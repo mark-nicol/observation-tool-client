@@ -1,7 +1,5 @@
 # ALMA Design Study Prototype Web Application
-<p align="center">
-  <img width="120" height="178" src="https://www.eso.org/public/archives/logos/medium/alma-logo.jpg">
-</p>
+![ALMA Logo](src/alma-logo.jpg =160x30)
 The ALMA Observing Tool (OT) is an application for the used for the preparation and submission of ALMA Phase 1 (observing proposal) and Phase 2 (telescope runfiles for accepted proposals) materials. The present ALMA-OT is a desktop Java application, running (almost) wholly on the users own machine.The exceptions are when submitting/retrieving proposals and when querying external databases and archives (such as name resolvers and image servers).
 
 This application is a prototype of the proposed upgraded OT. Built using [Angular](https://angular.io/), it moves heavy weight processes to a backend built using microservice architecture (see the [microservices](https://bitbucket.org/almaobservationtoolstudy/microservices/src/master/) repository) in an effort to reduce the requirements of the client system and increase mobility.

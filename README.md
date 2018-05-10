@@ -33,4 +33,4 @@ http://localhost:4200
 ```
 
 ## Documentation
-For documentation, visit [almaobservationtoolstudy.bitbucket.io](almaobservationtoolstudy.bitbucket.io)
+For documentation, visit [almaobservationtoolstudy.bitbucket.io](https://almaobservationtoolstudy.bitbucket.io)

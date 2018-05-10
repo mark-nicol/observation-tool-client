@@ -19,7 +19,7 @@ import {ProjectService} from '../../../../shared/services/project.service';
 export class PiSearchComponent implements OnInit {
 
   /** Placeholder for the search input */
-  INPUT_PLACEHOLDER = 'Enter Principle Investigator name';
+  INPUT_PLACEHOLDER = 'Enter Principal Investigator name';
 
   /** The chosen PI passed back from piSelect */
   passedPi: IAlmaInvestigator;

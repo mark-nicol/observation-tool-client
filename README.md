@@ -6,8 +6,9 @@ This application is a prototype of the proposed upgraded OT. Built using [Angula
 ## Usage (Development)
 ### Prerequisites
 This web app requires:
-  - [Nodejs](https://nodejs.org/en/download/)
-  - [Angular-CLI](https://cli.angular.io/)
+
+- [Nodejs](https://nodejs.org/en/download/)
+- [Angular-CLI](https://cli.angular.io/)
 
 It's recommended you clone and run the backend services before the web application.
 

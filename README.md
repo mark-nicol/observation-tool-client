@@ -1,28 +1,38 @@
-# OtPrototype
+# ALMA Design Study Prototype Web Application
+<p align="center">
+  <img width="120" height="178" src="https://www.eso.org/public/archives/logos/medium/alma-logo.jpg">
+</p>
+The ALMA Observing Tool (OT) is an application for the used for the preparation and submission of ALMA Phase 1 (observing proposal) and Phase 2 (telescope runfiles for accepted proposals) materials. The present ALMA-OT is a desktop Java application, running (almost) wholly on the users own machine.The exceptions are when submitting/retrieving proposals and when querying external databases and archives (such as name resolvers and image servers).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
+This application is a prototype of the proposed upgraded OT. Built using [Angular](https://angular.io/), it moves heavy weight processes to a backend built using microservice architecture (see the [microservices](https://bitbucket.org/almaobservationtoolstudy/microservices/src/master/) repository) in an effort to reduce the requirements of the client system and increase mobility.
 
-## Development server
+## Usage (Development)
+### Prerequisites
+This web app requires:
+  - [Nodejs](https://nodejs.org/en/download/)
+  - [Angular-CLI](https://cli.angular.io/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+It's recommended you clone and run the backend services before the web application.
 
-## Code scaffolding
+### Process
+Clone the repository
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+Navigate into the repo
+```
+cd app
+```
+Install required modules
+```npm
+npm install
+```
+Run the development server
+```npm
+ng serve
+```
+Open you browser of choice and navigate to
+```
+http://localhost:4200
+```
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Documentation
+For documentation, visit [almaobservationtoolstudy.bitbucket.io](almaobservationtoolstudy.bitbucket.io)

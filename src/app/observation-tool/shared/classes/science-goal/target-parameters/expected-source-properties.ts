@@ -1,6 +1,6 @@
-import {IExpectedProperties} from '../../interfaces/project/science-goal/target-parameters.interface';
-import {Flux} from '../../../../units/classes/flux';
-import {Frequency} from '../../../../units/classes/frequency';
+import {IExpectedProperties} from '../../../interfaces/project/science-goal/target-parameters.interface';
+import {Flux} from '../../../../../units/classes/flux';
+import {Frequency} from '../../../../../units/classes/frequency';
 
 export class ExpectedSourceProperties implements IExpectedProperties {
   prj_desiredCircularPolarizationPercentage: number;

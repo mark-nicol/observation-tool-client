@@ -5,7 +5,6 @@ import {AlmaInvestigatorSearchModal} from '../../../../alma-investigator-search/
 import {AlmaInvestigatorSearchService} from '../../../../alma-investigator-search/services/alma-investigator-search.service';
 import {ProjectService} from '../../../../shared/services/project.service';
 import {IAlmaInvestigator} from '../../../../shared/interfaces/alma-investigator.interface';
-import has = Reflect.has;
 
 /**
  * Initial PI search component
@@ -23,6 +22,7 @@ export class PiSearchComponent implements OnInit {
   INPUT_PLACEHOLDER = 'Enter Principal Investigator name';
 
   isLoading;
+  pi: IAlmaInvestigator;
 
   constructor(private almaInvestigatorSearchService: AlmaInvestigatorSearchService,
               private projectService: ProjectService,
@@ -36,21 +36,25 @@ export class PiSearchComponent implements OnInit {
    * Checks for a chosen PI in session storage and sets if available
    */
   ngOnInit() {
-
+    this.projectService.loadedProposal.subscribe(result => {
+      this.pi = result.prp_PrincipalInvestigator
+    });
   }
 
-  get pi(): IAlmaInvestigator {
-    if (this.projectService.hasProposalLoaded()) {
-      return this.projectService.loadedProposal.getValue().prp_PrincipalInvestigator;
-    }
-    // If no proposal, load investigator from project
-  }
+  // get pi(): IAlmaInvestigator {
+  //   if (this.projectService.hasProposalLoaded()) {
+  //     return this.projectService.loadedProposal.getValue().prp_PrincipalInvestigator;
+  //   } else {
+  //     console.log('no pi');
+  //   }
+  //   // If no proposal, load investigator from project
+  // }
 
   makeModal(piName: string) {
     this.suiModalService
       .open(new AlmaInvestigatorSearchModal(piName))
-      .onApprove(result => {
-        console.log(result);
+      .onApprove((result: IAlmaInvestigator) => {
+        this.projectService.setPi(result);
       })
       .onDeny(result => {
         console.log(result);

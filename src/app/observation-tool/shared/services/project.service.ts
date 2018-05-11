@@ -11,7 +11,6 @@ import {tap} from 'rxjs/operators';
 import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import * as _ from 'lodash';
-import {T} from '@angular/core/src/render3';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -220,6 +219,12 @@ export class ProjectService implements CanActivate {
       this._loadedGoal.getValue().prj_TargetParameters = undefined;
       this.router.navigate(['/science-goals/general']).then(() => this.toastr.info('All sources removed'));
     }
+  }
+
+  setPi(newPi: any) {
+    const oldProposal = this._loadedProposal.getValue();
+    oldProposal.prp_PrincipalInvestigator = newPi;
+    this._loadedProposal.next(oldProposal);
   }
 
 }

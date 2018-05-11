@@ -43,6 +43,7 @@ export class PiSearchComponent implements OnInit {
     if (this.projectService.hasProposalLoaded()) {
       return this.projectService.loadedProposal.getValue().prp_PrincipalInvestigator;
     }
+    // If no proposal, load investigator from project
   }
 
   makeModal(piName: string) {

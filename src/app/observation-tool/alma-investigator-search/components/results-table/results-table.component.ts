@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.interface';
 
@@ -21,6 +21,7 @@ export class ResultsTableComponent implements OnInit {
 
   /** The clicked PI in the table, used for highlighting */
   selectedPi: IAlmaInvestigator;
+  @Output() newPiEmitter = new EventEmitter<IAlmaInvestigator>();
 
   constructor() {
   }
@@ -34,7 +35,7 @@ export class ResultsTableComponent implements OnInit {
    */
   rowClick(pi: IAlmaInvestigator) {
     this.selectedPi = this.selectedPi === pi ? null : pi;
-    sessionStorage.setItem('selectedPi', JSON.stringify(this.selectedPi));
+    this.newPiEmitter.emit(pi);
   }
 
 }

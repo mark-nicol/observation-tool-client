@@ -11,6 +11,7 @@ import {tap} from 'rxjs/operators';
 import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import * as _ from 'lodash';
+import {T} from '@angular/core/src/render3';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -141,6 +142,13 @@ export class ProjectService implements CanActivate {
     }
   }
 
+  hasSources(): boolean {
+    if (this.hasScienceGoals()) {
+      return this._loadedGoal.getValue().prj_TargetParameters !== (null || undefined);
+    }
+    return false;
+  }
+
   startNewProject() {
     this.http.get('assets/new_project/ObsProject.json').subscribe(result => {
       this._loadedProject.next(Object.assign(new ObsProject, result));
@@ -190,7 +198,27 @@ export class ProjectService implements CanActivate {
       this.loadScienceGoal(this._currentGoal);
     } else {
       this._loadedProposal.getValue().prj_ScienceGoal = undefined;
-      this.router.navigate(['/project']).then(() => this.toastr.info('All science goals deleted'));
+      this.router.navigate(['/project']).then(() => this.toastr.info('All science goals removed'));
+    }
+  }
+
+  addSource() {
+    if (this.hasSources()) {
+      this._loadedGoal.getValue().prj_TargetParameters.push(new TargetParameters());
+    } else {
+      this._loadedGoal.getValue().prj_TargetParameters = [new TargetParameters()];
+    }
+  }
+
+  removeSource() {
+    this._loadedGoal.getValue().prj_TargetParameters.splice(this._currentTarget.getValue(), 1);
+    this._currentTarget.next(this._currentTarget.value - 1);
+    if (this._currentTarget.value === -1) {
+      this._currentTarget.next(0);
+    }
+    if (this._loadedGoal.getValue().prj_TargetParameters.length <= 0) {
+      this._loadedGoal.getValue().prj_TargetParameters = undefined;
+      this.router.navigate(['/science-goals/general']).then(() => this.toastr.info('All sources removed'));
     }
   }
 

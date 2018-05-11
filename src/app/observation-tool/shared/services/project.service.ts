@@ -88,8 +88,8 @@ export class ProjectService implements CanActivate {
   }
 
   loadProposal() {
-    const options = {params: new HttpParams().set('ref', this._loadedProject.value['prj_ObsProposalRef']['entityId'])};
-    this.http.get<any>(`${this.baseUrl}/projects/proposal`, options).subscribe(result => {
+    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value['prj_ObsProposalRef']['entityId'])};
+    this.http.get<any>(`${this.baseUrl}/proposal`, options).subscribe(result => {
       if (!(result.prj_ScienceGoal instanceof Array) && result.prj_ScienceGoal !== undefined) {
         result.prj_ScienceGoal = [result.prj_ScienceGoal];
       }

@@ -11,10 +11,10 @@
     <tr *ngFor="let pi of searchResults"
         (click)="rowClick(pi)"
         [class.active]="pi === selectedPi">
-      <td>{{pi.uid}}</td>
-      <td>{{pi.fullName}}</td>
-      <td>{{pi.email}}</td>
-      <td>{{pi.affiliation}}</td>
+      <td>{{pi.prp_userId}}</td>
+      <td>{{pi.prp_fullName}}</td>
+      <td>{{pi.prp_eMail}}</td>
+      <td>{{pi.prp_organisation}}</td>
     </tr>
   </tbody>
 </table>

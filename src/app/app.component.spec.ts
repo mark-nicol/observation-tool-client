@@ -5,7 +5,7 @@ import {SuiModule} from 'ng2-semantic-ui';
 
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './observation-tool/navbar/navbar.component';
-import {PersistenceService} from './observation-tool/shared/services/persistence.service';
+import {ProjectService} from './observation-tool/shared/services/project.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -20,7 +20,7 @@ describe('AppComponent', () => {
         NavbarComponent,
       ],
       providers: [
-        PersistenceService
+        ProjectService
       ]
     }).compileComponents();
   }));

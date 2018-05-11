@@ -1,7 +1,7 @@
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule} from '@angular/forms';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 import {AladinComponent} from '../aladin/aladin.component';
 
 import {SpacialImageComponent} from './spacial-image.component';
@@ -21,7 +21,7 @@ describe('SpacialImageComponent', () => {
                                        HttpClientTestingModule
                                      ],
                                      providers:    [
-                                       PersistenceService
+                                       ProjectService
                                      ]
                                    })
            .compileComponents();

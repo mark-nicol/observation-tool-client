@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ITargetParameters} from '../shared/interfaces/project/science-goal/target-parameters.interface';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {ProjectService} from '../shared/services/project.service';
+import {TargetParameters} from '../shared/classes/science-goal/target-parameters';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -22,7 +23,7 @@ export class ScienceGoalComponent implements OnInit {
     },
     'fieldSetup': {
       text: 'Field Setup',
-      path: 'field-setup/' + this.persistenceService.currentTarget
+      path: 'field-setup'
     },
     'spectralSetup': {
       text: 'Spectral Setup',
@@ -42,52 +43,44 @@ export class ScienceGoalComponent implements OnInit {
     }
   };
 
-  targets: ITargetParameters[];
-  selectedTarget: string;
+  currentTarget: number;
+  goalName: string;
 
   /** Iterator for pages */
   pageKeys: (o) => string[] = Object.keys;
 
+  menuOpen = true;
+
   /**
    * Constructor
    */
-  constructor(protected router: Router, private persistenceService: PersistenceService) {
+  constructor(protected router: Router, private projectService: ProjectService) {
   }
 
   ngOnInit() {
-    this.persistenceService.getScienceGoal().subscribe(result => {
-      console.log(result);
-      this.targets        = result.prj_TargetParameters;
-      this.selectedTarget = this.targets[0].prj_sourceName;
+    this.projectService.loadScienceGoal(this.projectService.currentGoal);
+    this.projectService.loadedGoal.subscribe(result => {
+      this.goalName = result.prj_name;
+    });
+    this.projectService.currentTarget.subscribe(result => {
+      this.currentTarget = result;
     });
   }
 
   changeTarget(index: number) {
-    this.persistenceService.currentTarget = index;
-    this.pages.fieldSetup.path            = 'field-setup/' + this.persistenceService.currentTarget;
+    this.projectService.setCurrentTarget(index);
   }
 
-  addNewTarget() {
-    this.targets.push({
-      type: '',
-      prj_isMosaic: false,
-      prj_sourceName: 'New Source',
-      prj_sourceCoordinates: null,
-      prj_pmRA: null,
-      prj_pmDec: null,
-      prj_parallax: null,
-      prj_nonSiderealMotion: false,
-      solarSystemObject: null,
-      prj_sourceEphemeris: '',
-      prj_sourceVelocity: null,
-      prj_index: this.targets.length - 1,
-      prj_ExpectedProperties: null,
-      prj_SinglePoint: null,
-    });
+  addSource() {
+    this.projectService.addSource();
   }
 
-  removeTarget() {
-    this.targets.pop();
+  removeSource() {
+    this.projectService.removeSource();
+  }
+
+  get targets(): ITargetParameters[] {
+    return this.projectService.loadedGoal.value.prj_TargetParameters;
   }
 
 }

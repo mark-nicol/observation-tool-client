@@ -1,98 +1,100 @@
 <div class="ui form container">
-  <h4 class="ui dividing header">Goal Calibrators</h4>
-  <div class="grouped fields">
-    <div class="field">
-      <sui-radio-button #systemRadio
-                        name="calibratorRadios"
-                        value="system"
-                        [(ngModel)]="selectedRadio">
-        System-defined calibration (recommended)
-      </sui-radio-button>
-    </div>
-    <div class="field">
-      <sui-radio-button #solarRadio
-                        name="calibratorRadios"
-                        value="solar"
-                        [(ngModel)]="selectedRadio">
-        System-defined calibration (force separate amplitude calibration using solar-system object)
-      </sui-radio-button>
-    </div>
-    <div class="field">
-      <sui-radio-button #userRadio
-                        name="calibratorRadios"
-                        value="user"
-                        [(ngModel)]="selectedRadio">
-        User-defined calibration
-      </sui-radio-button>
-    </div>
-    <div *ngIf="selectedRadio === 'user'">
-      <table class="ui celled table">
-        <thead>
-          <tr>
-            <th scope="col">Calibration Intent</th>
-            <th scope="col">Target Type</th>
-            <th scope="col">Source Name</th>
-            <th scope="col">RA</th>
-            <th scope="col">Dec</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Amplitude</td>
-            <td>Dynamic Calibrator</td>
-            <td></td>
-            <td>0.0000000</td>
-            <td>0.0000000</td>
-            <td>
-              <button class="ui tiny compact labeled icon blue button">
-                <i class="edit icon"></i>Edit Criteria
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>Bandpass</td>
-            <td>Dynamic Calibrator</td>
-            <td></td>
-            <td>0.0000000</td>
-            <td>0.0000000</td>
-            <td>
-              <button class="ui tiny compact labeled icon blue button">
-                <i class="edit icon"></i>Edit Criteria
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>Phase</td>
-            <td>Dynamic Calibrator</td>
-            <td></td>
-            <td>0.0000000</td>
-            <td>0.0000000</td>
-            <td>
-              <button class="ui tiny compact labeled icon blue button">
-                <i class="edit icon"></i>Edit Criteria
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <th colspan="6">
-              <div class="ui tiny compact right floated labeled icon buttons">
-                <button class="ui blue button">
-                  <i class="plus icon"></i>Add Dynamic Calibrator
+  <h3 class="ui top attached blue header">Goal Calibrators</h3>
+  <div class="ui bottom attached segment">
+    <div class="grouped fields">
+      <div class="field">
+        <sui-radio-button #systemRadio
+                          name="calibratorRadios"
+                          value="system"
+                          [(ngModel)]="selectedRadio">
+          System-defined calibration (recommended)
+        </sui-radio-button>
+      </div>
+      <div class="field">
+        <sui-radio-button #solarRadio
+                          name="calibratorRadios"
+                          value="solar"
+                          [(ngModel)]="selectedRadio">
+          System-defined calibration (force separate amplitude calibration using solar-system object)
+        </sui-radio-button>
+      </div>
+      <div class="field">
+        <sui-radio-button #userRadio
+                          name="calibratorRadios"
+                          value="user"
+                          [(ngModel)]="selectedRadio">
+          User-defined calibration
+        </sui-radio-button>
+      </div>
+      <div *ngIf="selectedRadio === 'user'">
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th scope="col">Calibration Intent</th>
+              <th scope="col">Target Type</th>
+              <th scope="col">Source Name</th>
+              <th scope="col">RA</th>
+              <th scope="col">Dec</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Amplitude</td>
+              <td>Dynamic Calibrator</td>
+              <td></td>
+              <td>0.0000000</td>
+              <td>0.0000000</td>
+              <td>
+                <button class="ui tiny compact labeled icon blue button">
+                  <i class="edit icon"></i>Edit Criteria
                 </button>
-                <button class="ui blue button">
-                  <i class="plus icon"></i>Add Fixed Calibrator
+              </td>
+            </tr>
+            <tr>
+              <td>Bandpass</td>
+              <td>Dynamic Calibrator</td>
+              <td></td>
+              <td>0.0000000</td>
+              <td>0.0000000</td>
+              <td>
+                <button class="ui tiny compact labeled icon blue button">
+                  <i class="edit icon"></i>Edit Criteria
                 </button>
-                <button class="ui red button">
-                  <i class="remove icon"></i>Delete Selected Calibration
+              </td>
+            </tr>
+            <tr>
+              <td>Phase</td>
+              <td>Dynamic Calibrator</td>
+              <td></td>
+              <td>0.0000000</td>
+              <td>0.0000000</td>
+              <td>
+                <button class="ui tiny compact labeled icon blue button">
+                  <i class="edit icon"></i>Edit Criteria
                 </button>
-              </div>
-            </th>
-          </tr>
-        </tfoot>
-      </table>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="6">
+                <div class="ui tiny compact right floated labeled icon buttons">
+                  <button class="ui blue button">
+                    <i class="plus icon"></i>Add Dynamic Calibrator
+                  </button>
+                  <button class="ui blue button">
+                    <i class="plus icon"></i>Add Fixed Calibrator
+                  </button>
+                  <button class="ui red button">
+                    <i class="remove icon"></i>Delete Selected Calibration
+                  </button>
+                </div>
+              </th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
   </div>
 </div>

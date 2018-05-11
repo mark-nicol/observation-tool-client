@@ -5,12 +5,13 @@ import {RouterModule} from '@angular/router';
 import {UnitsModule} from '../../units/units.module';
 import {DegreesPipe} from './pipes/degrees.pipe';
 import {SexagesimalPipe} from './pipes/sexagesimal.pipe';
-import {PersistenceService} from './services/persistence.service';
+import {ProjectService} from './services/project.service';
 import {SuiModule} from 'ng2-semantic-ui';
 import {SimbadService} from './services/simbad.service';
 import {SystemService} from './services/system.service';
 import {ProjectImportComponent} from './components/project-import/project-import.component';
 import { ProjectImportModalComponent } from './components/project-import-modal/project-import-modal.component';
+import {StartComponent} from './components/start/start.component';
 
 @NgModule({
   imports: [
@@ -25,9 +26,10 @@ import { ProjectImportModalComponent } from './components/project-import-modal/p
     SexagesimalPipe,
     ProjectImportComponent,
     ProjectImportModalComponent,
+    StartComponent
   ],
   providers: [
-    PersistenceService,
+    ProjectService,
     SystemService,
     SimbadService
   ],
@@ -36,6 +38,7 @@ import { ProjectImportModalComponent } from './components/project-import-modal/p
     RouterModule,
     FormsModule,
     UnitsModule,
+    StartComponent,
     DegreesPipe,
     ProjectImportComponent,
     SexagesimalPipe,

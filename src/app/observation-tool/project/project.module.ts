@@ -5,7 +5,7 @@ import {ToastModule} from 'ng2-toastr';
 import {AlmaInvestigatorSearchModule} from '../alma-investigator-search/alma-investigator-search.module';
 import {AlmaInvestigatorSearchService} from '../alma-investigator-search/services/alma-investigator-search.service';
 import {ScienceGoalModule} from '../science-goal/science-goal.module';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {ProjectService} from '../shared/services/project.service';
 import {SharedModule} from '../shared/shared.module';
 import {PiEntryComponent} from './components/pi-entry/pi-entry.component';
 import {PiSearchComponent} from './components/pi-entry/pi-search/pi-search.component';
@@ -36,7 +36,7 @@ import {ProjectComponent} from './project.component';
   ],
   providers: [
     AlmaInvestigatorSearchService,
-    PersistenceService
+    ProjectService
   ],
   exports: [
     ProjectComponent

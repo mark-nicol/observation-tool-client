@@ -1,0 +1,28 @@
+<div class="ui container">
+  <div class="ui center aligned segment">
+    <button class="ui blue labeled icon button"
+            (click)="loadNewProject()">
+      <i class="add icon"></i>Start a new project
+    </button>
+    <div class="ui horizontal divider">Or</div>
+    <form class="ui form">
+      <!-- Search field -->
+      <div class="field">
+        <h4>Search the ALMA Database</h4>
+        <div class="ui left fluid action input">
+          <!-- Selector -->
+          <sui-select class="selection">
+            <sui-select-option value="PI ID">PI ID</sui-select-option>
+            <sui-select-option value="Project Code">Project Code</sui-select-option>
+            <sui-select-option value="Project Name">Project Name</sui-select-option>
+          </sui-select>
+          <!-- Input -->
+          <input>
+          <button class="ui blue labeled icon button"
+                  (click)="makeProjectImportModal()"><i class="search icon"></i>Search
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

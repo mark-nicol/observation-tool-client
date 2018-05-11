@@ -1,19 +1,60 @@
-<div class="ui internally celled two column grid">
-  <div class="sixteen wide tablet six wide large screen seven wide widescreen column">
-    <spacial-image [resolveCoordinates]="resolveCoordinates"
-                   [form]="form"></spacial-image>
-    <div class="ui grid">
-      <div class="sixteen wide large screen eight wide widescreen column">
-        <fov-parameters></fov-parameters>
+<div class="ui two column stackable grid">
+  <div class="seven wide column">
+    <app-field-setup-segment [title]="'Spatial Image'">
+      <div class="ui equal width grid">
+        <div class="row">
+          <div class="column">
+
+            <spacial-image [resolveCoordinates]="resolveCoordinates"
+                           [form]="form"></spacial-image>
+
+
+          </div>
+        </div>
+        <div class="two column row">
+          <div class="column">
+            <h5 class="ui top attached blue header">FOV Parameters</h5>
+            <div class="ui bottom attached segment">
+              <fov-parameters></fov-parameters>
+            </div>
+          </div>
+          <div class="column">
+            <h5 class="ui top attached blue header">Image Query</h5>
+            <div class="ui bottom attached segment">
+              <image-query></image-query>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="sixteen wide large screen eight wide widescreen column">
-        <image-query></image-query>
+    </app-field-setup-segment>
+  </div>
+  <div class="nine wide column">
+    <div class="ui equal width grid">
+      <div class="row">
+        <div class="column">
+          <app-field-setup-segment [title]="'Source'">
+            <field-source [form]="form"
+                          (resolveEmitter)="resolveCoordinates = $event"></field-source>
+          </app-field-setup-segment>
+        </div>
+      </div>
+
+      <div class="row" style="padding: 0 0 0 0">
+        <div class="column">
+          <app-field-setup-segment [title]="'Expected Source Properties'">
+            <source-expected-properties [form]="form.get('prj_ExpectedProperties')"></source-expected-properties>
+          </app-field-setup-segment>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <app-field-setup-segment [title]="'Field Centre Coordinates'">
+            <field-center-coordinates [form]="form"></field-center-coordinates>
+          </app-field-setup-segment>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="sixteen wide tablet ten wide large screen nine wide widescreen column">
-    <field-source [form]="form" (resolveEmitter)="resolveCoordinates = $event"></field-source>
-    <source-expected-properties [form]="form.get('prj_ExpectedProperties')"></source-expected-properties>
-    <field-center-coordinates [form]="form"></field-center-coordinates>
+
   </div>
 </div>

@@ -2,6 +2,13 @@ import {Injectable} from '@angular/core';
 import {Fov} from '../../shared/classes/pointings/fov';
 import {IAladinConfig} from '../../shared/interfaces/aladin/aladin-config.interface';
 import {IAladinOverlay} from '../../shared/interfaces/aladin/overlay.interface';
+import {IRectangle, ISkyCoordinates} from '../../shared/interfaces/project/science-goal/target-parameters.interface';
+import {LongitudeUnits} from '../../../units/enums/longitude-units.enum';
+import {LatitudeUnits} from '../../../units/enums/latitude-units.enum';
+import {Longitude} from '../../../units/classes/longitude';
+import {Latitude} from '../../../units/classes/latitude';
+import {Angle} from '../../../units/classes/angle';
+import {AngleUnits} from '../../../units/enums/angle-units.enum';
 
 declare let A: any;
 declare let Coo: any;
@@ -75,6 +82,45 @@ export class AladinService {
 
   addPointing(ra: number, dec: number) {
     this._overlay.add(A.circle(ra, dec, this._radius, {color: '#FFAA00'}));
+  }
+
+  addRectangle(target: ISkyCoordinates, rect: IRectangle) {
+    const targetLonDeg = Object.assign(new Longitude, target.val_longitude).getValueInUnits(LongitudeUnits.DEG);
+    const targetLatDeg = Object.assign(new Latitude, target.val_latitude).getValueInUnits(LatitudeUnits.DEG);
+    const rectCentreLonDeg = Object.assign(new Longitude, rect.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG);
+    const rectCentreLatDeg = Object.assign(new Latitude, rect.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG);
+    const shortDeg = Object.assign(new Angle, rect.prj_short).getValueInUnits(AngleUnits.DEG);
+    const longDeg = Object.assign(new Angle, rect.prj_long).getValueInUnits(AngleUnits.DEG);
+    // top left
+    // x = centre - half short
+    // y = centre - half long
+    const topLeft = [
+      (targetLonDeg + rectCentreLonDeg) - (shortDeg / 2),
+      (targetLatDeg + rectCentreLatDeg) - (longDeg / 2)
+    ];
+    // top right
+    // x = centre + half short
+    // y = centre - half long
+    const topRight = [
+      (targetLonDeg + rectCentreLonDeg) + (shortDeg / 2),
+      (targetLatDeg + rectCentreLatDeg) - (longDeg / 2)
+    ];
+    // bottom right
+    // x = centre + half short
+    // y = centre + half long
+    const bottomRight = [
+      (targetLonDeg + rectCentreLonDeg) + (shortDeg / 2),
+      (targetLatDeg + rectCentreLatDeg) + (longDeg / 2)
+    ];
+    // bottom left
+    // x = centre - half short
+    // y = centre + half long
+    const bottomLeft = [
+      (targetLonDeg + rectCentreLonDeg) - (shortDeg / 2),
+      (targetLatDeg + rectCentreLatDeg) + (longDeg / 2)
+    ];
+    // draw
+    this._overlay.addFootprints([A.polygon([topLeft, topRight, bottomRight, bottomLeft])]);
   }
 
   goToObject(objectName: string, ra: number, dec: number) {

@@ -7,10 +7,12 @@ import {ControlPerformanceComponent} from './components/control-performance/cont
 import {GeneralComponent} from './components/general/general.component';
 import {TechnicalJustificationComponent} from './components/technical-justification/technical-justification.component';
 import {ScienceGoalComponent} from './science-goal.component';
+import {ProjectService} from '../shared/services/project.service';
 
 const routes: Routes = [
   {
     path: 'science-goals',
+    canActivate: [ProjectService],
     component: ScienceGoalComponent,
     children: [
       {
@@ -20,10 +22,6 @@ const routes: Routes = [
       {
         path: 'field-setup',
         component: FieldSetupComponent,
-      },
-      {
-        path: 'field-setup/:index',
-        component: FieldSetupComponent
       },
       {
         path: 'spectral-setup',

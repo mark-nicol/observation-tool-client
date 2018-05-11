@@ -1,8 +1,7 @@
-<h4 class="ui dividing header">Field Centre Coordinates</h4>
 <form class="ui form"
       [formGroup]="form">
   <div class="three fields">
-    <div class="field">
+    <div class="four wide field">
       <label>Coord Type</label>
       <sui-radio-button name="coordTypeRadios"
                         value="RELATIVE"
@@ -72,7 +71,7 @@
       </label>
       <sui-select id="offsetSelector"
                   class="selection"
-                  [(ngModel)]="offsetUnit"
+                  [ngModel]="offsetUnit"
                   [ngModelOptions]="{standalone: true}">
         <sui-select-option *ngFor="let unit of offsetUnits"
                            value="{{unit}}">
@@ -87,7 +86,8 @@
           <div class="field" formGroupName="val_longitude">
             <label *ngIf="i === 0">Lon</label>
             <div class="ui small labeled icon input">
-              <div class="ui label" [ngClass]="pointing.invalid ? 'red' : 'blue'">{{pointing.invalid ? '!' : i + 1}}</div>
+              <div class="ui label" [ngClass]="pointing.invalid ? 'red' : 'blue'">{{pointing.invalid ? '!' : i + 1}}
+              </div>
               <input formControlName="content"
                      type="number">
             </div>
@@ -116,133 +116,161 @@
 
 
   <ng-template #rectangularComponent>
-    <div class="three fields">
-      <div class="field">
-        <!-- System Selector -->
-        <label>System</label>
-        <div class="inline field">
+    <div formGroupName="prj_Rectangle">
+      <div class="four fields" formGroupName="prj_centre">
+        <div class="field">
+          <!-- System Selector -->
+          <label>System</label>
           <sui-select class="selection"
-                      (selectedOptionChange)="systemChange()">
+                      (selectedOptionChange)="systemChange()"
+                      formControlName="system">
             <sui-select-option *ngFor="let system of systemService.getSystems()"
                                value="{{system}}"></sui-select-option>
           </sui-select>
-          <sui-checkbox>Sexagesimal Units</sui-checkbox>
         </div>
-      </div>
 
-      <!-- Lon offset input -->
-      <div class="field">
-        <div *ngIf="radioValue === 'ABSOLUTE'; then absoluteLonLabel else relativeLonLabel"></div>
+        <div class="three wide field">
+          <label>Sexagesimal Units</label>
+          <sui-checkbox class="toggle"
+                        [ngModel]="form.value.prj_Rectangle.prj_centre.type === 'ABSOLUTE'"
+                        [ngModelOptions]="{standalone: true}">
+          </sui-checkbox>
+        </div>
+
+        <!-- Lon offset input -->
         <div class="field">
-          <ng-template #absoluteLonLabel>
+          <div *ngIf="radioValue === 'ABSOLUTE'; then absoluteLonLabel else relativeLonLabel"></div>
+          <div class="field" formGroupName="val_longitude">
+            <ng-template #absoluteLonLabel>
+              <label>
+                {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.lonLabel : chosenSystem.normalLabels.lonLabel}}
+              </label>
+            </ng-template>
+            <ng-template #relativeLonLabel>
+              <label>
+                Offset(Lon)
+              </label>
+            </ng-template>
+            <div class="ui action input">
+              <input formControlName="content">
+              <sui-select class="selection"
+                          formControlName="unit"
+                          *ngIf="form.value.prj_Rectangle.prj_centre.type === 'RELATIVE'">
+                <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
+              </sui-select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lat offset input -->
+        <div class="field" formGroupName="val_latitude">
+          <div
+            *ngIf="form.value.prj_Rectangle.prj_centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
+          <ng-template #absoluteLatLabel>
             <label>
-              {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.lonLabel : chosenSystem.normalLabels.lonLabel}}
+              {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
             </label>
           </ng-template>
-          <ng-template #relativeLonLabel>
+          <ng-template #relativeLatLabel>
             <label>
-              Offset(Lon)
+              Offset(Lat)
             </label>
           </ng-template>
           <div class="ui action input">
-            <input>
+            <input formControlName="content">
             <sui-select class="selection"
-                        *ngIf="radioValue === 'RELATIVE'">
+                        formControlName="unit"
+                        *ngIf="form.value.prj_Rectangle.prj_centre.type === 'RELATIVE'">
               <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
             </sui-select>
           </div>
         </div>
       </div>
 
-      <!-- Lat offset input -->
-      <div class="field">
-        <div *ngIf="radioValue === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
-        <ng-template #absoluteLatLabel>
+      <div class="three fields">
+        <!-- p length input -->
+        <div class="field" formGroupName="prj_short">
           <label>
-            {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
+            p length
           </label>
-        </ng-template>
-        <ng-template #relativeLatLabel>
+          <div class="ui action input">
+            <input placeholder="0.00000"
+                   type="number"
+                   formControlName="content">
+            <sui-select class="selection"
+                        formControlName="unit">
+              <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
+            </sui-select>
+          </div>
+        </div>
+
+        <!-- q length input -->
+        <div class="field" formGroupName="prj_long">
           <label>
-            Offset(Lat)
+            q length
           </label>
-        </ng-template>
-        <div class="ui action input">
-          <input>
-          <sui-select class="selection"
-                      *ngIf="radioValue === 'RELATIVE'">
-            <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
-          </sui-select>
+          <div class="ui action input">
+            <input placeholder="0.00000"
+                   type="number"
+                   formControlName="content">
+            <sui-select class="selection"
+                        formControlName="unit">
+              <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
+            </sui-select>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="three fields">
-      <!-- p length input -->
-      <div class="field">
-        <label>
-          p length
-        </label>
-        <div class="ui action input">
-          <input placeholder="0.00000"
-                 type="number">
-          <sui-select class="selection">
-            <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
-          </sui-select>
-        </div>
-      </div>
-
-      <!-- q length input -->
-      <div class="field">
-        <label>
-          q length
-        </label>
-        <div class="ui action input">
-          <input placeholder="0.00000"
-                 type="number">
-          <sui-select class="selection">
-            <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
-          </sui-select>
+        <!-- Position angle -->
+        <div class="field" formGroupName="prj_pALong">
+          <label>
+            Position Angle
+          </label>
+          <div class="ui action input">
+            <input placeholder="0.00000"
+                   type="number"
+                   formControlName="content">
+            <sui-select class="selection"
+                        formControlName="unit">
+              <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
+            </sui-select>
+          </div>
         </div>
       </div>
 
-      <!-- Position angle -->
-      <div class="field">
-        <label>
-          Position Angle
-        </label>
-        <div class="ui action input">
-          <input placeholder="0.00000"
-                 type="number">
-          <sui-select class="selection">
-            <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
-          </sui-select>
+      <div class="two fields">
+        <!-- Spacing input -->
+        <div class="field" formGroupName="prj_spacing">
+          <label>
+            Spacing
+          </label>
+          <div class="ui right action input">
+            <input placeholder="0.51093"
+                   type="number"
+                   formControlName="content">
+            <sui-select class="selection" formControlName="userUnit">
+              <sui-select-option value="fraction of main beam">Fraction of antenna beamsize</sui-select-option>
+              <sui-select-option value="arcsec">arcsec</sui-select-option>
+            </sui-select>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui centered grid">
+            <div class="row"></div>
+            <div class="row">
+              <div class="ui tiny compact blue labeled icon buttons">
+                <button
+                  class="ui button">
+                  <i class="refresh icon"></i>Reset to Nyquist
+                </button>
+                <button class="ui button">
+                  <i class="upload icon"></i> Export
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Spacing input -->
-    <div class="field">
-      <label>
-        Spacing
-      </label>
-      <div class="ui right action input">
-        <input placeholder="0.51093"
-               type="number">
-        <sui-select class="selection">
-          <sui-select-option value="fraction of main beam">Fraction of antenna beamsize</sui-select-option>
-          <sui-select-option value="arcsec">arcsec</sui-select-option>
-        </sui-select>
-      </div>
-      <div class="ui right floated tiny compact blue labeled icon buttons">
-        <button
-          class="ui button">
-          <i class="refresh icon"></i>Reset to Nyquist
-        </button>
-        <button class="ui button">
-          <i class="upload icon"></i> Export
-        </button>
-      </div>
     </div>
   </ng-template>
 </form>

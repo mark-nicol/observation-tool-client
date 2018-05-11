@@ -1,7 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {AladinService} from '../../services/aladin.service';
 
-import { PointingCanvasComponent } from './pointing-canvas.component';
+import {PointingCanvasComponent} from './pointing-canvas.component';
+import {ProjectService} from '../../../shared/services/project.service';
 
 describe('PointingCanvasComponent', () => {
   let component: PointingCanvasComponent;
@@ -9,10 +10,10 @@ describe('PointingCanvasComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PointingCanvasComponent ],
-      providers: [PointingService, AladinService]
+      declarations: [PointingCanvasComponent],
+      providers: [ProjectService, AladinService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

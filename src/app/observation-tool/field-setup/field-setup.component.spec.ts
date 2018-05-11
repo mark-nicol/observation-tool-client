@@ -4,7 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
 import {DegreesPipe} from '../shared/pipes/degrees.pipe';
 import {SexagesimalPipe} from '../shared/pipes/sexagesimal.pipe';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {ProjectService} from '../shared/services/project.service';
 import {SimbadService} from '../shared/services/simbad.service';
 import {SystemService} from '../shared/services/system.service';
 import {AladinComponent} from './components/aladin/aladin.component';
@@ -42,7 +42,7 @@ describe('FieldSetupComponent', () => {
                                        SuiModule
                                      ],
                                      providers: [
-                                       PersistenceService,
+                                       ProjectService,
                                        SystemService,
                                        SimbadService
                                      ]

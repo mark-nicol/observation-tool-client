@@ -3,7 +3,7 @@ import {
   ISinglePoint,
   ITargetParameters
 } from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 import {AladinService} from '../../services/aladin.service';
 import {FormGroup} from '@angular/forms';
 import {Longitude} from '../../../../units/classes/longitude';
@@ -27,7 +27,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   addingRect = false;
   addingFov = false;
 
-  constructor(private persistenceService: PersistenceService,
+  constructor(private persistenceService: ProjectService,
               private aladinService: AladinService) {
   }
 
@@ -94,12 +94,25 @@ export class AladinComponent implements OnInit, AfterViewInit {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
       this.aladinService.goToRaDec(this.form.value.prj_sourceCoordinates.val_longitude.content, this.form.value.prj_sourceCoordinates.val_latitude.content);
       this.aladinService.clearPointings();
-      value.prj_SinglePoint.forEach((point: ISinglePoint) => {
-        this.aladinService.addPointing(
-          value.prj_sourceCoordinates.val_longitude.content + Object.assign(new Longitude, point.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
-          value.prj_sourceCoordinates.val_latitude.content + Object.assign(new Latitude, point.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
-        );
-      });
+      if (value.type === 'F_MultiplePoints') {
+        value.prj_SinglePoint.forEach((point: ISinglePoint) => {
+          if (point.prj_centre.type === 'RELATIVE') {
+            this.aladinService.addPointing(
+              Object.assign(new Longitude, value.prj_sourceCoordinates.val_longitude).getValueInUnits(LongitudeUnits.DEG) +
+              Object.assign(new Longitude, point.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
+              Object.assign(new Latitude, value.prj_sourceCoordinates.val_latitude).getValueInUnits(LatitudeUnits.DEG) +
+              Object.assign(new Latitude, point.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
+            );
+          } else if (point.prj_centre.type === 'ABSOLUTE') {
+            this.aladinService.addPointing(
+              Object.assign(new Longitude, point.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
+              Object.assign(new Latitude, point.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
+            );
+          }
+        });
+      } else if (value.type === 'F_SingleRectangle') {
+        this.aladinService.addRectangle(value.prj_sourceCoordinates, value.prj_Rectangle);
+      }
     });
   }
 

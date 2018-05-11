@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {ObsProposal} from '../../../shared/classes/obsproposal';
+import {ProjectService} from '../../../shared/services/project.service';
 import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.interface';
-import {PersistenceService} from '../../../shared/services/persistence.service';
 
 /**
  * The proposalForm component
@@ -158,25 +158,28 @@ export class ProposalComponent implements OnInit {
     console.log(event);
   }
 
-  constructor(private persistenceService: PersistenceService, private formBuilder: FormBuilder) {
-    // this.createForm();
+  constructor(private projectService: ProjectService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
-    this.persistenceService.getProposal().subscribe(result => {
+    this.projectService.loadedProposal.subscribe(result => {
+      if (result.prp_title === undefined) {
+        this.projectService.loadedProject.subscribe(res => {
+          this.proposalForm.patchValue({prp_title: res.prj_projectName});
+        });
+      }
       this.proposalForm.patchValue(result);
     });
     this.observeFormChanges();
   }
 
-  setRows(rows: IAlmaInvestigator[]) {
-    const rowFormGroups = rows.map(tableRow => this.formBuilder.group(tableRow));
-    const rowFormArray = this.formBuilder.array(rowFormGroups);
-    this.proposalForm.setControl('investigators', rowFormArray);
+  get pi(): IAlmaInvestigator {
+    return this.projectService.loadedProposal.getValue().prp_PrincipalInvestigator;
   }
 
-  get investigators(): FormArray {
-    return this.proposalForm.get('investigators') as FormArray;
+  selectPi() {
+
   }
 
   /**
@@ -191,7 +194,7 @@ export class ProposalComponent implements OnInit {
     const debounce = this.proposalForm.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.proposalForm.valid && this.proposalForm.dirty) {
-        this.persistenceService.updateProposal(value).subscribe();
+        this.projectService.updateProposal(value).subscribe();
       }
     });
   }

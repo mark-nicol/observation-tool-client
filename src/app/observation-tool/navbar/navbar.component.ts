@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
-import {PersistenceService} from '../shared/services/persistence.service';
+import {ProjectService} from '../shared/services/project.service';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectImportModal} from '../shared/components/project-import-modal/project-import-modal.component';
 import {ObsProject} from '../shared/classes/obsproject';
+import {ScienceGoal} from '../shared/classes/science-goal/science-goal';
 
 /**
  * The navbar component at the top of the application
@@ -22,6 +24,8 @@ export class NavbarComponent implements OnInit {
 
   /** Keeps track of the currently selected science goal */
   selectedGoal: any;
+
+  sciGoalDropdownOpen = false;
 
   /** All items to show on the navbar menu and their routing paths */
   items: NavItemInterface[] = [
@@ -47,9 +51,14 @@ export class NavbarComponent implements OnInit {
     }
   ];
 
-  constructor(private router: Router,
-              private persistenceService: PersistenceService,
-              private suiModalService: SuiModalService) {
+  mobileMenuOpen = true;
+  userMenuOpen = true;
+  scienceGoalMenuOpen = true;
+
+  constructor(protected router: Router,
+              protected persistenceService: ProjectService,
+              private suiModalService: SuiModalService,
+              private location: Location) {
 
   }
 
@@ -57,6 +66,7 @@ export class NavbarComponent implements OnInit {
    * Sets the currently selected goal to the first in the list
    */
   ngOnInit() {
+
   }
 
   /**
@@ -67,23 +77,27 @@ export class NavbarComponent implements OnInit {
     this.selectedGoal = newGoal;
   }
 
-  /**
-   * Adds a new goal to the available goals
-   *
-   * @return false
-   */
-  addGoal() {
-    return false;
+  get scienceGoals(): ScienceGoal[] {
+    if (this.persistenceService.hasScienceGoals()) {
+      return this.persistenceService.loadedProposal.value.prj_ScienceGoal;
+    }
   }
 
-  /**
-   * Removes the selected goal from the available goals
-   * @param toRemove The goal to remove from the list
-   */
-  removeGoal(toRemove: string) {
+  addScienceGoal() {
+    this.persistenceService.addScienceGoal();
   }
 
-  exportClick() {
+  removeScienceGoal() {
+    this.persistenceService.removeScienceGoal();
+  }
+
+  setCurrentGoal(event: number) {
+    this.persistenceService.setCurrentTarget(0);
+    this.persistenceService.loadScienceGoal(event);
+    this.persistenceService.currentGoal = event;
+    if (this.router.url.indexOf('science-goals') < 0) {
+      this.router.navigate(['science-goals']).then();
+    }
   }
 
   makeProjectImportModal() {
@@ -91,6 +105,7 @@ export class NavbarComponent implements OnInit {
       .open(new ProjectImportModal())
       .onApprove((result: ObsProject) => {
         this.persistenceService.selectProject(result);
+        this.router.navigate(['/project']).then();
       })
       .onDeny(result => {
       });

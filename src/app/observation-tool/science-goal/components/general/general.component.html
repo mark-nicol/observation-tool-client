@@ -1,13 +1,18 @@
-<form class="ui form"
-      [formGroup]="generalForm">
-  <div class="field">
-    <label for="name-input">Science Goal Name</label>
-    <input id="name-input"
-           formControlName="prj_name">
+<div class="ui container">
+  <h3 class="ui top attached blue header">General</h3>
+  <div class="ui bottom attached segment">
+    <form class="ui form"
+          [formGroup]="form">
+      <div class="field">
+        <label for="name-input">Science Goal Name</label>
+        <input id="name-input"
+               formControlName="prj_name">
+      </div>
+      <div class="field">
+        <label for="description-input">Description</label>
+        <textarea id="description-input"
+                  formControlName="prj_note"></textarea>
+      </div>
+    </form>
   </div>
-  <div class="field">
-    <label for="description-input">Description</label>
-    <textarea id="description-input"
-              formControlName="prj_note"></textarea>
-  </div>
-</form>
+</div>

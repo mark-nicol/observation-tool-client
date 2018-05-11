@@ -2,9 +2,10 @@ import {IObsProposal} from '../interfaces/project/obsproposal.interface';
 import {IScienceGoal} from '../interfaces/project/science-goal/sciencegoal.interface';
 import {IAlmaInvestigator} from '../interfaces/alma-investigator.interface';
 import {IProposalFeedback} from '../interfaces/project/propsal-feedback.interface';
+import {ScienceGoal} from './science-goal/science-goal';
 
 export class ObsProposal implements IObsProposal {
-  prj_ScienceGoal: IScienceGoal;
+  prj_ScienceGoal: IScienceGoal[];
   prp_PrincipalInvestigator: IAlmaInvestigator;
   prp_abstract: string;
   prp_coInvestigators: IAlmaInvestigator[];

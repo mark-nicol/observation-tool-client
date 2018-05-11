@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
-import {PersistenceService} from '../../../shared/services/persistence.service';
+import {ProjectService} from '../../../shared/services/project.service';
 import {SystemService} from '../../../shared/services/system.service';
 import {FieldCenterCoordinatesComponent} from './field-center-coordinates.component';
 
@@ -20,7 +20,7 @@ describe('FieldCenterCoordinatesComponent', () => {
         SuiModule,
       ],
       providers: [
-        PersistenceService,
+        ProjectService,
         SystemService
       ]
     })

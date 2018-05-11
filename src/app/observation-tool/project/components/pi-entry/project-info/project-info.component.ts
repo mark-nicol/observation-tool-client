@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {ObsProject} from '../../../../shared/classes/obsproject';
-import {PersistenceService} from '../../../../shared/services/persistence.service';
+import {ProjectService} from '../../../../shared/services/project.service';
 import {ToastsManager} from 'ng2-toastr';
 
 /**
@@ -17,14 +16,14 @@ export class ProjectInfoComponent implements OnInit {
 
   project: ObsProject;
 
-  constructor(private persistenceService: PersistenceService,
+  constructor(private persistenceService: ProjectService,
               viewContainerRef: ViewContainerRef,
               private toastsManager: ToastsManager) {
     this.toastsManager.setRootViewContainerRef(viewContainerRef);
   }
 
   ngOnInit(): void {
-    this.persistenceService.getProject().subscribe(
+    this.persistenceService.loadedProject.subscribe(
       result => this.project = result,
       error => this.toastsManager.error('Could not retrieve project data', 'Error', {showCloseButton: true})
     );

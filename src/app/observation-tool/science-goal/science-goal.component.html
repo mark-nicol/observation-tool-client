@@ -1,28 +1,106 @@
-<div class="ui fixed sticky tabular menu">
-  <a class="item"
-     *ngFor="let page of pageKeys(pages)"
-     [routerLink]="pages[page].path"
-     [class.active]="router.url.indexOf(pages[page].path) > -1">
-    {{pages[page].text}}
-  </a>
-  <div class="right menu"
-       *ngIf="router.url.indexOf('field-setup') > -1 && targets !== undefined">
-    <a class="item"
-       *ngFor="let target of targets"
-       [routerLink]="['field-setup', target.prj_index + 1]"
-       [class.active]="router.url.indexOf('field-setup/'+(target.prj_index + 1)) > -1"
-       (click)="changeTarget(target.prj_index + 1)">
-      {{target.prj_sourceName}}
-    </a>
-    <div class="link item"
-         (click)="addNewTarget()"><i class="blue add icon"></i>
+<div class="ui grid">
+  <div class="column"
+       [ngClass]="menuOpen ? 'two wide' : 'one wide'">
+    <button *ngIf="!menuOpen"
+            class="ui large right attached primary button tablet or lower hidden"
+            (click)="menuOpen = !menuOpen"><i class="sidebar icon"></i></button>
+    <div *ngIf="menuOpen"
+         class="ui fluid borderless vertical menu tablet or lower hidden">
+      <div class="inverted primary header link item"
+           (click)="menuOpen = !menuOpen"><i class="arrow left icon"></i>
+        {{goalName}}
+      </div>
+      <div class="link item"
+           [routerLink]="'general'"
+           [routerLinkActive]="['active']">
+        General
+        <i class="info circle icon"></i>
+      </div>
+      <div class="item"
+           [class.header]="router.url.indexOf('field-setup') > -1"
+           [class.active]="router.url.indexOf('field-setup') > -1">
+        Field Setup
+        <i class="map icon"></i>
+        <div class="secondary menu">
+          <div *ngFor="let target of targets; let i = index"
+               class="link item"
+               [routerLink]="'field-setup'"
+               [class.active]="router.url.indexOf('field-setup') > -1 && i === currentTarget"
+               (click)="changeTarget(i)">
+            {{target.prj_sourceName}}
+          </div>
+          <div class="item">
+            <div class="ui tiny compact labeled icon buttons">
+              <button class="ui primary button"
+                      (click)="addSource()"><i class="add icon"></i>Add
+              </button>
+              <button class="ui red button"
+                      (click)="removeSource()"><i class="trash icon"></i>Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="link item"
+           [routerLink]="'spectral-setup'"
+           [routerLinkActive]="['active']">
+        Spectral Setup
+        <i class="chart line icon"></i>
+      </div>
+      <div class="link item"
+           [routerLink]="'calibration-setup'"
+           [routerLinkActive]="['active']">
+        Calibration Setup
+        <i class="crosshairs icon"></i>
+      </div>
+      <div class="link item"
+           [routerLink]="'control-performance'"
+           [routerLinkActive]="['active']">
+        Control and Performance
+        <i class="stopwatch icon"></i>
+      </div>
+      <div class="link item"
+           [routerLink]="'technical-justification'"
+           [routerLinkActive]="['active']">
+        Technical Justification
+        <i class="balance scale icon"></i>
+      </div>
     </div>
-    <div class="link item"
-         (click)="removeTarget()">
-      <i class="red delete icon"></i></div>
   </div>
-</div>
-<p style="height: 1.95em"></p>
-<div class="ui bottom attached segment">
-  <router-outlet></router-outlet>
+  <div class="column"
+       [ngClass]="menuOpen ? 'thirteen wide' : 'fourteen wide' ">
+    <router-outlet></router-outlet>
+    <div class="ui tablet mobile only bottom fixed fluid six item icon menu">
+      <div class="link item"
+           [routerLink]="'general'"
+           [routerLinkActive]="['active']">
+        <i class="info circle icon"></i>
+      </div>
+      <div class="item"
+           [class.active]="router.url.indexOf('field-setup') > -1">
+        <i class="map icon"></i>
+      </div>
+      <div class="link item"
+           [routerLink]="'spectral-setup'"
+           [routerLinkActive]="['active']">
+        <i class="chart line icon"></i>
+      </div>
+      <div class="link item"
+           [routerLink]="'calibration-setup'"
+           [routerLinkActive]="['active']">
+        <i class="crosshairs icon"></i>
+      </div>
+      <div class="link item"
+           [routerLink]="'control-performance'"
+           [routerLinkActive]="['active']">
+        <i class="stopwatch icon"></i>
+      </div>
+      <div class="link item"
+           [routerLink]="'technical-justification'"
+           [routerLinkActive]="['active']">
+        <i class="balance scale icon"></i>
+      </div>
+    </div>
+  </div>
+  <div class="one wide column"></div>
 </div>

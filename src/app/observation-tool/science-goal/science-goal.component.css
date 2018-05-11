@@ -1,4 +1,8 @@
-.ui.fixed.sticky {
-  background: white;
-  margin-top: 4em;
+.inverted.primary.header.item {
+  color: rgba(255,255,255,.9);
+  background: #2185d0;
+}
+
+.active.link.item {
+  font-weight: bold;
 }

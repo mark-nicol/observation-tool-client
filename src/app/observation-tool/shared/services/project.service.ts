@@ -60,7 +60,8 @@ export class ProjectService implements CanActivate {
   getAllProjects(): Observable<ObsProject[]> {
     return this.http.get<ObsProject[]>(`${this.baseUrl}/projects`).pipe(
       tap(
-        data => {},
+        data => {
+        },
         error => this.handleError(error)
       )
     );
@@ -176,6 +177,20 @@ export class ProjectService implements CanActivate {
       this._loadedProposal.getValue().prj_ScienceGoal.push(new ScienceGoal());
     } else {
       this._loadedProposal.getValue().prj_ScienceGoal = [new ScienceGoal()];
+    }
+  }
+
+  removeScienceGoal() {
+    this._loadedProposal.getValue().prj_ScienceGoal.splice(this._currentGoal, 1);
+    this._currentGoal--;
+    if (this._currentGoal === -1) {
+      this._currentGoal = 0;
+    }
+    if (this._loadedProposal.getValue().prj_ScienceGoal.length > 0) {
+      this.loadScienceGoal(this._currentGoal);
+    } else {
+      this._loadedProposal.getValue().prj_ScienceGoal = undefined;
+      this.router.navigate(['/project']).then(() => this.toastr.info('All science goals deleted'));
     }
   }
 

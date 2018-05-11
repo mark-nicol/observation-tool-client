@@ -77,25 +77,6 @@ export class NavbarComponent implements OnInit {
     this.selectedGoal = newGoal;
   }
 
-  /**
-   * Adds a new goal to the available goals
-   *
-   * @return false
-   */
-  addGoal() {
-    return false;
-  }
-
-  /**
-   * Removes the selected goal from the available goals
-   * @param toRemove The goal to remove from the list
-   */
-  removeGoal(toRemove: string) {
-  }
-
-  exportClick() {
-  }
-
   get scienceGoals(): ScienceGoal[] {
     if (this.persistenceService.hasScienceGoals()) {
       return this.persistenceService.loadedProposal.value.prj_ScienceGoal;
@@ -104,6 +85,10 @@ export class NavbarComponent implements OnInit {
 
   addScienceGoal() {
     this.persistenceService.addScienceGoal();
+  }
+
+  removeScienceGoal() {
+    this.persistenceService.removeScienceGoal();
   }
 
   setCurrentGoal(event: number) {

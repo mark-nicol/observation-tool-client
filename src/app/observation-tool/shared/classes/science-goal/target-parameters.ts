@@ -7,6 +7,7 @@ import {
 } from '../../interfaces/project/science-goal/target-parameters.interface';
 import {AngularVelocity} from '../../../../units/classes/angular-velocity';
 import {Angle} from '../../../../units/classes/angle';
+import {ExpectedSourceProperties} from './expected-source-properties';
 
 export class TargetParameters implements ITargetParameters {
   prj_ExpectedProperties: IExpectedProperties;
@@ -23,4 +24,10 @@ export class TargetParameters implements ITargetParameters {
   prj_sourceVelocity: ISourceVelocity;
   solarSystemObject: any;
   type: string;
+
+
+  constructor() {
+    this.prj_sourceName = 'New Target';
+    this.prj_ExpectedProperties = new ExpectedSourceProperties();
+  }
 }

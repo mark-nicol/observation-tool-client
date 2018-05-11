@@ -195,11 +195,11 @@ export class ProjectService implements CanActivate {
   }
 
   addSource() {
-
+    this._loadedGoal.getValue().prj_TargetParameters.push(new TargetParameters());
   }
 
   removeSource() {
-    
+
   }
 
 }

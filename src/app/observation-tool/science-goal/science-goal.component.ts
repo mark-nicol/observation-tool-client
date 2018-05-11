@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ITargetParameters} from '../shared/interfaces/project/science-goal/target-parameters.interface';
 import {ProjectService} from '../shared/services/project.service';
+import {TargetParameters} from '../shared/classes/science-goal/target-parameters';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -44,7 +45,6 @@ export class ScienceGoalComponent implements OnInit {
 
   currentTarget: number;
   goalName: string;
-  targets: ITargetParameters[];
 
   /** Iterator for pages */
   pageKeys: (o) => string[] = Object.keys;
@@ -60,7 +60,6 @@ export class ScienceGoalComponent implements OnInit {
   ngOnInit() {
     this.projectService.loadScienceGoal(this.projectService.currentGoal);
     this.projectService.loadedGoal.subscribe(result => {
-      this.targets = result.prj_TargetParameters;
       this.goalName = result.prj_name;
     });
     this.projectService.currentTarget.subscribe(result => {
@@ -78,6 +77,10 @@ export class ScienceGoalComponent implements OnInit {
 
   removeSource() {
     this.projectService.removeSource();
+  }
+
+  get targets(): ITargetParameters[] {
+    return this.projectService.loadedGoal.value.prj_TargetParameters;
   }
 
 }

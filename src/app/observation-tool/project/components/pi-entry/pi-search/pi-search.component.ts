@@ -4,6 +4,8 @@ import {ToastsManager} from 'ng2-toastr';
 import {AlmaInvestigatorSearchModal} from '../../../../alma-investigator-search/components/modal/modal.component';
 import {AlmaInvestigatorSearchService} from '../../../../alma-investigator-search/services/alma-investigator-search.service';
 import {ProjectService} from '../../../../shared/services/project.service';
+import {IAlmaInvestigator} from '../../../../shared/interfaces/alma-investigator.interface';
+import has = Reflect.has;
 
 /**
  * Initial PI search component
@@ -37,12 +39,20 @@ export class PiSearchComponent implements OnInit {
 
   }
 
+  get pi(): IAlmaInvestigator {
+    if (this.projectService.hasProposalLoaded()) {
+      return this.projectService.loadedProposal.getValue().prp_PrincipalInvestigator;
+    }
+  }
+
   makeModal(piName: string) {
     this.suiModalService
       .open(new AlmaInvestigatorSearchModal(piName))
-      .onApprove(result => console.log(result)/*this.newPi()*/)
+      .onApprove(result => {
+        console.log(result);
+      })
       .onDeny(result => {
-
+        console.log(result);
       });
   }
 }

@@ -4,7 +4,7 @@
          type="text"
          (keyup)="0"
          placeholder="{{this.INPUT_PLACEHOLDER}}"
-         value="">
+         value="{{pi?.prp_fullName}}">
   <i class="icon" *ngIf="isLoading"></i>
   <button class="ui blue labeled icon button"
           (click)="makeModal(piSearchInput.value)"

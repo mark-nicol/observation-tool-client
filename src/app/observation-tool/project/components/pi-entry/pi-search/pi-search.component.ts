@@ -32,12 +32,11 @@ export class PiSearchComponent implements OnInit {
     this.toastMgr.setRootViewContainerRef(viewContainerRef);
   }
 
-  /**
-   * Checks for a chosen PI in session storage and sets if available
-   */
   ngOnInit() {
     this.projectService.loadedProposal.subscribe(result => {
-      this.pi = result.prp_PrincipalInvestigator
+      if (result) {
+        this.pi = result.prp_PrincipalInvestigator;
+      }
     });
   }
 

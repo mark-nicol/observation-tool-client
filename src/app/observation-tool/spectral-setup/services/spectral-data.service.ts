@@ -36,7 +36,7 @@ export class SpectralDataService {
    * @param option The octile to retrieve data for
    */
   getSpectrum(option: number): any {
-    return this.http.get(`http://localhost:8080/api/spectral/${option}`);
+    return this.http.get(`http://localhost:8080/api/spectral/spectrum/${option}`);
   }
 
   getSplatalogue(filters?: any): any {

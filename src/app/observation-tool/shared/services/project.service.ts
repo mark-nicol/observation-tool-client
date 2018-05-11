@@ -7,9 +7,10 @@ import {TargetParameters} from '../classes/science-goal/target-parameters';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {ScienceGoal} from '../classes/science-goal/science-goal';
-import {catchError, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
+import * as _ from 'lodash';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -110,6 +111,13 @@ export class ProjectService implements CanActivate {
     });
   }
 
+  updateScienceGoal(updates: any) {
+    console.log('Old goal:', this._loadedGoal.getValue());
+    console.log('New goal:', _.merge(this._loadedGoal.getValue(), updates));
+    // this._loadedGoal.next(_.merge(this._loadedGoal.getValue(), updates));
+    // console.log(this._loadedGoal.getValue());
+  }
+
   updateTargetParams(proposal: TargetParameters): Observable<TargetParameters> {
     return this.http.post<TargetParameters>(`${this.baseUrl}/projects`, proposal, httpOptions);
   }
@@ -161,6 +169,14 @@ export class ProjectService implements CanActivate {
       this.toastr.error('Other error')
     }
     return new ErrorObservable('Broke');
+  }
+
+  addScienceGoal() {
+    if (this.hasScienceGoals()) {
+      this._loadedProposal.getValue().prj_ScienceGoal.push(new ScienceGoal());
+    } else {
+      this._loadedProposal.getValue().prj_ScienceGoal = [new ScienceGoal()];
+    }
   }
 
 }

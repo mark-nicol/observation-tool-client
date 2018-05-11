@@ -49,67 +49,35 @@ export class ScienceGoalComponent implements OnInit {
   /** Iterator for pages */
   pageKeys: (o) => string[] = Object.keys;
 
-  lowerBound = 0;
-  upperBound = 4;
-
   menuOpen = true;
 
   /**
    * Constructor
    */
-  constructor(protected router: Router, private persistenceService: ProjectService) {
+  constructor(protected router: Router, private projectService: ProjectService) {
   }
 
   ngOnInit() {
-    this.persistenceService.loadScienceGoal(this.persistenceService.currentGoal);
-    this.persistenceService.loadedGoal.subscribe(result => {
+    this.projectService.loadScienceGoal(this.projectService.currentGoal);
+    this.projectService.loadedGoal.subscribe(result => {
       this.targets = result.prj_TargetParameters;
       this.goalName = result.prj_name;
     });
-    this.persistenceService.currentTarget.subscribe(result => {
+    this.projectService.currentTarget.subscribe(result => {
       this.currentTarget = result;
     });
   }
 
   changeTarget(index: number) {
-    this.persistenceService.setCurrentTarget(index);
+    this.projectService.setCurrentTarget(index);
   }
 
-  addNewTarget() {
-    this.targets.push({
-      type: '',
-      prj_isMosaic: false,
-      prj_sourceName: 'New Source',
-      prj_sourceCoordinates: null,
-      prj_pmRA: null,
-      prj_pmDec: null,
-      prj_parallax: null,
-      prj_nonSiderealMotion: false,
-      solarSystemObject: null,
-      prj_sourceEphemeris: '',
-      prj_sourceVelocity: null,
-      prj_index: this.targets.length - 1,
-      prj_ExpectedProperties: null,
-      prj_SinglePoint: null,
-    });
+  addSource() {
+    this.projectService.addSource();
   }
 
-  removeTarget() {
-    this.targets.pop();
-  }
-
-  scrollTargetsDown() {
-    if (this.lowerBound > 0) {
-      this.lowerBound--;
-      this.upperBound--;
-    }
-  }
-
-  scrollTargetsUp() {
-    if (this.upperBound < this.targets.length - 1) {
-      this.lowerBound++;
-      this.upperBound++;
-    }
+  removeSource() {
+    this.projectService.removeSource();
   }
 
 }

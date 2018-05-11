@@ -194,4 +194,12 @@ export class ProjectService implements CanActivate {
     }
   }
 
+  addSource() {
+
+  }
+
+  removeSource() {
+    
+  }
+
 }

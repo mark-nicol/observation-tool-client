@@ -26,7 +26,7 @@
       ],
       "scripts": [
         "../semantic/dist/semantic.min.js",
-        "ng2-toastr/bundles/ng2-toastr.min.js"
+        "../node_modules/ng2-toastr/bundles/ng2-toastr.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

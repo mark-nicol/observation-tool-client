@@ -39,6 +39,9 @@ interface Margin {
   left: number
 }
 
+/**
+ * Interface for each ALMA band in the viewer
+ */
 interface AlmaBand {
   start: number
   end: number

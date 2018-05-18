@@ -124,7 +124,7 @@ export class ProjectService implements CanActivate {
   }
 
   updateProposal(proposal: ObsProposal): Observable<ObsProposal> {
-    return this.http.put<ObsProposal>(`${this.baseUrl}/projects/proposal`, proposal);
+    return this.http.put<ObsProposal>(`${this.baseUrl}/proposal`, proposal);
   }
 
   hasProjectLoaded(): boolean {

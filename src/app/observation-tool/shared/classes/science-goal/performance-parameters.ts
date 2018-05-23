@@ -5,24 +5,24 @@ import {IPerformanceParameters} from '../../interfaces/project/science-goal/perf
 
 export class PerformanceParameters implements IPerformanceParameters {
   desiredSensitivityFrequencyMeasure: string;
-  prj_acceptableAngularResolution: Angle;
-  prj_desiredACASensitivity: Sensitivity;
-  prj_desiredAngularResolution: Angle;
-  prj_desiredDynamicRange: number;
-  prj_desiredLargestScale: Angle;
-  prj_desiredSDSensitivity: Sensitivity;
-  prj_desiredSensitivity: Sensitivity;
-  prj_desiredSensitivityReferenceFrequencyWidth: Frequency;
-  prj_desiredTPSensitivity: Sensitivity;
-  prj_desiredTime: string;
-  prj_isPointSource: boolean;
-  prj_isScheduleConstrained: boolean;
-  prj_isSimultaneous12and7: boolean;
-  prj_isTimeConstrained: boolean;
-  prj_needsMoreTime: boolean;
-  prj_representativeFrequency: Frequency;
-  prj_useACA: boolean;
-  prj_useTP: boolean;
+  acceptableAngularResolution: Angle;
+  desiredACASensitivity: Sensitivity;
+  desiredAngularResolution: Angle;
+  desiredDynamicRange: number;
+  desiredLargestScale: Angle;
+  desiredSDSensitivity: Sensitivity;
+  desiredSensitivity: Sensitivity;
+  desiredSensitivityReferenceFrequencyWidth: Frequency;
+  desiredTPSensitivity: Sensitivity;
+  desiredTime: string;
+  isPointSource: boolean;
+  isScheduleConstrained: boolean;
+  isSimultaneous12and7: boolean;
+  isTimeConstrained: boolean;
+  needsMoreTime: boolean;
+  representativeFrequency: Frequency;
+  useACA: boolean;
+  useTP: boolean;
   resolutionOption: string;
   timingConstraintsType: string;
 }

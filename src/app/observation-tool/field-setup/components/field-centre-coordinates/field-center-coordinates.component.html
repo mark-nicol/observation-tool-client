@@ -132,7 +132,7 @@
         <div class="three wide field">
           <label>Sexagesimal Units</label>
           <sui-checkbox class="toggle"
-                        [ngModel]="form.value.prj_Rectangle.prj_centre.type === 'ABSOLUTE'"
+                        [ngModel]="form.value.Rectangle.centre.type === 'ABSOLUTE'"
                         [ngModelOptions]="{standalone: true}">
           </sui-checkbox>
         </div>
@@ -155,7 +155,7 @@
               <input formControlName="content">
               <sui-select class="selection"
                           formControlName="unit"
-                          *ngIf="form.value.prj_Rectangle.prj_centre.type === 'RELATIVE'">
+                          *ngIf="form.value.Rectangle.centre.type === 'RELATIVE'">
                 <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
               </sui-select>
             </div>
@@ -165,7 +165,7 @@
         <!-- Lat offset input -->
         <div class="field" formGroupName="val_latitude">
           <div
-            *ngIf="form.value.prj_Rectangle.prj_centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
+            *ngIf="form.value.Rectangle.centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
           <ng-template #absoluteLatLabel>
             <label>
               {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
@@ -180,7 +180,7 @@
             <input formControlName="content">
             <sui-select class="selection"
                         formControlName="unit"
-                        *ngIf="form.value.prj_Rectangle.prj_centre.type === 'RELATIVE'">
+                        *ngIf="form.value.Rectangle.centre.type === 'RELATIVE'">
               <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
             </sui-select>
           </div>

@@ -80,28 +80,31 @@ export class ProjectService implements CanActivate {
   }
 
   selectProject(project: ObsProject) {
+    console.log(project);
     this._loadedProject.next(project);
     this.loadProposal();
   }
 
   loadScienceGoal(index) {
-    this.loadedGoal.next(this._loadedProposal.value.prj_ScienceGoal[index]);
+    this.loadedGoal.next(this._loadedProposal.value.ScienceGoal[index]);
   }
 
   loadProposal() {
-    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value['prj_ObsProposalRef']['entityId'])};
+    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value['obsProposalRef']['entityId'])};
+    console.log(`${this.baseUrl}/proposal?proposalRef=${this._loadedProject.value['obsProposalRef']['entityId']}`);
     this.http.get<any>(`${this.baseUrl}/proposal`, options).subscribe(result => {
-      if (!(result.prj_ScienceGoal instanceof Array) && result.prj_ScienceGoal !== undefined) {
-        result.prj_ScienceGoal = [result.prj_ScienceGoal];
+      console.log(result);
+      if (!(result.ScienceGoal instanceof Array) && result.ScienceGoal !== undefined) {
+        result.ScienceGoal = [result.ScienceGoal];
       }
-      if (result.prj_ScienceGoal) {
-        for (const goal of result.prj_ScienceGoal) {
-          if (goal.prj_TargetParameters && !(goal.prj_TargetParameters instanceof Array)) {
-            goal.prj_TargetParameters = [goal.prj_TargetParameters];
+      if (result.ScienceGoal) {
+        for (const goal of result.ScienceGoal) {
+          if (goal.TargetParameters && !(goal.TargetParameters instanceof Array)) {
+            goal.TargetParameters = [goal.TargetParameters];
           }
-          for (const target of goal.prj_TargetParameters) {
-            if (target.prj_SinglePoint && !(target.prj_SinglePoint instanceof Array)) {
-              target.prj_SinglePoint = [target.prj_SinglePoint];
+          for (const target of goal.TargetParameters) {
+            if (target.SinglePoint && !(target.SinglePoint instanceof Array)) {
+              target.SinglePoint = [target.SinglePoint];
             }
           }
         }
@@ -137,13 +140,13 @@ export class ProjectService implements CanActivate {
 
   hasScienceGoals(): boolean {
     if (this.hasProposalLoaded()) {
-      return this._loadedProposal.value.prj_ScienceGoal !== (null || undefined);
+      return this._loadedProposal.value.ScienceGoal !== (null || undefined);
     }
   }
 
   hasSources(): boolean {
     if (this.hasScienceGoals()) {
-      return this._loadedGoal.getValue().prj_TargetParameters !== (null || undefined);
+      return this._loadedGoal.getValue().TargetParameters !== (null || undefined);
     }
     return false;
   }
@@ -181,49 +184,49 @@ export class ProjectService implements CanActivate {
 
   addScienceGoal() {
     if (this.hasScienceGoals()) {
-      this._loadedProposal.getValue().prj_ScienceGoal.push(new ScienceGoal());
+      this._loadedProposal.getValue().ScienceGoal.push(new ScienceGoal());
     } else {
-      this._loadedProposal.getValue().prj_ScienceGoal = [new ScienceGoal()];
+      this._loadedProposal.getValue().ScienceGoal = [new ScienceGoal()];
     }
   }
 
   removeScienceGoal() {
-    this._loadedProposal.getValue().prj_ScienceGoal.splice(this._currentGoal, 1);
+    this._loadedProposal.getValue().ScienceGoal.splice(this._currentGoal, 1);
     this._currentGoal--;
     if (this._currentGoal === -1) {
       this._currentGoal = 0;
     }
-    if (this._loadedProposal.getValue().prj_ScienceGoal.length > 0) {
+    if (this._loadedProposal.getValue().ScienceGoal.length > 0) {
       this.loadScienceGoal(this._currentGoal);
     } else {
-      this._loadedProposal.getValue().prj_ScienceGoal = undefined;
+      this._loadedProposal.getValue().ScienceGoal = undefined;
       this.router.navigate(['/project']).then(() => this.toastr.info('All science goals removed'));
     }
   }
 
   addSource() {
     if (this.hasSources()) {
-      this._loadedGoal.getValue().prj_TargetParameters.push(new TargetParameters());
+      this._loadedGoal.getValue().TargetParameters.push(new TargetParameters());
     } else {
-      this._loadedGoal.getValue().prj_TargetParameters = [new TargetParameters()];
+      this._loadedGoal.getValue().TargetParameters = [new TargetParameters()];
     }
   }
 
   removeSource() {
-    this._loadedGoal.getValue().prj_TargetParameters.splice(this._currentTarget.getValue(), 1);
+    this._loadedGoal.getValue().TargetParameters.splice(this._currentTarget.getValue(), 1);
     this._currentTarget.next(this._currentTarget.value - 1);
     if (this._currentTarget.value === -1) {
       this._currentTarget.next(0);
     }
-    if (this._loadedGoal.getValue().prj_TargetParameters.length <= 0) {
-      this._loadedGoal.getValue().prj_TargetParameters = undefined;
+    if (this._loadedGoal.getValue().TargetParameters.length <= 0) {
+      this._loadedGoal.getValue().TargetParameters = undefined;
       this.router.navigate(['/science-goals/general']).then(() => this.toastr.info('All sources removed'));
     }
   }
 
   setPi(newPi: any) {
     const oldProposal = this._loadedProposal.getValue();
-    oldProposal.prp_PrincipalInvestigator = newPi;
+    oldProposal.PrincipalInvestigator = newPi;
     this._loadedProposal.next(oldProposal);
   }
 

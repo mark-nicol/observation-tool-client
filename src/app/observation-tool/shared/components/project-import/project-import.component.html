@@ -31,10 +31,10 @@
   <tr *ngFor="let project of projects | async"
       (click)="rowClicked(project)"
       [class.active]="_selectedProject === project">
-    <td>{{project.prj_projectName}}</td>
-    <td>{{project.prj_code}}</td>
-    <td>{{project.prj_pI}}</td>
-    <td>{{project.prj_timeOfCreation}}</td>
+    <td>{{project.projectName}}</td>
+    <td>{{project.code}}</td>
+    <td>{{project.pI}}</td>
+    <td>{{project.timeOfCreation}}</td>
     <td></td>
     <td></td>
     <td></td>

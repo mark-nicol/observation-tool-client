@@ -4,7 +4,7 @@ import {Speed} from '../../../../../units/classes/speed';
 export class SourceVelocity implements ISourceVelocity {
   dopplerCalcType: string;
   referenceSystem: string;
-  val_centerVelocity: Speed;
+  centerVelocity: Speed;
 
   constructor() {
 

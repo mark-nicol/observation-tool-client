@@ -124,42 +124,42 @@ export class FieldSetupComponent implements OnInit {
   initForm(index: number) {
     this.persistenceService.loadedGoal
       .subscribe(result => {
-        if (result.prj_TargetParameters[index]) {
-          const targetParams = result.prj_TargetParameters[index];
+        if (result.TargetParameters[index]) {
+          const targetParams = result.TargetParameters[index];
           this.form.patchValue({
             prj_ExpectedProperties: {
-              prj_expectedPeakFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakFluxDensity,
-              prj_desiredCircularPolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredCircularPolarizationPercentage,
-              prj_expectedPeakLineFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakLineFluxDensity,
-              prj_expectedLineWidth: targetParams.prj_ExpectedProperties.prj_expectedLineWidth,
-              prj_desiredLinePolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredLinePolarizationPercentage
+              prj_expectedPeakFluxDensity: targetParams.ExpectedProperties.expectedPeakFluxDensity,
+              prj_desiredCircularPolarizationPercentage: targetParams.ExpectedProperties.desiredCircularPolarizationPercentage,
+              prj_expectedPeakLineFluxDensity: targetParams.ExpectedProperties.expectedPeakLineFluxDensity,
+              prj_expectedLineWidth: targetParams.ExpectedProperties.expectedLineWidth,
+              prj_desiredLinePolarizationPercentage: targetParams.ExpectedProperties.desiredLinePolarizationPercentage
             },
             type: targetParams.type,
-            prj_sourceName: targetParams.prj_sourceName,
+            prj_sourceName: targetParams.sourceName,
             solarSystemObject: targetParams.solarSystemObject,
-            prj_radialVelocityReferenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
+            prj_radialVelocityReferenceSystem: targetParams.sourceVelocity.referenceSystem,
             prj_sourceCoordinates: {
-              system: targetParams.prj_sourceCoordinates.system,
-              type: targetParams.prj_sourceCoordinates.type,
-              val_longitude: targetParams.prj_sourceCoordinates.val_longitude,
-              val_latitude: targetParams.prj_sourceCoordinates.val_latitude,
+              system: targetParams.sourceCoordinates.system,
+              type: targetParams.sourceCoordinates.type,
+              val_longitude: targetParams.sourceCoordinates.longitude,
+              val_latitude: targetParams.sourceCoordinates.latitude,
             },
-            prj_parallax: targetParams.prj_parallax,
+            prj_parallax: targetParams.parallax,
             prj_sourceVelocity: {
-              val_centerVelocity: targetParams.prj_sourceVelocity.val_centerVelocity,
-              dopplerCalcType: targetParams.prj_sourceVelocity.dopplerCalcType,
-              referenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
+              val_centerVelocity: targetParams.sourceVelocity.centerVelocity,
+              dopplerCalcType: targetParams.sourceVelocity.dopplerCalcType,
+              referenceSystem: targetParams.sourceVelocity.referenceSystem,
               redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-                targetParams.prj_sourceVelocity.val_centerVelocity),
-                targetParams.prj_sourceVelocity.dopplerCalcType)
+                targetParams.sourceVelocity.centerVelocity),
+                targetParams.sourceVelocity.dopplerCalcType)
             },
-            prj_pmRA: targetParams.prj_pmRA,
-            prj_pmDec: targetParams.prj_pmDec,
+            prj_pmRA: targetParams.pmRA,
+            prj_pmDec: targetParams.pmDec,
           });
-          if (targetParams.prj_Rectangle) {
-            this.form.patchValue({prj_Rectangle: targetParams.prj_Rectangle});
-          } else if (targetParams.prj_SinglePoint) {
-            this.setSinglePoint(targetParams.prj_SinglePoint);
+          if (targetParams.Rectangle) {
+            this.form.patchValue({prj_Rectangle: targetParams.Rectangle});
+          } else if (targetParams.SinglePoint) {
+            this.setSinglePoint(targetParams.SinglePoint);
           }
         }
       });
@@ -168,23 +168,23 @@ export class FieldSetupComponent implements OnInit {
 
   setSinglePoint(points: SinglePoint[]) {
     const formGroups = points.map(point => this.formBuilder.group({
-      prj_name: point.prj_name,
+      prj_name: point.name,
       prj_centre: this.formBuilder.group({
-        system: point.prj_centre.system,
-        type: point.prj_centre.type,
+        system: point.centre.system,
+        type: point.centre.type,
         val_longitude: this.formBuilder.group({
-          unit: point.prj_centre.val_longitude.unit,
-          content: [point.prj_centre.val_longitude.content, Validators.required]
+          unit: point.centre.longitude.unit,
+          content: [point.centre.longitude.content, Validators.required]
         }),
         val_latitude: this.formBuilder.group({
-          unit: point.prj_centre.val_latitude.unit,
-          content: [point.prj_centre.val_latitude.content, Validators.required]
+          unit: point.centre.latitude.unit,
+          content: [point.centre.latitude.content, Validators.required]
         }),
-        val_fieldName: point.prj_centre.val_fieldName
+        val_fieldName: point.centre.fieldName
       })
     }));
     const singlePointFormArray = this.formBuilder.array(formGroups);
-    this.form.setControl('prj_SinglePoint', singlePointFormArray);
+    this.form.setControl('SinglePoint', singlePointFormArray);
   }
 
   observeFormChanges() {

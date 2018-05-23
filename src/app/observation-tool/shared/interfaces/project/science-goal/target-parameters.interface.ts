@@ -8,63 +8,63 @@ import {Speed} from '../../../../../units/classes/speed';
 import {SolarSystemObjects} from '../../../enums/solar-system-objects.enum';
 
 export interface ITargetParameters {
-  prj_sourceEphemeris: string;
-  prj_pmDec: AngularVelocity;
+  sourceEphemeris: string;
+  pmDec: AngularVelocity;
   type: string;
-  prj_sourceCoordinates: ISkyCoordinates;
-  prj_sourceVelocity: ISourceVelocity;
-  prj_nonSiderealMotion: boolean;
-  prj_sourceName: string;
-  prj_isMosaic: boolean;
-  prj_pmRA: AngularVelocity;
-  prj_index: number;
-  prj_SinglePoint?: ISinglePoint[];
-  prj_Rectangle?: IRectangle;
+  sourceCoordinates: ISkyCoordinates;
+  sourceVelocity: ISourceVelocity;
+  nonSiderealMotion: boolean;
+  sourceName: string;
+  isMosaic: boolean;
+  pmRA: AngularVelocity;
+  index: number;
+  SinglePoint?: ISinglePoint[];
+  Rectangle?: IRectangle;
   solarSystemObject: any/*SolarSystemObjects*/; // TODO change
-  prj_ExpectedProperties: IExpectedProperties;
-  prj_parallax: Angle;
+  ExpectedProperties: IExpectedProperties;
+  parallax: Angle;
 }
 
 export interface IField {
-  prj_name: string;
-  prj_centre: ISkyCoordinates;
+  name: string;
+  centre: ISkyCoordinates;
 }
 
 export interface ISinglePoint extends IField {
 }
 
 export interface IRectangle extends IField {
-  prj_pALong: Angle;
-  prj_long: Angle;
-  prj_short: Angle;
-  prj_spacing: any; // TODO Userunit
-  prj_referenceFrequency: Frequency;
+  pALong: Angle;
+  long: Angle;
+  short: Angle;
+  spacing: any; // TODO Userunit
+  referenceFrequency: Frequency;
 }
 
 export interface ISkyCoordinates {
   system: string;
   type: string;
-  val_latitude: Latitude;
-  val_longitude: Longitude;
-  val_fieldName: string;
+  latitude: Latitude;
+  longitude: Longitude;
+  fieldName: string;
 }
 
 export interface ISourceVelocity {
   referenceSystem: string; // TODO Make enums
   dopplerCalcType: string;
-  val_centerVelocity: Speed;
+  centerVelocity: Speed;
 }
 
 export interface IExpectedProperties {
-  prj_expectedLineWidth: any; // TODO Userunit
-  prj_desiredPolarizationPercentage: number;
-  prj_desiredLineCircularPolarizationPercentage: number;
-  prj_referenceFrequency: Frequency;
-  prj_expectedPeakFluxDensity: Flux;
-  prj_expectedImageDynamicRange: number;
-  prj_desiredLinePolarizationPercentage: number;
-  prj_desiredCircularPolarizationPercentage: number;
-  prj_expectedPeakLineFluxDensity: Flux;
+  expectedLineWidth: any; // TODO Userunit
+  desiredPolarizationPercentage: number;
+  desiredLineCircularPolarizationPercentage: number;
+  referenceFrequency: Frequency;
+  expectedPeakFluxDensity: Flux;
+  expectedImageDynamicRange: number;
+  desiredLinePolarizationPercentage: number;
+  desiredCircularPolarizationPercentage: number;
+  expectedPeakLineFluxDensity: Flux;
   solarActivityLevel: string;
-  prj_expectedSpectralDynamicRange: number;
+  expectedSpectralDynamicRange: number;
 }

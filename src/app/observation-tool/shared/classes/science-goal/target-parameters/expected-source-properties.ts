@@ -3,16 +3,16 @@ import {Flux} from '../../../../../units/classes/flux';
 import {Frequency} from '../../../../../units/classes/frequency';
 
 export class ExpectedSourceProperties implements IExpectedProperties {
-  prj_desiredCircularPolarizationPercentage: number;
-  prj_desiredLineCircularPolarizationPercentage: number;
-  prj_desiredLinePolarizationPercentage: number;
-  prj_desiredPolarizationPercentage: number;
-  prj_expectedImageDynamicRange: number;
-  prj_expectedLineWidth: any;
-  prj_expectedPeakFluxDensity: Flux;
-  prj_expectedPeakLineFluxDensity: Flux;
-  prj_expectedSpectralDynamicRange: number;
-  prj_referenceFrequency: Frequency;
+  desiredCircularPolarizationPercentage: number;
+  desiredLineCircularPolarizationPercentage: number;
+  desiredLinePolarizationPercentage: number;
+  desiredPolarizationPercentage: number;
+  expectedImageDynamicRange: number;
+  expectedLineWidth: any;
+  expectedPeakFluxDensity: Flux;
+  expectedPeakLineFluxDensity: Flux;
+  expectedSpectralDynamicRange: number;
+  referenceFrequency: Frequency;
   solarActivityLevel: string;
 
   constructor() {

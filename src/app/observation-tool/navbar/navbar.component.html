@@ -41,7 +41,7 @@
                class="link item"
                [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
                (click)="setCurrentGoal(i)">
-            {{goal.prj_name}}
+            {{goal.name}}
           </div>
           <div class="divider"></div>
           <div class="header">
@@ -125,7 +125,7 @@
                class="link item"
                [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
                (click)="setCurrentGoal(i); scienceGoalMenuOpen = !scienceGoalMenuOpen; mobileMenuOpen = !mobileMenuOpen">
-            {{goal.prj_name}}
+            {{goal.name}}
           </div>
         </div>
       </ng-container>

@@ -64,7 +64,7 @@
       <div class="three wide field">
         <label>Sexagesimal Units</label>
         <sui-checkbox class="toggle"
-                      [ngModel]="form.value.prj_sourceCoordinates.type === 'ABSOLUTE'"
+                      [ngModel]="form.value.sourceCoordinates.type === 'ABSOLUTE'"
                       [ngModelOptions]="{standalone: true}"
                       [isDisabled]="sexagesimalCheckboxDisabled">
         </sui-checkbox>
@@ -77,7 +77,7 @@
            formGroupName="val_longitude">
         <label for="lonInput">
           {{
-          form.value.prj_sourceCoordinates.type === 'ABSOLUTE' ?
+          form.value.sourceCoordinates.type === 'ABSOLUTE' ?
           currentSystem?.sexagesimalLabels.lonLabel :
           currentSystem?.normalLabels.lonLabel
           }}
@@ -86,9 +86,9 @@
                id="lonInput"
                formControlName="content"
                placeholder="0"
-               [value]="form.value.prj_sourceCoordinates.type ?
-                        (form.value.prj_sourceCoordinates.val_longitude.content | sexagesimal: 'ra') :
-                        form.value.prj_sourceCoordinates.val_longitude.content">
+               [value]="form.value.sourceCoordinates.type ?
+                        (form.value.sourceCoordinates.longitude.content | sexagesimal: 'ra') :
+                        form.value.sourceCoordinates.longitude.content">
       </div>
 
       <!-- Dec(lat) input -->
@@ -98,7 +98,7 @@
            formGroupName="val_latitude">
         <label for="latInput">
           {{
-          form.value.prj_sourceCoordinates.type === 'ABSOLUTE' ?
+          form.value.sourceCoordinates.type === 'ABSOLUTE' ?
           currentSystem?.sexagesimalLabels.latLabel :
           currentSystem?.normalLabels.latLabel
           }}
@@ -107,9 +107,9 @@
                id="latInput"
                formControlName="content"
                placeholder="0"
-               [value]="form.value.prj_sourceCoordinates.type ?
-                        (form.value.prj_sourceCoordinates.val_latitude.content | sexagesimal: 'dec') :
-                        form.value.prj_sourceCoordinates.val_latitude.content">
+               [value]="form.value.sourceCoordinates.type ?
+                        (form.value.sourceCoordinates.latitude.content | sexagesimal: 'dec') :
+                        form.value.sourceCoordinates.latitude.content">
       </div>
     </div>
 

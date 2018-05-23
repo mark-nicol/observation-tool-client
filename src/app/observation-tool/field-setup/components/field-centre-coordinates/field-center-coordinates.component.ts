@@ -23,8 +23,8 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   _coordType = 'ABSOLUTE';
 
   get coordType() {
-    if (this.form.value.prj_SinglePoint[0]) {
-      return this.form.value.prj_SinglePoint[0].prj_centre.type;
+    if (this.form.value.SinglePoint[0]) {
+      return this.form.value.SinglePoint[0].centre.type;
     }
     return this._coordType;
   }
@@ -38,7 +38,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
         }
       });
     }
-    this.form.get('prj_SinglePoint').patchValue(newValueArray);
+    this.form.get('SinglePoint').patchValue(newValueArray);
     this._coordType = value;
   }
 
@@ -59,7 +59,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   ];
 
   get offsetUnit() {
-    return this.form.value.prj_SinglePoint[0].prj_centre.val_longitude.unit;
+    return this.form.value.SinglePoint[0].centre.longitude.unit;
   }
 
   set offsetUnit(value: string) {
@@ -76,7 +76,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
         }
       });
     }
-    this.form.get('prj_SinglePoint').patchValue(newValueArray);
+    this.form.get('SinglePoint').patchValue(newValueArray);
   }
 
   constructor(protected systemService: SystemService,
@@ -96,7 +96,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   get singlePoint(): FormArray {
-    return this.form.get('prj_SinglePoint') as FormArray;
+    return this.form.get('SinglePoint') as FormArray;
   }
 
   removePointing(index: number) {

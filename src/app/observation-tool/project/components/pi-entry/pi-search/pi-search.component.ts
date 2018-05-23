@@ -35,14 +35,14 @@ export class PiSearchComponent implements OnInit {
   ngOnInit() {
     this.projectService.loadedProposal.subscribe(result => {
       if (result) {
-        this.pi = result.prp_PrincipalInvestigator;
+        this.pi = result.PrincipalInvestigator;
       }
     });
   }
 
   // get pi(): IAlmaInvestigator {
   //   if (this.projectService.hasProposalLoaded()) {
-  //     return this.projectService.loadedProposal.getValue().prp_PrincipalInvestigator;
+  //     return this.projectService.loadedProposal.getValue().PrincipalInvestigator;
   //   } else {
   //     console.log('no pi');
   //   }

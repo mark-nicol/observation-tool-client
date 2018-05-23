@@ -164,9 +164,9 @@ export class ProposalComponent implements OnInit {
 
   ngOnInit() {
     this.projectService.loadedProposal.subscribe(result => {
-      if (result.prp_title === undefined) {
+      if (result.title === undefined) {
         this.projectService.loadedProject.subscribe(res => {
-          this.proposalForm.patchValue({prp_title: res.prj_projectName});
+          this.proposalForm.patchValue({prp_title: res.projectName});
         });
       }
       this.proposalForm.patchValue(result);
@@ -175,7 +175,7 @@ export class ProposalComponent implements OnInit {
   }
 
   get pi(): IAlmaInvestigator {
-    return this.projectService.loadedProposal.getValue().prp_PrincipalInvestigator;
+    return this.projectService.loadedProposal.getValue().PrincipalInvestigator;
   }
 
   selectPi() {

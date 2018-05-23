@@ -5,26 +5,26 @@ import {IProposalFeedback} from '../interfaces/project/propsal-feedback.interfac
 import {ScienceGoal} from './science-goal/science-goal';
 
 export class ObsProposal implements IObsProposal {
-  prj_ScienceGoal: IScienceGoal[];
-  prp_PrincipalInvestigator: IAlmaInvestigator;
-  prp_abstract: string;
-  prp_coInvestigators: IAlmaInvestigator[];
-  prp_coPrincipalInvestigators: IAlmaInvestigator[];
-  prp_continuation: boolean;
-  prp_cycle: string;
-  prp_dateReceived: Date;
-  prp_duplicateObservationJustification: string;
-  prp_isResubmission: boolean;
-  prp_keyword: string[];
-  prp_keywordCode: string[];
-  prp_proposalFeedback: IProposalFeedback;
-  prp_proposalTypeCode: string;
-  prp_proposalTypeString: string;
-  prp_recentPublications: string;
-  prp_relatedProposals: string;
-  prp_resubmittedProjectCode: string;
-  prp_scientificCategoryCode: string;
-  prp_scientificCategoryString: string;
-  prp_studentProject: boolean;
-  prp_title: string;
+  ScienceGoal: IScienceGoal[];
+  PrincipalInvestigator: IAlmaInvestigator;
+  abstract: string;
+  coInvestigators: IAlmaInvestigator[];
+  coPrincipalInvestigators: IAlmaInvestigator[];
+  continuation: boolean;
+  cycle: string;
+  dateReceived: Date;
+  duplicateObservationJustification: string;
+  isResubmission: boolean;
+  keyword: string[];
+  keywordCode: string[];
+  proposalFeedback: IProposalFeedback;
+  proposalTypeCode: string;
+  proposalTypeString: string;
+  recentPublications: string;
+  relatedProposals: string;
+  resubmittedProjectCode: string;
+  scientificCategoryCode: string;
+  scientificCategoryString: string;
+  studentProject: boolean;
+  title: string;
 }

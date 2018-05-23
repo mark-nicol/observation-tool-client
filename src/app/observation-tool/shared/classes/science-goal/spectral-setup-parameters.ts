@@ -6,10 +6,10 @@ import {Frequency} from '../../../../units/classes/frequency';
 
 export class SpectralSetupParameters implements ISpectralSetupParameters {
   polarisation: string;
-  prj_AdvancedSpectralSetup: IAdvancedSpectralSetup;
-  prj_ScienceSpectralWindow: IScienceSpectralWindow[];
-  prj_representativeFrequency: Frequency;
-  prj_singleContinuumFrequency: Frequency;
-  prj_userRepresentativeFrequency: boolean;
+  AdvancedSpectralSetup: IAdvancedSpectralSetup;
+  ScienceSpectralWindow: IScienceSpectralWindow[];
+  representativeFrequency: Frequency;
+  singleContinuumFrequency: Frequency;
+  userRepresentativeFrequency: boolean;
   type: string;
 }

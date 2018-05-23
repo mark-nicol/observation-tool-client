@@ -60,7 +60,7 @@ export class ScienceGoalComponent implements OnInit {
   ngOnInit() {
     this.projectService.loadScienceGoal(this.projectService.currentGoal);
     this.projectService.loadedGoal.subscribe(result => {
-      this.goalName = result.prj_name;
+      this.goalName = result.name;
     });
     this.projectService.currentTarget.subscribe(result => {
       this.currentTarget = result;
@@ -80,7 +80,7 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   get targets(): ITargetParameters[] {
-    return this.projectService.loadedGoal.value.prj_TargetParameters;
+    return this.projectService.loadedGoal.value.TargetParameters;
   }
 
 }

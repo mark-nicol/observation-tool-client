@@ -12,26 +12,26 @@ import {SourceVelocity} from './target-parameters/source-velocity';
 
 
 export class TargetParameters implements ITargetParameters {
-  prj_ExpectedProperties: ExpectedSourceProperties;
-  prj_SinglePoint: ISinglePoint[];
-  prj_index: number;
-  prj_isMosaic: boolean;
-  prj_nonSiderealMotion: boolean;
-  prj_parallax: Angle;
-  prj_pmDec: AngularVelocity;
-  prj_pmRA: AngularVelocity;
-  prj_sourceCoordinates: SkyCoordinates;
-  prj_sourceEphemeris: string;
-  prj_sourceName: string;
-  prj_sourceVelocity: SourceVelocity;
+  ExpectedProperties: ExpectedSourceProperties;
+  SinglePoint: ISinglePoint[];
+  index: number;
+  isMosaic: boolean;
+  nonSiderealMotion: boolean;
+  parallax: Angle;
+  pmDec: AngularVelocity;
+  pmRA: AngularVelocity;
+  sourceCoordinates: SkyCoordinates;
+  sourceEphemeris: string;
+  sourceName: string;
+  sourceVelocity: SourceVelocity;
   solarSystemObject: any;
   type: string;
 
 
   constructor() {
-    this.prj_sourceName = 'New Target';
-    this.prj_ExpectedProperties = new ExpectedSourceProperties();
-    this.prj_sourceCoordinates = new SkyCoordinates();
-    this.prj_sourceVelocity = new SourceVelocity();
+    this.sourceName = 'New Target';
+    this.ExpectedProperties = new ExpectedSourceProperties();
+    this.sourceCoordinates = new SkyCoordinates();
+    this.sourceVelocity = new SourceVelocity();
   }
 }

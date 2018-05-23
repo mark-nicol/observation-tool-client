@@ -7,26 +7,26 @@ import {ITechnicalJustification} from '../../interfaces/project/science-goal/tec
 
 export class ScienceGoal implements IScienceGoal {
   mode: string;
-  prj_CalibrationSetupParameters: ICalibrationSetupParameters;
-  prj_PerformanceParameters: IPerformanceParameters;
-  prj_SpectralSetupParameters: ISpectralSetupParameters;
-  prj_TargetParameters: ITargetParameters[];
-  prj_TechnicalJustifications: ITechnicalJustification[];
-  prj_estimated12mTime: number;
-  prj_estimated7mTime: number;
-  prj_estimatedACATime: number;
-  prj_estimatedTPTime: number;
-  prj_estimatedTotalTime: number;
-  prj_isDescoped: boolean;
-  prj_isResubmission: boolean;
-  prj_name: string;
-  prj_note: string;
-  prj_requiredReceiverBands: string;
-  prj_resubmissionOfName: string;
-  prj_resubmissionOfOusStatusUid: string;
-  prj_userPriority: number;
+  CalibrationSetupParameters: ICalibrationSetupParameters;
+  PerformanceParameters: IPerformanceParameters;
+  SpectralSetupParameters: ISpectralSetupParameters;
+  TargetParameters: ITargetParameters[];
+  TechnicalJustifications: ITechnicalJustification[];
+  estimated12mTime: number;
+  estimated7mTime: number;
+  estimatedACATime: number;
+  estimatedTPTime: number;
+  estimatedTotalTime: number;
+  isDescoped: boolean;
+  isResubmission: boolean;
+  name: string;
+  note: string;
+  requiredReceiverBands: string;
+  resubmissionOfName: string;
+  resubmissionOfOusStatusUid: string;
+  userPriority: number;
 
   constructor() {
-    this.prj_name = 'New Goal';
+    this.name = 'New Goal';
   }
 }

@@ -47,12 +47,12 @@ export class PointingCanvasComponent implements OnInit {
 
   ngOnInit() {
     this.setupSvg();
-    this.form.value.prj_SinglePoint.forEach((point: ISinglePoint) => {
+    this.form.value.SinglePoint.forEach((point: ISinglePoint) => {
       this.drawPointing(
-        this.form.value.prj_sourceCoordinates.val_longitude.content + Object.assign(
+        this.form.value.sourceCoordinates.longitude.content + Object.assign(
         new Longitude,
-        point.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
-        this.form.value.prj_sourceCoordinates.val_latitude.content + Object.assign(new Latitude, point.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
+        point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+        this.form.value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
       );
     });
     this.observeFormChanges();
@@ -72,10 +72,10 @@ export class PointingCanvasComponent implements OnInit {
       const worldClick = this.aladinService.coordsPixToWorld([event.offsetX, event.offsetY]);
       const lonDiff = new Longitude(
         LongitudeUnits.DEG,
-        worldClick[0] - Object.assign(new Longitude, this.form.value.prj_sourceCoordinates.val_longitude).getValueInUnits(LongitudeUnits.DEG));
+        worldClick[0] - Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG));
       const latDiff = new Latitude(
         LatitudeUnits.DEG,
-        worldClick[1] - Object.assign(new Latitude, this.form.value.prj_sourceCoordinates.val_latitude).getValueInUnits(LatitudeUnits.DEG)
+        worldClick[1] - Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG)
       );
       this.addPointing(lonDiff, latDiff);
       this.fovAddedEmitter.emit();
@@ -121,10 +121,10 @@ export class PointingCanvasComponent implements OnInit {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
       if (this.form.valid) {
         PointingCanvasComponent.clearCanvas();
-        value.prj_SinglePoint.forEach((point: ISinglePoint) => {
+        value.SinglePoint.forEach((point: ISinglePoint) => {
           this.drawPointing(
-            value.prj_sourceCoordinates.val_longitude.content + Object.assign(new Longitude, point.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
-            value.prj_sourceCoordinates.val_latitude.content + Object.assign(new Latitude, point.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
+            value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+            value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
           );
         });
       }
@@ -132,7 +132,7 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   get singlePoint(): FormArray {
-    return this.form.get('prj_SinglePoint') as FormArray;
+    return this.form.get('SinglePoint') as FormArray;
   }
 
   removePointing(index: number) {
@@ -144,15 +144,15 @@ export class PointingCanvasComponent implements OnInit {
       prj_name: '',
       prj_centre: this.formBuilder.group({
         val_longitude: this.formBuilder.group({
-          unit: this.form.value.prj_SinglePoint[0].prj_centre.val_longitude.unit,
+          unit: this.form.value.SinglePoint[0].centre.longitude.unit,
           content: ra ?
-            [ra.getValueInUnits(this.form.value.prj_SinglePoint[0].prj_centre.val_longitude.unit), Validators.required] :
+            [ra.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit), Validators.required] :
             [0.0, Validators.required]
         }),
         val_latitude: this.formBuilder.group({
-          unit: this.form.value.prj_SinglePoint[0].prj_centre.val_longitude.unit,
+          unit: this.form.value.SinglePoint[0].centre.longitude.unit,
           content: dec ?
-            [dec.getValueInUnits(this.form.value.prj_SinglePoint[0].prj_centre.val_longitude.unit), Validators.required] :
+            [dec.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit), Validators.required] :
             [0.0, Validators.required]
         }),
         val_fieldName: `Field-${this.singlePoint.length + 1}`
@@ -162,8 +162,8 @@ export class PointingCanvasComponent implements OnInit {
 
   isInsidePointing(pointing: ISinglePoint, x: number, y: number) {
     const centrePx = this.aladinService.coordsWorldToPix([
-      Object.assign(new Longitude, pointing.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG),
-      Object.assign(new Latitude, pointing.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG)
+      Object.assign(new Longitude, pointing.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+      Object.assign(new Latitude, pointing.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
     ]);
     return Math.sqrt((x - centrePx[0]) * (x - centrePx[0]) +
       (y - centrePx[1]) * (y - centrePx[1]))

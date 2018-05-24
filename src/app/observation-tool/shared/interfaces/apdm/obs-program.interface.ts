@@ -1,4 +1,4 @@
-import {IObsPlan} from './obs-project.interface';
+import {IObsPlan} from './obs-plan.interface';
 
 export interface IObsProgram {
   obsPlan: IObsPlan;

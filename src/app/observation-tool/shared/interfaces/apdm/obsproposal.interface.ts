@@ -1,7 +1,10 @@
+import {IEntity, IEntityRef} from './obsproject.interface';
+import {Time} from '../../../../units/classes/time';
+
 export interface IObsProposal {
-  obsProposalEntity: ObsProposalEntity;
-  documentsRef: DocumentsRefOrObsProjectRef;
-  obsProjectRef: DocumentsRefOrObsProjectRef;
+  obsProposalEntity: IEntity;
+  documentsRef: IEntityRef;
+  obsProjectRef: IEntityRef;
   _abstract: string;
   relatedProposals: string;
   previousProposals: string;
@@ -15,8 +18,8 @@ export interface IObsProposal {
   proposalTypeString: string;
   keyword?: (string)[] | null;
   keywordCode?: (string)[] | null;
-  principalInvestigator: CoInvestigatorEntityOrPrincipalInvestigator;
-  coInvestigator?: (CoInvestigatorEntityOrPrincipalInvestigator)[] | null;
+  principalInvestigator: IInvestigator;
+  coInvestigator?: (IInvestigator)[] | null;
   proposalFeedback: ProposalFeedback;
   schemaVersion: string;
   revision: string;
@@ -24,19 +27,7 @@ export interface IObsProposal {
   scienceGoals?: (ScienceGoalsEntity)[] | null;
   obsPlan: ObsPlan;
 }
-export interface ObsProposalEntity {
-  entityId: string;
-  entityIdEncrypted: string;
-  entityTypeName: string;
-  schemaVersion: string;
-  documentVersion: string;
-  timestamp: string;
-}
-export interface DocumentsRefOrObsProjectRef {
-  entityId: string;
-  entityTypeName: string;
-  documentVersion: string;
-}
+
 export interface DateReceived {
   year: number;
   month: number;
@@ -47,7 +38,7 @@ export interface DateReceived {
   second: number;
   fractionalSecond: number;
 }
-export interface CoInvestigatorEntityOrPrincipalInvestigator {
+export interface IInvestigator {
   fullName: string;
   organisation: string;
   eMail: string;
@@ -61,40 +52,40 @@ export interface CoInvestigatorEntityOrPrincipalInvestigator {
   associatedExec: string;
 }
 export interface ProposalFeedback {
-  estimatedTotalIntegrationTime: EstimatedTimeOrEstimatedAverageDataRateOrEstimatedMaximumDataRateOrEstimatedDataVolumeOrTimeOrEstimatedTotalIntegrationTimeOrDesiredLargestScaleOrRepresentativeFrequencyOrDesiredTimeOrCenterFrequencyOrSingleContinuumFrequencyOrLongitudeOrLatitudeOrPaLongOrLongOrShortOrReferenceFrequencyOrCenterVelocityOrExpectedPeakFluxDensityOrExpectedPeakLineFluxDensityOrPmRAOrPmDecOrParallaxOrEstimatedTotalTimeOrEstimated12MTimeOrEstimated7MTimeOrEstimatedTPTimeOrEstimatedACATimeOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
-  arrayTimeBreakdown: ArrayTimeBreakdown;
-  dataRateBreakdown: DataRateBreakdown;
-  receiverTimeBreakdown: ReceiverTimeBreakdown;
-  timeAllocationBreakdown: TimeAllocationBreakdown;
+  estimatedTotalIntegrationTime: Time;
+  arrayTimeBreakdown: IArrayTimeBreakdown;
+  dataRateBreakdown: IDataRateBreakdown;
+  receiverTimeBreakdown: IReceiverTimeBreakdown;
+  timeAllocationBreakdown: ITimeAllocationBreakdown;
 }
 export interface EstimatedTimeOrEstimatedAverageDataRateOrEstimatedMaximumDataRateOrEstimatedDataVolumeOrTimeOrEstimatedTotalIntegrationTimeOrDesiredLargestScaleOrRepresentativeFrequencyOrDesiredTimeOrCenterFrequencyOrSingleContinuumFrequencyOrLongitudeOrLatitudeOrPaLongOrLongOrShortOrReferenceFrequencyOrCenterVelocityOrExpectedPeakFluxDensityOrExpectedPeakLineFluxDensityOrPmRAOrPmDecOrParallaxOrEstimatedTotalTimeOrEstimated12MTimeOrEstimated7MTimeOrEstimatedTPTimeOrEstimatedACATimeOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay {
   value: number;
   unit: string;
 }
-export interface ArrayTimeBreakdown {
-  arrayTime?: (ArrayTimeEntity)[] | null;
+export interface IArrayTimeBreakdown {
+  arrayTime?: (IArrayTime)[] | null;
 }
-export interface ArrayTimeEntity {
-  estimatedTime: EstimatedTimeOrEstimatedAverageDataRateOrEstimatedMaximumDataRateOrEstimatedDataVolumeOrTimeOrEstimatedTotalIntegrationTimeOrDesiredLargestScaleOrRepresentativeFrequencyOrDesiredTimeOrCenterFrequencyOrSingleContinuumFrequencyOrLongitudeOrLatitudeOrPaLongOrLongOrShortOrReferenceFrequencyOrCenterVelocityOrExpectedPeakFluxDensityOrExpectedPeakLineFluxDensityOrPmRAOrPmDecOrParallaxOrEstimatedTotalTimeOrEstimated12MTimeOrEstimated7MTimeOrEstimatedTPTimeOrEstimatedACATimeOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
+export interface IArrayTime {
+  estimatedTime: Time;
   arrayName: string;
 }
-export interface DataRateBreakdown {
-  arrayDataRates?: (ArrayDataRatesEntity)[] | null;
+export interface IDataRateBreakdown {
+  arrayDataRates?: (IArrayDataRates)[] | null;
 }
-export interface ArrayDataRatesEntity {
+export interface IArrayDataRates {
   estimatedAverageDataRate: EstimatedTimeOrEstimatedAverageDataRateOrEstimatedMaximumDataRateOrEstimatedDataVolumeOrTimeOrEstimatedTotalIntegrationTimeOrDesiredLargestScaleOrRepresentativeFrequencyOrDesiredTimeOrCenterFrequencyOrSingleContinuumFrequencyOrLongitudeOrLatitudeOrPaLongOrLongOrShortOrReferenceFrequencyOrCenterVelocityOrExpectedPeakFluxDensityOrExpectedPeakLineFluxDensityOrPmRAOrPmDecOrParallaxOrEstimatedTotalTimeOrEstimated12MTimeOrEstimated7MTimeOrEstimatedTPTimeOrEstimatedACATimeOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
   estimatedMaximumDataRate: EstimatedTimeOrEstimatedAverageDataRateOrEstimatedMaximumDataRateOrEstimatedDataVolumeOrTimeOrEstimatedTotalIntegrationTimeOrDesiredLargestScaleOrRepresentativeFrequencyOrDesiredTimeOrCenterFrequencyOrSingleContinuumFrequencyOrLongitudeOrLatitudeOrPaLongOrLongOrShortOrReferenceFrequencyOrCenterVelocityOrExpectedPeakFluxDensityOrExpectedPeakLineFluxDensityOrPmRAOrPmDecOrParallaxOrEstimatedTotalTimeOrEstimated12MTimeOrEstimated7MTimeOrEstimatedTPTimeOrEstimatedACATimeOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
   estimatedDataVolume: EstimatedTimeOrEstimatedAverageDataRateOrEstimatedMaximumDataRateOrEstimatedDataVolumeOrTimeOrEstimatedTotalIntegrationTimeOrDesiredLargestScaleOrRepresentativeFrequencyOrDesiredTimeOrCenterFrequencyOrSingleContinuumFrequencyOrLongitudeOrLatitudeOrPaLongOrLongOrShortOrReferenceFrequencyOrCenterVelocityOrExpectedPeakFluxDensityOrExpectedPeakLineFluxDensityOrPmRAOrPmDecOrParallaxOrEstimatedTotalTimeOrEstimated12MTimeOrEstimated7MTimeOrEstimatedTPTimeOrEstimatedACATimeOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
   arrayName: string;
 }
-export interface ReceiverTimeBreakdown {
+export interface IReceiverTimeBreakdown {
   receiverTime?: (ReceiverTimeEntity)[] | null;
 }
 export interface ReceiverTimeEntity {
   time: EstimatedTimeOrEstimatedAverageDataRateOrEstimatedMaximumDataRateOrEstimatedDataVolumeOrTimeOrEstimatedTotalIntegrationTimeOrDesiredLargestScaleOrRepresentativeFrequencyOrDesiredTimeOrCenterFrequencyOrSingleContinuumFrequencyOrLongitudeOrLatitudeOrPaLongOrLongOrShortOrReferenceFrequencyOrCenterVelocityOrExpectedPeakFluxDensityOrExpectedPeakLineFluxDensityOrPmRAOrPmDecOrParallaxOrEstimatedTotalTimeOrEstimated12MTimeOrEstimated7MTimeOrEstimatedTPTimeOrEstimatedACATimeOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
   receiverBand: string;
 }
-export interface TimeAllocationBreakdown {
+export interface ITimeAllocationBreakdown {
   executiveFraction?: (ExecutiveFractionEntity)[] | null;
 }
 export interface ExecutiveFractionEntity {

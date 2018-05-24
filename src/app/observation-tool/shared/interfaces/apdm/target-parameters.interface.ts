@@ -7,7 +7,7 @@ import {ISkyCoordinates} from './sky-coordinates.interface';
 
 export interface ITargetParameters {
   isMosaic: boolean;
-  circleOrEllipseOrPolygon?: (IField)[] | null;
+  fields?: (IField)[] | null;
   type: string;
   sourceName: string;
   sourceCoordinates: ISkyCoordinates;

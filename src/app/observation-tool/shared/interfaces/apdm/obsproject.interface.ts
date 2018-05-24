@@ -53,14 +53,14 @@ export interface IObsPlan {
   runSciencePipeline: boolean;
   dataProcessingParameters: IDataProcessingParameters;
   flowControl: IFlowControl;
-  ousStatusRef: IEntityRef;
+  ousStatusRef?: IEntityRef | null;
   entityPartId: string;
   almatype: string;
   name: string;
   note: string;
   obsUnitControl: IObsUnitControl;
   unitDependencies: IUnitDependencies;
-  obsProjectRef: IEntityRef;
+  obsProjectRef?: IEntityRef | null;
   status: string;
 }
 export interface IDataProcessingParameters {

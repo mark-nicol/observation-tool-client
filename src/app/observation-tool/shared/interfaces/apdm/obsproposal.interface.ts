@@ -8,7 +8,7 @@ export interface IObsProposal {
   _abstract: string;
   relatedProposals: string;
   previousProposals: string;
-  dateReceived: DateReceived;
+  dateReceived: IDate;
   cycle: string;
   studentProject: boolean;
   continuation: boolean;
@@ -28,7 +28,7 @@ export interface IObsProposal {
   obsPlan: ObsPlan;
 }
 
-export interface DateReceived {
+export interface IDate {
   year: number;
   month: number;
   day: number;

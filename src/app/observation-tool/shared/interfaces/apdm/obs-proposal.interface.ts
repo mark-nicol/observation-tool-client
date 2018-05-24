@@ -1,4 +1,4 @@
-import {IEntity, IEntityRef, IObsPlan, IVelocity} from './obsproject.interface';
+import {IObsPlan, IVelocity} from './obs-project.interface';
 import {Time} from '../../../../units/classes/time';
 import {StorageVolume} from '../../../../units/classes/storage-volume';
 import {DataRate} from '../../../../units/classes/data-rate';
@@ -11,6 +11,8 @@ import {AngularVelocity} from '../../../../units/classes/angular-velocity';
 import {Longitude} from '../../../../units/classes/longitude';
 import {Latitude} from '../../../../units/classes/latitude';
 import {Flux} from '../../../../units/classes/flux';
+import {IEntity} from './entity.interface';
+import {IEntityRef} from './entity-ref.interface';
 
 export interface IObsProposal {
   obsProposalEntity: IEntity;

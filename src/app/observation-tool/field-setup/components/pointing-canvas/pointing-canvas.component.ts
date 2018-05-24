@@ -1,15 +1,13 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import * as d3 from 'd3';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {
-  ISinglePoint,
-  ITargetParameters
-} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {Latitude} from '../../../../units/classes/latitude';
 import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
 import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
 import {Longitude} from '../../../../units/classes/longitude';
 import {AladinService} from '../../services/aladin.service';
+import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
+import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
 
 
 @Component({
@@ -121,7 +119,7 @@ export class PointingCanvasComponent implements OnInit {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
       if (this.form.valid) {
         PointingCanvasComponent.clearCanvas();
-        value.SinglePoint.forEach((point: ISinglePoint) => {
+        value.fields.forEach((point: ISinglePoint) => {
           this.drawPointing(
             value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
             value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)

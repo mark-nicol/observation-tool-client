@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProjectService} from '../../services/project.service';
 import {Observable} from 'rxjs/Observable';
-import {ObsProject} from '../../classes/obsproject';
+import {IObsProject} from '../../interfaces/apdm/obs-project.interface';
 
 @Component({
   selector: 'app-project-import',
@@ -11,7 +11,7 @@ import {ObsProject} from '../../classes/obsproject';
 export class ProjectImportComponent implements OnInit {
 
   projects: Observable<any[]>;
-  _selectedProject: ObsProject;
+  _selectedProject: IObsProject;
   @Output() selectedProjectEmitter = new EventEmitter();
 
   constructor(private persistenceService: ProjectService) { }
@@ -20,7 +20,7 @@ export class ProjectImportComponent implements OnInit {
     this.projects = this.persistenceService.getAllProjects();
   }
 
-  rowClicked(event: ObsProject) {
+  rowClicked(event: IObsProject) {
     this._selectedProject = event;
     this.selectedProjectEmitter.emit(event);
   }

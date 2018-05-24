@@ -7,6 +7,7 @@ import {IProposalFeedback} from './proposal-feedback.interface';
 import {IScienceGoal} from './science-goal.interface';
 
 export interface IObsProposal {
+  title?: string | null;
   obsProposalEntity: IEntity;
   documentsRef: IEntityRef;
   obsProjectRef: IEntityRef;

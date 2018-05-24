@@ -8,6 +8,7 @@ import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
 import {Latitude} from '../../../../units/classes/latitude';
 import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
+import {IRectangle} from '../../../shared/interfaces/apdm/rectangle.interface';
 
 @Component({
   selector: 'app-aladin',
@@ -109,7 +110,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
           }
         });
       } else if (value.type === 'F_SingleRectangle') {
-        this.aladinService.addRectangle(value.sourceCoordinates, value.fields[0]);
+        this.aladinService.addRectangle(value.sourceCoordinates, <IRectangle>value.fields[0]);
       }
     });
   }

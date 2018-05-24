@@ -1,5 +1,8 @@
 import {Angle} from '../../../../units/classes/angle';
 import {Sensitivity} from '../../../../units/classes/sensitivity';
+import {Speed} from '../../../../units/classes/speed';
+import {Temperature} from '../../../../units/classes/temperature';
+import {Time} from '../../../../units/classes/time';
 
 export interface IObsProject {
   obsProjectEntity: IEntity;
@@ -62,17 +65,14 @@ export interface IObsPlan {
 }
 export interface IDataProcessingParameters {
   angularResolution: Angle;
-  velocityResolution: VelocityResolution; // TODO Make velocity
-  tbSensitivityGoal: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay; // TODO Make temperature
+  velocityResolution: IVelocity;
+  tbSensitivityGoal: Temperature;
   rmsGoal: Sensitivity;
   projectType: string;
 }
-export interface CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay {
-  value: number;
-  unit: string;
-}
-export interface VelocityResolution {
-  centerVelocity: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
+
+export interface IVelocity {
+  centerVelocity: Speed;
   referenceSystem: string;
   dopplerCalcType: string;
 }
@@ -81,9 +81,9 @@ export interface IFlowControl {
 }
 export interface IObsUnitControl {
   calibrationRequirements: ICalibrationRequirements;
-  maximumTime: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay; // TODO make time
+  maximumTime: Time;
   userPriority: number;
-  estimatedExecutionTime: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay; // TODO make time
+  estimatedExecutionTime: Time;
   tacPriority: number;
   aggregatedExecutionCount: number;
   arrayRequested: string;
@@ -95,7 +95,7 @@ export interface ICalibrationRequirements {
 }
 export interface IUnitDependencies {
   executionCount: number;
-  delay: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay; // TODO Make time
+  delay: Time;
   expression: string;
 }
 export interface ISubmissionRecord {

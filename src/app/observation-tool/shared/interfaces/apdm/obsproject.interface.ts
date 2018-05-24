@@ -1,7 +1,10 @@
+import {Angle} from '../../../../units/classes/angle';
+import {Sensitivity} from '../../../../units/classes/sensitivity';
+
 export interface IObsProject {
-  obsProjectEntity: ObsProjectEntity;
-  obsProposalRef: OusStatusRefOrObsProjectRefOrObsProposalRefOrProjectStatusRef;
-  projectStatusRef: OusStatusRefOrObsProjectRefOrObsProposalRefOrProjectStatusRef;
+  obsProjectEntity: IEntity;
+  obsProposalRef: IEntityRef;
+  projectStatusRef: IEntityRef;
   projectName: string;
   pi: string;
   version: string;
@@ -19,14 +22,14 @@ export interface IObsProject {
   taPhase2Comments: string;
   taMainComments: string;
   consensusReport: string;
-  obsProgram: ObsProgram;
-  submissionRecord?: (SubmissionRecordEntity)[] | null;
+  obsProgram: IObsProgram;
+  submissionRecord?: (ISubmissionRecord)[] | null;
   schemaVersion: string;
   revision: string;
   almatype: string;
   status: string;
 }
-export interface ObsProjectEntity {
+export interface IEntity {
   entityId: string;
   entityIdEncrypted: string;
   entityTypeName: string;
@@ -34,34 +37,34 @@ export interface ObsProjectEntity {
   documentVersion: string;
   timestamp: string;
 }
-export interface OusStatusRefOrObsProjectRefOrObsProposalRefOrProjectStatusRef {
+export interface IEntityRef {
   entityId: string;
   entityTypeName: string;
   documentVersion: string;
 }
-export interface ObsProgram {
-  obsPlan: ObsPlan;
+export interface IObsProgram {
+  obsPlan: IObsPlan;
 }
-export interface ObsPlan {
+export interface IObsPlan {
   scienceProcessingScript: string;
   runSciencePipeline: boolean;
-  dataProcessingParameters: DataProcessingParameters;
-  flowControl: FlowControl;
-  ousStatusRef: OusStatusRefOrObsProjectRefOrObsProposalRefOrProjectStatusRef;
+  dataProcessingParameters: IDataProcessingParameters;
+  flowControl: IFlowControl;
+  ousStatusRef: IEntityRef;
   entityPartId: string;
   almatype: string;
   name: string;
   note: string;
-  obsUnitControl: ObsUnitControl;
-  unitDependencies: UnitDependencies;
-  obsProjectRef: OusStatusRefOrObsProjectRefOrObsProposalRefOrProjectStatusRef;
+  obsUnitControl: IObsUnitControl;
+  unitDependencies: IUnitDependencies;
+  obsProjectRef: IEntityRef;
   status: string;
 }
-export interface DataProcessingParameters {
-  angularResolution: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
-  velocityResolution: VelocityResolution;
-  tbSensitivityGoal: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
-  rmsGoal: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
+export interface IDataProcessingParameters {
+  angularResolution: Angle;
+  velocityResolution: VelocityResolution; // TODO Make velocity
+  tbSensitivityGoal: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay; // TODO Make temperature
+  rmsGoal: Sensitivity;
   projectType: string;
 }
 export interface CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay {
@@ -73,29 +76,29 @@ export interface VelocityResolution {
   referenceSystem: string;
   dopplerCalcType: string;
 }
-export interface FlowControl {
+export interface IFlowControl {
   controlScript: string;
 }
-export interface ObsUnitControl {
-  calibrationRequirements: CalibrationRequirements;
-  maximumTime: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
+export interface IObsUnitControl {
+  calibrationRequirements: ICalibrationRequirements;
+  maximumTime: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay; // TODO make time
   userPriority: number;
-  estimatedExecutionTime: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
+  estimatedExecutionTime: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay; // TODO make time
   tacPriority: number;
   aggregatedExecutionCount: number;
   arrayRequested: string;
 }
-export interface CalibrationRequirements {
-  pointingAccuracy: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
+export interface ICalibrationRequirements {
+  pointingAccuracy: Angle;
   bandpassAccuracy: number;
   polarizationAccuracy: number;
 }
-export interface UnitDependencies {
+export interface IUnitDependencies {
   executionCount: number;
-  delay: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay;
+  delay: CenterVelocityOrAngularResolutionOrTbSensitivityGoalOrRmsGoalOrPointingAccuracyOrMaximumTimeOrEstimatedExecutionTimeOrDelay; // TODO Make time
   expression: string;
 }
-export interface SubmissionRecordEntity {
+export interface ISubmissionRecord {
   submitter: string;
   submissionTime: string;
 }

@@ -80,10 +80,10 @@
       </sui-select>
     </div>
 
-    <div formArrayName="prj_SinglePoint">
+    <div formArrayName="SinglePoint">
       <div *ngFor="let pointing of singlePoint.controls; let i = index" [formGroupName]="i">
-        <div class="two fields" formGroupName="prj_centre">
-          <div class="field" formGroupName="val_longitude">
+        <div class="two fields" formGroupName="centre">
+          <div class="field" formGroupName="longitude">
             <label *ngIf="i === 0">Lon</label>
             <div class="ui small labeled icon input">
               <div class="ui label" [ngClass]="pointing.invalid ? 'red' : 'blue'">{{pointing.invalid ? '!' : i + 1}}
@@ -92,7 +92,7 @@
                      type="number">
             </div>
           </div>
-          <div class="field" formGroupName="val_latitude">
+          <div class="field" formGroupName="latitude">
             <label *ngIf="i === 0">Lat</label>
             <div class="ui small action input">
               <input formControlName="content"
@@ -116,8 +116,8 @@
 
 
   <ng-template #rectangularComponent>
-    <div formGroupName="prj_Rectangle">
-      <div class="four fields" formGroupName="prj_centre">
+    <div>
+      <div class="four fields">
         <div class="field">
           <!-- System Selector -->
           <label>System</label>
@@ -140,7 +140,7 @@
         <!-- Lon offset input -->
         <div class="field">
           <div *ngIf="radioValue === 'ABSOLUTE'; then absoluteLonLabel else relativeLonLabel"></div>
-          <div class="field" formGroupName="val_longitude">
+          <div class="field">
             <ng-template #absoluteLonLabel>
               <label>
                 {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.lonLabel : chosenSystem.normalLabels.lonLabel}}
@@ -152,9 +152,8 @@
               </label>
             </ng-template>
             <div class="ui action input">
-              <input formControlName="content">
+              <input>
               <sui-select class="selection"
-                          formControlName="unit"
                           *ngIf="form.value.Rectangle.centre.type === 'RELATIVE'">
                 <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
               </sui-select>
@@ -163,9 +162,9 @@
         </div>
 
         <!-- Lat offset input -->
-        <div class="field" formGroupName="val_latitude">
+        <div class="field" formGroupName="latitude">
           <div
-            *ngIf="form.value.Rectangle.centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
+            *ngIf="form.value.fields.centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
           <ng-template #absoluteLatLabel>
             <label>
               {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
@@ -180,7 +179,7 @@
             <input formControlName="content">
             <sui-select class="selection"
                         formControlName="unit"
-                        *ngIf="form.value.Rectangle.centre.type === 'RELATIVE'">
+                        *ngIf="form.value.fields.centre.type === 'RELATIVE'">
               <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
             </sui-select>
           </div>
@@ -189,7 +188,7 @@
 
       <div class="three fields">
         <!-- p length input -->
-        <div class="field" formGroupName="prj_short">
+        <div class="field" formGroupName="short">
           <label>
             p length
           </label>
@@ -205,7 +204,7 @@
         </div>
 
         <!-- q length input -->
-        <div class="field" formGroupName="prj_long">
+        <div class="field" formGroupName="long">
           <label>
             q length
           </label>
@@ -221,7 +220,7 @@
         </div>
 
         <!-- Position angle -->
-        <div class="field" formGroupName="prj_pALong">
+        <div class="field" formGroupName="pALong">
           <label>
             Position Angle
           </label>
@@ -239,7 +238,7 @@
 
       <div class="two fields">
         <!-- Spacing input -->
-        <div class="field" formGroupName="prj_spacing">
+        <div class="field" formGroupName="spacing">
           <label>
             Spacing
           </label>

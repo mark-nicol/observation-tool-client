@@ -22,9 +22,9 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   _coordType = 'ABSOLUTE';
 
   get coordType() {
-    if (this.form.value.SinglePoint[0]) {
-      return this.form.value.SinglePoint[0].centre.type;
-    }
+    // if (this.form.value.SinglePoint[0]) {
+    //   return this.form.value.SinglePoint[0].centre.type;
+    // }
     return this._coordType;
   }
 

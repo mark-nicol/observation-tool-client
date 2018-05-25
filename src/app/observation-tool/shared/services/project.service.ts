@@ -80,7 +80,6 @@ export class ProjectService implements CanActivate {
   }
 
   selectProject(project: IObsProject) {
-    console.log(project);
     this._loadedProject.next(project);
     this.loadProposal();
   }
@@ -90,27 +89,8 @@ export class ProjectService implements CanActivate {
   }
 
   loadProposal() {
-    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value['obsProposalRef']['entityId'])};
-    console.log(`${this.baseUrl}/proposal?proposalRef=${this._loadedProject.value['obsProposalRef']['entityId']}`);
+    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
-      console.log(result);
-      // if (!(result.scienceGoals instanceof Array) && result.ScienceGoal !== undefined) {
-      //   result.ScienceGoal = [result.ScienceGoal];
-      // }
-      // if (result.ScienceGoal) {
-      //   for (const goal of result.ScienceGoal) {
-      //     if (goal.TargetParameters && !(goal.TargetParameters instanceof Array)) {
-      //       goal.TargetParameters = [goal.TargetParameters];
-      //     }
-      //     for (const target of goal.TargetParameters) {
-      //       if (target.SinglePoint && !(target.SinglePoint instanceof Array)) {
-      //         target.SinglePoint = [target.SinglePoint];
-      //       }
-      //     }
-      //   }
-      // }
-      //
-
       this._loadedProposal.next(result);
     });
   }
@@ -118,8 +98,6 @@ export class ProjectService implements CanActivate {
   updateScienceGoal(updates: any) {
     console.log('Old goal:', this._loadedGoal.getValue());
     console.log('New goal:', _.merge(this._loadedGoal.getValue(), updates));
-    // this._loadedGoal.next(_.merge(this._loadedGoal.getValue(), updates));
-    // console.log(this._loadedGoal.getValue());
   }
 
   updateTargetParams(proposal: ITargetParameters): Observable<ITargetParameters> {

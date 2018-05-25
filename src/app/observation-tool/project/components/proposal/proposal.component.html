@@ -5,37 +5,37 @@
       <label for="titleInput">Proposal Title</label>
       <input id="titleInput"
              type="text"
-             formControlName="prp_title">
+             formControlName="title">
     </div>
     <div class="field">
       <label for="cycleInput">Proposal Cycle</label>
       <input id="cycleInput"
              type="text"
-             formControlName="prp_cycle">
+             formControlName="cycle">
     </div>
     <div class="field">
       <label for="abstractTextArea">Abstract</label>
       <textarea #abstractTextArea
                 id="abstractTextArea"
                 rows="5"
-                formControlName="prp_abstract"></textarea>
+                formControlName="_abstract"></textarea>
       <p>Characters remaining: {{1200-abstractTextArea.value.length}}</p>
     </div>
     <div class="field">
       <label for="relatedProposalsTextArea">Related Proposals</label>
       <textarea id="relatedProposalsTextArea"
                 rows="5"
-                formControlName="prp_relatedProposals"></textarea>
+                formControlName="relatedProposals"></textarea>
     </div>
     <div class="field">
       <label for="previousProposalsTextArea">Previous Proposals</label>
       <textarea id="previousProposalsTextArea"
                 rows="5"
-                formControlName="prp_previousProposals"></textarea>
+                formControlName="previousProposals"></textarea>
     </div>
     <div class="field">
       <label>Student Project</label>
-      <sui-checkbox formControlName="prp_studentProject"></sui-checkbox>
+      <sui-checkbox formControlName="studentProject"></sui-checkbox>
     </div>
   </div>
   <h3 class="ui top attached blue header">Proposal Type</h3>
@@ -46,7 +46,7 @@
           <sui-radio-button id="{{typeRadio.id}}"
                             name="typeRadios"
                             value="{{typeRadio.id}}"
-                            formControlName="prp_proposalTypeString">
+                            formControlName="proposalTypeString">
             {{typeRadio.text}}
           </sui-radio-button>
         </div>
@@ -60,24 +60,20 @@
         <sui-radio-button id="{{categoryRadios[categoryRadio].value}}"
                           name="categoryRadios"
                           value="{{categoryRadios[categoryRadio].text}}"
-                          (currentValueChange)="categoryRadioChange($event)"
-                          formControlName="prp_scientificCategoryString">
+                          formControlName="scientificCategoryString">
           {{categoryRadios[categoryRadio].text}}
         </sui-radio-button>
       </div>
     </div>
 
     <div class="field">
-      <!--<label for="keywordSelector">Keywords (chosen {{-->
-      <!--(project | async)?.proposalForm.keywords === null ? 0 :-->
-      <!--(project | async)?.proposalForm.keywords.length}} of 2)</label>-->
       <sui-multi-select #keywordSelector
                         id="keywordSelector"
                         class="selection"
                         [isSearchable]="true"
-                        (maxSelected)="2"
-                        [options]="categoryRadios[chosenCategory].keywords"
-                        formControlName="prp_keywords">
+                        [maxSelected]="2"
+                        [options]="categoryRadios[proposalForm.getRawValue()['scientificCategoryString']].keywords"
+                        formControlName="keyword">
         <sui-select-option *ngFor="let option of keywordSelector.filteredOptions"
                            [value]="option">
         </sui-select-option>
@@ -100,20 +96,26 @@
       <tbody>
       <tr *ngIf="pi">
         <td>PI</td>
-        <td>{{pi.prp_fullName}}</td>
-        <td>{{pi.prp_eMail}}</td>
-        <td>{{pi.prp_organisation}}</td>
-        <td>{{pi.prp_userId}}</td>
+        <td>{{pi.fullName}}</td>
+        <td>{{pi.eMail}}</td>
+        <td>{{pi.organisation}}</td>
+        <td>{{pi.userId}}</td>
         <td>{{pi.allowedExec}}</td>
+      </tr>
+      <tr *ngFor="let investigator of proposalForm.getRawValue().coInvestigator">
+        <td>CoPI</td>
+        <td>{{investigator.fullName}}</td>
+        <td>{{investigator.eMail}}</td>
+        <td>{{investigator.organisation}}</td>
+        <td>{{investigator.userId}}</td>
+        <td>{{investigator.allowedExec}}</td>
       </tr>
       </tbody>
       <tfoot>
       <tr>
         <th colspan="6">
           <div class="ui right floated tiny compact labeled icon buttons">
-            <button class="ui blue button"
-                    (click)="selectPi()"><i class="add user icon"></i> Select PI
-            </button>
+            <button class="ui blue button"><i class="add user icon"></i> Select PI</button>
             <button class="ui blue button"><i class="add user icon"></i> Add CoPI</button>
             <button class="ui blue button"><i class="add user icon"></i> Add Collaborator</button>
             <button class="ui red button"><i class="remove user icon"></i> Remove Collaborator</button>
@@ -142,6 +144,6 @@
   <div class="ui bottom attached segment">
     <textarea title="Duplicate observations input"
               rows="5"
-              formControlName="prp_duplicateObservations"></textarea>
+              formControlName="duplicateObservationsJustification"></textarea>
   </div>
 </form>

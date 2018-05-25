@@ -5,8 +5,8 @@ import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
 import {ProjectService} from '../shared/services/project.service';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectImportModal} from '../shared/components/project-import-modal/project-import-modal.component';
-import {ObsProject} from '../shared/classes/obsproject';
-import {ScienceGoal} from '../shared/classes/science-goal/science-goal';
+import {IScienceGoal} from '../shared/interfaces/apdm/science-goal.interface';
+import {IObsProject} from '../shared/interfaces/apdm/obs-project.interface';
 
 /**
  * The navbar component at the top of the application
@@ -77,9 +77,9 @@ export class NavbarComponent implements OnInit {
     this.selectedGoal = newGoal;
   }
 
-  get scienceGoals(): ScienceGoal[] {
+  get scienceGoals(): IScienceGoal[] {
     if (this.persistenceService.hasScienceGoals()) {
-      return this.persistenceService.loadedProposal.value.prj_ScienceGoal;
+      return this.persistenceService.loadedProposal.value.scienceGoals;
     }
   }
 
@@ -103,7 +103,7 @@ export class NavbarComponent implements OnInit {
   makeProjectImportModal() {
     this.suiModalService
       .open(new ProjectImportModal())
-      .onApprove((result: ObsProject) => {
+      .onApprove((result: IObsProject) => {
         this.persistenceService.selectProject(result);
         this.router.navigate(['/project']).then();
       })

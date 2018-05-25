@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {ScienceGoal} from '../../../shared/classes/science-goal/science-goal';
 import {ProjectService} from '../../../shared/services/project.service';
 import {Observable} from '../../../../../../node_modules/rxjs';
+import {IScienceGoal} from '../../../shared/interfaces/apdm/science-goal.interface';
 
 /**
  * General science goal page component
@@ -17,7 +17,7 @@ import {Observable} from '../../../../../../node_modules/rxjs';
 export class GeneralComponent implements OnInit {
 
   form: FormGroup;
-  scienceGoal: ScienceGoal;
+  scienceGoal: IScienceGoal;
 
   constructor(private projectService: ProjectService,
               private formBuilder: FormBuilder) {
@@ -33,8 +33,8 @@ export class GeneralComponent implements OnInit {
 
   createForm() {
     this.form = this.formBuilder.group({
-      prj_name: '',
-      prj_note: ''
+      name: '',
+      note: ''
     });
   }
 

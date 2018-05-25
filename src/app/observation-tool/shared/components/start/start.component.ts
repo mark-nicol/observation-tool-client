@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectImportModal} from '../project-import-modal/project-import-modal.component';
-import {ObsProject} from '../../classes/obsproject';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectService} from '../../services/project.service';
 import {Router} from '@angular/router';
+import {IObsProject} from '../../interfaces/apdm/obs-project.interface';
 
 @Component({
   selector: 'app-start',
@@ -23,7 +23,7 @@ export class StartComponent implements OnInit {
   makeProjectImportModal() {
     this.suiModalService
       .open(new ProjectImportModal())
-      .onApprove((result: ObsProject) => {
+      .onApprove((result: IObsProject) => {
         this.projectService.selectProject(result);
         this.router.navigate(['/project']).then();
       })

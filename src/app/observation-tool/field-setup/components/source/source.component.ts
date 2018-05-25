@@ -2,10 +2,10 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from 
 import {FormGroup} from '@angular/forms';
 import 'rxjs/add/operator/debounce';
 import {Speed} from '../../../../units/classes/speed';
-import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {SimbadService} from '../../../shared/services/simbad.service';
 import {SystemService} from '../../../shared/services/system.service';
+import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 
 /**
  * Source Component in Field Setup
@@ -25,7 +25,7 @@ export class SourceComponent implements OnInit {
   @Output() resolveEmitter = new EventEmitter<number[]>();
 
   currentTarget               = 0;
-  target: TargetParameters;
+  target: ITargetParameters;
   /** Selectable solar system bodies for selection box */
   solarBodies                 = [
     'Mercury',
@@ -83,12 +83,12 @@ export class SourceComponent implements OnInit {
    * @param system The new system type to be used
    */
   systemChange() {
-    this.currentSystem = this.systemService.getSystem(this.form.value.prj_sourceCoordinates.system);
-    if (this.form.value.prj_sourceCoordinates.system === 'ICRS' ||
-        this.form.value.prj_sourceCoordinates.system === 'FK5 J2000') {
+    this.currentSystem = this.systemService.getSystem(this.form.value.sourceCoordinates.system);
+    if (this.form.value.sourceCoordinates.system === 'ICRS' ||
+        this.form.value.sourceCoordinates.system === 'FK5 J2000') {
       this.sexagesimalCheckboxDisabled = false;
     } else {
-      this.form.value.prj_sourceCoordinates.type = 'RELATIVE';
+      this.form.value.sourceCoordinates.type = 'RELATIVE';
       this.sexagesimalCheckboxDisabled       = true;
     }
   }
@@ -97,8 +97,8 @@ export class SourceComponent implements OnInit {
     this.form.patchValue({
       prj_sourceVelocity: {
         redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-          this.form.value.prj_sourceVelocity.val_centerVelocity.content),
-          this.form.value.prj_sourceVelocity.dopplerCalcType)
+          this.form.value.sourceVelocity.centerVelocity.content),
+          this.form.value.sourceVelocity.dopplerCalcType)
       }
     });
   }
@@ -119,7 +119,7 @@ export class SourceComponent implements OnInit {
 
 
   get sourceName() {
-    return this.form.get('prj_sourceName')
+    return this.form.get('sourceName')
   }
 
 }

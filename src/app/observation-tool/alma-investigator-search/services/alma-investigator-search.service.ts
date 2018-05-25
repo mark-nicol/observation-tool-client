@@ -16,17 +16,17 @@ export class AlmaInvestigatorSearchService {
 
   static resultToInvestigator(result: any): IAlmaInvestigator {
     return {
-      prp_index: 0,
+      index: 0,
       associatedExec: result.executive,
-      prp_fullName: result.fullName,
-      prp_organisation: result.affiliation,
-      prp_mobile: result.telephone,
-      prp_eMail: result.email,
-      prp_organisationId: result.affiliationId,
-      prp_userId: result.uid,
-      prp_telephone: result.telephone,
+      fullName: result.fullName,
+      organisation: result.affiliation,
+      mobile: result.telephone,
+      eMail: result.email,
+      organisationId: result.affiliationId,
+      userId: result.uid,
+      telephone: result.telephone,
       allowedExec: result.executive,
-      prp_verfiedUser: false,
+      verfiedUser: false,
     };
   }
 

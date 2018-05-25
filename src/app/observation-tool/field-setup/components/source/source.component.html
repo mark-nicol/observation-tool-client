@@ -6,7 +6,7 @@
     <div class="ui action icon input">
       <input id="sourceNameInput"
              type="text"
-             formControlName="prj_sourceName">
+             formControlName="sourceName">
       <i *ngIf="sourceName.invalid" class="red warning circle icon"></i>
       <button class="ui right floated tiny compact blue labeled icon button"
               (click)="resolveSource()">
@@ -47,7 +47,7 @@
 
   <div class="ui form" *ngIf="form.value.solarSystemObject === 'Unspecified'">
 
-    <div class="four fields" formGroupName="prj_sourceCoordinates">
+    <div class="four fields" formGroupName="sourceCoordinates">
       <div class="field">
         <!-- System Selector -->
         <label>System</label>
@@ -64,7 +64,7 @@
       <div class="three wide field">
         <label>Sexagesimal Units</label>
         <sui-checkbox class="toggle"
-                      [ngModel]="form.value.prj_sourceCoordinates.type === 'ABSOLUTE'"
+                      [ngModel]="form.value.sourceCoordinates.type === 'ABSOLUTE'"
                       [ngModelOptions]="{standalone: true}"
                       [isDisabled]="sexagesimalCheckboxDisabled">
         </sui-checkbox>
@@ -74,10 +74,10 @@
       <div class="field"
            suiPopup
            popupText="The longitude of the source"
-           formGroupName="val_longitude">
+           formGroupName="longitude">
         <label for="lonInput">
           {{
-          form.value.prj_sourceCoordinates.type === 'ABSOLUTE' ?
+          form.value.sourceCoordinates.type === 'ABSOLUTE' ?
           currentSystem?.sexagesimalLabels.lonLabel :
           currentSystem?.normalLabels.lonLabel
           }}
@@ -86,19 +86,19 @@
                id="lonInput"
                formControlName="content"
                placeholder="0"
-               [value]="form.value.prj_sourceCoordinates.type ?
-                        (form.value.prj_sourceCoordinates.val_longitude.content | sexagesimal: 'ra') :
-                        form.value.prj_sourceCoordinates.val_longitude.content">
+               [value]="form.value.sourceCoordinates.type ?
+                        (form.value.sourceCoordinates.longitude.content | sexagesimal: 'ra') :
+                        form.value.sourceCoordinates.longitude.content">
       </div>
 
       <!-- Dec(lat) input -->
       <div class="field"
            suiPopup
            popupText="The latitude of the source"
-           formGroupName="val_latitude">
+           formGroupName="latitude">
         <label for="latInput">
           {{
-          form.value.prj_sourceCoordinates.type === 'ABSOLUTE' ?
+          form.value.sourceCoordinates.type === 'ABSOLUTE' ?
           currentSystem?.sexagesimalLabels.latLabel :
           currentSystem?.normalLabels.latLabel
           }}
@@ -107,9 +107,9 @@
                id="latInput"
                formControlName="content"
                placeholder="0"
-               [value]="form.value.prj_sourceCoordinates.type ?
-                        (form.value.prj_sourceCoordinates.val_latitude.content | sexagesimal: 'dec') :
-                        form.value.prj_sourceCoordinates.val_latitude.content">
+               [value]="form.value.sourceCoordinates.type ?
+                        (form.value.sourceCoordinates.latitude.content | sexagesimal: 'dec') :
+                        form.value.sourceCoordinates.latitude.content">
       </div>
     </div>
 
@@ -118,7 +118,7 @@
       <div class="field"
            suiPopup
            popupText="The parallax angle of the source"
-           formGroupName="prj_parallax">
+           formGroupName="parallax">
         <label for="parallaxInput">
           Parallax
         </label>
@@ -140,7 +140,7 @@
       <div class="field"
            suiPopup
            popupText="Proper motion along cross-declination direction"
-           formGroupName="prj_pmRA">
+           formGroupName="pmRA">
         <label for="pmRaInput">
           PM RA
         </label>
@@ -164,7 +164,7 @@
       <div class="field"
            suiPopup
            popupText="Proper motion along declination direction"
-           formGroupName="prj_pmDec">
+           formGroupName="pmDec">
         <label for="plgecInput">
           PM DEC
         </label>
@@ -187,7 +187,7 @@
 
 
     <div class="four fields"
-         formGroupName="prj_sourceVelocity">
+         formGroupName="sourceVelocity">
       <!-- Radial input -->
       <div class="field"
            suiPopup
@@ -196,7 +196,7 @@
           Radial Velocity
         </label>
         <div class="ui action input"
-             formGroupName="val_centerVelocity">
+             formGroupName="centerVelocity">
           <input id="radialVelocityInput"
                  placeholder="0.000"
                  formControlName="content"

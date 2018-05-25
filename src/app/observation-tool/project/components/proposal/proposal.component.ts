@@ -18,17 +18,19 @@ import {IObsProposal} from '../../../shared/interfaces/apdm/obs-proposal.interfa
 export class ProposalComponent implements OnInit {
 
   proposalForm: FormGroup = this.formBuilder.group({
-    prp_title: '',
-    prp_cycle: '',
-    prp_abstract: '',
-    prp_relatedProposals: '',
-    prp_previousProposals: '',
-    prp_studentProject: false,
-    prp_proposalTypeString: '',
-    prp_scientificCategoryString: '',
-    prp_duplicateObservations: '',
-    prp_keywords: []
+    title: '',
+    cycle: '',
+    _abstract: '',
+    relatedProposals: '',
+    previousProposals: '',
+    studentProject: false,
+    proposalTypeString: '',
+    scientificCategoryString: '',
+    duplicateObservationsJustification: '',
+    keyword: [],
+    coInvestigator: []
   });
+
   proposal: Observable<IObsProposal>;
 
   /** The currently selected proposalForm type */
@@ -41,15 +43,15 @@ export class ProposalComponent implements OnInit {
       text: 'Regular'
     },
     {
-      id: 'opportunity',
-      text: 'Target of Opportunit'
+      id: 'Target Of Opportunity',
+      text: 'Target Of Opportunity'
     },
     {
-      id: 'vlbi',
+      id: 'VLBI',
       text: 'VLBI'
     },
     {
-      id: 'large',
+      id: 'Large Program',
       text: 'Large Program'
     },
   ];
@@ -60,65 +62,65 @@ export class ProposalComponent implements OnInit {
   categoryKeys = Object.keys;
   /** The available categories with values and keywords */
   categoryRadios: { [id: string]: any } = {
-    'cosmology': {
+    'Cosmology and the High Redshift Universe': {
       text: 'Cosmology and the High Redshift Universe',
-      value: 'cosmology',
+      value: 'Cosmology and the High Redshift Universe',
       keywords: [
         'Lyman Alpha Emitters/Blobs (LAE/LAB)',
         'Lyman Break Galaxies (LBG)',
-        'Starburst Galaxies',
+        'Starburst galaxies',
         'Sub-mm Galaxies (SMG)',
         'High-z Active Galactic Nuclei (AGN)',
-        'Gravitational Lenses',
+        'Gravitational lenses',
         'Damped Lyman Alpha (DLA) systems',
         'Cosmic Microwave Background (CMB)/Sunyaev-Zel\'dovich Effect (SZE)',
-        'Galaxy Structure and Evolution',
+        'Galaxy structure & evolution',
         'Gamma Ray Bursts (GRB)',
-        'Galaxy Clusters'
+        'Galaxy Clusters',
       ]
     },
-    'galaxies': {
-      text: 'Galaxies and the Galactic Nuclei',
-      value: 'galaxies',
+    'Galaxies and Galactic Nuclei': {
+      text: 'Galaxies and Galactic Nuclei',
+      value: 'Galaxies and Galactic Nuclei',
       keywords: [
-        'Starbursts, Star Formation',
+        'Starbursts, star formation',
         'Active Galactic Nuclei (AGN)/Quasars (QSO)',
-        'Spiral Galaxies',
-        'Merging and Interacting Galaxies',
-        'Surveys of Galaxies',
-        'Outflows, Jets, Feedback',
-        'Early-type Galaxies',
-        'Galaxy Groups and Clusters',
-        'Galaxy Chemistry',
-        'Galaxy Centres/Nuclei',
-        'Dwaf/Metal-poor Galaxies',
-        'Luminous and Ultra-Luminous Infra-Red Galaxies (LIRG & ULIRG)',
-        'Giant Molecular Clouds (GMC) Properties'
+        'Spiral galaxies',
+        'Merging and interacting galaxies',
+        'Surveys of galaxies',
+        'Outflows, jets, feedback',
+        'Early-type galaxies',
+        'Galaxy groups and clusters',
+        'Galaxy chemistry',
+        'Galactic centres/nuclei',
+        'Dwarf/metal-poor galaxies',
+        'Luminous and Ultra-Luminous Infra-Red Galaxies (LIRG &amp; ULIRG)',
+        'Giant Molecular Clouds (GMC) properties',
       ]
     },
-    'ism': {
-      text: 'ISM, star formation and astrochemisty',
-      value: 'ism',
+    'ISM, star formation and astrochemistry': {
+      text: 'ISM, star formation and astrochemistry',
+      value: 'ISM, star formation and astrochemistry',
       keywords: [
-        'Outflows, Jets, and Ionized Winds',
-        'High-mass Star Formation',
-        'Intermediate-mass Star Formation',
-        'Low-mass Star Formation',
-        'Pre-stellar cores, Infra-red Dark Clouds (IRDC)',
+        'Outflows, jets and ionized winds',
+        'High-mass star formation',
+        'Intermediate-mass star formation',
+        'Low-mass star formation',
+        'Pre-stellar cores, Infra-Red Dark Clouds (IRDC)',
         'Astrochemistry',
-        'Inter-stellar Medium (ISM)/Molecular Clouds',
+        'Inter-Stellar Medium (ISM)/Molecular clouds',
         'Photon-Dominated Regions (PDR)/X-Ray Dominated Regions (XDR)',
-        'Hll Regions',
-        'Magellanic Clouds'
+        'HII regions',
+        'Magellanic Clouds',
       ]
     },
-    'exoplanets': {
-      text: 'Circumstellar disks, exoplanets, and the solar system',
-      value: 'exoplanets',
+    'Circumstellar disks, exoplanets and the solar system': {
+      text: 'Circumstellar disks, exoplanets and the solar system',
+      value: 'Circumstellar disks, exoplanets and the solar system',
       keywords: [
-        'Debris Disks',
-        'Disks around Low-mass Stars',
-        'Disks around High-mass Stars',
+        'Debris disks',
+        'Disks around low-mass stars',
+        'Disks around high-mass stars',
         'Exo-planets',
         'Solar system - Comets',
         'Solar system - Planetary atmospheres',
@@ -127,48 +129,39 @@ export class ProposalComponent implements OnInit {
         'Solar system - Asteroids',
       ]
     },
-    'stars': {
+    'Stellar Evolution and the Sun': {
       text: 'Stellar Evolution and the Sun',
-      value: 'stars',
+      value: 'Stellar Evolution and the Sun',
       keywords: [
         'The Sun',
         'Main sequence stars',
-        'Asymptotic Giant Branch (AGB) Stars',
-        'Post-AGB Stars',
+        'Asymptotic Giant Branch (AGB) stars',
+        'Post-AGB stars',
         'Hypergiants',
-        'Evolved Stars - Shaping/physical structure',
-        'Evolved Stars - Chemistry',
+        'Evolved stars - Shaping/physical structure',
+        'Evolved stars - Chemistry',
         'Cataclysmic stars',
         'Luminous Blue Variables (LBV)',
-        'White Dwarfs',
-        'Brown Dwarfs',
-        'Supernovae (SN) Ejecta',
+        'White dwarfs',
+        'Brown dwarfs',
+        'Supernovae (SN) ejecta',
         'Pulsars and neutron stars',
         'Black holes',
-        'Transients'
+        'Transients',
       ]
     }
   };
 
   /** Count of currently selected keywords in the selection box */
   selectedKeywordCount = 0;
-  selectedKeywordValues: any;
-
-  log(event) {
-    console.log(event);
-  }
 
   constructor(private projectService: ProjectService,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
-    this.projectService.loadedProposal.subscribe(result => {
-      if (result.title === undefined) {
-        this.projectService.loadedProject.subscribe(res => {
-          this.proposalForm.patchValue({prp_title: res.projectName});
-        });
-      }
+    this.projectService.loadedProposal.subscribe((result: IObsProposal) => {
+      console.log(result);
       this.proposalForm.patchValue(result);
     });
     this.observeFormChanges();
@@ -178,23 +171,12 @@ export class ProposalComponent implements OnInit {
     return this.projectService.loadedProposal.getValue().principalInvestigator;
   }
 
-  selectPi() {
-
-  }
-
-  /**
-   * Resets the keyword selector when the chosen category changes
-   */
-  categoryRadioChange(newCategory: string) {
-    this.chosenCategory = newCategory;
-    // this.project.proposalForm.keywords = null;
-  }
-
   observeFormChanges() {
     const debounce = this.proposalForm.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.proposalForm.valid && this.proposalForm.dirty) {
-        this.projectService.updateProposal(value).subscribe();
+        console.log(value);
+        // this.projectService.updateProposal(value).subscribe();
       }
     });
   }

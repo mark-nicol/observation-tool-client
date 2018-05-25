@@ -80,7 +80,6 @@ export class ProjectService implements CanActivate {
   }
 
   selectProject(project: IObsProject) {
-    console.log(project);
     this._loadedProject.next(project);
     this.loadProposal();
   }
@@ -90,10 +89,8 @@ export class ProjectService implements CanActivate {
   }
 
   loadProposal() {
-    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value['obsProposalRef']['entityId'])};
-    console.log(`${this.baseUrl}/proposal?proposalRef=${this._loadedProject.value['obsProposalRef']['entityId']}`);
+    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
-      console.log(result);
       // if (!(result.scienceGoals instanceof Array) && result.ScienceGoal !== undefined) {
       //   result.ScienceGoal = [result.ScienceGoal];
       // }

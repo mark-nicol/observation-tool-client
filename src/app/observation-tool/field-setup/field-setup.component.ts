@@ -3,15 +3,18 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {Observable} from 'rxjs/Rx';
-import {SinglePoint} from '../shared/classes/science-goal/single-point';
 import {ProjectService} from '../shared/services/project.service';
 import {SourceComponent} from './components/source/source.component';
 import {Speed} from '../../units/classes/speed';
+import {ISinglePoint} from '../shared/interfaces/apdm/single-point.interface';
 
 /**
  * Handles the field setup page of a science goal
  */
 
+/* TODO Fix form to match model
+ * Is there a way to make forms from interfaces
+*/
 @Component({
   selector: 'field-setup',
   templateUrl: './field-setup.component.html',
@@ -124,15 +127,15 @@ export class FieldSetupComponent implements OnInit {
   initForm(index: number) {
     this.persistenceService.loadedGoal
       .subscribe(result => {
-        if (result.TargetParameters[index]) {
-          const targetParams = result.TargetParameters[index];
+        if (result.targetParameters[index]) {
+          const targetParams = result.targetParameters[index];
           this.form.patchValue({
             prj_ExpectedProperties: {
-              prj_expectedPeakFluxDensity: targetParams.ExpectedProperties.expectedPeakFluxDensity,
-              prj_desiredCircularPolarizationPercentage: targetParams.ExpectedProperties.desiredCircularPolarizationPercentage,
-              prj_expectedPeakLineFluxDensity: targetParams.ExpectedProperties.expectedPeakLineFluxDensity,
-              prj_expectedLineWidth: targetParams.ExpectedProperties.expectedLineWidth,
-              prj_desiredLinePolarizationPercentage: targetParams.ExpectedProperties.desiredLinePolarizationPercentage
+              prj_expectedPeakFluxDensity: targetParams.expectedProperties.expectedPeakFluxDensity,
+              prj_desiredCircularPolarizationPercentage: targetParams.expectedProperties.desiredCircularPolarizationPercentage,
+              prj_expectedPeakLineFluxDensity: targetParams.expectedProperties.expectedPeakLineFluxDensity,
+              prj_expectedLineWidth: targetParams.expectedProperties.expectedLineWidth,
+              prj_desiredLinePolarizationPercentage: targetParams.expectedProperties.desiredLinePolarizationPercentage
             },
             type: targetParams.type,
             prj_sourceName: targetParams.sourceName,
@@ -156,17 +159,17 @@ export class FieldSetupComponent implements OnInit {
             prj_pmRA: targetParams.pmRA,
             prj_pmDec: targetParams.pmDec,
           });
-          if (targetParams.Rectangle) {
-            this.form.patchValue({prj_Rectangle: targetParams.Rectangle});
-          } else if (targetParams.SinglePoint) {
-            this.setSinglePoint(targetParams.SinglePoint);
-          }
+          // if (targetParams.fields) {
+          //   this.form.patchValue({prj_Rectangle: targetParams.fields});
+          // } else if (targetParams.SinglePoint) {
+          //   this.setSinglePoint(targetParams.SinglePoint);
+          // }
         }
       });
 
   }
 
-  setSinglePoint(points: SinglePoint[]) {
+  setSinglePoint(points: ISinglePoint[]) {
     const formGroups = points.map(point => this.formBuilder.group({
       prj_name: point.name,
       prj_centre: this.formBuilder.group({

@@ -2,10 +2,10 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from 
 import {FormGroup} from '@angular/forms';
 import 'rxjs/add/operator/debounce';
 import {Speed} from '../../../../units/classes/speed';
-import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {SimbadService} from '../../../shared/services/simbad.service';
 import {SystemService} from '../../../shared/services/system.service';
+import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 
 /**
  * Source Component in Field Setup
@@ -25,7 +25,7 @@ export class SourceComponent implements OnInit {
   @Output() resolveEmitter = new EventEmitter<number[]>();
 
   currentTarget               = 0;
-  target: TargetParameters;
+  target: ITargetParameters;
   /** Selectable solar system bodies for selection box */
   solarBodies                 = [
     'Mercury',

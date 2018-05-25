@@ -5,6 +5,7 @@ import {AlmaInvestigatorSearchModal} from '../../../../alma-investigator-search/
 import {AlmaInvestigatorSearchService} from '../../../../alma-investigator-search/services/alma-investigator-search.service';
 import {ProjectService} from '../../../../shared/services/project.service';
 import {IAlmaInvestigator} from '../../../../shared/interfaces/alma-investigator.interface';
+import {IInvestigator} from '../../../../shared/interfaces/apdm/investigator.interface';
 
 /**
  * Initial PI search component
@@ -22,7 +23,7 @@ export class PiSearchComponent implements OnInit {
   INPUT_PLACEHOLDER = 'Enter Principal Investigator name';
 
   isLoading;
-  pi: IAlmaInvestigator;
+  pi: IInvestigator;
 
   constructor(private almaInvestigatorSearchService: AlmaInvestigatorSearchService,
               private projectService: ProjectService,
@@ -35,7 +36,7 @@ export class PiSearchComponent implements OnInit {
   ngOnInit() {
     this.projectService.loadedProposal.subscribe(result => {
       if (result) {
-        this.pi = result.PrincipalInvestigator;
+        this.pi = result.principalInvestigator;
       }
     });
   }

@@ -1,8 +1,4 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {
-  ISinglePoint,
-  ITargetParameters
-} from '../../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {ProjectService} from '../../../shared/services/project.service';
 import {AladinService} from '../../services/aladin.service';
 import {FormGroup} from '@angular/forms';
@@ -10,6 +6,9 @@ import {Longitude} from '../../../../units/classes/longitude';
 import {LongitudeUnits} from '../../../../units/enums/longitude-units.enum';
 import {LatitudeUnits} from '../../../../units/enums/latitude-units.enum';
 import {Latitude} from '../../../../units/classes/latitude';
+import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
+import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
+import {IRectangle} from '../../../shared/interfaces/apdm/rectangle.interface';
 
 @Component({
   selector: 'app-aladin',
@@ -95,7 +94,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
       this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
       this.aladinService.clearPointings();
       if (value.type === 'F_MultiplePoints') {
-        value.SinglePoint.forEach((point: ISinglePoint) => {
+        value.fields.forEach((point: ISinglePoint) => {
           if (point.centre.type === 'RELATIVE') {
             this.aladinService.addPointing(
               Object.assign(new Longitude, value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG) +
@@ -111,7 +110,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
           }
         });
       } else if (value.type === 'F_SingleRectangle') {
-        this.aladinService.addRectangle(value.sourceCoordinates, value.Rectangle);
+        this.aladinService.addRectangle(value.sourceCoordinates, <IRectangle>value.fields[0]);
       }
     });
   }

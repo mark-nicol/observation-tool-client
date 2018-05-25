@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {ObsProject} from '../../../../shared/classes/obsproject';
 import {ProjectService} from '../../../../shared/services/project.service';
 import {ToastsManager} from 'ng2-toastr';
+import {IObsProject} from '../../../../shared/interfaces/apdm/obs-project.interface';
 
 /**
  * Project info component
@@ -14,7 +14,7 @@ import {ToastsManager} from 'ng2-toastr';
 })
 export class ProjectInfoComponent implements OnInit {
 
-  project: ObsProject;
+  project: IObsProject;
 
   constructor(private persistenceService: ProjectService,
               viewContainerRef: ViewContainerRef,

@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ITargetParameters} from '../shared/interfaces/project/science-goal/target-parameters.interface';
 import {ProjectService} from '../shared/services/project.service';
-import {TargetParameters} from '../shared/classes/science-goal/target-parameters';
+import {ITargetParameters} from '../shared/interfaces/apdm/target-parameters.interface';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -80,7 +79,7 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   get targets(): ITargetParameters[] {
-    return this.projectService.loadedGoal.value.TargetParameters;
+    return this.projectService.loadedGoal.value.targetParameters;
   }
 
 }

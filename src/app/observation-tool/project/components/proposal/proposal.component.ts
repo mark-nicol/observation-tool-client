@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import {ObsProposal} from '../../../shared/classes/obsproposal';
 import {ProjectService} from '../../../shared/services/project.service';
-import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.interface';
+import {IInvestigator} from '../../../shared/interfaces/apdm/investigator.interface';
+import {IObsProposal} from '../../../shared/interfaces/apdm/obs-proposal.interface';
 
 /**
  * The proposalForm component
@@ -29,7 +29,7 @@ export class ProposalComponent implements OnInit {
     prp_duplicateObservations: '',
     prp_keywords: []
   });
-  proposal: Observable<ObsProposal>;
+  proposal: Observable<IObsProposal>;
 
   /** The currently selected proposalForm type */
   chosenType = 'regularRadio';
@@ -174,8 +174,8 @@ export class ProposalComponent implements OnInit {
     this.observeFormChanges();
   }
 
-  get pi(): IAlmaInvestigator {
-    return this.projectService.loadedProposal.getValue().PrincipalInvestigator;
+  get pi(): IInvestigator {
+    return this.projectService.loadedProposal.getValue().principalInvestigator;
   }
 
   selectPi() {

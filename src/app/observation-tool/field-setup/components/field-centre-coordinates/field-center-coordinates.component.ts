@@ -103,6 +103,11 @@ export class FieldCenterCoordinatesComponent implements OnInit {
     this.singlePoint.removeAt(index);
   }
 
+  get fields(): FormArray {
+    console.log(this.form.controls.fields['controls'][0]);
+    return this.form.get('fields') as FormArray;
+  }
+
   addPointing() {
     this.singlePoint.push(this.formBuilder.group({
       prj_name: '',

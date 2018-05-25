@@ -4,8 +4,10 @@ import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {Observable} from 'rxjs/Rx';
 import {ProjectService} from '../shared/services/project.service';
-import {ISinglePoint} from '../shared/interfaces/apdm/single-point.interface';
 import {IScienceGoal} from '../shared/interfaces/apdm/science-goal.interface';
+import {IField} from '../shared/interfaces/apdm/field.interface';
+import {IRectangle} from '../shared/interfaces/apdm/rectangle.interface';
+import {ISinglePoint} from '../shared/interfaces/apdm/single-point.interface';
 
 /**
  * Handles the field setup page of a science goal
@@ -71,6 +73,7 @@ export class FieldSetupComponent implements OnInit {
       referenceSystem: '',
     }),
     type: '',
+    fields: this.formBuilder.array([])
   });
 
   get resolveCoordinates(): number[] {
@@ -109,38 +112,75 @@ export class FieldSetupComponent implements OnInit {
 
   initForm(index: number) {
     this.persistenceService.loadedGoal.subscribe((result: IScienceGoal) => {
-        if (result.targetParameters[index]) {
-          const targetParams = result.targetParameters[index];
-          this.form.patchValue(targetParams);
-          // if (targetParams.fields) {
-          //   this.form.patchValue({prj_Rectangle: targetParams.fields});
-          // } else if (targetParams.SinglePoint) {
-          //   this.setSinglePoint(targetParams.SinglePoint);
-          // }
-        }
-      });
+      if (result.targetParameters[index]) {
+        const targetParams = result.targetParameters[index];
+        this.form.patchValue(targetParams);
+        this.setFields(targetParams.fields);
+      }
+    });
 
   }
 
-  setSinglePoint(points: ISinglePoint[]) {
-    const formGroups = points.map(point => this.formBuilder.group({
-      prj_name: point.name,
-      prj_centre: this.formBuilder.group({
-        system: point.centre.system,
-        type: point.centre.type,
-        val_longitude: this.formBuilder.group({
-          unit: point.centre.longitude.unit,
-          content: [point.centre.longitude.content, Validators.required]
+  setFields(fields: IField[]) {
+    let formGroups = [];
+    if (this.form.getRawValue().type === 'F_SingleRectangle') {
+      formGroups = fields.map((point: IRectangle) => this.formBuilder.group({
+        name: point.name,
+        centre: this.formBuilder.group({
+          system: point.centre.system,
+          type: point.centre.type,
+          longitude: this.formBuilder.group({
+            unit: point.centre.longitude.unit,
+            content: [point.centre.longitude.content, Validators.required]
+          }),
+          latitude: this.formBuilder.group({
+            unit: point.centre.latitude.unit,
+            content: [point.centre.latitude.content, Validators.required]
+          }),
+          fieldName: point.centre.fieldName
         }),
-        val_latitude: this.formBuilder.group({
-          unit: point.centre.latitude.unit,
-          content: [point.centre.latitude.content, Validators.required]
+        paLong: this.formBuilder.group({
+          unit: point.paLong.unit,
+          content: point.paLong.content
         }),
-        val_fieldName: point.centre.fieldName
-      })
-    }));
-    const singlePointFormArray = this.formBuilder.array(formGroups);
-    this.form.setControl('SinglePoint', singlePointFormArray);
+        _long: this.formBuilder.group({
+          unit: point._long.unit,
+          content: point._long.content
+        }),
+        _short: this.formBuilder.group({
+          unit: point._short.unit,
+          content: point._short.content
+        }),
+        spacing: this.formBuilder.group({
+          userUnit: point.spacing.userUnit,
+          unit: point.spacing.unit,
+          content: point.spacing.content
+        }),
+        referenceFrequency: this.formBuilder.group({
+          unit: point.referenceFrequency.unit,
+          content: point.referenceFrequency.content
+        }),
+      }));
+    } else if (this.form.getRawValue().type === 'F_MultiplePoints') {
+      formGroups = fields.map((point: ISinglePoint) => this.formBuilder.group({
+        name: point.name,
+        centre: this.formBuilder.group({
+          system: point.centre.system,
+          type: point.centre.type,
+          longitude: this.formBuilder.group({
+            unit: point.centre.longitude.unit,
+            content: [point.centre.longitude.content, Validators.required]
+          }),
+          latitude: this.formBuilder.group({
+            unit: point.centre.latitude.unit,
+            content: [point.centre.latitude.content, Validators.required]
+          }),
+          fieldName: point.centre.fieldName
+        })
+      }));
+    }
+    const fieldFormArray = this.formBuilder.array(formGroups);
+    this.form.setControl('fields', fieldFormArray);
   }
 
   observeFormChanges() {

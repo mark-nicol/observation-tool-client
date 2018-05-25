@@ -22,9 +22,9 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   _coordType = 'ABSOLUTE';
 
   get coordType() {
-    // if (this.form.value.SinglePoint[0]) {
-    //   return this.form.value.SinglePoint[0].centre.type;
-    // }
+    if (this.form.value.fields[0]) {
+      return this.form.value.fields[0].centre.type;
+    }
     return this._coordType;
   }
 
@@ -58,7 +58,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   ];
 
   get offsetUnit() {
-    return this.form.value.SinglePoint[0].centre.longitude.unit;
+    return this.form.value.fields[0].centre.longitude.unit;
   }
 
   set offsetUnit(value: string) {
@@ -83,6 +83,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.form);
     this.chosenSystem = this.systemService.getSystem(this.form.value.chosenSystem);
   }
 
@@ -95,7 +96,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   get singlePoint(): FormArray {
-    return this.form.get('SinglePoint') as FormArray;
+    return this.form.get('fields') as FormArray;
   }
 
   removePointing(index: number) {

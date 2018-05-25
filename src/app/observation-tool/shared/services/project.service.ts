@@ -91,6 +91,7 @@ export class ProjectService implements CanActivate {
   loadProposal() {
     const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
+      console.log(result);
       this._loadedProposal.next(result);
     });
   }

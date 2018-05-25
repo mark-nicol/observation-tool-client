@@ -122,8 +122,7 @@
           <!-- System Selector -->
           <label>System</label>
           <sui-select class="selection"
-                      (selectedOptionChange)="systemChange()"
-                      formControlName="system">
+                      (selectedOptionChange)="systemChange()">
             <sui-select-option *ngFor="let system of systemService.getSystems()"
                                value="{{system}}"></sui-select-option>
           </sui-select>
@@ -132,7 +131,7 @@
         <div class="three wide field">
           <label>Sexagesimal Units</label>
           <sui-checkbox class="toggle"
-                        [ngModel]="form.value.Rectangle.centre.type === 'ABSOLUTE'"
+                        [ngModel]="form.value.fields[0].centre.type === 'ABSOLUTE'"
                         [ngModelOptions]="{standalone: true}">
           </sui-checkbox>
         </div>
@@ -154,7 +153,7 @@
             <div class="ui action input">
               <input>
               <sui-select class="selection"
-                          *ngIf="form.value.Rectangle.centre.type === 'RELATIVE'">
+                          *ngIf="form.value.fields[0].centre.type === 'RELATIVE'">
                 <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
               </sui-select>
             </div>
@@ -162,9 +161,9 @@
         </div>
 
         <!-- Lat offset input -->
-        <div class="field" formGroupName="latitude">
+        <div class="field">
           <div
-            *ngIf="form.value.fields.centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
+            *ngIf="form.value.fields[0].centre.type === 'ABSOLUTE'; then absoluteLatLabel else relativeLatLabel"></div>
           <ng-template #absoluteLatLabel>
             <label>
               {{sexagesimalUnits ? chosenSystem.sexagesimalLabels.latLabel : chosenSystem.normalLabels.latLabel}}
@@ -176,10 +175,9 @@
             </label>
           </ng-template>
           <div class="ui action input">
-            <input formControlName="content">
+            <input>
             <sui-select class="selection"
-                        formControlName="unit"
-                        *ngIf="form.value.fields.centre.type === 'RELATIVE'">
+                        *ngIf="form.value.fields[0].centre.type === 'RELATIVE'">
               <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
             </sui-select>
           </div>
@@ -188,48 +186,42 @@
 
       <div class="three fields">
         <!-- p length input -->
-        <div class="field" formGroupName="short">
+        <div class="field">
           <label>
             p length
           </label>
           <div class="ui action input">
             <input placeholder="0.00000"
-                   type="number"
-                   formControlName="content">
-            <sui-select class="selection"
-                        formControlName="unit">
+                   type="number">
+            <sui-select class="selection">
               <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
             </sui-select>
           </div>
         </div>
 
         <!-- q length input -->
-        <div class="field" formGroupName="long">
+        <div class="field">
           <label>
             q length
           </label>
           <div class="ui action input">
             <input placeholder="0.00000"
-                   type="number"
-                   formControlName="content">
-            <sui-select class="selection"
-                        formControlName="unit">
+                   type="number">
+            <sui-select class="selection">
               <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
             </sui-select>
           </div>
         </div>
 
         <!-- Position angle -->
-        <div class="field" formGroupName="pALong">
+        <div class="field">
           <label>
             Position Angle
           </label>
           <div class="ui action input">
             <input placeholder="0.00000"
-                   type="number"
-                   formControlName="content">
-            <sui-select class="selection"
-                        formControlName="unit">
+                   type="number">
+            <sui-select class="selection">
               <sui-select-option *ngFor="let unit of offsetUnits" value="{{unit}}">{{unit}}</sui-select-option>
             </sui-select>
           </div>
@@ -238,15 +230,14 @@
 
       <div class="two fields">
         <!-- Spacing input -->
-        <div class="field" formGroupName="spacing">
+        <div class="field">
           <label>
             Spacing
           </label>
           <div class="ui right action input">
             <input placeholder="0.51093"
-                   type="number"
-                   formControlName="content">
-            <sui-select class="selection" formControlName="userUnit">
+                   type="number">
+            <sui-select class="selection">
               <sui-select-option value="fraction of main beam">Fraction of antenna beamsize</sui-select-option>
               <sui-select-option value="arcsec">arcsec</sui-select-option>
             </sui-select>

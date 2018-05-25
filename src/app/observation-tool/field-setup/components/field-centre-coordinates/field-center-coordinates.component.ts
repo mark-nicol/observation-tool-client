@@ -83,7 +83,6 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.form);
     this.chosenSystem = this.systemService.getSystem(this.form.value.chosenSystem);
   }
 
@@ -104,7 +103,6 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   get fields(): FormArray {
-    console.log(this.form.controls.fields['controls'][0]);
     return this.form.get('fields') as FormArray;
   }
 

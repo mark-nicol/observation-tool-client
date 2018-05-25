@@ -9,6 +9,7 @@ import {Latitude} from '../../../../units/classes/latitude';
 import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
 import {IRectangle} from '../../../shared/interfaces/apdm/rectangle.interface';
+import {IField} from '../../../shared/interfaces/apdm/field.interface';
 
 @Component({
   selector: 'app-aladin',
@@ -36,6 +37,7 @@ export class AladinComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.aladinService.initAladin();
     this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
+    this.drawFields();
     this.observeFormChanges();
   }
 
@@ -93,27 +95,31 @@ export class AladinComponent implements OnInit, AfterViewInit {
   observeFormChanges() {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
       this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
-      this.aladinService.clearPointings();
-      if (value.type === 'F_MultiplePoints') {
-        // value.fields.forEach((point: ISinglePoint) => {
-        //   if (point.centre.type === 'RELATIVE') {
-        //     this.aladinService.addPointing(
-        //       Object.assign(new Longitude, value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG) +
-        //       Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
-        //       Object.assign(new Latitude, value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG) +
-        //       Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
-        //     );
-        //   } else if (point.centre.type === 'ABSOLUTE') {
-        //     this.aladinService.addPointing(
-        //       Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
-        //       Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
-        //     );
-        //   }
-        // });
-      } else if (value.type === 'F_SingleRectangle') {
-        // this.aladinService.addRectangle(value.sourceCoordinates, <IRectangle>value.fields[0]);
-      }
+      this.drawFields();
     });
+  }
+
+  drawFields() {
+    this.aladinService.clearPointings();
+    if (this.form.value.type === 'F_MultiplePoints') {
+      this.form.value.fields.forEach((point: ISinglePoint) => {
+        if (point.centre.type === 'RELATIVE') {
+          this.aladinService.addPointing(
+            Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG) +
+            Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+            Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG) +
+            Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+          );
+        } else if (point.centre.type === 'ABSOLUTE') {
+          this.aladinService.addPointing(
+            Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+            Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+          );
+        }
+      });
+    } else if (this.form.value.type === 'F_SingleRectangle') {
+      this.aladinService.addRectangle(this.form.value.sourceCoordinates, <IRectangle>this.form.value.fields[0]);
+    }
   }
 
 }

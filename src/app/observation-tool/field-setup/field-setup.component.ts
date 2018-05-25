@@ -4,8 +4,6 @@ import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {Observable} from 'rxjs/Rx';
 import {ProjectService} from '../shared/services/project.service';
-import {SourceComponent} from './components/source/source.component';
-import {Speed} from '../../units/classes/speed';
 import {ISinglePoint} from '../shared/interfaces/apdm/single-point.interface';
 import {IScienceGoal} from '../shared/interfaces/apdm/science-goal.interface';
 
@@ -102,7 +100,6 @@ export class FieldSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.form);
     this.persistenceService.currentTarget.subscribe(result => {
       this.currentTarget = result;
       this.initForm(result)
@@ -114,7 +111,6 @@ export class FieldSetupComponent implements OnInit {
     this.persistenceService.loadedGoal.subscribe((result: IScienceGoal) => {
         if (result.targetParameters[index]) {
           const targetParams = result.targetParameters[index];
-          console.log(targetParams);
           this.form.patchValue(targetParams);
           // if (targetParams.fields) {
           //   this.form.patchValue({prj_Rectangle: targetParams.fields});

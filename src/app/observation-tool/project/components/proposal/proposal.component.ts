@@ -152,16 +152,12 @@ export class ProposalComponent implements OnInit {
     }
   };
 
-  /** Count of currently selected keywords in the selection box */
-  selectedKeywordCount = 0;
-
   constructor(private projectService: ProjectService,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     this.projectService.loadedProposal.subscribe((result: IObsProposal) => {
-      console.log(result);
       this.proposalForm.patchValue(result);
     });
     this.observeFormChanges();
@@ -175,7 +171,6 @@ export class ProposalComponent implements OnInit {
     const debounce = this.proposalForm.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.proposalForm.valid && this.proposalForm.dirty) {
-        console.log(value);
         // this.projectService.updateProposal(value).subscribe();
       }
     });

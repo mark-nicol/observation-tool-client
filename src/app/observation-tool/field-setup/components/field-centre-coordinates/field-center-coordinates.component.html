@@ -80,7 +80,7 @@
       </sui-select>
     </div>
 
-    <div formArrayName="fields">
+    <div formArrayName="fields" style="max-height: 10em; overflow-y: scroll; overflow-x: hidden">
       <div *ngFor="let pointing of fields.controls; let i = index" [formGroupName]="i">
         <div class="two fields" formGroupName="centre">
           <div class="field" formGroupName="longitude">

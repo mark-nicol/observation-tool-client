@@ -31,6 +31,7 @@ export class ProjectImportModal extends ComponentModalConfig<ModalContext, void,
     this.size = size;
     this.mustScroll = true;
     this.isClosable = true;
+    this.isFullScreen = true;
   }
 
 }

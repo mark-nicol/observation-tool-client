@@ -5,18 +5,29 @@
   <title>Observation Tool</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="eso_favicon.ico">
+  <link rel="icon" type="image/x-icon" href="src/eso_favicon.ico">
   <link rel="stylesheet" href="static/aladin.css"/>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="static/aladin.js" charset="utf-8"></script>
   <script src="https://rawgit.com/web-animations/web-animations-js/master/web-animations.min.js"></script>
 </head>
 <body>
-  <app-root>
-    <div style="text-align: center">
-      <h1>ALMA Observation Tool</h1>
-      <img src="./assets/img/alma-logo.jpg" style="width: 10%; height: 10%">
+<app-root>
+  <div class="ui fixed blue inverted menu">
+    <div class="item" style="width: 12%; padding-top:0;padding-bottom:0;padding-left:5px">
+      <img class="ui image logo" src="./assets/img/alma-logo.jpg">
+      <b class="title">Observation Tool</b>
     </div>
-  </app-root>
+    <div class="ui right dropdown item">
+      <i class="user icon"></i>
+      User
+      <i class="dropdown icon"></i>
+    </div>
+  </div>
+  <div class="ui active inverted dimmer">
+    <img src="alma-logo.jpg">
+    <div class="ui large text loader">Loading</div>
+  </div>
+</app-root>
 </body>
 </html>

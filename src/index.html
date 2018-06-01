@@ -24,8 +24,31 @@
       <i class="dropdown icon"></i>
     </div>
   </div>
+  <div style="height: 4em"></div>
+  <div class="ui container">
+    <div class="ui center aligned segment">
+      <button class="ui blue labeled icon button">
+        <i class="add icon"></i>Start a new project
+      </button>
+      <div class="ui horizontal divider">Or</div>
+      <form class="ui form">
+        <!-- Search field -->
+        <div class="field">
+          <h4>Search the ALMA Database</h4>
+          <div class="ui left fluid action input">
+            <!-- Selector -->
+            <sui-select class="selection">
+            </sui-select>
+            <!-- Input -->
+            <input>
+            <button class="ui blue labeled icon button"><i class="search icon"></i>Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
   <div class="ui active inverted dimmer">
-    <img src="alma-logo.jpg">
     <div class="ui large text loader">Loading</div>
   </div>
 </app-root>

@@ -67,5 +67,6 @@ export class AlmaInvestigatorSearchModal extends ComponentModalConfig<ModalConte
     this.size = size;
     this.mustScroll = true;
     this.isClosable = true;
+    this.isFullScreen = true;
   }
 }

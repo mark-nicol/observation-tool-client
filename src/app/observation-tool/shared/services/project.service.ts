@@ -95,19 +95,6 @@ export class ProjectService implements CanActivate {
     });
   }
 
-  updateScienceGoal(updates: any) {
-    console.log('Old goal:', this._loadedGoal.getValue());
-    console.log('New goal:', _.merge(this._loadedGoal.getValue(), updates));
-  }
-
-  updateTargetParams(proposal: ITargetParameters): Observable<ITargetParameters> {
-    return this.http.post<ITargetParameters>(`${this.baseUrl}/projects`, proposal, httpOptions);
-  }
-
-  updateProposal(proposal: IObsProposal): Observable<IObsProposal> {
-    return this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, proposal);
-  }
-
   hasProjectLoaded(): boolean {
     return this._loadedProject.getValue() !== null;
   }
@@ -209,6 +196,12 @@ export class ProjectService implements CanActivate {
     const oldProposal = this._loadedProposal.getValue();
     oldProposal.principalInvestigator = newPi;
     this._loadedProposal.next(oldProposal);
+  }
+
+  updateProposal(updates: IObsProposal) {
+    // console.log(this.loadedProposal.getValue());
+    // console.log(updates);
+    console.log(_.merge(this.loadedProposal.getValue(), updates));
   }
 
 }

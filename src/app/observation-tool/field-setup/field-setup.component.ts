@@ -187,8 +187,7 @@ export class FieldSetupComponent implements OnInit {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.form.dirty && this.form.valid) {
-        this.persistenceService.updateTargetParams(value).subscribe(() => {
-        });
+        console.log(value);
       }
     });
   }

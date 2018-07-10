@@ -169,9 +169,9 @@ export class ProposalComponent implements OnInit {
 
   observeFormChanges() {
     const debounce = this.proposalForm.valueChanges.debounce(() => Observable.interval(1500));
-    debounce.subscribe(value => {
+    debounce.subscribe((value: IObsProposal) => {
       if (this.proposalForm.valid && this.proposalForm.dirty) {
-        // this.projectService.updateProposal(value).subscribe();
+        this.projectService.updateProposal(value);
       }
     });
   }

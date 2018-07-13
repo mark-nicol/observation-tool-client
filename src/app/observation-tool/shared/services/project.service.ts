@@ -23,6 +23,13 @@ const httpOptions = {
  */
 @Injectable()
 export class ProjectService implements CanActivate {
+  get selectedProject(): IObsProject {
+    return this._selectedProject;
+  }
+
+  set selectedProject(value: IObsProject) {
+    this._selectedProject = value;
+  }
 
 
   private baseUrl = 'http://localhost:8080/api/project';
@@ -31,6 +38,8 @@ export class ProjectService implements CanActivate {
   private _loadedProposal = new BehaviorSubject<IObsProposal>(null);
   private _loadedGoal = new BehaviorSubject<IScienceGoal>(null);
   private _currentGoal = 0;
+
+  private _selectedProject: IObsProject;
 
   /**
    * Constructor, loads data and sets members
@@ -78,8 +87,8 @@ export class ProjectService implements CanActivate {
     return this._loadedGoal;
   }
 
-  selectProject(project: IObsProject) {
-    this._loadedProject.next(project);
+  selectProject() {
+    this._loadedProject.next(this._selectedProject);
     this.loadProposal();
   }
 

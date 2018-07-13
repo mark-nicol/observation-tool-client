@@ -4,9 +4,9 @@ import {UserAngle} from '../../../../units/classes/user-angle';
 import {Frequency} from '../../../../units/classes/frequency';
 
 export interface IRectangle extends IField {
-  paLong: Angle;
-  _long: Angle;
-  _short: Angle;
+  palong: Angle;
+  long: Angle;
+  short: Angle;
   spacing: UserAngle;
   referenceFrequency: Frequency;
 }

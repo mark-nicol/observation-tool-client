@@ -53,8 +53,8 @@ export class PiSearchComponent implements OnInit {
   makeModal(piName: string) {
     this.suiModalService
       .open(new AlmaInvestigatorSearchModal(piName))
-      .onApprove((result: IAlmaInvestigator) => {
-        this.projectService.setPi(result);
+      .onApprove(result => {
+        this.projectService.setPi(this.almaInvestigatorSearchService.selectedPi);
       })
       .onDeny(result => {
         console.log(result);

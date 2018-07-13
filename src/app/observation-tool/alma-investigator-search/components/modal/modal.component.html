@@ -7,18 +7,17 @@
   <app-refine-panel [name]="this.modal.context.name"
                     (refineSearch)="search($event[0], $event[1])"></app-refine-panel>
   <div *ngIf="resultsFound; else noResults">
-    <app-results-table [searchResults]="searchResults"
-                       (newPiEmitter)="selectedPi = $event"></app-results-table>
+    <app-results-table [searchResults]="searchResults"></app-results-table>
   </div>
   <ng-template #noResults><h4>No Results</h4></ng-template>
 </div>
 <div class="actions">
   <button class="ui tiny compact blue labeled icon button"
-          (click)="modal.approve(selectedPi)">
+          (click)="modal.approve(undefined)">
     <i class="add user icon"></i> Select Investigator
   </button>
   <button class="ui tiny compact red  labeled icon button"
-          (click)="modal.deny()">
+          (click)="modal.deny(undefined)">
     <i class="remove icon"></i> Cancel
   </button>
 </div>

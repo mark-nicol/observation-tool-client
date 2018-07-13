@@ -10,9 +10,17 @@ import {IAlmaInvestigator} from '../../shared/interfaces/alma-investigator.inter
 
 @Injectable()
 export class AlmaInvestigatorSearchService {
+  get selectedPi(): IAlmaInvestigator {
+    return this._selectedPi;
+  }
+
+  set selectedPi(value: IAlmaInvestigator) {
+    this._selectedPi = value;
+  }
 
   /** URL of the ALMA user lookup */
   private piUrl = 'https://cycle-5.asa.alma.cl/ObsprepSubmissionService/UserLookup?action=MatchStrings';
+  private _selectedPi: IAlmaInvestigator;
 
   static resultToInvestigator(result: any): IAlmaInvestigator {
     return {

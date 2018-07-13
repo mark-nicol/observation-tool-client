@@ -20,7 +20,7 @@ export class ProposalComponent implements OnInit {
   proposalForm: FormGroup = this.formBuilder.group({
     title: '',
     cycle: '',
-    _abstract: '',
+    abstract: '',
     relatedProposals: '',
     previousProposals: '',
     studentProject: false,
@@ -172,6 +172,7 @@ export class ProposalComponent implements OnInit {
     debounce.subscribe((value: IObsProposal) => {
       if (this.proposalForm.valid && this.proposalForm.dirty) {
         this.projectService.updateProposal(value);
+        this.proposalForm.markAsUntouched();
       }
     });
   }

@@ -10,7 +10,6 @@ import * as _ from 'lodash';
 import {IObsProject} from '../interfaces/apdm/obs-project.interface';
 import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
 import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
-import {ITargetParameters} from '../interfaces/apdm/target-parameters.interface';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -91,6 +90,7 @@ export class ProjectService implements CanActivate {
   loadProposal() {
     const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
+      console.log(result);
       this._loadedProposal.next(result);
     });
   }
@@ -118,12 +118,12 @@ export class ProjectService implements CanActivate {
 
   startNewProject() {
     // TODO Fix
-  //   this.http.get('assets/new_project/ObsProject.json').subscribe(result => {
-  //     this._loadedProject.next(Object.assign(new IObsProject, result));
-  //   });
-  //   this.http.get('assets/new_project/ObsProposal.json').subscribe(result => {
-  //     this._loadedProposal.next(Object.assign(new ObsProposal, result));
-  //   });
+    //   this.http.get('assets/new_project/ObsProject.json').subscribe(result => {
+    //     this._loadedProject.next(Object.assign(new IObsProject, result));
+    //   });
+    //   this.http.get('assets/new_project/ObsProposal.json').subscribe(result => {
+    //     this._loadedProposal.next(Object.assign(new ObsProposal, result));
+    //   });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -199,9 +199,11 @@ export class ProjectService implements CanActivate {
   }
 
   updateProposal(updates: IObsProposal) {
-    // console.log(this.loadedProposal.getValue());
-    // console.log(updates);
-    console.log(_.merge(this.loadedProposal.getValue(), updates));
+    console.log(this.loadedProposal.getValue());
+    console.log(updates);
+    this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, _.merge(this.loadedProposal.getValue(), updates)).subscribe(response =>
+      this._loadedProposal.next(response)
+    );
   }
 
 }

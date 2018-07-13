@@ -139,17 +139,17 @@ export class FieldSetupComponent implements OnInit {
           }),
           fieldName: point.centre.fieldName
         }),
-        paLong: this.formBuilder.group({
-          unit: point.paLong.unit,
-          content: point.paLong.content
+        palong: this.formBuilder.group({
+          unit: point.palong.unit,
+          content: point.palong.content
         }),
-        _long: this.formBuilder.group({
-          unit: point._long.unit,
-          content: point._long.content
+        long: this.formBuilder.group({
+          unit: point.long.unit,
+          content: point.long.content
         }),
-        _short: this.formBuilder.group({
-          unit: point._short.unit,
-          content: point._short.content
+        short: this.formBuilder.group({
+          unit: point.short.unit,
+          content: point.short.content
         }),
         spacing: this.formBuilder.group({
           userUnit: point.spacing.userUnit,
@@ -187,8 +187,7 @@ export class FieldSetupComponent implements OnInit {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.form.dirty && this.form.valid) {
-        this.persistenceService.updateTargetParams(value).subscribe(() => {
-        });
+        console.log(value);
       }
     });
   }

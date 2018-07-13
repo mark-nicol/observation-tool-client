@@ -89,8 +89,8 @@ export class AladinService {
     const targetLatDeg = Object.assign(new Latitude, target.latitude).getValueInUnits(LatitudeUnits.DEG);
     const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
     const rectCentreLatDeg = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG);
-    const shortDeg = Object.assign(new Angle, rect._short).getValueInUnits(AngleUnits.DEG);
-    const longDeg = Object.assign(new Angle, rect._long).getValueInUnits(AngleUnits.DEG);
+    const shortDeg = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
+    const longDeg = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
     // top left
     // x = centre - half short
     // y = centre - half long

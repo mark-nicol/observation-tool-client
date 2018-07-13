@@ -14,7 +14,7 @@ export interface IObsProposal {
   _abstract: string;
   relatedProposals: string;
   previousProposals: string;
-  dateReceived: IDate;
+  dateReceived: string;
   cycle: string;
   studentProject: boolean;
   continuation: boolean;

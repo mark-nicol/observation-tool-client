@@ -1,11 +1,15 @@
 <form class="ui form container" [formGroup]="proposalForm">
   <h3 class="ui top attached blue header">Proposal Information</h3>
   <div class="ui bottom attached segment">
-    <div class="field">
+    <div class="field" [class.disabled]="proposalForm.controls['title'].disabled">
       <label for="titleInput">Proposal Title</label>
-      <input id="titleInput"
-             type="text"
-             formControlName="title">
+      <div class="ui right icon input"
+           [class.loading]="proposalForm.controls['title'].disabled">
+        <input id="titleInput"
+               type="text"
+               formControlName="title">
+        <i class="icon"></i>
+      </div>
     </div>
     <div class="field">
       <label for="cycleInput">Proposal Cycle</label>

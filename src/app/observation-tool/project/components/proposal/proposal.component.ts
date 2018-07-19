@@ -18,7 +18,7 @@ import {IObsProposal} from '../../../shared/interfaces/apdm/obs-proposal.interfa
 export class ProposalComponent implements OnInit {
 
   proposalForm: FormGroup = this.formBuilder.group({
-    title: '',
+    title: [{value: '', disabled: true}],
     cycle: '',
     abstract: '',
     relatedProposals: '',
@@ -159,6 +159,7 @@ export class ProposalComponent implements OnInit {
   ngOnInit() {
     this.projectService.loadedProposal.subscribe((result: IObsProposal) => {
       this.proposalForm.patchValue(result);
+      this.proposalForm.controls['title'].enable();
     });
     this.observeFormChanges();
   }
@@ -172,7 +173,8 @@ export class ProposalComponent implements OnInit {
     debounce.subscribe((value: IObsProposal) => {
       if (this.proposalForm.valid && this.proposalForm.dirty) {
         this.projectService.updateProposal(value);
-        this.proposalForm.markAsUntouched();
+        this.proposalForm.controls['title'].disable();
+        this.proposalForm.markAsPristine();
       }
     });
   }

@@ -7,9 +7,11 @@ import {tap} from 'rxjs/operators';
 import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import * as _ from 'lodash';
-import {IObsProject} from '../interfaces/apdm/obs-project.interface';
-import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
-import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
+import {IScienceGoal} from '../generated/apdm/science-goal.interface';
+import {IObsProject} from '../generated/apdm/obsproject.interface';
+import {IObsProposal} from '../generated/apdm/obsproposal.interface';
+// import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
+// import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -79,7 +81,10 @@ export class ProjectService implements CanActivate {
   }
 
   selectProject(project: IObsProject) {
+    console.log(project);
     this._loadedProject.next(project);
+    console.log(this.loadedProject.getValue());
+    console.log(this._loadedProject.value);
     this.loadProposal();
   }
 
@@ -111,7 +116,7 @@ export class ProjectService implements CanActivate {
 
   hasSources(): boolean {
     if (this.hasScienceGoals()) {
-      return this._loadedGoal.getValue().targetParameters !== (null || undefined);
+      return this._loadedGoal.getValue().TargetParameters !== (null || undefined);
     }
     return false;
   }
@@ -181,20 +186,20 @@ export class ProjectService implements CanActivate {
   }
 
   removeSource() {
-    this._loadedGoal.getValue().targetParameters.splice(this._currentTarget.getValue(), 1);
+    this._loadedGoal.getValue().TargetParameters.splice(this._currentTarget.getValue(), 1);
     this._currentTarget.next(this._currentTarget.value - 1);
     if (this._currentTarget.value === -1) {
       this._currentTarget.next(0);
     }
-    if (this._loadedGoal.getValue().targetParameters.length <= 0) {
-      this._loadedGoal.getValue().targetParameters = undefined;
+    if (this._loadedGoal.getValue().TargetParameters.length <= 0) {
+      this._loadedGoal.getValue().TargetParameters = undefined;
       this.router.navigate(['/science-goals/general']).then(() => this.toastr.info('All sources removed'));
     }
   }
 
   setPi(newPi: any) {
     const oldProposal = this._loadedProposal.getValue();
-    oldProposal.principalInvestigator = newPi;
+    oldProposal.PrincipalInvestigator = newPi;
     this._loadedProposal.next(oldProposal);
   }
 

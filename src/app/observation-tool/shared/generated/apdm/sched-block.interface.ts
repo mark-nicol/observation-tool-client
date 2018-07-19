@@ -3,19 +3,18 @@ import {ISchedBlockEntityT} from './apdm/entity.interface';
 import {IObsProjectRefT, ISBStatusRefT} from './apdm/entity-ref.interface';
 import {ITimeAllocationBreakdownT} from './apdm/time-allocation-breakdown.interface';
 import {
-  IFieldSourceT,
-  IKeywordValueT,
-  IObservingGroupT,
-  IObservingParametersTUnion,
-  IObsProcedureT,
-  IOpticalCameraSpecT,
-  IPreconditionsT,
-  ISchedBlockControlT,
-  ISchedulingConstraintsT,
-  ISpectralSpecT,
-  ITargetT,
-  ITemporalConstraintsT
-} from './test';
+  IObservingParametersTUnion} from './test';
+import {IKeywordValueT} from './keyword-value.interface';
+import {IOpticalCameraSpecT} from './optical-camera-spec.interface';
+import {ISpectralSpecT} from './spectral-spec.interface';
+import {IFieldSourceT} from './field-source.interface';
+import {IObservingGroupT} from './observing-group.interface';
+import {IObsProcedureT} from './obs-procedure.interface';
+import {IPreconditionsT} from './preconditions.interface';
+import {ISchedBlockControlT} from './sched-block-control.interface';
+import {ISchedulingConstraintsT} from './scheduling-constraints.interface';
+import {ITargetT} from './target.interface';
+import {ITemporalConstraintsT} from './temporal-constraints.interface';
 
 export interface ISchedBlock extends IObsUnitT {
   '@type': 'SchedBlock';

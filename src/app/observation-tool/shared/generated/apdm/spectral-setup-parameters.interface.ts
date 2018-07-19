@@ -1,9 +1,8 @@
 import {
   IAbstractScienceSpectralWindowTUnion,
-  IAdvancedSpectralSetupT,
-  IFrequencyT,
-  IOverlaidSpectralLineT
-} from '../test';
+  IFrequencyT} from '../test';
+import {IAdvancedSpectralSetupT} from '../advanced-spectral-setup.interface';
+import {IOverlaidSpectralLineT} from '../overlaid-spectral-line.interface';
 
 export interface ISpectralSetupParametersT {
   representativeFrequency: IFrequencyT;

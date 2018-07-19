@@ -1,5 +1,6 @@
-import {IAngleT, IMagnitudeT} from './test';
+import {IAngleT} from './test';
 import {ISkyCoordinatesT} from './sky-coordinates.interface';
+import {IMagnitudeT} from './magnitude.interface';
 
 export interface IOpticalPointingTargetQueryParametersT {
   minCoordinates: ISkyCoordinatesT;

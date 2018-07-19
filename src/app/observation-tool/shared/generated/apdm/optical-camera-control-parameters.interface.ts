@@ -1,4 +1,5 @@
-import {IAngleT, IMagnitudeT, ITimeT} from '../test';
+import {IAngleT, ITimeT} from '../test';
+import {IMagnitudeT} from '../magnitude.interface';
 
 export interface IOpticalCameraControlParametersT {
   elevationLimit: IAngleT;

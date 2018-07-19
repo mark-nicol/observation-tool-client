@@ -1,4 +1,5 @@
-import {IAbstractTargetParametersT, IFieldTUnion} from './test';
+import {IFieldTUnion} from './test';
+import {IAbstractTargetParametersT} from './abstract-target-parameters.interface';
 
 export interface ITargetParametersT extends IAbstractTargetParametersT {
   '@type': 'TargetParametersT';

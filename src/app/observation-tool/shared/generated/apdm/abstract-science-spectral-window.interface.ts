@@ -1,4 +1,5 @@
-import {IAdvancedWindowSetupT, IExpectedSpectralLineT} from './test';
+import {IExpectedSpectralLineT} from './expected-spectral-line.interface';
+import {IAdvancedWindowSetupT} from './advanced-window-setup.interface';
 
 export interface IAbstractScienceSpectralWindowT {
   '@type': 'SpectralScanT' | 'ScienceSpectralWindowT';

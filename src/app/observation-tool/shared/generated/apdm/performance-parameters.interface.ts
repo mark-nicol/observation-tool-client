@@ -1,14 +1,13 @@
 import {
   IAngleT,
   IFrequencyT,
-  IMonitoringConstraintT,
-  ITemporalParametersT,
   ITimeT,
   IUserAngleT,
   IUserFrequencyT,
-  IUserSensitivityT,
-  IVisitConstraintT
-} from './test';
+  IUserSensitivityT} from './test';
+import {IMonitoringConstraintT} from './monitoring-constraint.interface';
+import {ITemporalParametersT} from './temporal-parameters.interface';
+import {IVisitConstraintT} from './visit-constraint.interface';
 
 export interface IPerformanceParametersT {
   desiredAngularResolution: IUserAngleT;

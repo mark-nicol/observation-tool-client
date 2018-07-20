@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit {
   scienceGoalMenuOpen = true;
 
   constructor(protected router: Router,
-              protected persistenceService: ProjectService,
+              public persistenceService: ProjectService,
               private suiModalService: SuiModalService,
               private location: Location) {
 
@@ -103,8 +103,8 @@ export class NavbarComponent implements OnInit {
   makeProjectImportModal() {
     this.suiModalService
       .open(new ProjectImportModal())
-      .onApprove((result: IObsProject) => {
-        this.persistenceService.selectProject(result);
+      .onApprove(result => {
+        this.persistenceService.selectProject();
         this.router.navigate(['/project']).then();
       })
       .onDeny(result => {

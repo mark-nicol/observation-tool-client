@@ -53,7 +53,7 @@ export class ScienceGoalComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(protected router: Router, private projectService: ProjectService) {
+  constructor(public router: Router, private projectService: ProjectService) {
   }
 
   ngOnInit() {

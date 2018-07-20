@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {ComponentModalConfig, ModalSize, SuiModal} from 'ng2-semantic-ui';
+import {ComponentModalConfig, ModalResult, ModalSize, SuiModal} from 'ng2-semantic-ui';
 import {IObsProject} from '../../interfaces/apdm/obs-project.interface';
+import {ProjectService} from '../../services/project.service';
 
 interface ModalContext {
   name: string;
@@ -15,9 +16,15 @@ interface ModalContext {
 
 export class ProjectImportModalComponent {
 
-  selectedProject: IObsProject;
-
   constructor(public modal: SuiModal<ModalContext>) { }
+
+  approve() {
+    this.modal.approve(undefined);
+  }
+
+  deny() {
+    this.modal.deny(undefined)
+  }
 
 }
 

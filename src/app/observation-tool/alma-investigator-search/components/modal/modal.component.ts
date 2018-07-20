@@ -21,7 +21,6 @@ export class AlmaInvestigatorSearchModalComponent {
   searchResults: IAlmaInvestigator[];
   isSearching = false;
   resultsFound = false;
-  selectedPi: IAlmaInvestigator;
 
   constructor(public modal: SuiModal<ModalContext>,
               private almaInvestigatorSearchService: AlmaInvestigatorSearchService) {

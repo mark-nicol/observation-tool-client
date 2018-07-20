@@ -11,8 +11,7 @@ import {IObsProject} from '../../interfaces/apdm/obs-project.interface';
 export class ProjectImportComponent implements OnInit {
 
   projects: Observable<any[]>;
-  _selectedProject: IObsProject;
-  @Output() selectedProjectEmitter = new EventEmitter();
+  private _selectedProject: IObsProject;
 
   constructor(private persistenceService: ProjectService) { }
 
@@ -22,7 +21,7 @@ export class ProjectImportComponent implements OnInit {
 
   rowClicked(event: IObsProject) {
     this._selectedProject = event;
-    this.selectedProjectEmitter.emit(event);
+    this.persistenceService.selectedProject = event;
   }
 
 }

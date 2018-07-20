@@ -23,8 +23,8 @@ export class StartComponent implements OnInit {
   makeProjectImportModal() {
     this.suiModalService
       .open(new ProjectImportModal())
-      .onApprove((result: IObsProject) => {
-        this.projectService.selectProject(result);
+      .onApprove(result => {
+        this.projectService.selectProject();
         this.router.navigate(['/project']).then();
       })
       .onDeny(result => {

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {IAlmaInvestigator} from '../../../shared/interfaces/alma-investigator.interface';
+import {AlmaInvestigatorSearchService} from '../../services/alma-investigator-search.service';
 
 /**
  * Results table component.
@@ -23,7 +24,7 @@ export class ResultsTableComponent implements OnInit {
   selectedPi: IAlmaInvestigator;
   @Output() newPiEmitter = new EventEmitter<IAlmaInvestigator>();
 
-  constructor() {
+  constructor(private almaInvestigatorSearchService: AlmaInvestigatorSearchService) {
   }
 
   ngOnInit() {
@@ -35,7 +36,7 @@ export class ResultsTableComponent implements OnInit {
    */
   rowClick(pi: IAlmaInvestigator) {
     this.selectedPi = this.selectedPi === pi ? null : pi;
-    this.newPiEmitter.emit(pi);
+    this.almaInvestigatorSearchService.selectedPi = pi;
   }
 
 }

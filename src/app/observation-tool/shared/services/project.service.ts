@@ -28,9 +28,9 @@ import {tap} from 'rxjs/operators';
 import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import * as _ from 'lodash';
-import {IScienceGoal} from '../generated/apdm/science-goal.interface';
 import {IObsProject} from '../generated/apdm/obsproject.interface';
 import {IObsProposal} from '../generated/apdm/obsproposal.interface';
+import {IAbstractScienceGoalUnion} from '../generated/apdm/abstract-science-goal.interface';
 // import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
 // import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
 
@@ -59,7 +59,7 @@ export class ProjectService implements CanActivate {
   private _currentTarget = new BehaviorSubject<number>(0);
   private _loadedProject = new BehaviorSubject<IObsProject>(null);
   private _loadedProposal = new BehaviorSubject<IObsProposal>(null);
-  private _loadedGoal = new BehaviorSubject<IScienceGoal>(null);
+  private _loadedGoal = new BehaviorSubject<IAbstractScienceGoalUnion>(null);
   private _currentGoal = 0;
 
   private _selectedProject: IObsProject;
@@ -106,7 +106,7 @@ export class ProjectService implements CanActivate {
     return this._loadedProposal;
   }
 
-  get loadedGoal(): BehaviorSubject<IScienceGoal> {
+  get loadedGoal(): BehaviorSubject<IAbstractScienceGoalUnion> {
     return this._loadedGoal;
   }
 

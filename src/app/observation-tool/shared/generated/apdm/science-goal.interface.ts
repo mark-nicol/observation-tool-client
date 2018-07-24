@@ -6,9 +6,9 @@ import {
 } from '../test';
 import {ICalibrationSetupParameters} from './calibration-setup-parameters.interface';
 import {ISpectralSetupParameters} from './spectral-setup-parameters.interface';
-import {IPerformanceParametersT} from '../performance-parameters.interface';
-import {ITargetParametersT} from '../target-parameters.interface';
-import {ITechnicalJustificationT} from '../technical-justification.interface';
+import {IPerformanceParameters} from './performance-parameters.interface';
+import {ITargetParameters} from './target-parameters.interface';
+import {ITechnicalJustification} from './technical-justification.interface';
 
 export interface IScienceGoal extends IAbstractScienceGoal {
   '@type': 'ScienceGoalT';
@@ -24,9 +24,9 @@ export interface IScienceGoal extends IAbstractScienceGoal {
   resubmissionOfOusStatusUid: string;
   resubmissionOfName: string;
   CalibrationSetupParameters: ICalibrationSetupParameters;
-  PerformanceParameters: IPerformanceParametersT;
+  PerformanceParameters: IPerformanceParameters;
   SpectralSetupParameters: ISpectralSetupParameters;
-  TargetParameters: ITargetParametersT[];
-  TechnicalJustification: ITechnicalJustificationT[];
+  TargetParameters: ITargetParameters[];
+  TechnicalJustification: ITechnicalJustification[];
   mode: string;
 }

@@ -3,6 +3,8 @@
 import {IUnitDependencies} from './unit-dependencies.interface';
 import {IObsProjectRef} from './entity-ref.interface';
 import {IObsUnitControl} from './obs-unit-control.interface';
+import {IObsUnitSet} from './obs-unit-set.interface';
+import {ISchedBlock} from './sched-block.interface';
 
 export interface IObsUnit {
   '@type': 'ObsUnitSetT' | 'SchedBlock';
@@ -13,3 +15,5 @@ export interface IObsUnit {
   obsProjectRef: IObsProjectRef;
   status: string;
 }
+
+export type IObsUnitUnion = IObsUnitSet | ISchedBlock;

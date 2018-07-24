@@ -2,6 +2,8 @@
 
 import {IExpectedSpectralLine} from './expected-spectral-line.interface';
 import {IAdvancedWindowSetup} from './advanced-window-setup.interface';
+import {ISpectralScan} from './spectral-scan.interface';
+import {IScienceSpectralWindow} from './science-spectral-window.interface';
 
 export interface IAbstractScienceSpectralWindow {
   '@type': 'SpectralScanT' | 'ScienceSpectralWindowT';
@@ -9,3 +11,5 @@ export interface IAbstractScienceSpectralWindow {
   AdvancedWindowSetup: IAdvancedWindowSetup;
   ExpectedSpectralLine: IExpectedSpectralLine[];
 }
+
+export type IAbstractScienceSpectralWindowTUnion = ISpectralScan | IScienceSpectralWindow;

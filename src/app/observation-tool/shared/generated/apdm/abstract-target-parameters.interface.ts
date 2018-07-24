@@ -5,6 +5,7 @@ import {IVelocity} from './velocity.interface';
 import {IExpectedProperties} from './expected-properties.interface';
 import {IObsAttachmentRefT} from './apdm/entity-ref.interface';
 import {IAngleT, IAngularVelocityT} from './test';
+import {ITargetParameters} from './target-parameters.interface';
 
 export interface IAbstractTargetParameters {
   '@type': 'TargetParametersT';
@@ -23,3 +24,5 @@ export interface IAbstractTargetParameters {
   ImageRef: IObsAttachmentRefT;
   solarSystemObject: string;
 }
+
+export type IAbstractTargetParametersUnion = ITargetParameters;

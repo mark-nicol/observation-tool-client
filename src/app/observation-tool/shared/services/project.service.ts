@@ -53,7 +53,7 @@ export class ProjectService implements CanActivate {
   }
 
 
-  private baseUrl = 'http://localhost:8080/api/project';
+  private baseUrl = 'http://localhost:8080/project';
   private _currentTarget = new BehaviorSubject<number>(0);
   private _loadedProject = new BehaviorSubject<IObsProject>(null);
   private _loadedProposal = new BehaviorSubject<IObsProposal>(null);
@@ -118,7 +118,7 @@ export class ProjectService implements CanActivate {
   }
 
   loadProposal() {
-    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value.obsProposalRef.entityId)};
+    const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
       console.log(result);
       this._loadedProposal.next(result);

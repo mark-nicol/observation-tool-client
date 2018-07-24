@@ -1,16 +1,16 @@
 // Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-import {IFrequencyT} from './test';
+import {Frequency} from '../../../../units/classes/frequency';
 
 export interface IBaseBandSpecification {
   entityPartId: string;
-  centerFrequency: IFrequencyT;
+  centerFrequency: Frequency;
   frequencySwitching: boolean;
-  lO2Frequency: IFrequencyT;
+  lO2Frequency: Frequency;
   weighting: number;
   useUSB: boolean;
   use12GHzFilter: boolean;
-  imageCenterFrequency: IFrequencyT;
+  imageCenterFrequency: Frequency;
   imageWeighting: number;
   almatype: string;
   baseBandName: string;

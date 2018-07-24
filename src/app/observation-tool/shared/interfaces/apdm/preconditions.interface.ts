@@ -1,12 +1,12 @@
 // Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-import {IUserAngleT} from './test';
 import {IWeatherConstraints} from './weather-constraints.interface';
+import {UserAngle} from '../../../../units/classes/user-angle';
 
 export interface IPreconditions {
   baselineCalValid: boolean;
   polarizationCalValid: boolean;
-  minAllowedHA: IUserAngleT;
-  maxAllowedHA: IUserAngleT;
+  minAllowedHA: UserAngle;
+  maxAllowedHA: UserAngle;
   WeatherConstraints: IWeatherConstraints;
 }

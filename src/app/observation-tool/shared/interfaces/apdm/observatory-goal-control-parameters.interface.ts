@@ -1,12 +1,14 @@
 // Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-import {IAngleT, IFluxT, ITimeT} from '../test';
+import {Angle} from '../../../../units/classes/angle';
+import {Time} from '../../../../units/classes/time';
+import {Flux} from '../../../../units/classes/flux';
 
 export interface IObservatoryGoalControlParameters {
-  elevationLimit: IAngleT;
-  antennaPositionTolerance: IAngleT;
-  sBMaximumTime: ITimeT;
+  elevationLimit: Angle;
+  antennaPositionTolerance: Angle;
+  sBMaximumTime: Time;
   randomizeOrder: boolean;
-  minFlux: IFluxT;
-  maxFlux: IFluxT;
+  minFlux: Flux;
+  maxFlux: Flux;
 }

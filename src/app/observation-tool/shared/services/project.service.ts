@@ -28,11 +28,10 @@ import {tap} from 'rxjs/operators';
 import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import * as _ from 'lodash';
-import {IObsProject} from '../generated/apdm/obsproject.interface';
-import {IObsProposal} from '../generated/apdm/obsproposal.interface';
-import {IAbstractScienceGoalUnion} from '../generated/apdm/abstract-science-goal.interface';
-// import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
-// import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
+import {IObsProposal} from '../interfaces/apdm/obsproposal.interface';
+import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
+import {IObsProject} from '../interfaces/apdm/obsproject.interface';
+import {IAbstractScienceGoalUnion} from '../interfaces/apdm/abstract-science-goal.interface';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -59,7 +58,7 @@ export class ProjectService implements CanActivate {
   private _currentTarget = new BehaviorSubject<number>(0);
   private _loadedProject = new BehaviorSubject<IObsProject>(null);
   private _loadedProposal = new BehaviorSubject<IObsProposal>(null);
-  private _loadedGoal = new BehaviorSubject<IAbstractScienceGoalUnion>(null);
+  private _loadedGoal = new BehaviorSubject<IScienceGoal>(null);
   private _currentGoal = 0;
 
   private _selectedProject: IObsProject;

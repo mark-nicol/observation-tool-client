@@ -1,15 +1,15 @@
 // Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-import {IFrequencyT} from './test';
 import {IBaseBandSpecification} from './baseband-configuration.interface';
+import {Frequency} from '../../../../units/classes/frequency';
 
 export interface IFrequencySetup {
-  restFrequency: IFrequencyT;
+  restFrequency: Frequency;
   transitionName: string;
-  lO1Frequency: IFrequencyT;
+  lO1Frequency: Frequency;
   isUserSpecifiedLO1: boolean;
   hasHardwareSetup: boolean;
-  floog: IFrequencyT;
+  floog: Frequency;
   tuneHigh: boolean;
   BaseBandSpecification: IBaseBandSpecification[];
   receiverBand: string;

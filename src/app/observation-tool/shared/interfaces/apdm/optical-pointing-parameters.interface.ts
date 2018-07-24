@@ -2,12 +2,12 @@
 
 import {IObservingParameters} from './observing-parameters.interface';
 import {IMagnitude} from './magnitude.interface';
-import {IAngleT} from './test';
+import {Angle} from '../../../../units/classes/angle';
 
 export interface IOpticalPointingParameters extends IObservingParameters {
   '@type': 'OpticalPointingParametersT';
-  antennaPositionTolerance: IAngleT;
-  elevationLimit: IAngleT;
+  antennaPositionTolerance: Angle;
+  elevationLimit: Angle;
   maxMagnitude: IMagnitude;
   minMagnitude: IMagnitude;
   randomizeOrder: boolean;

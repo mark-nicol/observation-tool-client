@@ -1,11 +1,5 @@
 // Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-import {IObsUnitT} from './apdm/obs-unit.interface';
-import {ISchedBlockEntityT} from './apdm/entity.interface';
-import {IObsProjectRefT, ISBStatusRefT} from './apdm/entity-ref.interface';
-import {ITimeAllocationBreakdownT} from './apdm/time-allocation-breakdown.interface';
-import {
-  IObservingParametersTUnion} from './test';
 import {IKeywordValue} from './keyword-value.interface';
 import {IOpticalCameraSpec} from './optical-camera-spec.interface';
 import {ISpectralSpec} from './spectral-spec.interface';
@@ -17,12 +11,17 @@ import {ISchedBlockControl} from './sched-block-control.interface';
 import {ISchedulingConstraints} from './scheduling-constraints.interface';
 import {ITarget} from './target.interface';
 import {ITemporalConstraints} from './temporal-constraints.interface';
+import {IObsUnit} from './obs-unit.interface';
+import {ISchedBlockEntity} from './entity.interface';
+import {IObsProjectRef, ISBStatusRef} from './entity-ref.interface';
+import {IObservingParametersUnion} from './observing-parameters.interface';
+import {ITimeAllocationBreakdown} from './time-allocation-breakdown.interface';
 
-export interface ISchedBlock extends IObsUnitT {
+export interface ISchedBlock extends IObsUnit {
   '@type': 'SchedBlock';
-  SchedBlockEntity: ISchedBlockEntityT;
-  SBStatusRef: ISBStatusRefT;
-  obsUnitSetRef: IObsProjectRefT;
+  SchedBlockEntity: ISchedBlockEntity;
+  SBStatusRef: ISBStatusRef;
+  obsUnitSetRef: IObsProjectRef;
   standardMode: boolean;
   modeName: string;
   pIName: string;
@@ -32,14 +31,14 @@ export interface ISchedBlock extends IObsUnitT {
   SpectralSpec: ISpectralSpec[];
   FieldSource: IFieldSource[];
   observingGroup: IObservingGroup[];
-  amplitudeCalParametersOrAtmosphericCalParametersOrBandpassCalParameters: IObservingParametersTUnion[];
+  amplitudeCalParametersOrAtmosphericCalParametersOrBandpassCalParameters: IObservingParametersUnion[];
   obsProcedure: IObsProcedure;
   Preconditions: IPreconditions;
   SchedBlockControl: ISchedBlockControl;
   SchedulingConstraints: ISchedulingConstraints;
   Target: ITarget[];
   TemporalConstraints: ITemporalConstraints[];
-  TimeAllocationBreakdown: ITimeAllocationBreakdownT;
+  TimeAllocationBreakdown: ITimeAllocationBreakdown;
   schemaVersion: string;
   revision: string;
   almatype: string;

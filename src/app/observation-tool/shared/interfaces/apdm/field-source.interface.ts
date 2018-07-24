@@ -2,10 +2,6 @@
 
 import {ISkyCoordinates} from './sky-coordinates.interface';
 import {IVelocity} from './velocity.interface';
-import {IObsAttachmentRefT} from './apdm/entity-ref.interface';
-import {
-  IAngleT,
-  IAngularVelocityT} from './test';
 import {ICrossPattern} from './cross-pattern.interface';
 import {IFillPattern} from './fill-pattern.interface';
 import {IPointingPattern} from './pointing-pattern.interface';
@@ -13,6 +9,9 @@ import {IRectanglePattern} from './rectangle-pattern.interface';
 import {IQuerySource} from './query-source.interface';
 import {IReference} from './reference.interface';
 import {ISourceProperty} from './source-property.interface';
+import {AngularVelocity} from '../../../../units/classes/angular-velocity';
+import {Angle} from '../../../../units/classes/angle';
+import {IObsAttachmentRef} from './entity-ref.interface';
 
 export interface IFieldSource {
   entityPartId: string;
@@ -20,10 +19,10 @@ export interface IFieldSource {
   sourceName: string;
   sourceVelocity: IVelocity;
   sourceEphemeris: string;
-  pMRA: IAngularVelocityT;
-  pMDec: IAngularVelocityT;
+  pMRA: AngularVelocity;
+  pMDec: AngularVelocity;
   nonSiderealMotion: boolean;
-  parallax: IAngleT;
+  parallax: Angle;
   name: string;
   isQuery: boolean;
   ephemerisFileName: string;
@@ -34,7 +33,7 @@ export interface IFieldSource {
   QuerySource: IQuerySource;
   Reference: IReference[];
   SourceProperty: ISourceProperty[];
-  ImageRef: IObsAttachmentRefT;
+  ImageRef: IObsAttachmentRef;
   almatype: string;
   solarSystemObject: string;
 }

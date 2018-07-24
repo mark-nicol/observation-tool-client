@@ -1,17 +1,17 @@
 // Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
 import {ISpectralLine} from './spectral-line.interface';
-import {IFrequencyT} from './test';
+import {Frequency} from '../../../../units/classes/frequency';
 
 export interface IAbstractSpectralWindow {
-  centerFrequency: IFrequencyT;
+  centerFrequency: Frequency;
   spectralAveragingFactor: number;
   name: string;
-  effectiveBandwidth: IFrequencyT;
+  effectiveBandwidth: Frequency;
   effectiveNumberOfChannels: number;
   associatedSpectralWindowNumberInPair: number;
   useThisSpectralWindow: boolean;
-  desiredCenterFrequency: IFrequencyT;
+  desiredCenterFrequency: Frequency;
   SpectralLine: ISpectralLine[];
   sideBand: string;
   windowFunction: string;

@@ -3,17 +3,18 @@
 import {ISkyCoordinates} from './sky-coordinates.interface';
 import {IVelocity} from './velocity.interface';
 import {IExpectedProperties} from './expected-properties.interface';
-import {IObsAttachmentRefT} from './apdm/entity-ref.interface';
-import {IAngleT, IAngularVelocityT} from './test';
 import {ITargetParameters} from './target-parameters.interface';
+import {IObsAttachmentRef} from './entity-ref.interface';
+import {AngularVelocity} from '../../../../units/classes/angular-velocity';
+import {Angle} from '../../../../units/classes/angle';
 
 export interface IAbstractTargetParameters {
   '@type': 'TargetParametersT';
   sourceName: string;
   sourceCoordinates: ISkyCoordinates;
-  pmRA: IAngularVelocityT;
-  pmDec: IAngularVelocityT;
-  parallax: IAngleT;
+  pmRA: AngularVelocity;
+  pmDec: AngularVelocity;
+  parallax: Angle;
   nonSiderealMotion: boolean;
   sourceEphemeris: string;
   sourceVelocity: IVelocity;
@@ -21,7 +22,7 @@ export interface IAbstractTargetParameters {
   index: number;
   sdReferencePosition: ISkyCoordinates[];
   ExpectedProperties: IExpectedProperties;
-  ImageRef: IObsAttachmentRefT;
+  ImageRef: IObsAttachmentRef;
   solarSystemObject: string;
 }
 

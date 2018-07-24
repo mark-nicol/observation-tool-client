@@ -1,14 +1,13 @@
 // Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-import {
-  IObsProjectEntityT} from '../test';
-import {IObsProposalRefT, IObsReviewRef, IProjectStatusRef} from './entity-ref.interface';
+import {IObsProposalRef, IObsReviewRef, IProjectStatusRef} from './entity-ref.interface';
 import {IObsProgram} from './obs-program.interface';
 import {ISubmissionRecord} from './submission-record.interface';
+import {IObsProjectEntity} from './entity.interface';
 
 export interface IObsProject {
-  obsProjectEntity: IObsProjectEntityT;
-  obsProposalRef: IObsProposalRefT;
+  obsProjectEntity: IObsProjectEntity;
+  obsProposalRef: IObsProposalRef;
   obsReviewRef: IObsReviewRef;
   ProjectStatusRef: IProjectStatusRef;
   projectName: string;

@@ -1,34 +1,33 @@
 // Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-import {
-  IAngleT,
-  IFrequencyT,
-  ITimeT,
-  IUserAngleT,
-  IUserFrequencyT,
-  IUserSensitivityT} from './test';
 import {IMonitoringConstraint} from './monitoring-constraint.interface';
 import {ITemporalParameters} from './temporal-parameters.interface';
 import {IVisitConstraint} from './visit-constraint.interface';
+import {Angle} from '../../../../units/classes/angle';
+import {UserAngle} from '../../../../units/classes/user-angle';
+import {UserSensitivity} from '../../../../units/classes/user-sensitivity';
+import {Frequency} from '../../../../units/classes/frequency';
+import {UserFrequency} from '../../../../units/classes/user-frequency';
+import {Time} from '../../../../units/classes/time';
 
 export interface IPerformanceParameters {
-  desiredAngularResolution: IUserAngleT;
-  desiredLargestScale: IAngleT;
-  desiredSensitivity: IUserSensitivityT;
+  desiredAngularResolution: UserAngle;
+  desiredLargestScale: Angle;
+  desiredSensitivity: UserSensitivity;
   desiredDynamicRange: number;
-  representativeFrequency: IFrequencyT;
+  representativeFrequency: Frequency;
   useACA: boolean;
   isTimeConstrained: boolean;
   useTP: boolean;
-  desiredSDSensitivity: IUserSensitivityT;
+  desiredSDSensitivity: UserSensitivity;
   isPointSource: boolean;
-  desiredSensitivityReferenceFrequencyWidth: IUserFrequencyT;
+  desiredSensitivityReferenceFrequencyWidth: UserFrequency;
   needsMoreTime: boolean;
-  desiredACASensitivity: IUserSensitivityT;
-  desiredTPSensitivity: IUserSensitivityT;
+  desiredACASensitivity: UserSensitivity;
+  desiredTPSensitivity: UserSensitivity;
   isScheduleConstrained: boolean;
-  desiredTime: ITimeT;
-  acceptableAngularResolution: IUserAngleT;
+  desiredTime: Time;
+  acceptableAngularResolution: UserAngle;
   isSimultaneous12and7: boolean;
   MonitoringConstraint: IMonitoringConstraint[];
   TemporalParameters: ITemporalParameters[];

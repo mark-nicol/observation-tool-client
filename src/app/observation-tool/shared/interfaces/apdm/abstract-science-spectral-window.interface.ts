@@ -12,4 +12,4 @@ export interface IAbstractScienceSpectralWindow {
   ExpectedSpectralLine: IExpectedSpectralLine[];
 }
 
-export type IAbstractScienceSpectralWindowTUnion = ISpectralScan | IScienceSpectralWindow;
+export type IAbstractScienceSpectralWindowUnion = ISpectralScan | IScienceSpectralWindow;

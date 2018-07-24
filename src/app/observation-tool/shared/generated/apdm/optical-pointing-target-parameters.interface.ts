@@ -1,9 +1,11 @@
-import {IAngleT, IAngularVelocityT} from './test';
-import {ISkyCoordinatesT} from './sky-coordinates.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-export interface IOpticalPointingTargetParametersT {
+import {IAngleT, IAngularVelocityT} from './test';
+import {ISkyCoordinates} from './sky-coordinates.interface';
+
+export interface IOpticalPointingTargetParameters {
   sourceName: string;
-  sourceCoordinates: ISkyCoordinatesT;
+  sourceCoordinates: ISkyCoordinates;
   pmRA: IAngularVelocityT;
   pmDec: IAngularVelocityT;
   parallax: IAngleT;

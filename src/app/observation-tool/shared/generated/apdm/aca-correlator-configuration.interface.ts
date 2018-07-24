@@ -1,8 +1,10 @@
-import {IAbstractCorrelatorConfigurationT} from './abstract-correlator-configuration.interface';
-import {IACABaseBandConfigT} from './aca-baseband-config.interface';
-import {IACAPhaseSwitchingConfigurationT} from './aca-phase-switching-configuration.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-export interface IACACorrelatorConfigurationT extends IAbstractCorrelatorConfigurationT {
-  ACABaseBandConfig: IACABaseBandConfigT[];
-  ACAPhaseSwitchingConfiguration: IACAPhaseSwitchingConfigurationT;
+import {IAbstractCorrelatorConfiguration} from './abstract-correlator-configuration.interface';
+import {IACABaseBandConfig} from './aca-baseband-config.interface';
+import {IACAPhaseSwitchingConfiguration} from './aca-phase-switching-configuration.interface';
+
+export interface IACACorrelatorConfiguration extends IAbstractCorrelatorConfiguration {
+  ACABaseBandConfig: IACABaseBandConfig[];
+  ACAPhaseSwitchingConfiguration: IACAPhaseSwitchingConfiguration;
 }

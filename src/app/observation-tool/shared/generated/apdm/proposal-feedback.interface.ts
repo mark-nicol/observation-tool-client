@@ -1,15 +1,17 @@
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
+
 import {
   ITimeT
 } from '../test';
-import {IArrayTimeBreakdownT} from './array-time-breakdown.interface';
-import {IDataRateBreakdownT} from './data-rate-breakdown.interface';
-import {IReceiverTimeBreakdownT} from './receiver-time-breakdown.interface';
-import {ITimeAllocationBreakdownT} from './time-allocation-breakdown.interface';
+import {IArrayTimeBreakdown} from './array-time-breakdown.interface';
+import {IDataRateBreakdown} from './data-rate-breakdown.interface';
+import {IReceiverTimeBreakdown} from './receiver-time-breakdown.interface';
+import {ITimeAllocationBreakdown} from './time-allocation-breakdown.interface';
 
-export interface IProposalFeedbackT {
+export interface IProposalFeedback {
   estimatedTotalIntegrationTime: ITimeT;
-  ArrayTimeBreakdown: IArrayTimeBreakdownT;
-  DataRateBreakdown: IDataRateBreakdownT;
-  ReceiverTimeBreakdown: IReceiverTimeBreakdownT;
-  TimeAllocationBreakdown: ITimeAllocationBreakdownT;
+  ArrayTimeBreakdown: IArrayTimeBreakdown;
+  DataRateBreakdown: IDataRateBreakdown;
+  ReceiverTimeBreakdown: IReceiverTimeBreakdown;
+  TimeAllocationBreakdown: ITimeAllocationBreakdown;
 }

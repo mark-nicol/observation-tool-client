@@ -1,7 +1,9 @@
-import {IAbstractScienceSpectralWindowT} from './abstract-science-spectral-window.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
+
+import {IAbstractScienceSpectralWindow} from './abstract-science-spectral-window.interface';
 import {IFrequencyT, IUserFrequencyT} from './test';
 
-export interface ISpectralScanT extends IAbstractScienceSpectralWindowT {
+export interface ISpectralScan extends IAbstractScienceSpectralWindow {
   '@type': 'SpectralScanT';
   startFrequency: IFrequencyT;
   endFrequency: IFrequencyT;

@@ -1,13 +1,15 @@
-import {IUnitDependenciesT} from './unit-dependencies.interface';
-import {IObsProjectRefT} from './entity-ref.interface';
-import {IObsUnitControlT} from './obs-unit-control.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-export interface IObsUnitT {
+import {IUnitDependencies} from './unit-dependencies.interface';
+import {IObsProjectRef} from './entity-ref.interface';
+import {IObsUnitControl} from './obs-unit-control.interface';
+
+export interface IObsUnit {
   '@type': 'ObsUnitSetT' | 'SchedBlock';
   name: string;
   note: string;
-  obsUnitControl: IObsUnitControlT;
-  UnitDependencies: IUnitDependenciesT;
-  obsProjectRef: IObsProjectRefT;
+  obsUnitControl: IObsUnitControl;
+  UnitDependencies: IUnitDependencies;
+  obsProjectRef: IObsProjectRef;
   status: string;
 }

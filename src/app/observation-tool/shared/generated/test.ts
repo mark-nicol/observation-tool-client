@@ -2,10 +2,10 @@
 // Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
 import {IObsProposal} from './apdm/obsproposal.interface';
-import {IObsProgramT} from './apdm/obs-program.interface';
-import {IObsUnitSetT} from './apdm/obs-unit-set.interface';
-import {IObservatoryGoalT} from './apdm/observatory-goal.interface';
-import {IOpticalPointingScienceGoalT} from './apdm/optical-pointing-science-goal.interface';
+import {IObsProgram} from './apdm/obs-program.interface';
+import {IObsUnitSet} from './apdm/obs-unit-set.interface';
+import {IObservatoryGoal} from './apdm/observatory-goal.interface';
+import {IOpticalPointingScienceGoal} from './apdm/optical-pointing-science-goal.interface';
 import {IScienceGoal} from './apdm/science-goal.interface';
 import {IObsReview} from './apdm/obs-review.interface';
 import {ITargetParametersT} from './target-parameters.interface';
@@ -18,15 +18,15 @@ import {IEllipseT} from './ellipse.interface';
 import {IRectangleT} from './rectangle.interface';
 import {ISinglePointT} from './single-point.interface';
 import {ICrossPatternT} from './cross-pattern.interface';
-import {IHolographyParametersT} from './apdm/holography-parameters.interface';
-import {IScienceParametersT} from './apdm/science-parameters.interface';
-import {IOpticalPointingParametersT} from './apdm/optical-pointing-parameters.interface';
-import {IRadiometricPointingParametersT} from './apdm/radiometric-pointing-parameters.interface';
-import {IReservationParametersT} from './apdm/reservation-parameters.interface';
-import {ICalibratorParametersT} from './apdm/calibration-parameters.interface';
-import {IPointingPatternT} from './apdm/pointing-pattern.interface';
-import {IRectanglePatternT} from './apdm/rectangle-pattern.interface';
-import {IFillPatternT} from './apdm/fill-pattern.interface';
+import {IHolographyParameters} from './apdm/holography-parameters.interface';
+import {IScienceParameters} from './apdm/science-parameters.interface';
+import {IOpticalPointingParameters} from './apdm/optical-pointing-parameters.interface';
+import {IRadiometricPointingParameters} from './apdm/radiometric-pointing-parameters.interface';
+import {IReservationParameters} from './apdm/reservation-parameters.interface';
+import {ICalibratorParameters} from './apdm/calibration-parameters.interface';
+import {IPointingPattern} from './apdm/pointing-pattern.interface';
+import {IRectanglePattern} from './apdm/rectangle-pattern.interface';
+import {IFillPattern} from './apdm/fill-pattern.interface';
 
 export interface ITimeT extends IDoubleWithUnitT {
 }
@@ -87,11 +87,11 @@ export interface IIntTimeSourceT extends IDoubleWithUnitT {
 export interface ILengthT extends IDoubleWithUnitT {
 }
 
-export type IAbstractScienceGoalTUnion = IObservatoryGoalT | IOpticalPointingScienceGoalT | IScienceGoal;
+export type IAbstractScienceGoalTUnion = IObservatoryGoal | IOpticalPointingScienceGoal | IScienceGoal;
 
-export type IObsPhaseTUnion = IObsProgramT | IObsReview | IObsProposal;
+export type IObsPhaseTUnion = IObsProgram | IObsReview | IObsProposal;
 
-export type IObsUnitTUnion = IObsUnitSetT | ISchedBlock;
+export type IObsUnitTUnion = IObsUnitSet | ISchedBlock;
 
 export type IAbstractScienceSpectralWindowTUnion = ISpectralScanT | IScienceSpectralWindowT;
 
@@ -99,6 +99,6 @@ export type IFieldTUnion = ICircleT | IPolygonT | IEllipseT | IRectangleT | ISin
 
 export type IAbstractTargetParametersTUnion = ITargetParametersT;
 
-export type IObservingParametersTUnion = IHolographyParametersT | IScienceParametersT | IOpticalPointingParametersT | IRadiometricPointingParametersT | IReservationParametersT | ICalibratorParametersT;
+export type IObservingParametersTUnion = IHolographyParameters | IScienceParameters | IOpticalPointingParameters | IRadiometricPointingParameters | IReservationParameters | ICalibratorParameters;
 
-export type IFieldPatternTUnion = IPointingPatternT | IRectanglePatternT | IFillPatternT | ICrossPatternT;
+export type IFieldPatternTUnion = IPointingPattern | IRectanglePattern | IFillPattern | ICrossPatternT;

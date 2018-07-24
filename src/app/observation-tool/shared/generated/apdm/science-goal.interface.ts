@@ -1,14 +1,16 @@
-import {IAbstractScienceGoalT} from './abstract-science-goal.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
+
+import {IAbstractScienceGoal} from './abstract-science-goal.interface';
 import {
   ITimeT
 } from '../test';
-import {ICalibrationSetupParametersT} from './calibration-setup-parameters.interface';
-import {ISpectralSetupParametersT} from './spectral-setup-parameters.interface';
+import {ICalibrationSetupParameters} from './calibration-setup-parameters.interface';
+import {ISpectralSetupParameters} from './spectral-setup-parameters.interface';
 import {IPerformanceParametersT} from '../performance-parameters.interface';
 import {ITargetParametersT} from '../target-parameters.interface';
 import {ITechnicalJustificationT} from '../technical-justification.interface';
 
-export interface IScienceGoal extends IAbstractScienceGoalT {
+export interface IScienceGoal extends IAbstractScienceGoal {
   '@type': 'ScienceGoalT';
   estimatedTotalTime: ITimeT;
   userPriority: number;
@@ -21,9 +23,9 @@ export interface IScienceGoal extends IAbstractScienceGoalT {
   isResubmission: boolean;
   resubmissionOfOusStatusUid: string;
   resubmissionOfName: string;
-  CalibrationSetupParameters: ICalibrationSetupParametersT;
+  CalibrationSetupParameters: ICalibrationSetupParameters;
   PerformanceParameters: IPerformanceParametersT;
-  SpectralSetupParameters: ISpectralSetupParametersT;
+  SpectralSetupParameters: ISpectralSetupParameters;
   TargetParameters: ITargetParametersT[];
   TechnicalJustification: ITechnicalJustificationT[];
   mode: string;

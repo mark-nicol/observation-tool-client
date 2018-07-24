@@ -1,7 +1,9 @@
-import {IFrequencyT} from './test';
-import {IBaseBandSpecificationT} from './baseband-configuration.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-export interface IFrequencySetupT {
+import {IFrequencyT} from './test';
+import {IBaseBandSpecification} from './baseband-configuration.interface';
+
+export interface IFrequencySetup {
   restFrequency: IFrequencyT;
   transitionName: string;
   lO1Frequency: IFrequencyT;
@@ -9,7 +11,7 @@ export interface IFrequencySetupT {
   hasHardwareSetup: boolean;
   floog: IFrequencyT;
   tuneHigh: boolean;
-  BaseBandSpecification: IBaseBandSpecificationT[];
+  BaseBandSpecification: IBaseBandSpecification[];
   receiverBand: string;
   dopplerReference: string;
 }

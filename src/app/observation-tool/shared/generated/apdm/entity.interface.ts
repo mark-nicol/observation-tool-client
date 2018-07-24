@@ -1,4 +1,6 @@
-export interface IEntityT {
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
+
+export interface IEntity {
   entityId: string;
   entityIdEncrypted: string;
   entityTypeName: string;
@@ -8,14 +10,14 @@ export interface IEntityT {
   datamodelVersion: string;
 }
 
-export interface IObsReviewEntityT extends IEntityT {
+export interface IObsReviewEntity extends IEntity {
 }
 
-export interface ISchedBlockEntityT extends IEntityT {
+export interface ISchedBlockEntity extends IEntity {
 }
 
-export interface IObsProjectEntityT extends IEntityT {
+export interface IObsProjectEntity extends IEntity {
 }
 
-export interface IObsProposalEntityT extends IEntityT {
+export interface IObsProposalEntity extends IEntity {
 }

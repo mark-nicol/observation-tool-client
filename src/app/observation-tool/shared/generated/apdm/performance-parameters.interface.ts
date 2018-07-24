@@ -1,3 +1,5 @@
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
+
 import {
   IAngleT,
   IFrequencyT,
@@ -5,11 +7,11 @@ import {
   IUserAngleT,
   IUserFrequencyT,
   IUserSensitivityT} from './test';
-import {IMonitoringConstraintT} from './monitoring-constraint.interface';
-import {ITemporalParametersT} from './temporal-parameters.interface';
-import {IVisitConstraintT} from './visit-constraint.interface';
+import {IMonitoringConstraint} from './monitoring-constraint.interface';
+import {ITemporalParameters} from './temporal-parameters.interface';
+import {IVisitConstraint} from './visit-constraint.interface';
 
-export interface IPerformanceParametersT {
+export interface IPerformanceParameters {
   desiredAngularResolution: IUserAngleT;
   desiredLargestScale: IAngleT;
   desiredSensitivity: IUserSensitivityT;
@@ -28,9 +30,9 @@ export interface IPerformanceParametersT {
   desiredTime: ITimeT;
   acceptableAngularResolution: IUserAngleT;
   isSimultaneous12and7: boolean;
-  MonitoringConstraint: IMonitoringConstraintT[];
-  TemporalParameters: ITemporalParametersT[];
-  VisitConstraint: IVisitConstraintT[];
+  MonitoringConstraint: IMonitoringConstraint[];
+  TemporalParameters: ITemporalParameters[];
+  VisitConstraint: IVisitConstraint[];
   desiredSensitivityFrequencyMeasure: string;
   timingConstraintsType: string;
   resolutionOption: string;

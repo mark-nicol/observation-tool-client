@@ -1,14 +1,16 @@
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
+
 import {
   IObsProjectEntityT} from '../test';
-import {IObsProposalRefT, IObsReviewRefT, IProjectStatusRefT} from './entity-ref.interface';
-import {IObsProgramT} from './obs-program.interface';
-import {ISubmissionRecordT} from './submission-record.interface';
+import {IObsProposalRefT, IObsReviewRef, IProjectStatusRef} from './entity-ref.interface';
+import {IObsProgram} from './obs-program.interface';
+import {ISubmissionRecord} from './submission-record.interface';
 
 export interface IObsProject {
   obsProjectEntity: IObsProjectEntityT;
   obsProposalRef: IObsProposalRefT;
-  obsReviewRef: IObsReviewRefT;
-  ProjectStatusRef: IProjectStatusRefT;
+  obsReviewRef: IObsReviewRef;
+  ProjectStatusRef: IProjectStatusRef;
   projectName: string;
   pI: string;
   version: string;
@@ -29,8 +31,8 @@ export interface IObsProject {
   isDDT: boolean;
   p2gAttention: boolean;
   p2gAttentionReasons: string;
-  obsProgram: IObsProgramT;
-  SubmissionRecord: ISubmissionRecordT[];
+  obsProgram: IObsProgram;
+  SubmissionRecord: ISubmissionRecord[];
   schemaVersion: string;
   revision: string;
   almatype: string;

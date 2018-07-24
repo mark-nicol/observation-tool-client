@@ -1,10 +1,12 @@
-import {ISkyCoordinatesT} from './sky-coordinates.interface';
-import {IAngleT, IAngularVelocityT} from './test';
-import {IFieldPatternT} from './field-pattern.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-export interface ICrossPatternT extends IFieldPatternT {
+import {ISkyCoordinates} from './sky-coordinates.interface';
+import {IAngleT, IAngularVelocityT} from './test';
+import {IFieldPattern} from './field-pattern.interface';
+
+export interface ICrossPattern extends IFieldPattern {
   '@type': 'CrossPatternT';
-  patternCenterCoordinates: ISkyCoordinatesT;
+  patternCenterCoordinates: ISkyCoordinates;
   longitudeLength: IAngleT;
   latitudeLength: IAngleT;
   scanVelocity: IAngularVelocityT;

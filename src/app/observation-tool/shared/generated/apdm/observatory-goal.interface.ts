@@ -1,19 +1,21 @@
-import {IAbstractScienceGoalT} from './abstract-science-goal.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
+
+import {IAbstractScienceGoal} from './abstract-science-goal.interface';
 import {
   ITimeT
 } from '../test';
-import {ICalibrationSetupParametersT} from './calibration-setup-parameters.interface';
-import {IObservatoryGoalControlParametersT} from './observatory-goal-control-parameters.interface';
-import {IObservatoryGoalTargetParametersT} from './observatory-goal-target-parameters.interface';
-import {ISpectralSetupParametersT} from './spectral-setup-parameters.interface';
+import {ICalibrationSetupParameters} from './calibration-setup-parameters.interface';
+import {IObservatoryGoalControlParameters} from './observatory-goal-control-parameters.interface';
+import {IObservatoryGoalTargetParameters} from './observatory-goal-target-parameters.interface';
+import {ISpectralSetupParameters} from './spectral-setup-parameters.interface';
 
-export interface IObservatoryGoalT extends IAbstractScienceGoalT {
+export interface IObservatoryGoal extends IAbstractScienceGoal {
   '@type': 'ObservatoryGoalT';
   purpose: string;
   integrationTime: ITimeT;
   useQuery: boolean;
-  CalibrationSetupParameters: ICalibrationSetupParametersT;
-  observatoryGoalControlParameters: IObservatoryGoalControlParametersT;
-  observatoryGoalTargetParameters: IObservatoryGoalTargetParametersT[];
-  SpectralSetupParameters: ISpectralSetupParametersT;
+  CalibrationSetupParameters: ICalibrationSetupParameters;
+  observatoryGoalControlParameters: IObservatoryGoalControlParameters;
+  observatoryGoalTargetParameters: IObservatoryGoalTargetParameters[];
+  SpectralSetupParameters: ISpectralSetupParameters;
 }

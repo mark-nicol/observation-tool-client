@@ -111,10 +111,7 @@ export class ProjectService implements CanActivate {
   }
 
   selectProject() {
-    console.log(project);
     this._loadedProject.next(this._selectedProject);
-    console.log(this.loadedProject.getValue());
-    console.log(this._loadedProject.value);
     this.loadProposal();
   }
 

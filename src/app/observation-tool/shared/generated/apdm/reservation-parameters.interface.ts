@@ -1,6 +1,8 @@
-import {IObservingParametersT} from './observing-parameters.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-export interface IReservationParametersT extends IObservingParametersT {
+import {IObservingParameters} from './observing-parameters.interface';
+
+export interface IReservationParameters extends IObservingParameters {
   '@type': 'ReservationParametersT';
   calendarId: string;
   reqId: string;

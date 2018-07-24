@@ -1,16 +1,18 @@
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
+
 import {
-  IProposalFeedbackT
+  IProposalFeedback
 } from './proposal-feedback.interface';
-import {IObsAttachmentRefT, IObsProjectRefT} from './entity-ref.interface';
+import {IObsAttachmentRef, IObsProjectRef} from './entity-ref.interface';
 import {IObsPhase} from './obs-phase.interface';
-import {IObsProposalEntityT} from './entity.interface';
-import {IInvestigatorT} from './investigator.interface';
+import {IObsProposalEntity} from './entity.interface';
+import {IInvestigator} from './investigator.interface';
 
 export interface IObsProposal extends IObsPhase {
   '@type': 'ObsProposal';
-  obsProposalEntity: IObsProposalEntityT;
-  DocumentsRef: IObsAttachmentRefT;
-  obsProjectRef: IObsProjectRefT;
+  obsProposalEntity: IObsProposalEntity;
+  DocumentsRef: IObsAttachmentRef;
+  obsProjectRef: IObsProjectRef;
   title: string;
   code: string;
   abstract: string;
@@ -30,10 +32,10 @@ export interface IObsProposal extends IObsPhase {
   resubmittedProjectCode: string;
   isResubmission: boolean;
   duplicateObservationsJustification: string;
-  PrincipalInvestigator: IInvestigatorT;
-  CoInvestigator: IInvestigatorT[];
-  CoPrincipalInvestigator: IInvestigatorT[];
-  ProposalFeedback: IProposalFeedbackT;
+  PrincipalInvestigator: IInvestigator;
+  CoInvestigator: IInvestigator[];
+  CoPrincipalInvestigator: IInvestigator[];
+  ProposalFeedback: IProposalFeedback;
   schemaVersion: string;
   revision: string;
   almatype: string;

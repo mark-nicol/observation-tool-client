@@ -1,30 +1,32 @@
-export interface IObsProposalRefT extends IEntityRefT {
-}
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-export interface IObsReviewRefT extends IEntityRefT {
-}
-
-export interface IProjectStatusRefT extends IEntityRefT {
-}
-
-export interface IObsAttachmentRefT extends IEntityRefT {
-}
-
-export interface IObsProjectRefT extends IEntityRefT {
-}
-
-export interface IEntityRefT {
+export interface IEntityRef {
   entityId: string;
   partId: string;
   entityTypeName: string;
   documentVersion: string;
 }
 
-export interface ISchedBlockRefT extends IEntityRefT {
+export interface IObsProposalRef extends IEntityRef {
 }
 
-export interface IOUSStatusRefT extends IEntityRefT {
+export interface IObsReviewRef extends IEntityRef {
 }
 
-export interface ISBStatusRefT extends IEntityRefT {
+export interface IProjectStatusRef extends IEntityRef {
+}
+
+export interface IObsAttachmentRef extends IEntityRef {
+}
+
+export interface IObsProjectRef extends IEntityRef {
+}
+
+export interface ISchedBlockRef extends IEntityRef {
+}
+
+export interface IOUSStatusRef extends IEntityRef {
+}
+
+export interface ISBStatusRef extends IEntityRef {
 }

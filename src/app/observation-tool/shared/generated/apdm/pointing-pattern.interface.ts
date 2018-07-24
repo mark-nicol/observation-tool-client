@@ -1,8 +1,10 @@
-import {ISkyCoordinatesT} from './sky-coordinates.interface';
-import {IFieldPatternT} from './field-pattern.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-export interface IPointingPatternT extends IFieldPatternT {
+import {ISkyCoordinates} from './sky-coordinates.interface';
+import {IFieldPattern} from './field-pattern.interface';
+
+export interface IPointingPattern extends IFieldPattern {
   '@type': 'PointingPatternT';
-  phaseCenterCoordinates: ISkyCoordinatesT[];
+  phaseCenterCoordinates: ISkyCoordinates[];
   isMosaic: boolean;
 }

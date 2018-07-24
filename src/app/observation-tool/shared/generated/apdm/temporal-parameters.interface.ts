@@ -1,4 +1,6 @@
-import {IAbstractTimingConstraintsT} from './abstract-timing-constraints.interface';
+// Generated using typescript-generator version 2.5.423 on 2018-07-19 14:12:38.
 
-export interface ITemporalParametersT extends IAbstractTimingConstraintsT {
+import {IAbstractTimingConstraints} from './abstract-timing-constraints.interface';
+
+export interface ITemporalParameters extends IAbstractTimingConstraints {
 }

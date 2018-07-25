@@ -19,24 +19,22 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-import {IEntityRef} from './entity-ref.interface';
-import {IDataProcessingParameters} from './data-processing-parameters.interface';
-import {IFlowControl} from './flow-control.interface';
-import {IObsUnitControl} from './obs-unit-control.interface';
-import {IUnitDependencies} from './unit-dependencies.interface';
+import {ReflectiveInjector} from '@angular/core';
+import {ValueUnitPair} from './value-unit-pair';
+import {IntTimeSourceUnits} from '../enums/int-time-source.enum';
+import {IntTimeSourceConversionService} from '../services/int-time-source-conversion.service';
 
-export interface IObsPlan {
-  scienceProcessingScript: string;
-  runSciencePipeline: boolean;
-  dataProcessingParameters: IDataProcessingParameters;
-  flowControl: IFlowControl;
-  ousStatusRef?: IEntityRef | null;
-  entityPartId: string;
-  almatype: string;
-  name: string;
-  note: string;
-  obsUnitControl: IObsUnitControl;
-  unitDependencies: IUnitDependencies;
-  obsProjectRef?: IEntityRef | null;
-  status: string;
+export class IntTimeSource extends ValueUnitPair {
+
+  /**
+   * Calls super constructor, injects correct conversion service
+   * @param unit  The units which the content is stored in
+   * @param value The content of the pair
+   */
+  constructor(unit = IntTimeSourceUnits.S, value = 0.0) {
+    super(unit, value, IntTimeSourceUnits.S);
+    const injector               = ReflectiveInjector.resolveAndCreate([IntTimeSourceConversionService]);
+    this._valueConversionService = injector.get(IntTimeSourceConversionService);
+  }
+
 }

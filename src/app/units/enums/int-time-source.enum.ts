@@ -19,9 +19,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-import {Time} from '../../../../units/classes/time';
-
-export interface IReceiverTime {
-  time: Time;
-  receiverBand: string;
+export enum IntTimeSourceUnits {
+  NS = 'ns',
+  US = 'us',
+  MS = 'ms',
+  S  = 's',
+  MIN = 'min',
+  H = 'h',
+  D = 'd',
 }

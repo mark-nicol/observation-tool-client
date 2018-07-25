@@ -19,20 +19,29 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-import {Frequency} from '../../../../units/classes/frequency';
-import {UserFrequency} from '../../../../units/classes/user-frequency';
-import {IAdvancedWindowSetup} from './advanced-window-setup.interface';
+import {Injectable} from '@angular/core';
+import {ValueConversionService} from './value-conversion.service';
+import {INT_TIME_SOURCE_DATA} from '../data/int-time-source.data';
 
-export interface ISpectralWindow {
-  transitionName: string;
-  centerFrequency: Frequency;
-  bandWidth: UserFrequency;
-  spectralResolution: UserFrequency;
-  groupIndex: number;
-  isSkyFrequency: boolean;
-  splatalogId?: number | null;
-  representativeWindow: boolean;
-  groupResourceUse: string;
-  index: number;
-  advancedWindowSetup: IAdvancedWindowSetup;
+/**
+ * Service to supply unit data of this type
+ */
+
+@Injectable()
+export class IntTimeSourceConversionService extends ValueConversionService {
+
+  /**
+   * Constructor, calls super and loads data for this service type
+   */
+  constructor() {
+    super();
+    this.loadData();
+  }
+
+  /**
+   * Loads the data specific to this type from a constant
+   */
+  loadData(): void {
+    this._data = INT_TIME_SOURCE_DATA;
+  }
 }

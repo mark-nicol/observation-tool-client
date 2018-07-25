@@ -19,13 +19,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-export interface IDate {
-  year: number;
-  month: number;
-  day: number;
-  timezone: number;
-  hour: number;
-  minute: number;
-  second: number;
-  fractionalSecond: number;
-}
+export const INT_TIME_SOURCE_DATA: { [id: string]: number } = {
+  'ns': 1.000e-9,
+  'us': 1.000e-6,
+  'ms': 1.000e-3,
+  's': 1.000,
+  'min': 60.000,
+  'h': 3600.000,
+  'd': (3600.000 * 24.0),
+};

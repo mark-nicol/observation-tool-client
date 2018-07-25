@@ -32,17 +32,17 @@ import {IObsProject} from '../../interfaces/apdm/obs-project.interface';
 export class ProjectImportComponent implements OnInit {
 
   projects: Observable<any[]>;
-  private _selectedProject: IObsProject;
+  _selectedProject: IObsProject;
 
-  constructor(private persistenceService: ProjectService) { }
+  constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projects = this.persistenceService.getAllProjects();
+    this.projects = this.projectService.getAllProjects();
   }
 
   rowClicked(event: IObsProject) {
     this._selectedProject = event;
-    this.persistenceService.selectedProject = event;
+    this.projectService.selectedProject = event;
   }
 
 }

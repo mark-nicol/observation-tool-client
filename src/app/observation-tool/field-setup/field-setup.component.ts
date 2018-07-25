@@ -133,8 +133,8 @@ export class FieldSetupComponent implements OnInit {
 
   initForm(index: number) {
     this.persistenceService.loadedGoal.subscribe((result: IScienceGoal) => {
-      if (result.targetParameters[index]) {
-        const targetParams = result.targetParameters[index];
+      if (result.TargetParameters[index]) {
+        const targetParams = result.TargetParameters[index];
         this.form.patchValue(targetParams);
         this.setFields(targetParams.fields);
       }
@@ -161,8 +161,8 @@ export class FieldSetupComponent implements OnInit {
           fieldName: point.centre.fieldName
         }),
         palong: this.formBuilder.group({
-          unit: point.palong.unit,
-          content: point.palong.content
+          unit: point.pALong.unit,
+          content: point.pALong.content
         }),
         long: this.formBuilder.group({
           unit: point.long.unit,

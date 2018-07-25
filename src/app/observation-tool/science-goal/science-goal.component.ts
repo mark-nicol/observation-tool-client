@@ -100,7 +100,7 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   get targets(): ITargetParameters[] {
-    return this.projectService.loadedGoal.value.targetParameters;
+    return this.projectService.loadedGoal.value.TargetParameters;
   }
 
 }

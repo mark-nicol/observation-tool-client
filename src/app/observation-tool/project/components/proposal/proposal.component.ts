@@ -186,7 +186,7 @@ export class ProposalComponent implements OnInit {
   }
 
   get pi(): IInvestigator {
-    return this.projectService.loadedProposal.getValue().principalInvestigator;
+    return this.projectService.loadedProposal.getValue().PrincipalInvestigator;
   }
 
   observeFormChanges() {

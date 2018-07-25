@@ -28,10 +28,9 @@ import {tap} from 'rxjs/operators';
 import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import * as _ from 'lodash';
-import {IObsProposal} from '../interfaces/apdm/obsproposal.interface';
+import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
 import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
-import {IObsProject} from '../interfaces/apdm/obsproject.interface';
-import {IAbstractScienceGoalUnion} from '../interfaces/apdm/abstract-science-goal.interface';
+import {IObsProject} from '../interfaces/apdm/obs-project.interface';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -105,7 +104,7 @@ export class ProjectService implements CanActivate {
     return this._loadedProposal;
   }
 
-  get loadedGoal(): BehaviorSubject<IAbstractScienceGoalUnion> {
+  get loadedGoal(): BehaviorSubject<IScienceGoal> {
     return this._loadedGoal;
   }
 
@@ -115,7 +114,7 @@ export class ProjectService implements CanActivate {
   }
 
   loadScienceGoal(index) {
-    this.loadedGoal.next(this._loadedProposal.value.scienceGoals[index]);
+    this.loadedGoal.next(<IScienceGoal>this._loadedProposal.value.scienceGoals[index]);
   }
 
   loadProposal() {

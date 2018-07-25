@@ -1,3 +1,24 @@
+/*
+ * ALMA - Atacama Large Millimeter Array
+ * Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+ * (in the framework of the ALMA collaboration).
+ * All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ */
+
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
@@ -5,8 +26,8 @@ import {NavItemInterface} from '../shared/interfaces/navbar-item.interface';
 import {ProjectService} from '../shared/services/project.service';
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectImportModal} from '../shared/components/project-import-modal/project-import-modal.component';
-import {ObsProject} from '../shared/classes/obsproject';
-import {ScienceGoal} from '../shared/classes/science-goal/science-goal';
+import {IScienceGoal} from '../shared/interfaces/apdm/science-goal.interface';
+import {IObsProject} from '../shared/interfaces/apdm/obs-project.interface';
 
 /**
  * The navbar component at the top of the application
@@ -56,7 +77,7 @@ export class NavbarComponent implements OnInit {
   scienceGoalMenuOpen = true;
 
   constructor(protected router: Router,
-              protected persistenceService: ProjectService,
+              public persistenceService: ProjectService,
               private suiModalService: SuiModalService,
               private location: Location) {
 
@@ -77,9 +98,9 @@ export class NavbarComponent implements OnInit {
     this.selectedGoal = newGoal;
   }
 
-  get scienceGoals(): ScienceGoal[] {
+  get scienceGoals(): IScienceGoal[] {
     if (this.persistenceService.hasScienceGoals()) {
-      return this.persistenceService.loadedProposal.value.prj_ScienceGoal;
+      return <IScienceGoal[]>this.persistenceService.loadedProposal.value.scienceGoals;
     }
   }
 
@@ -103,8 +124,8 @@ export class NavbarComponent implements OnInit {
   makeProjectImportModal() {
     this.suiModalService
       .open(new ProjectImportModal())
-      .onApprove((result: ObsProject) => {
-        this.persistenceService.selectProject(result);
+      .onApprove(result => {
+        this.persistenceService.selectProject();
         this.router.navigate(['/project']).then();
       })
       .onDeny(result => {

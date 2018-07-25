@@ -1,8 +1,28 @@
+/*
+ * ALMA - Atacama Large Millimeter Array
+ * Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+ * (in the framework of the ALMA collaboration).
+ * All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ */
+
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ITargetParameters} from '../shared/interfaces/project/science-goal/target-parameters.interface';
 import {ProjectService} from '../shared/services/project.service';
-import {TargetParameters} from '../shared/classes/science-goal/target-parameters';
+import {ITargetParameters} from '../shared/interfaces/apdm/target-parameters.interface';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -54,13 +74,13 @@ export class ScienceGoalComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(protected router: Router, private projectService: ProjectService) {
+  constructor(public router: Router, private projectService: ProjectService) {
   }
 
   ngOnInit() {
     this.projectService.loadScienceGoal(this.projectService.currentGoal);
     this.projectService.loadedGoal.subscribe(result => {
-      this.goalName = result.prj_name;
+      this.goalName = result.name;
     });
     this.projectService.currentTarget.subscribe(result => {
       this.currentTarget = result;
@@ -80,7 +100,7 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   get targets(): ITargetParameters[] {
-    return this.projectService.loadedGoal.value.prj_TargetParameters;
+    return this.projectService.loadedGoal.value.targetParameters;
   }
 
 }

@@ -1,17 +1,42 @@
+/*
+ * ALMA - Atacama Large Millimeter Array
+ * Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+ * (in the framework of the ALMA collaboration).
+ * All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ */
+
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {Observable} from 'rxjs/Rx';
-import {SinglePoint} from '../shared/classes/science-goal/single-point';
 import {ProjectService} from '../shared/services/project.service';
-import {SourceComponent} from './components/source/source.component';
-import {Speed} from '../../units/classes/speed';
+import {IScienceGoal} from '../shared/interfaces/apdm/science-goal.interface';
+import {IField} from '../shared/interfaces/apdm/field.interface';
+import {IRectangle} from '../shared/interfaces/apdm/rectangle.interface';
+import {ISinglePoint} from '../shared/interfaces/apdm/single-point.interface';
 
 /**
  * Handles the field setup page of a science goal
  */
 
+/* TODO Fix form to match model
+ * Is there a way to make forms from interfaces
+*/
 @Component({
   selector: 'field-setup',
   templateUrl: './field-setup.component.html',
@@ -21,62 +46,46 @@ import {Speed} from '../../units/classes/speed';
 export class FieldSetupComponent implements OnInit {
 
   form = this.formBuilder.group({
-    prj_ExpectedProperties: this.formBuilder.group({
-      prj_expectedPeakFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
-      prj_desiredCircularPolarizationPercentage: 0.0,
-      prj_expectedPeakLineFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
-      prj_expectedLineWidth: this.formBuilder.group({userUnit: '', content: 0.0}),
-      prj_desiredLinePolarizationPercentage: 0.0
-    }),
-    prj_SinglePoint: this.formBuilder.array([]),
-    prj_Rectangle: this.formBuilder.group({
-      prj_centre: this.formBuilder.group({
-        system: '',
-        type: '',
-        val_fieldName: '',
-        val_latitude: this.formBuilder.group({unit: '', content: 0.0}),
-        val_longitude: this.formBuilder.group({unit: '', content: 0.0})
-      }),
-      prj_long: this.formBuilder.group({unit: '', content: 0.0}),
-      prj_name: '',
-      prj_pALong: this.formBuilder.group({unit: '', content: 0.0}),
-      prj_referenceFrequency: this.formBuilder.group({unit: '', content: 0.0}),
-      prj_short: this.formBuilder.group({unit: '', content: 0.0}),
-      prj_spacing: this.formBuilder.group({userUnit: '', unit: '', content: 0.0})
+    expectedProperties: this.formBuilder.group({
+      expectedPeakFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
+      desiredCircularPolarizationPercentage: 0.0,
+      expectedPeakLineFluxDensity: this.formBuilder.group({unit: '', content: 0.0}),
+      expectedLineWidth: this.formBuilder.group({userUnit: '', content: 0.0}),
+      desiredLinePolarizationPercentage: 0.0
     }),
     index: -1,
-    prj_isMosaic: true,
-    prj_nonSiderealMotion: false,
-    prj_parallax: this.formBuilder.group({
+    isMosaic: true,
+    nonSiderealMotion: false,
+    parallax: this.formBuilder.group({
       unit: '',
       content: 0.0
     }),
-    prj_pmDec: this.formBuilder.group({
+    pmDec: this.formBuilder.group({
       unit: '',
       content: 0.0
     }),
-    prj_pmRA: this.formBuilder.group({
+    pmRA: this.formBuilder.group({
       unit: '',
       content: 0.0
     }),
     solarSystemObject: 'Unspecified',
-    prj_sourceCoordinates: this.formBuilder.group({
-      val_fieldName: 'None',
-      val_latitude: this.formBuilder.group({
+    sourceCoordinates: this.formBuilder.group({
+      fieldName: 'None',
+      latitude: this.formBuilder.group({
         unit: '',
         content: 0.0
       }),
-      val_longitude: this.formBuilder.group({
+      longitude: this.formBuilder.group({
         unit: '',
         content: 0.0
       }),
       system: 'ICRS',
       type: 'ABSOLUTE',
     }),
-    prj_sourceEphemeris: '',
-    prj_sourceName: ['', Validators.required],
-    prj_sourceVelocity: this.formBuilder.group({
-      val_centerVelocity: this.formBuilder.group({
+    sourceEphemeris: '',
+    sourceName: ['', Validators.required],
+    sourceVelocity: this.formBuilder.group({
+      centerVelocity: this.formBuilder.group({
         unit: '',
         content: 0.0
       }),
@@ -85,6 +94,7 @@ export class FieldSetupComponent implements OnInit {
       referenceSystem: '',
     }),
     type: '',
+    fields: this.formBuilder.array([])
   });
 
   get resolveCoordinates(): number[] {
@@ -122,77 +132,83 @@ export class FieldSetupComponent implements OnInit {
   }
 
   initForm(index: number) {
-    this.persistenceService.loadedGoal
-      .subscribe(result => {
-        if (result.prj_TargetParameters[index]) {
-          const targetParams = result.prj_TargetParameters[index];
-          this.form.patchValue({
-            prj_ExpectedProperties: {
-              prj_expectedPeakFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakFluxDensity,
-              prj_desiredCircularPolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredCircularPolarizationPercentage,
-              prj_expectedPeakLineFluxDensity: targetParams.prj_ExpectedProperties.prj_expectedPeakLineFluxDensity,
-              prj_expectedLineWidth: targetParams.prj_ExpectedProperties.prj_expectedLineWidth,
-              prj_desiredLinePolarizationPercentage: targetParams.prj_ExpectedProperties.prj_desiredLinePolarizationPercentage
-            },
-            type: targetParams.type,
-            prj_sourceName: targetParams.prj_sourceName,
-            solarSystemObject: targetParams.solarSystemObject,
-            prj_radialVelocityReferenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
-            prj_sourceCoordinates: {
-              system: targetParams.prj_sourceCoordinates.system,
-              type: targetParams.prj_sourceCoordinates.type,
-              val_longitude: targetParams.prj_sourceCoordinates.val_longitude,
-              val_latitude: targetParams.prj_sourceCoordinates.val_latitude,
-            },
-            prj_parallax: targetParams.prj_parallax,
-            prj_sourceVelocity: {
-              val_centerVelocity: targetParams.prj_sourceVelocity.val_centerVelocity,
-              dopplerCalcType: targetParams.prj_sourceVelocity.dopplerCalcType,
-              referenceSystem: targetParams.prj_sourceVelocity.referenceSystem,
-              redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-                targetParams.prj_sourceVelocity.val_centerVelocity),
-                targetParams.prj_sourceVelocity.dopplerCalcType)
-            },
-            prj_pmRA: targetParams.prj_pmRA,
-            prj_pmDec: targetParams.prj_pmDec,
-          });
-          if (targetParams.prj_Rectangle) {
-            this.form.patchValue({prj_Rectangle: targetParams.prj_Rectangle});
-          } else if (targetParams.prj_SinglePoint) {
-            this.setSinglePoint(targetParams.prj_SinglePoint);
-          }
-        }
-      });
+    this.persistenceService.loadedGoal.subscribe((result: IScienceGoal) => {
+      if (result.targetParameters[index]) {
+        const targetParams = result.targetParameters[index];
+        this.form.patchValue(targetParams);
+        this.setFields(targetParams.fields);
+      }
+    });
 
   }
 
-  setSinglePoint(points: SinglePoint[]) {
-    const formGroups = points.map(point => this.formBuilder.group({
-      prj_name: point.prj_name,
-      prj_centre: this.formBuilder.group({
-        system: point.prj_centre.system,
-        type: point.prj_centre.type,
-        val_longitude: this.formBuilder.group({
-          unit: point.prj_centre.val_longitude.unit,
-          content: [point.prj_centre.val_longitude.content, Validators.required]
+  setFields(fields: IField[]) {
+    let formGroups = [];
+    if (this.form.getRawValue().type === 'F_SingleRectangle') {
+      formGroups = fields.map((point: IRectangle) => this.formBuilder.group({
+        name: point.name,
+        centre: this.formBuilder.group({
+          system: point.centre.system,
+          type: point.centre.type,
+          longitude: this.formBuilder.group({
+            unit: point.centre.longitude.unit,
+            content: [point.centre.longitude.content, Validators.required]
+          }),
+          latitude: this.formBuilder.group({
+            unit: point.centre.latitude.unit,
+            content: [point.centre.latitude.content, Validators.required]
+          }),
+          fieldName: point.centre.fieldName
         }),
-        val_latitude: this.formBuilder.group({
-          unit: point.prj_centre.val_latitude.unit,
-          content: [point.prj_centre.val_latitude.content, Validators.required]
+        palong: this.formBuilder.group({
+          unit: point.palong.unit,
+          content: point.palong.content
         }),
-        val_fieldName: point.prj_centre.val_fieldName
-      })
-    }));
-    const singlePointFormArray = this.formBuilder.array(formGroups);
-    this.form.setControl('prj_SinglePoint', singlePointFormArray);
+        long: this.formBuilder.group({
+          unit: point.long.unit,
+          content: point.long.content
+        }),
+        short: this.formBuilder.group({
+          unit: point.short.unit,
+          content: point.short.content
+        }),
+        spacing: this.formBuilder.group({
+          userUnit: point.spacing.userUnit,
+          unit: point.spacing.unit,
+          content: point.spacing.content
+        }),
+        referenceFrequency: this.formBuilder.group({
+          unit: point.referenceFrequency.unit,
+          content: point.referenceFrequency.content
+        }),
+      }));
+    } else if (this.form.getRawValue().type === 'F_MultiplePoints') {
+      formGroups = fields.map((point: ISinglePoint) => this.formBuilder.group({
+        name: point.name,
+        centre: this.formBuilder.group({
+          system: point.centre.system,
+          type: point.centre.type,
+          longitude: this.formBuilder.group({
+            unit: point.centre.longitude.unit,
+            content: [point.centre.longitude.content, Validators.required]
+          }),
+          latitude: this.formBuilder.group({
+            unit: point.centre.latitude.unit,
+            content: [point.centre.latitude.content, Validators.required]
+          }),
+          fieldName: point.centre.fieldName
+        })
+      }));
+    }
+    const fieldFormArray = this.formBuilder.array(formGroups);
+    this.form.setControl('fields', fieldFormArray);
   }
 
   observeFormChanges() {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.form.dirty && this.form.valid) {
-        this.persistenceService.updateTargetParams(value).subscribe(() => {
-        });
+        console.log(value);
       }
     });
   }

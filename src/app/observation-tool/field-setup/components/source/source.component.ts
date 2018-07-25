@@ -1,11 +1,32 @@
+/*
+ * ALMA - Atacama Large Millimeter Array
+ * Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+ * (in the framework of the ALMA collaboration).
+ * All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ */
+
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import 'rxjs/add/operator/debounce';
 import {Speed} from '../../../../units/classes/speed';
-import {TargetParameters} from '../../../shared/classes/science-goal/target-parameters';
 import {CoordSystemInterface} from '../../../shared/interfaces/coord-system.interface';
 import {SimbadService} from '../../../shared/services/simbad.service';
 import {SystemService} from '../../../shared/services/system.service';
+import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 
 /**
  * Source Component in Field Setup
@@ -25,7 +46,7 @@ export class SourceComponent implements OnInit {
   @Output() resolveEmitter = new EventEmitter<number[]>();
 
   currentTarget               = 0;
-  target: TargetParameters;
+  target: ITargetParameters;
   /** Selectable solar system bodies for selection box */
   solarBodies                 = [
     'Mercury',
@@ -83,12 +104,12 @@ export class SourceComponent implements OnInit {
    * @param system The new system type to be used
    */
   systemChange() {
-    this.currentSystem = this.systemService.getSystem(this.form.value.prj_sourceCoordinates.system);
-    if (this.form.value.prj_sourceCoordinates.system === 'ICRS' ||
-        this.form.value.prj_sourceCoordinates.system === 'FK5 J2000') {
+    this.currentSystem = this.systemService.getSystem(this.form.value.sourceCoordinates.system);
+    if (this.form.value.sourceCoordinates.system === 'ICRS' ||
+        this.form.value.sourceCoordinates.system === 'FK5 J2000') {
       this.sexagesimalCheckboxDisabled = false;
     } else {
-      this.form.value.prj_sourceCoordinates.type = 'RELATIVE';
+      this.form.value.sourceCoordinates.type = 'RELATIVE';
       this.sexagesimalCheckboxDisabled       = true;
     }
   }
@@ -97,8 +118,8 @@ export class SourceComponent implements OnInit {
     this.form.patchValue({
       prj_sourceVelocity: {
         redshift: SourceComponent.getRedshift(Object.assign(new Speed,
-          this.form.value.prj_sourceVelocity.val_centerVelocity.content),
-          this.form.value.prj_sourceVelocity.dopplerCalcType)
+          this.form.value.sourceVelocity.centerVelocity.content),
+          this.form.value.sourceVelocity.dopplerCalcType)
       }
     });
   }
@@ -119,7 +140,7 @@ export class SourceComponent implements OnInit {
 
 
   get sourceName() {
-    return this.form.get('prj_sourceName')
+    return this.form.get('sourceName')
   }
 
 }

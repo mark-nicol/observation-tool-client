@@ -1,3 +1,24 @@
+<!--
+  ~ ALMA - Atacama Large Millimeter Array
+  ~ Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+  ~ (in the framework of the ALMA collaboration).
+  ~ All rights reserved.
+  ~
+  ~ This library is free software; you can redistribute it and/or
+  ~ modify it under the terms of the GNU Lesser General Public
+  ~ License as published by the Free Software Foundation; either
+  ~ version 2.1 of the License, or (at your option) any later version.
+  ~
+  ~ This library is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public
+  ~ License along with this library; if not, write to the Free Software
+  ~ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+  -->
+
 <form class="ui form" [formGroup]="form">
   <div class="two fields">
 
@@ -5,7 +26,7 @@
     <div class="field"
          suiPopup
          [popupTemplate]="peakFluxPopupTemplate"
-         formGroupName="prj_expectedPeakFluxDensity">
+         formGroupName="expectedPeakFluxDensity">
       <ng-template #peakFluxPopupTemplate>
         Expected peak flux density of source continuum for the <b>weakest</b> source component that you wish to detect
       </ng-template>
@@ -28,7 +49,7 @@
     <div class="field"
          suiPopup
          [popupTemplate]="peakLinePopupTemplate"
-         formGroupName="prj_expectedPeakLineFluxDensity">
+         formGroupName="expectedPeakLineFluxDensity">
       <ng-template #peakLinePopupTemplate>
         Expected peak flux density of line emission relative to the continuum for the <b>weakest</b> source component
         that
@@ -63,7 +84,7 @@
         <input id="contPolInput"
                type="number"
                placeholder="0.0"
-               formControlName="prj_desiredCircularPolarizationPercentage">
+               formControlName="desiredCircularPolarizationPercentage">
         <div class="ui label">%</div>
       </div>
     </div>
@@ -79,7 +100,7 @@
         <input id="linePolInput"
                type="number"
                placeholder="0.0"
-               formControlName="prj_desiredLinePolarizationPercentage">
+               formControlName="desiredLinePolarizationPercentage">
         <div class="ui label">%</div>
       </div>
     </div>
@@ -88,7 +109,7 @@
     <div class="five wide field"
          suiPopup
          popupText="Expected width of the lines to be observed (FWHM)"
-         formGroupName="prj_expectedLineWidth">
+         formGroupName="expectedLineWidth">
       <label for="lineWidthInput">
         Line Width
       </label>

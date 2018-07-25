@@ -1,14 +1,35 @@
+/*
+ * ALMA - Atacama Large Millimeter Array
+ * Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+ * (in the framework of the ALMA collaboration).
+ * All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ */
+
 import {Injectable} from '@angular/core';
-import {Fov} from '../../shared/classes/pointings/fov';
 import {IAladinConfig} from '../../shared/interfaces/aladin/aladin-config.interface';
 import {IAladinOverlay} from '../../shared/interfaces/aladin/overlay.interface';
-import {IRectangle, ISkyCoordinates} from '../../shared/interfaces/project/science-goal/target-parameters.interface';
 import {LongitudeUnits} from '../../../units/enums/longitude-units.enum';
 import {LatitudeUnits} from '../../../units/enums/latitude-units.enum';
 import {Longitude} from '../../../units/classes/longitude';
 import {Latitude} from '../../../units/classes/latitude';
 import {Angle} from '../../../units/classes/angle';
 import {AngleUnits} from '../../../units/enums/angle-units.enum';
+import {ISkyCoordinates} from '../../shared/interfaces/apdm/sky-coordinates.interface';
+import {IRectangle} from '../../shared/interfaces/apdm/rectangle.interface';
 
 declare let A: any;
 declare let Coo: any;
@@ -85,12 +106,12 @@ export class AladinService {
   }
 
   addRectangle(target: ISkyCoordinates, rect: IRectangle) {
-    const targetLonDeg = Object.assign(new Longitude, target.val_longitude).getValueInUnits(LongitudeUnits.DEG);
-    const targetLatDeg = Object.assign(new Latitude, target.val_latitude).getValueInUnits(LatitudeUnits.DEG);
-    const rectCentreLonDeg = Object.assign(new Longitude, rect.prj_centre.val_longitude).getValueInUnits(LongitudeUnits.DEG);
-    const rectCentreLatDeg = Object.assign(new Latitude, rect.prj_centre.val_latitude).getValueInUnits(LatitudeUnits.DEG);
-    const shortDeg = Object.assign(new Angle, rect.prj_short).getValueInUnits(AngleUnits.DEG);
-    const longDeg = Object.assign(new Angle, rect.prj_long).getValueInUnits(AngleUnits.DEG);
+    const targetLonDeg = Object.assign(new Longitude, target.longitude).getValueInUnits(LongitudeUnits.DEG);
+    const targetLatDeg = Object.assign(new Latitude, target.latitude).getValueInUnits(LatitudeUnits.DEG);
+    const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
+    const rectCentreLatDeg = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG);
+    const shortDeg = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
+    const longDeg = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
     // top left
     // x = centre - half short
     // y = centre - half long
@@ -164,16 +185,16 @@ export class AladinService {
     return this._overlay.overlay_items;
   }
 
-  calculateRadiusPixel(fov: Fov): number {
-    const sidePointPixel = this.coordsWorldToPix([fov.coordsWorld[0] + (fov.radiusWorld * 3.6 /*Hack job*/),
-      fov.coordsWorld[1]]);
-    return fov.coordsPixel[0] - sidePointPixel[0];
-  }
-
-  calculateRadiusWorld(fov: Fov): number {
-    const sidePointWorld = this.coordsPixToWorld([fov.coordsPixel[0] + fov.radiusPixel, fov.coordsPixel[1]]);
-    return AladinService.calculateDistanceBetweenPoints(fov.coordsWorld, sidePointWorld);
-  }
+  // calculateRadiusPixel(fov: Fov): number {
+  //   const sidePointPixel = this.coordsWorldToPix([fov.coordsWorld[0] + (fov.radiusWorld * 3.6 /*Hack job*/),
+  //     fov.coordsWorld[1]]);
+  //   return fov.coordsPixel[0] - sidePointPixel[0];
+  // }
+  //
+  // calculateRadiusWorld(fov: Fov): number {
+  //   const sidePointWorld = this.coordsPixToWorld([fov.coordsPixel[0] + fov.radiusPixel, fov.coordsPixel[1]]);
+  //   return AladinService.calculateDistanceBetweenPoints(fov.coordsWorld, sidePointWorld);
+  // }
 
   getCanvasRadius(): number {
     // Get centre

@@ -1,3 +1,24 @@
+<!--
+  ~ ALMA - Atacama Large Millimeter Array
+  ~ Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+  ~ (in the framework of the ALMA collaboration).
+  ~ All rights reserved.
+  ~
+  ~ This library is free software; you can redistribute it and/or
+  ~ modify it under the terms of the GNU Lesser General Public
+  ~ License as published by the Free Software Foundation; either
+  ~ version 2.1 of the License, or (at your option) any later version.
+  ~
+  ~ This library is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public
+  ~ License along with this library; if not, write to the Free Software
+  ~ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+  -->
+
 <div class="tablet or lower hidden">
   <div class="ui fixed blue inverted menu">
     <div class="item" style="width: 12%; padding-top:0;padding-bottom:0;padding-left:5px">
@@ -41,7 +62,7 @@
                class="link item"
                [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
                (click)="setCurrentGoal(i)">
-            {{goal.prj_name}}
+            {{goal.name}}
           </div>
           <div class="divider"></div>
           <div class="header">
@@ -125,7 +146,7 @@
                class="link item"
                [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
                (click)="setCurrentGoal(i); scienceGoalMenuOpen = !scienceGoalMenuOpen; mobileMenuOpen = !mobileMenuOpen">
-            {{goal.prj_name}}
+            {{goal.name}}
           </div>
         </div>
       </ng-container>

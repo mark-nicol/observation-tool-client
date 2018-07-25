@@ -1,22 +1,77 @@
 <!doctype html>
+<!--
+  ~ ALMA - Atacama Large Millimeter Array
+  ~ Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+  ~ (in the framework of the ALMA collaboration).
+  ~ All rights reserved.
+  ~
+  ~ This library is free software; you can redistribute it and/or
+  ~ modify it under the terms of the GNU Lesser General Public
+  ~ License as published by the Free Software Foundation; either
+  ~ version 2.1 of the License, or (at your option) any later version.
+  ~
+  ~ This library is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public
+  ~ License along with this library; if not, write to the Free Software
+  ~ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+  -->
+
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Observation Tool</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="eso_favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="static/aladin.css"/>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="static/aladin.js" charset="utf-8"></script>
   <script src="https://rawgit.com/web-animations/web-animations-js/master/web-animations.min.js"></script>
 </head>
 <body>
-  <app-root>
-    <div style="text-align: center">
-      <h1>ALMA Observation Tool</h1>
-      <img src="./assets/img/alma-logo.jpg" style="width: 10%; height: 10%">
+<app-root>
+  <div class="ui fixed blue inverted menu">
+    <div class="item" style="width: 12%; padding-top:0;padding-bottom:0;padding-left:5px">
+      <img class="ui image logo" src="./assets/img/alma-logo.jpg" style="border: 1px solid white; height: 36px;">
+      &nbsp;&nbsp;&nbsp;&nbsp;<b class="title">Observation Tool</b>
     </div>
-  </app-root>
+    <div class="ui right dropdown item">
+      <i class="user icon"></i>
+      User
+      <i class="dropdown icon"></i>
+    </div>
+  </div>
+  <div style="height: 4em"></div>
+  <div class="ui container">
+    <div class="ui center aligned segment">
+      <button class="ui blue labeled icon button">
+        <i class="add icon"></i>Start a new project
+      </button>
+      <div class="ui horizontal divider">Or</div>
+      <form class="ui form">
+        <!-- Search field -->
+        <div class="field">
+          <h4>Search the ALMA Database</h4>
+          <div class="ui left fluid action input">
+            <!-- Selector -->
+            <sui-select class="selection">
+            </sui-select>
+            <!-- Input -->
+            <input>
+            <button class="ui blue labeled icon button"><i class="search icon"></i>Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="ui active inverted dimmer">
+    <div class="ui large text loader">Loading</div>
+  </div>
+</app-root>
 </body>
 </html>

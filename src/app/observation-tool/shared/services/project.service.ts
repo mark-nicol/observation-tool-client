@@ -1,16 +1,36 @@
+/*
+ * ALMA - Atacama Large Millimeter Array
+ * Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+ * (in the framework of the ALMA collaboration).
+ * All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ */
+
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {ObsProject} from '../classes/obsproject';
-import {ObsProposal} from '../classes/obsproposal';
-import {TargetParameters} from '../classes/science-goal/target-parameters';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {ScienceGoal} from '../classes/science-goal/science-goal';
 import {tap} from 'rxjs/operators';
 import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import * as _ from 'lodash';
+import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
+import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
+import {IObsProject} from '../interfaces/apdm/obs-project.interface';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,14 +44,23 @@ const httpOptions = {
  */
 @Injectable()
 export class ProjectService implements CanActivate {
+  get selectedProject(): IObsProject {
+    return this._selectedProject;
+  }
+
+  set selectedProject(value: IObsProject) {
+    this._selectedProject = value;
+  }
 
 
-  private baseUrl = 'http://localhost:8080/api/project';
+  private baseUrl = 'http://localhost:8080/project';
   private _currentTarget = new BehaviorSubject<number>(0);
-  private _loadedProject = new BehaviorSubject<ObsProject>(null);
-  private _loadedProposal = new BehaviorSubject<ObsProposal>(null);
-  private _loadedGoal = new BehaviorSubject<ScienceGoal>(null);
+  private _loadedProject = new BehaviorSubject<IObsProject>(null);
+  private _loadedProposal = new BehaviorSubject<IObsProposal>(null);
+  private _loadedGoal = new BehaviorSubject<IScienceGoal>(null);
   private _currentGoal = 0;
+
+  private _selectedProject: IObsProject;
 
   /**
    * Constructor, loads data and sets members
@@ -57,8 +86,8 @@ export class ProjectService implements CanActivate {
     this._currentGoal = value;
   }
 
-  getAllProjects(): Observable<ObsProject[]> {
-    return this.http.get<ObsProject[]>(`${this.baseUrl}/projects`).pipe(
+  getAllProjects(): Observable<IObsProject[]> {
+    return this.http.get<IObsProject[]>(`${this.baseUrl}/projects`).pipe(
       tap(
         data => {
         },
@@ -67,64 +96,33 @@ export class ProjectService implements CanActivate {
     );
   }
 
-  get loadedProject(): BehaviorSubject<ObsProject> {
+  get loadedProject(): BehaviorSubject<IObsProject> {
     return this._loadedProject
   }
 
-  get loadedProposal(): BehaviorSubject<ObsProposal> {
+  get loadedProposal(): BehaviorSubject<IObsProposal> {
     return this._loadedProposal;
   }
 
-  get loadedGoal(): BehaviorSubject<ScienceGoal> {
+  get loadedGoal(): BehaviorSubject<IScienceGoal> {
     return this._loadedGoal;
   }
 
-  selectProject(project: ObsProject) {
-    this._loadedProject.next(project);
+  selectProject() {
+    this._loadedProject.next(this._selectedProject);
     this.loadProposal();
   }
 
   loadScienceGoal(index) {
-    this.loadedGoal.next(this._loadedProposal.value.prj_ScienceGoal[index]);
+    this.loadedGoal.next(<IScienceGoal>this._loadedProposal.value.scienceGoals[index]);
   }
 
   loadProposal() {
-    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value['prj_ObsProposalRef']['entityId'])};
-    this.http.get<any>(`${this.baseUrl}/proposal`, options).subscribe(result => {
-      if (!(result.prj_ScienceGoal instanceof Array) && result.prj_ScienceGoal !== undefined) {
-        result.prj_ScienceGoal = [result.prj_ScienceGoal];
-      }
-      if (result.prj_ScienceGoal) {
-        for (const goal of result.prj_ScienceGoal) {
-          if (goal.prj_TargetParameters && !(goal.prj_TargetParameters instanceof Array)) {
-            goal.prj_TargetParameters = [goal.prj_TargetParameters];
-          }
-          for (const target of goal.prj_TargetParameters) {
-            if (target.prj_SinglePoint && !(target.prj_SinglePoint instanceof Array)) {
-              target.prj_SinglePoint = [target.prj_SinglePoint];
-            }
-          }
-        }
-      }
-
-
+    const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
+    this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
+      console.log(result);
       this._loadedProposal.next(result);
     });
-  }
-
-  updateScienceGoal(updates: any) {
-    console.log('Old goal:', this._loadedGoal.getValue());
-    console.log('New goal:', _.merge(this._loadedGoal.getValue(), updates));
-    // this._loadedGoal.next(_.merge(this._loadedGoal.getValue(), updates));
-    // console.log(this._loadedGoal.getValue());
-  }
-
-  updateTargetParams(proposal: TargetParameters): Observable<TargetParameters> {
-    return this.http.post<TargetParameters>(`${this.baseUrl}/projects`, proposal, httpOptions);
-  }
-
-  updateProposal(proposal: ObsProposal): Observable<ObsProposal> {
-    return this.http.put<ObsProposal>(`${this.baseUrl}/projects/proposal`, proposal);
   }
 
   hasProjectLoaded(): boolean {
@@ -137,24 +135,25 @@ export class ProjectService implements CanActivate {
 
   hasScienceGoals(): boolean {
     if (this.hasProposalLoaded()) {
-      return this._loadedProposal.value.prj_ScienceGoal !== (null || undefined);
+      return this._loadedProposal.value.scienceGoals !== (null || undefined);
     }
   }
 
   hasSources(): boolean {
     if (this.hasScienceGoals()) {
-      return this._loadedGoal.getValue().prj_TargetParameters !== (null || undefined);
+      return this._loadedGoal.getValue().targetParameters !== (null || undefined);
     }
     return false;
   }
 
   startNewProject() {
-    this.http.get('assets/new_project/ObsProject.json').subscribe(result => {
-      this._loadedProject.next(Object.assign(new ObsProject, result));
-    });
-    this.http.get('assets/new_project/ObsProposal.json').subscribe(result => {
-      this._loadedProposal.next(Object.assign(new ObsProposal, result));
-    });
+    // TODO Fix
+    //   this.http.get('assets/new_project/ObsProject.json').subscribe(result => {
+    //     this._loadedProject.next(Object.assign(new IObsProject, result));
+    //   });
+    //   this.http.get('assets/new_project/ObsProposal.json').subscribe(result => {
+    //     this._loadedProposal.next(Object.assign(new ObsProposal, result));
+    //   });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -180,51 +179,61 @@ export class ProjectService implements CanActivate {
   }
 
   addScienceGoal() {
-    if (this.hasScienceGoals()) {
-      this._loadedProposal.getValue().prj_ScienceGoal.push(new ScienceGoal());
-    } else {
-      this._loadedProposal.getValue().prj_ScienceGoal = [new ScienceGoal()];
-    }
+    // TODO Fix
+    // if (this.hasScienceGoals()) {
+    //   this._loadedProposal.getValue().ScienceGoal.push(new ScienceGoal());
+    // } else {
+    //   this._loadedProposal.getValue().ScienceGoal = [new ScienceGoal()];
+    // }
   }
 
   removeScienceGoal() {
-    this._loadedProposal.getValue().prj_ScienceGoal.splice(this._currentGoal, 1);
+    this._loadedProposal.getValue().scienceGoals.splice(this._currentGoal, 1);
     this._currentGoal--;
     if (this._currentGoal === -1) {
       this._currentGoal = 0;
     }
-    if (this._loadedProposal.getValue().prj_ScienceGoal.length > 0) {
+    if (this._loadedProposal.getValue().scienceGoals.length > 0) {
       this.loadScienceGoal(this._currentGoal);
     } else {
-      this._loadedProposal.getValue().prj_ScienceGoal = undefined;
+      this._loadedProposal.getValue().scienceGoals = undefined;
       this.router.navigate(['/project']).then(() => this.toastr.info('All science goals removed'));
     }
   }
 
   addSource() {
-    if (this.hasSources()) {
-      this._loadedGoal.getValue().prj_TargetParameters.push(new TargetParameters());
-    } else {
-      this._loadedGoal.getValue().prj_TargetParameters = [new TargetParameters()];
-    }
+    // TODO Fix
+    // if (this.hasSources()) {
+    //   this._loadedGoal.getValue().TargetParameters.push(new TargetParameters());
+    // } else {
+    //   this._loadedGoal.getValue().TargetParameters = [new TargetParameters()];
+    // }
   }
 
   removeSource() {
-    this._loadedGoal.getValue().prj_TargetParameters.splice(this._currentTarget.getValue(), 1);
+    this._loadedGoal.getValue().targetParameters.splice(this._currentTarget.getValue(), 1);
     this._currentTarget.next(this._currentTarget.value - 1);
     if (this._currentTarget.value === -1) {
       this._currentTarget.next(0);
     }
-    if (this._loadedGoal.getValue().prj_TargetParameters.length <= 0) {
-      this._loadedGoal.getValue().prj_TargetParameters = undefined;
+    if (this._loadedGoal.getValue().targetParameters.length <= 0) {
+      this._loadedGoal.getValue().targetParameters = undefined;
       this.router.navigate(['/science-goals/general']).then(() => this.toastr.info('All sources removed'));
     }
   }
 
   setPi(newPi: any) {
     const oldProposal = this._loadedProposal.getValue();
-    oldProposal.prp_PrincipalInvestigator = newPi;
+    oldProposal.principalInvestigator = newPi;
     this._loadedProposal.next(oldProposal);
+  }
+
+  updateProposal(updates: IObsProposal) {
+    console.log(this.loadedProposal.getValue());
+    console.log(updates);
+    this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, _.merge(this.loadedProposal.getValue(), updates)).subscribe(response =>
+      this._loadedProposal.next(response)
+    );
   }
 
 }

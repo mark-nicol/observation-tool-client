@@ -1,3 +1,24 @@
+/*
+ * ALMA - Atacama Large Millimeter Array
+ * Copyright (c) UKATC - UK Astronomy Technology Centre, Science and Technology Facilities Council, 2018
+ * (in the framework of the ALMA collaboration).
+ * All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
+ */
+
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
@@ -10,23 +31,31 @@ import {IAlmaInvestigator} from '../../shared/interfaces/alma-investigator.inter
 
 @Injectable()
 export class AlmaInvestigatorSearchService {
+  get selectedPi(): IAlmaInvestigator {
+    return this._selectedPi;
+  }
+
+  set selectedPi(value: IAlmaInvestigator) {
+    this._selectedPi = value;
+  }
 
   /** URL of the ALMA user lookup */
   private piUrl = 'https://cycle-5.asa.alma.cl/ObsprepSubmissionService/UserLookup?action=MatchStrings';
+  private _selectedPi: IAlmaInvestigator;
 
   static resultToInvestigator(result: any): IAlmaInvestigator {
     return {
-      prp_index: 0,
+      index: 0,
       associatedExec: result.executive,
-      prp_fullName: result.fullName,
-      prp_organisation: result.affiliation,
-      prp_mobile: result.telephone,
-      prp_eMail: result.email,
-      prp_organisationId: result.affiliationId,
-      prp_userId: result.uid,
-      prp_telephone: result.telephone,
+      fullName: result.fullName,
+      organisation: result.affiliation,
+      mobile: result.telephone,
+      eMail: result.email,
+      organisationId: result.affiliationId,
+      userId: result.uid,
+      telephone: result.telephone,
       allowedExec: result.executive,
-      prp_verfiedUser: false,
+      verfiedUser: false,
     };
   }
 

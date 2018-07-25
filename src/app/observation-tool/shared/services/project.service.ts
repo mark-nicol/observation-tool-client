@@ -53,7 +53,7 @@ export class ProjectService implements CanActivate {
   }
 
 
-  private baseUrl = 'http://localhost:8080/api/project';
+  private baseUrl = 'http://localhost:8080/project';
   private _currentTarget = new BehaviorSubject<number>(0);
   private _loadedProject = new BehaviorSubject<IObsProject>(null);
   private _loadedProposal = new BehaviorSubject<IObsProposal>(null);
@@ -118,7 +118,7 @@ export class ProjectService implements CanActivate {
   }
 
   loadProposal() {
-    const options = {params: new HttpParams().set('proposalRef', this._loadedProject.value.obsProposalRef.entityId)};
+    const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
       console.log(result);
       this._loadedProposal.next(result);
@@ -141,7 +141,7 @@ export class ProjectService implements CanActivate {
 
   hasSources(): boolean {
     if (this.hasScienceGoals()) {
-      return this._loadedGoal.getValue().TargetParameters !== (null || undefined);
+      return this._loadedGoal.getValue().targetParameters !== (null || undefined);
     }
     return false;
   }
@@ -211,20 +211,20 @@ export class ProjectService implements CanActivate {
   }
 
   removeSource() {
-    this._loadedGoal.getValue().TargetParameters.splice(this._currentTarget.getValue(), 1);
+    this._loadedGoal.getValue().targetParameters.splice(this._currentTarget.getValue(), 1);
     this._currentTarget.next(this._currentTarget.value - 1);
     if (this._currentTarget.value === -1) {
       this._currentTarget.next(0);
     }
-    if (this._loadedGoal.getValue().TargetParameters.length <= 0) {
-      this._loadedGoal.getValue().TargetParameters = undefined;
+    if (this._loadedGoal.getValue().targetParameters.length <= 0) {
+      this._loadedGoal.getValue().targetParameters = undefined;
       this.router.navigate(['/science-goals/general']).then(() => this.toastr.info('All sources removed'));
     }
   }
 
   setPi(newPi: any) {
     const oldProposal = this._loadedProposal.getValue();
-    oldProposal.PrincipalInvestigator = newPi;
+    oldProposal.principalInvestigator = newPi;
     this._loadedProposal.next(oldProposal);
   }
 

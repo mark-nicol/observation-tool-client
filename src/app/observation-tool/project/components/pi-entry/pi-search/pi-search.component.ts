@@ -57,7 +57,7 @@ export class PiSearchComponent implements OnInit {
   ngOnInit() {
     this.projectService.loadedProposal.subscribe(result => {
       if (result) {
-        this.pi = result.PrincipalInvestigator;
+        this.pi = result.principalInvestigator;
       }
     });
   }

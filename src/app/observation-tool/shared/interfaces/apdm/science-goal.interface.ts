@@ -21,10 +21,10 @@ export interface IScienceGoal extends IAbstractScienceGoal {
   isResubmission: boolean;
   resubmissionOfOusStatusUid: string;
   resubmissionOfName: string;
-  CalibrationSetupParameters: ICalibrationSetupParameters;
-  PerformanceParameters: IPerformanceParameters;
-  SpectralSetupParameters: ISpectralSetupParameters;
-  TargetParameters: ITargetParameters[];
-  TechnicalJustification: ITechnicalJustification[];
+  calibrationSetupParameters: ICalibrationSetupParameters;
+  performanceParameters: IPerformanceParameters;
+  spectralSetupParameters: ISpectralSetupParameters;
+  targetParameters: ITargetParameters[];
+  technicalJustification: ITechnicalJustification[];
   mode: string;
 }

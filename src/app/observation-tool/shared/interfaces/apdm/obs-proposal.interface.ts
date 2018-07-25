@@ -32,9 +32,9 @@ export interface IObsProposal extends IObsPhase {
   resubmittedProjectCode: string;
   isResubmission: boolean;
   duplicateObservationsJustification: string;
-  PrincipalInvestigator: IInvestigator;
-  CoInvestigator: IInvestigator[];
-  CoPrincipalInvestigator: IInvestigator[];
+  principalInvestigator: IInvestigator;
+  coInvestigator: IInvestigator[];
+  coPrincipalInvestigator: IInvestigator[];
   ProposalFeedback: IProposalFeedback;
   schemaVersion: string;
   revision: string;

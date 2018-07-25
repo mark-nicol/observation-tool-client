@@ -133,8 +133,8 @@ export class FieldSetupComponent implements OnInit {
 
   initForm(index: number) {
     this.persistenceService.loadedGoal.subscribe((result: IScienceGoal) => {
-      if (result.TargetParameters[index]) {
-        const targetParams = result.TargetParameters[index];
+      if (result.targetParameters[index]) {
+        const targetParams = result.targetParameters[index];
         this.form.patchValue(targetParams);
         this.setFields(targetParams.fields);
       }

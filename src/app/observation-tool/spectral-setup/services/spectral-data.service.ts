@@ -57,7 +57,7 @@ export class SpectralDataService {
    * @param option The octile to retrieve data for
    */
   getSpectrum(option: number): any {
-    return this.http.get(`http://localhost:8080/api/spectral/spectrum/${option}`);
+    return this.http.get(`http://localhost:8080/spectral/spectrum/${option}`);
   }
 
   getSplatalogue(filters?: any): any {
@@ -66,7 +66,7 @@ export class SpectralDataService {
     } else if (this._observable) {
       return this._observable;
     } else {
-      this._observable = this.http.get('http://localhost:8080/api/spectral/splatalogue').map((response: ISpectralLine[]) => {
+      this._observable = this.http.get('http://localhost:8080/spectral/splatalogue').map((response: ISpectralLine[]) => {
         this._observable  = null;
         this._splatalogue = response;
         return this._splatalogue;

@@ -7,7 +7,7 @@ import {Frequency} from '../../../../units/classes/frequency';
 
 export interface IRectangle extends IField {
   '@type': 'RectangleT';
-  pALong: Angle;
+  palong: Angle;
   long: Angle;
   short: Angle;
   spacing: UserAngle;

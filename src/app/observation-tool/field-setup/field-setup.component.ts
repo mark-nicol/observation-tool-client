@@ -161,8 +161,8 @@ export class FieldSetupComponent implements OnInit {
           fieldName: point.centre.fieldName
         }),
         palong: this.formBuilder.group({
-          unit: point.pALong.unit,
-          content: point.pALong.content
+          unit: point.palong.unit,
+          content: point.palong.content
         }),
         long: this.formBuilder.group({
           unit: point.long.unit,

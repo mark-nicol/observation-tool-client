@@ -147,13 +147,11 @@ export class ProjectService implements CanActivate {
   }
 
   startNewProject() {
-    // TODO Fix
-    //   this.http.get('assets/new_project/ObsProject.json').subscribe(result => {
-    //     this._loadedProject.next(Object.assign(new IObsProject, result));
-    //   });
-    //   this.http.get('assets/new_project/ObsProposal.json').subscribe(result => {
-    //     this._loadedProposal.next(Object.assign(new ObsProposal, result));
-    //   });
+    this.http.get<IObsProject>(`${this.baseUrl}/new`).subscribe(result => {
+      console.log(result);
+      this._loadedProject.next(result);
+      this.loadProposal();
+    });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

@@ -148,6 +148,7 @@ export class ProjectService implements CanActivate {
   startNewProject() {
     this.http.get<IObsProject>(`${this.baseUrl}/new`).subscribe(result => {
       this._loadedProject.next(result);
+      this.router.navigate(['/project']).then();
       this.loadProposal();
     });
   }

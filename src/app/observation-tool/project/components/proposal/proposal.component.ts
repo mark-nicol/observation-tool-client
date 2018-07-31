@@ -179,7 +179,6 @@ export class ProposalComponent implements OnInit {
 
   ngOnInit() {
     this.projectService.loadedProposal.subscribe((result: IObsProposal) => {
-      console.log(result);
       this.proposalForm.patchValue(result);
       this.proposalForm.controls['title'].enable();
     });

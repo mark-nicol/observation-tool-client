@@ -120,7 +120,6 @@ export class ProjectService implements CanActivate {
   loadProposal() {
     const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
-      console.log(result);
       this._loadedProposal.next(result);
     });
   }
@@ -148,7 +147,6 @@ export class ProjectService implements CanActivate {
 
   startNewProject() {
     this.http.get<IObsProject>(`${this.baseUrl}/new`).subscribe(result => {
-      console.log(result);
       this._loadedProject.next(result);
       this.loadProposal();
     });

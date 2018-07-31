@@ -225,12 +225,18 @@ export class ProjectService implements CanActivate {
     this._loadedProposal.next(oldProposal);
   }
 
+  updateProject(updates: IObsProject) {
+    this.http.put<IObsProject>(`${this.baseUrl}/project`, _.merge(this.loadedProject.getValue(), updates)).subscribe(response => {
+      this._loadedProject.next(response);
+    });
+  }
+
   updateProposal(updates: IObsProposal) {
     console.log(this.loadedProposal.getValue());
     console.log(updates);
-    this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, _.merge(this.loadedProposal.getValue(), updates)).subscribe(response =>
-      this._loadedProposal.next(response)
-    );
+    this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, _.merge(this.loadedProposal.getValue(), updates)).subscribe(response => {
+      this._loadedProposal.next(response);
+    });
   }
 
 }

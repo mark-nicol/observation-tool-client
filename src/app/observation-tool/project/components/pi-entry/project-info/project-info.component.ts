@@ -23,6 +23,7 @@ import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {ProjectService} from '../../../../shared/services/project.service';
 import {ToastsManager} from 'ng2-toastr';
 import {IObsProject} from '../../../../shared/interfaces/apdm/obs-project.interface';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 /**
  * Project info component
@@ -36,16 +37,22 @@ import {IObsProject} from '../../../../shared/interfaces/apdm/obs-project.interf
 export class ProjectInfoComponent implements OnInit {
 
   project: IObsProject;
+  form: FormGroup = this.formBuilder.group({
+    projectName: ''
+  });
 
   constructor(private persistenceService: ProjectService,
               viewContainerRef: ViewContainerRef,
-              private toastsManager: ToastsManager) {
+              private toastsManager: ToastsManager,
+              private formBuilder: FormBuilder) {
     this.toastsManager.setRootViewContainerRef(viewContainerRef);
   }
 
   ngOnInit(): void {
     this.persistenceService.loadedProject.subscribe(
-      result => this.project = result,
+      (result: IObsProject) => {
+        this.form.patchValue(result);
+      },
       error => this.toastsManager.error('Could not retrieve project data', 'Error', {showCloseButton: true})
     );
   }

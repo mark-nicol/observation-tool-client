@@ -24,7 +24,6 @@ import {ProjectImportModal} from '../project-import-modal/project-import-modal.c
 import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectService} from '../../services/project.service';
 import {Router} from '@angular/router';
-import {IObsProject} from '../../interfaces/apdm/obs-project.interface';
 
 @Component({
   selector: 'app-start',
@@ -54,7 +53,6 @@ export class StartComponent implements OnInit {
 
   loadNewProject() {
     this.projectService.startNewProject();
-    this.router.navigate(['/project']).then();
   }
 
 }

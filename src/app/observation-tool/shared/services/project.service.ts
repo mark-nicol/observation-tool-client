@@ -120,7 +120,6 @@ export class ProjectService implements CanActivate {
   loadProposal() {
     const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
-      console.log(result);
       this._loadedProposal.next(result);
     });
   }
@@ -147,13 +146,11 @@ export class ProjectService implements CanActivate {
   }
 
   startNewProject() {
-    // TODO Fix
-    //   this.http.get('assets/new_project/ObsProject.json').subscribe(result => {
-    //     this._loadedProject.next(Object.assign(new IObsProject, result));
-    //   });
-    //   this.http.get('assets/new_project/ObsProposal.json').subscribe(result => {
-    //     this._loadedProposal.next(Object.assign(new ObsProposal, result));
-    //   });
+    this.http.get<IObsProject>(`${this.baseUrl}/new`).subscribe(result => {
+      this._loadedProject.next(result);
+      this.router.navigate(['/project']).then();
+      this.loadProposal();
+    });
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

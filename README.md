@@ -34,3 +34,28 @@ http://localhost:4200
 
 ## Documentation
 For documentation, visit [almaobservationtoolstudy.bitbucket.io](https://almaobservationtoolstudy.bitbucket.io)
+
+### Generating Documentation
+To generate documentation ensure this repository and the [documentation repository](https://bitbucket.org/almaobservationtoolstudy/almaobservationtoolstudy.bitbucket.io/) are cloned and in the same parent folder, i.e.:
+```
+  parent/
+  ├──── app-repo/
+  |     └── <app-files>
+  └──── docs-repo/
+        └── <docs-files>
+```
+In the app repository, run the compodoc script from ``package.json``
+```
+npm run compodoc
+```
+This will create documentation in the docs repository
+
+Then commit and push the new docs
+```
+cd ../almaobservationtoolstudy.bitbucket.io
+git add .
+git commit -m "<message>"
+git push origin master
+```
+### Writing Documentation
+Compodoc provides support for some JSDoc tags, more info [here](https://compodoc.github.io/website/guides/jsdoc-tags.html).

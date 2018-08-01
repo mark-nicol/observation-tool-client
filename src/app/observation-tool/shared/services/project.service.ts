@@ -79,8 +79,8 @@ export class ProjectService implements CanActivate {
     this._currentGoal = value;
   }
 
-  getAllProjects(): Observable<IObsProject[]> {
-    return this.http.get<IObsProject[]>(`${this.baseUrl}/list`).pipe(
+  getAllProjects(): Observable<IProjectListItem[]> {
+    return this.http.get<IProjectListItem[]>(`${this.baseUrl}/list`).pipe(
       tap(
         data => {
         },

@@ -150,27 +150,7 @@ export class ProjectService implements CanActivate {
     });
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.hasProjectLoaded()) {
-      return true
-    }
-    this.router.navigate(['/new-start']).then();
-    return false;
-  }
 
-  handleError(error: HttpErrorResponse) {
-    console.log(error);
-    if (error.status === 0) { // No server found or CORS
-      this.toastr.error('Could not connect to server', 'Error');
-    } else if (error.status === 404) {
-      this.toastr.error('Not found', 'Error');
-    } else if (error.status === 500) {
-      this.toastr.error('Server error', 'Error');
-    } else {
-      this.toastr.error('Other error')
-    }
-    return new ErrorObservable('Broke');
-  }
 
   addScienceGoal() {
     // TODO Fix
@@ -229,11 +209,31 @@ export class ProjectService implements CanActivate {
   }
 
   updateProposal(updates: IObsProposal) {
-    console.log(this.loadedProposal.getValue());
-    console.log(updates);
     this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, _.merge(this.loadedProposal.getValue(), updates)).subscribe(response => {
       this._loadedProposal.next(response);
     });
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.hasProjectLoaded()) {
+      return true
+    }
+    this.router.navigate(['/new-start']).then();
+    return false;
+  }
+
+  handleError(error: HttpErrorResponse) {
+    console.log(error);
+    if (error.status === 0) { // No server found or CORS
+      this.toastr.error('Could not connect to server', 'Error');
+    } else if (error.status === 404) {
+      this.toastr.error('Not found', 'Error');
+    } else if (error.status === 500) {
+      this.toastr.error('Server error', 'Error');
+    } else {
+      this.toastr.error('Other error')
+    }
+    return new ErrorObservable('Broke');
   }
 
   get selectedProject(): IProjectListItem {

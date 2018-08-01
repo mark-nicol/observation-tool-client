@@ -19,7 +19,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -217,13 +217,13 @@ export class ProjectService implements CanActivate {
   handleError(error: HttpErrorResponse) {
     console.log(error);
     if (error.status === 0) { // No server found or CORS
-      this.toastr.error('Could not connect to server', 'Error');
+      this.toastr.error('Could not connect to server', 'Error').then();
     } else if (error.status === 404) {
-      this.toastr.error('Not found', 'Error');
+      this.toastr.error('Not found', 'Error').then();
     } else if (error.status === 500) {
-      this.toastr.error('Server error', 'Error');
+      this.toastr.error('Server error', 'Error').then();
     } else {
-      this.toastr.error('Other error')
+      this.toastr.error('Other error').then();
     }
     return new ErrorObservable('Broke');
   }

@@ -27,18 +27,10 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {tap} from 'rxjs/operators';
 import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
-import * as _ from 'lodash';
 import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
 import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
 import {IObsProject} from '../interfaces/apdm/obs-project.interface';
 import {IProjectListItem} from '../interfaces/project-list-item.interface';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json'
-  })
-};
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -203,13 +195,13 @@ export class ProjectService implements CanActivate {
   }
 
   updateProject(updates: IObsProject) {
-    this.http.put<IObsProject>(`${this.baseUrl}/project`, _.merge(this.loadedProject.getValue(), updates)).subscribe(response => {
+    this.http.put<IObsProject>(`${this.baseUrl}/project`, Object.assign(this._loadedProject.getValue(), updates)).subscribe(response => {
       this._loadedProject.next(response);
     });
   }
 
   updateProposal(updates: IObsProposal) {
-    this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, _.merge(this.loadedProposal.getValue(), updates)).subscribe(response => {
+    this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, Object.assign(this._loadedProposal.getValue(), updates)).subscribe(response => {
       this._loadedProposal.next(response);
     });
   }

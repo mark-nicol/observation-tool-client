@@ -23,6 +23,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProjectService} from '../../services/project.service';
 import {Observable} from 'rxjs/Observable';
 import {IObsProject} from '../../interfaces/apdm/obs-project.interface';
+import {IProjectListItem} from '../../interfaces/project-list-item.interface';
 
 @Component({
   selector: 'app-project-import',
@@ -31,8 +32,8 @@ import {IObsProject} from '../../interfaces/apdm/obs-project.interface';
 })
 export class ProjectImportComponent implements OnInit {
 
-  projects: Observable<any[]>;
-  _selectedProject: IObsProject;
+  projects: Observable<IProjectListItem[]>;
+  _selectedProject: IProjectListItem;
 
   constructor(private projectService: ProjectService) { }
 
@@ -40,7 +41,7 @@ export class ProjectImportComponent implements OnInit {
     this.projects = this.projectService.getAllProjects();
   }
 
-  rowClicked(event: IObsProject) {
+  rowClicked(event: IProjectListItem) {
     this._selectedProject = event;
     this.projectService.selectedProject = event;
   }

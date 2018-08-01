@@ -31,6 +31,7 @@ import * as _ from 'lodash';
 import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
 import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
 import {IObsProject} from '../interfaces/apdm/obs-project.interface';
+import {IProjectListItem} from '../interfaces/project-list-item.interface';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -44,14 +45,6 @@ const httpOptions = {
  */
 @Injectable()
 export class ProjectService implements CanActivate {
-  get selectedProject(): IObsProject {
-    return this._selectedProject;
-  }
-
-  set selectedProject(value: IObsProject) {
-    this._selectedProject = value;
-  }
-
 
   private baseUrl = 'http://localhost:8080/project';
   private _currentTarget = new BehaviorSubject<number>(0);
@@ -60,7 +53,7 @@ export class ProjectService implements CanActivate {
   private _loadedGoal = new BehaviorSubject<IScienceGoal>(null);
   private _currentGoal = 0;
 
-  private _selectedProject: IObsProject;
+  private _selectedProject: IProjectListItem;
 
   /**
    * Constructor, loads data and sets members
@@ -87,7 +80,7 @@ export class ProjectService implements CanActivate {
   }
 
   getAllProjects(): Observable<IObsProject[]> {
-    return this.http.get<IObsProject[]>(`${this.baseUrl}/projects`).pipe(
+    return this.http.get<IObsProject[]>(`${this.baseUrl}/list`).pipe(
       tap(
         data => {
         },
@@ -109,8 +102,12 @@ export class ProjectService implements CanActivate {
   }
 
   selectProject() {
-    this._loadedProject.next(this._selectedProject);
-    this.loadProposal();
+    const options = {params: new HttpParams().set('entityRef', this._selectedProject.obsProjectEntityId)};
+    this.http.get<IObsProject>(`${this.baseUrl}/project`, options).subscribe((result: IObsProject) => {
+      this._loadedProject.next(result);
+      this.loadProposal();
+      this.router.navigate(['/project']).then();
+    });
   }
 
   loadScienceGoal(index) {
@@ -146,34 +143,14 @@ export class ProjectService implements CanActivate {
   }
 
   startNewProject() {
-    this.http.get<IObsProject>(`${this.baseUrl}/new`).subscribe(result => {
+    this.http.post<IObsProject>(`${this.baseUrl}`, null).subscribe(result => {
       this._loadedProject.next(result);
       this.router.navigate(['/project']).then();
       this.loadProposal();
     });
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.hasProjectLoaded()) {
-      return true
-    }
-    this.router.navigate(['/new-start']).then();
-    return false;
-  }
 
-  handleError(error: HttpErrorResponse) {
-    console.log(error);
-    if (error.status === 0) { // No server found or CORS
-      this.toastr.error('Could not connect to server', 'Error');
-    } else if (error.status === 404) {
-      this.toastr.error('Not found', 'Error');
-    } else if (error.status === 500) {
-      this.toastr.error('Server error', 'Error');
-    } else {
-      this.toastr.error('Other error')
-    }
-    return new ErrorObservable('Broke');
-  }
 
   addScienceGoal() {
     // TODO Fix
@@ -225,12 +202,46 @@ export class ProjectService implements CanActivate {
     this._loadedProposal.next(oldProposal);
   }
 
+  updateProject(updates: IObsProject) {
+    this.http.put<IObsProject>(`${this.baseUrl}/project`, _.merge(this.loadedProject.getValue(), updates)).subscribe(response => {
+      this._loadedProject.next(response);
+    });
+  }
+
   updateProposal(updates: IObsProposal) {
-    console.log(this.loadedProposal.getValue());
-    console.log(updates);
-    this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, _.merge(this.loadedProposal.getValue(), updates)).subscribe(response =>
-      this._loadedProposal.next(response)
-    );
+    this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, _.merge(this.loadedProposal.getValue(), updates)).subscribe(response => {
+      this._loadedProposal.next(response);
+    });
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.hasProjectLoaded()) {
+      return true
+    }
+    this.router.navigate(['/new-start']).then();
+    return false;
+  }
+
+  handleError(error: HttpErrorResponse) {
+    console.log(error);
+    if (error.status === 0) { // No server found or CORS
+      this.toastr.error('Could not connect to server', 'Error');
+    } else if (error.status === 404) {
+      this.toastr.error('Not found', 'Error');
+    } else if (error.status === 500) {
+      this.toastr.error('Server error', 'Error');
+    } else {
+      this.toastr.error('Other error')
+    }
+    return new ErrorObservable('Broke');
+  }
+
+  get selectedProject(): IProjectListItem {
+    return this._selectedProject;
+  }
+
+  set selectedProject(value: IProjectListItem) {
+    this._selectedProject = value;
   }
 
 }

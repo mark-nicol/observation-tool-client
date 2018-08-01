@@ -19,9 +19,13 @@
   ~ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
   -->
 
-<h5>Project Name</h5>
-<p>{{project?.projectName}}</p>
-<h5>Project Priority</h5>
-<p>{{project?.obsProgram?.obsPlan?.obsUnitControl?.userPriority}}</p>
-<h5>Assigned Project Code</h5>
-<p>{{project?.code}}</p>
+<form class="ui form" [formGroup]="form">
+  <div class="field">
+    <label>Project Name</label>
+    <input formControlName="projectName">
+  </div>
+  <h5>Project Priority</h5>
+  <p>{{project?.obsProgram?.obsPlan?.obsUnitControl?.userPriority}}</p>
+  <h5>Assigned Project Code</h5>
+  <p>{{project?.code}}</p>
+</form>

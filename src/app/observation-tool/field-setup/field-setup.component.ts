@@ -113,18 +113,18 @@ export class FieldSetupComponent implements OnInit {
    * constructor
    * @param config             Config for the popups, used to delay showing
    * @param formBuilder
-   * @param persistenceService
+   * @param projectService
    * @param activatedRoute
    */
   constructor(private config: SuiPopupConfig,
               private formBuilder: FormBuilder,
-              private persistenceService: ProjectService,
+              private projectService: ProjectService,
               private activatedRoute: ActivatedRoute) {
     this.config.delay = 1000;
   }
 
   ngOnInit() {
-    this.persistenceService.currentTarget.subscribe(result => {
+    this.projectService.currentTarget.subscribe(result => {
       this.currentTarget = result;
       this.initForm(result)
     });
@@ -132,7 +132,7 @@ export class FieldSetupComponent implements OnInit {
   }
 
   initForm(index: number) {
-    this.persistenceService.loadedGoal.subscribe((result: IScienceGoal) => {
+    this.projectService.loadedGoal.subscribe((result: IScienceGoal) => {
       if (result.targetParameters[index]) {
         const targetParams = result.targetParameters[index];
         this.form.patchValue(targetParams);
@@ -208,7 +208,8 @@ export class FieldSetupComponent implements OnInit {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.form.dirty && this.form.valid) {
-        console.log(value);
+        this.projectService.updateProposal(value);
+        this.form.markAsPristine();
       }
     });
   }

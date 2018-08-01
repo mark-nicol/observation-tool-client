@@ -23,6 +23,9 @@ import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {ProjectService} from '../../../../shared/services/project.service';
 import {ToastsManager} from 'ng2-toastr';
 import {IObsProject} from '../../../../shared/interfaces/apdm/obs-project.interface';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
+import {IObsProposal} from '../../../../shared/interfaces/apdm/obs-proposal.interface';
 
 /**
  * Project info component
@@ -36,18 +39,35 @@ import {IObsProject} from '../../../../shared/interfaces/apdm/obs-project.interf
 export class ProjectInfoComponent implements OnInit {
 
   project: IObsProject;
+  form: FormGroup = this.formBuilder.group({
+    projectName: ''
+  });
 
-  constructor(private persistenceService: ProjectService,
+  constructor(private projectService: ProjectService,
               viewContainerRef: ViewContainerRef,
-              private toastsManager: ToastsManager) {
+              private toastsManager: ToastsManager,
+              private formBuilder: FormBuilder) {
     this.toastsManager.setRootViewContainerRef(viewContainerRef);
   }
 
   ngOnInit(): void {
-    this.persistenceService.loadedProject.subscribe(
-      result => this.project = result,
+    this.projectService.loadedProject.subscribe(
+      (result: IObsProject) => {
+        this.form.patchValue(result);
+      },
       error => this.toastsManager.error('Could not retrieve project data', 'Error', {showCloseButton: true})
     );
+    this.observeFormChanges();
+  }
+
+  observeFormChanges() {
+    const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
+    debounce.subscribe((value: IObsProject) => {
+      if (this.form.valid && this.form.dirty) {
+        this.projectService.updateProject(value);
+        this.form.markAsPristine();
+      }
+    });
   }
 
 }

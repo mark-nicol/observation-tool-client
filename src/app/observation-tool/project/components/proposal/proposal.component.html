@@ -97,7 +97,7 @@
                         class="selection"
                         [isSearchable]="true"
                         [maxSelected]="2"
-                        [options]="categoryRadios[proposalForm.getRawValue()['scientificCategoryString']].keywords"
+                        [options]="categoryRadios[proposalForm.getRawValue()['scientificCategoryString']]?.keyword"
                         formControlName="keyword">
         <sui-select-option *ngFor="let option of keywordSelector.filteredOptions"
                            [value]="option">

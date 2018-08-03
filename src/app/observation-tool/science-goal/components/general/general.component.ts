@@ -63,6 +63,9 @@ export class GeneralComponent implements OnInit {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.form.dirty && this.form.valid) {
+        console.log(value);
+        this.projectService.updateProposal(value);
+        this.form.markAsPristine();
       }
     });
   }

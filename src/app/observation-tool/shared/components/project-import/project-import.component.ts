@@ -32,13 +32,17 @@ import {IProjectListItem} from '../../interfaces/project-list-item.interface';
 })
 export class ProjectImportComponent implements OnInit {
 
-  projects: Observable<IProjectListItem[]>;
+  projects: IProjectListItem[];
   _selectedProject: IProjectListItem;
+  showLoader = true;
 
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projects = this.projectService.getAllProjects();
+    this.projectService.getAllProjects().subscribe((result: IProjectListItem[]) => {
+      this.projects = result;
+      this.showLoader = false;
+    });
   }
 
   rowClicked(event: IProjectListItem) {

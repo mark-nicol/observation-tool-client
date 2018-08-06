@@ -142,15 +142,13 @@ export class ProjectService implements CanActivate {
     });
   }
 
-
-
   addScienceGoal() {
-    // TODO Fix
-    // if (this.hasScienceGoals()) {
-    //   this._loadedProposal.getValue().ScienceGoal.push(new ScienceGoal());
-    // } else {
-    //   this._loadedProposal.getValue().ScienceGoal = [new ScienceGoal()];
-    // }
+    console.log('add science goal', `${this.baseUrl}/science-goal?entityRef=${this._loadedProject.value.obsProposalRef.entityId}`);
+    const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
+    this.http.put<IObsProposal>(`${this.baseUrl}/science-goal`, null, options).subscribe(result => {
+      console.log(result);
+      this._loadedProposal.next(result);
+    });
   }
 
   removeScienceGoal() {

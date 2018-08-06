@@ -26,7 +26,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;<b class="title">Observation Tool</b>
       <!--<span class="version">&nbsp;&nbsp;2.0.0alpha3</span>-->
     </div>
-    <ng-container *ngIf="persistenceService.hasProjectLoaded()">
+    <ng-container *ngIf="projectService.hasProjectLoaded()">
       <a class="item"
          [routerLink]="items[0].path"
          [routerLinkActive]="['active']">
@@ -46,13 +46,13 @@
         {{items[2].title}}
       </a>
       <div class="ui link item"
-           *ngIf="!persistenceService.hasScienceGoals()"
+           *ngIf="!projectService.hasScienceGoals()"
            (click)="addScienceGoal()">
         <i class="add icon"></i> Add Science Goal
       </div>
       <div class="ui link dropdown item"
            [class.myDropdown]="router.url.indexOf('science-goals') > -1"
-           *ngIf="persistenceService.hasScienceGoals()"
+           *ngIf="projectService.hasScienceGoals()"
            suiDropdown>
         <i [class]="items[3].icon"></i>
         {{items[3].title}}
@@ -60,7 +60,7 @@
         <div class="menu" suiDropdownMenu>
           <div *ngFor="let goal of scienceGoals; let i = index"
                class="link item"
-               [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
+               [class.active]="router.url.indexOf('science-goals') > -1 && projectService.currentGoal === i"
                (click)="setCurrentGoal(i)">
             {{goal.name}}
           </div>
@@ -113,7 +113,7 @@
   </div>
   <div [suiCollapse]="mobileMenuOpen">
     <div class="ui bottom attached blue fluid vertical menu" style="margin-bottom: 14px">
-      <ng-container *ngIf="persistenceService.hasProjectLoaded()">
+      <ng-container *ngIf="projectService.hasProjectLoaded()">
         <div class="link item"
              [routerLink]="items[0].path"
              [routerLinkActive]="['active']"
@@ -136,7 +136,7 @@
           {{items[2].title}}
         </div>
         <div class="item"
-             *ngIf="persistenceService.hasScienceGoals()"
+             *ngIf="projectService.hasScienceGoals()"
              (click)="scienceGoalMenuOpen = !scienceGoalMenuOpen">
           <i [class]="items[3].icon"></i>
           {{items[3].title}}
@@ -144,7 +144,7 @@
         <div class="secondary menu" [suiCollapse]="scienceGoalMenuOpen">
           <div *ngFor="let goal of scienceGoals; let i = index"
                class="link item"
-               [class.active]="router.url.indexOf('science-goals') > -1 && persistenceService.currentGoal === i"
+               [class.active]="router.url.indexOf('science-goals') > -1 && projectService.currentGoal === i"
                (click)="setCurrentGoal(i); scienceGoalMenuOpen = !scienceGoalMenuOpen; mobileMenuOpen = !mobileMenuOpen">
             {{goal.name}}
           </div>

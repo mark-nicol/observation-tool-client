@@ -77,7 +77,7 @@ export class NavbarComponent implements OnInit {
   scienceGoalMenuOpen = true;
 
   constructor(protected router: Router,
-              public persistenceService: ProjectService,
+              public projectService: ProjectService,
               private suiModalService: SuiModalService,
               private location: Location) {
 
@@ -99,23 +99,23 @@ export class NavbarComponent implements OnInit {
   }
 
   get scienceGoals(): IScienceGoal[] {
-    if (this.persistenceService.hasScienceGoals()) {
-      return <IScienceGoal[]>this.persistenceService.loadedProposal.value.scienceGoals;
+    if (this.projectService.hasScienceGoals()) {
+      return <IScienceGoal[]>this.projectService.loadedProposal.value.scienceGoals;
     }
   }
 
   addScienceGoal() {
-    this.persistenceService.addScienceGoal();
+    this.projectService.addScienceGoal();
   }
 
   removeScienceGoal() {
-    this.persistenceService.removeScienceGoal();
+    this.projectService.removeScienceGoal();
   }
 
   setCurrentGoal(event: number) {
-    this.persistenceService.setCurrentTarget(0);
-    this.persistenceService.loadScienceGoal(event);
-    this.persistenceService.currentGoal = event;
+    this.projectService.setCurrentTarget(0);
+    this.projectService.loadScienceGoal(event);
+    this.projectService.currentGoal = event;
     if (this.router.url.indexOf('science-goals') < 0) {
       this.router.navigate(['science-goals']).then();
     }
@@ -125,7 +125,7 @@ export class NavbarComponent implements OnInit {
     this.suiModalService
       .open(new ProjectImportModal())
       .onApprove(result => {
-        this.persistenceService.selectProject();
+        this.projectService.selectProject();
         this.router.navigate(['/project']).then();
       })
       .onDeny(result => {

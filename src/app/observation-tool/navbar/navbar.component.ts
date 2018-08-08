@@ -75,6 +75,7 @@ export class NavbarComponent implements OnInit {
   mobileMenuOpen = true;
   userMenuOpen = true;
   scienceGoalMenuOpen = true;
+  isSaving = false;
 
   constructor(protected router: Router,
               public projectService: ProjectService,
@@ -87,7 +88,7 @@ export class NavbarComponent implements OnInit {
    * Sets the currently selected goal to the first in the list
    */
   ngOnInit() {
-
+    this.projectService.isSaving.subscribe(result => this.isSaving = result);
   }
 
   /**

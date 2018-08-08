@@ -21,7 +21,6 @@
 
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {ProjectService} from '../../../../shared/services/project.service';
-import {ToastsManager} from 'ng2-toastr';
 import {IObsProject} from '../../../../shared/interfaces/apdm/obs-project.interface';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
@@ -45,9 +44,7 @@ export class ProjectInfoComponent implements OnInit {
 
   constructor(private projectService: ProjectService,
               viewContainerRef: ViewContainerRef,
-              private toastsManager: ToastsManager,
               private formBuilder: FormBuilder) {
-    this.toastsManager.setRootViewContainerRef(viewContainerRef);
   }
 
   ngOnInit(): void {
@@ -55,7 +52,7 @@ export class ProjectInfoComponent implements OnInit {
       (result: IObsProject) => {
         this.form.patchValue(result);
       },
-      error => this.toastsManager.error('Could not retrieve project data', 'Error', {showCloseButton: true})
+      error => {}
     );
     this.observeFormChanges();
   }

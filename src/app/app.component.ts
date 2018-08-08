@@ -21,7 +21,6 @@
 
 import {Component, ViewContainerRef} from '@angular/core';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
-import {ToastsManager} from 'ng2-toastr';
 
 /**
  * The main app component

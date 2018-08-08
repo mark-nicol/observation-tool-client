@@ -21,11 +21,9 @@
 
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {SuiModalService} from 'ng2-semantic-ui';
-import {ToastsManager} from 'ng2-toastr';
 import {AlmaInvestigatorSearchModal} from '../../../../alma-investigator-search/components/modal/modal.component';
 import {AlmaInvestigatorSearchService} from '../../../../alma-investigator-search/services/alma-investigator-search.service';
 import {ProjectService} from '../../../../shared/services/project.service';
-import {IAlmaInvestigator} from '../../../../shared/interfaces/alma-investigator.interface';
 import {IInvestigator} from '../../../../shared/interfaces/apdm/investigator.interface';
 
 /**
@@ -48,10 +46,7 @@ export class PiSearchComponent implements OnInit {
 
   constructor(private almaInvestigatorSearchService: AlmaInvestigatorSearchService,
               private projectService: ProjectService,
-              private suiModalService: SuiModalService,
-              private toastMgr: ToastsManager,
-              viewContainerRef: ViewContainerRef) {
-    this.toastMgr.setRootViewContainerRef(viewContainerRef);
+              private suiModalService: SuiModalService) {
   }
 
   ngOnInit() {

@@ -22,7 +22,6 @@
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SuiModule} from 'ng2-semantic-ui';
-import {ToastModule} from 'ng2-toastr';
 import {AlmaInvestigatorSearchModule} from '../alma-investigator-search/alma-investigator-search.module';
 import {AlmaInvestigatorSearchService} from '../alma-investigator-search/services/alma-investigator-search.service';
 import {ScienceGoalModule} from '../science-goal/science-goal.module';
@@ -45,7 +44,6 @@ import {ProjectComponent} from './project.component';
     ProjectRoutingModule,
     SuiModule,
     ReactiveFormsModule,
-    ToastModule.forRoot(),
   ],
   declarations: [
     PlannedObservingComponent,

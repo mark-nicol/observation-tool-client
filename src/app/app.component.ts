@@ -38,8 +38,7 @@ export class AppComponent {
   /** The title of the app */
   title = 'app';
 
-  constructor(config: SuiPopupConfig, toastr: ToastsManager, vRef: ViewContainerRef) {
+  constructor(config: SuiPopupConfig) {
     config.delay = 1000;
-    toastr.setRootViewContainerRef(vRef);
   }
 }

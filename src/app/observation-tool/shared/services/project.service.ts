@@ -25,7 +25,6 @@ import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {tap} from 'rxjs/operators';
-import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
 import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
@@ -53,8 +52,7 @@ export class ProjectService implements CanActivate {
    * Constructor, loads data and sets members
    */
   constructor(private http: HttpClient,
-              private router: Router,
-              private toastr: ToastsManager) {
+              private router: Router) {
   }
 
   get currentTarget(): BehaviorSubject<number> {
@@ -163,7 +161,7 @@ export class ProjectService implements CanActivate {
       this.loadScienceGoal(this._currentGoal);
     } else {
       this._loadedProposal.getValue().scienceGoals = undefined;
-      this.router.navigate(['/project']).then(() => this.toastr.info('All science goals removed'));
+      this.router.navigate(['/project']).then(() => {/*this.toastr.info('All science goals removed')*/});
     }
   }
 
@@ -184,7 +182,9 @@ export class ProjectService implements CanActivate {
     }
     if (this._loadedGoal.getValue().targetParameters.length <= 0) {
       this._loadedGoal.getValue().targetParameters = undefined;
-      this.router.navigate(['/science-goals/general']).then(() => this.toastr.info('All sources removed'));
+      this.router.navigate(['/science-goals/general']).then(() => {
+        // this.toastr.info('All sources removed')
+      });
     }
   }
 
@@ -221,13 +221,13 @@ export class ProjectService implements CanActivate {
   handleError(error: HttpErrorResponse) {
     console.log(error);
     if (error.status === 0) { // No server found or CORS
-      this.toastr.error('Could not connect to server', 'Error').then();
+      // this.toastr.error('Could not connect to server', 'Error').then();
     } else if (error.status === 404) {
-      this.toastr.error('Not found', 'Error').then();
+      // this.toastr.error('Not found', 'Error').then();
     } else if (error.status === 500) {
-      this.toastr.error('Server error', 'Error').then();
+      // this.toastr.error('Server error', 'Error').then();
     } else {
-      this.toastr.error('Other error').then();
+      // this.toastr.error('Other error').then();
     }
     return new ErrorObservable('Broke');
   }

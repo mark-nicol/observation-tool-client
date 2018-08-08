@@ -37,7 +37,6 @@
     "fs": "0.0.1-security",
     "lodash.merge": "^4.6.0",
     "ng2-semantic-ui": "^0.9.7",
-    "ng2-toastr": "^4.1.2",
     "ngx-pagination": "^3.1.0",
     "ngx-papaparse": "^1.2.5",
     "rxjs": "^5.5.0",

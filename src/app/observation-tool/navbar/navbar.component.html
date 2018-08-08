@@ -71,26 +71,33 @@
                       (click)="addScienceGoal()"><i class="add icon"></i>Add Goal
               </button>
               <button class="ui red button"
-              (click)="removeScienceGoal()"><i class="minus icon"></i>Remove Goal</button>
+                      (click)="removeScienceGoal()"><i class="minus icon"></i>Remove Goal
+              </button>
             </div>
           </div>
         </div>
       </div>
     </ng-container>
-    <div class="ui right dropdown item" suiDropdown>
-      <i class="user icon"></i>
-      User
-      <i class="dropdown icon"></i>
-      <div class="menu" suiDropdownMenu>
-        <div class="item" (click)="makeProjectImportModal()">
-          <i class="open folder icon"></i>Open Project
+    <div class="ui right secondary menu">
+      <div class="item"
+           *ngIf="isSaving">
+        <div class="ui tiny active inline inverted loader"></div>
+      </div>
+      <div class="ui right dropdown item" suiDropdown>
+        <i class="user icon"></i>
+        User
+        <i class="dropdown icon"></i>
+        <div class="menu" suiDropdownMenu>
+          <div class="item" (click)="makeProjectImportModal()">
+            <i class="open folder icon"></i>Open Project
+          </div>
+          <div class="item">
+            <i class="sign out icon"></i>Logout
+          </div>
+          <a class="item" href="http://www.eso.org/UserPortal">
+            <i class="setting icon"></i>User Portal
+          </a>
         </div>
-        <div class="item">
-          <i class="sign out icon"></i>Logout
-        </div>
-        <a class="item" href="http://www.eso.org/UserPortal">
-          <i class="setting icon"></i>User Portal
-        </a>
       </div>
     </div>
   </div>

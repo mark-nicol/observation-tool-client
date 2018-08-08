@@ -45,6 +45,8 @@ export class ProjectService implements CanActivate {
   private _loadedGoal = new BehaviorSubject<IScienceGoal>(null);
   private _currentGoal = 0;
 
+  isSaving = new BehaviorSubject<boolean>(false);
+
   private _selectedProject: IProjectListItem;
 
   /**
@@ -193,14 +195,18 @@ export class ProjectService implements CanActivate {
   }
 
   updateProject(updates: IObsProject) {
+    this.isSaving.next(true);
     this.http.put<IObsProject>(`${this.baseUrl}/project`, Object.assign(this._loadedProject.getValue(), updates)).subscribe(response => {
       this._loadedProject.next(response);
+      this.isSaving.next(false);
     });
   }
 
   updateProposal(updates: IObsProposal) {
+    this.isSaving.next(true);
     this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, Object.assign(this._loadedProposal.getValue(), updates)).subscribe(response => {
       this._loadedProposal.next(response);
+      this.isSaving.next(false);
     });
   }
 

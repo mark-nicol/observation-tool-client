@@ -26,13 +26,17 @@ import {AppComponent} from './app.component';
 import {NavbarModule} from './observation-tool/navbar/navbar.module';
 import {ProjectModule} from './observation-tool/project/project.module';
 import {SharedModule} from './observation-tool/shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     NavbarModule,
     ProjectModule,
     SharedModule,
+    ToastrModule.forRoot(),
     AppRoutingModule,
   ],
   declarations: [

@@ -146,7 +146,6 @@ export class ProjectService implements CanActivate {
   }
 
   addScienceGoal() {
-    console.log('add science goal', `${this.baseUrl}/science-goal?entityRef=${this._loadedProject.value.obsProposalRef.entityId}`);
     const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.put<IObsProposal>(`${this.baseUrl}/science-goal`, null, options)
       .pipe(tap(
@@ -162,7 +161,15 @@ export class ProjectService implements CanActivate {
   }
 
   removeScienceGoal() {
-    this._loadedProposal.getValue().scienceGoals.splice(this._currentGoal, 1);
+    const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
+    this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal}`, options)
+      .pipe(tap(
+        null,
+        error => this.handleError(error))
+      )
+      .subscribe(
+        result => this._loadedProposal.next(result)
+      );
     this._currentGoal--;
     if (this._currentGoal === -1) {
       this._currentGoal = 0;

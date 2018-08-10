@@ -165,8 +165,8 @@ export class ProjectService implements CanActivate {
     this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal}`, options)
       .pipe(tap(
         null,
-        error => this.handleError(error))
-      )
+        error => this.handleError(error)
+      ))
       .subscribe(
         result => this._loadedProposal.next(result)
       );
@@ -185,16 +185,28 @@ export class ProjectService implements CanActivate {
   }
 
   addSource() {
-    // TODO Fix
-    // if (this.hasSources()) {
-    //   this._loadedGoal.getValue().TargetParameters.push(new TargetParameters());
-    // } else {
-    //   this._loadedGoal.getValue().TargetParameters = [new TargetParameters()];
-    // }
+    console.log(this._loadedProposal.getValue());
+    const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
+    this.http.put<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal}/source`, null, options)
+      .pipe(tap(
+        null,
+        error => this.handleError(error)
+      ))
+      .subscribe(
+        result => this._loadedProposal.next(result)
+      );
   }
 
   removeSource() {
-    this._loadedGoal.getValue().targetParameters.splice(this._currentTarget.getValue(), 1);
+    const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
+    this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal}/source/${this._currentTarget.getValue()}`, options)
+      .pipe(tap(
+        null,
+        error => this.handleError(error)
+      ))
+      .subscribe(
+        result => this._loadedProposal.next(result)
+      );
     this._currentTarget.next(this._currentTarget.value - 1);
     if (this._currentTarget.value === -1) {
       this._currentTarget.next(0);
@@ -202,7 +214,7 @@ export class ProjectService implements CanActivate {
     if (this._loadedGoal.getValue().targetParameters.length <= 0) {
       this._loadedGoal.getValue().targetParameters = undefined;
       this.router.navigate(['/science-goals/general']).then(() => {
-        // this.toastr.info('All sources removed')
+        this.toasts.info('All sources removed')
       });
     }
   }

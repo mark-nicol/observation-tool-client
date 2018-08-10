@@ -125,13 +125,14 @@ export class ProjectService implements CanActivate {
 
   hasScienceGoals(): boolean {
     if (this.hasProposalLoaded()) {
-      return this._loadedProposal.value.scienceGoals !== (null || undefined);
+      return this._loadedProposal.getValue().scienceGoals !== (null || undefined || []) && this._loadedProposal.getValue().scienceGoals.length !== 0;
     }
+    return false;
   }
 
   hasSources(): boolean {
     if (this.hasScienceGoals()) {
-      return this._loadedGoal.getValue().targetParameters !== (null || undefined);
+      return this._loadedGoal.getValue().targetParameters !== (null || undefined) && this._loadedGoal.getValue().targetParameters.length !== 0;
     }
     return false;
   }
@@ -235,7 +236,7 @@ export class ProjectService implements CanActivate {
     } else if (error.status === 404) {
       this.toasts.error('Not found', 'Error');
     } else if (error.status === 500) {
-      this.toasts.error('Server error', 'Error');
+      this.toasts.error(`Server error\n${error.error.exception}`, 'Error');
     } else {
       this.toasts.error('Other error');
     }

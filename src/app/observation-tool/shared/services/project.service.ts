@@ -199,7 +199,7 @@ export class ProjectService implements CanActivate {
 
   removeSource() {
     const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
-    this.http.put<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal}/source/${this._currentTarget.getValue()}`, options)
+    this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal}/source/${this._currentTarget.getValue()}`, options)
       .pipe(tap(
         null,
         error => this.handleError(error)

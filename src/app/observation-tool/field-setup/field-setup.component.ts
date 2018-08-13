@@ -124,22 +124,13 @@ export class FieldSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.currentTarget.subscribe(result => {
-      this.currentTarget = result;
-      this.initForm(result)
+    this.projectService.currentTarget.subscribe((sourceIndex: number) => {
+      this.currentTarget = sourceIndex;
+      const goalIndex = this.projectService.currentGoal.getValue();
+      this.form.patchValue(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]);
+      this.setFields(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex].fields);
     });
     this.observeFormChanges();
-  }
-
-  initForm(index: number) {
-    this.projectService.loadedGoal.subscribe((result: IScienceGoal) => {
-      if (result.targetParameters[index]) {
-        const targetParams = result.targetParameters[index];
-        this.form.patchValue(targetParams);
-        this.setFields(targetParams.fields);
-      }
-    });
-
   }
 
   setFields(fields: IField[]) {

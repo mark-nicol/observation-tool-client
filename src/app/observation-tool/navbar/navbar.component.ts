@@ -115,8 +115,7 @@ export class NavbarComponent implements OnInit {
 
   setCurrentGoal(event: number) {
     this.projectService.setCurrentTarget(0);
-    this.projectService.loadScienceGoal(event);
-    this.projectService.currentGoal = event;
+    this.projectService.setCurrentGoal(event);
     if (this.router.url.indexOf('science-goals') < 0) {
       this.router.navigate(['science-goals']).then();
     }

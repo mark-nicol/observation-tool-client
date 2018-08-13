@@ -80,10 +80,9 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.loadScienceGoal(this.projectService.currentGoal);
     this.projectService.loadedProposal.subscribe(result => {
-      this.goalName = result.scienceGoals[this.projectService.currentGoal].name;
-      this._targets = result.scienceGoals[this.projectService.currentGoal].targetParameters;
+      this.goalName = result.scienceGoals[this.projectService.currentGoal.getValue()].name;
+      this._targets = result.scienceGoals[this.projectService.currentGoal.getValue()].targetParameters;
     });
     this.projectService.currentTarget.subscribe(result => {
       this.currentTarget = result;

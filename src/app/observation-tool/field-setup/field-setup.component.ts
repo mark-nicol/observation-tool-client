@@ -32,10 +32,6 @@ import {ISinglePoint} from '../shared/interfaces/apdm/single-point.interface';
 /**
  * Handles the field setup page of a science goal
  */
-
-/* TODO Fix form to match model
- * Is there a way to make forms from interfaces
-*/
 @Component({
   selector: 'field-setup',
   templateUrl: './field-setup.component.html',
@@ -104,8 +100,6 @@ export class FieldSetupComponent implements OnInit {
     this._resolveCoordinates = value;
   }
 
-  currentTarget = 0;
-
   private _resolveCoordinates: number[];
 
   /**
@@ -125,9 +119,10 @@ export class FieldSetupComponent implements OnInit {
   ngOnInit() {
     this.projectService.currentGoal.subscribe((goalIndex: number) => {
       this.projectService.currentTarget.subscribe((sourceIndex: number) => {
-        this.currentTarget = sourceIndex;
-        this.form.patchValue(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]);
-        this.setFields(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex].fields);
+        if (this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]) {
+          this.form.patchValue(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]);
+          this.setFields(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex].fields);
+        }
       });
     });
     this.observeFormChanges();

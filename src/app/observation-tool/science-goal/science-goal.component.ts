@@ -64,7 +64,7 @@ export class ScienceGoalComponent implements OnInit {
     }
   };
 
-  _targets: ITargetParameters[];
+  _targets: ITargetParameters[] = [];
   currentTarget: number;
   goalName: string;
 
@@ -83,15 +83,13 @@ export class ScienceGoalComponent implements OnInit {
     this.projectService.currentGoal.subscribe((goalIndex: number) => {
       this.goalName = this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].name;
       this._targets = this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters;
-      this.projectService.currentTarget.subscribe(result => {
-        this.currentTarget = result;
-      });
+    });
+    this.projectService.currentTarget.subscribe(result => {
+      this.currentTarget = result;
     });
   }
 
   changeTarget(index: number) {
-    console.log('Changing target');
-    console.log(this._targets);
     this.projectService.setCurrentTarget(index);
   }
 

@@ -121,7 +121,7 @@ export class ProjectService implements CanActivate {
 
   removeScienceGoal() {
     const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
-    this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal}`, options)
+    this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal.getValue()}`, options)
       .pipe(tap(
         null,
         error => this.handleError(error)
@@ -143,7 +143,7 @@ export class ProjectService implements CanActivate {
   addSource() {
     console.log(this._loadedProposal.getValue());
     const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
-    this.http.put<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal}/source`, null, options)
+    this.http.put<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal.getValue()}/source`, null, options)
       .pipe(tap(
         null,
         error => this.handleError(error)
@@ -155,7 +155,7 @@ export class ProjectService implements CanActivate {
 
   removeSource() {
     const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
-    this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal}/source/${this._currentTarget.getValue()}`, options)
+    this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal.getValue()}/source/${this._currentTarget.getValue()}`, options)
       .pipe(tap(
         null,
         error => this.handleError(error)

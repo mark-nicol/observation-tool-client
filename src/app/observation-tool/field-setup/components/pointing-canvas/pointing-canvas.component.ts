@@ -66,14 +66,20 @@ export class PointingCanvasComponent implements OnInit {
 
   ngOnInit() {
     this.setupSvg();
-    this.form.value.SinglePoint.forEach((point: ISinglePoint) => {
-      this.drawPointing(
-        this.form.value.sourceCoordinates.longitude.content + Object.assign(
-        new Longitude,
-        point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
-        this.form.value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
-      );
-    });
+    if (this.form.value.fields[0]['@type'] === 'SinglePointT') {
+      this.form.value.fields.forEach((point: ISinglePoint) => {
+        if (point.centre.type === 'RELATIVE') {
+          this.drawPointing(
+            this.form.value.sourceCoordinates.longitude.content + Object.assign(
+            new Longitude,
+            point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+            this.form.value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+          );
+        } else {
+          this.drawPointing(Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG), Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG));
+        }
+      });
+    }
     this.observeFormChanges();
   }
 

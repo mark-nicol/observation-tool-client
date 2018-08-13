@@ -106,6 +106,7 @@ export class AladinService {
   }
 
   addRectangle(target: ISkyCoordinates, rect: IRectangle) {
+    console.log(target, rect);
     const targetLonDeg = Object.assign(new Longitude, target.longitude).getValueInUnits(LongitudeUnits.DEG);
     const targetLatDeg = Object.assign(new Latitude, target.latitude).getValueInUnits(LatitudeUnits.DEG);
     const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);

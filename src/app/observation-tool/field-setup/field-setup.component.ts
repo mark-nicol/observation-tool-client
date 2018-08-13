@@ -25,7 +25,6 @@ import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {Observable} from 'rxjs/Rx';
 import {ProjectService} from '../shared/services/project.service';
-import {IScienceGoal} from '../shared/interfaces/apdm/science-goal.interface';
 import {IField} from '../shared/interfaces/apdm/field.interface';
 import {IRectangle} from '../shared/interfaces/apdm/rectangle.interface';
 import {ISinglePoint} from '../shared/interfaces/apdm/single-point.interface';
@@ -124,11 +123,12 @@ export class FieldSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.currentTarget.subscribe((sourceIndex: number) => {
-      this.currentTarget = sourceIndex;
-      const goalIndex = this.projectService.currentGoal.getValue();
-      this.form.patchValue(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]);
-      this.setFields(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex].fields);
+    this.projectService.currentGoal.subscribe((goalIndex: number) => {
+      this.projectService.currentTarget.subscribe((sourceIndex: number) => {
+        this.currentTarget = sourceIndex;
+        this.form.patchValue(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]);
+        this.setFields(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex].fields);
+      });
     });
     this.observeFormChanges();
   }

@@ -28,6 +28,7 @@ import {SuiModalService} from 'ng2-semantic-ui';
 import {ProjectImportModal} from '../shared/components/project-import-modal/project-import-modal.component';
 import {IScienceGoal} from '../shared/interfaces/apdm/science-goal.interface';
 import {IObsProject} from '../shared/interfaces/apdm/obs-project.interface';
+import {IObsProposal} from '../shared/interfaces/apdm/obs-proposal.interface';
 
 /**
  * The navbar component at the top of the application
@@ -76,6 +77,7 @@ export class NavbarComponent implements OnInit {
   userMenuOpen = true;
   scienceGoalMenuOpen = true;
   isSaving = false;
+  _scienceGoals: IScienceGoal[];
 
   constructor(protected router: Router,
               public projectService: ProjectService,
@@ -89,6 +91,12 @@ export class NavbarComponent implements OnInit {
    */
   ngOnInit() {
     this.projectService.isSaving.subscribe(result => this.isSaving = result);
+    this.projectService.loadedProposal.subscribe((proposal: IObsProposal) => {
+      if (proposal) {
+        this._scienceGoals = proposal.scienceGoals;
+      }
+
+    });
   }
 
   /**
@@ -114,7 +122,6 @@ export class NavbarComponent implements OnInit {
   }
 
   setCurrentGoal(event: number) {
-    this.projectService.setCurrentTarget(0);
     this.projectService.setCurrentGoal(event);
     if (this.router.url.indexOf('science-goals') < 0) {
       this.router.navigate(['science-goals']).then();

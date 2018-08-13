@@ -230,7 +230,12 @@ export class ProjectService implements CanActivate {
   }
 
   setCurrentGoal(value: number) {
-    this._currentGoal.next(value);
+    this._currentTarget.next(0);
+    if (value >= this._loadedProposal.getValue().scienceGoals.length) {
+      this._currentGoal.next(0);
+    } else {
+      this._currentGoal.next(value);
+    }
   }
 
   get currentTarget(): BehaviorSubject<number> {

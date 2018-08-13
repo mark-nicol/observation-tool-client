@@ -29,6 +29,9 @@ import {Longitude} from '../../../../units/classes/longitude';
 import {AladinService} from '../../services/aladin.service';
 import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
+import {IRectangle} from '../../../shared/interfaces/apdm/rectangle.interface';
+import {AngleUnits} from '../../../../units/enums/angle-units.enum';
+import {Angle} from '../../../../units/classes/angle';
 
 
 @Component({
@@ -79,6 +82,8 @@ export class PointingCanvasComponent implements OnInit {
           this.drawPointing(Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG), Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG));
         }
       });
+    } else if (this.form.value.fields[0]['@type'] === 'RectangleT') {
+      this.drawRectangle(this.form.value.fields[0]);
     }
     this.observeFormChanges();
   }
@@ -122,6 +127,16 @@ export class PointingCanvasComponent implements OnInit {
       .attr('fill', 'none')
       .style('stroke-width', '2px')
       .style('stroke', 'lime');
+  }
+
+  drawRectangle(rect: IRectangle) {
+    const pix = this.aladinService.coordsWorldToPix([rect.centre.longitude.content, rect.centre.latitude.content]);
+    this.svg.append('rect')
+      .attr('x', pix[1])
+      .attr('y', pix[0])
+      .attr('width', rect.short.content)
+      .attr('height', rect.long.content)
+      .attr('transform', `rotate(${Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.DEG)})`);
   }
 
   cutPolygons() {

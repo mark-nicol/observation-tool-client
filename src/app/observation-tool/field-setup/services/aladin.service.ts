@@ -94,6 +94,9 @@ export class AladinService {
   }
 
   coordsWorldToPix(coordsWorld: number[]): number[] {
+    console.log(coordsWorld);
+    console.log('world to pix', this._aladin.world2pix);
+    console.log(this._aladin);
     return this._aladin.world2pix(coordsWorld[0], coordsWorld[1]);
   }
 
@@ -106,7 +109,6 @@ export class AladinService {
   }
 
   addRectangle(target: ISkyCoordinates, rect: IRectangle) {
-    console.log(target, rect);
     const targetLonDeg = Object.assign(new Longitude, target.longitude).getValueInUnits(LongitudeUnits.DEG);
     const targetLatDeg = Object.assign(new Latitude, target.latitude).getValueInUnits(LatitudeUnits.DEG);
     const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);

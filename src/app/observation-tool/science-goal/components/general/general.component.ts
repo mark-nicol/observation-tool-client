@@ -22,8 +22,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ProjectService} from '../../../shared/services/project.service';
-import {Observable} from '../../../../../../node_modules/rxjs';
-import {IScienceGoal} from '../../../shared/interfaces/apdm/science-goal.interface';
+import {Observable} from 'rxjs';
 
 /**
  * General science goal page component
@@ -38,7 +37,6 @@ import {IScienceGoal} from '../../../shared/interfaces/apdm/science-goal.interfa
 export class GeneralComponent implements OnInit {
 
   form: FormGroup;
-  scienceGoal: IScienceGoal;
 
   constructor(private projectService: ProjectService,
               private formBuilder: FormBuilder) {

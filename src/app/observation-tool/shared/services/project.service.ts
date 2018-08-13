@@ -114,7 +114,6 @@ export class ProjectService implements CanActivate {
         }
       ))
       .subscribe(result => {
-        console.log(result);
         this._loadedProposal.next(result);
       });
   }
@@ -141,7 +140,6 @@ export class ProjectService implements CanActivate {
   }
 
   addSource() {
-    console.log(this._loadedProposal.getValue());
     const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
     this.http.put<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal.getValue()}/source`, null, options)
       .pipe(tap(
@@ -194,6 +192,14 @@ export class ProjectService implements CanActivate {
       this._loadedProposal.next(response);
       this.isSaving.next(false);
     });
+  }
+
+  updateScienceGoal(updates: any) {
+    let scienceGoal = this._loadedProposal.getValue().scienceGoals[this._currentGoal.getValue()];
+    scienceGoal = Object.assign(scienceGoal, updates);
+    const proposal = this._loadedProposal.getValue();
+    proposal.scienceGoals[this._currentGoal.getValue()] = Object.assign(this._loadedProposal.getValue().scienceGoals[this._currentGoal.getValue()], updates);
+    this.updateProposal(proposal);
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {

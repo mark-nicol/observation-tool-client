@@ -133,6 +133,7 @@ export class FieldSetupComponent implements OnInit {
     let formGroups = [];
     if (this.form.getRawValue().type === 'F_SingleRectangle') {
       formGroups = fields.map((point: IRectangle) => this.formBuilder.group({
+        '@type': point['@type'],
         name: point.name,
         centre: this.formBuilder.group({
           system: point.centre.system,
@@ -171,6 +172,7 @@ export class FieldSetupComponent implements OnInit {
       }));
     } else if (this.form.getRawValue().type === 'F_MultiplePoints') {
       formGroups = fields.map((point: ISinglePoint) => this.formBuilder.group({
+        '@type': point['@type'],
         name: point.name,
         centre: this.formBuilder.group({
           system: point.centre.system,

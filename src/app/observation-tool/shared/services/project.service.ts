@@ -30,6 +30,8 @@ import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
 import {IObsProject} from '../interfaces/apdm/obs-project.interface';
 import {IProjectListItem} from '../interfaces/project-list-item.interface';
 import {ToastrService} from 'ngx-toastr';
+import {ITargetParameters} from '../interfaces/apdm/target-parameters.interface';
+import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -77,7 +79,6 @@ export class ProjectService implements CanActivate {
   loadProposal() {
     const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
-      console.log(result);
       this._loadedProposal.next(result);
     });
   }
@@ -198,21 +199,21 @@ export class ProjectService implements CanActivate {
     });
   }
 
-  updateScienceGoal(updates: any) {
+  updateScienceGoal(updates: IScienceGoal) {
     const proposal = this._loadedProposal.getValue();
     proposal.scienceGoals[this._currentGoal.getValue()] = Object.assign(proposal.scienceGoals[this._currentGoal.getValue()], updates);
     this.updateProposal(proposal);
   }
 
-  updateSource(updates: any) {
+  updateSource(updates: ITargetParameters) {
     const proposal = this._loadedProposal.getValue();
     proposal
       .scienceGoals[this._currentGoal.getValue()]
       .targetParameters[this._currentTarget.getValue()]
-      = Object.assign(proposal
-      .scienceGoals[this._currentGoal.getValue()]
-      .targetParameters[this._currentTarget.getValue()], updates);
-    console.log(proposal);
+      = Object.assign(
+      proposal
+        .scienceGoals[this._currentGoal.getValue()]
+        .targetParameters[this._currentTarget.getValue()], updates);
     this.updateProposal(proposal);
   }
 

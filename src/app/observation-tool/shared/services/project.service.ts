@@ -77,6 +77,7 @@ export class ProjectService implements CanActivate {
   loadProposal() {
     const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.get<IObsProposal>(`${this.baseUrl}/proposal`, options).subscribe(result => {
+      console.log(result);
       this._loadedProposal.next(result);
     });
   }
@@ -147,7 +148,10 @@ export class ProjectService implements CanActivate {
         error => this.handleError(error)
       ))
       .subscribe(
-        result => this._loadedProposal.next(result)
+        result => {
+          console.log(result);
+          this._loadedProposal.next(result)
+        }
       );
   }
 
@@ -195,10 +199,20 @@ export class ProjectService implements CanActivate {
   }
 
   updateScienceGoal(updates: any) {
-    let scienceGoal = this._loadedProposal.getValue().scienceGoals[this._currentGoal.getValue()];
-    scienceGoal = Object.assign(scienceGoal, updates);
     const proposal = this._loadedProposal.getValue();
-    proposal.scienceGoals[this._currentGoal.getValue()] = Object.assign(this._loadedProposal.getValue().scienceGoals[this._currentGoal.getValue()], updates);
+    proposal.scienceGoals[this._currentGoal.getValue()] = Object.assign(proposal.scienceGoals[this._currentGoal.getValue()], updates);
+    this.updateProposal(proposal);
+  }
+
+  updateSource(updates: any) {
+    const proposal = this._loadedProposal.getValue();
+    proposal
+      .scienceGoals[this._currentGoal.getValue()]
+      .targetParameters[this._currentTarget.getValue()]
+      = Object.assign(proposal
+      .scienceGoals[this._currentGoal.getValue()]
+      .targetParameters[this._currentTarget.getValue()], updates);
+    console.log(proposal);
     this.updateProposal(proposal);
   }
 
@@ -211,6 +225,7 @@ export class ProjectService implements CanActivate {
   }
 
   handleError(error: HttpErrorResponse) {
+    this.isSaving.next(false);
     if (error.status === 0) { // No server found or CORS
       this.toasts.error('Could not connect to server', 'Error');
     } else if (error.status === 404) {

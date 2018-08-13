@@ -30,6 +30,8 @@ import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
 import {IObsProject} from '../interfaces/apdm/obs-project.interface';
 import {IProjectListItem} from '../interfaces/project-list-item.interface';
 import {ToastrService} from 'ngx-toastr';
+import {ITargetParameters} from '../interfaces/apdm/target-parameters.interface';
+import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -114,7 +116,6 @@ export class ProjectService implements CanActivate {
         }
       ))
       .subscribe(result => {
-        console.log(result);
         this._loadedProposal.next(result);
       });
   }
@@ -141,7 +142,6 @@ export class ProjectService implements CanActivate {
   }
 
   addSource() {
-    console.log(this._loadedProposal.getValue());
     const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
     this.http.put<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal.getValue()}/source`, null, options)
       .pipe(tap(
@@ -149,7 +149,10 @@ export class ProjectService implements CanActivate {
         error => this.handleError(error)
       ))
       .subscribe(
-        result => this._loadedProposal.next(result)
+        result => {
+          console.log(result);
+          this._loadedProposal.next(result)
+        }
       );
   }
 
@@ -196,6 +199,24 @@ export class ProjectService implements CanActivate {
     });
   }
 
+  updateScienceGoal(updates: IScienceGoal) {
+    const proposal = this._loadedProposal.getValue();
+    proposal.scienceGoals[this._currentGoal.getValue()] = Object.assign(proposal.scienceGoals[this._currentGoal.getValue()], updates);
+    this.updateProposal(proposal);
+  }
+
+  updateSource(updates: ITargetParameters) {
+    const proposal = this._loadedProposal.getValue();
+    proposal
+      .scienceGoals[this._currentGoal.getValue()]
+      .targetParameters[this._currentTarget.getValue()]
+      = Object.assign(
+      proposal
+        .scienceGoals[this._currentGoal.getValue()]
+        .targetParameters[this._currentTarget.getValue()], updates);
+    this.updateProposal(proposal);
+  }
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.hasProjectLoaded()) {
       return true
@@ -205,6 +226,7 @@ export class ProjectService implements CanActivate {
   }
 
   handleError(error: HttpErrorResponse) {
+    this.isSaving.next(false);
     if (error.status === 0) { // No server found or CORS
       this.toasts.error('Could not connect to server', 'Error');
     } else if (error.status === 404) {

@@ -121,7 +121,8 @@ export class FieldSetupComponent implements OnInit {
       this.projectService.currentTarget.subscribe((sourceIndex: number) => {
         if (this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]) {
           this.form.patchValue(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]);
-          this.setFields(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex].fields);
+          if (this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex].fields.length > 0)
+            this.setFields(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex].fields);
         }
       });
     });
@@ -132,6 +133,7 @@ export class FieldSetupComponent implements OnInit {
     let formGroups = [];
     if (this.form.getRawValue().type === 'F_SingleRectangle') {
       formGroups = fields.map((point: IRectangle) => this.formBuilder.group({
+        '@type': point['@type'],
         name: point.name,
         centre: this.formBuilder.group({
           system: point.centre.system,
@@ -170,6 +172,7 @@ export class FieldSetupComponent implements OnInit {
       }));
     } else if (this.form.getRawValue().type === 'F_MultiplePoints') {
       formGroups = fields.map((point: ISinglePoint) => this.formBuilder.group({
+        '@type': point['@type'],
         name: point.name,
         centre: this.formBuilder.group({
           system: point.centre.system,
@@ -194,7 +197,7 @@ export class FieldSetupComponent implements OnInit {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.form.dirty && this.form.valid) {
-        this.projectService.updateProposal(value);
+        this.projectService.updateSource(value);
         this.form.markAsPristine();
       }
     });

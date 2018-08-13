@@ -58,9 +58,9 @@
         {{items[3].title}}
         <i class="dropdown icon"></i>
         <div class="menu" suiDropdownMenu>
-          <div *ngFor="let goal of scienceGoals; let i = index"
+          <div *ngFor="let goal of _scienceGoals; let i = index"
                class="link item"
-               [class.active]="router.url.indexOf('science-goals') > -1 && projectService.currentGoal === i"
+               [class.active]="router.url.indexOf('science-goals') > -1 && projectService.currentGoal.getValue() === i"
                (click)="setCurrentGoal(i)">
             {{goal.name}}
           </div>
@@ -151,7 +151,7 @@
         <div class="secondary menu" [suiCollapse]="scienceGoalMenuOpen">
           <div *ngFor="let goal of scienceGoals; let i = index"
                class="link item"
-               [class.active]="router.url.indexOf('science-goals') > -1 && projectService.currentGoal === i"
+               [class.active]="router.url.indexOf('science-goals') > -1 && projectService.currentGoal.getValue() === i"
                (click)="setCurrentGoal(i); scienceGoalMenuOpen = !scienceGoalMenuOpen; mobileMenuOpen = !mobileMenuOpen">
             {{goal.name}}
           </div>

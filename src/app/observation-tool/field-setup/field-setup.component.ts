@@ -25,7 +25,6 @@ import {ActivatedRoute} from '@angular/router';
 import {SuiPopupConfig} from 'ng2-semantic-ui';
 import {Observable} from 'rxjs/Rx';
 import {ProjectService} from '../shared/services/project.service';
-import {IScienceGoal} from '../shared/interfaces/apdm/science-goal.interface';
 import {IField} from '../shared/interfaces/apdm/field.interface';
 import {IRectangle} from '../shared/interfaces/apdm/rectangle.interface';
 import {ISinglePoint} from '../shared/interfaces/apdm/single-point.interface';
@@ -33,10 +32,6 @@ import {ISinglePoint} from '../shared/interfaces/apdm/single-point.interface';
 /**
  * Handles the field setup page of a science goal
  */
-
-/* TODO Fix form to match model
- * Is there a way to make forms from interfaces
-*/
 @Component({
   selector: 'field-setup',
   templateUrl: './field-setup.component.html',
@@ -105,8 +100,6 @@ export class FieldSetupComponent implements OnInit {
     this._resolveCoordinates = value;
   }
 
-  currentTarget = 0;
-
   private _resolveCoordinates: number[];
 
   /**
@@ -124,22 +117,15 @@ export class FieldSetupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.currentTarget.subscribe(result => {
-      this.currentTarget = result;
-      this.initForm(result)
+    this.projectService.currentGoal.subscribe((goalIndex: number) => {
+      this.projectService.currentTarget.subscribe((sourceIndex: number) => {
+        if (this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]) {
+          this.form.patchValue(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex]);
+          this.setFields(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters[sourceIndex].fields);
+        }
+      });
     });
     this.observeFormChanges();
-  }
-
-  initForm(index: number) {
-    this.projectService.loadedGoal.subscribe((result: IScienceGoal) => {
-      if (result.targetParameters[index]) {
-        const targetParams = result.targetParameters[index];
-        this.form.patchValue(targetParams);
-        this.setFields(targetParams.fields);
-      }
-    });
-
   }
 
   setFields(fields: IField[]) {

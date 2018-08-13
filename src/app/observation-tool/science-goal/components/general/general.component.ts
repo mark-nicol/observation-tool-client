@@ -46,8 +46,8 @@ export class GeneralComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.loadedGoal.subscribe(result => {
-      this.form.patchValue(result);
+    this.projectService.currentGoal.subscribe((goalIndex: number) => {
+      this.form.patchValue(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex]);
     });
     this.observeFormChanges();
   }

@@ -139,4 +139,8 @@ export class NavbarComponent implements OnInit {
       });
   }
 
+  startNewProject() {
+    this.projectService.startNewProject();
+  }
+
 }

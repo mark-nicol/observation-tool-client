@@ -30,7 +30,6 @@ import {AladinService} from '../../services/aladin.service';
 import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
 import {IRectangle} from '../../../shared/interfaces/apdm/rectangle.interface';
-import {AngleUnits} from '../../../../units/enums/angle-units.enum';
 import {Angle} from '../../../../units/classes/angle';
 
 
@@ -130,13 +129,37 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   drawRectangle(rect: IRectangle) {
-    const pix = this.aladinService.coordsWorldToPix([rect.centre.longitude.content, rect.centre.latitude.content]);
-    this.svg.append('rect')
-      .attr('x', pix[1])
-      .attr('y', pix[0])
-      .attr('width', rect.short.content)
-      .attr('height', rect.long.content)
-      .attr('transform', `rotate(${Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.DEG)})`);
+    const rectCentreLon = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
+    const rectCentreLat = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LongitudeUnits.DEG);
+    const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(LongitudeUnits.DEG);
+    const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(LongitudeUnits.DEG);
+    const targCentreLon = Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG);
+    const targCentreLat = Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LongitudeUnits.DEG);
+    let actualLon;
+    let actualLat;
+    if (rect.centre.type === 'RELATIVE') {
+      actualLon = targCentreLon + rectCentreLon;
+      actualLat = targCentreLat + rectCentreLat;
+    } else if (rect.centre.type === 'ABSOLUTE') {
+      actualLon = rectCentreLon;
+      actualLat = rectCentreLat;
+    }
+
+    const p1 = {x: actualLon - rectLong * Math.sin(rect.palong.content), y: actualLat - rectShort / 2 * Math.cos(rect.palong.content)};
+    const p2 = {x: actualLon + rectLong * Math.cos(rect.palong.content), y: actualLat - rectShort / 2 * Math.sin(rect.palong.content)};
+    const p3 = {x: actualLon + rectLong * Math.sin(rect.palong.content), y: actualLat + rectShort / 2 * Math.cos(rect.palong.content)};
+    const p4 = {x: actualLon - rectLong * Math.cos(rect.palong.content), y: actualLat + rectShort / 2 * Math.sin(rect.palong.content)};
+
+    const p1Pix = this.aladinService.coordsWorldToPix([p1.x, p1.y]);
+    const p2Pix = this.aladinService.coordsWorldToPix([p2.x, p2.y]);
+    const p3Pix = this.aladinService.coordsWorldToPix([p3.x, p3.y]);
+    const p4Pix = this.aladinService.coordsWorldToPix([p4.x, p4.y]);
+
+    this.svg.append('polygon')
+      .attr('points', `${p1Pix[0]},${p1Pix[1]} ${p2Pix[0]},${p2Pix[1]} ${p3Pix[0]},${p3Pix[1]} ${p4Pix[0]},${p4Pix[1]}`)
+      .attr('fill', 'none')
+      .style('stroke-width', '2px')
+      .style('stroke', 'lime');
   }
 
   cutPolygons() {

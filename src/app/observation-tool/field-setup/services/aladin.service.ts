@@ -94,10 +94,11 @@ export class AladinService {
   }
 
   coordsWorldToPix(coordsWorld: number[]): number[] {
-    console.log(coordsWorld);
-    console.log('world to pix', this._aladin.world2pix);
-    console.log(this._aladin);
     return this._aladin.world2pix(coordsWorld[0], coordsWorld[1]);
+  }
+
+  degToPix(value: number): number {
+    return this.coordsWorldToPix([value, 0])[1]
   }
 
   get RaDec(): number[] {

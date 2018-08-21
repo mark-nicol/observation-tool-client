@@ -145,21 +145,42 @@ export class PointingCanvasComponent implements OnInit {
       actualLat = rectCentreLat;
     }
 
-    const p1 = {x: actualLon - rectLong * Math.sin(rect.palong.content), y: actualLat - rectShort / 2 * Math.cos(rect.palong.content)};
-    const p2 = {x: actualLon + rectLong * Math.cos(rect.palong.content), y: actualLat - rectShort / 2 * Math.sin(rect.palong.content)};
-    const p3 = {x: actualLon + rectLong * Math.sin(rect.palong.content), y: actualLat + rectShort / 2 * Math.cos(rect.palong.content)};
-    const p4 = {x: actualLon - rectLong * Math.cos(rect.palong.content), y: actualLat + rectShort / 2 * Math.sin(rect.palong.content)};
+    const p1 = {
+      x: actualLon - rectLong * Math.sin(rect.palong.content),
+      y: actualLat - rectShort / 2 * Math.cos(rect.palong.content)
+    };  // Bottom Left
+    const p2 = {
+      x: actualLon + rectLong * Math.cos(rect.palong.content),
+      y: actualLat - rectShort / 2 * Math.sin(rect.palong.content)
+    };  // Top Left
+    const p3 = {
+      x: actualLon + rectLong * Math.sin(rect.palong.content),
+      y: actualLat + rectShort / 2 * Math.cos(rect.palong.content)
+    };  // Top Right
+    const p4 = {
+      x: actualLon - rectLong * Math.cos(rect.palong.content),
+      y: actualLat + rectShort / 2 * Math.sin(rect.palong.content)
+    };  // Bottom Right
 
     const p1Pix = this.aladinService.coordsWorldToPix([p1.x, p1.y]);
     const p2Pix = this.aladinService.coordsWorldToPix([p2.x, p2.y]);
     const p3Pix = this.aladinService.coordsWorldToPix([p3.x, p3.y]);
     const p4Pix = this.aladinService.coordsWorldToPix([p4.x, p4.y]);
 
+    const xSidePix = p3Pix[0] - p2Pix[0];
+    const ySidePix = p1Pix[1] - p2Pix[1];
+
     this.svg.append('polygon')
       .attr('points', `${p1Pix[0]},${p1Pix[1]} ${p2Pix[0]},${p2Pix[1]} ${p3Pix[0]},${p3Pix[1]} ${p4Pix[0]},${p4Pix[1]}`)
       .attr('fill', 'none')
       .style('stroke-width', '2px')
       .style('stroke', 'lime');
+    this.svg.append('rect')
+      .attr('x', p2Pix[0])
+      .attr('y', p2Pix[1])
+      .attr('width', xSidePix)
+      .attr('height', ySidePix)
+      .attr('transform', `rotate(${-rect.palong.content})`);
   }
 
   cutPolygons() {

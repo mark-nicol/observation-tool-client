@@ -49,6 +49,7 @@ export class PointingCanvasComponent implements OnInit {
 
   @ViewChild('canvasContainer') private canvasContainer: ElementRef;
   private svg: any;
+  private drawArea: any;
   private width: number;
   private height: number;
 
@@ -94,6 +95,7 @@ export class PointingCanvasComponent implements OnInit {
     this.svg = d3.select(element).append('svg')
       .attr('width', element.offsetWidth)
       .attr('height', element.offsetHeight);
+    this.drawArea = this.svg.append('g').attr('class', 'draw-area');
   }
 
   click(event: MouseEvent) {
@@ -119,7 +121,7 @@ export class PointingCanvasComponent implements OnInit {
 
   drawPointing(ra: number, dec: number) {
     const worldCoords = this.aladinService.coordsWorldToPix([ra, dec]);
-    this.svg.append('circle')
+    this.drawArea.append('circle')
       .attr('cx', worldCoords[0])
       .attr('cy', worldCoords[1])
       .attr('r', this.aladinService.getCanvasRadius())
@@ -170,12 +172,12 @@ export class PointingCanvasComponent implements OnInit {
     const xSidePix = p3Pix[0] - p2Pix[0];
     const ySidePix = p1Pix[1] - p2Pix[1];
 
-    this.svg.append('polygon')
+    this.drawArea.append('polygon')
       .attr('points', `${p1Pix[0]},${p1Pix[1]} ${p2Pix[0]},${p2Pix[1]} ${p3Pix[0]},${p3Pix[1]} ${p4Pix[0]},${p4Pix[1]}`)
       .attr('fill', 'none')
       .style('stroke-width', '2px')
       .style('stroke', 'lime');
-    this.svg.append('rect')
+    this.drawArea.append('rect')
       .attr('x', p2Pix[0])
       .attr('y', p2Pix[1])
       .attr('width', xSidePix)

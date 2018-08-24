@@ -112,40 +112,43 @@ export class AladinService {
   addRectangle(target: ISkyCoordinates, rect: IRectangle) {
     const targetLonDeg = Object.assign(new Longitude, target.longitude).getValueInUnits(LongitudeUnits.DEG);
     const targetLatDeg = Object.assign(new Latitude, target.latitude).getValueInUnits(LatitudeUnits.DEG);
-    const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
-    const rectCentreLatDeg = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG);
-    const shortDeg = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
-    const longDeg = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
-    // top left
-    // x = centre - half short
-    // y = centre - half long
-    const topLeft = [
-      (targetLonDeg + rectCentreLonDeg) - (shortDeg / 2),
-      (targetLatDeg + rectCentreLatDeg) - (longDeg / 2)
-    ];
-    // top right
-    // x = centre + half short
-    // y = centre - half long
-    const topRight = [
-      (targetLonDeg + rectCentreLonDeg) + (shortDeg / 2),
-      (targetLatDeg + rectCentreLatDeg) - (longDeg / 2)
-    ];
-    // bottom right
-    // x = centre + half short
-    // y = centre + half long
-    const bottomRight = [
-      (targetLonDeg + rectCentreLonDeg) + (shortDeg / 2),
-      (targetLatDeg + rectCentreLatDeg) + (longDeg / 2)
-    ];
-    // bottom left
-    // x = centre - half short
-    // y = centre + half long
-    const bottomLeft = [
-      (targetLonDeg + rectCentreLonDeg) - (shortDeg / 2),
-      (targetLatDeg + rectCentreLatDeg) + (longDeg / 2)
-    ];
+    const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG) * 1.8;
+    const rectCentreLatDeg = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG) * 1.05;
+    console.log(`rect lon before convert: ${rect.centre.longitude.content} ${rect.centre.longitude.unit}`);
+    console.log(`rect lat before convert: ${rect.centre.latitude.content} ${rect.centre.latitude.unit}`);
+    console.log(`rect lon after convert: ${rectCentreLonDeg} ${LongitudeUnits.DEG}`);
+    console.log(`rect lat after convert: ${rectCentreLatDeg} ${LatitudeUnits.DEG}`);
+    const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
+    const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
+
+    let actualLon;
+    let actualLat;
+    if (rect.centre.type === 'RELATIVE') {
+      actualLon = targetLonDeg + rectCentreLonDeg;
+      actualLat = targetLatDeg + rectCentreLatDeg;
+    } else if (rect.centre.type === 'ABSOLUTE') {
+      actualLon = rectCentreLonDeg;
+      actualLat = rectCentreLatDeg;
+    }
+
+    const p1 = {
+      x: actualLon - rectLong * Math.sin(rect.palong.content),
+      y: actualLat - rectShort / 2 * Math.cos(rect.palong.content)
+    };  // Bottom Left
+    const p2 = {
+      x: actualLon + rectLong * Math.cos(rect.palong.content),
+      y: actualLat - rectShort / 2 * Math.sin(rect.palong.content)
+    };  // Top Left
+    const p3 = {
+      x: actualLon + rectLong * Math.sin(rect.palong.content),
+      y: actualLat + rectShort / 2 * Math.cos(rect.palong.content)
+    };  // Top Right
+    const p4 = {
+      x: actualLon - rectLong * Math.cos(rect.palong.content),
+      y: actualLat + rectShort / 2 * Math.sin(rect.palong.content)
+    };  // Bottom Right
     // draw
-    this._overlay.addFootprints([A.polygon([topLeft, topRight, bottomRight, bottomLeft])]);
+    this._overlay.addFootprints([A.polygon([[p1.x, p1.y], [p2.x, p2.y], [p3.x, p3.y], [p4.x, p4.y]])]);
   }
 
   goToObject(objectName: string, ra: number, dec: number) {

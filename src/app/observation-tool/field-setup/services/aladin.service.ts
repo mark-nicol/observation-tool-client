@@ -43,7 +43,7 @@ export class AladinService {
   private _initialConfig: IAladinConfig = {
     cooFrame: 'ICRS',
     survey: 'P/DSS2/color',
-    fov: 0.95,
+    fov: 0.25,
     showReticle: true,
     showZoomControl: false,
     showLayersControl: true,
@@ -73,7 +73,7 @@ export class AladinService {
       sourceSize: 20
     });
     this._aladin.addCatalog(this._catalogue);
-    this._overlay = A.graphicOverlay({color: '#FFAA00', lineWidth: 3});
+    this._overlay = A.graphicOverlay({color: '#009900', lineWidth: 3});
     this._aladin.addOverlay(this._overlay);
   }
 
@@ -109,46 +109,43 @@ export class AladinService {
     this._overlay.add(A.circle(ra, dec, this._radius, {color: '#FFAA00'}));
   }
 
+  static rotatedPoint(centreX, centreY, offsetX, offsetY, angle): { x: number, y: number } {
+    return {
+      x: centreX + (offsetX * Math.cos(angle)) - (offsetY * Math.sin(angle)),
+      y: centreY + (offsetX * Math.sin(angle)) + (offsetY * Math.cos(angle))
+    }
+  }
+
   addRectangle(target: ISkyCoordinates, rect: IRectangle) {
     const targetLonDeg = Object.assign(new Longitude, target.longitude).getValueInUnits(LongitudeUnits.DEG);
     const targetLatDeg = Object.assign(new Latitude, target.latitude).getValueInUnits(LatitudeUnits.DEG);
     const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG) * 1.8;
     const rectCentreLatDeg = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG) * 1.05;
-    console.log(`rect lon before convert: ${rect.centre.longitude.content} ${rect.centre.longitude.unit}`);
-    console.log(`rect lat before convert: ${rect.centre.latitude.content} ${rect.centre.latitude.unit}`);
-    console.log(`rect lon after convert: ${rectCentreLonDeg} ${LongitudeUnits.DEG}`);
-    console.log(`rect lat after convert: ${rectCentreLatDeg} ${LatitudeUnits.DEG}`);
-    const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
-    const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
+    const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG) * 1.05;
+    const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG) * 1.8;
+    const rectAngle = Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.RAD);
+    let actualCentreLon, actualCentreLat;
 
-    let actualLon;
-    let actualLat;
     if (rect.centre.type === 'RELATIVE') {
-      actualLon = targetLonDeg + rectCentreLonDeg;
-      actualLat = targetLatDeg + rectCentreLatDeg;
+      actualCentreLon = targetLonDeg + rectCentreLonDeg;
+      actualCentreLat = targetLatDeg + rectCentreLatDeg;
     } else if (rect.centre.type === 'ABSOLUTE') {
-      actualLon = rectCentreLonDeg;
-      actualLat = rectCentreLatDeg;
+      actualCentreLon = rectCentreLonDeg;
+      actualCentreLat = rectCentreLatDeg;
     }
 
-    const p1 = {
-      x: actualLon - rectLong * Math.sin(rect.palong.content),
-      y: actualLat - rectShort / 2 * Math.cos(rect.palong.content)
-    };  // Bottom Left
-    const p2 = {
-      x: actualLon + rectLong * Math.cos(rect.palong.content),
-      y: actualLat - rectShort / 2 * Math.sin(rect.palong.content)
-    };  // Top Left
-    const p3 = {
-      x: actualLon + rectLong * Math.sin(rect.palong.content),
-      y: actualLat + rectShort / 2 * Math.cos(rect.palong.content)
-    };  // Top Right
-    const p4 = {
-      x: actualLon - rectLong * Math.cos(rect.palong.content),
-      y: actualLat + rectShort / 2 * Math.sin(rect.palong.content)
-    };  // Bottom Right
-    // draw
-    this._overlay.addFootprints([A.polygon([[p1.x, p1.y], [p2.x, p2.y], [p3.x, p3.y], [p4.x, p4.y]])]);
+    const topLeft = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, -(rectLong / 2), -(rectShort / 2), -rectAngle);
+    const topRight = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, (rectLong / 2), -(rectShort / 2), -rectAngle);
+    const bottomRight = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, (rectLong / 2), (rectShort / 2), -rectAngle);
+    const bottomLeft = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, -(rectLong / 2), (rectShort / 2), -rectAngle);
+
+    this._overlay.addFootprints(A.polygon([
+      [topLeft.x, topLeft.y],
+      [topRight.x, topRight.y],
+      [bottomRight.x, bottomRight.y],
+      [bottomLeft.x, bottomLeft.y]
+    ]))
+
   }
 
   goToObject(objectName: string, ra: number, dec: number) {

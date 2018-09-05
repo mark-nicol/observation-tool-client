@@ -31,6 +31,7 @@ import {ITargetParameters} from '../../../shared/interfaces/apdm/target-paramete
 import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
 import {IRectangle} from '../../../shared/interfaces/apdm/rectangle.interface';
 import {Angle} from '../../../../units/classes/angle';
+import {AngleUnits} from '../../../../units/enums/angle-units.enum';
 
 
 @Component({
@@ -130,59 +131,120 @@ export class PointingCanvasComponent implements OnInit {
       .style('stroke', 'lime');
   }
 
+  get degreesPerPixel(): number {
+    const aladinCorners = this.aladinService.getFovCorners();
+    const aladinWidth = aladinCorners[0][0] - aladinCorners[1][0];
+    return this.width / aladinWidth;
+  }
+
   drawRectangle(rect: IRectangle) {
+    const rectCentreLon = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG) * 1.8;
+    const rectCentreLat = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG) * 1.05;
+    let rectLong = Object.assign(new Angle, rect.long).getValueInUnits(LongitudeUnits.DEG) * 1.8;
+    let rectShort = Object.assign(new Angle, rect.short).getValueInUnits(LongitudeUnits.DEG) * 1.05;
+    const targetCentreLon = Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG);
+    const targetCentreLat = Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LongitudeUnits.DEG);
+    const rectAngle = Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.RAD);
+    rectLong = rectLong * this.degreesPerPixel;
+    rectShort = rectShort * this.degreesPerPixel;
+    let actualCentreLon;
+    let actualCentreLat;
+    if (rect.centre.type === 'RELATIVE') {
+      actualCentreLon = targetCentreLon + rectCentreLon;
+      actualCentreLat = targetCentreLat + rectCentreLat;
+    } else if (rect.centre.type === 'ABSOLUTE') {
+      actualCentreLon = rectCentreLon;
+      actualCentreLat = rectCentreLat;
+    }
+
+    const centrePx = this.aladinService.coordsWorldToPix([actualCentreLon, actualCentreLat]);
+
+    const rectCorners = [
+      {
+        x: centrePx[0] - (rectLong / 2),
+        y: centrePx[1] - (rectShort / 2),
+        fill: 'orange'
+      },
+      {
+        x: centrePx[0] + (rectLong / 2),
+        y: centrePx[1] - (rectShort / 2),
+        fill: 'green'
+      },
+      {
+        x: centrePx[0] + (rectLong / 2),
+        y: centrePx[1] + (rectShort / 2),
+        fill: 'red'
+      },
+      {
+        x: centrePx[0] - (rectLong / 2),
+        y: centrePx[1] + (rectShort / 2),
+        fill: 'blue'
+      }
+    ];
+
+    this.drawArea.append('circle')
+      .attr('cx', centrePx[0])
+      .attr('cy', centrePx[1])
+      .attr('r', 2)
+      .style('fill', 'grey');
+
+    this.drawArea.append('rect')
+      .attr('x', rectCorners[0].x)
+      .attr('y', rectCorners[0].y)
+      .attr('width', rectLong)
+      .attr('height', rectShort)
+      .attr('stroke', 'black')
+      .attr('tansform', `rotate(${rectAngle})`);
+
+    const rectPoints = this.drawArea.append('g').selectAll('circle').data(rectCorners).enter();
+    rectPoints.append('circle')
+      .attr('cx', d => {
+          return d.x
+        }
+      )
+      .attr('cy', d => {
+        return d.y
+      })
+      .attr('r', 2)
+      .style('fill', d => {
+        return d.fill
+      });
+
+
+    /*
     const rectCentreLon = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
     const rectCentreLat = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LongitudeUnits.DEG);
     const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(LongitudeUnits.DEG);
     const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(LongitudeUnits.DEG);
     const targCentreLon = Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG);
     const targCentreLat = Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LongitudeUnits.DEG);
-    let actualLon;
-    let actualLat;
+    const rectAngle = Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.RAD);
+    let actualCentreLon;
+    let actualCentreLat;
     if (rect.centre.type === 'RELATIVE') {
-      actualLon = targCentreLon + rectCentreLon;
-      actualLat = targCentreLat + rectCentreLat;
+      actualCentreLon = targCentreLon + rectCentreLon;
+      actualCentreLat = targCentreLat + rectCentreLat;
     } else if (rect.centre.type === 'ABSOLUTE') {
-      actualLon = rectCentreLon;
-      actualLat = rectCentreLat;
+      actualCentreLon = rectCentreLon;
+      actualCentreLat = rectCentreLat;
     }
 
-    const p1 = {
-      x: actualLon - rectLong * Math.sin(rect.palong.content),
-      y: actualLat - rectShort / 2 * Math.cos(rect.palong.content)
-    };  // Bottom Left
-    const p2 = {
-      x: actualLon + rectLong * Math.cos(rect.palong.content),
-      y: actualLat - rectShort / 2 * Math.sin(rect.palong.content)
-    };  // Top Left
-    const p3 = {
-      x: actualLon + rectLong * Math.sin(rect.palong.content),
-      y: actualLat + rectShort / 2 * Math.cos(rect.palong.content)
-    };  // Top Right
-    const p4 = {
-      x: actualLon - rectLong * Math.cos(rect.palong.content),
-      y: actualLat + rectShort / 2 * Math.sin(rect.palong.content)
-    };  // Bottom Right
+    const topLeft = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, -(rectLong / 2), -(rectShort / 2), -rectAngle);
+    const topRight = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, (rectLong / 2), -(rectShort / 2), -rectAngle);
+    const bottomRight = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, (rectLong / 2), (rectShort / 2), -rectAngle);
+    const bottomLeft = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, -(rectLong / 2), (rectShort / 2), -rectAngle);
 
-    const p1Pix = this.aladinService.coordsWorldToPix([p1.x, p1.y]);
-    const p2Pix = this.aladinService.coordsWorldToPix([p2.x, p2.y]);
-    const p3Pix = this.aladinService.coordsWorldToPix([p3.x, p3.y]);
-    const p4Pix = this.aladinService.coordsWorldToPix([p4.x, p4.y]);
-
-    const xSidePix = p3Pix[0] - p2Pix[0];
-    const ySidePix = p1Pix[1] - p2Pix[1];
+    const p1Pix = this.aladinService.coordsWorldToPix([topLeft.x, topLeft.y]);
+    const p2Pix = this.aladinService.coordsWorldToPix([topRight.x, topRight.y]);
+    const p3Pix = this.aladinService.coordsWorldToPix([bottomRight.x, bottomRight.y]);
+    const p4Pix = this.aladinService.coordsWorldToPix([bottomLeft.x, bottomLeft.y]);
 
     this.drawArea.append('polygon')
       .attr('points', `${p1Pix[0]},${p1Pix[1]} ${p2Pix[0]},${p2Pix[1]} ${p3Pix[0]},${p3Pix[1]} ${p4Pix[0]},${p4Pix[1]}`)
       .attr('fill', 'none')
       .style('stroke-width', '2px')
       .style('stroke', 'lime');
-    this.drawArea.append('rect')
-      .attr('x', p2Pix[0])
-      .attr('y', p2Pix[1])
-      .attr('width', xSidePix)
-      .attr('height', ySidePix)
-      .attr('transform', `rotate(${-rect.palong.content})`);
+      */
   }
 
   cutPolygons() {

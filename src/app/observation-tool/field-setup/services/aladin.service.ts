@@ -30,6 +30,7 @@ import {Angle} from '../../../units/classes/angle';
 import {AngleUnits} from '../../../units/enums/angle-units.enum';
 import {ISkyCoordinates} from '../../shared/interfaces/apdm/sky-coordinates.interface';
 import {IRectangle} from '../../shared/interfaces/apdm/rectangle.interface';
+import {UserAngle} from '../../../units/classes/user-angle';
 
 declare let A: any;
 declare let Coo: any;
@@ -124,6 +125,7 @@ export class AladinService {
     const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG) * 1.05;
     const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG) * 1.8;
     const rectAngle = Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.RAD);
+    const spacing = Object.assign(new UserAngle, rect.spacing).getValueInUnits(AngleUnits.DEG);
     let actualCentreLon, actualCentreLat;
 
     if (rect.centre.type === 'RELATIVE') {
@@ -144,8 +146,31 @@ export class AladinService {
       [topRight.x, topRight.y],
       [bottomRight.x, bottomRight.y],
       [bottomLeft.x, bottomLeft.y]
-    ]))
+    ]));
 
+    const mosaic = this.createMosaic(actualCentreLon, actualCentreLat, rectLong, rectShort, spacing, -rectAngle);
+    console.log(mosaic);
+    mosaic.forEach((value: { x: number, y: number }) => {
+      this.addPointing(value.x, value.y);
+    });
+
+  }
+
+  createMosaic(rectCentreLon, rectCentreLat, rectWidth, rectHeight, spacing, angle) {
+    const array = [];
+    const startPoint = {x: rectCentreLon - rectWidth / 2, y: rectCentreLat - rectHeight / 2};
+    const endPoint = {x: rectCentreLon + rectWidth / 2, y: rectCentreLat + rectHeight / 2};
+    for (let i = startPoint.x; i <= endPoint.x; i += spacing) {
+      for (let j = startPoint.y; j <= endPoint.y; j += spacing) {
+        const pointX = i - rectCentreLon;
+        const pointY = j - rectCentreLat;
+        array.push({
+          x: (pointX * Math.cos(angle) - pointY * Math.sin(angle)) + rectCentreLon,
+          y: (pointX * Math.sin(angle) + pointY * Math.cos(angle)) + rectCentreLat
+        });
+      }
+    }
+    return array;
   }
 
   goToObject(objectName: string, ra: number, dec: number) {
@@ -211,4 +236,9 @@ export class AladinService {
     // return difference
     return pxCentre[0] - pxRight[0];
   }
+
+  getFovCorners(): number[] {
+    return this._aladin.getFovCorners();
+  }
+
 }

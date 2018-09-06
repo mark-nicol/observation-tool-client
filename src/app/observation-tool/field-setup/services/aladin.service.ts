@@ -30,6 +30,7 @@ import {Angle} from '../../../units/classes/angle';
 import {AngleUnits} from '../../../units/enums/angle-units.enum';
 import {ISkyCoordinates} from '../../shared/interfaces/apdm/sky-coordinates.interface';
 import {IRectangle} from '../../shared/interfaces/apdm/rectangle.interface';
+import {UserAngle} from '../../../units/classes/user-angle';
 
 declare let A: any;
 declare let Coo: any;
@@ -43,7 +44,7 @@ export class AladinService {
   private _initialConfig: IAladinConfig = {
     cooFrame: 'ICRS',
     survey: 'P/DSS2/color',
-    fov: 0.95,
+    fov: 0.25,
     showReticle: true,
     showZoomControl: false,
     showLayersControl: true,
@@ -73,7 +74,7 @@ export class AladinService {
       sourceSize: 20
     });
     this._aladin.addCatalog(this._catalogue);
-    this._overlay = A.graphicOverlay({color: '#FFAA00', lineWidth: 3});
+    this._overlay = A.graphicOverlay({color: '#009900', lineWidth: 3});
     this._aladin.addOverlay(this._overlay);
   }
 
@@ -97,6 +98,10 @@ export class AladinService {
     return this._aladin.world2pix(coordsWorld[0], coordsWorld[1]);
   }
 
+  degToPix(value: number): number {
+    return this.coordsWorldToPix([value, 0])[1]
+  }
+
   get RaDec(): number[] {
     return this._aladin.getRaDec();
   }
@@ -105,43 +110,66 @@ export class AladinService {
     this._overlay.add(A.circle(ra, dec, this._radius, {color: '#FFAA00'}));
   }
 
+  static rotatedPoint(centreX, centreY, offsetX, offsetY, angle): { x: number, y: number } {
+    return {
+      x: centreX + (offsetX * Math.cos(angle)) - (offsetY * Math.sin(angle)),
+      y: centreY + (offsetX * Math.sin(angle)) + (offsetY * Math.cos(angle))
+    }
+  }
+
   addRectangle(target: ISkyCoordinates, rect: IRectangle) {
     const targetLonDeg = Object.assign(new Longitude, target.longitude).getValueInUnits(LongitudeUnits.DEG);
     const targetLatDeg = Object.assign(new Latitude, target.latitude).getValueInUnits(LatitudeUnits.DEG);
-    const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
-    const rectCentreLatDeg = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG);
-    const shortDeg = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
-    const longDeg = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
-    // top left
-    // x = centre - half short
-    // y = centre - half long
-    const topLeft = [
-      (targetLonDeg + rectCentreLonDeg) - (shortDeg / 2),
-      (targetLatDeg + rectCentreLatDeg) - (longDeg / 2)
-    ];
-    // top right
-    // x = centre + half short
-    // y = centre - half long
-    const topRight = [
-      (targetLonDeg + rectCentreLonDeg) + (shortDeg / 2),
-      (targetLatDeg + rectCentreLatDeg) - (longDeg / 2)
-    ];
-    // bottom right
-    // x = centre + half short
-    // y = centre + half long
-    const bottomRight = [
-      (targetLonDeg + rectCentreLonDeg) + (shortDeg / 2),
-      (targetLatDeg + rectCentreLatDeg) + (longDeg / 2)
-    ];
-    // bottom left
-    // x = centre - half short
-    // y = centre + half long
-    const bottomLeft = [
-      (targetLonDeg + rectCentreLonDeg) - (shortDeg / 2),
-      (targetLatDeg + rectCentreLatDeg) + (longDeg / 2)
-    ];
-    // draw
-    this._overlay.addFootprints([A.polygon([topLeft, topRight, bottomRight, bottomLeft])]);
+    const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG) * 1.8;
+    const rectCentreLatDeg = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG) * 1.05;
+    const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG) * 1.05;
+    const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG) * 1.8;
+    const rectAngle = Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.RAD);
+    const spacing = Object.assign(new UserAngle, rect.spacing).getValueInUnits(AngleUnits.DEG);
+    let actualCentreLon, actualCentreLat;
+
+    if (rect.centre.type === 'RELATIVE') {
+      actualCentreLon = targetLonDeg + rectCentreLonDeg;
+      actualCentreLat = targetLatDeg + rectCentreLatDeg;
+    } else if (rect.centre.type === 'ABSOLUTE') {
+      actualCentreLon = rectCentreLonDeg;
+      actualCentreLat = rectCentreLatDeg;
+    }
+
+    const topLeft = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, -(rectLong / 2), -(rectShort / 2), -rectAngle);
+    const topRight = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, (rectLong / 2), -(rectShort / 2), -rectAngle);
+    const bottomRight = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, (rectLong / 2), (rectShort / 2), -rectAngle);
+    const bottomLeft = AladinService.rotatedPoint(actualCentreLon, actualCentreLat, -(rectLong / 2), (rectShort / 2), -rectAngle);
+
+    this._overlay.addFootprints(A.polygon([
+      [topLeft.x, topLeft.y],
+      [topRight.x, topRight.y],
+      [bottomRight.x, bottomRight.y],
+      [bottomLeft.x, bottomLeft.y]
+    ]));
+
+    const mosaic = this.createMosaic(actualCentreLon, actualCentreLat, rectLong, rectShort, spacing, -rectAngle);
+    mosaic.forEach((value: { x: number, y: number }) => {
+      this.addPointing(value.x, value.y);
+    });
+
+  }
+
+  createMosaic(rectCentreLon, rectCentreLat, rectWidth, rectHeight, spacing, angle) {
+    const array = [];
+    const startPoint = {x: rectCentreLon - rectWidth / 2, y: rectCentreLat - rectHeight / 2};
+    const endPoint = {x: rectCentreLon + rectWidth / 2, y: rectCentreLat + rectHeight / 2};
+    for (let i = startPoint.x; i <= endPoint.x; i += spacing) {
+      for (let j = startPoint.y; j <= endPoint.y; j += spacing) {
+        const pointX = i - rectCentreLon;
+        const pointY = j - rectCentreLat;
+        array.push({
+          x: (pointX * Math.cos(angle) - pointY * Math.sin(angle)) + rectCentreLon,
+          y: (pointX * Math.sin(angle) + pointY * Math.cos(angle)) + rectCentreLat
+        });
+      }
+    }
+    return array;
   }
 
   goToObject(objectName: string, ra: number, dec: number) {
@@ -207,4 +235,9 @@ export class AladinService {
     // return difference
     return pxCentre[0] - pxRight[0];
   }
+
+  getFovCorners(): number[] {
+    return this._aladin.getFovCorners();
+  }
+
 }

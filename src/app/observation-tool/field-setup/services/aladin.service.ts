@@ -149,7 +149,6 @@ export class AladinService {
     ]));
 
     const mosaic = this.createMosaic(actualCentreLon, actualCentreLat, rectLong, rectShort, spacing, -rectAngle);
-    console.log(mosaic);
     mosaic.forEach((value: { x: number, y: number }) => {
       this.addPointing(value.x, value.y);
     });

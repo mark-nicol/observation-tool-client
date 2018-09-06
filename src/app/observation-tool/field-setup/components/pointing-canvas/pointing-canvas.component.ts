@@ -30,6 +30,8 @@ import {AladinService} from '../../services/aladin.service';
 import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
 import {IRectangle} from '../../../shared/interfaces/apdm/rectangle.interface';
+import {AngleUnits} from '../../../../units/enums/angle-units.enum';
+import {Angle} from '../../../../units/classes/angle';
 
 
 /**
@@ -109,16 +111,28 @@ export class PointingCanvasComponent implements OnInit {
     const element = this.canvasContainer.nativeElement;
     this.width = element.offsetWidth;
     this.height = element.offsetHeight;
+
     this.svg = d3.select(element).append('svg')
       .attr('width', this.width)
       .attr('height', this.height);
-    this._xScale = d3.scaleLinear().range([0, this.width]);
-    this._yScale = d3.scaleLinear().range([this.height, 0]);
-    this._xAxis = d3.axisBottom(this._xScale);
+
     const fovCorners = this.aladinService.getFovCorners();
-    this._xScale.domain([d3.min(fovCorners, d => d[0]), d3.max(fovCorners, d => d[0])]);
-    this._yScale.domain([d3.min(fovCorners, d => d[1]), d3.max(fovCorners, d => d[1])]);
+
+    this._xScale = d3.scaleLinear()
+      .range([this.width, 0])
+      .domain([d3.min(fovCorners, d => d[0]), d3.max(fovCorners, d => d[0])]);
+
+    this._yScale = d3.scaleLinear()
+      .range([this.height, 0])
+      .domain([d3.min(fovCorners, d => d[1]), d3.max(fovCorners, d => d[1])]);
+
     this._drawArea = this.svg.append('g').attr('class', 'draw-area');
+    this._drawArea.append('circle')
+      .attr('cx', this._xScale(this.form.value.sourceCoordinates.longitude.content))
+      .attr('cy', this._yScale(this.form.value.sourceCoordinates.latitude.content))
+      .attr('r', this.aladinService.getCanvasRadius())
+      .style('stroke', 'lime')
+      .style('fill', 'none');
   }
 
   click(event: MouseEvent) {
@@ -143,11 +157,42 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   drawPointing(ra: number, dec: number) {
-
+    this._drawArea.append('circle')
+      .attr('cx', this._xScale(ra))
+      .attr('cy', this._yScale(dec))
+      .attr('r', this.aladinService.getCanvasRadius())
+      .attr('fill', 'none')
+      .style('stroke-width', '2px')
+      .style('stroke', 'lime');
   }
 
   drawRectangle(rect: IRectangle) {
-
+    const targetLon = Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG);
+    const targetLat = Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG);
+    const rectLon = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
+    const rectLat = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG);
+    const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
+    const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
+    const rectAngle = Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.RAD);
+    let actualCentreLon, actualCentreLat;
+    if (rect.centre.type === 'RELATIVE') {
+      actualCentreLon = targetLon + rectLon;
+      actualCentreLat = targetLat + rectLat;
+    } else if (rect.centre.type === 'ABSOLUTE') {
+      actualCentreLon = rectLon;
+      actualCentreLat = rectLat;
+    }
+    this._drawArea.append('circle')
+      .attr('cx', this._xScale(actualCentreLon))
+      .attr('cy', this._yScale(actualCentreLat))
+      .attr('r', 10)
+      .style('stroke', 'lime');
+    this._drawArea.append('rect')
+      .attr('x', this._xScale(actualCentreLon))
+      .attr('y', this._yScale(actualCentreLat))
+      .attr('width', this._xScale(rectLong))
+      .attr('height', this._yScale(rectShort))
+      .attr('transform', `rotate(${rectAngle})`);
   }
 
   cutPolygons() {

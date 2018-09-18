@@ -19,4 +19,37 @@
   ~ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
   -->
 
-<p>Planned Observing Works</p>
+<div class="ui container">
+  <table class="ui celled table">
+    <thead>
+    <tr>
+      <th>Science Goal</th>
+      <th>Number of Sources</th>
+      <th>Band</th>
+      <th>Spec. Type</th>
+      <th>No. Spec. Win.</th>
+      <th>Pol.</th>
+      <th>Calibration Setup</th>
+      <th>Ang. Res.</th>
+      <th>Largest Scale</th>
+      <th>Rep. Freq.</th>
+      <th>Sens.</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let goal of proposal?.scienceGoals">
+        <td>{{goal.name}}</td>
+        <td>{{goal.targetParameters.length}}</td>
+        <td>{{goal.requiredReceiverBands[0]}}</td>
+        <td></td>
+        <td>{{goal.spectralSetupParameters.spectralWindows.length}}</td>
+        <td></td>
+        <td>{{goal.calibrationSetupParameters.selection | titlecase}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

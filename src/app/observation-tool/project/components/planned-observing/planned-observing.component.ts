@@ -20,11 +20,11 @@
  */
 
 import {Component} from '@angular/core';
+import {ProjectService} from '../../../shared/services/project.service';
+import {IObsProposal} from '../../../shared/interfaces/apdm/obs-proposal.interface';
 
 /**
  * Planned observing component
- *
- * TODO Implement
  */
 
 @Component({
@@ -34,5 +34,14 @@ import {Component} from '@angular/core';
 })
 
 export class PlannedObservingComponent {
+
+  proposal: IObsProposal;
+
+  constructor(private projectService: ProjectService) {
+    this.projectService.loadedProposal.subscribe(result => {
+      console.log(result);
+      this.proposal = result;
+    });
+  }
 
 }

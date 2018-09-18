@@ -120,10 +120,14 @@ export class AladinService {
   addRectangle(target: ISkyCoordinates, rect: IRectangle) {
     const targetLonDeg = Object.assign(new Longitude, target.longitude).getValueInUnits(LongitudeUnits.DEG);
     const targetLatDeg = Object.assign(new Latitude, target.latitude).getValueInUnits(LatitudeUnits.DEG);
-    const rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG) * 1.8;
-    const rectCentreLatDeg = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG) * 1.05;
-    const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG) * 1.05;
-    const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG) * 1.8;
+    let rectCentreLonDeg = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
+    let rectCentreLatDeg = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG);
+    rectCentreLonDeg = rectCentreLonDeg  * (1 + Math.cos(rectCentreLatDeg));
+    rectCentreLatDeg = rectCentreLatDeg * (1 + Math.sin(rectCentreLonDeg));
+    let rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
+    let rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
+    rectLong = rectLong * (1 + Math.cos(rectLong));
+    rectShort = rectShort * (1 + Math.sin(rectShort));
     const rectAngle = Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.RAD);
     const spacing = Object.assign(new UserAngle, rect.spacing).getValueInUnits(AngleUnits.DEG);
     let actualCentreLon, actualCentreLat;

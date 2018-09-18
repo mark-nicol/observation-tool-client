@@ -169,8 +169,10 @@ export class PointingCanvasComponent implements OnInit {
   drawRectangle(rect: IRectangle) {
     const targetLon = Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG);
     const targetLat = Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG);
-    const rectLon = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
-    const rectLat = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG);
+    let rectLon = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
+    let rectLat = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG);
+    rectLon = rectLon  * (1 + Math.cos(rectLat));
+    rectLat = rectLat * (1 + Math.sin(rectLon));
     const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
     const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
     const rectAngle = Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.RAD);
@@ -187,12 +189,12 @@ export class PointingCanvasComponent implements OnInit {
       .attr('cy', this._yScale(actualCentreLat))
       .attr('r', 10)
       .style('stroke', 'lime');
-    this._drawArea.append('rect')
-      .attr('x', this._xScale(actualCentreLon))
-      .attr('y', this._yScale(actualCentreLat))
-      .attr('width', this._xScale(rectLong))
-      .attr('height', this._yScale(rectShort))
-      .attr('transform', `rotate(${rectAngle})`);
+    // this._drawArea.append('rect')
+    //   .attr('x', this._xScale(actualCentreLon))
+    //   .attr('y', this._yScale(actualCentreLat))
+    //   .attr('width', this._xScale(rectLong))
+    //   .attr('height', this._yScale(rectShort))
+    //   .attr('transform', `rotate(${rectAngle})`);
   }
 
   cutPolygons() {

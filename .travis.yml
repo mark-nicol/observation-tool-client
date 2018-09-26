@@ -3,6 +3,11 @@ sudo: required
 services:
   - docker
 
+branches:
+  only:
+  - master
+  - development
+
 env:
   - IMAGE_NAME=joebarrettukatc/observation-tool-client
 

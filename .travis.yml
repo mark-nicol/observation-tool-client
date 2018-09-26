@@ -6,4 +6,4 @@ services:
 language: javascript
 
 before_install:
-  - docker build -t joebarrettukatc/observation-tool-client:latest
+  - docker build -t joebarrettukatc/observation-tool-client:latest .

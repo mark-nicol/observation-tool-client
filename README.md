@@ -59,5 +59,3 @@ git push origin master
 ```
 ### Writing Documentation
 Compodoc provides support for some JSDoc tags, more info [here](https://compodoc.github.io/website/guides/jsdoc-tags.html).
-
-TEST

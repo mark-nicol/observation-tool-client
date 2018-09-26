@@ -1,0 +1,9 @@
+sudo: required
+
+services:
+  - docker
+
+language: javascript
+
+before_install:
+  - docker build -t joebarrettukatc/observation-tool-client:latest

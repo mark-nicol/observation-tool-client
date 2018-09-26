@@ -20,12 +20,12 @@ before_deploy:
 deploy:
   - provider: script
     edge: false
-    script: docker push "$IMAGE_NAME":latest
+    script: docker tag "$IMAGE_NAME" "$IMAGE_NAME":latest && docker push "$IMAGE_NAME":latest
     on:
       branch: master
   - provider: script
     edge: true
-    script: docker push "$IMAGE_NAME":edge
+    script: docker tag "$IMAGE_NAME" "$IMAGE_NAME":edge && docker push "$IMAGE_NAME":edge
     on:
       branch: development
 

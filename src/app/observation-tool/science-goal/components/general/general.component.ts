@@ -22,8 +22,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ProjectService} from '../../../shared/services/project.service';
-import {Observable} from '../../../../../../node_modules/rxjs';
-import {IScienceGoal} from '../../../shared/interfaces/apdm/science-goal.interface';
+import {Observable} from 'rxjs';
 
 /**
  * General science goal page component
@@ -38,7 +37,6 @@ import {IScienceGoal} from '../../../shared/interfaces/apdm/science-goal.interfa
 export class GeneralComponent implements OnInit {
 
   form: FormGroup;
-  scienceGoal: IScienceGoal;
 
   constructor(private projectService: ProjectService,
               private formBuilder: FormBuilder) {
@@ -46,8 +44,8 @@ export class GeneralComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.loadedGoal.subscribe(result => {
-      this.form.patchValue(result);
+    this.projectService.currentGoal.subscribe((goalIndex: number) => {
+      this.form.patchValue(this.projectService.loadedProposal.getValue().scienceGoals[goalIndex]);
     });
     this.observeFormChanges();
   }
@@ -63,8 +61,7 @@ export class GeneralComponent implements OnInit {
     const debounce = this.form.valueChanges.debounce(() => Observable.interval(1500));
     debounce.subscribe(value => {
       if (this.form.dirty && this.form.valid) {
-        console.log(value);
-        this.projectService.updateProposal(value);
+        this.projectService.updateScienceGoal(value);
         this.form.markAsPristine();
       }
     });

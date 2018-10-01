@@ -23,6 +23,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProjectService} from '../shared/services/project.service';
 import {ITargetParameters} from '../shared/interfaces/apdm/target-parameters.interface';
+import {IObsProposal} from '../shared/interfaces/apdm/obs-proposal.interface';
 
 /**
  * Science goal component which contains tabbed science goal pages
@@ -63,6 +64,7 @@ export class ScienceGoalComponent implements OnInit {
     }
   };
 
+  _targets: ITargetParameters[] = [];
   currentTarget: number;
   goalName: string;
 
@@ -78,12 +80,14 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.loadScienceGoal(this.projectService.currentGoal);
-    this.projectService.loadedGoal.subscribe(result => {
-      this.goalName = result.name;
-    });
-    this.projectService.currentTarget.subscribe(result => {
-      this.currentTarget = result;
+    this.projectService.loadedProposal.subscribe((proposal: IObsProposal) => {
+      this.projectService.currentGoal.subscribe((goalIndex: number) => {
+        this.goalName = this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].name;
+        this._targets = this.projectService.loadedProposal.getValue().scienceGoals[goalIndex].targetParameters;
+      });
+      this.projectService.currentTarget.subscribe(result => {
+        this.currentTarget = result;
+      });
     });
   }
 
@@ -100,7 +104,7 @@ export class ScienceGoalComponent implements OnInit {
   }
 
   get targets(): ITargetParameters[] {
-    return this.projectService.loadedGoal.value.targetParameters;
+    return this._targets;
   }
 
 }

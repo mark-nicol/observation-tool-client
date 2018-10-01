@@ -25,12 +25,13 @@ import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {tap} from 'rxjs/operators';
-import {ToastsManager} from 'ng2-toastr';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
 import {IObsProposal} from '../interfaces/apdm/obs-proposal.interface';
-import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
 import {IObsProject} from '../interfaces/apdm/obs-project.interface';
 import {IProjectListItem} from '../interfaces/project-list-item.interface';
+import {ToastrService} from 'ngx-toastr';
+import {ITargetParameters} from '../interfaces/apdm/target-parameters.interface';
+import {IScienceGoal} from '../interfaces/apdm/science-goal.interface';
 
 /**
  * Service to supply data to pages and sections from stored objects
@@ -39,11 +40,12 @@ import {IProjectListItem} from '../interfaces/project-list-item.interface';
 export class ProjectService implements CanActivate {
 
   private baseUrl = 'http://localhost:8080/project';
-  private _currentTarget = new BehaviorSubject<number>(0);
   private _loadedProject = new BehaviorSubject<IObsProject>(null);
   private _loadedProposal = new BehaviorSubject<IObsProposal>(null);
-  private _loadedGoal = new BehaviorSubject<IScienceGoal>(null);
-  private _currentGoal = 0;
+  private _currentGoal = new BehaviorSubject<number>(0);
+  private _currentTarget = new BehaviorSubject<number>(0);
+
+  isSaving = new BehaviorSubject<boolean>(false);
 
   private _selectedProject: IProjectListItem;
 
@@ -52,45 +54,17 @@ export class ProjectService implements CanActivate {
    */
   constructor(private http: HttpClient,
               private router: Router,
-              private toastr: ToastsManager) {
-  }
-
-  get currentTarget(): BehaviorSubject<number> {
-    return this._currentTarget;
-  }
-
-  setCurrentTarget(value: number) {
-    this._currentTarget.next(value);
-  }
-
-  get currentGoal(): number {
-    return this._currentGoal;
-  }
-
-  set currentGoal(value: number) {
-    this._currentGoal = value;
+              private toasts: ToastrService) {
   }
 
   getAllProjects(): Observable<IProjectListItem[]> {
     return this.http.get<IProjectListItem[]>(`${this.baseUrl}/list`).pipe(
       tap(
-        data => {
+        () => {
         },
         error => this.handleError(error)
       )
     );
-  }
-
-  get loadedProject(): BehaviorSubject<IObsProject> {
-    return this._loadedProject
-  }
-
-  get loadedProposal(): BehaviorSubject<IObsProposal> {
-    return this._loadedProposal;
-  }
-
-  get loadedGoal(): BehaviorSubject<IScienceGoal> {
-    return this._loadedGoal;
   }
 
   selectProject() {
@@ -100,10 +74,6 @@ export class ProjectService implements CanActivate {
       this.loadProposal();
       this.router.navigate(['/project']).then();
     });
-  }
-
-  loadScienceGoal(index) {
-    this.loadedGoal.next(<IScienceGoal>this._loadedProposal.value.scienceGoals[index]);
   }
 
   loadProposal() {
@@ -123,13 +93,7 @@ export class ProjectService implements CanActivate {
 
   hasScienceGoals(): boolean {
     if (this.hasProposalLoaded()) {
-      return this._loadedProposal.value.scienceGoals !== (null || undefined);
-    }
-  }
-
-  hasSources(): boolean {
-    if (this.hasScienceGoals()) {
-      return this._loadedGoal.getValue().targetParameters !== (null || undefined);
+      return this._loadedProposal.getValue().scienceGoals !== (null || undefined || []) && this._loadedProposal.getValue().scienceGoals.length !== 0;
     }
     return false;
   }
@@ -142,50 +106,75 @@ export class ProjectService implements CanActivate {
     });
   }
 
-
-
   addScienceGoal() {
-    // TODO Fix
-    // if (this.hasScienceGoals()) {
-    //   this._loadedProposal.getValue().ScienceGoal.push(new ScienceGoal());
-    // } else {
-    //   this._loadedProposal.getValue().ScienceGoal = [new ScienceGoal()];
-    // }
+    const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
+    this.http.put<IObsProposal>(`${this.baseUrl}/science-goal`, null, options)
+      .pipe(tap(
+        null,
+        error => {
+          this.handleError(error);
+        }
+      ))
+      .subscribe(result => {
+        this._loadedProposal.next(result);
+      });
   }
 
   removeScienceGoal() {
-    this._loadedProposal.getValue().scienceGoals.splice(this._currentGoal, 1);
-    this._currentGoal--;
-    if (this._currentGoal === -1) {
-      this._currentGoal = 0;
+    const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
+    this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal.getValue()}`, options)
+      .pipe(tap(
+        null,
+        error => this.handleError(error)
+      ))
+      .subscribe(
+        result => this._loadedProposal.next(result)
+      );
+    let currentGoalValue = this._currentGoal.getValue();
+    currentGoalValue--;
+    if (currentGoalValue === -1) {
+      currentGoalValue = 0;
+      this.router.navigate(['/project']).then(() => {
+        this.toasts.info('All science goals removed')
+      });
     }
-    if (this._loadedProposal.getValue().scienceGoals.length > 0) {
-      this.loadScienceGoal(this._currentGoal);
-    } else {
-      this._loadedProposal.getValue().scienceGoals = undefined;
-      this.router.navigate(['/project']).then(() => this.toastr.info('All science goals removed'));
-    }
+    this._currentGoal.next(currentGoalValue);
   }
 
   addSource() {
-    // TODO Fix
-    // if (this.hasSources()) {
-    //   this._loadedGoal.getValue().TargetParameters.push(new TargetParameters());
-    // } else {
-    //   this._loadedGoal.getValue().TargetParameters = [new TargetParameters()];
-    // }
+    const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
+    this.http.put<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal.getValue()}/source`, null, options)
+      .pipe(tap(
+        null,
+        error => this.handleError(error)
+      ))
+      .subscribe(
+        result => {
+          console.log(result);
+          this._loadedProposal.next(result)
+        }
+      );
   }
 
   removeSource() {
-    this._loadedGoal.getValue().targetParameters.splice(this._currentTarget.getValue(), 1);
-    this._currentTarget.next(this._currentTarget.value - 1);
-    if (this._currentTarget.value === -1) {
-      this._currentTarget.next(0);
+    const options = {params: new HttpParams().set('entityRef', this._loadedProposal.getValue().obsProposalEntity.entityId)};
+    this.http.delete<IObsProposal>(`${this.baseUrl}/science-goal/${this._currentGoal.getValue()}/source/${this._currentTarget.getValue()}`, options)
+      .pipe(tap(
+        null,
+        error => this.handleError(error)
+      ))
+      .subscribe(
+        result => this._loadedProposal.next(result)
+      );
+    let currentTargetValue = this._currentTarget.getValue();
+    currentTargetValue--;
+    if (currentTargetValue === -1) {
+      currentTargetValue = 0;
+      this.router.navigate(['/science-goals/general']).then(() => {
+        this.toasts.info('All sources removed')
+      });
     }
-    if (this._loadedGoal.getValue().targetParameters.length <= 0) {
-      this._loadedGoal.getValue().targetParameters = undefined;
-      this.router.navigate(['/science-goals/general']).then(() => this.toastr.info('All sources removed'));
-    }
+    this._currentTarget.next(currentTargetValue);
   }
 
   setPi(newPi: any) {
@@ -195,15 +184,37 @@ export class ProjectService implements CanActivate {
   }
 
   updateProject(updates: IObsProject) {
+    this.isSaving.next(true);
     this.http.put<IObsProject>(`${this.baseUrl}/project`, Object.assign(this._loadedProject.getValue(), updates)).subscribe(response => {
       this._loadedProject.next(response);
+      this.isSaving.next(false);
     });
   }
 
   updateProposal(updates: IObsProposal) {
+    this.isSaving.next(true);
     this.http.put<IObsProposal>(`${this.baseUrl}/proposal`, Object.assign(this._loadedProposal.getValue(), updates)).subscribe(response => {
       this._loadedProposal.next(response);
+      this.isSaving.next(false);
     });
+  }
+
+  updateScienceGoal(updates: IScienceGoal) {
+    const proposal = this._loadedProposal.getValue();
+    proposal.scienceGoals[this._currentGoal.getValue()] = Object.assign(proposal.scienceGoals[this._currentGoal.getValue()], updates);
+    this.updateProposal(proposal);
+  }
+
+  updateSource(updates: ITargetParameters) {
+    const proposal = this._loadedProposal.getValue();
+    proposal
+      .scienceGoals[this._currentGoal.getValue()]
+      .targetParameters[this._currentTarget.getValue()]
+      = Object.assign(
+      proposal
+        .scienceGoals[this._currentGoal.getValue()]
+        .targetParameters[this._currentTarget.getValue()], updates);
+    this.updateProposal(proposal);
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -215,17 +226,46 @@ export class ProjectService implements CanActivate {
   }
 
   handleError(error: HttpErrorResponse) {
-    console.log(error);
+    this.isSaving.next(false);
     if (error.status === 0) { // No server found or CORS
-      this.toastr.error('Could not connect to server', 'Error').then();
+      this.toasts.error('Could not connect to server', 'Error');
     } else if (error.status === 404) {
-      this.toastr.error('Not found', 'Error').then();
+      this.toasts.error('Not found', 'Error');
     } else if (error.status === 500) {
-      this.toastr.error('Server error', 'Error').then();
+      this.toasts.error(`Server error\n${error.error.exception}`, 'Error');
     } else {
-      this.toastr.error('Other error').then();
+      this.toasts.error('Other error');
     }
     return new ErrorObservable('Broke');
+  }
+
+  get loadedProject(): BehaviorSubject<IObsProject> {
+    return this._loadedProject
+  }
+
+  get loadedProposal(): BehaviorSubject<IObsProposal> {
+    return this._loadedProposal;
+  }
+
+  get currentGoal(): BehaviorSubject<number> {
+    return this._currentGoal;
+  }
+
+  setCurrentGoal(value: number) {
+    this._currentTarget.next(0);
+    if (value >= this._loadedProposal.getValue().scienceGoals.length) {
+      this._currentGoal.next(0);
+    } else {
+      this._currentGoal.next(value);
+    }
+  }
+
+  get currentTarget(): BehaviorSubject<number> {
+    return this._currentTarget;
+  }
+
+  setCurrentTarget(value: number) {
+    this._currentTarget.next(value);
   }
 
   get selectedProject(): IProjectListItem {

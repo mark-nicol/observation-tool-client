@@ -29,7 +29,24 @@ import {Longitude} from '../../../../units/classes/longitude';
 import {AladinService} from '../../services/aladin.service';
 import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
+import {IRectangle} from '../../../shared/interfaces/apdm/rectangle.interface';
+import {AngleUnits} from '../../../../units/enums/angle-units.enum';
+import {Angle} from '../../../../units/classes/angle';
 
+
+/**
+ * Interface for chart margins
+ */
+interface Margin {
+  /** Top margin */
+  top: number,
+  /** Right margin */
+  right: number,
+  /** Bottom margin */
+  bottom: number,
+  /** Left margin */
+  left: number
+}
 
 @Component({
   selector: 'app-pointing-canvas',
@@ -47,6 +64,11 @@ export class PointingCanvasComponent implements OnInit {
 
   @ViewChild('canvasContainer') private canvasContainer: ElementRef;
   private svg: any;
+  private _drawArea: any;
+  private _xScale: any;
+  private _yScale: any;
+  private _xAxis: any;
+  private _yAxis: any;
   private width: number;
   private height: number;
 
@@ -66,14 +88,22 @@ export class PointingCanvasComponent implements OnInit {
 
   ngOnInit() {
     this.setupSvg();
-    this.form.value.SinglePoint.forEach((point: ISinglePoint) => {
-      this.drawPointing(
-        this.form.value.sourceCoordinates.longitude.content + Object.assign(
-        new Longitude,
-        point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
-        this.form.value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
-      );
-    });
+    if (this.form.value.fields[0]['@type'] === 'SinglePointT') {
+      this.form.value.fields.forEach((point: ISinglePoint) => {
+        if (point.centre.type === 'RELATIVE') {
+          this.drawPointing(
+            this.form.value.sourceCoordinates.longitude.content + Object.assign(
+            new Longitude,
+            point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+            this.form.value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+          );
+        } else {
+          this.drawPointing(Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG), Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG));
+        }
+      });
+    } else if (this.form.value.fields[0]['@type'] === 'RectangleT') {
+      this.drawRectangle(this.form.value.fields[0]);
+    }
     this.observeFormChanges();
   }
 
@@ -81,9 +111,28 @@ export class PointingCanvasComponent implements OnInit {
     const element = this.canvasContainer.nativeElement;
     this.width = element.offsetWidth;
     this.height = element.offsetHeight;
+
     this.svg = d3.select(element).append('svg')
-      .attr('width', element.offsetWidth)
-      .attr('height', element.offsetHeight);
+      .attr('width', this.width)
+      .attr('height', this.height);
+
+    const fovCorners = this.aladinService.getFovCorners();
+
+    this._xScale = d3.scaleLinear()
+      .range([this.width, 0])
+      .domain([d3.min(fovCorners, d => d[0]), d3.max(fovCorners, d => d[0])]);
+
+    this._yScale = d3.scaleLinear()
+      .range([this.height, 0])
+      .domain([d3.min(fovCorners, d => d[1]), d3.max(fovCorners, d => d[1])]);
+
+    this._drawArea = this.svg.append('g').attr('class', 'draw-area');
+    this._drawArea.append('circle')
+      .attr('cx', this._xScale(this.form.value.sourceCoordinates.longitude.content))
+      .attr('cy', this._yScale(this.form.value.sourceCoordinates.latitude.content))
+      .attr('r', this.aladinService.getCanvasRadius())
+      .style('stroke', 'lime')
+      .style('fill', 'none');
   }
 
   click(event: MouseEvent) {
@@ -108,14 +157,44 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   drawPointing(ra: number, dec: number) {
-    const worldCoords = this.aladinService.coordsWorldToPix([ra, dec]);
-    this.svg.append('circle')
-      .attr('cx', worldCoords[0])
-      .attr('cy', worldCoords[1])
+    this._drawArea.append('circle')
+      .attr('cx', this._xScale(ra))
+      .attr('cy', this._yScale(dec))
       .attr('r', this.aladinService.getCanvasRadius())
       .attr('fill', 'none')
       .style('stroke-width', '2px')
       .style('stroke', 'lime');
+  }
+
+  drawRectangle(rect: IRectangle) {
+    const targetLon = Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG);
+    const targetLat = Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG);
+    let rectLon = Object.assign(new Longitude, rect.centre.longitude).getValueInUnits(LongitudeUnits.DEG);
+    let rectLat = Object.assign(new Latitude, rect.centre.latitude).getValueInUnits(LatitudeUnits.DEG);
+    rectLon = rectLon  * (1 + Math.cos(rectLat));
+    rectLat = rectLat * (1 + Math.sin(rectLon));
+    const rectShort = Object.assign(new Angle, rect.short).getValueInUnits(AngleUnits.DEG);
+    const rectLong = Object.assign(new Angle, rect.long).getValueInUnits(AngleUnits.DEG);
+    const rectAngle = Object.assign(new Angle, rect.palong).getValueInUnits(AngleUnits.RAD);
+    let actualCentreLon, actualCentreLat;
+    if (rect.centre.type === 'RELATIVE') {
+      actualCentreLon = targetLon + rectLon;
+      actualCentreLat = targetLat + rectLat;
+    } else if (rect.centre.type === 'ABSOLUTE') {
+      actualCentreLon = rectLon;
+      actualCentreLat = rectLat;
+    }
+    this._drawArea.append('circle')
+      .attr('cx', this._xScale(actualCentreLon))
+      .attr('cy', this._yScale(actualCentreLat))
+      .attr('r', 10)
+      .style('stroke', 'lime');
+    // this._drawArea.append('rect')
+    //   .attr('x', this._xScale(actualCentreLon))
+    //   .attr('y', this._yScale(actualCentreLat))
+    //   .attr('width', this._xScale(rectLong))
+    //   .attr('height', this._yScale(rectShort))
+    //   .attr('transform', `rotate(${rectAngle})`);
   }
 
   cutPolygons() {

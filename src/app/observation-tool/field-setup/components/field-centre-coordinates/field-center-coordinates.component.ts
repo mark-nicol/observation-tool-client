@@ -79,7 +79,9 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   ];
 
   get offsetUnit() {
-    return this.form.value.fields[0].centre.longitude.unit;
+    if (this.form.value.fields[0]) {
+      return this.form.value.fields[0].centre.longitude.unit;
+    }
   }
 
   set offsetUnit(value: string) {
@@ -104,6 +106,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.form);
     this.chosenSystem = this.systemService.getSystem(this.form.value.chosenSystem);
   }
 

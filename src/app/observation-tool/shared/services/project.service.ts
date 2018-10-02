@@ -92,8 +92,6 @@ export class ProjectService implements CanActivate {
   }
 
   hasScienceGoals(): boolean {
-    console.log('hasScienceGoals');
-    console.log(this.loadedProposal.getValue());
     if (this.hasProposalLoaded()) {
       return this._loadedProposal.getValue().scienceGoals !== (null || undefined || []) && this._loadedProposal.getValue().scienceGoals.length !== 0;
     }

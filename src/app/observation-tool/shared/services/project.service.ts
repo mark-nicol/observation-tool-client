@@ -92,6 +92,8 @@ export class ProjectService implements CanActivate {
   }
 
   hasScienceGoals(): boolean {
+    console.log('hasScienceGoals');
+    console.log(this.loadedProposal.getValue());
     if (this.hasProposalLoaded()) {
       return this._loadedProposal.getValue().scienceGoals !== (null || undefined || []) && this._loadedProposal.getValue().scienceGoals.length !== 0;
     }
@@ -107,6 +109,7 @@ export class ProjectService implements CanActivate {
   }
 
   addScienceGoal() {
+    console.log('addScienceGoal');
     const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.put<IObsProposal>(`${this.baseUrl}/science-goal`, null, options)
       .pipe(tap(

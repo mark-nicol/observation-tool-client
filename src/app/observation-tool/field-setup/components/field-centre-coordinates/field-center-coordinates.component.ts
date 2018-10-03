@@ -88,11 +88,11 @@ export class FieldCenterCoordinatesComponent implements OnInit {
     const newValueArray = [];
     for (let i = 0; i < this.singlePoint.length; i++) {
       newValueArray.push({
-        prj_centre: {
-          val_longitude: {
+        centre: {
+          longitude: {
             unit: value
           },
-          val_latitude: {
+          latitude: {
             unit: value
           }
         }
@@ -132,17 +132,18 @@ export class FieldCenterCoordinatesComponent implements OnInit {
 
   addPointing() {
     this.singlePoint.push(this.formBuilder.group({
-      prj_name: '',
-      prj_centre: this.formBuilder.group({
-        val_longitude: this.formBuilder.group({
-          unit: this.offsetUnit,
+      name: '',
+      centre: this.formBuilder.group({
+        longitude: this.formBuilder.group({
+          unit: this.offsetUnit ? this.offsetUnit : 'deg',
           content: [0.0, Validators.required]
         }),
-        val_latitude: this.formBuilder.group({
-          unit: this.offsetUnit,
+        latitude: this.formBuilder.group({
+          unit: this.offsetUnit ? this.offsetUnit : 'deg',
           content: [0.0, Validators.required]
         }),
-        val_fieldName: `Field-${this.singlePoint.length + 1}`
+        type: this.coordType,
+        fieldName: `Field-${this.singlePoint.length + 1}`
       })
     }))
   }

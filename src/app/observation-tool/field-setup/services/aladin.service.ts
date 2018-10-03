@@ -107,6 +107,7 @@ export class AladinService {
   }
 
   addPointing(ra: number, dec: number) {
+    console.log('addPointing', ra, dec);
     this._overlay.add(A.circle(ra, dec, this._radius, {color: '#FFAA00'}));
   }
 

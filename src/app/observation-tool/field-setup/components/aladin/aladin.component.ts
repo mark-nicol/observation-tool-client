@@ -115,7 +115,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
 
   observeFormChanges() {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
-      console.log(value);
       this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
       this.drawFields();
     });
@@ -133,7 +132,6 @@ export class AladinComponent implements OnInit, AfterViewInit {
             Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
           );
         } else if (point.centre.type === 'ABSOLUTE') {
-          console.log(point);
           this.aladinService.addPointing(
             Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
             Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)

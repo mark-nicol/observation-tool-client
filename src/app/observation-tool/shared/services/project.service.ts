@@ -107,7 +107,6 @@ export class ProjectService implements CanActivate {
   }
 
   addScienceGoal() {
-    console.log('addScienceGoal');
     const options = {params: new HttpParams().set('entityRef', this._loadedProject.value.obsProposalRef.entityId)};
     this.http.put<IObsProposal>(`${this.baseUrl}/science-goal`, null, options)
       .pipe(tap(
@@ -151,7 +150,6 @@ export class ProjectService implements CanActivate {
       ))
       .subscribe(
         result => {
-          console.log(result);
           this._loadedProposal.next(result)
         }
       );

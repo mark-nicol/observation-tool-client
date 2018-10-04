@@ -58,7 +58,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
         }
       });
     }
-    this.form.get('SinglePoint').patchValue(newValueArray);
+    this.form.get('fields').patchValue(newValueArray);
     this._coordType = value;
   }
 
@@ -79,18 +79,20 @@ export class FieldCenterCoordinatesComponent implements OnInit {
   ];
 
   get offsetUnit() {
-    return this.form.value.fields[0].centre.longitude.unit;
+    if (this.form.value.fields[0]) {
+      return this.form.value.fields[0].centre.longitude.unit;
+    }
   }
 
   set offsetUnit(value: string) {
     const newValueArray = [];
     for (let i = 0; i < this.singlePoint.length; i++) {
       newValueArray.push({
-        prj_centre: {
-          val_longitude: {
+        centre: {
+          longitude: {
             unit: value
           },
-          val_latitude: {
+          latitude: {
             unit: value
           }
         }
@@ -129,17 +131,18 @@ export class FieldCenterCoordinatesComponent implements OnInit {
 
   addPointing() {
     this.singlePoint.push(this.formBuilder.group({
-      prj_name: '',
-      prj_centre: this.formBuilder.group({
-        val_longitude: this.formBuilder.group({
-          unit: this.offsetUnit,
-          content: [0.0, Validators.required]
+      name: '',
+      centre: this.formBuilder.group({
+        longitude: this.formBuilder.group({
+          unit: this.offsetUnit ? this.offsetUnit : 'deg',
+          content: [this.form.getRawValue().sourceCoordinates.longitude.content, Validators.required]
         }),
-        val_latitude: this.formBuilder.group({
-          unit: this.offsetUnit,
-          content: [0.0, Validators.required]
+        latitude: this.formBuilder.group({
+          unit: this.offsetUnit ? this.offsetUnit : 'deg',
+          content: [this.form.getRawValue().sourceCoordinates.latitude.content, Validators.required]
         }),
-        val_fieldName: `Field-${this.singlePoint.length + 1}`
+        type: this.coordType,
+        fieldName: `Field-${this.singlePoint.length + 1}`
       })
     }))
   }

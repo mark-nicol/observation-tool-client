@@ -30,7 +30,6 @@ import {Latitude} from '../../../../units/classes/latitude';
 import {ITargetParameters} from '../../../shared/interfaces/apdm/target-parameters.interface';
 import {ISinglePoint} from '../../../shared/interfaces/apdm/single-point.interface';
 import {IRectangle} from '../../../shared/interfaces/apdm/rectangle.interface';
-import {IField} from '../../../shared/interfaces/apdm/field.interface';
 
 @Component({
   selector: 'app-aladin',
@@ -102,25 +101,23 @@ export class AladinComponent implements OnInit, AfterViewInit {
   }
 
   viewMode() {
-    // TODO Work out what happens here
+    console.log(this.form);
     this.aladinService.showPointings();
   }
 
   editMode() {
-    // TODO Work out what happens here
-    // Stop form subscriptions
-    // hide overlays
     this.aladinService.hidePointings();
   }
 
   observeFormChanges() {
     this.form.valueChanges.subscribe((value: ITargetParameters) => {
-      this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
+      // this.aladinService.goToRaDec(this.form.value.sourceCoordinates.longitude.content, this.form.value.sourceCoordinates.latitude.content);
       this.drawFields();
     });
   }
 
   drawFields() {
+    console.log('drawFields');
     this.aladinService.clearPointings();
     if (this.form.value.type === 'F_MultiplePoints') {
       this.form.value.fields.forEach((point: ISinglePoint) => {

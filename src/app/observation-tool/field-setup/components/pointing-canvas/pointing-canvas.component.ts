@@ -73,7 +73,7 @@ export class PointingCanvasComponent implements OnInit {
   private height: number;
 
   static clearCanvas() {
-    d3.selectAll('svg > *').remove();
+    d3.selectAll('pointing').remove();
   }
 
   static mouseHasMoved(oldEvent: MouseEvent, newEvent: MouseEvent): boolean {
@@ -88,7 +88,8 @@ export class PointingCanvasComponent implements OnInit {
 
   ngOnInit() {
     this.setupSvg();
-    if (this.form.value.fields[0]['@type'] === 'SinglePointT') {
+    console.log(this.form.value);
+    if (this.form.value.type === 'F_MultiplePoints') {
       this.form.value.fields.forEach((point: ISinglePoint) => {
         if (point.centre.type === 'RELATIVE') {
           this.drawPointing(
@@ -101,7 +102,7 @@ export class PointingCanvasComponent implements OnInit {
           this.drawPointing(Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG), Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG));
         }
       });
-    } else if (this.form.value.fields[0]['@type'] === 'RectangleT') {
+    } else if (this.form.value.type === 'F_SingleRectangle') {
       this.drawRectangle(this.form.value.fields[0]);
     }
     this.observeFormChanges();
@@ -120,35 +121,20 @@ export class PointingCanvasComponent implements OnInit {
 
     this._xScale = d3.scaleLinear()
       .range([this.width, 0])
-      .domain([d3.min(fovCorners, d => d[0]), d3.max(fovCorners, d => d[0])]);
+      .domain(d3.extent(fovCorners, d => d[0]));
 
     this._yScale = d3.scaleLinear()
       .range([this.height, 0])
-      .domain([d3.min(fovCorners, d => d[1]), d3.max(fovCorners, d => d[1])]);
+      .domain(d3.extent(fovCorners, d => d[1]));
 
     this._drawArea = this.svg.append('g').attr('class', 'draw-area');
-    this._drawArea.append('circle')
-      .attr('cx', this._xScale(this.form.value.sourceCoordinates.longitude.content))
-      .attr('cy', this._yScale(this.form.value.sourceCoordinates.latitude.content))
-      .attr('r', this.aladinService.getCanvasRadius())
-      .style('stroke', 'lime')
-      .style('fill', 'none');
   }
 
   click(event: MouseEvent) {
     if (this.addingFov) {
-      const worldClick = this.aladinService.coordsPixToWorld([event.offsetX, event.offsetY]);
-      const lonDiff = new Longitude(
-        LongitudeUnits.DEG,
-        worldClick[0] - Object.assign(new Longitude, this.form.value.sourceCoordinates.longitude).getValueInUnits(LongitudeUnits.DEG));
-      const latDiff = new Latitude(
-        LatitudeUnits.DEG,
-        worldClick[1] - Object.assign(new Latitude, this.form.value.sourceCoordinates.latitude).getValueInUnits(LatitudeUnits.DEG)
-      );
-      this.addPointing(lonDiff, latDiff);
+      this.addPointing(this._xScale.invert(event.offsetX), this._yScale.invert(event.offsetY));
       this.fovAddedEmitter.emit();
     } else if (this.addingRec) {
-
       this.rectAddedEmitter.emit();
     }
   }
@@ -158,6 +144,7 @@ export class PointingCanvasComponent implements OnInit {
 
   drawPointing(ra: number, dec: number) {
     this._drawArea.append('circle')
+      .attr('class', 'pointing')
       .attr('cx', this._xScale(ra))
       .attr('cy', this._yScale(dec))
       .attr('r', this.aladinService.getCanvasRadius())
@@ -221,8 +208,8 @@ export class PointingCanvasComponent implements OnInit {
         PointingCanvasComponent.clearCanvas();
         value.fields.forEach((point: ISinglePoint) => {
           this.drawPointing(
-            value.sourceCoordinates.longitude.content + Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
-            value.sourceCoordinates.latitude.content + Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
+            Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG),
+            Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG)
           );
         });
       }
@@ -230,30 +217,72 @@ export class PointingCanvasComponent implements OnInit {
   }
 
   get singlePoint(): FormArray {
-    return this.form.get('SinglePoint') as FormArray;
+    return this.form.get('fields') as FormArray;
+  }
+
+  get offsetUnit() {
+    if (this.form.value.fields[0]) {
+      return this.form.value.fields[0].centre.longitude.unit;
+    }
+  }
+
+  set offsetUnit(value: string) {
+    const newValueArray = [];
+    for (let i = 0; i < this.singlePoint.length; i++) {
+      newValueArray.push({
+        centre: {
+          longitude: {
+            unit: value
+          },
+          latitude: {
+            unit: value
+          }
+        }
+      });
+    }
+    this.form.get('fields').patchValue(newValueArray);
   }
 
   removePointing(index: number) {
     this.singlePoint.removeAt(index);
   }
 
-  addPointing(ra?: Longitude, dec?: Latitude) {
+  private _coordType: string = 'ABSOLUTE';
+
+  get coordType() {
+    if (this.form.value.fields[0]) {
+      return this.form.value.fields[0].centre.type;
+    }
+    return this._coordType;
+  }
+
+  set coordType(value: string) {
+    const newValueArray = [];
+    for (let i = 0; i < this.singlePoint.length; i++) {
+      newValueArray.push({
+        centre: {
+          type: value
+        }
+      });
+    }
+    this.form.get('fields').patchValue(newValueArray);
+    this._coordType = value;
+  }
+
+  addPointing(ra: Longitude, dec: Latitude) {
     this.singlePoint.push(this.formBuilder.group({
-      prj_name: '',
-      prj_centre: this.formBuilder.group({
-        val_longitude: this.formBuilder.group({
-          unit: this.form.value.SinglePoint[0].centre.longitude.unit,
-          content: ra ?
-            [ra.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit), Validators.required] :
-            [0.0, Validators.required]
+      name: '',
+      centre: this.formBuilder.group({
+        longitude: this.formBuilder.group({
+          unit: this.offsetUnit ? this.offsetUnit : 'deg',
+          content: [ra, Validators.required]
         }),
-        val_latitude: this.formBuilder.group({
-          unit: this.form.value.SinglePoint[0].centre.longitude.unit,
-          content: dec ?
-            [dec.getValueInUnits(this.form.value.SinglePoint[0].centre.longitude.unit), Validators.required] :
-            [0.0, Validators.required]
+        latitude: this.formBuilder.group({
+          unit: this.offsetUnit ? this.offsetUnit : 'deg',
+          content: [dec, Validators.required]
         }),
-        val_fieldName: `Field-${this.singlePoint.length + 1}`
+        fieldName: `Field-${this.singlePoint.length + 1}`,
+        type: this.coordType
       })
     }));
   }

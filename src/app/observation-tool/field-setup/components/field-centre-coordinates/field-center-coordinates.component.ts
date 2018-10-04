@@ -58,7 +58,7 @@ export class FieldCenterCoordinatesComponent implements OnInit {
         }
       });
     }
-    this.form.get('SinglePoint').patchValue(newValueArray);
+    this.form.get('fields').patchValue(newValueArray);
     this._coordType = value;
   }
 

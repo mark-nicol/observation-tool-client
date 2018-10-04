@@ -120,7 +120,7 @@ export class PointingCanvasComponent implements OnInit {
     const fovCorners = this.aladinService.getFovCorners();
 
     this._xScale = d3.scaleLinear()
-      .range([0, this.width])
+      .range([this.width, 0])
       .domain(d3.extent(fovCorners, d => d[0]));
 
     this._yScale = d3.scaleLinear()
@@ -247,6 +247,28 @@ export class PointingCanvasComponent implements OnInit {
     this.singlePoint.removeAt(index);
   }
 
+  private _coordType: string = 'ABSOLUTE';
+
+  get coordType() {
+    if (this.form.value.fields[0]) {
+      return this.form.value.fields[0].centre.type;
+    }
+    return this._coordType;
+  }
+
+  set coordType(value: string) {
+    const newValueArray = [];
+    for (let i = 0; i < this.singlePoint.length; i++) {
+      newValueArray.push({
+        centre: {
+          type: value
+        }
+      });
+    }
+    this.form.get('fields').patchValue(newValueArray);
+    this._coordType = value;
+  }
+
   addPointing(ra: Longitude, dec: Latitude) {
     this.singlePoint.push(this.formBuilder.group({
       name: '',
@@ -259,7 +281,8 @@ export class PointingCanvasComponent implements OnInit {
           unit: this.offsetUnit ? this.offsetUnit : 'deg',
           content: [dec, Validators.required]
         }),
-        fieldName: `Field-${this.singlePoint.length + 1}`
+        fieldName: `Field-${this.singlePoint.length + 1}`,
+        type: this.coordType
       })
     }));
   }

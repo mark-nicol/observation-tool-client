@@ -88,7 +88,8 @@ export class PointingCanvasComponent implements OnInit {
 
   ngOnInit() {
     this.setupSvg();
-    if (this.form.value.fields[0]['@type'] === 'SinglePointT') {
+    console.log(this.form.value);
+    if (this.form.value.type === 'F_MultiplePoints') {
       this.form.value.fields.forEach((point: ISinglePoint) => {
         if (point.centre.type === 'RELATIVE') {
           this.drawPointing(
@@ -101,7 +102,7 @@ export class PointingCanvasComponent implements OnInit {
           this.drawPointing(Object.assign(new Longitude, point.centre.longitude).getValueInUnits(LongitudeUnits.DEG), Object.assign(new Latitude, point.centre.latitude).getValueInUnits(LatitudeUnits.DEG));
         }
       });
-    } else if (this.form.value.fields[0]['@type'] === 'RectangleT') {
+    } else if (this.form.value.type === 'F_SingleRectangle') {
       this.drawRectangle(this.form.value.fields[0]);
     }
     this.observeFormChanges();
@@ -119,20 +120,14 @@ export class PointingCanvasComponent implements OnInit {
     const fovCorners = this.aladinService.getFovCorners();
 
     this._xScale = d3.scaleLinear()
-      .range([this.width, 0])
-      .domain([d3.min(fovCorners, d => d[0]), d3.max(fovCorners, d => d[0])]);
+      .range([0, this.width])
+      .domain(d3.extent(fovCorners, d => d[0]));
 
     this._yScale = d3.scaleLinear()
       .range([this.height, 0])
-      .domain([d3.min(fovCorners, d => d[1]), d3.max(fovCorners, d => d[1])]);
+      .domain(d3.extent(fovCorners, d => d[1]));
 
     this._drawArea = this.svg.append('g').attr('class', 'draw-area');
-    this._drawArea.append('circle')
-      .attr('cx', this._xScale(this.form.value.sourceCoordinates.longitude.content))
-      .attr('cy', this._yScale(this.form.value.sourceCoordinates.latitude.content))
-      .attr('r', this.aladinService.getCanvasRadius())
-      .style('stroke', 'lime')
-      .style('fill', 'none');
   }
 
   click(event: MouseEvent) {

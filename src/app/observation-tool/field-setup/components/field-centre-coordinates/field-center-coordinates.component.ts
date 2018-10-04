@@ -135,11 +135,11 @@ export class FieldCenterCoordinatesComponent implements OnInit {
       centre: this.formBuilder.group({
         longitude: this.formBuilder.group({
           unit: this.offsetUnit ? this.offsetUnit : 'deg',
-          content: [0.0, Validators.required]
+          content: [this.form.getRawValue().sourceCoordinates.longitude.content, Validators.required]
         }),
         latitude: this.formBuilder.group({
           unit: this.offsetUnit ? this.offsetUnit : 'deg',
-          content: [0.0, Validators.required]
+          content: [this.form.getRawValue().sourceCoordinates.latitude.content, Validators.required]
         }),
         type: this.coordType,
         fieldName: `Field-${this.singlePoint.length + 1}`

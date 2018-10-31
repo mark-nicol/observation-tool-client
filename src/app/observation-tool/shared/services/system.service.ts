@@ -40,7 +40,7 @@ export class SystemService {
       lonHeader: 'RA',
       latHeader: 'Dec'
     },
-    'FK5 J2000': {
+    'J2000': {
       sexagesimalLabels: {
         latLabel: 'Dec',
         lonLabel: 'RA',

@@ -150,7 +150,6 @@ export class ProjectService implements CanActivate {
       ))
       .subscribe(
         result => {
-          console.log(result);
           this._loadedProposal.next(result)
         }
       );

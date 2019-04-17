@@ -17,7 +17,7 @@ Clone the repository
 
 Navigate into the repo
 ```
-cd app
+cd observation-tool-client
 ```
 Install required modules
 ```npm
@@ -25,7 +25,7 @@ npm install
 ```
 Run the development server
 ```npm
-ng serve
+npm run ng serve
 ```
 Open you browser of choice and navigate to
 ```

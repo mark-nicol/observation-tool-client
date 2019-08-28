@@ -35,7 +35,7 @@
     "deep-assign": "^2.0.0",
     "equatorial": "^1.1.0",
     "fs": "0.0.1-security",
-    "lodash.merge": "^4.6.0",
+    "lodash.merge": "^4.6.2",
     "ng2-semantic-ui": "^0.9.7",
     "ngx-pagination": "^3.1.0",
     "ngx-papaparse": "^1.2.5",

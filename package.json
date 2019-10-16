@@ -29,7 +29,7 @@
     "@angular/platform-browser-dynamic": "v5-lts",
     "@angular/router": "v5-lts",
     "core-js": "^2.4.1",
-    "csv-parse": "^2.0.0",
+    "csv-parse": "^4.4.6",
     "csv-parser": "^1.12.0",
     "d3": "^4.11.0",
     "deep-assign": "^2.0.0",
